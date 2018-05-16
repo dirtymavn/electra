@@ -33,4 +33,26 @@ class User extends CartalystUser
     protected $hidden = [
         'password', 'created_at', 'updated_at',
     ];
+
+    /**
+     * Get user's profile picture.
+     *
+     * @return string
+     */
+    public function isSuperAdmin() {
+        if ( $this->roles[0]->slug == 'super-admin' ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * The roles that belong to the user.
+     */
+   public function role()
+   {
+       return $this->belongsToMany('App\Models\Role', 'role_users');
+   }
+   
 }

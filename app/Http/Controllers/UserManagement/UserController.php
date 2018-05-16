@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\UserManagement\UserDataTable;
 
+use Sentinel;
+
 class UserController extends Controller
 {
     /**
@@ -36,7 +38,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $user = Sentinel::registerAndActive( $request->all() );
+        } catch (\Exception $e) {
+
+        }
     }
 
     /**
