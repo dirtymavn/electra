@@ -21,10 +21,15 @@ Electra travel management for Sabre
 ### Mailgun
 
 IP Adress : 184.173.153.201 
+
 SMTP Hostname : smtp.mailgun.org
+
 Default SMTP Login : postmaster@mg.wckd.xyz
+
 API Base url : https://api.mailgun.net/v3/mg.wckd.xyz
+
 Password : 4c7fd206a7c28e0a24f99a89ea7928a1
+
 API Key : key-a4d8200fc6655d20b40569b6d2dc3b29
 
 ## Flow
