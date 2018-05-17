@@ -43,7 +43,6 @@ class UserDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->addIndex(['title' => 'No', 'width' => '10px'])
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->addAction(['width' => '80px'])
@@ -58,6 +57,7 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'no' => ['title' => 'No', 'width' => '10px'],
             'first_name' => ['name' => 'first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
             'last_name' => ['name' => 'last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
             'email' => ['name' => 'email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],
