@@ -10,5 +10,9 @@
 | contains the "auth" middleware group. Now create something great!
 |
 */
-
-Route::get('login', array('as' => 'auth.login', 'uses' => 'LoginController@index'));
+Route::get('login', array('as' => 'auth.login', 'uses' => 'AuthController@create'));
+Route::post('login/store', array('as' => 'auth.login.store', 'uses' => 'AuthController@store'));
+// in Middleware Sentinel Auth
+Route::group( [ 'middleware' => 'sentinel_auth' ], function () {
+    Route::get('logout', [ 'as' => 'auth.logout', 'uses' => 'AuthController@logout' ]);
+});
