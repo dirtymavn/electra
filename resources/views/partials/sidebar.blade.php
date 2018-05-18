@@ -1,175 +1,10 @@
-            <div class="menu-mobile menu-activated-on-click color-scheme-dark">
-                <div class="mm-logo-buttons-w">
-                    <a class="mm-logo" href="{{route('dashboard')}}"><img src="{{asset('themes/img/logo.png')}}"><span>Clean Admin</span></a>
-                    <div class="mm-buttons">
-                        <div class="content-panel-open">
-                            <div class="os-icon os-icon-grid-circles"></div>
-                        </div>
-                        <div class="mobile-menu-trigger">
-                            <div class="os-icon os-icon-hamburger-menu-1"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-and-user">
-                    <div class="logged-user-w">
-                        <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
-                        <div class="logged-user-info-w">
-                            <div class="logged-user-name">Maria Gomez</div>
-                            <div class="logged-user-role">Administrator</div>
-                        </div>
-                    </div>
-                   
-                    <ul class="main-menu">
-                        <li class="selected">
-                            <a href="{{route('dashboard')}}">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-layout"></div>
-                                </div><span>Dashboard</span></a>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-layers"></div>
-                                </div><span>User Management</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="{{route('user-management.user.index')}}">Register User</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="themes/apps_bank.html">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-package"></div>
-                                </div><span>Applications</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="themes/apps_email.html">Email Application</a></li>
-                                <li><a href="themes/apps_support_dashboard.html">Support Dashboard</a></li>
-                                <li><a href="themes/apps_support_index.html">Tickets Index</a></li>
-                                <li><a href="themes/apps_crypto.html">Crypto Dashboard <strong class="badge badge-danger">New</strong></a></li>
-                                <li><a href="themes/apps_projects.html">Projects List</a></li>
-                                <li><a href="themes/apps_bank.html">Banking <strong class="badge badge-danger">New</strong></a></li>
-                                <li><a href="themes/apps_full_chat.html">Chat Application</a></li>
-                                <li><a href="themes/apps_todo.html">To Do Application <strong class="badge badge-danger">New</strong></a></li>
-                                <li><a href="themes/misc_chat.html">Popup Chat</a></li>
-                                <li><a href="themes/apps_pipeline.html">CRM Pipeline</a></li>
-                                <li><a href="themes/rentals_index_grid.html">Property Listing <strong class="badge badge-danger">New</strong></a></li>
-                                <li><a href="themes/misc_calendar.html">Calendar</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="themes/#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-file-text"></div>
-                                </div><span>Pages</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="themes/misc_invoice.html">Invoice</a></li>
-                                <li><a href="themes/rentals_index_grid.html">Property Listing <strong class="badge badge-danger">New</strong></a></li>
-                                <li><a href="themes/misc_charts.html">Charts</a></li>
-                                <li><a href="themes/auth_login.html">Login</a></li>
-                                <li><a href="themes/auth_register.html">Register</a></li>
-                                <li><a href="themes/auth_lock.html">Lock Screen</a></li>
-                                <li><a href="themes/misc_pricing_plans.html">Pricing Plans</a></li>
-                                <li><a href="themes/misc_error_404.html">Error 404</a></li>
-                                <li><a href="themes/misc_error_500.html">Error 500</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="themes/#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-life-buoy"></div>
-                                </div><span>UI Kit</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="themes/uikit_modals.html">Modals <strong class="badge badge-danger">New</strong></a></li>
-                                <li><a href="themes/uikit_alerts.html">Alerts</a></li>
-                                <li><a href="themes/uikit_grid.html">Grid</a></li>
-                                <li><a href="themes/uikit_progress.html">Progress</a></li>
-                                <li><a href="themes/uikit_popovers.html">Popover</a></li>
-                                <li><a href="themes/uikit_tooltips.html">Tooltips</a></li>
-                                <li><a href="themes/uikit_buttons.html">Buttons</a></li>
-                                <li><a href="themes/uikit_dropdowns.html">Dropdowns</a></li>
-                                <li><a href="themes/uikit_typography.html">Typography</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="themes/#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-mail"></div>
-                                </div><span>Emails</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="themes/emails_welcome.html">Welcome Email</a></li>
-                                <li><a href="themes/emails_order.html">Order Confirmation</a></li>
-                                <li><a href="themes/emails_payment_due.html">Payment Due</a></li>
-                                <li><a href="themes/emails_forgot.html">Forgot Password</a></li>
-                                <li><a href="themes/emails_activate.html">Activate Account</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="themes/#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-users"></div>
-                                </div><span>Users</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="themes/users_profile_big.html">Big Profile</a></li>
-                                <li><a href="themes/users_profile_small.html">Compact Profile</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="themes/#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-edit-32"></div>
-                                </div><span>Forms</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="themes/forms_regular.html">Regular Forms</a></li>
-                                <li><a href="themes/forms_validation.html">Form Validation</a></li>
-                                <li><a href="themes/forms_wizard.html">Form Wizard</a></li>
-                                <li><a href="themes/forms_uploads.html">File Uploads</a></li>
-                                <li><a href="themes/forms_wisiwig.html">Wisiwig Editor</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="themes/#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-grid"></div>
-                                </div><span>Tables</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="themes/tables_regular.html">Regular Tables</a></li>
-                                <li><a href="themes/tables_datatables.html">Data Tables</a></li>
-                                <li><a href="themes/tables_editable.html">Editable Tables</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-sub-menu">
-                            <a href="themes/#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-zap"></div>
-                                </div><span>Icons</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="themes/icon_fonts_simple_line_icons.html">Simple Line Icons</a></li>
-                                <li><a href="themes/icon_fonts_feather.html">Feather Icons</a></li>
-                                <li><a href="themes/icon_fonts_themefy.html">Themefy Icons</a></li>
-                                <li><a href="themes/icon_fonts_picons_thin.html">Picons Thin</a></li>
-                                <li><a href="themes/icon_fonts_dripicons.html">Dripicons</a></li>
-                                <li><a href="themes/icon_fonts_eightyshades.html">Eightyshades</a></li>
-                                <li><a href="themes/icon_fonts_entypo.html">Entypo</a></li>
-                                <li><a href="themes/icon_fonts_font_awesome.html">Font Awesome</a></li>
-                                <li><a href="themes/icon_fonts_foundation_icon_font.html">Foundation Icon Font</a></li>
-                                <li><a href="themes/icon_fonts_metrize_icons.html">Metrize Icons</a></li>
-                                <li><a href="themes/icon_fonts_picons_social.html">Picons Social</a></li>
-                                <li><a href="themes/icon_fonts_batch_icons.html">Batch Icons</a></li>
-                                <li><a href="themes/icon_fonts_dashicons.html">Dashicons</a></li>
-                                <li><a href="themes/icon_fonts_typicons.html">Typicons</a></li>
-                                <li><a href="themes/icon_fonts_weather_icons.html">Weather Icons</a></li>
-                                <li><a href="themes/icon_fonts_light_admin.html">Light Admin</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    
-                </div>
-            </div>
-           
+            @include('partials.mobile_menu')
+
             <div class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
                 <div class="logo-w">
                     <a class="logo" href="{{route('dashboard')}}">
                         <div class="logo-element"></div>
-                        <div class="logo-label">Clean Admin</div>
+                        <div class="logo-label">{{env('APP_NAME')}}</div>
                     </a>
                 </div>
                 <div class="logged-user-w avatar-inline">
@@ -309,7 +144,7 @@
                                 <div class="os-icon os-icon-layout"></div>
                             </div><span>Dashboard</span></a>
                     </li>
-                    <li class=" has-sub-menu">
+                    <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-layers"></div>
@@ -324,187 +159,298 @@
                             </div>
                         </div>
                     </li>
-                    <li class="sub-header"><span>Options</span></li>
-                    <li class=" has-sub-menu">
-                        <a href="themes/apps_bank.html">
+                    <li class="has-sub-menu">
+                        <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-package"></div>
-                            </div><span>Applications</span></a>
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Business</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Applications</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-package"></i></div>
+                            <div class="sub-menu-header">Business</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/apps_email.html">Email Application</a></li>
-                                    <li><a href="themes/apps_support_dashboard.html">Support Dashboard</a></li>
-                                    <li><a href="themes/apps_support_index.html">Tickets Index</a></li>
-                                    <li><a href="themes/apps_crypto.html">Crypto Dashboard <strong class="badge badge-danger">New</strong></a></li>
-                                    <li><a href="themes/apps_projects.html">Projects List</a></li>
-                                    <li><a href="themes/apps_bank.html">Banking <strong class="badge badge-danger">New</strong></a></li>
+                                    <li><a href="">Customer</a></li>
+                                    <li><a href="">Sales Folder</a></li>
+                                    <li><a href="">Invoice</a></li>
+                                    <li><a href="">LG</a></li>
+                                    <li><a href="">Inventory</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="themes/apps_full_chat.html">Chat Application</a></li>
-                                    <li><a href="themes/apps_todo.html">To Do Application <strong class="badge badge-danger">New</strong></a></li>
-                                    <li><a href="themes/misc_chat.html">Popup Chat</a></li>
-                                    <li><a href="themes/apps_pipeline.html">CRM Pipeline</a></li>
-                                    <li><a href="themes/rentals_index_grid.html">Property Listing <strong class="badge badge-danger">New</strong></a></li>
-                                    <li><a href="themes/misc_calendar.html">Calendar</a></li>
+                                    <li><a href="">Delivery</a></li>
+                                    <li><a href="">Voucher</a></li>
+                                    <li><a href="">Visa</a></li>
+                                    <li><a href="">Queue</a></li>
+                                    <li><a href="">Report</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class=" has-sub-menu">
-                        <a href="themes/#">
+                    <li class="has-sub-menu">
+                        <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-file-text"></div>
-                            </div><span>Pages</span></a>
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Outbound</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Pages</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
+                            <div class="sub-menu-header">Outbound</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/misc_invoice.html">Invoice</a></li>
-                                    <li><a href="themes/rentals_index_grid.html">Property Listing <strong class="badge badge-danger">New</strong></a></li>
-                                    <li><a href="themes/misc_charts.html">Charts</a></li>
-                                    <li><a href="themes/auth_login.html">Login</a></li>
-                                    <li><a href="themes/auth_register.html">Register</a></li>
+                                    <li><a href="">Guide</a></li>
+                                    <li><a href="">Itin</a></li>
+                                    <li><a href="">Folder</a></li>
+                                    <li><a href="">Order</a></li>
+                                    <li><a href="">Visa</a></li>
+                                    <li><a href="">Avail</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="themes/auth_lock.html">Lock Screen</a></li>
-                                    <li><a href="themes/misc_pricing_plans.html">Pricing Plans</a></li>
-                                    <li><a href="themes/misc_error_404.html">Error 404</a></li>
-                                    <li><a href="themes/misc_error_500.html">Error 500</a></li>
+                                    <li><a href="">Queue</a></li>
+                                    <li><a href="">Visa Rpt</a></li>
+                                    <li><a href="">Delivery</a></li>
+                                    <li><a href="">Allotment</a></li>
+                                    <li><a href="">Report</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class=" has-sub-menu">
-                        <a href="themes/#">
+                    <li class="has-sub-menu">
+                        <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-life-buoy"></div>
-                            </div><span>UI Kit</span></a>
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Hotel</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">UI Kit</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
+                            <div class="sub-menu-header">Hotel</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/uikit_modals.html">Modals <strong class="badge badge-danger">New</strong></a></li>
-                                    <li><a href="themes/uikit_alerts.html">Alerts</a></li>
-                                    <li><a href="themes/uikit_grid.html">Grid</a></li>
-                                    <li><a href="themes/uikit_progress.html">Progress</a></li>
-                                    <li><a href="themes/uikit_popovers.html">Popover</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="themes/uikit_tooltips.html">Tooltips</a></li>
-                                    <li><a href="themes/uikit_buttons.html">Buttons</a></li>
-                                    <li><a href="themes/uikit_dropdowns.html">Dropdowns</a></li>
-                                    <li><a href="themes/uikit_typography.html">Typography</a></li>
+                                    <li><a href="">Hotel</a></li>
+                                    <li><a href="">Enquiry</a></li>
+                                    <li><a href="">Booking</a></li>
+                                    <li><a href="">Report</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class="sub-header"><span>Elements</span></li>
-                    <li class=" has-sub-menu">
-                        <a href="themes/#">
+                    <li class="has-sub-menu">
+                        <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-mail"></div>
-                            </div><span>Emails</span></a>
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>FIT</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Emails</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-mail"></i></div>
+                            <div class="sub-menu-header">FIT</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/emails_welcome.html">Welcome Email</a></li>
-                                    <li><a href="themes/emails_order.html">Order Confirmation</a></li>
-                                    <li><a href="themes/emails_payment_due.html">Payment Due</a></li>
-                                    <li><a href="themes/emails_forgot.html">Forgot Password</a></li>
-                                    <li><a href="themes/emails_activate.html">Activate Account</a></li>
+                                    <li><a href="">Folder</a></li>
+                                    <li><a href="">Availability</a></li>
+                                    <li><a href="">FIT Order</a></li>
+                                    <li><a href="">Delivery</a></li>
+                                </ul>
+                                <ul class="sub-menu">
+                                    <li><a href="">Invoice</a></li>
+                                    <li><a href="">LG</a></li>
+                                    <li><a href="">Allotment</a></li>
+                                    <li><a href="">Report</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class=" has-sub-menu">
-                        <a href="themes/#">
+                    <li class="has-sub-menu">
+                        <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-users"></div>
-                            </div><span>Users</span></a>
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>AR</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Users</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
+                            <div class="sub-menu-header">AR</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/users_profile_big.html">Big Profile</a></li>
-                                    <li><a href="themes/users_profile_small.html">Compact Profile</a></li>
+                                    <li><a href="">Customer</a></li>
+                                    <li><a href="">Invoice</a></li>
+                                    <li><a href="">Misc. Inv.</a></li>
+                                    <li><a href="">Receipt</a></li>
+                                    <li><a href="">Settlem't</a></li>
+                                    <li><a href="">Rec. Vou.</a></li>
+                                    <li><a href="">Bank</a></li>
+                                </ul>
+                                <ul class="sub-menu">
+                                    <li><a href="">Deposit</a></li>
+                                    <li><a href="">Reminder</a></li>
+                                    <li><a href="">Cr. Note</a></li>
+                                    <li><a href="">Cr. Card</a></li>
+                                    <li><a href="">Billing</a></li>
+                                    <li><a href="">Report</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class=" has-sub-menu">
-                        <a href="themes/#">
+                    <li class="has-sub-menu">
+                        <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-edit-32"></div>
-                            </div><span>Forms</span></a>
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>AP</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Forms</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-edit-32"></i></div>
+                            <div class="sub-menu-header">AP</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/forms_regular.html">Regular Forms</a></li>
-                                    <li><a href="themes/forms_validation.html">Form Validation</a></li>
-                                    <li><a href="themes/forms_wizard.html">Form Wizard</a></li>
-                                    <li><a href="themes/forms_uploads.html">File Uploads</a></li>
-                                    <li><a href="themes/forms_wisiwig.html">Wisiwig Editor</a></li>
+                                    <li><a href="">Supplier</a></li>
+                                    <li><a href="">LG</a></li>
+                                    <li><a href="">Deposit</a></li>
+                                    <li><a href="">LG Delivery</a></li>
+                                    <li><a href="">Pay-Req</a></li>
+                                </ul>
+                                <ul class="sub-menu">
+                                    <li><a href="">Payment</a></li>
+                                    <li><a href="">Petty. Cash</a></li>
+                                    <li><a href="">Chq Print</a></li>
+                                    <li><a href="">Report</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class=" has-sub-menu">
-                        <a href="themes/#">
+                    <li class="has-sub-menu">
+                        <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-grid"></div>
-                            </div><span>Tables</span></a>
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Settlement</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Tables</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-grid"></i></div>
+                            <div class="sub-menu-header">Settlement</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/tables_regular.html">Regular Tables</a></li>
-                                    <li><a href="themes/tables_datatables.html">Data Tables</a></li>
-                                    <li><a href="themes/tables_editable.html">Editable Tables</a></li>
+                                    <li><a href="">Deposit</a></li>
+                                    <li><a href="">Settlem't</a></li>
+                                    <li><a href="">Rec. Vou.</a></li>
+                                    <li><a href="">Payment</a></li>
+                                    <li><a href="">Receipt</a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class=" has-sub-menu">
-                        <a href="themes/#">
+                    <li class="has-sub-menu">
+                        <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-zap"></div>
-                            </div><span>Icons</span></a>
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>GL</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Icons</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-zap"></i></div>
+                            <div class="sub-menu-header">GL</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/icon_fonts_simple_line_icons.html">Simple Line Icons</a></li>
-                                    <li><a href="themes/icon_fonts_feather.html">Feather Icons</a></li>
-                                    <li><a href="themes/icon_fonts_themefy.html">Themefy Icons</a></li>
-                                    <li><a href="themes/icon_fonts_picons_thin.html">Picons Thin</a></li>
-                                    <li><a href="themes/icon_fonts_dripicons.html">Dripicons</a></li>
-                                    <li><a href="themes/icon_fonts_eightyshades.html">Eightyshades</a></li>
+                                    <li><a href="">Account</a></li>
+                                    <li><a href="">Journal</a></li>
+                                    <li><a href="">Posting</a></li>
+                                    <li><a href="">Report</a></li>
+                                    <li><a href="">Per. End</a></li>
+                                    <li><a href="">JV Period</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="themes/icon_fonts_entypo.html">Entypo</a></li>
-                                    <li><a href="themes/icon_fonts_font_awesome.html">Font Awesome</a></li>
-                                    <li><a href="themes/icon_fonts_foundation_icon_font.html">Foundation Icon Font</a></li>
-                                    <li><a href="themes/icon_fonts_metrize_icons.html">Metrize Icons</a></li>
-                                    <li><a href="themes/icon_fonts_picons_social.html">Picons Social</a></li>
-                                    <li><a href="themes/icon_fonts_batch_icons.html">Batch Icons</a></li>
+                                    <li><a href="">Recon.</a></li>
+                                    <li><a href="">Bank Rec.</a></li>
+                                    <li><a href="">FX Trans.</a></li>
+                                    <li><a href="">BSP Rec.</a></li>
+                                    <li><a href="">Finance</a></li>
                                 </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Refund</span></a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header">Refund</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="themes/icon_fonts_dashicons.html">Dashicons</a></li>
-                                    <li><a href="themes/icon_fonts_typicons.html">Typicons</a></li>
-                                    <li><a href="themes/icon_fonts_weather_icons.html">Weather Icons</a></li>
-                                    <li><a href="themes/icon_fonts_light_admin.html">Light Admin</a></li>
+                                    <li><a href="">Refund</a></li>
+                                    <li><a href="">Report</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Inventory</span></a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header">Inventory</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li><a href="">Inventory</a></li>
+                                    <li><a href="">LG Delivery</a></li>
+                                    <li><a href="">BSP Rec.</a></li>
+                                    <li><a href="">Report</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Budget</span></a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header">Budget</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li><a href="">Budget</a></li>
+                                    <li><a href="">Ex. Rate</a></li>
+                                    <li><a href="">Report</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Internal</span></a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header">Internal</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li><a href="">Profile</a></li>
+                                    <li><a href="">Cash Adv.</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>TMIS</span></a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header">TMIS</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li><a href="">Report</a></li>
+                                    <li><a href="">C. Report</a></li>
+                                    <li><a href="">Rpt. Tool2.0</a></li>
+                                    <li><a href="">Dashboard</a></li>
+                                    <li><a href="">All Rpt.</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layers"></div>
+                            </div><span>Interface</span></a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header">Interface</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li><a href="">BOS</a></li>
                                 </ul>
                             </div>
                         </div>
