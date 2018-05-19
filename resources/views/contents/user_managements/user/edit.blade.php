@@ -9,7 +9,7 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('user-management.user.index')}}">User Management</a></li>
+        <li class="breadcrumb-item"><a href="{{route('user.index')}}">User Management</a></li>
         <li class="breadcrumb-item">Edit</li>
     </ul>
 @endsection
@@ -18,7 +18,7 @@
 
 @section('content')
     {!! Form::model($user, [
-            'route'     =>['user-management.user.update', $user->id],
+            'route'     =>['user.update', $user->id],
             'method'    => 'PATCH',
             'class' =>  'form-horizontal',
             'id'    =>  'form-user',
@@ -29,7 +29,7 @@
                 @include('contents.user_managements.user._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{ route('user-management.user.index') }}" class="btn btn-default">{{trans('Cancel')}}</a>
+                        <a href="{{ route('user.index') }}" class="btn btn-default">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-primary" id="btn-submit">{{ trans('Submit') }}</button>
                     </div>
                 </div>              

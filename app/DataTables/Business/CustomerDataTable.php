@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataTables\UserManagement;
+namespace App\DataTables\Business;
 
-use App\Models\User;
+use App\Models\Business\Customer;
 use Yajra\DataTables\Services\DataTable;
 
-class UserDataTable extends DataTable
+class CustomerDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -16,9 +16,9 @@ class UserDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-             ->addColumn('action', function($user){
-                $edit_url = route('user.edit', $user->id);
-                $delete_url = route('user.destroy', $user->id);
+            ->addColumn('action', function($customer){
+                $edit_url = route('customer.edit', $customer->id);
+                $delete_url = route('customer.destroy', $customer->id);
                 return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
             })
             ->addIndexColumn();
@@ -27,12 +27,14 @@ class UserDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\User $model
+     * @param \App\Models\Business\Customer $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Customer $model)
     {
-        return $model->newQuery()->select('first_name','last_name','email','created_at');
+        $empty = collect();
+        return $empty;
+        // return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
     }
 
     /**
@@ -58,12 +60,9 @@ class UserDataTable extends DataTable
     {
         return [
             'no' => ['title' => 'No', 'width' => '10px'],
-            'first_name' => ['name' => 'first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
-            'last_name' => ['name' => 'last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
-            'email' => ['name' => 'email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],
-            'created_at' => ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at']
+            'customer' => ['title' => 'Customer'],
+            'company' => ['title' => 'Company'],
         ];
-
     }
 
     /**
@@ -73,6 +72,6 @@ class UserDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'UserManagement/User_' . date('YmdHis');
+        return 'Business/Customer_' . date('YmdHis');
     }
 }

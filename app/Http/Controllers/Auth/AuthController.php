@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-        return view('contents.auth.login');
+        return view('contents.auths.login');
     }
 
     /**

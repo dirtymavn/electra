@@ -154,7 +154,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="{{route('user-management.user.index')}}">Register User</a></li>
+                                    <li><a href="{{route('user.index')}}">Register User</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Customer</a></li>
+                                    <li><a href="{{route('customer.index')}}">Customer</a></li>
                                     <li><a href="">Sales Folder</a></li>
                                     <li><a href="">Invoice</a></li>
                                     <li><a href="">LG</a></li>
