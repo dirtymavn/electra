@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::group([ 'middleware' => 'sentinel_auth' ], function () {
+Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // Dashboard
     Route::get('/', array('as' => 'dashboard', 'uses' => 'DashboardController@index'));
     // User Management
@@ -22,5 +22,4 @@
     Route::group(['prefix' => 'business', 'namespace' => 'Business'], function () {
         Route::resource('customer', 'CustomerController');
     });
-
-// });
+});

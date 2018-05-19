@@ -25,6 +25,9 @@
     <div class="all-wrapper menu-side with-pattern">
         @yield('body')
     </div>
+    
+    {!! Html::script('themes/bower_components/jquery/dist/jquery.min.js') !!}
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
     @yield('script')
 </body>
 <!-- Mirrored from light.pinsupreme.com/auth_login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 May 2018 15:11:13 GMT -->

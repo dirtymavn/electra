@@ -22,8 +22,10 @@ class User extends CartalystUser
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password','username'
     ];
+
+    protected $loginNames = ['username'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -31,7 +33,7 @@ class User extends CartalystUser
      * @var array
      */
     protected $hidden = [
-        'password', 'created_at', 'updated_at',
+        'password', 'updated_at',
     ];
 
     /**

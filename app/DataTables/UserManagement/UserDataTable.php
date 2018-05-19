@@ -32,7 +32,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->select('first_name','last_name','email','created_at');
+        return $model->newQuery()->select('id', 'first_name','last_name','email','created_at');
     }
 
     /**
@@ -57,7 +57,6 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'no' => ['title' => 'No', 'width' => '10px'],
             'first_name' => ['name' => 'first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
             'last_name' => ['name' => 'last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
             'email' => ['name' => 'email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],

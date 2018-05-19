@@ -34,7 +34,7 @@ class AuthController extends Controller
                 return redirect()->back()->withInput();
             }
 
-            return redirect()->route('admin.dashboard.index');
+            return redirect()->route('dashboard');
         } catch (\Exception $e) {
             return redirect()->back()->withInput();
         }
@@ -48,6 +48,6 @@ class AuthController extends Controller
     public function logout()
     {
         Sentinel::logout();
-        return redirect()->route( 'admin.login' );
+        return redirect()->route( 'auth.login' );
     }
 }

@@ -2,8 +2,6 @@
 
 use Illuminate\Database\Seeder;
 
-use Sentinel;
-
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -33,16 +31,14 @@ class UsersTableSeeder extends Seeder
         ];
 
         $user = Sentinel::registerAndActivate( [
-                'email' => $data[ 'email' ],
-                'password' => User::DEFAULT_PASSWORD,
-                'first_name' => $data[ 'first_name' ],
-                'last_name' => $data[ 'last_name' ],
-                'gender' => $data[ 'gender' ],
-                'phone' => $data[ 'phone' ],
-                'address' => $data[ 'address' ],
+                'email' => $datas[ 'email' ],
+                'password' => '12345678',
+                'first_name' => $datas[ 'first_name' ],
+                'last_name' => $datas[ 'last_name' ],
+                'username' => 'superadmin',
                 'status' => 1
                 ] );
-            Sentinel::findRoleBySlug( $data[ 'role' ] )->users()->attach( $user );
+            Sentinel::findRoleBySlug( $datas[ 'role' ] )->users()->attach( $user );
         
         Schema::enableForeignKeyConstraints();
     }

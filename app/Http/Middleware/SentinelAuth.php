@@ -21,7 +21,7 @@ class SentinelAuth
                 return response( 'Unauthorized.', 401 );
             }
 
-            return redirect()->route( 'admin.auths.create' );
+            return redirect()->route( 'auth.login' );
         }
 
         return $next($request);
