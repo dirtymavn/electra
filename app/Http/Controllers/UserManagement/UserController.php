@@ -39,9 +39,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-            $user = Sentinel::registerAndActive( $request->all() );
-        } catch (\Exception $e) {
+            $user = Sentinel::registerAndActivate($request->all());
 
+            Sentinel::findRoleBySlug( $request->role )->users()->attach( $user );
+            flash()->success( trans('message.user.create-success') );
+            
+            return redirect()->route( 'user.index' );
+        } catch (Exception $e) {
+            flash()->error( trans('message.user.create-error') );
+            return back()->withInput();
         }
     }
 
@@ -64,7 +70,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('contents.user_managements.user.edit', compact('user'));
     }
 
     /**
@@ -76,17 +82,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        try {
+            $user_find = User::find($id);
+            $user = Sentinel::update( $user_find, $request->all() );
+           
+            if(!empty($request->role)){
+                Sentinel::findRoleBySlug( $user_find->roles()->first()->slug )->users()->detach($user);
+                Sentinel::findRoleBySlug( $request->role )->users()->attach( $user );
+            }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            flash()->success( trans('message.user.update-success') );
+            return redirect()->route( 'user.index' );
+        } catch (Exception $e) {
+            flash()->error( trans('message.user.update-error') );
+            return back()->withInput();
+        }
     }
 }
