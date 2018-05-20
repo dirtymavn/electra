@@ -39,9 +39,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-            $user = Sentinel::registerAndActivate($request->all());
+            $user = Sentinel::registerAndActivate( $request->all() );
 
-            Sentinel::findRoleBySlug( $request->role )->users()->attach( $user );
+            Sentinel::findRoleBySlug( 'admin' )->users()->attach( $user );
             flash()->success( trans('message.user.create-success') );
             
             return redirect()->route( 'user.index' );

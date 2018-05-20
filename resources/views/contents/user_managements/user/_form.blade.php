@@ -1,38 +1,42 @@
-<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-    {!! Form::label('name', trans('Name'), ['class' => 'col-sm-2 control-label']) !!}
+<div class="row">
     <div class="col-sm-6">
-        {!! Form::text('name', old('name') , ['class' => 'form-control', 'placeholder' => 'Input the name']) !!}
-        
+        <div class="form-group {{ $errors->has('first_name') ? 'has-error' : ''}}">
+            {!! Form::label('First Name', trans('First Name'), ['class' => 'col-sm-6 control-label']) !!}
+            {!! Form::text('first_name', old('first_name') , ['class' => 'form-control', 'placeholder' => 'Input the First Name']) !!}
+        </div>
     </div>
-</div>
-
-<div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
-    {!! Form::label('description', trans('Description'), ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-6">
-        {!! Form::textarea('description', old('description') , ['class' => 'form-control', 'placeholder' => 'Input the description (max. 160 chars)', 'rows' => '3', 'maxlength' => '160']) !!}
-        {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
+        <div class="form-group {{ $errors->has('last_name') ? 'has-error' : ''}}">
+            {!! Form::label('Last Name', trans('Last Name'), ['class' => 'col-sm-6 control-label']) !!}
+            {!! Form::text('last_name', old('last_name') , ['class' => 'form-control', 'placeholder' => 'Input the Last Name']) !!}
+        </div>
     </div>
-</div>
-
-<div class="form-group {{ $errors->has('image') ? 'has-error' : ''}}">
-    {!! Form::label('image', trans('Image'), ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-6">
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-            <div class="fileinput-new thumbnail" style="width: 200px; height: auto;">
-                <img src="{{(@$masterTryOut->image) ? get_file($masterTryOut->image, 'thumbnail') : url('images/noimagefound.jpg')}}">
-            </div>
-            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-            <div>
-                <span class="btn btn-default btn-file">
-                    <span class="fileinput-new">Choose</span>
-                    <span class="fileinput-exists">Edit</span>
-                    <input type="file" accept="image/jpg, image/png" name="image" value="{{@$masterTryOut->image}}">
-                </span>
-                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Delete</a>
-            </div>
+        <div class="form-group {{ $errors->has('username') ? 'has-error' : ''}}">
+            {!! Form::label('Username', trans('Username'), ['class' => 'col-sm-6 control-label']) !!}
+            {!! Form::text('username', old('username') , ['class' => 'form-control', 'placeholder' => 'Input the Username']) !!}
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
+            {!! Form::label('email', trans('Email'), ['class' => 'col-sm-6 control-label']) !!}
+            {!! Form::text('email', old('Email') , ['class' => 'form-control', 'placeholder' => 'Input the Email']) !!}
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
+            {!! Form::label('password', trans('Password'), ['class' => 'col-sm-6 control-label']) !!}
+            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Input the Password']) !!}
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group {{ $errors->has('company_id') ? 'has-error' : ''}}">
+            {!! Form::label('company_id', trans('Company ID'), ['class' => 'col-sm-6 control-label']) !!}
+            {!! Form::text('company_id', null ,['class' => 'form-control', 'placeholder' => 'Input the Company ID']) !!}
         </div>
     </div>
 </div>
+
 
 @section('part_script')
 <script src="{{ asset('themes/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script>
