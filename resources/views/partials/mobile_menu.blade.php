@@ -43,6 +43,7 @@
                 <div class="sub-menu-w">
                     <ul class="sub-menu">
                         <li><a href="{{route('customer.index')}}">Customer</a></li>
+                        <li><a href="{{ route('supplier.index') }}">Supplier</a></li>
                         <li><a href="">Sales Folder</a></li>
                         <li><a href="">Invoice</a></li>
                         <li><a href="">LG</a></li>

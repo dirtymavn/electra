@@ -21,5 +21,6 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // Business
     Route::group(['prefix' => 'business', 'namespace' => 'Business'], function () {
         Route::resource('customer', 'CustomerController');
+        Route::resource('supplier', 'SupplierController');
     });
 });
