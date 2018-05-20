@@ -20,6 +20,16 @@ class AuthController extends Controller
     }
 
     /**
+     * Show the form for forgot password.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function forgot()
+    {
+        return view('contents.auths.forgot');
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

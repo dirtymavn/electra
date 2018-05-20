@@ -17,3 +17,7 @@ Electra travel management for Sabre
 - deploy : Deploy123*
 - PostgreSQL : postgres/(blank)
 - PostgreSQL : root/(Root123*)
+
+## Example Auth
+- username : superadmin
+- password : 12345678

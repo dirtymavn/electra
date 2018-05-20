@@ -18,6 +18,7 @@
             {!! Form::password('password', [ 'class' => 'form-control', 'placeholder' => 'Enter Your Password' ]) !!}
             <div class="pre-icon os-icon os-icon-fingerprint"></div>
         </div>
+        <a href="{{ route('auth.forgot') }}"> Forgot Password </a>
         <div class="buttons-w">
             <button class="btn btn-primary" type="submit">Log me in</button>
             <div class="form-check-inline">

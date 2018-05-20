@@ -172,16 +172,16 @@
                                     <li><a href="{{route('customer.index')}}">Customer</a></li>
                                     <li><a href=" {{ route('supplier.index') }} ">Supplier</a></li>
                                     <li><a href=" {{ route('supplier.index') }} ">Sales Folder</a></li>
-                                    <li><a href="">Invoice</a></li>
-                                    <li><a href="">LG</a></li>
-                                    <li><a href="">Inventory</a></li>
+                                    <li><a href="#">Invoice</a></li>
+                                    <li><a href="#">LG</a></li>
+                                    <li><a href="#">Inventory</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="">Delivery</a></li>
-                                    <li><a href="">Voucher</a></li>
-                                    <li><a href="">Visa</a></li>
-                                    <li><a href="">Queue</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Delivery</a></li>
+                                    <li><a href="#">Voucher</a></li>
+                                    <li><a href="#">Visa</a></li>
+                                    <li><a href="#">Queue</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -196,19 +196,19 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Guide</a></li>
-                                    <li><a href="">Itin</a></li>
-                                    <li><a href="">Folder</a></li>
-                                    <li><a href="">Order</a></li>
-                                    <li><a href="">Visa</a></li>
-                                    <li><a href="">Avail</a></li>
+                                    <li><a href="#">Guide</a></li>
+                                    <li><a href="#">Itin</a></li>
+                                    <li><a href="#">Folder</a></li>
+                                    <li><a href="#">Order</a></li>
+                                    <li><a href="#">Visa</a></li>
+                                    <li><a href="#">Avail</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="">Queue</a></li>
-                                    <li><a href="">Visa Rpt</a></li>
-                                    <li><a href="">Delivery</a></li>
-                                    <li><a href="">Allotment</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Queue</a></li>
+                                    <li><a href="#">Visa Rpt</a></li>
+                                    <li><a href="#">Delivery</a></li>
+                                    <li><a href="#">Allotment</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -223,10 +223,10 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Hotel</a></li>
-                                    <li><a href="">Enquiry</a></li>
-                                    <li><a href="">Booking</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Hotel</a></li>
+                                    <li><a href="#">Enquiry</a></li>
+                                    <li><a href="#">Booking</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -241,16 +241,16 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Folder</a></li>
-                                    <li><a href="">Availability</a></li>
-                                    <li><a href="">FIT Order</a></li>
-                                    <li><a href="">Delivery</a></li>
+                                    <li><a href="#">Folder</a></li>
+                                    <li><a href="#">Availability</a></li>
+                                    <li><a href="#">FIT Order</a></li>
+                                    <li><a href="#">Delivery</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="">Invoice</a></li>
-                                    <li><a href="">LG</a></li>
-                                    <li><a href="">Allotment</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Invoice</a></li>
+                                    <li><a href="#">LG</a></li>
+                                    <li><a href="#">Allotment</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -265,21 +265,21 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Customer</a></li>
-                                    <li><a href="">Invoice</a></li>
-                                    <li><a href="">Misc. Inv.</a></li>
-                                    <li><a href="">Receipt</a></li>
-                                    <li><a href="">Settlem't</a></li>
-                                    <li><a href="">Rec. Vou.</a></li>
-                                    <li><a href="">Bank</a></li>
+                                    <li><a href="#">Customer</a></li>
+                                    <li><a href="#">Invoice</a></li>
+                                    <li><a href="#">Misc. Inv.</a></li>
+                                    <li><a href="#">Receipt</a></li>
+                                    <li><a href="#">Settlem't</a></li>
+                                    <li><a href="#">Rec. Vou.</a></li>
+                                    <li><a href="#">Bank</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="">Deposit</a></li>
-                                    <li><a href="">Reminder</a></li>
-                                    <li><a href="">Cr. Note</a></li>
-                                    <li><a href="">Cr. Card</a></li>
-                                    <li><a href="">Billing</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Deposit</a></li>
+                                    <li><a href="#">Reminder</a></li>
+                                    <li><a href="#">Cr. Note</a></li>
+                                    <li><a href="#">Cr. Card</a></li>
+                                    <li><a href="#">Billing</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -294,17 +294,17 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Supplier</a></li>
-                                    <li><a href="">LG</a></li>
-                                    <li><a href="">Deposit</a></li>
-                                    <li><a href="">LG Delivery</a></li>
-                                    <li><a href="">Pay-Req</a></li>
+                                    <li><a href="#">Supplier</a></li>
+                                    <li><a href="#">LG</a></li>
+                                    <li><a href="#">Deposit</a></li>
+                                    <li><a href="#">LG Delivery</a></li>
+                                    <li><a href="#">Pay-Req</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="">Payment</a></li>
-                                    <li><a href="">Petty. Cash</a></li>
-                                    <li><a href="">Chq Print</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Payment</a></li>
+                                    <li><a href="#">Petty. Cash</a></li>
+                                    <li><a href="#">Chq Print</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -319,11 +319,11 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Deposit</a></li>
-                                    <li><a href="">Settlem't</a></li>
-                                    <li><a href="">Rec. Vou.</a></li>
-                                    <li><a href="">Payment</a></li>
-                                    <li><a href="">Receipt</a></li>
+                                    <li><a href="#">Deposit</a></li>
+                                    <li><a href="#">Settlem't</a></li>
+                                    <li><a href="#">Rec. Vou.</a></li>
+                                    <li><a href="#">Payment</a></li>
+                                    <li><a href="#">Receipt</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -338,19 +338,19 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Account</a></li>
-                                    <li><a href="">Journal</a></li>
-                                    <li><a href="">Posting</a></li>
-                                    <li><a href="">Report</a></li>
-                                    <li><a href="">Per. End</a></li>
-                                    <li><a href="">JV Period</a></li>
+                                    <li><a href="#">Account</a></li>
+                                    <li><a href="#">Journal</a></li>
+                                    <li><a href="#">Posting</a></li>
+                                    <li><a href="#">Report</a></li>
+                                    <li><a href="#">Per. End</a></li>
+                                    <li><a href="#">JV Period</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="">Recon.</a></li>
-                                    <li><a href="">Bank Rec.</a></li>
-                                    <li><a href="">FX Trans.</a></li>
-                                    <li><a href="">BSP Rec.</a></li>
-                                    <li><a href="">Finance</a></li>
+                                    <li><a href="#">Recon.</a></li>
+                                    <li><a href="#">Bank Rec.</a></li>
+                                    <li><a href="#">FX Trans.</a></li>
+                                    <li><a href="#">BSP Rec.</a></li>
+                                    <li><a href="#">Finance</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -365,8 +365,8 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Refund</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Refund</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -381,10 +381,10 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Inventory</a></li>
-                                    <li><a href="">LG Delivery</a></li>
-                                    <li><a href="">BSP Rec.</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Inventory</a></li>
+                                    <li><a href="#">LG Delivery</a></li>
+                                    <li><a href="#">BSP Rec.</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -399,9 +399,9 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Budget</a></li>
-                                    <li><a href="">Ex. Rate</a></li>
-                                    <li><a href="">Report</a></li>
+                                    <li><a href="#">Budget</a></li>
+                                    <li><a href="#">Ex. Rate</a></li>
+                                    <li><a href="#">Report</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -416,8 +416,8 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Profile</a></li>
-                                    <li><a href="">Cash Adv.</a></li>
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="#">Cash Adv.</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -432,11 +432,11 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">Report</a></li>
-                                    <li><a href="">C. Report</a></li>
-                                    <li><a href="">Rpt. Tool2.0</a></li>
-                                    <li><a href="">Dashboard</a></li>
-                                    <li><a href="">All Rpt.</a></li>
+                                    <li><a href="#">Report</a></li>
+                                    <li><a href="#">C. Report</a></li>
+                                    <li><a href="#">Rpt. Tool2.0</a></li>
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="#">All Rpt.</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -451,7 +451,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="">BOS</a></li>
+                                    <li><a href="#">BOS</a></li>
                                 </ul>
                             </div>
                         </div>

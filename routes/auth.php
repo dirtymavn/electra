@@ -11,6 +11,7 @@
 |
 */
 Route::get('login', array('as' => 'auth.login', 'uses' => 'AuthController@create'));
+Route::get('forgot-password', array('as' => 'auth.forgot', 'uses' => 'AuthController@forgot'));
 Route::post('login/store', array('as' => 'auth.login.store', 'uses' => 'AuthController@store'));
 // in Middleware Sentinel Auth
 Route::group( [ 'middleware' => 'sentinel_auth' ], function () {
