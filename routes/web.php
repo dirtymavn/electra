@@ -13,6 +13,12 @@
 Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // Dashboard
     Route::get('/', array('as' => 'dashboard', 'uses' => 'DashboardController@index'));
+
+    // Master
+    Route::group(['prefix' => 'master', 'namespace' => 'Master'], function () {
+        Route::resource('company', 'CompanyController');
+    });
+
     // User Management
     Route::group(['prefix' => 'user-management', 'namespace' => 'UserManagement'], function () {
         Route::resource( 'user', 'UserController' );

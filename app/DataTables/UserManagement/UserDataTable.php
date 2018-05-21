@@ -32,7 +32,8 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->select('id', 'first_name','last_name','email','created_at');
+        return $model->newQuery()->leftJoin('companies', 'companies.id', '=', 'users.company_id')
+            ->select('users.id', 'users.first_name','users.last_name','users.email','users.created_at','companies.name as company_name');
     }
 
     /**
@@ -45,7 +46,7 @@ class UserDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px', 'class' => 'row-actions'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -57,10 +58,11 @@ class UserDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'first_name' => ['name' => 'first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
-            'last_name' => ['name' => 'last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
-            'email' => ['name' => 'email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],
-            'created_at' => ['name' => 'created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at']
+            'first_name' => ['name' => 'users.first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
+            'last_name' => ['name' => 'users.last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
+            'email' => ['name' => 'users.email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],
+            'company_name' => ['name' => 'companies.name', 'data' => 'company_name', 'title' => trans('Company'), 'id' => 'company'],
+            'created_at' => ['name' => 'users.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at']
         ];
 
     }

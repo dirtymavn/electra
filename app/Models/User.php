@@ -22,7 +22,7 @@ class User extends CartalystUser
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password','username'
+        'first_name', 'last_name', 'email', 'password','username','status','company_id'
     ];
 
     protected $loginNames = ['username'];
@@ -56,5 +56,13 @@ class User extends CartalystUser
    {
        return $this->belongsToMany('App\Models\Role', 'role_users');
    }
+
+   /**
+     * Get the company that owns the user.
+    */
+   public function company()
+    {
+        return $this->belongsTo('App\Models\Master\Company');
+    }
    
 }

@@ -1,16 +1,16 @@
 @if( isset( $show_url ) )
-<a href="{!! empty( $show_url ) ? 'javascript:void(0)' : $show_url !!}" class="btn btn-primary btn-xs {!! empty( $show_url ) ? 'disabled' : '' !!}" title="Show" data-button="show">
+<a href="{!! empty( $show_url ) ? 'javascript:void(0)' : $show_url !!}" class="{!! empty( $show_url ) ? 'disabled' : '' !!}" title="Show" data-button="show">
     <i class="fa fa-search fa-fw"></i>
 </a>
 @endif
 @if( isset( $edit_url ) )
-<a href="{!! empty( $edit_url ) ? 'javascript:void(0)' : $edit_url !!}" class="btn btn-success btn-xs {!! empty( $edit_url ) ? 'disabled' : '' !!}" title="Edit" data-button="edit">
-    <i class="fa fa-pencil-square-o fa-fw"></i>
+<a href="{!! empty( $edit_url ) ? 'javascript:void(0)' : $edit_url !!}" class="{!! empty( $edit_url ) ? 'disabled' : '' !!}" title="Edit" data-button="edit">
+    <i class="os-icon os-icon-ui-49"></i>
 </a>
 @endif
 @if( isset( $delete_url ) )
-    <a href="javascript:void(0)" id="deleteData" class="btn btn-danger btn-xs deleteData {!! empty( $delete_url ) ? 'disabled' : '' !!}" title="Delete" data-href="{!! empty( $delete_url ) ? 'javascript:void(0)' : $delete_url !!}" data-button="delete">
-        <i class="fa fa-trash-o fa-fw"></i>
+    <a href="javascript:void(0)" id="deleteData" class="danger deleteData {!! empty( $delete_url ) ? 'disabled' : '' !!}" title="Delete" data-href="{!! empty( $delete_url ) ? 'javascript:void(0)' : $delete_url !!}" data-button="delete">
+        <i class="os-icon os-icon-ui-15"></i>
     </a>
 @endif
 @if( isset( $status ) )

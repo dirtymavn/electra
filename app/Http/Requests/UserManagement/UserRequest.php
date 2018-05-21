@@ -23,8 +23,30 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        $userName = 'required|unique:users,username';
+        $email = 'required|email|unique:users,email';
+
+        if ($this->method() == 'PATCH') {
+            $userName = 'required|unique:users,username,' . $this->segment(3);
+            $email = 'required|email|unique:users,email,' . $this->segment(3);
+        }
+
         return [
-            'name' => 'required'
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'username' => $userName,
+            'email' => $email,
+            'password' => 'required_if:is_required,==,requirred|min:8',
+            'conf_password' => 'required_if:is_required,==,requirred|min:8|same:password',
+            'company_id' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'password.required_if' => 'The password field is required.',
+            'conf_password.required_if' => 'The confirmation password field is required.',
         ];
     }
 }

@@ -30,6 +30,15 @@
                 <a href="#">
                     <div class="icon-w">
                         <div class="os-icon os-icon-layers"></div>
+                    </div><span>Master</span></a>
+                <ul class="sub-menu">
+                    <li><a href="{{route('company.index')}}">Company</a></li>
+                </ul>
+            </li>
+            <li class="has-sub-menu">
+                <a href="#">
+                    <div class="icon-w">
+                        <div class="os-icon os-icon-layers"></div>
                     </div><span>User Management</span></a>
                 <ul class="sub-menu">
                     <li><a href="{{route('user.index')}}">Register User</a></li>

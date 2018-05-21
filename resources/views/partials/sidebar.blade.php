@@ -148,6 +148,21 @@
                         <a href="#">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-layers"></div>
+                            </div><span>Master</span></a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-header">Master</div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li><a href="{{route('company.index')}}">Company</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-layers"></div>
                             </div><span>User Management</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">User Management</div>
