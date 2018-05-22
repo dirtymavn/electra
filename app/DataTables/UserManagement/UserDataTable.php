@@ -18,8 +18,9 @@ class UserDataTable extends DataTable
         return datatables($query)
              ->addColumn('action', function($user){
                 $edit_url = route('user.edit', $user->id);
+                $reset_pass_url = route('user.reset-password', $user->id);
                 $delete_url = route('user.destroy', $user->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                return view('partials.action-button')->with(compact('edit_url', 'reset_pass_url' ,'delete_url'));
             })
             ->addIndexColumn();
     }
@@ -46,7 +47,7 @@ class UserDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px', 'class' => 'row-actions'])
+                    ->addAction(['width' => '100px', 'class' => 'row-actions'])
                     ->parameters($this->getBuilderParameters());
     }
 

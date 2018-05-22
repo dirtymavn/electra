@@ -4,14 +4,14 @@
                 <div class="logo-w">
                     <a class="logo" href="{{route('dashboard')}}">
                         <div class="logo-element"></div>
-                        <div class="logo-label">{{env('APP_NAME')}}</div>
+                        <div class="logo-label">{{ user_info('company') }}</div>
                     </a>
                 </div>
                 <div class="logged-user-w avatar-inline">
                     <div class="logged-user-i">
                         <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
                         <div class="logged-user-info-w">
-                            <div class="logged-user-name">Maria Gomez</div>
+                            <div class="logged-user-name">{{ user_info('full_name') }}</div>
                             <div class="logged-user-role">Administrator</div>
                         </div>
                         <div class="logged-user-toggler-arrow">
@@ -21,7 +21,7 @@
                             <div class="logged-user-avatar-info">
                                 <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
                                 <div class="logged-user-info-w">
-                                    <div class="logged-user-name">Maria Gomez</div>
+                                    <div class="logged-user-name">{{ user_info('full_name') }}</div>
                                     <div class="logged-user-role">Administrator</div>
                                 </div>
                             </div>

@@ -22,6 +22,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // User Management
     Route::group(['prefix' => 'user-management', 'namespace' => 'UserManagement'], function () {
         Route::resource( 'user', 'UserController' );
+        Route::patch('user/{id}/reset-password', array('as' => 'user.reset-password', 'uses' => 'UserController@resetPassword'));
     });
 
     // Business

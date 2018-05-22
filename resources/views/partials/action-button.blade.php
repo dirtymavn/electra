@@ -8,6 +8,11 @@
     <i class="os-icon os-icon-ui-49"></i>
 </a>
 @endif
+@if( isset( $reset_pass_url ) )
+    <a href="javascript:void(0)" id="resetData" class="resetData {!! empty( $reset_pass_url ) ? 'disabled' : '' !!}" title="Reset Password" data-href="{!! empty( $reset_pass_url ) ? 'javascript:void(0)' : $reset_pass_url !!}" data-button="reset">
+        <i class="os-icon os-icon-grid-18"></i>
+    </a>
+@endif
 @if( isset( $delete_url ) )
     <a href="javascript:void(0)" id="deleteData" class="danger deleteData {!! empty( $delete_url ) ? 'disabled' : '' !!}" title="Delete" data-href="{!! empty( $delete_url ) ? 'javascript:void(0)' : $delete_url !!}" data-button="delete">
         <i class="os-icon os-icon-ui-15"></i>

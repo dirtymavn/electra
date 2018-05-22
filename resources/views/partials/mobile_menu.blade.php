@@ -1,6 +1,6 @@
 <div class="menu-mobile menu-activated-on-click color-scheme-dark">
     <div class="mm-logo-buttons-w">
-        <a class="mm-logo" href="{{route('dashboard')}}"><img src="{{asset('themes/img/logo.png')}}"><span>{{env('APP_NAME')}}</span></a>
+        <a class="mm-logo" href="{{route('dashboard')}}"><img src="{{asset('themes/img/logo.png')}}"><span>{{ user_info('company') }}</span></a>
         <div class="mm-buttons">
             <div class="content-panel-open">
                 <div class="os-icon os-icon-grid-circles"></div>
@@ -14,7 +14,7 @@
         <div class="logged-user-w">
             <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
             <div class="logged-user-info-w">
-                <div class="logged-user-name">Maria Gomez</div>
+                <div class="logged-user-name">{{ user_info('full_name') }}</div>
                 <div class="logged-user-role">Administrator</div>
             </div>
         </div>

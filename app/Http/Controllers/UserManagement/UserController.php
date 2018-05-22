@@ -10,6 +10,8 @@ use Sentinel;
 use App\Models\User;
 use App\Models\Master\Company;
 use App\Http\Requests\UserManagement\UserRequest;
+use App\Mail\UserManagement\ResetPassword;
+use Mail;
 
 class UserController extends Controller
 {
@@ -138,5 +140,27 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->back();
+    }
+
+    /**
+     * Reset Password the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function resetPassword($id)
+    {
+        $user = $this->user->find($id);
+        if ($user) {
+            $newPassword = $this->generateRandomString(8);
+            $message = 'Your password has been reset, this is your new password : ' . $newPassword;
+            $updatePassword = Sentinel::update($user, ['password' => $newPassword]);
+            if ($updatePassword) {
+                Mail::to($user->email)->send(new ResetPassword(['message' => $message, 'name' => $user->first_name.' '.$user->last_name]));
+            }
+            return redirect()->route('user.index');
+        } else {
+            return redirect()->route('user.index');
+        }
     }
 }
