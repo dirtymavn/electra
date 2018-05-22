@@ -22,7 +22,7 @@ class User extends CartalystUser
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password','username','status','company_id'
+        'first_name', 'last_name', 'email', 'password','username','status','company_id', 'parent_id', 'company_role'
     ];
 
     protected $loginNames = ['username'];
@@ -63,6 +63,45 @@ class User extends CartalystUser
    public function company()
     {
         return $this->belongsTo('App\Models\Master\Company');
+    }
+
+    /**
+     * Get the childs of user.
+    */
+    public function childs()
+    {
+        return $this->hasMany('App\Models\User', 'parent_id');
+    }
+
+    /**
+     * Get the parent of user.
+    */
+    public function parent()
+    {
+        return $this->belongsTo('App\Models\User', 'parent_id', 'id');
+    }
+
+    /**
+     * Get user under company.
+    */
+   public function usersUnderCompany()
+    {
+        $results = self::leftJoin('companies', 'companies.id', '=', 'users.company_id');
+        if (user_info('company_role') == 'super-admin') {
+            $results = $results;
+        } else {
+            if (user_info()->parent) {
+                $id = user_info()->parent->id;
+                $results = $results->where('users.parent_id', $id)
+                    ->whereNotIn('users.id', [user_info('id')]);
+            } else {
+                $id = user_info('id');
+                $results = $results->where('users.parent_id', $id);
+
+            }
+        }
+
+        return $results;
     }
    
 }

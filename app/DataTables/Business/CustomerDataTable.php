@@ -32,9 +32,9 @@ class CustomerDataTable extends DataTable
      */
     public function query(Customer $model)
     {
-        $empty = collect();
-        return $empty;
-        // return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
+        // $empty = collect();
+        // return $empty;
+        return $model->getDataByCompany(@user_info()->company->id)->select('id', 'name', 'address', 'created_at', 'updated_at');
     }
 
     /**
@@ -47,7 +47,7 @@ class CustomerDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px', 'class' => 'row-actions'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -59,10 +59,11 @@ class CustomerDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'no' => ['title' => 'No', 'width' => '10px'],
-            'customer' => ['title' => 'Customer'],
-            'company' => ['title' => 'Company'],
+            'name' => ['name' => 'customers.name', 'data' => 'name', 'title' => trans('Name'), 'id' => 'name'],
+            'address' => ['name' => 'customers.address', 'data' => 'address', 'title' => trans('Address'), 'id' => 'address'],
+            'created_at' => ['name' => 'customers.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at'],
         ];
+
     }
 
     /**

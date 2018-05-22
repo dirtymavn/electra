@@ -51,7 +51,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        $companies = $this->company->getData()->pluck('name', 'id')->all();
+        if (user_info()->company) {
+            $companies = user_info()->company()->pluck('name', 'id')->all();
+        } else {
+            $companies = $this->company->getData()->pluck('name', 'id')->all();
+        }
         return view('contents.user_managements.user.create', compact('companies'));
     }
 
@@ -64,6 +68,14 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         try {
+            if (user_info('company_role') == 'super-admin') {
+                $companyRole = 'admin';
+            } else {
+                $companyRole = 'subscriber';
+                $parentId = (user_info('parent_id')) ? user_info('parent_id') : user_info()->parent->id;
+            }
+            
+            $request->merge(['company_role' => $companyRole, 'parent_id' => $parentId]);
             $user = Sentinel::registerAndActivate( $request->all() );
 
             Sentinel::findRoleBySlug( 'admin' )->users()->attach( $user );
@@ -138,7 +150,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        if ($user->childs->count() > 0 || $user->company_role == 'super-admin' || $user->company_role == 'admin') {
+            // cannot delete, user have childs, super-admin, and admin of company
+        } else {
+            $user->delete();
+        }
         return redirect()->back();
     }
 

@@ -21,9 +21,9 @@ class Company extends Model
     /**
      * Get the user record associated with the company.
     */
-    public function user()
+    public function users()
     {
-        return $this->hasOne('App\Models\User', 'company_id');
+        return $this->hasMany('App\Models\User', 'company_id');
     }
 
     /**
@@ -32,5 +32,10 @@ class Company extends Model
     public static function scopeGetData($query)
     {
         return $query->whereDoesntHave('user');
+    }
+
+    public function customers()
+    {
+        return $this->hasMany('App\Models\Business\Customer', 'company_id');
     }
 }

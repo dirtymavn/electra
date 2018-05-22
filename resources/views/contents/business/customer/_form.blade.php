@@ -1,3 +1,18 @@
+<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+    {!! Form::label('name', trans('Customer Name'), ['class' => 'col-sm-6 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::text('name', old('name') , ['class' => 'form-control', 'placeholder' => 'Input the Customer Name']) !!}
+    </div>
+</div>
+
+<div class="form-group {{ $errors->has('address') ? 'has-error' : ''}}">
+    {!! Form::label('address', trans('Address'), ['class' => 'col-sm-6 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::textarea('address', old('address') , ['class' => 'form-control', 'placeholder' => 'Input the Address', 'rows' => '3']) !!}
+    </div>
+</div>
+
+<div style="display:none;">
 <div class="form-group">
     <label class="col-md-2 control-label">Customer No:</label>
     <div class="col-md-10">
@@ -1468,9 +1483,9 @@
         
     </div>
 </div>
-
+</div>
 @section('part_script')
 <!-- <script src="{{ asset('themes/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script> -->
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-<!-- {!! JsValidator::formRequest('App\Http\Requests\UserManagement\UserRequest', '#form-user') !!} -->
+{!! JsValidator::formRequest('App\Http\Requests\Business\CustomerRequest', '#form-customer') !!}
 @endsection

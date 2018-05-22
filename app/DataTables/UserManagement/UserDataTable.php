@@ -33,7 +33,7 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->leftJoin('companies', 'companies.id', '=', 'users.company_id')
+        return $model->usersUnderCompany()
             ->select('users.id', 'users.first_name','users.last_name','users.email','users.created_at','companies.name as company_name');
     }
 

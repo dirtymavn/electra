@@ -29,7 +29,7 @@
                 @include('contents.business.customer._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{ route('customer.index') }}" class="btn btn-default">{{trans('Cancel')}}</a>
+                        <a href="{{ route('customer.index') }}" class="btn btn-white">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-primary" id="btn-submit">{{ trans('Submit') }}</button>
                     </div>
                 </div>              
