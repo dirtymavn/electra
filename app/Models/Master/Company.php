@@ -31,7 +31,7 @@ class Company extends Model
     */
     public static function scopeGetData($query)
     {
-        return $query->whereDoesntHave('user');
+        return $query->whereDoesntHave('users');
     }
 
     public function customers()

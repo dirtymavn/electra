@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        if (user_info()->company) {
+        if (@user_info()->company) {
             $companies = user_info()->company()->pluck('name', 'id')->all();
         } else {
             $companies = $this->company->getData()->pluck('name', 'id')->all();
@@ -70,6 +70,7 @@ class UserController extends Controller
         try {
             if (user_info('company_role') == 'super-admin') {
                 $companyRole = 'admin';
+                $parentId = null;
             } else {
                 $companyRole = 'subscriber';
                 $parentId = (user_info('parent_id')) ? user_info('parent_id') : user_info()->parent->id;
