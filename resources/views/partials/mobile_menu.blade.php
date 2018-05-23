@@ -15,7 +15,7 @@
             <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
             <div class="logged-user-info-w">
                 <div class="logged-user-name">{{ user_info('full_name') }}</div>
-                <div class="logged-user-role">Administrator</div>
+                <div class="logged-user-role">{{ str_replace('-',' ',user_info('company_role')) }}</div>
             </div>
         </div>
         
