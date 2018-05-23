@@ -16,4 +16,6 @@ Route::post('login/store', array('as' => 'auth.login.store', 'uses' => 'AuthCont
 // in Middleware Sentinel Auth
 Route::group( [ 'middleware' => 'sentinel_auth' ], function () {
     Route::get('logout', [ 'as' => 'auth.logout', 'uses' => 'AuthController@logout' ]);
+    Route::get('profile', array('as' => 'auth.profile', 'uses' => 'AuthController@profile'));
+    Route::patch('profile/{id}/update', array('as' => 'auth.profile.update', 'uses' => 'AuthController@updateProfile'));
 });

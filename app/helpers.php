@@ -49,15 +49,11 @@ if (!function_exists('link_to_avatar')) {
      */
     function link_to_avatar($path = null)
     {
-        if (strpos($path, 'avatar-') !== false) {
-            return asset('uploads/users/avatar/') . '/' . trim($path, '/');
+        if (is_null($path) || !file_exists($path)) {
+            return url('themes/img/avatar1.jpg');
         }
 
-        if (is_null($path) || !file_exists(avatar_path($path))) {
-            return 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image';
-        }
-
-        return asset('storage/avatars') . '/' . trim($path, '/');
+        return get_file($path, 'thumbnail');
     }
 }
 

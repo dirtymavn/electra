@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Sentinel;
+use App\Models\User;
+use App\Http\Requests\Auth\ProfileRequest;
 
 class AuthController extends Controller
 {
@@ -59,5 +61,54 @@ class AuthController extends Controller
     {
         Sentinel::logout();
         return redirect()->route( 'auth.login' );
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        $user = user_info();
+        $user->company_name = @$user->company->name;
+        return view('contents.auths.profile', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Auth\ProfileRequest  $request
+     * @param  integer  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(ProfileRequest $request, $id)
+    {
+        try {
+            $user = User::find($id);
+            $dataInput = $request->except(['_method', '_token', 'email', 'conf_password', 'company_name']);
+            
+            if (@$request->avatar) {
+                if ($user->avatar) {
+                    delete_file($user->avatar);
+                }
+
+                $uploadAvatar = upload_file($request->avatar, 'uploads/users/avatar/');
+                $avatar = $uploadAvatar['original'];
+
+                $dataInput['avatar'] = $avatar;
+            }
+
+            if ($request->password == 'default1234') {
+                unset($dataInput['password']);
+                $updateUser = $user->update($dataInput);
+            } else {
+                $updateUser = Sentinel::update($user, $dataInput);
+            }
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }

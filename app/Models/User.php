@@ -22,7 +22,7 @@ class User extends CartalystUser
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password','username','status','company_id', 'parent_id', 'company_role'
+        'first_name', 'last_name', 'email', 'password','username','status','company_id', 'parent_id', 'company_role', 'avatar'
     ];
 
     protected $loginNames = ['username'];

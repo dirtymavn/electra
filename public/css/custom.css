@@ -4,3 +4,11 @@
 .has-error input {
     border-color: #e65252;
 }
+.fileinput .thumbnail {
+    border: solid 1px;
+}
+.logged-user-w .avatar-w img {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+}
