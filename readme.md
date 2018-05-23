@@ -8,15 +8,15 @@ Electra travel management for Sabre
 - UFW Firewall installed, opening OpenSSH & Apache2
 - Apache2 installed, pointing at default configuration
 - PostgreSQL installed, no password for _postgres_ user
-- External IP : 206.189.145.216
+- Staging server : 128.199.115.155
+- Development server : 128.199.233.178
 
 
 ## Credential
 
 (username/password)
-- deploy : Deploy123*
-- PostgreSQL : postgres/(blank)
-- PostgreSQL : root/(Root123*)
+- deploy : ?
+- PostgreSQL : ?
 
 ### Mailgun
 
@@ -30,13 +30,13 @@ Electra travel management for Sabre
 ## Flow
 
 1. All development should be done in *development* branch and tested by developer him/herself.
-2. Upon complete testing (on developer machine), push to *testing* branch -> deploy to **development server** (206.189.145.216 - digitalocean)
+2. Upon complete testing (on developer machine), push to *testing* branch -> deploy to **development server** (128.199.233.178)
 3. Tester test and note feedback of development server test result everyday
-4. Once a week at the end of the week, upon PM approval, push weekly progress to staging server (xxx.xxx.xxx.xxx - AWS)
+4. Once a week at the end of the week, upon PM approval, push weekly progress to **staging server** (128.199.115.155)
 
 ## Public Key
 
-only public key below can access **development server** (206.189.145.216)
+only public key below can access **both servers above**
 
 #### Hendri
 ```

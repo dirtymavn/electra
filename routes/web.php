@@ -17,6 +17,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // Master
     Route::group(['prefix' => 'master', 'namespace' => 'Master'], function () {
         Route::resource('company', 'CompanyController');
+        Route::resource('role', 'RoleController');
     });
 
     // User Management
