@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Master;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use App\DataTables\Master\CompanyDataTable;
+use App\Models\Master\Menu;
+use App\Models\Role;
 
 class RoleController extends Controller
 {
@@ -12,9 +16,9 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CompanyDataTable $dataTable)
     {
-        //
+        return $dataTable->render('contents.masters.company.index');
     }
 
     /**
@@ -24,7 +28,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Menu::getPermission();
+        return view( 'contents.masters.roles.create', compact('permissions'));
     }
 
     /**
@@ -35,7 +40,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $roles = Role::create( $request->all() );
+
+            return redirect()->route('role.index');
+        } catch (\Exception $e) {
+
+        }
     }
 
     /**
