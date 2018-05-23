@@ -80,11 +80,11 @@ class UserController extends Controller
             $user = Sentinel::registerAndActivate( $request->all() );
 
             Sentinel::findRoleBySlug( 'admin' )->users()->attach( $user );
-            flash()->success( trans('message.user.create-success') );
+            flash()->success( trans('message.create.success') );
             
             return redirect()->route( 'user.index' );
         } catch (Exception $e) {
-            flash()->error( trans('message.user.create-error') );
+            flash()->error( trans('message.error') );
             return back()->withInput();
         }
     }
@@ -134,11 +134,10 @@ class UserController extends Controller
                 Sentinel::findRoleBySlug( $request->role )->users()->attach( $user );
             }
 
-            flash()->success( trans('message.user.update-success') );
+            flash()->success( trans('message.update.success') );
             return redirect()->route( 'user.index' );
         } catch (Exception $e) {
-            echo "asdas"; die();
-            flash()->error( trans('message.user.update-error') );
+            flash()->error( trans('message.error') );
             return back()->withInput();
         }
     }
@@ -153,8 +152,10 @@ class UserController extends Controller
     {
         if ($user->childs->count() > 0 || $user->company_role == 'super-admin' || $user->company_role == 'admin') {
             // cannot delete, user have childs, super-admin, and admin of company
+            flash()->error(trans('message.have_related'));
         } else {
             $user->delete();
+            flash()->success(trans('message.delete.success'));
         }
         return redirect()->back();
     }
@@ -174,9 +175,13 @@ class UserController extends Controller
             $updatePassword = Sentinel::update($user, ['password' => $newPassword]);
             if ($updatePassword) {
                 Mail::to($user->email)->send(new ResetPassword(['message' => $message, 'name' => $user->first_name.' '.$user->last_name]));
+                flash()->success(trans('Password has been reseted, new password has sent by email'));
+            } else {
+                flash()->success(trans('message.error'));
             }
             return redirect()->route('user.index');
         } else {
+            flash()->info(trans('message.not_found'));
             return redirect()->route('user.index');
         }
     }

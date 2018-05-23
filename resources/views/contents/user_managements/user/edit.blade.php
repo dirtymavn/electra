@@ -17,6 +17,7 @@
 @section('page_title', 'Edit User')
 
 @section('content')
+@include('flash::message')
     {!! Form::model($user, [
             'route'     =>['user.update', $user->id],
             'method'    => 'PATCH',

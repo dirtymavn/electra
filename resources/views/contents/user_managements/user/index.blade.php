@@ -16,7 +16,7 @@
 @section('page_title', 'User Lists')
 
 @section('content')
-
+@include('flash::message')
 <a href="{{ route('user.create')}}" class="btn btn-primary" id="btn-submit">
     <i class="fa fa-plus m-right-10"></i> Add User
 </a>

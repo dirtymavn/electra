@@ -72,6 +72,7 @@ class AuthController extends Controller
     {
         $user = user_info();
         $user->company_name = @$user->company->name;
+
         return view('contents.auths.profile', compact('user'));
     }
 
@@ -106,9 +107,11 @@ class AuthController extends Controller
                 $updateUser = Sentinel::update($user, $dataInput);
             }
 
+            flash()->success('Profile is successfully updated');
             return redirect()->back();
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            flash()->error('<strong>Whoops! </strong> Something went wrong');
+            return redirect()->back()->withInput();
         }
     }
 }

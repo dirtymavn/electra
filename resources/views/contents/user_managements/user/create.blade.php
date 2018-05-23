@@ -17,6 +17,7 @@
 @section('page_title', 'Create User')
 
 @section('content')
+@include('flash::message')
     {!! Form::open([
             'route' =>  'user.store',
             'class' =>  'form-horizontal',

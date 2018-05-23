@@ -16,6 +16,7 @@
 @section('page_title', 'Profile')
 
 @section('content')
+    @include('flash::message')
     {!! Form::model($user, [
             'route'     =>['auth.profile.update', $user->id],
             'method'    => 'PATCH',

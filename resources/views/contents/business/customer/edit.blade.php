@@ -17,6 +17,7 @@
 @section('page_title', 'Edit Customer')
 
 @section('content')
+    @include('flash::message')
     {!! Form::model($customer, [
             'route'     =>['customer.update', $customer->id],
             'method'    => 'PATCH',
