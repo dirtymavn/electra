@@ -73,7 +73,7 @@ class UserController extends Controller
                 $parentId = null;
             } else {
                 $companyRole = 'subscriber';
-                $parentId = (user_info('parent_id')) ? user_info('parent_id') : user_info()->parent->id;
+                $parentId = (user_info('parent_id')) ? user_info('parent_id') : user_info()->id;
             }
             
             $request->merge(['company_role' => $companyRole, 'parent_id' => $parentId]);
