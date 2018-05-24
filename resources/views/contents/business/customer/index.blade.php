@@ -16,7 +16,7 @@
 @section('page_title', 'Customers')
 
 @section('content')
-
+@include('flash::message')
 <a href="{{ route('customer.create')}}" class="btn btn-primary" id="btn-submit">
     <i class="fa fa-plus m-right-10"></i> Add Customer
 </a>

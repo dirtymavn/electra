@@ -17,6 +17,7 @@
 @section('page_title', 'Create Company')
 
 @section('content')
+    @include('flash::message')
     {!! Form::open([
             'route' =>  'company.store',
             'class' =>  'form-horizontal',

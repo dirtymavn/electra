@@ -9,9 +9,9 @@
                 </div>
                 <div class="logged-user-w avatar-inline">
                     <div class="logged-user-i">
-                        <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
+                        <div class="avatar-w"><img alt="" src="{{link_to_avatar(user_info('avatar'))}}"></div>
                         <div class="logged-user-info-w">
-                            <div class="logged-user-name">{{ user_info('full_name') }}</div>
+                            <div class="logged-user-name">{{ user_info('first_name') }}</div>
                             <div class="logged-user-role">{{ str_replace('-',' ',user_info('company_role')) }}</div>
                         </div>
                         <div class="logged-user-toggler-arrow">
@@ -19,19 +19,16 @@
                         </div>
                         <div class="logged-user-menu color-style-bright">
                             <div class="logged-user-avatar-info">
-                                <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
+                                <div class="avatar-w"><img alt="" src="{{link_to_avatar(user_info('avatar'))}}"></div>
                                 <div class="logged-user-info-w">
-                                    <div class="logged-user-name">{{ user_info('full_name') }}</div>
+                                    <div class="logged-user-name">{{ user_info('first_name') }}</div>
                                     <div class="logged-user-role">{{ str_replace('-',' ',user_info('company_role')) }}</div>
                                 </div>
                             </div>
                             <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                             <ul>
-                                <li><a href="themes/apps_email.html"><i class="os-icon os-icon-mail-01"></i><span>Incoming Mail</span></a></li>
-                                <li><a href="themes/users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a></li>
-                                <li><a href="themes/users_profile_small.html"><i class="os-icon os-icon-coins-4"></i><span>Billing Details</span></a></li>
-                                <li><a href="themes/#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a></li>
-                                <li><a href="themes/#"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
+                                <li><a href="{{ route('auth.profile') }}"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a></li>
+                                <li><a href="{{ route('auth.logout') }}"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -198,6 +195,7 @@
                                     <li><a href="#">Visa</a></li>
                                     <li><a href="#">Queue</a></li>
                                     <li><a href="#">Report</a></li>
+                                    <li><a href="{{ route('transaction.index') }}">Transaction</a></li>
                                 </ul>
                             </div>
                         </div>

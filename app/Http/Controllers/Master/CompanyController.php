@@ -58,13 +58,16 @@ class CompanyController extends Controller
             $insert = $this->company->create($request->all());
             
             if ($insert) {
+                flash()->success('Data is successfully inserted');
                 \DB::commit();
                 return redirect()->route('company.index');
             }
-            
+            flash()->error('Data is failed to insert');
             return redirect()->back()->withInput();
         } catch (\Exception $e) {
+            flash()->error('<strong>Whoops! </strong> Something went wrong');
             \DB::rollback();
+            return redirect()->back()->withInput();
         }
     }
 
@@ -102,9 +105,10 @@ class CompanyController extends Controller
         $update = $company->update($request->all());
 
         if ($update) {
+            flash()->success('Data is successfully updated');
             return redirect()->route('company.index');
         }
-
+        flash()->error('<strong>Whoops! </strong> Something went wrong');
         return redirect()->back()->withInput();
     }
 
@@ -117,9 +121,11 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         if ($company->user) {
+            flash()->error('<strong>Whoops! </strong> Data cannot be deleted, because have related');
             return redirect()->back();
         } else {
             $company->delete();
+            flash()->success('Data is successfully deleted');
             return redirect()->back();
         }
     }

@@ -22,6 +22,9 @@ class UserDataTable extends DataTable
                 $delete_url = route('user.destroy', $user->id);
                 return view('partials.action-button')->with(compact('edit_url', 'reset_pass_url' ,'delete_url'));
             })
+            ->editColumn('company_role', function($user) {
+                return strtoupper(str_replace('-', ' ', $user->company_role));
+            })
             ->addIndexColumn();
     }
 
@@ -34,7 +37,8 @@ class UserDataTable extends DataTable
     public function query(User $model)
     {
         return $model->usersUnderCompany()
-            ->select('users.id', 'users.first_name','users.last_name','users.email','users.created_at','companies.name as company_name');
+            ->select('users.id', 'users.first_name','users.last_name','users.email','users.username',
+                'users.created_at','companies.name as company_name', 'users.company_role');
     }
 
     /**
@@ -62,7 +66,9 @@ class UserDataTable extends DataTable
             'first_name' => ['name' => 'users.first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
             'last_name' => ['name' => 'users.last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
             'email' => ['name' => 'users.email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],
+            'username' => ['name' => 'users.username', 'data' => 'username', 'title' => trans('Username'), 'id' => 'username'],
             'company_name' => ['name' => 'companies.name', 'data' => 'company_name', 'title' => trans('Company'), 'id' => 'company'],
+            'company_role' => ['name' => 'users.company_role', 'data' => 'company_role', 'title' => trans('Role'), 'id' => 'company_role'],
             'created_at' => ['name' => 'users.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at']
         ];
 

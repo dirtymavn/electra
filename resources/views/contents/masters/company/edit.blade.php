@@ -17,6 +17,7 @@
 @section('page_title', 'Edit Company')
 
 @section('content')
+    @include('flash::message')
     {!! Form::model($company, [
             'route'     =>['company.update', $company->id],
             'method'    => 'PATCH',

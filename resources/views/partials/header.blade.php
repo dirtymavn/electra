@@ -11,7 +11,7 @@
                                 <ul>
                                     <li>
                                         <a href="#">
-                                            <div class="user-avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
+                                            <div class="user-avatar-w"><img alt="" src="{{link_to_avatar(user_info('avatar'))}}"></div>
                                             <div class="message-content">
                                                 <h6 class="message-from">John Mayers</h6>
                                                 <h6 class="message-title">Account Update</h6></div>
@@ -59,10 +59,10 @@
                        
                         <div class="logged-user-w">
                             <div class="logged-user-i">
-                                <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
+                                <div class="avatar-w"><img alt="" src="{{link_to_avatar(user_info('avatar'))}}"></div>
                                 <div class="logged-user-menu color-style-bright">
                                     <div class="logged-user-avatar-info">
-                                        <div class="avatar-w"><img alt="" src="{{asset('themes/img/avatar1.jpg')}}"></div>
+                                        <div class="avatar-w"><img alt="" src="{{link_to_avatar(user_info('avatar'))}}"></div>
                                         <div class="logged-user-info-w">
                                             <div class="logged-user-name">{{ user_info('full_name') }}</div>
                                             <div class="logged-user-role">{{ str_replace('-',' ',user_info('company_role')) }}</div>
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                     <ul>
-                                        <li><a href="users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a></li>
+                                        <li><a href="{{ route('auth.profile') }}"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a></li>
                                         <li><a href="{{ route('auth.logout') }}"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
                                     </ul>
                                 </div>

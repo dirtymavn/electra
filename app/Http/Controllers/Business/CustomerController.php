@@ -59,12 +59,17 @@ class CustomerController extends Controller
             $insert = $this->customer->create($request->all());
             
             if ($insert) {
+                flash()->success('Data is successfully inserted');
                 \DB::commit();
+                return redirect()->route('customer.index');
+            } else {
+                flash()->error('Data is failed to insert');
+                return redirect()->back()->withInput();
             }
-            return redirect()->route('customer.index');
         } catch (\Exception $e) {
+            flash()->error('<strong>Whoops! </strong> Something went wrong');
             \DB::rollback();
-            return redirect()->route('customer.index');
+            return redirect()->back()->withInput();
         }
     }
 
@@ -100,7 +105,13 @@ class CustomerController extends Controller
     public function update(CustomerRequest $request, Customer $customer)
     {
         $update = $customer->update($request->all());
-        return redirect()->route('customer.index');
+        if ($update) {
+            flash()->success('Data is successfully inserted');
+            return redirect()->route('customer.index');
+        }
+
+        flash()->error('<strong>Whoops! </strong> Something went wrong');        
+        return redirect()->back()->withInput();
     }
 
     /**
@@ -111,7 +122,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $update = $customer->delete();
+        $destroy = $customer->delete();
+        flash()->success('Data is successfully deleted');
         return redirect()->route('customer.index');
     }
 }

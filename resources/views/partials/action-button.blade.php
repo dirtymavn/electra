@@ -13,6 +13,16 @@
         <i class="os-icon os-icon-grid-18"></i>
     </a>
 @endif
+@if( isset( $approve_url ) )
+    <a href="javascript:void(0)" id="approveData" style="color:#71c21a;" class="{!! empty( $approve_url ) ? 'disabled' : '' !!}" title="Approve" data-href="{!! empty( $approve_url ) ? 'javascript:void(0)' : $approve_url !!}" data-button="Approve">
+        <i class="fa fa-check"></i>
+    </a>
+@endif
+@if( isset( $reject_url ) )
+    <a href="javascript:void(0)" id="rejectData" class="danger{!! empty( $reject_url ) ? 'disabled' : '' !!}" title="Reject" data-href="{!! empty( $reject_url ) ? 'javascript:void(0)' : $reject_url !!}" data-button="Reject">
+        <i class="fa fa-times"></i>
+    </a>
+@endif
 @if( isset( $delete_url ) )
     <a href="javascript:void(0)" id="deleteData" class="danger deleteData {!! empty( $delete_url ) ? 'disabled' : '' !!}" title="Delete" data-href="{!! empty( $delete_url ) ? 'javascript:void(0)' : $delete_url !!}" data-button="delete">
         <i class="os-icon os-icon-ui-15"></i>
@@ -39,3 +49,4 @@
         <i class="fa fa-refresh fa-fw"></i>
     </a>
 @endif
+

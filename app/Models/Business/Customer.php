@@ -21,8 +21,15 @@ class Customer extends Model
         return $this->belongsTo('App\Models\Master\Company');
     }
 
-    public function getDataByCompany($companyId)
+    public static function getDataByCompany($companyId = null)
     {
-        return self::whereCompanyId($companyId);
+        $results = self::join('companies', 'companies.id', '=', 'customers.company_id');
+        if ($companyId) {
+            $results = $results->where('customers.company_id', $companyId);
+        } else {
+            $results = $results->whereNotNull('customers.company_id');
+        }
+
+        return $results;
     }
 }

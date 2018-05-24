@@ -18,6 +18,7 @@
     {!! Html::style('themes/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css') !!}
     {!! Html::style('themes/bower_components/slick-carousel/slick/slick.css') !!}
     {!! Html::style('themes/css/maince5a.css?version=4.4.1') !!}
+    {!! Html::style('themes/icon_fonts_assets/font-awesome/css/font-awesome.min.css') !!}
     {!! Html::style('css/custom.css') !!}
     <style>
         body {
@@ -171,20 +172,20 @@
     {!! Html::script('themes/js/demo_customizerce5a.js?version=4.4.1') !!}
     {!! Html::script('themes/js/maince5a.js?version=4.4.1') !!}
     <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '../www.google-analytics.com/analytics.js', 'ga');
+        // (function(i, s, o, g, r, a, m) {
+        //     i['GoogleAnalyticsObject'] = r;
+        //     i[r] = i[r] || function() {
+        //         (i[r].q = i[r].q || []).push(arguments)
+        //     }, i[r].l = 1 * new Date();
+        //     a = s.createElement(o),
+        //         m = s.getElementsByTagName(o)[0];
+        //     a.async = 1;
+        //     a.src = g;
+        //     m.parentNode.insertBefore(a, m)
+        // })(window, document, 'script', '../www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-42863888-9', 'auto');
-        ga('send', 'pageview');
+        // ga('create', 'UA-42863888-9', 'auto');
+        // ga('send', 'pageview');
     </script>
     @yield('script')
     @yield('part_script')

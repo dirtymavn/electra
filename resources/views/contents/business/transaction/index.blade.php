@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'User Management')
+@section('title', 'Transaction')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,16 +9,16 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{route('user.index')}}">User Management</a></li>
+    <li class="breadcrumb-item"><a href="{{route('transaction.index')}}">Transaction</a></li>
 </ul>
 @endsection
 
-@section('page_title', 'User Lists')
+@section('page_title', 'Transaction Lists')
 
 @section('content')
 @include('flash::message')
-<a href="{{ route('user.create')}}" class="btn btn-primary" id="btn-submit">
-    <i class="fa fa-plus m-right-10"></i> Add User
+<a href="{{ route('transaction.create')}}" class="btn btn-primary" id="btn-submit">
+    <i class="fa fa-plus m-right-10"></i> Add Transaction
 </a>
 <br>
 

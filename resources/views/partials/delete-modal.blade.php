@@ -43,6 +43,52 @@
         </div>
     </div>
 </div>
+
+<div id="approve-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{!! trans('Confirmation') !!}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="text-body-confirm-approve">{!! trans('Are you sure want to approve this transaction ?') !!}</p>
+            </div>
+            <div class="modal-footer">
+                {!! Form::open(['id' => 'approve-transaction', 'method' => 'patch']) !!}
+                    <a id="approve-modal-cancel" href="#" class="btn btn-white pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> {!! trans('Cancel') !!}
+                    </a>
+                    <button class="btn btn-success" id="submit-approve" type="submit">
+                        <i class="fa fa-check m-right-10"></i> Continue
+                    </button>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reject-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{!! trans('Confirmation') !!}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="text-body-confirm-reject">{!! trans('Are you sure want to reject this transaction ?') !!}</p>
+            </div>
+            <div class="modal-footer">
+                {!! Form::open(['id' => 'reject-transaction', 'method' => 'patch']) !!}
+                    <a id="reject-modal-cancel" href="#" class="btn btn-white pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> {!! trans('Cancel') !!}
+                    </a>
+                    <button class="btn btn-danger" id="submit-reject" type="submit">
+                        <i class="fa fa-check m-right-10"></i> Continue
+                    </button>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
 @section('part_script')
 <script>
     $(document).ready(function() {
@@ -65,6 +111,26 @@
             $('#reset-modal').modal('show');
             $("#text-body-confirm-reset").text("{{ trans('Are you sure want to reset this data ?') }}");
             $('#submit-reset').attr('value','Reset');
+            e.preventDefault();
+        });
+
+        $(document).on('click', '#approveData', function(e) {
+            $('#submit-approve').attr('disabld', true);
+            var url = $(this).attr('data-href');
+            $('#approve-transaction').attr('action', url );
+            $('#approve-modal').modal('show');
+            $("#text-body-confirm-approve").text("{{ trans('Are you sure want to approve this transaction ?') }}");
+            $('#submit-approve').html('<i class="fa fa-check m-right-10"></i> Approve');
+            e.preventDefault();
+        });
+
+        $(document).on('click', '#rejectData', function(e) {
+            $('#submit-reject').attr('disabld', true);
+            var url = $(this).attr('data-href');
+            $('#reject-transaction').attr('action', url );
+            $('#reject-modal').modal('show');
+            $("#text-body-confirm-reject").text("{{ trans('Are you sure want to reject this transaction ?') }}");
+            $('#submit-reject').html('<i class="fa fa-check m-right-10"></i> Reject');
             e.preventDefault();
         });
     });

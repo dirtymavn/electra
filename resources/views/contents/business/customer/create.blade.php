@@ -21,6 +21,7 @@
 @section('page_title', 'Create Customer')
 
 @section('content')
+    @include('flash::message')
     {!! Form::open([
             'route' =>  'customer.store',
             'class' =>  'form-horizontal',
