@@ -4,7 +4,7 @@
 @section('body')
 <div class="auth-box-w">
     <div class="logo-w">
-        <a href="{{route('auth.login')}}"><img alt="" src="{{asset('themes/img/logo-big.png')}}"></a>
+        <a href="{{route('auth.login')}}"><img class="img-responsive" style="width:100%;" src="{{asset('themes/img/logo-big.png')}}"></a>
     </div>
     <h4 class="auth-header">Login Form</h4>
     {!! Form::open( [ 'route' => 'auth.login.store', 'id' => 'form-login' ] ) !!}

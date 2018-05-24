@@ -168,6 +168,9 @@ $(function () {
   if ($('#dataTable1').length) {
     $('#dataTable1').DataTable({ buttons: ['copy', 'excel', 'pdf'] });
   }
+  if ($('#dataTable2').length) {
+      $('#dataTable2').DataTable({ buttons: ['copy', 'excel', 'pdf'] });
+  }
   // #6. EDITABLE TABLES
 
   if ($('#editableTable').length) {

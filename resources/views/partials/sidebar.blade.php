@@ -2,9 +2,8 @@
 
             <div class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
                 <div class="logo-w">
-                    <a class="logo" href="{{route('dashboard')}}">
-                        <div class="logo-element"></div>
-                        <div class="logo-label">{{ user_info('company') }}</div>
+                    <a class="logo" href="#">
+                        <img class="img-responsive" style="width:80%;display:table;margin:auto;" alt="" src="{{ asset('themes/img/logo-big.png') }}">
                     </a>
                 </div>
                 <div class="logged-user-w avatar-inline">
