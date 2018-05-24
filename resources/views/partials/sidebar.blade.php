@@ -183,7 +183,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="{{route('customer.index')}}">Customer</a></li>
                                     <li><a href=" {{ route('supplier.index') }} ">Supplier</a></li>
-                                    <li><a href=" {{ route('sales.create') }} ">Sales Folder</a></li>
+                                    <li><a href=" {{ route('sales.index') }} ">Sales Folder</a></li>
                                     <li><a href="#">Invoice</a></li>
                                     <li><a href="#">LG</a></li>
                                     <li><a href="#">Inventory</a></li>
