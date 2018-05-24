@@ -30,5 +30,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     Route::group(['prefix' => 'business', 'namespace' => 'Business'], function () {
         Route::resource('customer', 'CustomerController');
         Route::resource('supplier', 'SupplierController');
+        Route::resource('transaction', 'TransactionController');
+        Route::patch('transaction/{id}/approve', array('as' => 'transaction.approve', 'uses' => 'TransactionController@approve'));
+        Route::patch('transaction/{id}/reject', array('as' => 'transaction.reject', 'uses' => 'TransactionController@reject'));
     });
 });

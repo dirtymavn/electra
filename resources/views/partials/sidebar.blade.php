@@ -195,6 +195,7 @@
                                     <li><a href="#">Visa</a></li>
                                     <li><a href="#">Queue</a></li>
                                     <li><a href="#">Report</a></li>
+                                    <li><a href="{{ route('transaction.index') }}">Transaction</a></li>
                                 </ul>
                             </div>
                         </div>

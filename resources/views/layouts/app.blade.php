@@ -18,6 +18,7 @@
     {!! Html::style('themes/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css') !!}
     {!! Html::style('themes/bower_components/slick-carousel/slick/slick.css') !!}
     {!! Html::style('themes/css/maince5a.css?version=4.4.1') !!}
+    {!! Html::style('themes/icon_fonts_assets/font-awesome/css/font-awesome.min.css') !!}
     {!! Html::style('css/custom.css') !!}
     <style>
         body {
