@@ -114,6 +114,7 @@ class TransactionController extends Controller
         // if ($transaction->status == 0) {
             $transaction->delete();
             flash()->success(trans('message.delete.success'));
+            return redirect()->route('transaction.index');
         // } else {
 
         // }

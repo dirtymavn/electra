@@ -76,10 +76,10 @@ class UserController extends Controller
                 $parentId = (user_info('parent_id')) ? user_info('parent_id') : user_info()->id;
             }
             
-            $request->merge(['company_role' => $companyRole, 'parent_id' => $parentId]);
+            $request->merge(['company_role' => $companyRole, 'parent_id' => $parentId, 'status' => 1]);
             $user = Sentinel::registerAndActivate( $request->all() );
 
-            Sentinel::findRoleBySlug( 'admin' )->users()->attach( $user );
+            Sentinel::findRoleBySlug( $companyRole )->users()->attach( $user );
             flash()->success( trans('message.create.success') );
             
             return redirect()->route( 'user.index' );

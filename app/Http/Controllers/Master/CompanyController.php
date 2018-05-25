@@ -120,7 +120,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        if ($company->user) {
+        if ($company->users) {
             flash()->error('<strong>Whoops! </strong> Data cannot be deleted, because have related');
             return redirect()->back();
         } else {

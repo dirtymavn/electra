@@ -27,5 +27,12 @@ class RolesTableSeeder extends Seeder
             'name' => 'Administrator',
             'permissions' => []
         ]);
+
+        Sentinel::getRoleRepository()->createModel()->create([
+            'slug' => 'subscriber',
+            'name' => 'Subscriber',
+            'permissions' => [],
+        ]);
+
     }
 }

@@ -122,8 +122,13 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $destroy = $customer->delete();
-        flash()->success('Data is successfully deleted');
+        if ($customer->transactions) {
+            flash()->error(trans('message.have_related'));
+        } else {
+            $destroy = $customer->delete();
+            flash()->success('Data is successfully deleted');
+        }
+        
         return redirect()->route('customer.index');
     }
 }

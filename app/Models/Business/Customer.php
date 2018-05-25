@@ -32,4 +32,9 @@ class Customer extends Model
 
         return $results;
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'customer_id');
+    }
 }

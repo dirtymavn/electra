@@ -17,15 +17,17 @@ class SentinelHasAccess
      */
     public function handle($request, Closure $next, $permission)
     {
+        
         if ( $user = Sentinel::check() ) {
             if( Sentinel::getUser()->status == 1 ){
                 if( ! $user->isSuperAdmin() ) {
-                    if ( Sentinel::hasAccess($permission) ) {
+                    if ( ! $user->hasAccess($permission) ) {
                         if ($request->ajax() || $request->wantsJson()) {
                             return response('Unauthorized.', 403);
                         }
 
-                        return abort(401);
+                        flash()->error('Your dont have permission!');
+                        return redirect()->route('dashboard');
                     }
                 }
             } else{
