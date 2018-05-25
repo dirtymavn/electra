@@ -192,7 +192,7 @@
                                 </ul>
                                 <ul class="sub-menu">
                                     <li><a href="#">Delivery</a></li>
-                                    <li><a href="#">Voucher</a></li>
+                                    <li><a href="{{ route('voucher.index') }}">Voucher</a></li>
                                     <li><a href="#">Visa</a></li>
                                     <li><a href="#">Queue</a></li>
                                     <li><a href="#">Report</a></li>

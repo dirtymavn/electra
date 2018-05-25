@@ -26,15 +26,17 @@
                         <div class="os-icon os-icon-layout"></div>
                     </div><span>Dashboard</span></a>
             </li>
-            <li class="has-sub-menu">
-                <a href="#">
-                    <div class="icon-w">
-                        <div class="os-icon os-icon-layers"></div>
-                    </div><span>Master</span></a>
-                <ul class="sub-menu">
-                    <li><a href="{{route('company.index')}}">Company</a></li>
-                </ul>
-            </li>
+            @if(user_info()->inRole('super-admin'))
+                <li class="has-sub-menu">
+                    <a href="#">
+                        <div class="icon-w">
+                            <div class="os-icon os-icon-layers"></div>
+                        </div><span>Master</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="{{route('company.index')}}">Company</a></li>
+                    </ul>
+                </li>
+            @endif
             <li class="has-sub-menu">
                 <a href="#">
                     <div class="icon-w">
@@ -58,7 +60,7 @@
                         <li><a href="">LG</a></li>
                         <li><a href="">Inventory</a></li>
                         <li><a href="">Delivery</a></li>
-                        <li><a href="">Voucher</a></li>
+                        <li><a href="{{ route('voucher.index') }}">Voucher</a></li>
                         <li><a href="">Visa</a></li>
                         <li><a href="">Queue</a></li>
                         <li><a href="">Report</a></li>
@@ -72,7 +74,7 @@
                     </div><span>Outbound</span></a>
                 <div class="sub-menu-w">
                     <ul class="sub-menu">
-                        <li><a href="">Guide</a></li>
+                        <li><a href="{{ route('guide.index') }}">Guide</a></li>
                         <li><a href="">Itin</a></li>
                         <li><a href="">Folder</a></li>
                         <li><a href="">Order</a></li>
