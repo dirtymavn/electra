@@ -211,7 +211,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Guide</a></li>
+                                    <li><a href="{{ route('guide.index') }}">Guide</a></li>
                                     <li><a href="#">Itin</a></li>
                                     <li><a href="#">Folder</a></li>
                                     <li><a href="#">Order</a></li>
