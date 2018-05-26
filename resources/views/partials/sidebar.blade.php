@@ -187,11 +187,11 @@
                                     <li><a href=" {{ route('supplier.index') }} ">Supplier</a></li>
                                     <li><a href=" {{ route('sales.index') }} ">Sales Folder</a></li>
                                     <li><a href="#">Invoice</a></li>
-                                    <li><a href="#">LG</a></li>
+                                    <li><a href="{{ route('lg.index') }}">LG</a></li>
                                     <li><a href="#">Inventory</a></li>
                                 </ul>
                                 <ul class="sub-menu">
-                                    <li><a href="#">Delivery</a></li>
+                                    <li><a href=" {{ route('delivery.index') }} ">Delivery</a></li>
                                     <li><a href="{{ route('voucher.index') }}">Voucher</a></li>
                                     <li><a href="#">Visa</a></li>
                                     <li><a href="#">Queue</a></li>
