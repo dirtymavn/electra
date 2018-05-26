@@ -26,5 +26,6 @@ return [
     'have_related' => '<strong>Whoops! </strong> Data cannot be deleted, because have related',
     'not_found' => 'Data not found or has been deleted',
     'approve' => 'Data is successfully approved',
+    'approve_error' => '<strong>Whoops! </strong> Data cannot be deleted, because already approved',
     'reject' => 'Data is successfully rejected',
 ];

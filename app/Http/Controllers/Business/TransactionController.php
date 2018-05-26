@@ -111,13 +111,15 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        // if ($transaction->status == 0) {
+        if ($transaction->status == 0) {
             $transaction->delete();
             flash()->success(trans('message.delete.success'));
-            return redirect()->route('transaction.index');
-        // } else {
-
-        // }
+        } else {
+            flash()->error(trans('message.approve_error'));
+        }
+        
+        return redirect()->route('transaction.index');
+       
     }
 
     /**

@@ -55,7 +55,7 @@ class CustomerController extends Controller
     {
         \DB::beginTransaction();
         try {
-            $request->merge(['company_id' => user_info()->company->id]);
+            $request->merge(['company_id' => 1]);
             $insert = $this->customer->create($request->all());
             
             if ($insert) {
