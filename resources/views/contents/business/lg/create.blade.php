@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Voucher')
+@section('title', 'Create LG')
 
 @section('style')
 <link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" />
