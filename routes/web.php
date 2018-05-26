@@ -35,7 +35,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::patch('transaction/{id}/approve', array('as' => 'transaction.approve', 'uses' => 'TransactionController@approve'));
         Route::patch('transaction/{id}/reject', array('as' => 'transaction.reject', 'uses' => 'TransactionController@reject'));
         Route::resource('voucher', 'VoucherController');
-        Route::resource('lg', 'LgController');
+        Route::resource('lg', 'LGController');
         Route::resource('delivery', 'DeliveryController');
 
     });
