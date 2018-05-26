@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Master;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\DataTables\Master\CompanyDataTable;
+use App\DataTables\Master\RoleDataTable;
 use App\Models\Master\Menu;
 use App\Models\Role;
 
@@ -16,9 +16,9 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CompanyDataTable $dataTable)
+    public function index(RoleDataTable $dataTable)
     {
-        return $dataTable->render('contents.masters.company.index');
+        return $dataTable->render('contents.masters.roles.index');
     }
 
     /**
@@ -42,7 +42,7 @@ class RoleController extends Controller
     {
         try {
             $roles = Role::create( $request->all() );
-
+            flash()->success('Data is successfully created');
             return redirect()->route('role.index');
         } catch (\Exception $e) {
 
@@ -68,7 +68,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $permissions = Menu::getPermission();
+        $role = Role::find($id);
+        return view( 'contents.masters.roles.edit', compact('role', 'permissions') );
     }
 
     /**
@@ -80,7 +82,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $role = Role::find($id)->update( $request->all() );
+            flash()->success('Data is successfully updated');
+            return redirect()->route('role.index');
+        } catch (\Exception $e) {
+
+        }
     }
 
     /**
@@ -91,6 +99,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::find($id)->delete();
+        flash()->success('Data is successfully deleted');
+        return redirect()->back();
     }
 }

@@ -7,20 +7,49 @@
 <div class="form-group">
     {!! Form::label('premissions', trans('Permission'), [ 'class' => 'control-label col-sm-6' ]) !!}
     <div class="col-md-12">
-        @foreach( $permissions as $key => $datas )
-            <div class="row">
-                <div class="col-sm-4">
-                    <label> {{ $key }} </label>
-                </div>
-                <div class="col-sm-8">
-                    @foreach( $datas as $i => $value )
-                        <label>
-                            {!! Form::checkbox('permissions[]', $i) !!}
-                            {!! $value !!}
-                        </label>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> Role Action </th>
+                    <th> Create </th>
+                    <th> Update </th>
+                    <th> Read </th>
+                    <th> Delete </th>
+                    <th> Approve </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach( $permissions as $key => $datas )
+                    <tr>
+                        <th colspan="6"> {{ $key }} </th>
+                    </tr>
+                    @foreach ($datas as $row => $results)
+                        <tr>
+                            <td> - {{ $row }} </td>
+                            @foreach ($results as $i => $data)
+                                <td> {!! Form::checkbox('permissions[]', $i) !!} </td>
+                            @endforeach
+                        </tr>
                     @endforeach
+
+                @endforeach
+            </tbody>   
+        </table>
+        {{-- @foreach( $permissions as $key => $datas )
+            <div class="row">
+                <div class="col-sm-12">
+                    <label> {{ $key }} </label>
+                    <div class="row">
+                        @foreach ($datas as $row => $data)
+                            <div class="col-sm-6">
+                                &nbsp&nbsp&nbsp<span> {{ $row }} </span>
+                            </div>
+                            <div class="col-sm-6">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        @endforeach
+        @endforeach --}}
     </div>
 </div>

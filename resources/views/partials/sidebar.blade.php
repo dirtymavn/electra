@@ -168,7 +168,7 @@
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="{{route('user.index')}}">Register User</a></li>
-                                    <li><a href="{{route('user.index')}}">Role User</a></li>
+                                    <li><a href="{{route('role.index')}}">Role User</a></li>
                                 </ul>
                             </div>
                         </div>

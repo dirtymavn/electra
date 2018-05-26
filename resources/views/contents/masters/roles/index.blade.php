@@ -16,7 +16,7 @@
 @section('page_title', 'Role Lists')
 
 @section('content')
-
+@include('flash::message')
 <a href="{{ route('role.create')}}" class="btn btn-primary" id="btn-submit">
     <i class="fa fa-plus m-right-10"></i> Add Role
 </a>
