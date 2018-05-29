@@ -13,10 +13,12 @@ use Cartalyst\Sentinel\Roles\RoleInterface;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends CartalystUser implements Auditable, UserContract
 {
     use \OwenIt\Auditing\Auditable;
+    use SoftDeletes;
 
     protected $table = 'users';
 
@@ -39,6 +41,13 @@ class User extends CartalystUser implements Auditable, UserContract
     protected $hidden = [
         'password', 'updated_at',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Get user's profile picture.
