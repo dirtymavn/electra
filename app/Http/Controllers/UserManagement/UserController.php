@@ -150,7 +150,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->childs->count() > 0 || $user->company_role == 'super-admin' || $user->company_role == 'admin') {
+        if ($user->childs->count() > 0 || $user->company_role == 'super-admin' || ($user->company_role == 'admin' && !user_info()->inRole('super-admin'))) {
             // cannot delete, user have childs, super-admin, and admin of company
             flash()->error(trans('message.have_related'));
         } else {

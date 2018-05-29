@@ -11,9 +11,13 @@ use Cartalyst\Sentinel\Persistences\PersistableInterface;
 use Cartalyst\Sentinel\Roles\RoleableInterface;
 use Cartalyst\Sentinel\Roles\RoleInterface;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
-class User extends CartalystUser
+class User extends CartalystUser implements Auditable, UserContract
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $table = 'users';
 
     /**
@@ -103,5 +107,79 @@ class User extends CartalystUser
 
         return $results;
     }
-   
+    
+    /**
+     * Get the unique identifier for the user.
+     *
+     * @return mixed
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();
+    }
+    /**
+     * Get the name of the unique identifier for the user.
+     *
+     * @return string
+     */
+    public function getAuthIdentifierName()
+    {
+        return $this->getKey();
+    }
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+    /**
+     * Get the token value for the "remember me" session.
+     *
+     * @return string
+     */
+    public function getRememberToken()
+    {
+        return $this->getPersistCode();
+    }
+    /**
+     * Set the token value for the "remember me" session.
+     *
+     * @param  string $value
+     *
+     * @return void
+     */
+    public function setRememberToken($value)
+    {
+        $this->persist_code = $value;
+        $this->save();
+    }
+    /**
+     * Get the column name for the "remember me" token.
+     *
+     * @return string
+     */
+    public function getRememberTokenName()
+    {
+        return "persist_code";
+    }
+
+    /**
+     * Get user's profile by Username or Email.
+     *
+     * @return string
+     */
+    public static function findUser($uEmail)
+    {
+        return self::whereUsername($uEmail)
+            ->orWhere('email', $uEmail)
+            ->first();
+    }
+
+    public static function getPersistence($userId)
+    {
+        return \DB::table('persistences')->whereUserId($userId)->first();
+    }
 }
