@@ -8,6 +8,8 @@ use App\DataTables\Master\CompanyDataTable;
 use App\Models\Master\Company;
 use App\Http\Requests\Master\CompanyRequest;
 
+use Excel;
+
 class CompanyController extends Controller
 {
     /**
@@ -128,5 +130,20 @@ class CompanyController extends Controller
             flash()->success('Data is successfully deleted');
             return redirect()->back();
         }
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export()
+    {
+        $company = Company::select('*')->get();
+        // dd($company);
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($company) {
+            $excel->sheet('Sheet 1', function($sheet) use ($company) {
+                $sheet->fromArray($company);
+            });
+        })->export('xls');
     }
 }
