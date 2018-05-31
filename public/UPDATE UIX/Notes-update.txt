@@ -1,0 +1,17 @@
+1. Update css hanya di folder css.
+
+2. update revisi menu fixed ada pada div di bawah comment :
+<!--------------------
+START - Main Menu Tambahan Fixed Menu
+-------------------->
+
+* hanya menambahkan class fixed menu
+
+3. Update content form ada di antara comment :
+<!--------------------
+START - Content yg diupdate
+-------------------->
+
+<!--------------------
+END -  Content yg diupdate
+-------------------->
