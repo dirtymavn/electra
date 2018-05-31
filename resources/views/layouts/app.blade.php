@@ -186,6 +186,12 @@
 
         // ga('create', 'UA-42863888-9', 'auto');
         // ga('send', 'pageview');
+        function initSelect2(element, placeholder) {
+            element.select2({
+                placeholder: placeholder,
+                allowClear: true
+            }); 
+        }
     </script>
     @yield('script')
     @yield('part_script')

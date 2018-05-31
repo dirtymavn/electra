@@ -43,5 +43,6 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // Outbound
     Route::group(['prefix' => 'outbound', 'namespace' => 'Outbound'], function () {
         Route::resource('guide', 'GuideController');
+        Route::resource('itin', 'ItinController');
     });
 });
