@@ -3,9 +3,12 @@
 namespace App\Models\Business;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Transaction extends Model
+class Transaction extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     const PENDING = 0;
     const APPROVE = 1;
     const REJECT = 2;
