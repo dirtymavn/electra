@@ -145,7 +145,7 @@ class CompanyController extends Controller
             $excel->sheet('Sheet 1', function($sheet) use ($company) {
                 $sheet->fromArray($company);
             });
-        })->export('pdf');
+        })->export('xls');
     }
 
 
