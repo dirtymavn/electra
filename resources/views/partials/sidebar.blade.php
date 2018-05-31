@@ -212,7 +212,7 @@
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="{{ route('guide.index') }}">Guide</a></li>
-                                    <li><a href="#">Itin</a></li>
+                                    <li><a href="{{ route('itin.index') }}">Itin</a></li>
                                     <li><a href="#">Folder</a></li>
                                     <li><a href="#">Order</a></li>
                                     <li><a href="#">Visa</a></li>
