@@ -12,3 +12,24 @@
     height: 35px;
     object-fit: cover;
 }
+
+/* @media (min-width: 1024px) and (max-width: 2500px) {
+    .menu-w.menu-layout-compact.fixed-menu {
+        width:16.5%;
+        left:0;
+        height:100%;
+        position:fixed;
+        z-index:999;
+    }
+    .content-w {
+        margin-left:16.5%;
+    }
+} */
+
+.menu-w .logged-user-menu ul {
+    list-style: none;
+    text-align: left;
+    margin: 0px;
+    padding: 0px 10px;
+    padding-bottom: 20px;
+}

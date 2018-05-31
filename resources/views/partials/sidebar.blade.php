@@ -1,6 +1,6 @@
             @include('partials.mobile_menu')
 
-            <div class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
+            <div class="fixed-menu menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
                 <div class="logo-w">
                     <a class="logo" href="#">
                         <img class="img-responsive" style="width:80%;display:table;margin:auto;" alt="" src="{{ asset('themes/img/logo-big.png') }}">
@@ -176,11 +176,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-users"></div>
                             </div><span>Business</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Business</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="{{route('customer.index')}}">Customer</a></li>
@@ -204,11 +204,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-folder"></div>
                             </div><span>Outbound</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Outbound</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-folder"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="{{ route('guide.index') }}">Guide</a></li>
@@ -231,11 +231,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-file-text"></div>
                             </div><span>Hotel</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Hotel</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Hotel</a></li>
@@ -249,11 +249,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-box"></div>
                             </div><span>FIT</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">FIT</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-box"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Folder</a></li>
@@ -273,11 +273,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-corner-left-up"></div>
                             </div><span>AR</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">AR</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-corner-left-up"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Customer</a></li>
@@ -302,11 +302,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-agenda-1"></div>
                             </div><span>AP</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">AP</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-agenda-1"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Supplier</a></li>
@@ -327,11 +327,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-delivery-box-2"></div>
                             </div><span>Settlement</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Settlement</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-delivery-box-2"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Deposit</a></li>
@@ -346,11 +346,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-star"></div>
                             </div><span>GL</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">GL</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-star"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Account</a></li>
@@ -373,11 +373,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-wallet-loaded"></div>
                             </div><span>Refund</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Refund</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Refund</a></li>
@@ -389,11 +389,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-cv-2"></div>
                             </div><span>Inventory</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Inventory</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-cv-2"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Inventory</a></li>
@@ -407,11 +407,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-bar-chart-stats-up"></div>
                             </div><span>Budget</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Budget</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-bar-chart-stats-up"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Budget</a></li>
@@ -424,11 +424,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-mail"></div>
                             </div><span>Internal</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Internal</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-mail"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Profile</a></li>
@@ -440,11 +440,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-users"></div>
                             </div><span>TMIS</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">TMIS</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">Report</a></li>
@@ -459,11 +459,11 @@
                     <li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
+                                <div class="os-icon os-icon-edit-32"></div>
                             </div><span>Interface</span></a>
                         <div class="sub-menu-w">
                             <div class="sub-menu-header">Interface</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-edit-32"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li><a href="#">BOS</a></li>
