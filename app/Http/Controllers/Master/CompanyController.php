@@ -9,6 +9,7 @@ use App\Models\Master\Company;
 use App\Http\Requests\Master\CompanyRequest;
 
 use Excel;
+use PDF;
 
 class CompanyController extends Controller
 {
@@ -136,7 +137,7 @@ class CompanyController extends Controller
      * Export PDF
      * @return void
      */
-    public function export()
+     public function export_excel()
     {
         $company = Company::select('*')->get();
         // dd($company);
@@ -144,6 +145,18 @@ class CompanyController extends Controller
             $excel->sheet('Sheet 1', function($sheet) use ($company) {
                 $sheet->fromArray($company);
             });
-        })->export('xls');
+        })->export('pdf');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $companies = Company::all();
+        $pdf = PDF::loadView('contents.masters.company.parts.pdf', compact('companies'));
+        return $pdf->download('company.pdf');
     }
 }
