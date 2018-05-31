@@ -29,8 +29,8 @@
 				Actions
 			</button>
 			<div class="dropdown-menu">
-				<a class="dropdown-item" href="{{ route('export.company') }}">Export XLS</a>
-				<a class="dropdown-item" href="#">Export PDF</a>
+				<a class="dropdown-item" href="{{ route('export.company.excel') }}">Export XLS</a>
+				<a class="dropdown-item" href="{{ route('export.company.pdf') }}">Export PDF</a>
 			</div>
 		</div>
 	</div>
