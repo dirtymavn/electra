@@ -40,20 +40,10 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         try {
-            $user = User::findUser($request->username);
-            if ($user) {
-                if ($user->getPersistence($user->id)) {
-                    flash()->error('The user is being used by another user');
-                    return redirect()->back()->withInput();
-                } else {
-                    $remember = (bool) $request->input('remember_me');
-                    if (!Sentinel::authenticate($request->all())) {
-                        flash()->error('Wrong username!');
-                        return redirect()->back()->withInput();
-                    }
-                }
-            } else {
-                flash()->error('User not found!');
+            
+            $remember = (bool) $request->input('remember_me');
+            if (!Sentinel::authenticate($request->all())) {
+                flash()->error('Wrong username or password!');
                 return redirect()->back()->withInput();
             }
 
