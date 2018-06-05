@@ -28704,7 +28704,8 @@ body.color-scheme-dark .page-item.disabled .page-link,
 		padding: 2rem 1rem
 	}
 	.content-box {
-		padding: 2rem
+		padding: 2rem;
+		min-height:600px;
 	}
 	.all-wrapper {
 		max-width: 100%
