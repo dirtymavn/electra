@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Business;
 
 use App\Models\Business\Customer;
+use App\Models\Business\Customer\MasterCustomer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\Business\CustomerDataTable;
@@ -12,17 +13,21 @@ class CustomerController extends Controller
 {
     /**
      * @var \App\Models\Business\Customer
+     * @var \App\Models\Business\Customer\MasterCustomer
     */
     protected $customer;
+    protected $masterCustomer;
 
     /**
-     * Create a new CompanyController instance.
+     * Create a new CustomerController instance.
      *
      * @param \App\Models\Business\Customer  $customer
+     * @param \App\Models\Business\Customer\MasterCustomer  $masterCustomer
     */
-    public function __construct(Customer $customer)
+    public function __construct(Customer $customer, MasterCustomer $masterCustomer)
     {
         $this->customer = $customer;
+        $this->masterCustomer = $masterCustomer;
     }
 
     /**
@@ -48,18 +53,32 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Business\CustomerRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CustomerRequest $request)
+    public function store(Request $request)
     {
         \DB::beginTransaction();
         try {
-            $request->merge(['company_id' => 1]);
-            $insert = $this->customer->create($request->all());
+            // if (user_info()->parent) {
+            //     $companyId = @user_info()->parent->company->id;
+            // } else {
+            //     $companyId = @user_info()->company->id;
+
+            // }
+            // $request->merge(['company_id' => $companyId]);
+            // $insert = $this->customer->create($request->all());
+            if (@$request->is_draft == 'true') {
+                $request->merge(['is_draft' => true]);
+                $msgSuccess = 'Data is successfully inserted as draft';
+            } else {
+                $msgSuccess = 'Data is successfully inserted';
+                $request->merge(['is_draft' => false]);
+            }
+            $insert = $this->masterCustomer->create($request->all());
             
             if ($insert) {
-                flash()->success('Data is successfully inserted');
+                flash()->success($msgSuccess);
                 \DB::commit();
                 return redirect()->route('customer.index');
             } else {
@@ -76,10 +95,10 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Business\Customer  $customer
+     * @param  \App\Models\Business\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(MasterCustomer $customer)
     {
         //
     }
@@ -87,26 +106,80 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Business\Customer  $customer
+     * @param  \App\Models\Business\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
-    {
+    public function edit(MasterCustomer $customer)
+    {        
+        $main = $customer->mains()->first()->toArray();
+        $mainContact = $customer->mains()->first()->contacts()->first()->toArray();
+        $basic = $customer->basics()->first()->toArray();
+        $general = $customer->generals()->first()->toArray();
+        $generalDoc = $customer->generals()->first()->docs()->first()->toArray();
+        $discRate = $customer->discountRates()->first()->toArray();
+        $creditCard = $customer->creditCards()->first()->toArray();
+        $creditCard['cc_expiry_date'] = $creditCard['expiry_date'];
+        $termFee = $customer->termFees()->first()->toArray();
+
+        $customer = $customer->toArray();
+
+        unset($main['id'], $mainContact['id'], $basic['id'], $general['id'], $generalDoc['id'], $discRate['id'], $creditCard['id'], $termFee['id']);
+
+        $arrayMerge = array_merge($customer, $main, $mainContact, $basic, $general, $generalDoc, $discRate, $creditCard, $termFee);
+
+
+        $customer = (object) $arrayMerge;
         return view('contents.business.customer.edit', compact('customer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Business\CustomerRequest  $request
-     * @param  \App\Models\Business\Customer  $customer
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Business\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, Customer $customer)
+    public function update(Request $request, MasterCustomer $customer)
     {
+        if (@$request->is_draft == 'false') {
+            $request->merge(['is_draft' => false]);
+            $msgSuccess = 'Data is successfully published';
+        } else {
+            $msgSuccess = 'Data is successfully updated';
+            $request->merge(['is_draft' => true]);
+        }
+
         $update = $customer->update($request->all());
         if ($update) {
-            flash()->success('Data is successfully inserted');
+            $input = $request->all();
+            $input['customer_id'] = $customer->id;
+
+            $main = $customer->mains()->first();
+            $main->update($input);
+
+            $mainContact = $customer->mains()->first()->contacts()->first();
+            $mainContact->update($input);
+
+            $basic = $customer->basics()->first();
+            $basic->update($input);
+
+            $general = $customer->generals()->first();
+            $general->update($input);
+            
+            $generalDoc = $customer->generals()->first()->docs()->first();
+            $generalDoc->update($input);
+
+            $discountrate = $customer->discountRates()->first();
+            $discountrate->update($input);
+
+            $creditcard = $customer->creditCards()->first();
+            $input['expiry_date'] = $input['cc_expiry_date'];
+            $creditcard->update($input);
+
+            $termfee = $customer->termFees()->first();
+            $termfee->update($input);
+
+            flash()->success('Data is successfully updated');
             return redirect()->route('customer.index');
         }
 
@@ -117,10 +190,10 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Business\Customer  $customer
+     * @param  \App\Models\Business\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(MasterCustomer $customer)
     {
         if ($customer->transactions) {
             flash()->error(trans('message.have_related'));

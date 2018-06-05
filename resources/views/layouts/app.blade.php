@@ -29,6 +29,13 @@
 </head>
 
 <body class="menu-position-side menu-side-left full-screen">
+<div class="spinner">
+  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div>
+</div>
     <div class="all-wrapper solid-bg-all">
         <div class="search-with-suggestions-w" style="display:none;">
             <div class="search-with-suggestions-modal">
@@ -192,6 +199,23 @@
                 allowClear: true
             }); 
         }
+        function spinnerLoad(element) {
+            element.submit(function() {
+                $('div.spinner').show(); 
+                return true;
+            });
+        }
+        $('.only_number').keypress(function (event) {
+            var charCode = event.which;
+            var value = $(this).val();
+            var dotcontains = value.indexOf(".") != -1;
+            if (dotcontains)
+                if (charCode == 46) return false;
+            if (charCode == 46) return true;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        });
     </script>
     @yield('script')
     @yield('part_script')
