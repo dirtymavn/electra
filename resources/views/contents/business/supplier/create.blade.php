@@ -13,7 +13,7 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('customer.index')}}">Supplier</a></li>
+        <li class="breadcrumb-item"><a href="{{route('supplier.index')}}">Supplier</a></li>
         <li class="breadcrumb-item">Create</li>
     </ul>
 @endsection
@@ -22,15 +22,14 @@
 
 @section('content')
     {!! Form::open([
-            'route' =>  'customer.store',
+            'route' =>  'supplier.store',
             'class' =>  'form-horizontal',
-            'id'    =>  'form-customer',
-            'enctype' => 'multipart/form-data',
+            'id'    =>  'form-supplier'
         ]) !!}
         @include('contents.business.supplier._form')  
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <a href="{{route('customer.index')}}" class="btn btn-default">Cancel</a>
+                <a href="{{route('supplier.index')}}" class="btn btn-default">Cancel</a>
                 <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
             </div>
         </div>              

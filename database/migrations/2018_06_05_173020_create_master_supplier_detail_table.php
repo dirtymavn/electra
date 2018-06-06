@@ -13,6 +13,8 @@ class CreateMasterSupplierDetailTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('master_supplier_detail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('master_supplier_id')->unisgned();
@@ -29,7 +31,11 @@ class CreateMasterSupplierDetailTable extends Migration
 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('master_supplier_id')->references('id')->on('master_supplier')->onDelete('cascade');
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

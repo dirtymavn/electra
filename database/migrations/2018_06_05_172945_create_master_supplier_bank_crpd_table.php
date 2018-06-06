@@ -13,6 +13,8 @@ class CreateMasterSupplierBankCrpdTable extends Migration
      */
     public function up()
     {
+         Schema::disableForeignKeyConstraints();
+
         Schema::create('master_supplier_bank_crpd', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('supplier_bank_id')->unsigned();
@@ -24,7 +26,10 @@ class CreateMasterSupplierBankCrpdTable extends Migration
 
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('supplier_bank_id')->references('id')->on('master_supplier_bank')->onDelete('cascade');
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

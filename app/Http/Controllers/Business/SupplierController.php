@@ -8,6 +8,8 @@ use App\DataTables\Business\SupplierDataTable;
 
 use App\Models\Business\Supplier;
 
+use DB;
+
 class SupplierController extends Controller
 {
      /**
@@ -38,7 +40,13 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        abort(503);
+        DB::beginTransaction();
+        try {
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
     }
 
     /**
