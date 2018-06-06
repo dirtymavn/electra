@@ -1,0 +1,15 @@
+.fixed-menu.menu-w
+{
+	position:fixed;
+	background:#f2f4f8;
+	z-index:9;
+	width:225px;
+}
+.all-wrapper.solid-bg-all .content-w
+{
+	margin-left:225px;
+}
+.menu-w.menu-layout-compact ul.main-menu
+{
+	padding-top:0;
+}
