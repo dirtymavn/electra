@@ -42,9 +42,9 @@ class SupplierController extends Controller
     {
         DB::beginTransaction();
         try {
-            
+
             DB::commit();
-        } catch {
+        } catch (\Exception $e) {
             DB::rollback();
         }
     }
