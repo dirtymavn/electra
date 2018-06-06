@@ -1,13 +1,14 @@
 .fixed-menu.menu-w
 {
 	position:fixed;
-	background:#f2f4f8;
+	background:#f7f7f7;
 	z-index:9;
 	width:225px;
 }
 .all-wrapper.solid-bg-all .content-w
 {
 	margin-left:225px;
+	min-height:630px;
 }
 .menu-w.menu-layout-compact ul.main-menu
 {
