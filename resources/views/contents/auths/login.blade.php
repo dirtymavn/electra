@@ -6,7 +6,7 @@
     <div class="logo-w">
         <a href="{{route('auth.login')}}"><img class="img-responsive" style="width:100%;" src="{{asset('themes/img/logo-big.png')}}"></a>
     </div>
-    <h4 class="auth-header">Login Form</h4>
+    
     <div style="width:85%;margin:0 auto;">
         @include('flash::message')
     </div>
