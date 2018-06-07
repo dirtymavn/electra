@@ -26,16 +26,23 @@
             'class' =>  'form-horizontal',
             'id'    =>  'form-supplier'
         ]) !!}
-        @include('contents.business.supplier._form')  
+        @include('contents.business.supplier._form')   
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <a href="{{route('supplier.index')}}" class="btn btn-default">Cancel</a>
+                <a href="{{route('supplier.index')}}" class="btn btn-grey">Cancel</a>
                 <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
+                <button type="button" class="btn btn-success" id="btn-submit-draft">Submit as Draft</button>
             </div>
-        </div>              
+        </div>            
     {!! Form::close() !!}
 @endsection
 
 @section('script')
-
+<script>
+$(document).on('click', '#btn-submit-draft', function() {
+    var url = $('#form-supplier').attr('action');
+    $('#form-supplier').attr('action', url + '?is_draft=true');
+    $('#form-supplier').submit();
+});
+</script>
 @endsection

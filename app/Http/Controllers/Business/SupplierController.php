@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\Business\SupplierDataTable;
 
-use App\Models\Business\Supplier;
+use App\Models\Business\Supplier\MasterSupplier as Supplier;
 
 use DB;
 
@@ -17,8 +17,8 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(SupplierDataTable $dataTable)
-    {
+     public function index(SupplierDataTable $dataTable)
+     {
         return $dataTable->render('contents.business.supplier.index');
     }
 
@@ -42,10 +42,29 @@ class SupplierController extends Controller
     {
         DB::beginTransaction();
         try {
-
+            if (@$request->is_draft == 'true') {
+                $request->merge(['is_draft' => true]);
+                $msgSuccess = 'Data is successfully inserted as draft';
+            } else {
+                $msgSuccess = 'Data is successfully inserted';
+                $request->merge(['is_draft' => false]);
+            }
+            $insert = Supplier::create($request->all());
+            
+            if ($insert) {
+                flash()->success($msgSuccess);
+                \DB::commit();
+                return redirect()->route('supplier.index');
+            } else {
+                flash()->error('Data is failed to insert');
+                return redirect()->back()->withInput();
+            }
             DB::commit();
         } catch (\Exception $e) {
+            
             DB::rollback();
+            flash()->error('Data is failed to insert');
+            return redirect()->back()->withInput();
         }
     }
 
@@ -68,7 +87,7 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        return view('contents.business.supplier.edit', compact('supplier'));
     }
 
     /**
@@ -80,7 +99,26 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        DB::beginTransaction();
+        try {
+
+            $insert = $supplier->update( $request->all() );
+            
+            if ($insert) {
+                flash()->success('Data is successfully updated');
+                \DB::commit();
+                return redirect()->route('supplier.index');
+            } else {
+                flash()->error('Data is failed to updated');
+                return redirect()->back()->withInput();
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            
+            DB::rollback();
+            flash()->error('Data is failed to updated');
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
@@ -91,6 +129,8 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        $destroy = $supplier->delete();
+        flash()->success('Data is successfully deleted');
+        return redirect()->route('supplier.index');
     }
 }

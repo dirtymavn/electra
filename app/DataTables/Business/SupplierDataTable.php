@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Business;
 
-use App\Models\Business\Supplier;
+use App\Models\Business\Supplier\MasterSupplier;
 use Yajra\DataTables\Services\DataTable;
 
 class SupplierDataTable extends DataTable
@@ -30,11 +30,15 @@ class SupplierDataTable extends DataTable
      * @param \App\Models\Business\Supplier $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Supplier $model)
+    public function query(MasterSupplier $model)
     {
-        $empty = collect();
-        return $empty;
-        // return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
+        return $model->newQuery()->select('id', 
+            'supplier_no',
+            'supplier_type',
+            'name',
+            'status', 
+            'created_at'
+        );
     }
 
     /**
@@ -59,9 +63,11 @@ class SupplierDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'no' => ['title' => 'No', 'width' => '10px'],
-            'Supplier' => ['title' => 'Supplier'],
-            'company' => ['title' => 'Company'],
+            'supplier_no' => ['title' => 'Supplier No', 'width' => '10px'],
+            'supplier_type' => ['title' => 'Supplier Type'],
+            'name' => ['title' => 'Name'],
+            'status' => ['title' => 'Status'],
+            'created_at' => ['title' => 'Created At'],
         ];
     }
 
