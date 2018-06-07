@@ -22,6 +22,7 @@
 @section('page_title', 'Create Supplier')
 
 @section('content')
+@include('flash::message')
     {!! Form::open([
             'route' =>  'supplier.store',
             'class' =>  'form-horizontal',
