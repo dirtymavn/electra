@@ -35,6 +35,10 @@
 {!! $dataTable->scripts() !!}
 
 <script>
+    $(document).ready(function() {
+        spinnerLoad($('#form-customer'));
+    });
+
     $(document).on('click', '#bulk-delete', function() {
         var lengthChecked = $('td .checklist:checked').length;
         var ids = [];

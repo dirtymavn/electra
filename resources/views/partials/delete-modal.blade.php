@@ -158,6 +158,8 @@
             $('#submit-reject').html('<i class="fa fa-check m-right-10"></i> Reject');
             e.preventDefault();
         });
+
+        spinnerLoad($('#destroy, #reset-password, #approve-transaction, #reject-transaction, #form-bulk-delete'));
     });
     $('#submit, #submit-to').click(function () {
         modal_loader();

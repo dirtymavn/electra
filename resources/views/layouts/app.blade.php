@@ -13,13 +13,12 @@
     <!-- <link href="../fast.fonts.net/cssapi/487b73f1-c2d1-43db-8526-db577e4c822b.css" rel="stylesheet" type="text/css"> -->
     {!! Html::style('themes/bower_components/select2/dist/css/select2.min.css') !!}
     {!! Html::style('themes/bower_components/bootstrap-daterangepicker/daterangepicker.css') !!}
-    {!! Html::style('themes/bower_components/dropzone/dist/dropzone.css') !!}
     {!! Html::style('themes/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}
-    {!! Html::style('themes/bower_components/fullcalendar/dist/fullcalendar.min.css') !!}
     {!! Html::style('themes/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css') !!}
     {!! Html::style('themes/bower_components/slick-carousel/slick/slick.css') !!}
     {!! Html::style('themes/css/maince5a.css?version=4.4.1') !!}
     {!! Html::style('themes/icon_fonts_assets/font-awesome/css/font-awesome.min.css') !!}
+    {!! Html::style('themes/css/main_custom.css') !!}
     {!! Html::style('css/custom.css') !!}
     <style>
         body {
@@ -153,18 +152,13 @@
     {!! Html::script('themes/bower_components/moment/moment.js') !!}
     {!! Html::script('themes/bower_components/chart.js/dist/Chart.min.js') !!}
     {!! Html::script('themes/bower_components/select2/dist/js/select2.full.min.js') !!}
-    {!! Html::script('themes/bower_components/jquery-bar-rating/dist/jquery.barrating.min.js') !!}
     {!! Html::script('themes/bower_components/ckeditor/ckeditor.js') !!}
     {!! Html::script('themes/bower_components/bootstrap-validator/dist/validator.min.js') !!}
     {!! Html::script('themes/bower_components/bootstrap-daterangepicker/daterangepicker.js') !!}
-    {!! Html::script('themes/bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js') !!}
-    {!! Html::script('themes/bower_components/dropzone/dist/dropzone.js') !!}
     {!! Html::script('themes/bower_components/editable-table/mindmup-editabletable.js') !!}
     {!! Html::script('themes/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}
     {!! Html::script('themes/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}
-    {!! Html::script('themes/bower_components/fullcalendar/dist/fullcalendar.min.js') !!}
     {!! Html::script('themes/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') !!}
-    {!! Html::script('themes/bower_components/tether/dist/js/tether.min.js') !!}
     {!! Html::script('themes/bower_components/slick-carousel/slick/slick.min.js') !!}
     {!! Html::script('themes/bower_components/bootstrap/js/dist/util.js') !!}
     {!! Html::script('themes/bower_components/bootstrap/js/dist/alert.js') !!}
