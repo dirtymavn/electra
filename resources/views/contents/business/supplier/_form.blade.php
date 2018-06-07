@@ -40,8 +40,8 @@
 				<ul class="nav nav-tabs smaller">
 					<li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#main">Main</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contact">Contact</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#term">Bank</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#finance">Bank CRPD</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#bank">Bank</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#bank_crpd">Bank CRPD</a></li>
 				</ul>
 			</div>
 			<div class="tab-content">

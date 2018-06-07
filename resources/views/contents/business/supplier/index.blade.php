@@ -16,7 +16,7 @@
 @section('page_title', 'Suppliers')
 
 @section('content')
-
+@include('flash::message')
 <a href="{{ route('supplier.create')}}" class="btn btn-primary" id="btn-submit">
     <i class="fa fa-plus m-right-10"></i> Add Supplier
 </a>
