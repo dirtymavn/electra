@@ -87,6 +87,11 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
+        $parent = $supplier->toArray();
+        $detail = $supplier->detail->toArray();
+        $merge = array_merge($parent, $detail);
+        $supplier = (object) $merge;
+
         return view('contents.business.supplier.edit', compact('supplier'));
     }
 
