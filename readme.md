@@ -1,6 +1,24 @@
 # electra
 Electra travel management for Sabre
 
+## Form Rules
+Untuk setiap form **Master data** dan form **Transactional**:
+- Setiap form memiliki 1 button dropdown/split button dengan 3 pilihan: **Save as draft**, **Publish**, **Publish and continue**
+- **Save as draft** akan menyimpan data form tsb dan status di set sebagai **draft**. Tidak redirect (masih di view yg sama)
+- **Publish** akan menyimpan data form tsb dan status di set sebagai **published**. Redirect ke list form terkait
+- **Publish and continue** akan menyimpan data form tsb dan status di set sebagai **published**. Redirect ke editor form yang sama, dengan posisi seluruh field blank / cleared.
+- Status draft hanya bisa maju ke status published. Status published **tidak dapat** kembali menjadi draft
+
+Untuk setiap list **Master data** dan form **Transactional**:
+- List menampilkan seluruh data dari semua status(termasuk status draft)
+- List menampilkan 3 fungsi pada ujung kanan baris per list : **View**, **Edit**, **Delete**
+- List memiliki checkbox pada ujung kiri baris per list. Checkbox digunakan untuk bulk action
+- Bulk action dropdown button pada bagian _list filter_ hanya dipergunakan untuk 2 hal : **bulk delete** atau **bulk edit status**
+
+### General transaction rules
+
+- Cascade lock : Data yang sudah dipakai sebagai FK di form lainnya tidak dapat dihapus. Penghapusan harus dilakukan berurut dari data terujung.
+
 ## Server configuration
 
 - Ubuntu 16.04 LTS
