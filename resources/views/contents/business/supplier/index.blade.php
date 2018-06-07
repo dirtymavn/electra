@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Business - Customer')
+@section('title', 'Business - Supplier')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
