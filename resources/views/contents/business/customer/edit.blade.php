@@ -37,7 +37,9 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('customer.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-primary" id="btn-update">{{ trans('Submit') }}</button>
-                        <button type="button" class="btn btn-success" id="btn-publish">Publish</button>
+                        @if($customer->is_draft)
+                            <button type="button" class="btn btn-success" id="btn-publish">Publish</button>
+                        @endif
                     </div>
                 </div>              
             </div>
