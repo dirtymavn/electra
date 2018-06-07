@@ -228,8 +228,8 @@
                                         {!! Form::text('seat_pref', old('seat_pref') , ['class' => 'form-control', 'placeholder' => 'Input the Seat Pref']) !!}
                                     </div>
                                     <div class="form-group">
-                                        {!! Form::label('sear_pref_remark', trans('Seat Pref Remark'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('sear_pref_remark', old('sear_pref_remark') , ['class' => 'form-control', 'placeholder' => 'Input the Seat Pref Remark']) !!}
+                                        {!! Form::label('seat_pref_remark', trans('Seat Pref Remark'), ['class' => 'control-label']) !!}
+                                        {!! Form::text('seat_pref_remark', old('seat_pref_remark') , ['class' => 'form-control', 'placeholder' => 'Input the Seat Pref Remark']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -348,7 +348,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('cc_expiry_date', trans('Expiry Date'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('cc_expiry_date', old('cc_expiry_date') , ['class' => 'form-control', 'placeholder' => 'Input the Expiry Date']) !!}
+                                        {!! Form::date('cc_expiry_date', old('cc_expiry_date') , ['class' => 'form-control', 'placeholder' => 'Input the Expiry Date']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -400,7 +400,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('addon_to_date', trans('Addon To Date'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('addon_to_date', old('addon_to_date') , ['class' => 'form-control', 'placeholder' => 'Input the Addon To Date']) !!}
+                                        {!! Form::date('addon_to_date', old('addon_to_date') , ['class' => 'form-control', 'placeholder' => 'Input the Addon To Date']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
