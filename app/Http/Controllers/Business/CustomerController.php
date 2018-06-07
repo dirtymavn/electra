@@ -69,18 +69,27 @@ class CustomerController extends Controller
             // $request->merge(['company_id' => $companyId]);
             // $insert = $this->customer->create($request->all());
             if (@$request->is_draft == 'true') {
-                $request->merge(['is_draft' => true]);
-                $msgSuccess = 'Data is successfully inserted as draft';
-            } else {
-                $msgSuccess = 'Data is successfully inserted';
+                $msgSuccess = trans('message.save_as_draft');
+            } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
+                $msgSuccess = trans('message.published_continue');
+            } else {
+                $request->merge(['is_draft' => false]);
+                $msgSuccess = trans('message.published');
             }
+
             $insert = $this->masterCustomer->create($request->all());
             
             if ($insert) {
+                $redirect = redirect()->route('customer.index');
+                if (@$request->is_draft == 'true') {
+                    $redirect = redirect()->route('customer.edit', $insert->id);
+                } elseif (@$request->is_publish_continue == 'true') {
+                    $redirect = redirect()->route('customer.create');
+                }
                 flash()->success($msgSuccess);
                 \DB::commit();
-                return redirect()->route('customer.index');
+                return $redirect;
             } else {
                 flash()->error('Data is failed to insert');
                 return redirect()->back()->withInput();
@@ -143,10 +152,15 @@ class CustomerController extends Controller
     {
         if (@$request->is_draft == 'false') {
             $request->merge(['is_draft' => false]);
-            $msgSuccess = 'Data is successfully published';
+            $msgSuccess = trans('message.published');
+            $redirect = redirect()->route('customer.index');
+        } elseif (@$request->is_publish_continue == 'true') {
+            $request->merge(['is_draft' => false]);
+            $msgSuccess = trans('message.published_continue');
+            $redirect = redirect()->route('customer.create');
         } else {
-            $msgSuccess = 'Data is successfully updated';
-            $request->merge(['is_draft' => true]);
+            $msgSuccess = trans('message.update.success');
+            $redirect = redirect()->route('customer.edit', $customer->id);
         }
 
         $update = $customer->update($request->all());
@@ -179,8 +193,8 @@ class CustomerController extends Controller
             $termfee = $customer->termFees()->first();
             $termfee->update($input);
 
-            flash()->success('Data is successfully updated');
-            return redirect()->route('customer.index');
+            flash()->success($msgSuccess);
+            return $redirect;
         }
 
         flash()->error('<strong>Whoops! </strong> Something went wrong');        
@@ -202,6 +216,25 @@ class CustomerController extends Controller
             flash()->success('Data is successfully deleted');
         }
         
+        return redirect()->route('customer.index');
+    }
+    
+    /**
+     * Remove the many resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkDelete(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        if ( count($ids) > 0 ) {
+            MasterCustomer::whereIn('id', $ids)->delete();
+            flash()->success(trans('message.delete.success'));
+        } else {
+            flash()->success(trans('message.delete.error'));
+        }
+
         return redirect()->route('customer.index');
     }
 }

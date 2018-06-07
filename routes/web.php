@@ -31,6 +31,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // Business
     Route::group(['prefix' => 'business', 'namespace' => 'Business'], function () {
         Route::resource('customer', 'CustomerController');
+        Route::post('customer/bulk-delete', array('as' => 'customer.bulk-delete', 'uses' => 'CustomerController@bulkDelete'));
         Route::resource('supplier', 'SupplierController');
         Route::resource('sales', 'SalesFolderController');
         Route::resource('transaction', 'TransactionController');

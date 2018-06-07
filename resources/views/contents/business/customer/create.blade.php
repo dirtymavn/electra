@@ -34,8 +34,9 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('customer.index')}}" class="btn btn-grey">Cancel</a>
-                        <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
-                        <button type="button" class="btn btn-success" id="btn-submit-draft">Submit as Draft</button>
+                        <button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit">Publish</button>
+                        <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                     </div>
                 </div>              
     </form>
@@ -46,6 +47,11 @@
 $(document).on('click', '#btn-submit-draft', function() {
     var url = $('#form-customer').attr('action');
     $('#form-customer').attr('action', url + '?is_draft=true');
+    $('#form-customer').submit();
+});
+$(document).on('click', '#btn-publish-continue', function() {
+    var url = $('#form-customer').attr('action');
+    $('#form-customer').attr('action', url + '?is_publish_continue=true');
     $('#form-customer').submit();
 });
 </script>

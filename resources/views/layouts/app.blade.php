@@ -8,6 +8,7 @@
     <meta content="Electra" name="author">
     <meta content="Admin" name="description">
     <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{asset('themes/img/favicon.png')}}" rel="shortcut icon"><link href="{{asset('themes/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
     <!-- <link href="../fast.fonts.net/cssapi/487b73f1-c2d1-43db-8526-db577e4c822b.css" rel="stylesheet" type="text/css"> -->
     {!! Html::style('themes/bower_components/select2/dist/css/select2.min.css') !!}
@@ -179,6 +180,11 @@
     {!! Html::script('themes/js/demo_customizerce5a.js?version=4.4.1') !!}
     {!! Html::script('themes/js/maince5a.js?version=4.4.1') !!}
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         // (function(i, s, o, g, r, a, m) {
         //     i['GoogleAnalyticsObject'] = r;
         //     i[r] = i[r] || function() {
@@ -216,6 +222,11 @@
                 return false;
             return true;
         });
+        function bulkDelete(url, ids) {
+            $('#bulk-delete-modal').modal('show');
+            $('#bulk-delete-id').val(ids.join());
+            $('#form-bulk-delete').attr('action', url);
+        }
     </script>
     @yield('script')
     @yield('part_script')

@@ -16,7 +16,7 @@ class CustomerDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables($query)
+        return datatables()->of($query)
             ->addColumn('action', function($customer){
                 $edit_url = route('customer.edit', $customer->id);
                 $delete_url = route('customer.destroy', $customer->id);
@@ -24,8 +24,7 @@ class CustomerDataTable extends DataTable
             })
             ->editColumn('is_draft', function($customer){
                 return ($customer->is_draft) ? 'Yes' : 'No';
-            })
-            ->addIndexColumn();
+            });
     }
 
     /**
@@ -68,6 +67,7 @@ class CustomerDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->addAction(['width' => '80px', 'class' => 'row-actions'])
+                    ->addCheckbox(['class' => 'checklist'], 0)
                     ->parameters($this->getBuilderParameters());
     }
 

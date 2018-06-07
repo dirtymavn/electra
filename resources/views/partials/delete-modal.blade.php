@@ -89,6 +89,31 @@
         </div>
     </div>
 </div>
+
+<div id="bulk-delete-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{!! trans('Confirmation') !!}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p id="text-body-confirm">{!! trans('Are you sure want to delete ?') !!}</p>
+            </div>
+            <div class="modal-footer">
+                {!! Form::open(['id' => 'form-bulk-delete', 'method' => 'post']) !!}
+                    <input type="hidden" name="ids" id="bulk-delete-id">
+                    <a id="bulk-delete-modal-cancel" href="#" class="btn btn-white pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> {!! trans('Cancel') !!}
+                    </a>
+                    
+                    <button class="btn btn-success" id="submit-bulk-delete" type="submit">
+                        <i class="fa fa-check m-right-10"></i> Continue
+                    </button>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+</div>
 @section('part_script')
 <script>
     $(document).ready(function() {

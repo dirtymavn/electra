@@ -28,4 +28,7 @@ return [
     'approve' => 'Data is successfully approved',
     'approve_error' => '<strong>Whoops! </strong> Data cannot be deleted, because already approved',
     'reject' => 'Data is successfully rejected',
+    'published' => 'Data is successfully published',
+    'published_continue' => 'Data is successfully published, you can continue input data',
+    'save_as_draft' => 'Data is successfully inserted as draft',
 ];

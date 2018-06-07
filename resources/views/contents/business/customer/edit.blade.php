@@ -36,9 +36,10 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('customer.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
-                        <button type="submit" class="btn btn-primary" id="btn-update">{{ trans('Submit') }}</button>
+                        <button type="submit" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
                         @if($customer->is_draft)
-                            <button type="button" class="btn btn-success" id="btn-publish">Publish</button>
+                            <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
+                            <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                         @endif
                     </div>
                 </div>              
@@ -52,6 +53,11 @@
 $(document).on('click', '#btn-publish', function() {
     var url = $('#form-customer').attr('action');
     $('#form-customer').attr('action', url + '?is_draft=false');
+    $('#form-customer').submit();
+});
+$(document).on('click', '#btn-publish-continue', function() {
+    var url = $('#form-customer').attr('action');
+    $('#form-customer').attr('action', url + '?is_publish_continue=true');
     $('#form-customer').submit();
 });
 </script>
