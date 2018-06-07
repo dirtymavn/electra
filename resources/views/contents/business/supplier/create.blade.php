@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Create Customer')
+@section('title', 'Create Supplier')
 
 @section('style')
-<link href="http://13.229.205.203/sabre/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
-<!-- <link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" /> -->
-<link href="http://13.229.205.203/sabre/kendo/styles/web/kendo.common.min.css" rel="stylesheet" type="text/css" />
-<link href="http://13.229.205.203/sabre/kendo/styles/web/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="http://13.229.205.203/sabre/kendo/styles/web/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" />
+<style>
+    .os-tabs-controls {
+        margin-bottom: 0px;
+    }
+</style>
 @endsection
 
 @section('breadcrumb')

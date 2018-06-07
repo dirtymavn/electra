@@ -21,12 +21,12 @@ class MasterSupplier extends Model
 
     public function detail()
     {
-    	return $this->belongsTo( MasterSupplierDetail::class );
+    	return $this->hasOne( MasterSupplierDetail::class );
     }
 
     public function bank()
     {
-    	return $this->belongsTo( MasterSupplierBank::class );
+    	return $this->hasOne( MasterSupplierBank::class );
     }
 
     protected static function boot()
