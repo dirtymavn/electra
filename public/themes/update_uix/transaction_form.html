@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <!-- Mirrored from light.pinsupreme.com/uikit_modals.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 May 2018 15:11:15 GMT -->
+  <!-- Mirrored from light.pinsupreme.com/forms_validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 May 2018 15:11:21 GMT -->
   <head>
-    <title>Pop Up error message
+    <title>Transaction Form
     </title>
     <meta charset="utf-8">
-    <meta content="ie=edge" http-equiv="x-ua-compatible">
-    <meta content="template language" name="keywords">
-    <meta content="Tamerlan Soziev" name="author">
-    <meta content="Admin dashboard html template" name="description">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link href="../favicon.png" rel="shortcut icon">
-    <link href="../apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="favicon.png" rel="shortcut icon">
+    <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../fast.fonts.net/cssapi/487b73f1-c2d1-43db-8526-db577e4c822b.css" rel="stylesheet" type="text/css">
+    <link href="../bower_components/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../bower_components/dropzone/dist/dropzone.css" rel="stylesheet">
+    <link href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="../bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="../bower_components/slick-carousel/slick/slick.css" rel="stylesheet">
+    <link href="../css/maince5a.css?version=4.4.1" rel="stylesheet">
+	<link href="../css/main_custom.css" rel="stylesheet">
+	<link href="simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
   </head>
-  <body class="menu-position-side menu-side-left full-screen">
-    <div class="all-wrapper solid-bg-all">
+  <body class="menu-position-side menu-side-left full-screen with-content-panel">
+    <div class="all-wrapper with-side-panel solid-bg-all">
       <div class="search-with-suggestions-w">
         <div class="search-with-suggestions-modal">
           <div class="element-search">
@@ -695,13 +700,13 @@ END - Mobile Menu List
       <!--------------------
 END - Mobile Menu
 -------------------->
-                        <!--------------------
+      <!--------------------
             START - Main Menu Tambahan Fixed Menu
             -------------------->
             <div class="fixed-menu menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
                 <div class="logo-w">
                     <a class="logo" href="dashboard-sabre.html">
-                        <img class="img-responsive" style="width:80%;display:table;margin:auto;" alt="" src="img/logo-big.png">
+                        <img class="img-responsive" style="width:80%;display:table;margin:auto;" alt="" src="../img/logo-big.png">
                     </a>
                 </div>
                 <div class="menu-actions">
@@ -825,7 +830,7 @@ END - Mobile Menu
                        END - Messages Link in secondary top menu
                        -------------------->
                 </div>
-                <div class="element-search autosuggest-search-activator"><input placeholder="Start typing to search..." type="text"></div>
+                
                 <ul class="main-menu">
                     <li class="selected">
                         <a href="dashboard-sabre.html">
@@ -1294,73 +1299,254 @@ END - Top Menu Controls
         <!--------------------
 END - Top Bar
 -------------------->
+        <!--------------------
+START - Breadcrumbs
+-------------------->
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="index.html">Home
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="index.html">Products
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <span>Laptop with retina screen
+            </span>
+          </li>
+        </ul>
+        <!--------------------
+END - Breadcrumbs
+-------------------->
+        <div class="content-panel-toggler">
+          <i class="os-icon os-icon-grid-squares-22">
+          </i>
+          <span>Sidebar
+          </span>
+        </div>
         <div class="content-i">
           <div class="content-box">
-            <div class="element-wrapper">
-              <h6 class="element-header">Examples of Modals
-              </h6>
-              <div class="element-box">
-                <!--Large modal-->
-                <button class="mr-2 mb-2 btn btn-primary" data-target=".bd-example-modal-lg" data-toggle="modal"> Large modal
-                </button>
-                <div aria-hidden="true" aria-labelledby="myLargeModalLabel" class="modal fade bd-example-modal-lg" role="dialog" tabindex="-1">
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title
-                        </h5>
-                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                          <span aria-hidden="true"> &times;
-                          </span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-						<label>Lorem Ipsum dolor sit amet</label>
-                      </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-secondary" data-dismiss="modal" type="button"> Close
-                        </button>
-                      </div>
-                    </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="element-wrapper">
+                  <div class="element-box">
+					  <div class="alert alert-success" role="alert">
+						<strong>Well done! 
+						</strong>You successfully read this important alert message.
+					  </div>
+					  <div class="alert alert-info" role="alert">
+						<strong>Heads up! 
+						</strong>This alert needs your attention, but it's not super important.
+					  </div>
+					  <div class="alert alert-warning" role="alert">
+						<strong>Warning! 
+						</strong>Better check yourself, you're not looking too good.
+					  </div>
+					  <div class="alert alert-danger" role="alert">
+						<strong>Oh snap! 
+						</strong>Change a few things up and try submitting again.
+					  </div>
+                    <form id="formValidate">
+						<ul class='tabs'>
+						  <li><a href='#tab1'>Tab 1</a></li>
+						  <li><a href='#tab2'>Tab 2</a></li>
+						  <li><a href='#tab3'>Tab 3</a></li>
+						</ul>
+						<div id='tab1' class="tab-content">
+						  <div class="form-group">
+							<label for=""> Email address
+							</label>
+							<input class="form-control" data-error="Your email address is invalid" placeholder="Enter email" required="required" type="email">
+							<div class="help-block form-text with-errors form-control-feedback">
+							</div>
+						  </div>
+						  <div class="row">
+							<div class="col-sm-6">
+							  <div class="form-group">
+								<label for=""> Password
+								</label>
+								<input class="form-control" data-minlength="6" placeholder="Password" required="required" type="password">
+								<div class="help-block form-text text-muted form-control-feedback">Minimum of 6 characters
+								</div>
+							  </div>
+							</div>
+							<div class="col-sm-6">
+							  <div class="form-group">
+								<label for="">Confirm Password
+								</label>
+								<input class="form-control" data-match-error="Passwords don&#39;t match" placeholder="Confirm Password" required="required" type="password">
+								<div class="help-block form-text with-errors form-control-feedback">
+								</div>
+							  </div>
+							</div>
+						  </div>
+						  <div class="form-group">
+							<label for=""> Regular select
+							</label>
+							<select class="form-control">
+							  <option value="New York">New York
+							  </option>
+							  <option value="California">California
+							  </option>
+							  <option value="Boston">Boston
+							  </option>
+							  <option value="Texas">Texas
+							  </option>
+							  <option value="Colorado">Colorado
+							  </option>
+							</select>
+						  </div>
+						  <div class="form-group">
+							<label for=""> Multiselect
+							</label>
+							<select class="form-control select2" multiple="true">
+							  <option selected="true">New York
+							  </option>
+							  <option selected="true">California
+							  </option>
+							  <option>Boston
+							  </option>
+							  <option>Texas
+							  </option>
+							  <option>Colorado
+							  </option>
+							</select>
+						  </div>
+						  <fieldset class="form-group">
+							<legend>
+							  <span>Section Example
+							  </span>
+							</legend>
+							<div class="row">
+							  <div class="col-sm-6">
+								<div class="form-group">
+								  <label for=""> First Name
+								  </label>
+								  <input class="form-control" data-error="Please input your First Name" placeholder="First Name" required="required" type="text">
+								  <div class="help-block form-text with-errors form-control-feedback">
+								  </div>
+								</div>
+							  </div>
+							  <div class="col-sm-6">
+								<div class="form-group">
+								  <label for="">Last Name
+								  </label>
+								  <input class="form-control" data-error="Please input your Last Name" placeholder="Last Name" required="required" type="text">
+								  <div class="help-block form-text with-errors form-control-feedback">
+								  </div>
+								</div>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-sm-6">
+								<div class="form-group">
+								  <label for=""> Date of Birth
+								  </label>
+								  <input class="single-daterange form-control" placeholder="Date of birth" type="text" value="04/12/1978">
+								</div>
+							  </div>
+							  <div class="col-sm-6">
+								<div class="form-group">
+								  <label for="">Twitter Username
+								  </label>
+								  <div class="input-group">
+									<div class="input-group-prepend">
+									  <div class="input-group-text">@
+									  </div>
+									</div>
+									<input class="form-control" placeholder="Twitter Username" type="text">
+								  </div>
+								</div>
+							  </div>
+							</div>
+							<div class="form-group">
+							  <label for="">Date Range Picker
+							  </label>
+							  <input class="multi-daterange form-control" type="text" value="03/31/2017 - 04/06/2017">
+							</div>
+							<div class="form-group">
+							  <label> Example textarea
+							  </label>
+							  <textarea class="form-control" rows="3">
+							  </textarea>
+							</div>
+						  </fieldset>
+						  <div class="form-check">
+							<label class="form-check-label">
+							  <input class="form-check-input" type="checkbox">I agree to terms and conditions
+							</label>
+						  </div>
+						  <div class="form-buttons-w">
+							<button class="btn btn-primary" type="submit"> Submit
+							</button>
+						  </div>
+						</div>
+						<div id='tab2' class="tab-content">
+						  <p>This is the 2nd tab.</p>
+						</div>
+						<div id='tab3' class="tab-content">
+						  <p>And this is the 3rd tab.</p>
+						</div>
+
+                    </form>
                   </div>
-                </div>
-                <!--Small modal-->
-                <button class="btn btn-primary" data-target=".bd-example-modal-sm" data-toggle="modal" type="button"> Small modal
-                </button>
-                <div aria-hidden="true" aria-labelledby="mySmallModalLabel" class="modal fade bd-example-modal-sm" role="dialog" tabindex="-1">
-                  <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title
-                        </h5>
-                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                          <span aria-hidden="true"> &times;
-                          </span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <label>Lorem Ipsum dolor sit amet</label>
-                      </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-secondary" data-dismiss="modal" type="button"> Close
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-				<!-- Processing Modal -->
-				<button class="btn btn-primary" data-target=".bd-example-modal-processing-sm" data-toggle="modal" type="button"> Processing modal
-                </button>
-                <div aria-hidden="true" aria-labelledby="mySmallModalLabel" class="modal fade bd-example-modal-processing-sm" role="dialog" tabindex="-1">
-                  <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                      
-                    </div>
-                  </div>
+				  <div class="element-box">
+					<h3>Accordion Feature</h3>
+					<div class="accordion-wrapper">
+						<div class="accordion">Section 4
+							<i class="icon-arrow-down">
+							</i>
+						</div>
+						<div class="panel">
+								<div class="row">
+								  <div class="col-sm-6">
+									<div class="form-group">
+									  <label for=""> First Name
+									  </label>
+									  <input class="form-control" data-error="Please input your First Name" placeholder="First Name" required="required" type="text">
+									  <div class="help-block form-text with-errors form-control-feedback">
+									  </div>
+									</div>
+								  </div>
+								  <div class="col-sm-6">
+									<div class="form-group">
+									  <label for="">Last Name
+									  </label>
+									  <input class="form-control" data-error="Please input your Last Name" placeholder="Last Name" required="required" type="text">
+									  <div class="help-block form-text with-errors form-control-feedback">
+									  </div>
+									</div>
+								  </div>
+								</div>
+								<div class="row">
+								  <div class="col-sm-6">
+									<div class="form-group">
+									  <label for=""> Date of Birth
+									  </label>
+									  <input class="single-daterange form-control" placeholder="Date of birth" type="text" value="04/12/1978">
+									</div>
+								  </div>
+								  <div class="col-sm-6">
+									<div class="form-group">
+									  <label for="">Twitter Username
+									  </label>
+									  <div class="input-group">
+										<div class="input-group-prepend">
+										  <div class="input-group-text">@
+										  </div>
+										</div>
+										<input class="form-control" placeholder="Twitter Username" type="text">
+									  </div>
+									</div>
+								  </div>
+								</div>
+						</div>
+					</div>
+				  </div>
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -1368,9 +1554,68 @@ END - Top Bar
     <div class="display-type">
     </div>
     </div>
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/bootstrap/js/dist/util.js"></script>
-    <script src="../bower_components/bootstrap/js/dist/modal.js"></script>
+  <script src="../bower_components/jquery/dist/jquery.min.js">
+  </script>
+  <script src="../bower_components/popper.js/dist/umd/popper.min.js">
+  </script>
+  <script src="../bower_components/moment/moment.js">
+  </script>
+  <script src="../bower_components/chart.js/dist/Chart.min.js">
+  </script>
+  <script src="../bower_components/select2/dist/js/select2.full.min.js">
+  </script>
+  <script src="../bower_components/jquery-bar-rating/dist/jquery.barrating.min.js">
+  </script>
+  <script src="../bower_components/ckeditor/ckeditor.js">
+  </script>
+  <script src="../bower_components/bootstrap-validator/dist/validator.min.js">
+  </script>
+  <script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js">
+  </script>
+  <script src="../bower_components/ion.rangeSlider/js/ion.rangeSlider.min.js">
+  </script>
+  <script src="../bower_components/dropzone/dist/dropzone.js">
+  </script>
+  <script src="../bower_components/editable-table/mindmup-editabletable.js">
+  </script>
+  <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js">
+  </script>
+  <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js">
+  </script>
+  <script src="../bower_components/fullcalendar/dist/fullcalendar.min.js">
+  </script>
+  <script src="../bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js">
+  </script>
+  <script src="../bower_components/tether/dist/js/tether.min.js">
+  </script>
+  <script src="../bower_components/slick-carousel/slick/slick.min.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/util.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/alert.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/button.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/carousel.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/collapse.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/dropdown.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/modal.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/tab.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/tooltip.js">
+  </script>
+  <script src="../bower_components/bootstrap/js/dist/popover.js">
+  </script>
+  <script src="../js/main_custom.js">
+  </script>
+  <script src="../js/demo_customizerce5a.js?version=4.4.1">
+  </script>
+  <script src="../js/maince5a.js?version=4.4.1">
+  </script>
   </body>
-<!-- Mirrored from light.pinsupreme.com/uikit_modals.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 May 2018 15:11:15 GMT -->
+<!-- Mirrored from light.pinsupreme.com/forms_validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 May 2018 15:11:21 GMT -->
 </html>
