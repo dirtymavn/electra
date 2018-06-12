@@ -21,6 +21,9 @@ class SupplierDataTable extends DataTable
                 $delete_url = route('supplier.destroy', $supplier->id);
                 return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
             })
+            ->editColumn('is_draft', function($customer){
+                return ($customer->is_draft) ? 'Yes' : 'No';
+            })
             ->addIndexColumn();
     }
 
@@ -37,6 +40,7 @@ class SupplierDataTable extends DataTable
             'supplier_type',
             'name',
             'status', 
+            'is_draft',
             'created_at'
         );
     }
@@ -51,7 +55,8 @@ class SupplierDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px', 'class' => 'row-actions'])
+                    ->addCheckbox(['class' => 'checklist'], 0)
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -63,10 +68,11 @@ class SupplierDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'supplier_no' => ['title' => 'Supplier No', 'width' => '10px'],
+            'supplier_no' => ['title' => 'Supplier No'],
             'supplier_type' => ['title' => 'Supplier Type'],
             'name' => ['title' => 'Name'],
             'status' => ['title' => 'Status'],
+            'is_draft' => ['title' => 'Is Draft'],
             'created_at' => ['title' => 'Created At'],
         ];
     }
