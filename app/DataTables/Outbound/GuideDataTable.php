@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Outbound;
 
-use App\Models\Outbound\Guide;
+use App\Models\Outbound\Guide\MasterTourGuide;
 use Yajra\DataTables\Services\DataTable;
 
 class GuideDataTable extends DataTable
@@ -15,21 +15,33 @@ class GuideDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables($query);
-            // ->addColumn('action', 'outbound/guide.action');
+        return datatables($query)
+            ->addColumn('action', function($guide){
+                $edit_url = route('guide.edit', $guide->id);
+                $delete_url = route('guide.destroy', $guide->id);
+                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            })
+            ->editColumn('is_draft', function($guide){
+                return ($guide->is_draft) ? 'Yes' : 'No';
+            })
+            ->editColumn('start_date', function($guide){
+                return date('Y, F d', strtotime($guide->start_date));
+            });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Outbound\Guide $model
+     * @param \App\Models\Outbound\Guide\MasterTourGuide $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Guide $model)
+    public function query(MasterTourGuide $model)
     {
-        $empty = collect();
-        return $empty;
-        // return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
+        // $empty = collect();
+        // return $empty;
+        return $model->newQuery()->join('master_tour_guide_mains', 'master_tour_guide_mains.master_tour_guide_id', '=', 'master_tour_guides.id')
+            ->select('master_tour_guides.id', 'master_tour_guides.guide_code', 'master_tour_guides.guide_status', 'master_tour_guides.supplier_no',
+                'master_tour_guides.is_draft', 'master_tour_guide_mains.start_date', 'master_tour_guide_mains.remark');
     }
 
     /**
@@ -42,7 +54,8 @@ class GuideDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px', 'class' => 'row-actions'])
+                    ->addCheckbox(['class' => 'checklist'], 0)
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -54,15 +67,14 @@ class GuideDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'From Date',
-            'Start Time',
-            'To Date',
-            'End Time',
-            'Tour Code',
-            'Staff ID',
-            'Status',
-            'Remark',
+            'start_date' => ['name' => 'master_tour_guide_mains.start_date', 'data' => 'start_date', 'title' => trans('Start Date'), 'id' => 'start_date'],
+            'guide_code' => ['name' => 'master_tour_guides.guide_code', 'data' => 'guide_code', 'title' => trans('Tour Code'), 'id' => 'guide_code'],
+            'supplier_no' => ['name' => 'master_tour_guides.supplier_no', 'data' => 'supplier_no', 'title' => trans('Staff ID'), 'id' => 'supplier_ni'],
+            'guide_status' => ['name' => 'master_tour_guides.guide_status', 'data' => 'guide_status', 'title' => trans('Status'), 'id' => 'guide_status'],
+            'is_draft' => ['name' => 'master_tour_guides.is_draft', 'data' => 'is_draft', 'title' => trans('Is Draft'), 'id' => 'is_draft'],
+            'remark' => ['name' => 'master_tour_guide_mains.remark', 'data' => 'remark', 'title' => trans('Remark'), 'id' => 'remark'],
         ];
+
     }
 
     /**

@@ -111,3 +111,7 @@
 .nav-link.has-error.active:after {
   background-color: red;
 }
+
+.os-tabs-controls {
+    margin-bottom: 0px;
+}

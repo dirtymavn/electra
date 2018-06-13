@@ -9,7 +9,7 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('guide.index')}}">Guide</a></li>
+        <li class="breadcrumb-item"><a href="{{route('guide.index')}}">Tour Guide</a></li>
         <li class="breadcrumb-item">Create</li>
     </ul>
 @endsection
@@ -26,11 +26,13 @@
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.outbounds.guide._form')  
+                @include('contents.outbounds.guide._form_fixed')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{route('guide.index')}}" class="btn btn-white">Cancel</a>
-                        <button type="button" class="btn btn-primary" id="btn-submit">Submit</button>
+                        <a href="{{route('guide.index')}}" class="btn btn-grey">Cancel</a>
+                        <button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit">Publish</button>
+                        <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                     </div>
                 </div>              
             </div>
@@ -39,4 +41,16 @@
 @endsection
 
 @section('script')
+<script>
+$(document).on('click', '#btn-submit-draft', function() {
+    var url = $('#form-guide').attr('action');
+    $('#form-guide').attr('action', url + '?is_draft=true');
+    $('#form-guide').submit();
+});
+$(document).on('click', '#btn-publish-continue', function() {
+    var url = $('#form-guide').attr('action');
+    $('#form-guide').attr('action', url + '?is_publish_continue=true');
+    $('#form-guide').submit();
+});
+</script>
 @endsection
