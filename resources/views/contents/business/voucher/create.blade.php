@@ -34,8 +34,10 @@
                 @include('contents.business.voucher._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{route('voucher.index')}}" class="btn btn-white">Cancel</a>
-                        <button type="button" class="btn btn-primary" id="btn-submit">Submit</button>
+                        <a href="{{route('voucher.index')}}" class="btn btn-grey">Cancel</a>
+                        <button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit">Publish</button>
+                        <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                     </div>
                 </div>              
             </div>
@@ -44,4 +46,16 @@
 @endsection
 
 @section('script')
+<script>
+$(document).on('click', '#btn-submit-draft', function() {
+    var url = $('#form-voucher').attr('action');
+    $('#form-voucher').attr('action', url + '?is_draft=true');
+    $('#form-voucher').submit();
+});
+$(document).on('click', '#btn-publish-continue', function() {
+    var url = $('#form-voucher').attr('action');
+    $('#form-voucher').attr('action', url + '?is_publish_continue=true');
+    $('#form-voucher').submit();
+});
+</script>
 @endsection

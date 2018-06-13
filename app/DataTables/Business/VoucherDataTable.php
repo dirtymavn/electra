@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Business;
 
-use App\Models\Business\Voucher;
+use App\Models\Business\Voucher\MasterVoucher;
 use Yajra\DataTables\Services\DataTable;
 
 class VoucherDataTable extends DataTable
@@ -15,21 +15,44 @@ class VoucherDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables($query);
-            // ->addColumn('action', 'business/voucher.action');
+        return datatables()->of($query)
+            ->addColumn('action', function($customer){
+                $edit_url = route('customer.edit', $customer->id);
+                $delete_url = route('customer.destroy', $customer->id);
+                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            })
+            ->editColumn('is_draft', function($customer){
+                return ($customer->is_draft) ? 'Yes' : 'No';
+            });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Business\Voucher $model
+     * @param \App\Models\Business\Voucher\MasterVoucher $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Voucher $model)
+    public function query(MasterVoucher $model)
     {
-        $empty = collect();
-        return $empty;
-        // return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
+        return $model->newQuery()->select(
+            'id',
+            'voucher_no',
+            'voucher_status',
+            'voucher_date',
+            'voucher_currency',
+            'voucher_amt',
+            'valid_from',
+            'valid_to',
+            'transferrable_flag',
+            'internal_desc',
+            'desc',
+            'cust_no',
+            'cust_name',
+            'cust_address',
+            'is_draft',
+            'created_at',
+            'updated_at'
+        );
     }
 
     /**
@@ -42,7 +65,8 @@ class VoucherDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px', 'class' => 'row-actions'])
+                    ->addCheckbox(['class' => 'checklist'], 0)
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -54,12 +78,16 @@ class VoucherDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'Voucher No.',
-            'Customer',
-            'Status',
-            'Valid From',
-            'Valid End'
+            'voucher_no',
+            'voucher_date',
+            'valid_from',
+            'valid_to',
+            'cust_no',
+            'cust_name',
+            'cust_address',
+            'is_draft',
         ];
+
     }
 
     /**
