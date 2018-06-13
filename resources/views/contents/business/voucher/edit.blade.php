@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit company')
+@section('title', 'Edit Voucher')
 
 @section('style')
 <link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" />
@@ -9,28 +9,28 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('company.index')}}">Company</a></li>
+        <li class="breadcrumb-item"><a href="{{route('voucher.index')}}">Voucher</a></li>
         <li class="breadcrumb-item">Edit</li>
     </ul>
 @endsection
 
-@section('page_title', 'Edit Company')
+@section('page_title', 'Edit voucher')
 
 @section('content')
     @include('flash::message')
-    {!! Form::model($company, [
-            'route'     =>['company.update', $company->id],
+    {!! Form::model($voucher, [
+            'route'     =>['voucher.update', $voucher->id],
             'method'    => 'PATCH',
             'class' =>  'form-horizontal',
-            'id'    =>  'form-company',
+            'id'    =>  'form-voucher',
             'enctype' => 'multipart/form-data',
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.masters.company._form')  
+                @include('contents.business.voucher._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{ route('company.index') }}" class="btn btn-white">{{trans('Cancel')}}</a>
+                        <a href="{{ route('voucher.index') }}" class="btn btn-white">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-primary" id="btn-submit">{{ trans('Submit') }}</button>
                     </div>
                 </div>              
