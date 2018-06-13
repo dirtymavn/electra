@@ -53,10 +53,10 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Business\CustomerRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
         \DB::beginTransaction();
         try {
@@ -144,11 +144,11 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Business\CustomerRequest  $request
      * @param  \App\Models\Business\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MasterCustomer $customer)
+    public function update(CustomerRequest $request, MasterCustomer $customer)
     {
         if (@$request->is_draft == 'false') {
             $request->merge(['is_draft' => false]);

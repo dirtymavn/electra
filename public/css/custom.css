@@ -95,3 +95,19 @@
   }
 }
 /* Loader style .end */
+
+.tab-content {
+    border: none;
+    padding: 0;
+    margin-top: 0px;
+}
+
+.nav-link.has-error,
+.nav-link.has-error.active {
+  color: red;
+}
+
+.nav-link.has-error:after,
+.nav-link.has-error.active:after {
+  background-color: red;
+}

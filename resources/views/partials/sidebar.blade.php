@@ -6,7 +6,7 @@
                         <img class="img-responsive" style="width:80%;display:table;margin:auto;" alt="" src="{{ asset('themes/img/logo-big.png') }}">
                     </a>
                 </div>
-                <div class="logged-user-w avatar-inline">
+                <div class="logged-user-w avatar-inline" style="display:none;">
                     <div class="logged-user-i">
                         <div class="avatar-w"><img alt="" src="{{link_to_avatar(user_info('avatar'))}}"></div>
                         <div class="logged-user-info-w">
@@ -437,7 +437,7 @@
                             </div>
                         </div>
                     </li>
-                    <li class="has-sub-menu">
+                    {{--<li class="has-sub-menu">
                         <a href="#">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-users"></div>
@@ -470,6 +470,6 @@
                                 </ul>
                             </div>
                         </div>
-                    </li>
+                    </li>--}}
                 </ul>
             </div>

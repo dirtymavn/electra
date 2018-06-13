@@ -249,7 +249,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="has-sub-menu">
+            {{--<li class="has-sub-menu">
                 <a href="#">
                     <div class="icon-w">
                         <div class="os-icon os-icon-layers"></div>
@@ -274,7 +274,7 @@
                         <li><a href="">BOS</a></li>
                     </ul>
                 </div>
-            </li>
+            </li>--}}
         </ul>
         
     </div>

@@ -199,12 +199,28 @@
                 allowClear: true
             }); 
         }
+
         function spinnerLoad(element) {
             element.submit(function() {
-                $('div.spinner').show(); 
-                return true;
+                if (element.find('.has-error').length <= 0) {
+                    $('div.spinner').show(); 
+                    return true;
+                }
+                
+                element.find('.has-error').each(function(i, obj) {
+                    var idTab = $('.tab-pane .form-group.has-error').eq(i).parent().parent().parent().parent().parent().attr('id');
+                    if (idTab !== undefined) {
+                        var thisNavItem = $('.os-tabs-controls .nav-item a.nav-link');
+                        if (thisNavItem.attr('href') == '#'+idTab) {
+                            $("a[href*='#"+idTab+"']").addClass('has-error');
+                        }
+                    }
+                });
+
+                return false;
             });
         }
+
         $('.only_number').keypress(function (event) {
             var charCode = event.which;
             var value = $(this).val();

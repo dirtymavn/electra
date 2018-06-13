@@ -437,7 +437,7 @@
 @section('part_script')
 <!-- <script src="{{ asset('themes/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script> -->
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-<!-- {!! JsValidator::formRequest('App\Http\Requests\Business\CustomerRequest', '#form-customer') !!} -->
+{!! JsValidator::formRequest('App\Http\Requests\Business\CustomerRequest', '#form-customer') !!}
 <script>
 $(function(){
     spinnerLoad($('#form-customer'));

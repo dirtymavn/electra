@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         
-                        <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-left" style="display:none;"><i class="os-icon os-icon-ui-46"></i>
+                        <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-left"><i class="os-icon os-icon-ui-46"></i>
                             <div class="os-dropdown">
                                 <div class="icon-w"><i class="os-icon os-icon-ui-46"></i></div>
                                 <ul>
