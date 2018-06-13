@@ -16,13 +16,13 @@ class VoucherDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()->of($query)
-            ->addColumn('action', function($customer){
-                $edit_url = route('customer.edit', $customer->id);
-                $delete_url = route('customer.destroy', $customer->id);
+            ->addColumn('action', function($voucher){
+                $edit_url = route('voucher.edit', $voucher->id);
+                $delete_url = route('voucher.destroy', $voucher->id);
                 return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
             })
-            ->editColumn('is_draft', function($customer){
-                return ($customer->is_draft) ? 'Yes' : 'No';
+            ->editColumn('is_draft', function($voucher){
+                return ($voucher->is_draft) ? 'Yes' : 'No';
             });
     }
 

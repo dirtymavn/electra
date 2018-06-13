@@ -41,7 +41,6 @@ class VoucherController extends Controller
     {
         DB::beginTransaction();
         try {
-            dd($request->all());
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
@@ -52,7 +51,7 @@ class VoucherController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            Voucher::create( $request->all() );
+            $insert = Voucher::create( $request->all() );
 
             if ($insert) {
                 $redirect = redirect()->route('voucher.index');
@@ -69,6 +68,7 @@ class VoucherController extends Controller
                 return redirect()->back()->withInput();
             }
         } catch (\Exception $e) {
+            dd($e);
             flash()->error('<strong>Whoops! </strong> Something went wrong');
             \DB::rollback();
             return redirect()->back()->withInput();
