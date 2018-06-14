@@ -19,6 +19,11 @@ Untuk setiap list **Master data** dan form **Transactional**:
 
 - Cascade lock : Data yang sudah dipakai sebagai FK di form lainnya tidak dapat dihapus. Penghapusan harus dilakukan berurut dari data terujung.
 
+## Commit rules
+Untuk setiap commit yang dilakukan harus mempertimbangkan perubahan data yang terjadi di sisi client. Berikut point yg perlu diperhatikan dalam perubahan yang mengubah struktur maupun menambah data. Staging server merupakan server yg digunakan sebagai _showcase_ aplikasi kepada client, dan akan melalui reset data per setiap commit push. Meskipun data di reset setiap kali di push, proses dibawah harus dilakukan untuk memastikan bahwa server staging / development memiliki cukup data untuk dilakukan _functional testing_ maupun _usability testing_. List data seed akan disediakan secara terpisah untuk menjamin kelancaran fungsionalitas.
+1. Data yang akan dihapus harus di truncate secara keseluruhan (bukan hanya di delete)
+2. Seed data disediakan Aurora dan Hendri, parallel dengan testing scenario
+
 ## Server configuration
 
 - Ubuntu 16.04 LTS
