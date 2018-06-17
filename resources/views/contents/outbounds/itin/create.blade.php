@@ -3,7 +3,6 @@
 @section('title', 'Create Itinerary')
 
 @section('style')
-<link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" />
 <style>
     .os-tabs-controls {
         margin-bottom: 0px;
@@ -31,17 +30,32 @@
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.outbounds.itin._form')  
+                @include('contents.outbounds.itin._form_fixed')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{route('itin.index')}}" class="btn btn-white">Cancel</a>
-                        <button type="button" class="btn btn-primary" id="btn-submit">Submit</button>
+                        <a href="{{route('itin.index')}}" class="btn btn-grey">Cancel</a>
+                        <button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit">Publish</button>
+                        <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                     </div>
                 </div>              
             </div>
         </div>
     </form>
+    @stack('models')
 @endsection
 
 @section('script')
+<script>
+$(document).on('click', '#btn-submit-draft', function() {
+    var url = $('#form-itin').attr('action');
+    $('#form-itin').attr('action', url + '?is_draft=true');
+    $('#form-itin').submit();
+});
+$(document).on('click', '#btn-publish-continue', function() {
+    var url = $('#form-itin').attr('action');
+    $('#form-itin').attr('action', url + '?is_publish_continue=true');
+    $('#form-itin').submit();
+});
+</script>
 @endsection

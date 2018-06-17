@@ -237,6 +237,32 @@
             $('#bulk-delete-id').val(ids.join());
             $('#form-bulk-delete').attr('action', url);
         }
+
+        $('.only_numeric').keypress(function (event) {
+            var iKeyCode = (event.which) ? event.which : event.keyCode;
+            if (iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+                return false;
+
+            return true;
+        });
+
+        function initDatatable(element, url, columnss, datas = null) {
+            element.DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: url,
+                    method: 'POST',
+                    data: datas
+                },
+                columns: columnss,
+                paging:   false,
+                ordering: false,
+                info:     false,
+                searching:     false
+            });
+
+        }
     </script>
     @yield('script')
     @yield('part_script')
