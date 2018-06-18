@@ -2,7 +2,7 @@
 <html>
   <!-- Mirrored from light.pinsupreme.com/forms_validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 May 2018 15:11:21 GMT -->
   <head>
-    <title>Transaction Form
+    <title>Transaction List
     </title>
     <meta charset="utf-8">
     <link href="favicon.png" rel="shortcut icon">
@@ -1601,190 +1601,274 @@ END - Breadcrumbs
 						<strong>Oh snap! 
 						</strong>Change a few things up and try submitting again.
 					  </div>
-                    
 						<ul class='tabs'>
-						  <li><a href='#tab1'>Form Input</a></li>
-						  <li><a href='#tab2'>Dropzone File Upload</a></li>
+						  <li><a href='#tab1'>Transaction Data</a></li>
+						  <li><a href='#tab2'>Chart Report</a></li>
+						  <li><a href='#tab3'>Invoice</a></li>
 						</ul>
 						<div id='tab1' class="tab-content">
-							<form id="formValidate">
-							  <div class="form-group">
-								<label for=""> Email address
-								</label>
-								<input class="form-control" data-error="Your email address is invalid" placeholder="Enter email" required="required" type="email">
-								<div class="help-block form-text with-errors form-control-feedback">
-								</div>
-							  </div>
-							  <div class="row">
-								<div class="col-sm-6">
-								  <div class="form-group">
-									<label for=""> Password
-									</label>
-									<input class="form-control" data-minlength="6" placeholder="Password" required="required" type="password">
-									<div class="help-block form-text text-muted form-control-feedback">Minimum of 6 characters
-									</div>
-								  </div>
-								</div>
-								<div class="col-sm-6">
-								  <div class="form-group">
-									<label for="">Confirm Password
-									</label>
-									<input class="form-control" data-match-error="Passwords don&#39;t match" placeholder="Confirm Password" required="required" type="password">
-									<div class="help-block form-text with-errors form-control-feedback">
-									</div>
-								  </div>
-								</div>
-							  </div>
-							  <div class="form-group">
-								<label for=""> Regular select
-								</label>
-								<select class="form-control">
-								  <option value="New York">New York
-								  </option>
-								  <option value="California">California
-								  </option>
-								  <option value="Boston">Boston
-								  </option>
-								  <option value="Texas">Texas
-								  </option>
-								  <option value="Colorado">Colorado
-								  </option>
-								</select>
-							  </div>
-							  <div class="form-group">
-								<label for=""> Multiselect
-								</label>
-								<select class="form-control select2" multiple="true">
-								  <option selected="true">New York
-								  </option>
-								  <option selected="true">California
-								  </option>
-								  <option>Boston
-								  </option>
-								  <option>Texas
-								  </option>
-								  <option>Colorado
-								  </option>
-								</select>
-							  </div>
-							  <fieldset class="form-group">
-								<legend>
-								  <span>Section Example
-								  </span>
-								</legend>
-								<div class="row">
-								  <div class="col-sm-6">
-									<div class="form-group">
-									  <label for=""> First Name
-									  </label>
-									  <input class="form-control" data-error="Please input your First Name" placeholder="First Name" required="required" type="text">
-									  <div class="help-block form-text with-errors form-control-feedback">
-									  </div>
-									</div>
-								  </div>
-								  <div class="col-sm-6">
-									<div class="form-group">
-									  <label for="">Last Name
-									  </label>
-									  <input class="form-control" data-error="Please input your Last Name" placeholder="Last Name" required="required" type="text">
-									  <div class="help-block form-text with-errors form-control-feedback">
-									  </div>
-									</div>
-								  </div>
-								</div>
-								<div class="row">
-								  <div class="col-sm-6">
-									<div class="form-group">
-									  <label for=""> Date of Birth
-									  </label>
-									  <input class="single-daterange form-control" placeholder="Date of birth" type="text" value="04/12/1978">
-									</div>
-								  </div>
-								  <div class="col-sm-6">
-									<div class="form-group">
-									  <label for="">Twitter Username
-									  </label>
-									  <div class="input-group">
-										<div class="input-group-prepend">
-										  <div class="input-group-text">@
-										  </div>
+							<div class="form-group row">
+								<div class="col-md-6">
+									<div class="form-group row">
+										<div class="col-md-3">
+											<label class="col-form-label font-weight-bold" for=""> Your Email
+											</label>
 										</div>
-										<input class="form-control" placeholder="Twitter Username" type="text">
-									  </div>
+										<div class="col-md-2">
+											<label class="col-form-label font-weight-bold" for="">:
+											</label>
+										</div>
+										<div class="col-md-7">
+											<p class="col-form-label" for=""> lorem@ipsum.com
+											</p>
+										</div>
 									</div>
-								  </div>
+									<div class="form-group row">
+										<div class="col-md-3">
+											<label class="col-form-label font-weight-bold" for=""> Your Email
+											</label>
+										</div>
+										<div class="col-md-2">
+											<label class="col-form-label font-weight-bold" for="">:
+											</label>
+										</div>
+										<div class="col-md-7">
+											<p class="col-form-label" for=""> lorem@ipsum.com
+											</p>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-3">
+											<label class="col-form-label font-weight-bold" for=""> Your Email
+											</label>
+										</div>
+										<div class="col-md-2">
+											<label class="col-form-label font-weight-bold" for="">:
+											</label>
+										</div>
+										<div class="col-md-7">
+											<p class="col-form-label" for=""> lorem@ipsum.com
+											</p>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-3">
+											<label class="col-form-label font-weight-bold" for=""> Your Email
+											</label>
+										</div>
+										<div class="col-md-2">
+											<label class="col-form-label font-weight-bold" for="">:
+											</label>
+										</div>
+										<div class="col-md-7">
+											<p class="col-form-label" for=""> lorem@ipsum.com
+											</p>
+										</div>
+									</div>
 								</div>
-								<div class="form-group">
-								  <label for="">Date Range Picker
-								  </label>
-								  <input class="multi-daterange form-control" type="text" value="03/31/2017 - 04/06/2017">
+								<div class="col-md-6">
+									<div class="form-group row">
+										<div class="col-md-3">
+											<label class="col-form-label font-weight-bold" for=""> Your Email
+											</label>
+										</div>
+										<div class="col-md-2">
+											<label class="col-form-label font-weight-bold" for="">:
+											</label>
+										</div>
+										<div class="col-md-7">
+											<p class="col-form-label" for=""> lorem@ipsum.com
+											</p>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-3">
+											<label class="col-form-label font-weight-bold" for=""> Your Email
+											</label>
+										</div>
+										<div class="col-md-2">
+											<label class="col-form-label font-weight-bold" for="">:
+											</label>
+										</div>
+										<div class="col-md-7">
+											<p class="col-form-label" for=""> lorem@ipsum.com
+											</p>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-3">
+											<label class="col-form-label font-weight-bold" for=""> Your Email
+											</label>
+										</div>
+										<div class="col-md-2">
+											<label class="col-form-label font-weight-bold" for="">:
+											</label>
+										</div>
+										<div class="col-md-7">
+											<p class="col-form-label" for=""> lorem@ipsum.com
+											</p>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-3">
+											<label class="col-form-label font-weight-bold" for=""> Your Email
+											</label>
+										</div>
+										<div class="col-md-2">
+											<label class="col-form-label font-weight-bold" for="">:
+											</label>
+										</div>
+										<div class="col-md-7">
+											<p class="col-form-label" for=""> lorem@ipsum.com
+											</p>
+										</div>
+									</div>
 								</div>
-								<div class="form-group">
-								  <label> Example textarea
-								  </label>
-								  <textarea class="form-control" rows="3">
-								  </textarea>
-								</div>
-							  </fieldset>
-							  <div class="form-check">
-								<label class="form-check-label">
-								  <input class="form-check-input" type="checkbox">I agree to terms and conditions
-								</label>
-							  </div>
-							  <div class="form-group row">
-								<label class="col-sm-4 col-form-label">Radio Buttons
-								</label>
-								<div class="col-sm-8">
-								  <div class="form-check">
-									<label class="form-check-label">
-									  <input checked="" class="form-check-input" name="optionsRadios" type="radio" value="option1">Option number one
-									</label>
-								  </div>
-								  <div class="form-check">
-									<label class="form-check-label">
-									  <input class="form-check-input" name="optionsRadios" type="radio" value="option2">Here is another radio option
-									</label>
-								  </div>
-								  <div class="form-check">
-									<label class="form-check-label">
-									  <input class="form-check-input" name="optionsRadios" type="radio" value="option3">Option three is here
-									</label>
-								  </div>
-								</div>
-							  </div>
-							  <div class="form-buttons-w">
-								<button class="btn btn-outline-secondary" type="submit"> Cancel
-								</button>
-								<button class="btn btn-outline-primary" type="submit"> Save as Draft
-								</button>
-								<button class="btn btn-primary" type="submit"> Publish
-								</button>
-								<button class="btn btn-success" type="submit"> Publish and continue
-								</button>
-							  </div>
-							</form>
+							</div>
+						  <div class="form-buttons-w">
+							<button class="btn btn-primary" type="submit"> Submit
+							</button>
+						  </div>
 						</div>
 						<div id='tab2' class="tab-content">
-						    <div class="element-wrapper">
-							  <h6 class="element-header">File Uploads
-							  </h6>
-							  <div class="element-box">
-								<h5 class="form-header">Dropzone File Upload
-								</h5>
-								<div class="form-desc">DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews. 
-								  <a href="http://www.dropzonejs.com/" target="_blank">Learn More here
-								  </a>
+							<div class="form-group row">
+								<div class="col-md-8">
+									<div class="element-wrapper">
+									  <h6 class="element-header">Bar Charts
+									  </h6>
+									  <div class="element-box">
+										<div class="el-chart-w">
+										  <canvas height="145" id="barChart1" width="300">
+										  </canvas>
+										</div>
+									  </div>
+									</div>
 								</div>
-								<form action="http://light.pinsupreme.com/index.html" class="dropzone" id="my-awesome-dropzone">
-								  <div class="dz-message">
-									<div>
-									  <h4>Drop files here or click to upload.
-									  </h4>
-									  <div class="text-muted">(This is just a demo dropzone. Selected files are not actually uploaded)
+								<div class="col-md-4">
+									<div class="element-wrapper">
+									  <div class="element-box">
+										<h5 class="form-header">Pie Chart
+										</h5>
+										<div class="form-desc">Pie and doughnut charts are probably the most commonly used charts there are. 
+										  <a href="http://www.chartjs.org/" target="_blank">Learn More about Chart.js
+										  </a>
+										</div>
+										<div class="el-chart-w">
+										  <canvas height="150px" id="pieChart1" width="150px">
+										  </canvas>
+										</div>
+									  </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id='tab3' class="tab-content">
+						    <div class="element-wrapper">
+							  <div class="invoice-w">
+								<div class="infos">
+								  <div class="info-1">
+									<div class="invoice-logo-w">
+									  <img alt="" src="img/logo2.png">
+									</div>
+									<div class="company-name">Paper Inc
+									</div>
+									<div class="company-address">47 Countrylane Ave, 
+									  <br/>Los Angeles, CA 97446 
+									  <br/>United States
+									</div>
+									<div class="company-extra">tel. 858.745.5577
+									</div>
+								  </div>
+								  <div class="info-2">
+									<div class="company-name">Client Inc
+									</div>
+									<div class="company-address">210 Benson Lane, Suite 430
+									  <br/>Queens, NY 11243
+									  <br/>United States
+									</div>
+								  </div>
+								</div>
+								<div class="invoice-heading">
+								  <h3>Invoice
+								  </h3>
+								  <div class="invoice-date">22 December 2017
+								  </div>
+								</div>
+								<div class="invoice-body">
+								  <div class="invoice-desc">
+									<div class="desc-label">Invoice #
+									</div>
+									<div class="desc-value">HSFB 342823
+									</div>
+								  </div>
+								  <div class="invoice-table">
+									<table class="table">
+									  <thead>
+										<tr>
+										  <th>Description
+										  </th>
+										  <th>Qty
+										  </th>
+										  <th class="text-right">Price
+										  </th>
+										</tr>
+									  </thead>
+									  <tbody>
+										<tr>
+										  <td>User Interface
+										  </td>
+										  <td>2
+										  </td>
+										  <td class="text-right">$4,500
+										  </td>
+										</tr>
+										<tr>
+										  <td>Framework Development
+										  </td>
+										  <td>4
+										  </td>
+										  <td class="text-right">$9,750
+										  </td>
+										</tr>
+										<tr>
+										  <td>Widgets and Plugins
+										  </td>
+										  <td>1
+										  </td>
+										  <td class="text-right">$1,240
+										  </td>
+										</tr>
+									  </tbody>
+									  <tfoot>
+										<tr>
+										  <td>Total
+										  </td>
+										  <td class="text-right" colspan="2">$15,490
+										  </td>
+										</tr>
+									  </tfoot>
+									</table>
+									<div class="terms">
+									  <div class="terms-header">Terms and Conditions
+									  </div>
+									  <div class="terms-content">Should be paid as soon as received, otherwise a 5% penalty fee is applied
 									  </div>
 									</div>
 								  </div>
-								</form>
+								</div>
+								<div class="invoice-footer">
+								  <div class="invoice-logo">
+									<img alt="" src="img/logo.png">
+									<span>Paper Inc
+									</span>
+								  </div>
+								  <div class="invoice-info">
+									<span>hello@paper.inc
+									</span>
+									<span>858.757.4455
+									</span>
+								  </div>
+								</div>
 							  </div>
 							</div>
 						</div>

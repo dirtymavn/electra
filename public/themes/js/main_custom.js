@@ -1,3 +1,25 @@
+	//TABLE CHECKBOX FEATURE
+	$(document).ready(function () {
+		$(".checkbox-table").each(function () {
+			if($(this).prop("checked"))
+			{
+				$(this).parent().parent().addClass("active");
+			}
+		})
+	});
+
+
+$(".checkbox-table").change(function () {
+	if($(this).prop("checked"))
+	{
+		$(this).parent().parent().addClass("active");
+	}
+	else
+	{
+		$(this).parent().parent().removeClass("active");
+	}
+});
+
 // TAB FEATURE
 $('ul.tabs').each(function(){
   // For each set of tabs, we want to keep track of
@@ -54,3 +76,18 @@ for (i = 0; i < acc.length; i++) {
         }
     });
 }
+
+//THIRD SUBMENU CHILD
+$('li.sub-submenu a').click(function () {
+	if($(this).children(".arrow-third-menu").hasClass("os-icon-chevron-down"))
+	{
+		$(this).children(".arrow-third-menu").removeClass("os-icon-chevron-down");
+		$(this).children(".arrow-third-menu").addClass("os-icon-chevron-right");
+	}
+	else if($(this).children(".arrow-third-menu").hasClass("os-icon-chevron-right"))
+	{
+		$(this).children(".arrow-third-menu").removeClass("os-icon-chevron-right");
+		$(this).children(".arrow-third-menu").addClass("os-icon-chevron-down");
+	}
+    $(this).siblings(".third-menu").toggleClass("expanded");
+  });
