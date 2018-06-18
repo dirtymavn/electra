@@ -115,3 +115,7 @@
 .os-tabs-controls {
     margin-bottom: 0px;
 }
+
+td.dt-center {
+  text-align: center;
+}
