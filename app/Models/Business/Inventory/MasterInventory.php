@@ -26,4 +26,10 @@ class MasterInventory extends Model
     	'rooms',
     	'is_draft'
     ];
+
+
+    public function trx()
+    {
+        return $this->belongsTo(TrxSales::class, 'trx_sales_id', 'id');
+    }
 }

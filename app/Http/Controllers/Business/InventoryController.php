@@ -44,7 +44,7 @@ class InventoryController extends Controller
     {
         DB::beginTransaction();
         try {
-            
+
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
@@ -99,6 +99,13 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
+        $trx = $inventory->trx->toArray();
+        $inventory = $inventory->toArray();
+        unset($trx['id']);
+
+        $merge = array_merge($inventory, $trx);
+
+        $inventory = (object) $merge;
         return view('contents.business.inventory.edit', compact('inventory'));
     }
 
@@ -111,7 +118,28 @@ class InventoryController extends Controller
      */
     public function update(Request $request, Inventory $inventory)
     {
-        //
+        try {
+            if (@$request->is_draft == 'false') {
+                $request->merge(['is_draft' => false]);
+                $msgSuccess = trans('message.published');
+                $redirect = redirect()->route('inventory.index');
+            } elseif (@$request->is_publish_continue == 'true') {
+                $request->merge(['is_draft' => false]);
+                $msgSuccess = trans('message.published_continue');
+                $redirect = redirect()->route('inventory.create');
+            } else {
+                $msgSuccess = trans('message.update.success');
+                $redirect = redirect()->route('inventory.edit', $inventory->id);
+            }
+
+            $update = $inventory->update( $request->all() );
+
+            flash()->success($msgSuccess);
+            return $redirect;
+        } catch (\Exception $e) {
+            flash()->error('<strong>Whoops! </strong> Something went wrong '. $e->getMessage());        
+            return redirect()->back()->withInput();
+        }
     }
 
     /**
