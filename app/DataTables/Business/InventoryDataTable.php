@@ -51,7 +51,8 @@ class InventoryDataTable extends DataTable
          'coupon_no',
          'nights',
          'rooms',
-         'is_draft'
+         'is_draft',
+         'created_at'
      );
     }
 

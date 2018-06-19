@@ -1,9 +1,34 @@
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-12">
         <div class="form-group">
-            {!! Form::label('trx_sales_id', trans('Trx Sales'), ['class' => 'control-label']) !!}
-            {!! Form::select('trx_sales_id', ['' => "Choose Trx Sales"], old('trx_sales_id'), ['class' => 'form-control']) !!}
+            {!! Form::label('invoice_no', trans('Invoice No'), ['class' => 'control-label']) !!}
+            {!! Form::text('invoice_no', old('invoice_no') , ['class' => 'form-control', 'placeholder' => 'Input the Code']) !!}
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            {!! Form::label('sales_date', trans('Sales Date'), ['class' => 'control-label']) !!}
+            {!! Form::date('sales_date', old('sales_date') , ['class' => 'form-control', 'placeholder' => 'Input the Sales Date']) !!}
+        </div>        
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {!! Form::label('ticket_amt', trans('Ticket Amt'), ['class' => 'control-label']) !!}
+            {!! Form::number('ticket_amt', old('ticket_amt') , ['class' => 'form-control', 'placeholder' => 'Input the Ticket Amt']) !!}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            {!! Form::label('rebate', trans('Rebate'), ['class' => 'control-label']) !!}
+            {!! Form::number('rebate', old('rebate') , ['class' => 'form-control', 'placeholder' => 'Input the Rebate']) !!}
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-6">
 
         <div class="form-group">
             {!! Form::label('inventory_type', trans('Inventory Type'), ['class' => 'control-label']) !!}
@@ -34,12 +59,12 @@
             {!! Form::label('sold_qty', trans('Sold Qty'), ['class' => 'control-label']) !!}
             {!! Form::number('sold_qty', old('sold_qty') , ['class' => 'form-control', 'placeholder' => 'Input the Sold Qty']) !!}
         </div>
-    </div>
-    <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('received_date', trans('Received Date'), ['class' => 'control-label']) !!}
-            {!! Form::text('received_date', old('received_date') , ['class' => 'form-control', 'placeholder' => 'Input the Product Code']) !!}
+            {!! Form::date('received_date', old('received_date') , ['class' => 'form-control', 'placeholder' => 'Input the Product Code']) !!}
         </div>
+    </div>
+    <div class="col-md-6">
 
         <div class="form-group">
             {!! Form::label('guest_name', trans('Guest Name'), ['class' => 'control-label']) !!}
@@ -89,125 +114,11 @@
                 </ul>
             </div>
             <div class="tab-content">
-                <div class="tab-pane active show" id="cost">
-                    <div class="element-wrapper">
-                        <div class="element-box">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        {!! Form::label('name', trans('Name'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('name', old('name') , ['class' => 'form-control', 'placeholder' => 'Input the Name']) !!}
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                {!! Form::label('category', trans('Category'), ['class' => 'control-label']) !!}
-                                                {!! Form::select('category', ['' => "Choose Category"], old('category'), ['class' => 'form-control']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                {!! Form::label('city_code', trans('City Code'), ['class' => 'control-label']) !!}
-                                                {!! Form::select('city_code', ['' => "Choose City Code"], old('city_code'), ['class' => 'form-control']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                {!! Form::label('type', trans('Type'), ['class' => 'control-label']) !!}
-                                                {!! Form::select('type', ['' => "Choose Type"], old('type'), ['class' => 'form-control']) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! Form::label('airline', trans('Airline'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('airline', ['' => "Choose Airline"], old('airline'), ['class' => 'form-control']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('nationality', trans('Nationality'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('nationality', ['' => "Choose Nationality"], old('nationality'), ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        {!! Form::label('description', trans('Description'), ['class' => 'control-label']) !!}
-                                        {!! Form::textarea('description', old('description') , ['class' => 'form-control', 'placeholder' => 'Input the Description', 'rows' => 5]) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('min_cap', trans('Min. Cap.'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('min_cap', old('min_cap') , ['class' => 'form-control', 'placeholder' => 'Input the Min. Cap.']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('max_cap', trans('Max. Cap.'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('max_cap', old('max_cap') , ['class' => 'form-control', 'placeholder' => 'Input the Max. Cap.']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('validity_from', trans('Validity From'), ['class' => 'control-label']) !!}
-                                        {!! Form::date('validity_from', old('validity_from'), ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('validity_end', trans('Validity End'), ['class' => 'control-label']) !!}
-                                        {!! Form::date('validity_end', old('validity_end'), ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! Form::label('depature', trans('Depature'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('depature', ['' => "Choose Depature", '1' => 'Daily', '2' => 'Only on day of week', '3' => 'Only on the following date'], old('depature'), ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! Form::label('no_of_day', trans('No. of Days'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('no_of_day', old('no_of_day') , ['class' => 'form-control', 'placeholder' => 'Input the No. of Days']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! Form::label('cutoff_day', trans('Cutoff Days'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('cutoff_day', old('cutoff_day') , ['class' => 'form-control', 'placeholder' => 'Input the Cutoff Days']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label('only_on_week', trans('The Day of Week'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('only_on_week[]', ['1' => 'Monday', '2' => 'Tuesday', '3' => 'Wednesday', '4' => 'Thursday', '5' => 'Friday', '6' => 'Saturday', '7' => 'Sunday'], old('only_on_week'), ['class' => 'form-control', 'multiple' => true, 'id' => 'only_on_week']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label('only_on_date', trans('Following Date'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('only_on_date[]', ['25/01/18' => '25/01/18'], old('only_on_date'), ['class' => 'form-control', 'multiple' => true, 'id' => 'only_on_date']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        {!! Form::label('remark', trans('Remark'), ['class' => 'control-label']) !!}
-                                        {!! Form::textarea('remark', old('remark') , ['class' => 'form-control', 'placeholder' => 'Input the Remark', 'rows' => 5]) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="tab-pane active show" id="transport">
+                    @include('contents.business.inventory.parts.transport')
+                </div>
+                <div class="tab-pane" id="cost">
+                    @include('contents.business.inventory.parts.cost')
                 </div>
             </div>
         </div>

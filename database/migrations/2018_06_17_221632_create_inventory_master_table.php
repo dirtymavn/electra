@@ -153,6 +153,23 @@ class CreateInventoryMasterTable extends Migration
             $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');         
         });
 
+        Schema::create('master_inventory_cost', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('master_inventory_id')->unsigned();
+            $table->string('cost_type')->nullable();
+            $table->string('lg_no')->nullable();
+            $table->string('supplier_no')->nullable();
+            $table->float('ticket_cost')->nullable();
+            $table->float('published_r')->nullable();
+            $table->float('exch_rate')->nullable();
+            $table->float('tax')->nullable();
+            $table->float('discount')->nullable();
+            $table->float('comm_amt')->nullable();
+            
+            $table->timestamps();   
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');         
+        });
+
         Schema::create('master_inventory_route_misc', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('master_inventory_id')->unsigned();
@@ -215,6 +232,7 @@ class CreateInventoryMasterTable extends Migration
             Schema::dropIfExists('master_inventory_route_hotel');
             Schema::dropIfExists('master_inventory_route_air');
             Schema::dropIfExists('master_inventory_route_car_transfer');
+            Schema::dropIfExists('master_inventory_cost');
             Schema::dropIfExists('master_inventory');
             Schema::dropIfExists('trx_sales');
             
