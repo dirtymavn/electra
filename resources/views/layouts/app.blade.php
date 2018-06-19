@@ -204,6 +204,7 @@
         function spinnerLoad(element) {
             element.submit(function() {
                 if (element.find('.has-error').length <= 0) {
+                    element.find('.has-errors').removeClass('has-errors');
                     $('div.spinner').show(); 
                     return true;
                 }
@@ -213,7 +214,7 @@
                     if (idTab !== undefined) {
                         var thisNavItem = $('.os-tabs-controls .nav-item a.nav-link');
                         if (thisNavItem.attr('href') == '#'+idTab) {
-                            $("a[href*='#"+idTab+"']").addClass('has-error');
+                            $("a[href*='#"+idTab+"']").addClass('has-errors');
                         }
                     }
                 });
