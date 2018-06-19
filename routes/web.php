@@ -41,6 +41,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('voucher', 'VoucherController');
         Route::resource('lg', 'LGController');
         Route::resource('delivery', 'DeliveryController');
+        Route::resource('inventory', 'InventoryController');
+        Route::post('inventory/bulk-delete', array('as' => 'inventory.bulk-delete', 'uses' => 'InventoryController@bulkDelete'));
 
     });
 

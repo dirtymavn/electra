@@ -188,7 +188,7 @@
                                     <li><a href=" {{ route('sales.index') }} ">Sales Folder</a></li>
                                     <li><a href="#">Invoice</a></li>
                                     <li><a href="{{ route('lg.index') }}">LG</a></li>
-                                    <li><a href="#">Inventory</a></li>
+                                    <li><a href="{{ route('inventory.index') }}">Inventory</a></li>
                                 </ul>
                                 <ul class="sub-menu">
                                     <li><a href=" {{ route('delivery.index') }} ">Delivery</a></li>

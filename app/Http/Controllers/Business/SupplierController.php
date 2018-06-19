@@ -17,8 +17,8 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index(SupplierDataTable $dataTable)
-     {
+    public function index(SupplierDataTable $dataTable)
+    {
         return $dataTable->render('contents.business.supplier.index');
     }
 
@@ -139,7 +139,7 @@ class SupplierController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            
+
             DB::rollback();
             flash()->error('Data is failed to updated');
             return redirect()->back()->withInput();
