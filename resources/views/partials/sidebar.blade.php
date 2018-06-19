@@ -414,7 +414,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-bar-chart-stats-up"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Budget</a></li>
+                                    <li><a href="{{route('budget-rate.index')}}">Budget Rate</a></li>
                                     <li><a href="#">Ex. Rate</a></li>
                                     <li><a href="#">Report</a></li>
                                 </ul>

@@ -231,7 +231,7 @@
                     </div><span>Budget</span></a>
                 <div class="sub-menu-w">
                     <ul class="sub-menu">
-                        <li><a href="">Budget</a></li>
+                        <li><a href="{{route('budget-rate.index')}}">Budget Rate</a></li>
                         <li><a href="">Ex. Rate</a></li>
                         <li><a href="">Report</a></li>
                     </ul>
