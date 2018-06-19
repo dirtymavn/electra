@@ -109,7 +109,7 @@
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pkg">Route PKG</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#car">Route Car</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#car_tf">Route Car Transfer</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#car_air">Route Car Air</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#car_air">Route Air</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#hotel">Route Hotel</a></li>
                 </ul>
             </div>
@@ -119,6 +119,24 @@
                 </div>
                 <div class="tab-pane" id="cost">
                     @include('contents.business.inventory.parts.cost')
+                </div>
+                <div class="tab-pane" id="misc">
+                    @include('contents.business.inventory.parts.misc')
+                </div>
+                <div class="tab-pane" id="pkg">
+                    @include('contents.business.inventory.parts.pkg')
+                </div>
+                <div class="tab-pane" id="car">
+                    @include('contents.business.inventory.parts.car')
+                </div>
+                <div class="tab-pane" id="car_tf">
+                    @include('contents.business.inventory.parts.car_transfer')
+                </div>
+                <div class="tab-pane" id="car_air">
+                    @include('contents.business.inventory.parts.air')
+                </div>
+                <div class="tab-pane" id="hotel">
+                    @include('contents.business.inventory.parts.hotel')
                 </div>
             </div>
         </div>
@@ -135,4 +153,6 @@
         initSelect2($('#only_on_date'), 'Select The Following Date');
     });
 </script>
+
+@include('contents.business.inventory.js.misc')
 @endsection
