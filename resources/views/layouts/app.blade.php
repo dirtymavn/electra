@@ -18,7 +18,7 @@
     {!! Html::style('themes/bower_components/slick-carousel/slick/slick.css') !!}
     {!! Html::style('themes/css/maince5a.css?version=4.4.1') !!}
     {!! Html::style('themes/icon_fonts_assets/font-awesome/css/font-awesome.min.css') !!}
-    {!! Html::style('themes/css/main_custom.css') !!}
+    <!-- {!! Html::style('themes/css/main_custom.css') !!} -->
     {!! Html::style('css/custom.css') !!}
     <style>
         body {
@@ -173,6 +173,7 @@
     {!! Html::script('themes/js/dataTables.bootstrap4.min.js') !!}
     {!! Html::script('themes/js/demo_customizerce5a.js?version=4.4.1') !!}
     {!! Html::script('themes/js/maince5a.js?version=4.4.1') !!}
+    <!-- {!! Html::script('themes/js/main_custom.js') !!} -->
     <script>
         $.ajaxSetup({
             headers: {
@@ -203,6 +204,7 @@
         function spinnerLoad(element) {
             element.submit(function() {
                 if (element.find('.has-error').length <= 0) {
+                    element.find('.has-errors').removeClass('has-errors');
                     $('div.spinner').show(); 
                     return true;
                 }
@@ -212,7 +214,7 @@
                     if (idTab !== undefined) {
                         var thisNavItem = $('.os-tabs-controls .nav-item a.nav-link');
                         if (thisNavItem.attr('href') == '#'+idTab) {
-                            $("a[href*='#"+idTab+"']").addClass('has-error');
+                            $("a[href*='#"+idTab+"']").addClass('has-errors');
                         }
                     }
                 });

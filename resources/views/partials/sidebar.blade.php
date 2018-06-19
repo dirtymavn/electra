@@ -358,7 +358,7 @@
                                     <li><a href="#">Posting</a></li>
                                     <li><a href="#">Report</a></li>
                                     <li><a href="#">Per. End</a></li>
-                                    <li><a href="#">JV Period</a></li>
+                                    <li><a href="{{route('jvperiod.index')}}">JV Period</a></li>
                                 </ul>
                                 <ul class="sub-menu">
                                     <li><a href="#">Recon.</a></li>
@@ -414,7 +414,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-bar-chart-stats-up"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Budget</a></li>
+                                    <li><a href="{{route('budget-rate.index')}}">Budget Rate</a></li>
                                     <li><a href="#">Ex. Rate</a></li>
                                     <li><a href="#">Report</a></li>
                                 </ul>

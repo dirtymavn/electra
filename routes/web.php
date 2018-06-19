@@ -60,4 +60,17 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('itin/itinerary-optional', array('as' => 'itin.itinerary-optional.post', 'uses' => 'ItinController@itineraryOptionalStore'));
 
     });
+
+    // GL
+    Route::group(['prefix' => 'gl', 'namespace' => 'GL'], function () {
+        Route::resource('jvperiod', 'JvPeriodController');
+        Route::post('jvperiod/bulk-delete', array('as' => 'jvperiod.bulk-delete', 'uses' => 'JvPeriodController@bulkDelete'));
+    });
+
+    // Budget
+    Route::group(['prefix' => 'budget', 'namespace' => 'Budget'], function () {
+        Route::resource('budget-rate', 'BudgetRateController');
+        Route::post('budget-rate/bulk-delete', array('as' => 'budget-rate.bulk-delete', 'uses' => 'BudgetRateController@bulkDelete'));
+    });
+
 });

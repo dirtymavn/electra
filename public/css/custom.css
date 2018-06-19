@@ -102,13 +102,13 @@
     margin-top: 0px;
 }
 
-.nav-link.has-error,
-.nav-link.has-error.active {
+.nav-link.has-errors,
+.nav-link.has-errors.active {
   color: red;
 }
 
-.nav-link.has-error:after,
-.nav-link.has-error.active:after {
+.nav-link.has-errors:after,
+.nav-link.has-errors.active:after {
   background-color: red;
 }
 
