@@ -65,6 +65,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     Route::group(['prefix' => 'gl', 'namespace' => 'GL'], function () {
         Route::resource('jvperiod', 'JvPeriodController');
         Route::post('jvperiod/bulk-delete', array('as' => 'jvperiod.bulk-delete', 'uses' => 'JvPeriodController@bulkDelete'));
+        Route::resource('fx-trans', 'FxTransactionController');
+        Route::post('fx-trans/bulk-delete', array('as' => 'fx-trans.bulk-delete', 'uses' => 'FxTransactionController@bulkDelete'));
+        Route::post('fx-trans/get-detail-data', array('as' => 'fx-trans.get-detail-data', 'uses' => 'FxTransactionController@detailData'));
+        Route::post('fx-trans/fx-detail', array('as' => 'fx-trans.fx-detail.post', 'uses' => 'FxTransactionController@fxTransDetailStore'));
+        Route::post('fx-trans/fx-detail/delete', array('as' => 'fx-trans.fx-detail.delete', 'uses' => 'FxTransactionController@fxTransDetailDelete'));
+        Route::post('fx-trans/fx-detail/detail', array('as' => 'fx-trans.fx-detail.detail', 'uses' => 'FxTransactionController@fxTransDetailGetDetail'));
     });
 
     // Budget

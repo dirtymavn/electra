@@ -363,7 +363,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="#">Recon.</a></li>
                                     <li><a href="#">Bank Rec.</a></li>
-                                    <li><a href="#">FX Trans.</a></li>
+                                    <li><a href="{{route('fx-trans.index')}}">FX Trans.</a></li>
                                     <li><a href="#">BSP Rec.</a></li>
                                     <li><a href="#">Finance</a></li>
                                 </ul>
