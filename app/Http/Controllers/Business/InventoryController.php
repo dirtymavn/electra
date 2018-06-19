@@ -99,7 +99,7 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        
+        return view('contents.business.inventory.edit', compact('inventory'));
     }
 
     /**
