@@ -207,7 +207,7 @@ class InventoryController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        } elseif ($request->type == 'pkg') {
+        } elseif ($request->type == 'pkg-detail') {
             return datatables()->of($datas)
                 ->addColumn('action', function ($inventory) {
                     return '<a href="javascript:void(0)" class="editDataOptional" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
@@ -244,6 +244,35 @@ class InventoryController extends Controller
                 'type' => 'misc-detail',
                 'user_id' => user_info('id'),
                 'data' => json_encode($request->except(['_token', 'misc_id']))
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryDetailPkg(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            if (@$request->pkg_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->pkg_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'pkg-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'pkg_id']))
             ]);
 
             \DB::commit();

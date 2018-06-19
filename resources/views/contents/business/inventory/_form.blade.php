@@ -106,7 +106,7 @@
                     <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#transport">Transport</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cost">Cost</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#misc">Route Misc</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pkg">Route PKG</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pkg">Route Package</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#car">Route Car</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#car_tf">Route Car Transfer</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#car_air">Route Air</a></li>
@@ -153,4 +153,5 @@
 </script>
 
 @include('contents.business.inventory.js.misc')
+@include('contents.business.inventory.js.pkg')
 @endsection
