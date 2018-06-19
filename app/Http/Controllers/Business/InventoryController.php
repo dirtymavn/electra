@@ -199,31 +199,27 @@ class InventoryController extends Controller
 
         $datas = collect($datas);
 
-        if ($request->type == 'misc') {
+        if ($request->type == 'misc-detail') {
             return datatables()->of($datas)
-                ->addColumn('action', function ($itin) {
-                    return '<a href="javascript:void(0)" class="editData" title="Edit" data-id="' . $itin['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                                <a href="javascript:void(0)" class="danger deleteData" title="Delete" data-id="' . $itin['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+                ->addColumn('action', function ($inventory) {
+                    return '<a href="javascript:void(0)" class="editData" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                                <a href="javascript:void(0)" class="danger deleteData" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
                 })
-                ->editColumn('as_remark_flag', function ($itin) {
-                    return ($itin['as_remark_flag'] == 'true' || $itin['as_remark_flag'] === true) ? '<div class="status-pill green" data-title="Yes" data-toggle="tooltip" data-original-title="" title=""></div>' : '<div class="status-pill red" data-title="No" data-toggle="tooltip" data-original-title="" title=""></div>';
-
-                })
-                ->rawColumns(['as_remark_flag', 'action'])
+                ->rawColumns(['action'])
                 ->make(true);
         } elseif ($request->type == 'pkg') {
             return datatables()->of($datas)
-                ->addColumn('action', function ($itin) {
-                    return '<a href="javascript:void(0)" class="editDataOptional" title="Edit" data-id="' . $itin['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                                                        <a href="javascript:void(0)" class="danger deleteDataOptional" title="Delete" data-id="' . $itin['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+                ->addColumn('action', function ($inventory) {
+                    return '<a href="javascript:void(0)" class="editDataOptional" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                                                        <a href="javascript:void(0)" class="danger deleteDataOptional" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         } else {
             return datatables()->of($datas)
-                ->addColumn('action', function ($itin) {
-                    return '<a href="javascript:void(0)" class="editDataService" title="Edit" data-id="' . $itin['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                                            <a href="javascript:void(0)" class="danger deleteDataService" title="Delete" data-id="' . $itin['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+                ->addColumn('action', function ($inventory) {
+                    return '<a href="javascript:void(0)" class="editDataService" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                                            <a href="javascript:void(0)" class="danger deleteDataService" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -236,18 +232,18 @@ class InventoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function itineraryDetailStore(Request $request)
+    public function inventoryDetailMisc(Request $request)
     {
         \DB::beginTransaction();
         try {
-            if (@$request->itinerary_detail_id) {
+            if (@$request->misc_id) {
                 // Delete temporaries
-                \DB::table('temporaries')->whereId($request->itinerary_detail_id)->delete();
+                \DB::table('temporaries')->whereId($request->misc_id)->delete();
             }
             \DB::table('temporaries')->insert([
-                'type' => 'itinerary-detail',
+                'type' => 'misc-detail',
                 'user_id' => user_info('id'),
-                'data' => json_encode($request->except(['_token', 'itinerary_detail_id']))
+                'data' => json_encode($request->except(['_token', 'misc_id']))
             ]);
 
             \DB::commit();
@@ -265,7 +261,7 @@ class InventoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function itineraryDetailDelete(Request $request)
+    public function inventoryDetailDelete(Request $request)
     {
         $findTemp = \DB::table('temporaries')->whereId($request->id)->delete();
         if ($findTemp) {
@@ -280,7 +276,7 @@ class InventoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function itineraryDetailGetDetail(Request $request)
+    public function inventoryDetailGetDetail(Request $request)
     {
         $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
         $findTemp->data = json_decode($findTemp->data);

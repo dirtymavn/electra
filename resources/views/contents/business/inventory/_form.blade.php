@@ -144,13 +144,11 @@
 </div>
 
 @section('part_script')
-<script src="{{ asset('themes/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\Master\CompanyRequest', '#form-company') !!}
+
 <script>
-    $(document).ready(function() {
-        initSelect2($('#only_on_week'), 'Select The Day of Week');
-        initSelect2($('#only_on_date'), 'Select The Following Date');
+    $(function(){
+        spinnerLoad($('#form-inventory'));
     });
 </script>
 

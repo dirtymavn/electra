@@ -11,16 +11,16 @@
         ];
 
         var detailDatas = {
-            'type': 'itinerary-detail'
+            'type': 'misc-detail'
         };
 
-        initDatatable($('#itinerary-detail'), "{{route('itin.get-detail-data')}}", detailColumns, detailDatas);
+        initDatatable($('#misc-detail'), "{{route('inventory.get-detail-data')}}", detailColumns, detailDatas);
 
-        $('#form-itinerary-detail').submit(function(e) {
+        $('#form-misc-detail').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                url: "{{route('itin.itinerary-detail.post')}}",
+                url: "{{route('inventory.misc-detail.post')}}",
                 method: "POST",
                 processData: false,
                 contentType: false,
@@ -28,31 +28,31 @@
                 data: formData,
                 success: function(data) {
                     $('#form-detail').modal('hide');
-                    $('#itinerary-detail').DataTable().ajax.reload();
+                    $('#misc-detail').DataTable().ajax.reload();
                 }
             });
         });
     });
 
     $(document).on('click', '.btn-add-detail', function(e) {
-        $('#form-itinerary-detail').find("input[type=text], textarea, input[type=hidden]").val("");
+        $('#form-misc-detail').find("input[type=text], textarea, input[type=hidden]").val("");
         $('#form-detail').modal({backdrop: 'static', keyboard: false});
         e.preventDefault();
     });
 
     $(document).on('click', '#form-detail-accept', function() {
-        $('#form-itinerary-detail').submit();
+        $('#form-misc-detail').submit();
     })
 
     $(document).on('click', '.deleteData', function() {
         var id = $(this).data('id');
         $.ajax({
-            url: "{{route('itin.itinerary-detail.delete')}}",
+            url: "{{route('inventory.detail.delete')}}",
             method: "POST",
             dataType: "JSON",
             data: {'id':id},
             success: function(data) {
-                $('#itinerary-detail').DataTable().ajax.reload();
+                $('#misc-detail').DataTable().ajax.reload();
             }
         })
     });
@@ -60,25 +60,20 @@
     $(document).on('click', '.editData', function() {
         var id = $(this).data('id');
         $.ajax({
-            url: "{{route('itin.itinerary-detail.detail')}}",
+            url: "{{route('inventory.detail.detail')}}",
             method: "POST",
             dataType: "JSON",
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $('#day').val(value.day);
-                $('#as_remark_flag').val(value.as_remark_flag);
-                $('#remark_seq').val(value.remark_seq);
-                $('#city').val(value.city);
-                $('#itinerary_item_code').val(value.itinerary_item_code);
-                $('#brief_description').val(value.brief_description);
-                $('#breakfast').val(value.breakfast);
-                $('#lunch').val(value.lunch);
-                $('#dinner').val(value.dinner);
-                $('#accomodations').val(value.accomodations);
-                $('#remark').val(value.remark);
-                $('#transport_detail').val(value.transport_detail);
-                $('#itinerary_detail_id').val(data.data.id);
+                $("#start_date").val(value.start_date)
+                $("#end_date").val(value.end_date)
+                $("#start_desc").val(value.start_desc)
+                $("#end_desc").val(value.end_desc)
+                $("#description").val(value.description)
+                $("#status").val(value.status)
+                $("#misc_id").val(data.data.id)
+
                 $('#form-detail').modal({backdrop: 'static', keyboard: false});
             }
         })
