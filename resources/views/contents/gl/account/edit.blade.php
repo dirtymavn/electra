@@ -18,8 +18,8 @@
 
 @section('content')
     @include('flash::message')
-    {!! Form::model($jvperiod, [
-            'route'     =>['account.update', $jvperiod->id],
+    {!! Form::model($account, [
+            'route'     =>['account.update', $account->id],
             'method'    => 'PATCH',
             'class' =>  'form-horizontal',
             'id'    =>  'form-account',
@@ -32,7 +32,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('account.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
-                        @if($jvperiod->is_draft)
+                        @if(!$account->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                         @endif

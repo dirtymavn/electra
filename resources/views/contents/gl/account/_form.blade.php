@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('id_branch', trans('ID Branch'), ['class' => 'control-label']) !!}
-            {!! Form::select('id_branch', ['' => 'Choose Branch'], old('id_branch'), ['class' => 'form-control']) !!}
+            {!! Form::label('branch_id', trans('ID Branch'), ['class' => 'control-label']) !!}
+            {!! Form::select('branch_id', ['' => 'Choose Branch'], old('branch_id'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('acc_no_key', trans('Acc. No. Key'), ['class' => 'control-label']) !!}
@@ -22,7 +22,8 @@
         </div>
         <div class="form-group">
             {!! Form::label('sub_acc_id', trans('Sub Acc.'), ['class' => 'control-label']) !!}
-            {!! Form::select('sub_acc_id', ['' => 'Choose Sub Acc.'], old('sub_acc_id'), ['class' => 'form-control']) !!}
+            {{-- {!! Form::select('sub_acc_id', ['' => 'Choose Sub Acc.'], old('sub_acc_id'), ['class' => 'form-control']) !!} --}}
+            {!! Form::text('sub_acc_id', old('sub_acc_id') , ['class' => 'form-control', 'placeholder' => 'Input the Sub Acc ID']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('acc_type', trans('Acc. Type'), ['class' => 'control-label']) !!}

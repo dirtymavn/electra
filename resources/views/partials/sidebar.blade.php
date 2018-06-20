@@ -353,7 +353,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-star"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Account</a></li>
+                                    <li><a href="{{ route('account.index') }}">Account</a></li>
                                     <li><a href="#">Journal</a></li>
                                     <li><a href="#">Posting</a></li>
                                     <li><a href="#">Report</a></li>
