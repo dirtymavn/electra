@@ -431,7 +431,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-mail"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="{{ route('profile.index') }}">Profile</a></li>
                                     <li><a href="#">Cash Adv.</a></li>
                                 </ul>
                             </div>

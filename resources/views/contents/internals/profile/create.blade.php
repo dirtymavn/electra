@@ -25,7 +25,7 @@
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.gl.profile._form')  
+                @include('contents.internals.profile._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('profile.index')}}" class="btn btn-grey">Cancel</a>

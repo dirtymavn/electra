@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Internals;
 
-use App\User;
+use App\Models\Internals\MasterProfile;
 use Yajra\DataTables\Services\DataTable;
 
 class MasterProfileDataTable extends DataTable
@@ -15,19 +15,45 @@ class MasterProfileDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables($query)
-            ->addColumn('action', 'internals/masterprofiledatatable.action');
+        return datatables()->of($query)
+        ->addColumn('action', function($profile){
+            $edit_url = route('profile.edit', $profile->id);
+            $delete_url = route('profile.destroy', $profile->id);
+            return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+        })
+        ->editColumn('is_draft', function($profile){
+            return ($profile->is_draft) ? 'Yes' : 'No';
+        });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\User $model
+     * @param \App\Models\Internals\MasterProfile $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(MasterProfile $model)
     {
-        return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
+        return $model->newQuery()->select(
+            'id',
+            'staff_no',
+            'staff_fullname',
+            'status',
+            'type',
+            'title',
+            'home_tel',
+            'mobile',
+            'employment_date',
+            'branch_id',
+            'office_tel',
+            'fax_no',
+            'email',
+            'office_address',
+            'home_address',
+            'remark',
+            'dr_account',
+            'is_draft'
+        );
     }
 
     /**
@@ -38,10 +64,11 @@ class MasterProfileDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
-                    ->parameters($this->getBuilderParameters());
+        ->columns($this->getColumns())
+        ->minifiedAjax()
+        ->addAction(['width' => '80px', 'class' => 'row-actions'])
+        ->addCheckbox(['class' => 'checklist'], 0)
+        ->parameters($this->getBuilderParameters());
     }
 
     /**
@@ -52,12 +79,18 @@ class MasterProfileDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'add your columns',
-            'created_at',
-            'updated_at'
-        ];
-    }
+         'staff_no',
+         'staff_fullname',
+         'status',
+         'type',
+         'title',
+         'home_tel',
+         'mobile',
+         'employment_date',
+         'is_draft',
+     ];
+
+ }
 
     /**
      * Get filename for export.

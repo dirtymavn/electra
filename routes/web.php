@@ -92,4 +92,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('budget-rate/bulk-delete', array('as' => 'budget-rate.bulk-delete', 'uses' => 'BudgetRateController@bulkDelete'));
     });
 
+    // Budget
+    Route::group(['prefix' => 'internals', 'namespace' => 'Internals'], function () {
+        Route::resource('profile', 'MasterProfileController');
+        Route::post('profile/bulk-delete', array('as' => 'profile.bulk-delete', 'uses' => 'MasterProfileController@bulkDelete'));
+    });
+
 });
