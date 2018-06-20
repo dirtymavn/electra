@@ -30,10 +30,14 @@
                 @include('contents.business.voucher._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{ route('voucher.index') }}" class="btn btn-white">{{trans('Cancel')}}</a>
-                        <button type="submit" class="btn btn-primary" id="btn-submit">{{ trans('Submit') }}</button>
+                        <a href="{{ route('voucher.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
+                        <button type="submit" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
+                        @if(!$voucher->is_draft)
+                            <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
+                            <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
+                        @endif
                     </div>
-                </div>              
+                </div>             
             </div>
         </div>
     </form>

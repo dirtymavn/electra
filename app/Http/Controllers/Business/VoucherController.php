@@ -118,7 +118,7 @@ class VoucherController extends Controller
                 $redirect = redirect()->route('voucher.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('voucher.edit', $voucher->id);
+                $redirect = redirect()->route('voucher.index');
             }
 
             $insert = $voucher->update( $request->all() );
