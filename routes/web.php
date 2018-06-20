@@ -78,6 +78,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('fx-trans/fx-detail/detail', array('as' => 'fx-trans.fx-detail.detail', 'uses' => 'FxTransactionController@fxTransDetailGetDetail'));
          Route::resource('account', 'MasterCoaController');
          Route::post('account/bulk-delete', array('as' => 'account.bulk-delete', 'uses' => 'MasterCoaController@bulkDelete'));
+         Route::resource('periodend', 'TrxPostingController');
+         Route::post('periodend/bulk-delete', array('as' => 'periodend.bulk-delete', 'uses' => 'TrxPostingController@bulkDelete'));
+         Route::post('periodend/get-detail-data', array('as' => 'periodend.get-detail-data', 'uses' => 'TrxPostingController@detailData'));
+        Route::post('periodend/trx-detail', array('as' => 'periodend.posting-detail.post', 'uses' => 'TrxPostingController@trxTransDetailStore'));
+        Route::post('periodend/trx-detail/delete', array('as' => 'periodend.posting-detail.delete', 'uses' => 'TrxPostingController@trxTransDetailDelete'));
+        Route::post('periodend/trx-detail/detail', array('as' => 'periodend.posting-detail.detail', 'uses' => 'TrxPostingController@trxTransDetailGetDetail'));
     });
 
     // Budget

@@ -357,7 +357,7 @@
                                     <li><a href="#">Journal</a></li>
                                     <li><a href="#">Posting</a></li>
                                     <li><a href="#">Report</a></li>
-                                    <li><a href="#">Per. End</a></li>
+                                    <li><a href="{{ route('periodend.index') }}">Per. End</a></li>
                                     <li><a href="{{route('jvperiod.index')}}">JV Period</a></li>
                                 </ul>
                                 <ul class="sub-menu">

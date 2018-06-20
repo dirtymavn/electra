@@ -29,7 +29,7 @@ class CreateMasterPostingTable extends Migration
 
         Schema::create('trx_posting_detail', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('master_posting_id')->unsigned();
+            $table->integer('trx_posting_id')->unsigned();
             $table->string('transaction_subject');
             $table->string('transaction_type');
             $table->float('in_qty')->nullable()->default(0);
@@ -43,7 +43,7 @@ class CreateMasterPostingTable extends Migration
             $table->float('result_total')->nullable()->default(0);
 
             $table->timestamps();
-            $table->foreign('master_posting_id')->references('id')->on('trx_posting')->onDelete('cascade');
+            $table->foreign('trx_posting_id')->references('id')->on('trx_posting')->onDelete('cascade');
         });
 
         Schema::create('trx_posting_result', function (Blueprint $table) {

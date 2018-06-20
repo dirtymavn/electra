@@ -9,10 +9,6 @@
             {!! Form::date('postdate_end', old('postdate_end') , ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('user_id', trans('User'), ['class' => 'control-label']) !!}
-            {!! Form::select('user_id', ['' => 'Choose User'], old('user_id'), ['class' => 'form-control']) !!}
-        </div>
-        <div class="form-group">
             {!! Form::label('branch_id', trans('Branch'), ['class' => 'control-label']) !!}
             {!! Form::select('branch_id', ['' => 'Choose Branch'], old('branch_id'), ['class' => 'form-control']) !!}
         </div>
@@ -44,7 +40,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('qty', trans('Quantity'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('qty', old('qty') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Quantity']) !!}
+                                        {!! Form::number('qty', old('qty') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Quantity']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('avg_price', trans('Avg. Price'), ['class' => 'control-label']) !!}
@@ -65,7 +61,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="table-responsive">
-                                            <table class="table table-bordered table-striped" id="postingt-detail" style="width:100%;">
+                                            <table class="table table-bordered table-striped" id="posting-detail" style="width:100%;">
                                                 <thead>
                                                     <tr class="text-center">
                                                         <th>Subject</th>
@@ -106,7 +102,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" value="" name="master_posting_id" id="master_posting_id">
+                    <input type="hidden" value="" name="trx_posting_id" id="trx_posting_id">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -258,7 +254,7 @@
                 $('#result_qty').val(value.result_qty);
                 $('#result_price').val(value.result_price);
                 $('#result_total').val(value.result_total);
-                $('#master_posting_id').val(data.data.id);
+                $('#trx_posting_id').val(data.data.id);
                 $('#form-detail').modal({backdrop: 'static', keyboard: false});
             }
         })

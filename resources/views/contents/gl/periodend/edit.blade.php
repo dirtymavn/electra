@@ -18,8 +18,8 @@
 
 @section('content')
     @include('flash::message')
-    {!! Form::model($posting, [
-            'route'     =>['periodend.update', $posting->id],
+    {!! Form::model($trxPosting, [
+            'route'     =>['periodend.update', $trxPosting->id],
             'method'    => 'PATCH',
             'class' =>  'form-horizontal',
             'id'    =>  'form-periodend',
@@ -27,12 +27,12 @@
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.gl.trx_fx_trans._form')  
+                @include('contents.gl.periodend._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('periodend.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
-                        @if($posting->is_draft)
+                        @if($trxPosting->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                         @endif

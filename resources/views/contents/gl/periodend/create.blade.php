@@ -25,7 +25,7 @@
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.gl.trx_fx_trans._form')  
+                @include('contents.gl.periodend._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('periodend.index')}}" class="btn btn-grey">Cancel</a>
