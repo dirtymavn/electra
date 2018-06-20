@@ -31,14 +31,74 @@ class UsersTableSeeder extends Seeder
         ];
 
         $user = Sentinel::registerAndActivate( [
-                'email' => $datas[ 'email' ],
-                'password' => '12345678',
-                'first_name' => $datas[ 'first_name' ],
-                'last_name' => $datas[ 'last_name' ],
-                'username' => 'superadmin',
-                'status' => 1
-                ] );
-            Sentinel::findRoleBySlug( $datas[ 'role' ] )->users()->attach( $user );
+            'email' => $datas[ 'email' ],
+            'password' => '12345678',
+            'first_name' => $datas[ 'first_name' ],
+            'last_name' => $datas[ 'last_name' ],
+            'username' => 'superadmin',
+            'status' => 1
+        ] );
+        Sentinel::findRoleBySlug( $datas[ 'role' ] )->users()->attach( $user );
+
+        $users = array(
+            array(
+                'email' => 'wit2@mailinator.com',
+                'first_name' => 'Ilham',
+                'last_name' => 'Ilham',
+                'role' => 'subscriber',
+                'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
+                'phone'   => '622157905788',
+                'username' => 'wit2',
+                'status' => 1,
+            
+            ),
+            array(
+                'email' => 'wit1@mailinator.com',
+                'first_name' => 'Arya',
+                'last_name' => 'Nugraha',
+                'role' => 'subscriber',
+                'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
+                'phone'   => '622157905788',
+                'username' => 'wit1',
+                'status' => 1,
+                
+            ),
+            array(
+                'email' => 'adminwit@mailinator.com',
+                'first_name' => 'Admin',
+                'last_name' => 'WIT',
+                'role' => 'admin',
+                'username' => 'adminwit',
+                'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
+                'phone'   => '622157905788',
+                'status' => 1,
+                
+            ),
+            array(
+                'email' => 'adminsabre@mailinator.com',
+                'first_name' => 'Admin',
+                'last_name' => 'Sabre',
+                'role' => 'admin',
+                'username' => 'adminsabre',
+                'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
+                'phone'   => '622157905788',
+                'status' => 1,
+                
+            ),
+        );
+
+        foreach ($users as $user) {
+            $sentinel = Sentinel::registerAndActivate([
+                'email' => $user['email'],
+                'first_name' => $user['first_name'],
+                'last_name' => $user['last_name'],
+                'username' => $user['username'],
+                'status' => 1,
+                'password' => '12345678'
+            ]);
+
+            Sentinel::findRoleBySlug( $user[ 'role' ] )->users()->attach( $sentinel );
+        }
         
         Schema::enableForeignKeyConstraints();
     }
