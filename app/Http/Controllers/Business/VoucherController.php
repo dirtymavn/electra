@@ -50,7 +50,11 @@ class VoucherController extends Controller
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
             }
-
+            $request->merge([
+                'voucher_date' => date('Y-m-d', strtotime( $request->voucher_date )),
+                'valid_from' => date('Y-m-d', strtotime( $request->valid_from )),
+                'valid_to' => date('Y-m-d', strtotime( $request->valid_to )),
+            ]);
             $insert = Voucher::create( $request->all() );
 
             if ($insert) {
@@ -120,7 +124,11 @@ class VoucherController extends Controller
                 $msgSuccess = trans('message.update.success');
                 $redirect = redirect()->route('voucher.index');
             }
-
+            $request->merge([
+                'voucher_date' => date('Y-m-d', strtotime( $request->voucher_date )),
+                'valid_from' => date('Y-m-d', strtotime( $request->valid_from )),
+                'valid_to' => date('Y-m-d', strtotime( $request->valid_to )),
+            ]);
             $insert = $voucher->update( $request->all() );
             
             if ($insert) {
