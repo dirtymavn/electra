@@ -13,7 +13,7 @@ class VoucherRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class VoucherRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'voucher_no' => 'required',
+            'voucher_status' => 'required',
+            'voucher_date' => 'required|date',
+            'voucher_currency' => 'required',
+            'voucher_amt' => 'required',
+            'valid_from' => 'required',
+            'valid_to' => 'required'
         ];
     }
 }
