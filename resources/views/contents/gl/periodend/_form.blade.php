@@ -144,8 +144,8 @@
                                 {!! Form::text('result_qty', old('result_qty'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Result Qty']) !!}
                             </div>
                             <div class="form-group">
-                                {!! Form::label('result_price', trans('Result Price'), ['class' => 'control-label']) !!}
-                                {!! Form::text('result_price', old('result_price'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Result Price']) !!}
+                                {!! Form::label('result_avg', trans('Result Avg'), ['class' => 'control-label']) !!}
+                                {!! Form::text('result_avg', old('result_avg'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Result Avg']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('result_total', trans('Result Total'), ['class' => 'control-label']) !!}
@@ -186,7 +186,7 @@
             { data: 'out_price', name: 'out_price'},
             { data: 'out_total', name: 'out_total'},
             { data: 'result_qty', name: 'result_qty'},
-            { data: 'result_price', name: 'result_price'},
+            { data: 'result_avg', name: 'result_avg'},
             { data: 'result_total', name: 'result_total'},
             { data: 'action', name: 'action', className: 'dt-center'},
         ];
@@ -253,7 +253,7 @@
                 $('#out_total').val(value.out_total);
                 $('#result_qty').val(value.result_qty);
                 $('#result_price').val(value.result_price);
-                $('#result_total').val(value.result_total);
+                $('#result_avg').val(value.result_avg);
                 $('#trx_posting_id').val(data.data.id);
                 $('#form-detail').modal({backdrop: 'static', keyboard: false});
             }

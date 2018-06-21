@@ -35,9 +35,9 @@ class CreateMasterPostingTable extends Migration
             $table->float('in_qty')->nullable()->default(0);
             $table->float('in_price')->nullable()->default(0);
             $table->float('in_total')->nullable()->default(0);
-            $table->float('our_qty')->nullable()->default(0);
-            $table->float('our_price')->nullable()->default(0);
-            $table->float('our_total')->nullable()->default(0);
+            $table->float('out_qty')->nullable()->default(0);
+            $table->float('out_price')->nullable()->default(0);
+            $table->float('out_total')->nullable()->default(0);
             $table->float('result_qty')->nullable()->default(0);
             $table->float('result_avg')->nullable()->default(0);
             $table->float('result_total')->nullable()->default(0);

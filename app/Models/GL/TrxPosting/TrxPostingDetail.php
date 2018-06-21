@@ -15,9 +15,9 @@ class TrxPostingDetail extends Model
     	'in_qty',
     	'in_price',
     	'in_total',
-    	'our_qty',
-    	'our_price',
-    	'our_total',
+    	'out_qty',
+    	'out_price',
+    	'out_total',
     	'result_qty',
     	'result_avg',
     	'result_total'

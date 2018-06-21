@@ -41,8 +41,8 @@ class TrxPostingController extends Controller
      */
     public function store(Request $request)
     {
-       \DB::beginTransaction();
-       try {
+     \DB::beginTransaction();
+     try {
         if (@$request->is_draft == 'true') {
             $msgSuccess = trans('message.save_as_draft');
         } elseif (@$request->is_publish_continue == 'true') {
@@ -139,7 +139,7 @@ class TrxPostingController extends Controller
             $update = $trxPosting->update($request->all());
 
             if ($update) {
-                
+
                 // delete childs
                 $details = $trxPosting->details;
                 foreach ($details as $value) {
@@ -161,9 +161,9 @@ class TrxPostingController extends Controller
                         $detail->in_qty = $trxDetail->in_qty;
                         $detail->in_price = $trxDetail->in_price;
                         $detail->in_total = $trxDetail->in_total;
-                        $detail->our_qty = $trxDetail->our_qty;
-                        $detail->our_price = $trxDetail->our_price;
-                        $detail->our_total = $trxDetail->our_total;
+                        $detail->out_qty = $trxDetail->out_qty;
+                        $detail->out_price = $trxDetail->out_price;
+                        $detail->out_total = $trxDetail->out_total;
                         $detail->result_qty = $trxDetail->result_qty;
                         $detail->result_avg = $trxDetail->result_avg;
                         $detail->result_total = $trxDetail->result_total;
@@ -172,7 +172,7 @@ class TrxPostingController extends Controller
                     }
 
                     // clear temporary data
-                    \DB::table('temporaries')->whereType('fxTrans-detail')
+                    \DB::table('temporaries')->whereType('posting-detail')
                     ->whereUserId(user_info('id'))->delete();
                 }
 

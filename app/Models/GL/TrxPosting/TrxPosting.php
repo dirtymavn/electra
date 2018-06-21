@@ -49,11 +49,11 @@ class TrxPosting extends Model
                     $detail->in_qty = $trxDetail->in_qty;
                     $detail->in_price = $trxDetail->in_price;
                     $detail->in_total = $trxDetail->in_total;
-                    $detail->our_qty = $trxDetail->our_qty;
-                    $detail->our_price = $trxDetail->our_price;
-                    $detail->our_total = $trxDetail->our_total;
+                    $detail->out_qty = $trxDetail->out_qty;
+                    $detail->out_price = $trxDetail->out_price;
+                    $detail->out_total = $trxDetail->out_total;
                     $detail->result_qty = $trxDetail->result_qty;
-                    $detail->result_avg = $trxDetail->result_avg;
+                    $detail->result_avg = $trxDetail->result_price;
                     $detail->result_total = $trxDetail->result_total;
                     
                     $detail->save();
