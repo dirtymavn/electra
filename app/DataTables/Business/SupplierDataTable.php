@@ -21,8 +21,8 @@ class SupplierDataTable extends DataTable
                 $delete_url = route('supplier.destroy', $supplier->id);
                 return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
             })
-            ->editColumn('is_draft', function($customer){
-                return ($customer->is_draft) ? 'Yes' : 'No';
+            ->editColumn('is_draft', function($supplier){
+                return ($supplier->is_draft) ? 'Yes' : 'No';
             })
             ->addIndexColumn();
     }

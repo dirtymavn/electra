@@ -32,7 +32,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('account.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
-                        @if(!$account->is_draft)
+                        @if($account->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                         @endif

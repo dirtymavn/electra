@@ -68,7 +68,6 @@ class VoucherController extends Controller
                 return redirect()->back()->withInput();
             }
         } catch (\Exception $e) {
-            dd($e);
             flash()->error('<strong>Whoops! </strong> Something went wrong');
             \DB::rollback();
             return redirect()->back()->withInput();
