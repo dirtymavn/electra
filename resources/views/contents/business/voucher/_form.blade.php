@@ -13,7 +13,7 @@
                 </div>  
                 <div class="form-group">
                     {!! Form::label('voucher_date', trans('Date'), ['class' => 'control-label']) !!}
-                    {!! Form::date('voucher_date', old('voucher_date') , ['class' => 'form-control']) !!}
+                    {!! Form::datetime('voucher_date', old('voucher_date') , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     <div class="row">
