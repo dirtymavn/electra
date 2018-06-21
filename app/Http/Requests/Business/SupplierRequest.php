@@ -13,7 +13,7 @@ class SupplierRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class SupplierRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'supplier_no' => 'required',
+            'supplier_type' => 'required',
+            'name' => 'required',
+            'address' => 'required',
         ];
     }
 }
