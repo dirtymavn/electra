@@ -23,7 +23,7 @@
         <div class="form-group">
             {!! Form::label('sub_acc_id', trans('Sub Acc.'), ['class' => 'control-label']) !!}
             {{-- {!! Form::select('sub_acc_id', ['' => 'Choose Sub Acc.'], old('sub_acc_id'), ['class' => 'form-control']) !!} --}}
-            {!! Form::text('sub_acc_id', old('sub_acc_id') , ['class' => 'form-control', 'placeholder' => 'Input the Sub Acc ID']) !!}
+            {!! Form::integer('sub_acc_id', old('sub_acc_id') , ['class' => 'form-control', 'placeholder' => 'Input the Sub Acc ID']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('acc_type', trans('Acc. Type'), ['class' => 'control-label']) !!}
@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('acc_liquidity', trans('Acc. Liquidity'), ['class' => 'control-label']) !!}
-            {!! Form::text('acc_liquidity', old('acc_liquidity') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Acc. Liquidity']) !!}
+            {!! Form::number('acc_liquidity', old('acc_liquidity') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Acc. Liquidity']) !!}
         </div>
     </div>
     <div class="col-md-6">
