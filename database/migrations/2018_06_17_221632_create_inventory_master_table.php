@@ -13,6 +13,8 @@ class CreateInventoryMasterTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('trx_sales', function (Blueprint $table) {
             $table->increments('id');
             $table->string('invoice_no');
@@ -26,7 +28,7 @@ class CreateInventoryMasterTable extends Migration
 
         Schema::create('master_inventory', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('trx_sales_id');
+            $table->integer('trx_sales_id')->unsigned();
             $table->string('inventory_type')->nullable();
             $table->string('voucher_no')->nullable();
             $table->string('product_code')->nullable();
@@ -41,9 +43,12 @@ class CreateInventoryMasterTable extends Migration
             $table->string('coupon_no')->nullable();
             $table->integer('nights')->nullable();
             $table->integer('rooms')->nullable();
+            $table->boolean('is_draft')->nullable()->default(true);
 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('trx_sales_id')->references('id')->on('trx_sales')->onDelete('cascade');
         });
 
         Schema::create('master_inventory_route_air', function (Blueprint $table) {
@@ -75,10 +80,12 @@ class CreateInventoryMasterTable extends Migration
             $table->text('land_sector_desc')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');
         });
 
         Schema::create('master_inventory_route_hotel', function (Blueprint $table) {
-            $table->increments('id')->nullable();
+            $table->increments('id');
             $table->integer('master_inventory_id')->unsigned();
             $table->string('city')->nullable();
             $table->string('hotel_name')->nullable();
@@ -99,32 +106,112 @@ class CreateInventoryMasterTable extends Migration
             $table->text('remark')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');
         });
 
         Schema::create('master_inventory_route_car', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('master_inventory_id')->unsigned();
-            $table->date('from');
-            $table->date('to');
-            $table->string('company');
-            $table->string('class');
-            $table->datetime('departure');
-            $table->datetime('arrival');
-            $table->string('status');
+            $table->date('from')->nullable();
+            $table->date('to')->nullable();
+            $table->string('company')->nullable();
+            $table->string('class')->nullable();
+            $table->datetime('departure')->nullable();
+            $table->datetime('arrival')->nullable();
+            $table->string('status')->nullable();
 
-            $table->timestamps();            
+            $table->timestamps();  
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');          
         });
 
         Schema::create('master_inventory_route_cost', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('master_inventory_id')->unsigned();
-            $table->string('cost_type');
-            $table->string('lg_no');
-            $table->datetime('departure');
-            $table->datetime('arrival');
-            $table->string('status');
+            $table->string('cost_type')->nullable();
+            $table->string('lg_no')->nullable();
+            $table->datetime('departure')->nullable();
+            $table->datetime('arrival')->nullable();
+            $table->string('status')->nullable();
 
-            $table->timestamps();            
+            $table->timestamps();   
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');         
+        });
+
+        Schema::create('master_inventory_transport', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('master_inventory_id')->unsigned();
+            $table->string('airline_no')->nullable();
+            $table->string('reissue')->nullable();
+            $table->datetime('valid_from')->nullable();
+            $table->datetime('valid_to')->nullable();
+            $table->datetime('issue_date')->nullable();
+            $table->boolean('conjunction_ticket_flag')->nullable()->default(true);
+            $table->boolean('conjunction_firts_ticket')->nullable()->default(true);
+
+            $table->timestamps();   
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');         
+        });
+
+        Schema::create('master_inventory_cost', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('master_inventory_id')->unsigned();
+            $table->string('cost_type')->nullable();
+            $table->string('lg_no')->nullable();
+            $table->string('supplier_no')->nullable();
+            $table->float('ticket_cost')->nullable();
+            $table->float('published_r')->nullable();
+            $table->float('exch_rate')->nullable();
+            $table->float('tax')->nullable();
+            $table->float('discount')->nullable();
+            $table->float('comm_amt')->nullable();
+            
+            $table->timestamps();   
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');         
+        });
+
+        Schema::create('master_inventory_route_misc', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('master_inventory_id')->unsigned();
+            $table->text('desc')->nullable();
+            $table->datetime('start_date')->nullable();
+            $table->datetime('end_date')->nullable();
+            $table->text('start_desc')->nullable();
+            $table->text('end_desc')->nullable();
+            $table->string('status')->nullable();
+
+            $table->timestamps();   
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');         
+        });
+
+        Schema::create('master_inventory_route_pkg', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('master_inventory_id')->unsigned();
+            $table->string('package_name')->nullable();
+            $table->datetime('start_date')->nullable();
+            $table->datetime('end_date')->nullable();
+            $table->string('status')->nullable();
+
+            $table->timestamps();   
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');         
+        });
+
+        Schema::create('master_inventory_route_car_transfer', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('master_inventory_id')->unsigned();
+            $table->string('city')->nullable();
+            $table->string('company_code')->nullable();
+            $table->string('vehicle')->nullable();
+            $table->integer('days_hired')->nullable();
+            $table->datetime('pickup_date')->nullable();
+            $table->string('pickup_location')->nullable();
+            $table->datetime('dropoff_date')->nullable();
+            $table->string('dropoff_location')->nullable();
+            $table->string('status')->nullable();
+            $table->string('rate_type')->nullable();
+
+            $table->timestamps(); 
+            $table->foreign('master_inventory_id')->references('id')->on('master_inventory')->onDelete('cascade');           
         });        
     }
 
@@ -135,6 +222,20 @@ class CreateInventoryMasterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_inventory');
+        Schema::disableForeignKeyConstraints();
+            
+            Schema::dropIfExists('master_inventory_transport');
+            Schema::dropIfExists('master_inventory_route_pkg');
+            Schema::dropIfExists('master_inventory_route_misc');
+            Schema::dropIfExists('master_inventory_route_cost');
+            Schema::dropIfExists('master_inventory_route_car');
+            Schema::dropIfExists('master_inventory_route_hotel');
+            Schema::dropIfExists('master_inventory_route_air');
+            Schema::dropIfExists('master_inventory_route_car_transfer');
+            Schema::dropIfExists('master_inventory_cost');
+            Schema::dropIfExists('master_inventory');
+            Schema::dropIfExists('trx_sales');
+            
+        Schema::enableForeignKeyConstraints();
     }
 }

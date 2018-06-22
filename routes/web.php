@@ -41,6 +41,13 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('voucher', 'VoucherController');
         Route::resource('lg', 'LGController');
         Route::resource('delivery', 'DeliveryController');
+        Route::resource('inventory', 'InventoryController');
+        Route::post('inventory/bulk-delete', array('as' => 'inventory.bulk-delete', 'uses' => 'InventoryController@bulkDelete'));
+        Route::post('inventory/get-detail-data', array('as' => 'inventory.get-detail-data', 'uses' => 'InventoryController@detailData'));
+        Route::post('inventory/inventory-detail/delete', array('as' => 'inventory.detail.delete', 'uses' => 'InventoryController@inventoryDetailDelete'));
+        Route::post('inventory/inventory-misc-detail', array('as' => 'inventory.misc-detail.post', 'uses' => 'InventoryController@inventoryDetailMisc'));
+        Route::post('inventory/inventory-pkg-detail', array('as' => 'inventory.pkg-detail.post', 'uses' => 'InventoryController@inventoryDetailPkg'));
+        Route::post('inventory/inventory-detail/detail', array('as' => 'inventory.detail.detail', 'uses' => 'InventoryController@inventoryDetailGetDetail'));
 
     });
 
@@ -58,4 +65,37 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('itin/itinerary-optional', array('as' => 'itin.itinerary-optional.post', 'uses' => 'ItinController@itineraryOptionalStore'));
 
     });
+
+    // GL
+    Route::group(['prefix' => 'gl', 'namespace' => 'GL'], function () {
+        Route::resource('jvperiod', 'JvPeriodController');
+        Route::post('jvperiod/bulk-delete', array('as' => 'jvperiod.bulk-delete', 'uses' => 'JvPeriodController@bulkDelete'));
+        Route::resource('fx-trans', 'FxTransactionController');
+        Route::post('fx-trans/bulk-delete', array('as' => 'fx-trans.bulk-delete', 'uses' => 'FxTransactionController@bulkDelete'));
+        Route::post('fx-trans/get-detail-data', array('as' => 'fx-trans.get-detail-data', 'uses' => 'FxTransactionController@detailData'));
+        Route::post('fx-trans/fx-detail', array('as' => 'fx-trans.fx-detail.post', 'uses' => 'FxTransactionController@fxTransDetailStore'));
+        Route::post('fx-trans/fx-detail/delete', array('as' => 'fx-trans.fx-detail.delete', 'uses' => 'FxTransactionController@fxTransDetailDelete'));
+        Route::post('fx-trans/fx-detail/detail', array('as' => 'fx-trans.fx-detail.detail', 'uses' => 'FxTransactionController@fxTransDetailGetDetail'));
+         Route::resource('account', 'MasterCoaController');
+         Route::post('account/bulk-delete', array('as' => 'account.bulk-delete', 'uses' => 'MasterCoaController@bulkDelete'));
+         Route::resource('periodend', 'TrxPostingController');
+         Route::post('periodend/bulk-delete', array('as' => 'periodend.bulk-delete', 'uses' => 'TrxPostingController@bulkDelete'));
+         Route::post('periodend/get-detail-data', array('as' => 'periodend.get-detail-data', 'uses' => 'TrxPostingController@detailData'));
+        Route::post('periodend/trx-detail', array('as' => 'periodend.posting-detail.post', 'uses' => 'TrxPostingController@trxTransDetailStore'));
+        Route::post('periodend/trx-detail/delete', array('as' => 'periodend.posting-detail.delete', 'uses' => 'TrxPostingController@trxTransDetailDelete'));
+        Route::post('periodend/trx-detail/detail', array('as' => 'periodend.posting-detail.detail', 'uses' => 'TrxPostingController@trxTransDetailGetDetail'));
+    });
+
+    // Budget
+    Route::group(['prefix' => 'budget', 'namespace' => 'Budget'], function () {
+        Route::resource('budget-rate', 'BudgetRateController');
+        Route::post('budget-rate/bulk-delete', array('as' => 'budget-rate.bulk-delete', 'uses' => 'BudgetRateController@bulkDelete'));
+    });
+
+    // Budget
+    Route::group(['prefix' => 'internals', 'namespace' => 'Internals'], function () {
+        Route::resource('profile', 'MasterProfileController');
+        Route::post('profile/bulk-delete', array('as' => 'profile.bulk-delete', 'uses' => 'MasterProfileController@bulkDelete'));
+    });
+
 });

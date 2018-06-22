@@ -22,7 +22,7 @@
         <div class="os-tabs-w">
             <div class="os-tabs-controls">
                 <ul class="nav nav-tabs smaller">
-                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#main">Main</a></li>
+                    <li class="nav-item"><a class="nav-link active show {{ $errors->has('itinerary_name') ? 'has-errors' : ''}}" data-toggle="tab" href="#main">Main</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#itinerary">Itinerary</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#service">Service</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#optional">Optional</a></li>
@@ -34,9 +34,10 @@
                         <div class="element-box">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <div class="form-group">
+                                    <div class="form-group {{ $errors->has('itinerary_name') ? 'has-error has-danger' : ''}}">
                                         {!! Form::label('itinerary_name', trans('Itinerary Name'), ['class' => 'control-label']) !!}
                                         {!! Form::text('itinerary_name', old('itinerary_name') , ['class' => 'form-control', 'placeholder' => 'Input the Name']) !!}
+                                        {!! $errors->first('itinerary_name', '<span id="itinerary_name-error" class="help-block form-text with-errors form-control-feedback">:message</span>') !!}
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">

@@ -68,7 +68,6 @@ class VoucherController extends Controller
                 return redirect()->back()->withInput();
             }
         } catch (\Exception $e) {
-            dd($e);
             flash()->error('<strong>Whoops! </strong> Something went wrong');
             \DB::rollback();
             return redirect()->back()->withInput();
@@ -118,9 +117,9 @@ class VoucherController extends Controller
                 $redirect = redirect()->route('voucher.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('voucher.edit', $voucher->id);
+                $redirect = redirect()->route('voucher.index');
             }
-
+           
             $insert = $voucher->update( $request->all() );
             
             if ($insert) {

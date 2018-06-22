@@ -188,7 +188,7 @@
                                     <li><a href=" {{ route('sales.index') }} ">Sales Folder</a></li>
                                     <li><a href="#">Invoice</a></li>
                                     <li><a href="{{ route('lg.index') }}">LG</a></li>
-                                    <li><a href="#">Inventory</a></li>
+                                    <li><a href="{{ route('inventory.index') }}">Inventory</a></li>
                                 </ul>
                                 <ul class="sub-menu">
                                     <li><a href=" {{ route('delivery.index') }} ">Delivery</a></li>
@@ -353,17 +353,17 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-star"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Account</a></li>
+                                    <li><a href="{{ route('account.index') }}">Account</a></li>
                                     <li><a href="#">Journal</a></li>
                                     <li><a href="#">Posting</a></li>
                                     <li><a href="#">Report</a></li>
-                                    <li><a href="#">Per. End</a></li>
-                                    <li><a href="#">JV Period</a></li>
+                                    <li><a href="{{ route('periodend.index') }}">Per. End</a></li>
+                                    <li><a href="{{route('jvperiod.index')}}">JV Period</a></li>
                                 </ul>
                                 <ul class="sub-menu">
                                     <li><a href="#">Recon.</a></li>
                                     <li><a href="#">Bank Rec.</a></li>
-                                    <li><a href="#">FX Trans.</a></li>
+                                    <li><a href="{{route('fx-trans.index')}}">FX Trans.</a></li>
                                     <li><a href="#">BSP Rec.</a></li>
                                     <li><a href="#">Finance</a></li>
                                 </ul>
@@ -414,7 +414,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-bar-chart-stats-up"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Budget</a></li>
+                                    <li><a href="{{route('budget-rate.index')}}">Budget Rate</a></li>
                                     <li><a href="#">Ex. Rate</a></li>
                                     <li><a href="#">Report</a></li>
                                 </ul>
@@ -431,7 +431,7 @@
                             <div class="sub-menu-icon"><i class="os-icon os-icon-mail"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="{{ route('profile.index') }}">Profile</a></li>
                                     <li><a href="#">Cash Adv.</a></li>
                                 </ul>
                             </div>

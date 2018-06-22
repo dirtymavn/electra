@@ -13,7 +13,7 @@
                 </div>  
                 <div class="form-group">
                     {!! Form::label('voucher_date', trans('Date'), ['class' => 'control-label']) !!}
-                    {!! Form::date('voucher_date', old('voucher_date') , ['class' => 'form-control']) !!}
+                    {!! Form::datetime('voucher_date', old('voucher_date') , ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -83,7 +83,6 @@
     </div>
 </div>
 @section('part_script')
-<script src="{{ asset('themes/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\Master\CompanyRequest', '#form-voucher') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Business\VoucherRequest', '#form-voucher') !!}
 @endsection
