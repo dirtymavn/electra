@@ -288,12 +288,12 @@
                     element.submit();
                 });
                 $(document).on('click', '#btn-publish', function() {
-                    $('#form-budgetrate').attr('action', url + '?is_draft=false');
-                    $('#form-budgetrate').submit();
+                    element.attr('action', url + '?is_draft=false');
+                    element.submit();
                 });
                 $(document).on('click', '#btn-publish-continue', function() {
-                    $('#form-budgetrate').attr('action', url + '?is_publish_continue=true');
-                    $('#form-budgetrate').submit();
+                    element.attr('action', url + '?is_publish_continue=true');
+                    element.submit();
                 });
             }
         }
