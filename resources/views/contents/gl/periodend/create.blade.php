@@ -44,12 +44,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-periodend').attr('action');
+    var url = "{{route('periodend.store')}}";
     $('#form-periodend').attr('action', url + '?is_draft=true');
     $('#form-periodend').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-periodend').attr('action');
+    var url = "{{route('periodend.store')}}";
     $('#form-periodend').attr('action', url + '?is_publish_continue=true');
     $('#form-periodend').submit();
 });

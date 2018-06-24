@@ -51,12 +51,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-publish', function() {
-    var url = $('#form-customer').attr('action');
+    var url = "{{route('customer.update', $customer->id)}}";
     $('#form-customer').attr('action', url + '?is_draft=false');
     $('#form-customer').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-customer').attr('action');
+    var url = "{{route('customer.update', $customer->id)}}";
     $('#form-customer').attr('action', url + '?is_publish_continue=true');
     $('#form-customer').submit();
 });

@@ -45,12 +45,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-customer').attr('action');
+    var url = "{{route('customer.store')}}";
     $('#form-customer').attr('action', url + '?is_draft=true');
     $('#form-customer').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-customer').attr('action');
+    var url = "{{route('customer.store')}}";
     $('#form-customer').attr('action', url + '?is_publish_continue=true');
     $('#form-customer').submit();
 });

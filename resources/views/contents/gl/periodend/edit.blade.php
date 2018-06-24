@@ -45,15 +45,16 @@
     @stack('models')
 @endsection
 
+
 @section('script')
 <script>
 $(document).on('click', '#btn-publish', function() {
-    var url = $('#form-periodend').attr('action');
+    var url = "{{route('periodend.update', $trxPosting->id)}}";
     $('#form-periodend').attr('action', url + '?is_draft=false');
     $('#form-periodend').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-periodend').attr('action');
+    var url = "{{route('periodend.update', $trxPosting->id)}}";
     $('#form-periodend').attr('action', url + '?is_publish_continue=true');
     $('#form-periodend').submit();
 });

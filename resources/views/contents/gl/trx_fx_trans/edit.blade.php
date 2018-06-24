@@ -48,12 +48,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-publish', function() {
-    var url = $('#form-fxtrans').attr('action');
+    var url = "{{route('fx-trans.update', $trxFxTrans->id)}}";
     $('#form-fxtrans').attr('action', url + '?is_draft=false');
     $('#form-fxtrans').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-fxtrans').attr('action');
+    var url = "{{route('fx-trans.update', $trxFxTrans->id)}}";
     $('#form-fxtrans').attr('action', url + '?is_publish_continue=true');
     $('#form-fxtrans').submit();
 });

@@ -46,12 +46,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-publish', function() {
-    var url = $('#form-jvperiod').attr('action');
+    var url = "{{route('jvperiod.update', $jvperiod->id)}}";
     $('#form-jvperiod').attr('action', url + '?is_draft=false');
     $('#form-jvperiod').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-jvperiod').attr('action');
+    var url = "{{route('jvperiod.update', $jvperiod->id)}}";
     $('#form-jvperiod').attr('action', url + '?is_publish_continue=true');
     $('#form-jvperiod').submit();
 });

@@ -48,12 +48,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-publish', function() {
-    var url = $('#form-inventory').attr('action');
+    var url = "{{route('inventory.update', $inventory->id)}}";
     $('#form-inventory').attr('action', url + '?is_draft=false');
     $('#form-inventory').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-inventory').attr('action');
+    var url = "{{route('inventory.update', $inventory->id)}}";
     $('#form-inventory').attr('action', url + '?is_publish_continue=true');
     $('#form-inventory').submit();
 });

@@ -113,8 +113,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $user->role_id = $user->roles[0]->slug;
         $companies = $user->company()->pluck('name', 'id')->all();
-        return view('contents.user_managements.user.edit', compact('user', 'companies'));
+        $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
+        return view('contents.user_managements.user.edit', compact('user', 'companies', 'roles'));
     }
 
     /**

@@ -27,6 +27,12 @@
                     </div><span>Dashboard</span></a>
             </li>
             @if(user_info()->inRole('super-admin'))
+                <li>
+                    <a href="{{route('audit-trail.index')}}">
+                        <div class="icon-w">
+                            <div class="os-icon os-icon-newspaper"></div>
+                        </div><span>Audit Trail</span></a>
+                </li>
                 <li class="has-sub-menu">
                     <a href="#">
                         <div class="icon-w">

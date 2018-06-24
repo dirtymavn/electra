@@ -48,12 +48,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-itin').attr('action');
+    var url = "{{route('itin.store')}}";
     $('#form-itin').attr('action', url + '?is_draft=true');
     $('#form-itin').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-itin').attr('action');
+    var url = "{{route('itin.store')}}";
     $('#form-itin').attr('action', url + '?is_publish_continue=true');
     $('#form-itin').submit();
 });

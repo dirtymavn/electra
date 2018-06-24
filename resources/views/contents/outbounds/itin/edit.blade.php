@@ -47,12 +47,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-publish', function() {
-    var url = $('#form-itin').attr('action');
+    var url = "{{route('itin.update', $itin->id)}}";
     $('#form-itin').attr('action', url + '?is_draft=false');
     $('#form-itin').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-itin').attr('action');
+    var url = "{{route('itin.update', $itin->id)}}";
     $('#form-itin').attr('action', url + '?is_publish_continue=true');
     $('#form-itin').submit();
 });
