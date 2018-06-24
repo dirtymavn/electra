@@ -265,6 +265,38 @@
             });
 
         }
+
+        function submitForm(url, element, type) {
+            if (type == 'create') {
+                $(document).on('click', '#btn-submit', function() {
+                    element.attr('action', url);
+                    element.submit();
+                });
+                $(document).on('click', '#btn-submit-draft', function() {
+                    element.attr('action', url + '?is_draft=true');
+                    element.submit();
+                });
+                $(document).on('click', '#btn-publish-continue', function() {
+                    element.attr('action', url + '?is_publish_continue=true');
+                    element.submit();
+                });
+            }
+
+            if (type == 'update') {
+                $(document).on('click', '#btn-update', function() {
+                    element.attr('action', url);
+                    element.submit();
+                });
+                $(document).on('click', '#btn-publish', function() {
+                    $('#form-budgetrate').attr('action', url + '?is_draft=false');
+                    $('#form-budgetrate').submit();
+                });
+                $(document).on('click', '#btn-publish-continue', function() {
+                    $('#form-budgetrate').attr('action', url + '?is_publish_continue=true');
+                    $('#form-budgetrate').submit();
+                });
+            }
+        }
     </script>
     @yield('script')
     @yield('part_script')

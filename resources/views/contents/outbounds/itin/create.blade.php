@@ -35,7 +35,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('itin.index')}}" class="btn btn-grey">Cancel</a>
                         <button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>
-                        <button type="submit" class="btn btn-primary" id="btn-submit">Publish</button>
+                        <button type="button" class="btn btn-primary" id="btn-submit">Publish</button>
                         <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                     </div>
                 </div>              
@@ -47,15 +47,6 @@
 
 @section('script')
 <script>
-$(document).on('click', '#btn-submit-draft', function() {
-    var url = "{{route('itin.store')}}";
-    $('#form-itin').attr('action', url + '?is_draft=true');
-    $('#form-itin').submit();
-});
-$(document).on('click', '#btn-publish-continue', function() {
-    var url = "{{route('itin.store')}}";
-    $('#form-itin').attr('action', url + '?is_publish_continue=true');
-    $('#form-itin').submit();
-});
+    submitForm("{{route('itin.store')}}", $('#form-itin'), 'create');
 </script>
 @endsection

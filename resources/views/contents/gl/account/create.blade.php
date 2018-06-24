@@ -30,7 +30,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('account.index')}}" class="btn btn-grey">Cancel</a>
                         <button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>
-                        <button type="submit" class="btn btn-primary" id="btn-submit">Publish</button>
+                        <button type="button" class="btn btn-primary" id="btn-submit">Publish</button>
                         <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                     </div>
                 </div>              
@@ -41,15 +41,6 @@
 
 @section('script')
 <script>
-$(document).on('click', '#btn-submit-draft', function() {
-    var url = "{{route('account.store')}}";
-    $('#form-account').attr('action', url + '?is_draft=true');
-    $('#form-account').submit();
-});
-$(document).on('click', '#btn-publish-continue', function() {
-    var url = "{{route('account.store')}}";
-    $('#form-account').attr('action', url + '?is_publish_continue=true');
-    $('#form-account').submit();
-});
+    submitForm("{{route('account.store')}}", $('#form-account'), 'create');
 </script>
 @endsection

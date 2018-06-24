@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('profile.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
-                        <button type="submit" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
+                        <button type="button" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
                         @if($profile->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
@@ -45,15 +45,6 @@
 
 @section('script')
 <script>
-$(document).on('click', '#btn-publish', function() {
-    var url = "{{route('profile.update', $profile->id)}}";
-    $('#form-profile').attr('action', url + '?is_draft=false');
-    $('#form-profile').submit();
-});
-$(document).on('click', '#btn-publish-continue', function() {
-    var url = "{{route('profile.update', $profile->id)}}";
-    $('#form-profile').attr('action', url + '?is_publish_continue=true');
-    $('#form-profile').submit();
-});
+    submitForm("{{route('profile.update', $profile->id)}}", $('#form-profile'), 'update');
 </script>
 @endsection
