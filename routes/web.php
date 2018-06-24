@@ -98,4 +98,6 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('profile/bulk-delete', array('as' => 'profile.bulk-delete', 'uses' => 'MasterProfileController@bulkDelete'));
     });
 
+    // Audit Trail
+    Route::get('audit-trail', array('as' => 'audit-trail.index', 'uses' => 'AuditTrailController@index', 'middleware' => 'sentinel_access:audit-trail'));
 });
