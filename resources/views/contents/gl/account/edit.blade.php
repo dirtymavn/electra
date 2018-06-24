@@ -46,12 +46,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-publish', function() {
-    var url = $('#form-account').attr('action');
+    var url = "{{route('account.update', $account->id)}}";
     $('#form-account').attr('action', url + '?is_draft=false');
     $('#form-account').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-account').attr('action');
+    var url = "{{route('account.update', $account->id)}}";
     $('#form-account').attr('action', url + '?is_publish_continue=true');
     $('#form-account').submit();
 });

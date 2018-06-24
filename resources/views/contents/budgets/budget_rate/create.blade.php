@@ -42,12 +42,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-budgetrate').attr('action');
+    var url = "{{route('budget-rate.store')}}";
     $('#form-budgetrate').attr('action', url + '?is_draft=true');
     $('#form-budgetrate').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-budgetrate').attr('action');
+    var url = "{{route('budget-rate.store')}}";
     $('#form-budgetrate').attr('action', url + '?is_publish_continue=true');
     $('#form-budgetrate').submit();
 });

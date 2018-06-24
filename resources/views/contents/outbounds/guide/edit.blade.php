@@ -46,12 +46,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-publish', function() {
-    var url = $('#form-guide').attr('action');
+    var url = "{{route('guide.update', $guide->id)}}";
     $('#form-guide').attr('action', url + '?is_draft=false');
     $('#form-guide').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-guide').attr('action');
+    var url = "{{route('guide.update', $guide->id)}}";
     $('#form-guide').attr('action', url + '?is_publish_continue=true');
     $('#form-guide').submit();
 });

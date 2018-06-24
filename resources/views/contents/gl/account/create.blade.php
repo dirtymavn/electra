@@ -25,10 +25,7 @@
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.gl.account._form')  
-                <input type="hidden" id="is_draft" name="is_draft">
-                <input type="hidden" id="is_publish_continue" name="is_publish_continue">
-                
+                @include('contents.gl.account._form')
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('account.index')}}" class="btn btn-grey">Cancel</a>
@@ -45,13 +42,13 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-account').attr('action');
-    $("#is_draft").val(true);
+    var url = "{{route('account.store')}}";
+    $('#form-account').attr('action', url + '?is_draft=true');
     $('#form-account').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-account').attr('action');
-    $("#is_publish_continue").val(true);
+    var url = "{{route('account.store')}}";
+    $('#form-account').attr('action', url + '?is_publish_continue=true');
     $('#form-account').submit();
 });
 </script>

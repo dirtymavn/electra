@@ -44,12 +44,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-inventory').attr('action');
+    var url = "{{route('inventory.store')}}";
     $('#form-inventory').attr('action', url + '?is_draft=true');
     $('#form-inventory').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-inventory').attr('action');
+    var url = "{{route('inventory.store')}}";
     $('#form-inventory').attr('action', url + '?is_publish_continue=true');
     $('#form-inventory').submit();
 });

@@ -43,12 +43,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-guide').attr('action');
+    var url = "{{route('guide.store')}}";
     $('#form-guide').attr('action', url + '?is_draft=true');
     $('#form-guide').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-guide').attr('action');
+    var url = "{{route('guide.store')}}";
     $('#form-guide').attr('action', url + '?is_publish_continue=true');
     $('#form-guide').submit();
 });

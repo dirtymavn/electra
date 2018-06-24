@@ -42,12 +42,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-profile').attr('action');
+    var url = "{{route('profile.store')}}";
     $('#form-profile').attr('action', url + '?is_draft=true');
     $('#form-profile').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-profile').attr('action');
+    var url = "{{route('profile.store')}}";
     $('#form-profile').attr('action', url + '?is_publish_continue=true');
     $('#form-profile').submit();
 });

@@ -42,12 +42,12 @@
 @section('script')
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
-    var url = $('#form-jvperiod').attr('action');
+    var url = "{{route('jvperiod.store')}}";
     $('#form-jvperiod').attr('action', url + '?is_draft=true');
     $('#form-jvperiod').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
-    var url = $('#form-jvperiod').attr('action');
+    var url = "{{route('jvperiod.store')}}";
     $('#form-jvperiod').attr('action', url + '?is_publish_continue=true');
     $('#form-jvperiod').submit();
 });
