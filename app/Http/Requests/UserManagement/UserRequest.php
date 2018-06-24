@@ -39,6 +39,7 @@ class UserRequest extends FormRequest
             'password' => 'required_if:is_required,==,requirred|min:8',
             'conf_password' => 'required_if:is_required,==,requirred|min:8|same:password',
             'company_id' => 'required',
+            'role_id' => 'required',
         ];
     }
 
