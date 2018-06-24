@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('budget-rate.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
-                        <button type="submit" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
+                        <button type="button" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
                         @if($budgetRate->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
@@ -45,15 +45,6 @@
 
 @section('script')
 <script>
-$(document).on('click', '#btn-publish', function() {
-    var url = "{{route('budget-rate.update', $budgetRate->id)}}";
-    $('#form-budgetrate').attr('action', url + '?is_draft=false');
-    $('#form-budgetrate').submit();
-});
-$(document).on('click', '#btn-publish-continue', function() {
-    var url = "{{route('budget-rate.update', $budgetRate->id)}}";
-    $('#form-budgetrate').attr('action', url + '?is_publish_continue=true');
-    $('#form-budgetrate').submit();
-});
+    submitForm("{{route('budget-rate.update', $budgetRate->id)}}", $('#form-budgetrate'), 'update');
 </script>
 @endsection

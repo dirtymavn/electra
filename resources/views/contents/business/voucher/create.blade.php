@@ -47,15 +47,6 @@
 
 @section('script')
 <script>
-$(document).on('click', '#btn-submit-draft', function() {
-    var url = "{{route('voucher.store')}}";
-    $('#form-voucher').attr('action', url + '?is_draft=true');
-    $('#form-voucher').submit();
-});
-$(document).on('click', '#btn-publish-continue', function() {
-    var url = "{{route('voucher.store')}}";
-    $('#form-voucher').attr('action', url + '?is_publish_continue=true');
-    $('#form-voucher').submit();
-});
+    submitForm("{{route('voucher.store')}}", $('#form-voucher'), 'create');
 </script>
 @endsection
