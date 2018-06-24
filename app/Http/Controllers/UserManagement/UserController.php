@@ -8,6 +8,7 @@ use App\DataTables\UserManagement\UserDataTable;
 
 use Sentinel;
 use App\Models\User;
+use App\Models\Role;
 use App\Models\Master\Company;
 use App\Http\Requests\UserManagement\UserRequest;
 use App\Mail\UserManagement\ResetPassword;
@@ -17,18 +18,21 @@ class UserController extends Controller
 {
     /**
      * @var \App\Models\User
+     * @var \App\Models\Role
      * @var \App\Models\Master\Company
     */
     protected $user;
+    protected $role;
     protected $company;
 
     /**
      * Create a new UserController instance.
      *
      * @param \App\Models\User  $user
+     * @param \App\Models\Role  $role
      * @param \App\Models\Master\Company  $company
     */
-    public function __construct(User $user, Company $company)
+    public function __construct(User $user, Company $company, Role $role)
     {
         $this->user = $user;
         $this->company = $company;
@@ -56,7 +60,8 @@ class UserController extends Controller
         } else {
             $companies = $this->company->getData()->pluck('name', 'id')->all();
         }
-        return view('contents.user_managements.user.create', compact('companies'));
+        $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
+        return view('contents.user_managements.user.create', compact('companies', 'roles'));
     }
 
     /**
@@ -79,7 +84,7 @@ class UserController extends Controller
             $request->merge(['company_role' => $companyRole, 'parent_id' => $parentId, 'status' => 1]);
             $user = Sentinel::registerAndActivate( $request->all() );
 
-            Sentinel::findRoleBySlug( $companyRole )->users()->attach( $user );
+            Sentinel::findRoleBySlug( $request->role_id )->users()->attach( $user );
             flash()->success( trans('message.create.success') );
             
             return redirect()->route( 'user.index' );

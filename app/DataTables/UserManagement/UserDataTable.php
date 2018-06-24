@@ -23,7 +23,8 @@ class UserDataTable extends DataTable
                 return view('partials.action-button')->with(compact('edit_url', 'reset_pass_url' ,'delete_url'));
             })
             ->editColumn('company_role', function($user) {
-                return strtoupper(str_replace('-', ' ', $user->company_role));
+               // return strtoupper(str_replace('-', ' ', $user->company_role));
+               return $user->roles[0]->slug;
             })
             ->addIndexColumn();
     }
