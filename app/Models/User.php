@@ -100,8 +100,10 @@ class User extends CartalystUser implements Auditable, UserContract
    public function usersUnderCompany()
     {
         $results = self::leftJoin('companies', 'companies.id', '=', 'users.company_id')
-        ->join('role_users', 'role_users.user_id', '=', 'users.id')
-        ->whereNotIn('role_id', [1]);
+        ->join('role_users', 'role_users.user_id', '=', 'users.id');
+        if (user_info()->roles[0]->slug != 'super-admin') {
+            $results->whereNotIn('role_id', [1]);
+        }
         if (user_info('company_role') == 'super-admin') {
             $results = $results;
         } else {
