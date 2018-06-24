@@ -28,6 +28,8 @@
         <div class="box">
             <div class="box-body">
                 @include('contents.gl.periodend._form')  
+                <input type="hidden" id="is_draft" name="is_draft">
+                <input type="hidden" id="is_publish_continue" name="is_publish_continue">
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('periodend.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
@@ -45,16 +47,17 @@
     @stack('models')
 @endsection
 
+
 @section('script')
 <script>
-$(document).on('click', '#btn-publish', function() {
+$(document).on('click', '#btn-submit-draft', function() {
     var url = $('#form-periodend').attr('action');
-    $('#form-periodend').attr('action', url + '?is_draft=false');
+    $("#is_draft").val(true);
     $('#form-periodend').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
     var url = $('#form-periodend').attr('action');
-    $('#form-periodend').attr('action', url + '?is_publish_continue=true');
+    $("#is_publish_continue").val(true);
     $('#form-periodend').submit();
 });
 </script>
