@@ -13,7 +13,7 @@ class PeriodEndRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class PeriodEndRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'postdate_start' => 'required',
+            'postdate_end' => 'required',
         ];
     }
 }

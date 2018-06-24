@@ -17,7 +17,7 @@ class CreateMasterVoucherTable extends Migration
             $table->increments('id');
             $table->string('voucher_no')->nullable();
             $table->string('voucher_status')->nullable();
-            $table->datetime('voucher_date')->nullable();
+            $table->date('voucher_date')->nullable(); // seharusnya datetime
             $table->string('voucher_currency')->nullable();
             $table->float('voucher_amt')->nullable();
             $table->date('valid_from')->nullable();

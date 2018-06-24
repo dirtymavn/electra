@@ -32,6 +32,8 @@
         <div class="box">
             <div class="box-body">
                 @include('contents.business.voucher._form')  
+                <input type="hidden" id="is_draft" name="is_draft">
+                <input type="hidden" id="is_publish_continue" name="is_publish_continue">
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('voucher.index')}}" class="btn btn-grey">Cancel</a>
@@ -49,12 +51,12 @@
 <script>
 $(document).on('click', '#btn-submit-draft', function() {
     var url = $('#form-voucher').attr('action');
-    $('#form-voucher').attr('action', url + '?is_draft=true');
+    $("#is_draft").val(true);
     $('#form-voucher').submit();
 });
 $(document).on('click', '#btn-publish-continue', function() {
     var url = $('#form-voucher').attr('action');
-    $('#form-voucher').attr('action', url + '?is_publish_continue=true');
+    $("#is_publish_continue").val(true);
     $('#form-voucher').submit();
 });
 </script>
