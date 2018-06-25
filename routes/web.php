@@ -19,7 +19,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('company', 'CompanyController')->middleware('sentinel_access:company');
         Route::get('export/excel/company', [ 'as' => 'export.company.excel', 'uses' => 'CompanyController@export_excel' ]);
         Route::get('export/pdf/company', [ 'as' => 'export.company.pdf', 'uses' => 'CompanyController@export_pdf' ]);
+        
+    });
+
+    Route::group(['prefix' => 'user-management', 'namespace' => 'Master'], function () {
         Route::resource('role', 'RoleController');
+
     });
 
     // User Management

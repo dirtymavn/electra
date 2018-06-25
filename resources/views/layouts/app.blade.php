@@ -18,7 +18,7 @@
     {!! Html::style('themes/bower_components/slick-carousel/slick/slick.css') !!}
     {!! Html::style('themes/css/maince5a.css?version=4.4.1') !!}
     {!! Html::style('themes/icon_fonts_assets/font-awesome/css/font-awesome.min.css') !!}
-    <!-- {!! Html::style('themes/css/main_custom.css') !!} -->
+    {!! Html::style('themes/css/main_custom.css') !!}
     {!! Html::style('css/custom.css') !!}
     <style>
         body {
@@ -28,7 +28,7 @@
     @yield('style')
 </head>
 
-<body class="menu-position-side menu-side-left full-screen">
+<body class="menu-position-side menu-side-left full-screen with-content-panel">
 <div class="spinner">
   <div class="rect1"></div>
   <div class="rect2"></div>
@@ -36,7 +36,7 @@
   <div class="rect4"></div>
   <div class="rect5"></div>
 </div>
-    <div class="all-wrapper solid-bg-all">
+    <div class="all-wrapper with-side-panel solid-bg-all">
         <div class="search-with-suggestions-w" style="display:none;">
             <div class="search-with-suggestions-modal">
                 <div class="element-search">
@@ -173,7 +173,7 @@
     {!! Html::script('themes/js/dataTables.bootstrap4.min.js') !!}
     {!! Html::script('themes/js/demo_customizerce5a.js?version=4.4.1') !!}
     {!! Html::script('themes/js/maince5a.js?version=4.4.1') !!}
-    <!-- {!! Html::script('themes/js/main_custom.js') !!} -->
+    {!! Html::script('themes/js/main_custom.js') !!}
     <script>
         $.ajaxSetup({
             headers: {

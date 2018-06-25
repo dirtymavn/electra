@@ -1,6 +1,6 @@
             @include('partials.mobile_menu')
 
-            <div class="fixed-menu menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
+            <div class="fixed-menu menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-click menu-has-selected-link">
                 <div class="logo-w">
                     <a class="logo" href="#">
                         <img class="img-responsive" style="width:80%;display:table;margin:auto;" alt="" src="{{ asset('themes/img/logo-big.png') }}">
@@ -134,102 +134,124 @@
                 <h1 class="menu-page-header">Page Header</h1>
                 <ul class="main-menu">
                     <li class="sub-header"><span>Main Menu</span></li>
-                    <li class="selected">
+                    <li class="{!! (url(route('dashboard')) == Request::url() OR Request::is('/*')) ? ' active' : '' !!}">
                         <a href="{{route('dashboard')}}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-layout"></div>
                             </div><span>Dashboard</span></a>
                     </li>
                     @if(user_info()->inRole('super-admin'))
-                        <li>
+                        <li class="{!! (url(route('audit-trail.index')) == Request::url() OR Request::is('audit-trail*')) ? ' active' : '' !!}">
                             <a href="{{route('audit-trail.index')}}">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-newspaper"></div>
                                 </div><span>Audit Trail</span></a>
                         </li>
-                        <li class="has-sub-menu">
+                        <li class="has-sub-menu {!! (Request::is('master*') OR Request::is('master')) ? ' active' : '' !!}">
                             <a href="#">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-layers"></div>
                                 </div><span>Master</span></a>
                             <div class="sub-menu-w">
-                                <div class="sub-menu-header">Master</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="{{route('company.index')}}">Company</a></li>
+                                        <li class="{!! (url(route('company.index')) == Request::url() OR Request::is('master/company*')) ? ' active' : '' !!}">
+                                            <a href="{{route('company.index')}}"><i class="fa fa-circle-o"></i><span>Company</span></a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </li>
                     @endif
-                    <li class="has-sub-menu">
-                        <a href="#">
-                            <div class="icon-w">
-                                <div class="os-icon os-icon-layers"></div>
-                            </div><span>User Management</span></a>
-                        <div class="sub-menu-w">
-                            <div class="sub-menu-header">User Management</div>
-                            <div class="sub-menu-icon"><i class="os-icon os-icon-layers"></i></div>
-                            <div class="sub-menu-i">
-                                <ul class="sub-menu">
-                                    <li><a href="{{route('user.index')}}">Register User</a></li>
-                                    <li><a href="{{route('role.index')}}">Role User</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="has-sub-menu">
+                    <li class="has-sub-menu {!! (Request::is('user-management*') OR Request::is('user-management')) ? ' active' : '' !!}">
                         <a href="#">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-users"></div>
-                            </div><span>Business</span></a>
+                            </div><span>User Management</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Business</div>
                             <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="{{route('customer.index')}}">Customer</a></li>
-                                    <li><a href=" {{ route('supplier.index') }} ">Supplier</a></li>
-                                    <li><a href=" {{ route('sales.index') }} ">Sales Folder</a></li>
-                                    <li><a href="#">Invoice</a></li>
-                                    <li><a href="{{ route('lg.index') }}">LG</a></li>
-                                    <li><a href="{{ route('inventory.index') }}">Inventory</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href=" {{ route('delivery.index') }} ">Delivery</a></li>
-                                    <li><a href="{{ route('voucher.index') }}">Voucher</a></li>
-                                    <li><a href="#">Visa</a></li>
-                                    <li><a href="#">Queue</a></li>
-                                    <li><a href="#">Report</a></li>
-                                    <li><a href="{{ route('transaction.index') }}">Transaction</a></li>
+                                    <li class="{!! (url(route('user.index')) == Request::url() OR Request::is('user-management/user*')) ? ' active' : '' !!}">
+                                        <a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i><span>Register User</span></a>
+                                    </li>
+                                    <li class="{!! (url(route('role.index')) == Request::url() OR Request::is('user-management/role*')) ? ' active' : '' !!}">
+                                        <a href="{{route('role.index')}}"><i class="fa fa-circle-o"></i><span>Role User</span></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class="has-sub-menu">
+                    <li class="has-sub-menu {!! (Request::is('business*') OR Request::is('business')) ? ' active' : '' !!}">
+                        <a href="#">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-folder"></div>
+                            </div><span>Business</span></a>
+                        <div class="sub-menu-w">
+                            
+                            <div class="sub-menu-icon"><i class="os-icon os-icon-folder"></i></div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li class="{!! (url(route('customer.index')) == Request::url() OR Request::is('business/customer*')) ? ' active' : '' !!}">
+                                        <a href="{{route('customer.index')}}"><i class="fa fa-circle-o"></i><span>Customer</span></a>
+                                    </li>
+                                    <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('business/supplier*')) ? ' active' : '' !!}">
+                                        <a href=" {{ route('supplier.index') }} "><i class="fa fa-circle-o"></i><span>Supplier</span></a>
+                                    </li>
+                                    <li class="{!! (url(route('sales.index')) == Request::url() OR Request::is('business/sales*')) ? ' active' : '' !!}">
+                                        <a href=" {{ route('sales.index') }} "><i class="fa fa-circle-o"></i><span>Sales Folder</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Invoice</span></a></li>
+                                    <li class="{!! (url(route('lg.index')) == Request::url() OR Request::is('business/lg*')) ? ' active' : '' !!}">
+                                        <a href="{{ route('lg.index') }}"><i class="fa fa-circle-o"></i><span>LG</span></a>
+                                    </li>
+                                    <li><a href="{{ route('inventory.index') }}"><i class="fa fa-circle-o"></i><span>Inventory</span></a></li>
+                                <!-- </ul>
+                                <ul class="sub-menu"> -->
+                                    <li class="{!! (url(route('delivery.index')) == Request::url() OR Request::is('business/delivery*')) ? ' active' : '' !!}">
+                                        <a href=" {{ route('delivery.index') }} "><i class="fa fa-circle-o"></i><span>Delivery</span></a>
+                                    </li>
+                                    <li class="{!! (url(route('voucher.index')) == Request::url() OR Request::is('business/voucher*')) ? ' active' : '' !!}">
+                                        <a href="{{ route('voucher.index') }}"><i class="fa fa-circle-o"></i><span>Voucher</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Visa</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Queue</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
+                                    <li class="{!! (url(route('transaction.index')) == Request::url() OR Request::is('business/transaction*')) ? ' active' : '' !!}">
+                                        <a href="{{ route('transaction.index') }}"><i class="fa fa-circle-o"></i><span>Transaction</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu {!! (Request::is('outbound*') OR Request::is('outbound')) ? ' active' : '' !!}">
                         <a href="#">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-folder"></div>
                             </div><span>Outbound</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Outbound</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-folder"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="{{ route('guide.index') }}">Guide</a></li>
-                                    <li><a href="{{ route('itin.index') }}">Itin</a></li>
-                                    <li><a href="#">Folder</a></li>
-                                    <li><a href="#">Order</a></li>
-                                    <li><a href="#">Visa</a></li>
-                                    <li><a href="#">Avail</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="#">Queue</a></li>
-                                    <li><a href="#">Visa Rpt</a></li>
-                                    <li><a href="#">Delivery</a></li>
-                                    <li><a href="#">Allotment</a></li>
-                                    <li><a href="#">Report</a></li>
+                                    <li class="{!! (url(route('guide.index')) == Request::url() OR Request::is('outbound/guide*')) ? ' active' : '' !!}">
+                                        <a href="{{ route('guide.index') }}"><i class="fa fa-circle-o"></i><span>Guide</span></a>
+                                    </li>
+                                    <li class="{!! (url(route('itin.index')) == Request::url() OR Request::is('outbound/itin*')) ? ' active' : '' !!}">
+                                        <a href="{{ route('itin.index') }}"><i class="fa fa-circle-o"></i><span>Itin</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Folder</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Order</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Visa</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Avail</span></a></li>
+                                <!-- </ul>
+                                <ul class="sub-menu"> -->
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Queue</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Visa Rpt</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Delivery</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Allotment</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -240,14 +262,14 @@
                                 <div class="os-icon os-icon-file-text"></div>
                             </div><span>Hotel</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Hotel</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Hotel</a></li>
-                                    <li><a href="#">Enquiry</a></li>
-                                    <li><a href="#">Booking</a></li>
-                                    <li><a href="#">Report</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Hotel</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Enquiry</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Booking</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -258,20 +280,20 @@
                                 <div class="os-icon os-icon-box"></div>
                             </div><span>FIT</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">FIT</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-box"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Folder</a></li>
-                                    <li><a href="#">Availability</a></li>
-                                    <li><a href="#">FIT Order</a></li>
-                                    <li><a href="#">Delivery</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="#">Invoice</a></li>
-                                    <li><a href="#">LG</a></li>
-                                    <li><a href="#">Allotment</a></li>
-                                    <li><a href="#">Report</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Folder</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Availability</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>FIT Order</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Delivery</span></a></li>
+                                <!-- </ul>
+                                <ul class="sub-menu"> -->
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Invoice</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>LG</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Allotment</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -282,25 +304,25 @@
                                 <div class="os-icon os-icon-corner-left-up"></div>
                             </div><span>AR</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">AR</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-corner-left-up"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Customer</a></li>
-                                    <li><a href="#">Invoice</a></li>
-                                    <li><a href="#">Misc. Inv.</a></li>
-                                    <li><a href="#">Receipt</a></li>
-                                    <li><a href="#">Settlem't</a></li>
-                                    <li><a href="#">Rec. Vou.</a></li>
-                                    <li><a href="#">Bank</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="#">Deposit</a></li>
-                                    <li><a href="#">Reminder</a></li>
-                                    <li><a href="#">Cr. Note</a></li>
-                                    <li><a href="#">Cr. Card</a></li>
-                                    <li><a href="#">Billing</a></li>
-                                    <li><a href="#">Report</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Customer</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Invoice</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Misc. Inv.</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Receipt</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Settlem't</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Rec. Vou.</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Bank</span></a></li>
+                                <!-- </ul>
+                                <ul class="sub-menu"> -->
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Deposit</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Reminder</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Cr. Note</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Cr. Card</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Billing</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -311,21 +333,21 @@
                                 <div class="os-icon os-icon-agenda-1"></div>
                             </div><span>AP</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">AP</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-agenda-1"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Supplier</a></li>
-                                    <li><a href="#">LG</a></li>
-                                    <li><a href="#">Deposit</a></li>
-                                    <li><a href="#">LG Delivery</a></li>
-                                    <li><a href="#">Pay-Req</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="#">Payment</a></li>
-                                    <li><a href="#">Petty. Cash</a></li>
-                                    <li><a href="#">Chq Print</a></li>
-                                    <li><a href="#">Report</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Supplier</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>LG</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Deposit</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>LG Delivery</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Pay-Req</span></a></li>
+                                <!-- </ul>
+                                <ul class="sub-menu"> -->
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Payment</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Petty. Cash</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Chq Print</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -336,42 +358,50 @@
                                 <div class="os-icon os-icon-delivery-box-2"></div>
                             </div><span>Settlement</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Settlement</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-delivery-box-2"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Deposit</a></li>
-                                    <li><a href="#">Settlem't</a></li>
-                                    <li><a href="#">Rec. Vou.</a></li>
-                                    <li><a href="#">Payment</a></li>
-                                    <li><a href="#">Receipt</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Deposit</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Settlem't</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Rec. Vou.</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Payment</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Receipt</span></a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class="has-sub-menu">
+                    <li class="has-sub-menu {!! (Request::is('gl*') OR Request::is('gl')) ? ' active' : '' !!}">
                         <a href="#">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-star"></div>
                             </div><span>GL</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">GL</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-star"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="{{ route('account.index') }}">Account</a></li>
-                                    <li><a href="#">Journal</a></li>
-                                    <li><a href="#">Posting</a></li>
-                                    <li><a href="#">Report</a></li>
-                                    <li><a href="{{ route('periodend.index') }}">Per. End</a></li>
-                                    <li><a href="{{route('jvperiod.index')}}">JV Period</a></li>
-                                </ul>
-                                <ul class="sub-menu">
-                                    <li><a href="#">Recon.</a></li>
-                                    <li><a href="#">Bank Rec.</a></li>
-                                    <li><a href="{{route('fx-trans.index')}}">FX Trans.</a></li>
-                                    <li><a href="#">BSP Rec.</a></li>
-                                    <li><a href="#">Finance</a></li>
+                                    <li class="{!! (url(route('account.index')) == Request::url() OR Request::is('gl/account*')) ? ' active' : '' !!}">
+                                        <a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i><span>Account</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Journal</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Posting</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
+                                    <li class="{!! (url(route('periodend.index')) == Request::url() OR Request::is('gl/periodend*')) ? ' active' : '' !!}">
+                                        <a href="{{ route('periodend.index') }}"><i class="fa fa-circle-o"></i><span>Per. End</span></a>
+                                    </li>
+                                    <li class="{!! (url(route('jvperiod.index')) == Request::url() OR Request::is('gl/jvperiod*')) ? ' active' : '' !!}">
+                                        <a href="{{route('jvperiod.index')}}"><i class="fa fa-circle-o"></i><span>JV Period</span></a>
+                                    </li>
+                                <!-- </ul>
+                                <ul class="sub-menu"> -->
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Recon.</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Bank Rec.</span></a></li>
+                                    <li class="{!! (url(route('fx-trans.index')) == Request::url() OR Request::is('gl/fx-trans*')) ? ' active' : '' !!}">
+                                        <a href="{{route('fx-trans.index')}}"><i class="fa fa-circle-o"></i><span>FX Trans.</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>BSP Rec.</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Finance</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -382,12 +412,12 @@
                                 <div class="os-icon os-icon-wallet-loaded"></div>
                             </div><span>Refund</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Refund</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Refund</a></li>
-                                    <li><a href="#">Report</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Refund</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -398,47 +428,51 @@
                                 <div class="os-icon os-icon-cv-2"></div>
                             </div><span>Inventory</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Inventory</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-cv-2"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Inventory</a></li>
-                                    <li><a href="#">LG Delivery</a></li>
-                                    <li><a href="#">BSP Rec.</a></li>
-                                    <li><a href="#">Report</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Inventory</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>LG Delivery</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>BSP Rec.</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class="has-sub-menu">
+                    <li class="has-sub-menu {!! (Request::is('budget*') OR Request::is('budget')) ? ' active' : '' !!}">
                         <a href="#">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-bar-chart-stats-up"></div>
                             </div><span>Budget</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Budget</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-bar-chart-stats-up"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="{{route('budget-rate.index')}}">Budget Rate</a></li>
-                                    <li><a href="#">Ex. Rate</a></li>
-                                    <li><a href="#">Report</a></li>
+                                    <li class="{!! (url(route('budget-rate.index')) == Request::url() OR Request::is('gl/budget-rate*')) ? ' active' : '' !!}">
+                                        <a href="{{route('budget-rate.index')}}"><i class="fa fa-circle-o"></i><span>Budget Rate</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Ex. Rate</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
                                 </ul>
                             </div>
                         </div>
                     </li>
-                    <li class="has-sub-menu">
+                    <li class="has-sub-menu {!! (Request::is('internals*') OR Request::is('internals')) ? ' active' : '' !!}">
                         <a href="#">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-mail"></div>
                             </div><span>Internal</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Internal</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-mail"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="{{ route('profile.index') }}">Profile</a></li>
-                                    <li><a href="#">Cash Adv.</a></li>
+                                    <li class="{!! (url(route('profile.index')) == Request::url() OR Request::is('gl/profile*')) ? ' active' : '' !!}">
+                                        <a href="{{ route('profile.index') }}"><i class="fa fa-circle-o"></i><span>Profile</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Cash Adv.</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -449,15 +483,15 @@
                                 <div class="os-icon os-icon-users"></div>
                             </div><span>TMIS</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">TMIS</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">Report</a></li>
-                                    <li><a href="#">C. Report</a></li>
-                                    <li><a href="#">Rpt. Tool2.0</a></li>
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="#">All Rpt.</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Report</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>C. Report</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Rpt. Tool2.0</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>Dashboard</span></a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>All Rpt.</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -468,11 +502,11 @@
                                 <div class="os-icon os-icon-edit-32"></div>
                             </div><span>Interface</span></a>
                         <div class="sub-menu-w">
-                            <div class="sub-menu-header">Interface</div>
+                            
                             <div class="sub-menu-icon"><i class="os-icon os-icon-edit-32"></i></div>
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
-                                    <li><a href="#">BOS</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i><span>BOS</span></a></li>
                                 </ul>
                             </div>
                         </div>
