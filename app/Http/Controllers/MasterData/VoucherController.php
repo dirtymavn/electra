@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Business;
+namespace App\Http\Controllers\MasterData;
 
 use App\Models\Business\Voucher\MasterVoucher as Voucher;
 use Illuminate\Http\Request;

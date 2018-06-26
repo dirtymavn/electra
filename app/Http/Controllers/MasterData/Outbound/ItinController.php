@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Outbound;
+namespace App\Http\Controllers\MasterData\Outbound;
 
 use App\Models\Outbound\Itinerary\MasterItinerary;
 use App\Models\Outbound\Itinerary\MasterItineraryDetail;
