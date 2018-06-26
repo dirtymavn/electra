@@ -45,7 +45,6 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::patch('transaction/{id}/reject', array('as' => 'transaction.reject', 'uses' => 'TransactionController@reject'));
         Route::resource('voucher', 'VoucherController');
         Route::post('voucher/bulk-delete', array('as' => 'voucher.bulk-delete', 'uses' => 'VoucherController@bulkDelete'));
-        Route::resource('lg', 'LGController');
         Route::resource('delivery', 'DeliveryController');
         Route::resource('inventory', 'InventoryController');
         Route::post('inventory/bulk-delete', array('as' => 'inventory.bulk-delete', 'uses' => 'InventoryController@bulkDelete'));
@@ -90,6 +89,11 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('periodend/trx-detail', array('as' => 'periodend.posting-detail.post', 'uses' => 'TrxPostingController@trxTransDetailStore'));
         Route::post('periodend/trx-detail/delete', array('as' => 'periodend.posting-detail.delete', 'uses' => 'TrxPostingController@trxTransDetailDelete'));
         Route::post('periodend/trx-detail/detail', array('as' => 'periodend.posting-detail.detail', 'uses' => 'TrxPostingController@trxTransDetailGetDetail'));
+    });
+
+    // Outbound
+    Route::group(['prefix' => 'accounting'], function () {
+        Route::resource('lg', 'Business\LGController');
     });
 
     // Budget
