@@ -35,6 +35,7 @@
 			<div class="os-tabs-controls">
 				<ul class="nav nav-tabs smaller">
 					<li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#main">Main</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#term">Term</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contact">Contact</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#bank">Bank</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#bank_crpd">Bank CRPD</a></li>
@@ -42,6 +43,8 @@
 			</div>
 			<div class="tab-content">
 				@include('contents.business.supplier.parts.main')
+
+				@include('contents.business.supplier.parts.term')
 
 				@include('contents.business.supplier.parts.contact')
 
