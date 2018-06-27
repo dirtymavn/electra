@@ -52,8 +52,8 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::label('conjunction_first_ticket', trans('Conjunction Ticket Flag'), ['class' => 'control-label']) !!}
-                    {!! Form::text('conjunction_first_ticket', old('conjunction_first_ticket') , ['class' => 'form-control', 'placeholder' => 'Input the Conjunction Ticket Flag']) !!}
+                    {!! Form::label('conjunction_first_ticket', trans('Conjunction First Ticket'), ['class' => 'control-label']) !!}
+                    {!! Form::text('conjunction_first_ticket', old('conjunction_first_ticket') , ['class' => 'form-control', 'placeholder' => 'Input the Conjunction First Ticket']) !!}
                 </div>
             </div>
         </div>
