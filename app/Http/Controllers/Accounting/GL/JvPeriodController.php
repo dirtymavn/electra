@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\MasterData\Outbound;
+namespace App\Http\Controllers\Accounting\GL;
 
 use App\Models\GL\JvPeriod;
 use Illuminate\Http\Request;
