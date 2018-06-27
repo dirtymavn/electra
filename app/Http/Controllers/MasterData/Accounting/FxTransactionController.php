@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\MasterData\Outbound;
+namespace App\Http\Controllers\MasterData\Accounting;
 
 use App\Models\GL\FxTrans\TrxFxTrans;
 use App\Models\GL\FxTrans\TrxFxTransDetail;

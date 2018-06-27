@@ -49,6 +49,18 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // accounting
     Route::group(['prefix' => 'accounting', 'namespace' => 'Accounting'], function () {
         Route::resource('lg', 'LGController');
+
+        // GL
+        Route::group(['prefix' => 'gl', 'namespace' => 'GL'], function () {
+            Route::resource('jvperiod', 'JvPeriodController');
+            Route::post('jvperiod/bulk-delete', array('as' => 'jvperiod.bulk-delete', 'uses' => 'JvPeriodController@bulkDelete'));
+            Route::resource('periodend', 'TrxPostingController');
+            Route::post('periodend/bulk-delete', array('as' => 'periodend.bulk-delete', 'uses' => 'TrxPostingController@bulkDelete'));
+            Route::post('periodend/get-detail-data', array('as' => 'periodend.get-detail-data', 'uses' => 'TrxPostingController@detailData'));
+            Route::post('periodend/trx-detail', array('as' => 'periodend.posting-detail.post', 'uses' => 'TrxPostingController@trxTransDetailStore'));
+            Route::post('periodend/trx-detail/delete', array('as' => 'periodend.posting-detail.delete', 'uses' => 'TrxPostingController@trxTransDetailDelete'));
+            Route::post('periodend/trx-detail/detail', array('as' => 'periodend.posting-detail.detail', 'uses' => 'TrxPostingController@trxTransDetailGetDetail'));
+        });
     });
 
     // finance
@@ -94,6 +106,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('budget-rate/bulk-delete', array('as' => 'budget-rate.bulk-delete', 'uses' => 'BudgetRateController@bulkDelete'));
             Route::resource('account', 'MasterCoaController');
             Route::post('account/bulk-delete', array('as' => 'account.bulk-delete', 'uses' => 'MasterCoaController@bulkDelete'));
+            Route::resource('fx-trans', 'FxTransactionController');
+            Route::post('fx-trans/bulk-delete', array('as' => 'fx-trans.bulk-delete', 'uses' => 'FxTransactionController@bulkDelete'));
+            Route::post('fx-trans/get-detail-data', array('as' => 'fx-trans.get-detail-data', 'uses' => 'FxTransactionController@detailData'));
+            Route::post('fx-trans/fx-detail', array('as' => 'fx-trans.fx-detail.post', 'uses' => 'FxTransactionController@fxTransDetailStore'));
+            Route::post('fx-trans/fx-detail/delete', array('as' => 'fx-trans.fx-detail.delete', 'uses' => 'FxTransactionController@fxTransDetailDelete'));
+            Route::post('fx-trans/fx-detail/detail', array('as' => 'fx-trans.fx-detail.detail', 'uses' => 'FxTransactionController@fxTransDetailGetDetail'));
         });
         
     });
@@ -113,6 +131,6 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('company', 'CompanyController')->middleware('sentinel_access:company');
         Route::get('export/excel/company', [ 'as' => 'export.company.excel', 'uses' => 'CompanyController@export_excel' ]);
         Route::get('export/pdf/company', [ 'as' => 'export.company.pdf', 'uses' => 'CompanyController@export_pdf' ]);
-        
+
     });
 });

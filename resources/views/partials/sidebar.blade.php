@@ -334,7 +334,7 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu">
+        <li class=" has-sub-menu {!! (Request::is('accounting*') OR Request::is('accounting')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-agenda-1"></div>
@@ -365,10 +365,8 @@
                                 <i class="fa fa-circle-o"></i><span>Billing</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>LG</span>
-                            </a>
+                        <li class="{!! (url(route('lg.index')) == Request::url() OR Request::is('accounting/lg*')) ? ' active' : '' !!}">
+                            <a href="{{ route('lg.index') }}"><i class="fa fa-circle-o"></i><span>LG</span></a>
                         </li>
                         <li>
                             <a href="#">
@@ -443,15 +441,11 @@
                                                 <i class="fa fa-circle-o"></i><span>Posting</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Period End</span>
-                                            </a>
+                                        <li class="{!! (url(route('periodend.index')) == Request::url() OR Request::is('gl/periodend*')) ? ' active' : '' !!}">
+                                            <a href="{{ route('periodend.index') }}"><i class="fa fa-circle-o"></i><span>Per. End</span></a>
                                         </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>JV Period</span>
-                                            </a>
+                                        <li class="{!! (url(route('jvperiod.index')) == Request::url() OR Request::is('gl/jvperiod*')) ? ' active' : '' !!}">
+                                            <a href="{{route('jvperiod.index')}}"><i class="fa fa-circle-o"></i><span>JV Period</span></a>
                                         </li>
                                         <li>
                                             <a href="#">
@@ -602,10 +596,8 @@
                             <div class="sub-menu-w third-menu">
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>FX Transaction</span>
-                                            </a>
+                                        <li class="{!! (url(route('fx-trans.index')) == Request::url() OR Request::is('gl/fx-trans*')) ? ' active' : '' !!}">
+                                            <a href="{{route('fx-trans.index')}}"><i class="fa fa-circle-o"></i><span>FX Trans.</span></a>
                                         </li>
                                         <li class="{!! (url(route('budget-rate.index')) == Request::url() OR Request::is('gl/budget-rate*')) ? ' active' : '' !!}">
                                             <a href="{{route('budget-rate.index')}}"><i class="fa fa-circle-o"></i><span>Budget Rate</span></a>
