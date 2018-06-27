@@ -322,6 +322,11 @@
                         </li>
                         <li>
                             <a href="#">
+                                <i class="fa fa-circle-o"></i><span>FIT Older</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Delivery</span>
                             </a>
                         </li>
