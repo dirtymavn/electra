@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('cust_name', trans('Name'), ['class' => 'control-label']) !!}
-                    {!! Form::text('cust_name', old('cust_name') , ['class' => 'form-control', 'placeholder' => 'Input the Name']) !!}
+                    {!! Form::text('cust_name', old('cust_name') , ['class' => 'form-control', 'placeholder' => 'Input the Customer Name']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('cust_address', trans('Address'), ['class' => 'control-label']) !!}
