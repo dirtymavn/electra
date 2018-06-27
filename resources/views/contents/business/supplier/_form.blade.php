@@ -24,12 +24,8 @@
 			{!! Form::select('hotel_vendor_flag', ['1' => 'Active', '0' => 'Non Active'], old('hotel_vendor_flag'), ['class' => 'form-control']) !!}
 		</div>
 		<div class="form-group">
-			{!! Form::label('sundry_profile_flag', trans('Hotel Vendor Flag'), ['class' => 'control-label']) !!}
+			{!! Form::label('sundry_profile_flag', trans('Sundry Profile Flag'), ['class' => 'control-label']) !!}
 			{!! Form::select('sundry_profile_flag', ['1' => 'Active', '0' => 'Non Active'], old('sundry_profile_flag'), ['class' => 'form-control']) !!}
-		</div>
-		<div class="form-group">
-			{!! Form::label('sundry_profile_flag', trans('Hotel Vendor Flag'), ['class' => 'control-label']) !!}
-			{!! Form::select('status', ['active' => 'Active', 'non_active' => 'Non Active'], old('status'), ['class' => 'form-control']) !!}
 		</div>
 	</div>
 </div>
