@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\GL;
+namespace App\Http\Controllers\MasterData\Outbound;
 
 use App\Models\GL\TrxPosting\TrxPosting;
 use App\Models\GL\TrxPosting\TrxPostingDetail;

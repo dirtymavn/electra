@@ -1,38 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\GL;
+namespace App\Http\Controllers\MasterData\Outbound;
 
-use App\Models\GL\JvPeriod;
+use App\Models\GL\MasterCoa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\GL\JvPeriodDataTable;
-use App\Http\Requests\GL\JvPeriodRequest;
+use App\DataTables\GL\MasterCoaDataTable;
 
-class JvPeriodController extends Controller
+class MasterCoaController extends Controller
 {
-    /**
-     * @var App\Models\GL\JvPeriod
-    */
-    protected $jvPeriod;
-
-    /**
-     * Create a new JvPeriodController instance.
-     *
-     * @param \App\Models\GL\JvPeriod  $jvPeriod
-    */
-    public function __construct(JvPeriod $jvPeriod)
-    {
-        $this->jvPeriod = $jvPeriod;
-    }
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(JvPeriodDataTable $dataTable)
+    public function index(MasterCoaDataTable $dataTable)
     {
-        return $dataTable->render('contents.gl.jvperiod.index');
+        return $dataTable->render('contents.gl.account.index');
     }
 
     /**
@@ -42,16 +26,16 @@ class JvPeriodController extends Controller
      */
     public function create()
     {
-        return view('contents.gl.jvperiod.create');
+        return view('contents.gl.account.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\GL\JvPeriodRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JvPeriodRequest $request)
+    public function store(Request $request)
     {
         \DB::beginTransaction();
         try {
@@ -65,14 +49,14 @@ class JvPeriodController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $insert = $this->jvPeriod->create($request->all());
+            $insert = MasterCoa::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('jvperiod.index');
+                $redirect = redirect()->route('account.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('jvperiod.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('account.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('jvperiod.create');
+                    $redirect = redirect()->route('account.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -84,16 +68,15 @@ class JvPeriodController extends Controller
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GL\JvPeriod  $jvPeriod
+     * @param  \App\Models\GL\MasterCoa  $account
      * @return \Illuminate\Http\Response
      */
-    public function show(JvPeriod $jvPeriod)
+    public function show(MasterCoa $account)
     {
         //
     }
@@ -101,39 +84,39 @@ class JvPeriodController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GL\JvPeriod  $jvperiod
+     * @param  \App\Models\GL\MasterCoa  $account
      * @return \Illuminate\Http\Response
      */
-    public function edit(JvPeriod $jvperiod)
+    public function edit(MasterCoa $account)
     {
-        return view('contents.gl.jvperiod.edit', compact('jvperiod'));
+        return view('contents.gl.account.edit', compact('account'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\GL\JvPeriodRequest  $request
-     * @param  \App\Models\GL\JvPeriod  $jvperiod
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\GL\MasterCoa  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(JvPeriodRequest $request, JvPeriod $jvperiod)
+    public function update(Request $request, MasterCoa $account)
     {
-        \DB::beginTransaction();
+         \DB::beginTransaction();
         try {
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('jvperiod.index');
+                $redirect = redirect()->route('account.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('jvperiod.create');
+                $redirect = redirect()->route('account.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('jvperiod.edit', $jvperiod->id);
+                $redirect = redirect()->route('account.edit', $account->id);
             }
 
-            $update = $jvperiod->update($request->all());
+            $update = $account->update($request->all());
 
             if ($update) {
 
@@ -147,22 +130,20 @@ class JvPeriodController extends Controller
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GL\JvPeriod  $jvperiod
+     * @param  \App\Models\GL\MasterCoa  $account
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JvPeriod $jvperiod)
+    public function destroy(MasterCoa $account)
     {
-        $jvperiod->delete();
+        $account->delete();
         flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('jvperiod.index');
-
+        return redirect()->route('account.index');
     }
 
     /**
@@ -175,13 +156,13 @@ class JvPeriodController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            JvPeriod::whereIn('id', $ids)->delete();
+            MasterCoa::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('jvperiod.index');
+        return redirect()->route('account.index');
     }
 }

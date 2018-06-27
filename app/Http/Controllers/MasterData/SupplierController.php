@@ -1,22 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\GL;
+namespace App\Http\Controllers\MasterData;
 
-use App\Models\GL\MasterCoa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\GL\MasterCoaDataTable;
+use App\DataTables\Business\SupplierDataTable;
 
-class MasterCoaController extends Controller
+use App\Models\Business\Supplier\MasterSupplier as Supplier;
+
+use DB;
+
+class SupplierController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(MasterCoaDataTable $dataTable)
+    public function index(SupplierDataTable $dataTable)
     {
-        return $dataTable->render('contents.gl.account.index');
+        return $dataTable->render('contents.business.supplier.index');
     }
 
     /**
@@ -26,7 +29,7 @@ class MasterCoaController extends Controller
      */
     public function create()
     {
-        return view('contents.gl.account.create');
+        return view('contents.business.supplier.create');
     }
 
     /**
@@ -37,8 +40,9 @@ class MasterCoaController extends Controller
      */
     public function store(Request $request)
     {
-        \DB::beginTransaction();
+        DB::beginTransaction();
         try {
+
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
@@ -49,23 +53,26 @@ class MasterCoaController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $insert = MasterCoa::create($request->all());
 
+            $insert = Supplier::create( $request->all() );
+            
             if ($insert) {
-                $redirect = redirect()->route('account.index');
+                $redirect = redirect()->route('supplier.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('account.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('supplier.edit', $insert->id);
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('account.create');
+                    $redirect = redirect()->route('supplier.create');
                 }
-
                 flash()->success($msgSuccess);
                 \DB::commit();
                 return $redirect;
+            } else {
+                flash()->error('Data is failed to insert');
+                return redirect()->back()->withInput();
             }
         } catch (\Exception $e) {
+            flash()->error('<strong>Whoops! </strong> Something went wrong '. $e->getMessage());
             \DB::rollback();
-            flash()->success(trans('message.error') . ' : ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
     }
@@ -73,10 +80,10 @@ class MasterCoaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GL\MasterCoa  $account
+     * @param  \App\Models\Business\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function show(MasterCoa $account)
+    public function show(Supplier $supplier)
     {
         //
     }
@@ -84,50 +91,58 @@ class MasterCoaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GL\MasterCoa  $account
+     * @param  \App\Models\Business\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterCoa $account)
+    public function edit(Supplier $supplier)
     {
-        return view('contents.gl.account.edit', compact('account'));
+        $parent = $supplier->toArray();
+        $detail = $supplier->detail->toArray();
+        $merge = array_merge($parent, $detail);
+        $supplier = (object) $merge;
+
+        return view('contents.business.supplier.edit', compact('supplier'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\GL\MasterCoa  $account
+     * @param  \App\Models\Business\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MasterCoa $account)
+    public function update(Request $request, Supplier $supplier)
     {
-         \DB::beginTransaction();
+        DB::beginTransaction();
         try {
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('account.index');
+                $redirect = redirect()->route('supplier.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('account.create');
+                $redirect = redirect()->route('supplier.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('account.edit', $account->id);
+                $redirect = redirect()->route('supplier.edit', $supplier->id);
             }
 
-            $update = $account->update($request->all());
-
-            if ($update) {
-
-                flash()->success($msgSuccess);
+            $insert = $supplier->update( $request->all() );
+            
+            if ($insert) {
                 \DB::commit();
+                flash()->success($msgSuccess);
                 return $redirect;
-
+            } else {
+                flash()->error('Data is failed to updated');
+                return redirect()->back()->withInput();
             }
+            DB::commit();
         } catch (\Exception $e) {
-            \DB::rollback();
-            flash()->success(trans('message.error') . ' : ' . $e->getMessage());
+
+            DB::rollback();
+            flash()->error('Data is failed to updated');
             return redirect()->back()->withInput();
         }
     }
@@ -135,15 +150,14 @@ class MasterCoaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GL\MasterCoa  $account
+     * @param  \App\Models\Business\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MasterCoa $account)
+    public function destroy(Supplier $supplier)
     {
-        $account->delete();
-        flash()->success(trans('message.delete.success'));
-
-        return redirect()->route('account.index');
+        $destroy = $supplier->delete();
+        flash()->success('Data is successfully deleted');
+        return redirect()->route('supplier.index');
     }
 
     /**
@@ -156,13 +170,11 @@ class MasterCoaController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            MasterCoa::whereIn('id', $ids)->delete();
-
+            Supplier::whereIn('id', $ids)->delete();
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
-
-        return redirect()->route('account.index');
+        return redirect()->route('supplier.index');
     }
 }

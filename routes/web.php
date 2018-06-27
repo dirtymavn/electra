@@ -14,12 +14,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     // Dashboard
     Route::get('/', array('as' => 'dashboard', 'uses' => 'DashboardController@index'));
 
-    // Master
-    Route::group(['prefix' => 'master', 'namespace' => 'Master'], function () {
-        Route::resource('company', 'CompanyController')->middleware('sentinel_access:company');
-        Route::get('export/excel/company', [ 'as' => 'export.company.excel', 'uses' => 'CompanyController@export_excel' ]);
-        Route::get('export/pdf/company', [ 'as' => 'export.company.pdf', 'uses' => 'CompanyController@export_pdf' ]);
-        
+    // User Management
+    Route::group(['prefix' => 'user-management', 'namespace' => 'UserManagement'], function () {
+        Route::resource( 'user', 'UserController' );
+        Route::patch('user/{id}/reset-password', array('as' => 'user.reset-password', 'uses' => 'UserController@resetPassword'));
     });
 
     Route::group(['prefix' => 'user-management', 'namespace' => 'Master'], function () {
@@ -27,25 +25,46 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
     });
 
-    // User Management
-    Route::group(['prefix' => 'user-management', 'namespace' => 'UserManagement'], function () {
-        Route::resource( 'user', 'UserController' );
-        Route::patch('user/{id}/reset-password', array('as' => 'user.reset-password', 'uses' => 'UserController@resetPassword'));
+     // Business
+    Route::group(['prefix' => 'business', 'namespace' => 'Business'], function () {
+        Route::resource('sales', 'SalesFolderController');
+        Route::resource('delivery', 'DeliveryController');
     });
 
-    // Business
-    Route::group(['prefix' => 'business', 'namespace' => 'Business'], function () {
+     // Outbound
+    Route::group(['prefix' => 'outbound', 'namespace' => 'Outbound'], function () {
+
+    });
+
+    // Hotel
+    Route::group(['prefix' => 'hotel', 'namespace' => 'Hotel'], function () {
+
+    });
+
+    // FIT
+    Route::group(['prefix' => 'fit', 'namespace' => 'FIT'], function () {
+
+    });
+
+    // accounting
+    Route::group(['prefix' => 'accounting', 'namespace' => 'Accounting'], function () {
+        Route::resource('lg', 'LGController');
+    });
+
+    // finance
+    Route::group(['prefix' => 'finance', 'namespace' => 'Finance'], function () {
+
+    });
+
+    // Master Data
+    Route::group(['prefix' => 'master-data', 'namespace' => 'MasterData'], function () {
         Route::resource('customer', 'CustomerController');
         Route::post('customer/bulk-delete', array('as' => 'customer.bulk-delete', 'uses' => 'CustomerController@bulkDelete'));
         Route::resource('supplier', 'SupplierController');
         Route::post('supplier/bulk-delete', array('as' => 'supplier.bulk-delete', 'uses' => 'SupplierController@bulkDelete'));
-        Route::resource('sales', 'SalesFolderController');
-        Route::resource('transaction', 'TransactionController');
-        Route::patch('transaction/{id}/approve', array('as' => 'transaction.approve', 'uses' => 'TransactionController@approve'));
-        Route::patch('transaction/{id}/reject', array('as' => 'transaction.reject', 'uses' => 'TransactionController@reject'));
         Route::resource('voucher', 'VoucherController');
         Route::post('voucher/bulk-delete', array('as' => 'voucher.bulk-delete', 'uses' => 'VoucherController@bulkDelete'));
-        Route::resource('delivery', 'DeliveryController');
+        // Inventory
         Route::resource('inventory', 'InventoryController');
         Route::post('inventory/bulk-delete', array('as' => 'inventory.bulk-delete', 'uses' => 'InventoryController@bulkDelete'));
         Route::post('inventory/get-detail-data', array('as' => 'inventory.get-detail-data', 'uses' => 'InventoryController@detailData'));
@@ -53,61 +72,47 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('inventory/inventory-misc-detail', array('as' => 'inventory.misc-detail.post', 'uses' => 'InventoryController@inventoryDetailMisc'));
         Route::post('inventory/inventory-pkg-detail', array('as' => 'inventory.pkg-detail.post', 'uses' => 'InventoryController@inventoryDetailPkg'));
         Route::post('inventory/inventory-detail/detail', array('as' => 'inventory.detail.detail', 'uses' => 'InventoryController@inventoryDetailGetDetail'));
+        // end Inventory
+        // Outbound
+        Route::group(['prefix' => 'outbound', 'namespace' => 'Outbound'], function () {
+            Route::resource('guide', 'GuideController');
+            Route::post('guide/bulk-delete', array('as' => 'guide.bulk-delete', 'uses' => 'GuideController@bulkDelete'));
+            Route::resource('itin', 'ItinController');
+            Route::post('itin/bulk-delete', array('as' => 'itin.bulk-delete', 'uses' => 'ItinController@bulkDelete'));
+            Route::post('itin/get-detail-data', array('as' => 'itin.get-detail-data', 'uses' => 'ItinController@detailData'));
+            Route::post('itin/itinerary-detail', array('as' => 'itin.itinerary-detail.post', 'uses' => 'ItinController@itineraryDetailStore'));
+            Route::post('itin/itinerary-detail/delete', array('as' => 'itin.itinerary-detail.delete', 'uses' => 'ItinController@itineraryDetailDelete'));
+            Route::post('itin/itinerary-detail/detail', array('as' => 'itin.itinerary-detail.detail', 'uses' => 'ItinController@itineraryDetailGetDetail'));
+            Route::post('itin/itinerary-service', array('as' => 'itin.itinerary-service.post', 'uses' => 'ItinController@itineraryServiceStore'));
+            Route::post('itin/itinerary-optional', array('as' => 'itin.itinerary-optional.post', 'uses' => 'ItinController@itineraryOptionalStore'));
 
+        }); 
+
+        // Accounting
+        Route::group(['prefix' => 'accounting-setup', 'namespace' => 'Accounting'], function () {
+            Route::resource('budget-rate', 'BudgetRateController');
+            Route::post('budget-rate/bulk-delete', array('as' => 'budget-rate.bulk-delete', 'uses' => 'BudgetRateController@bulkDelete'));
+            Route::resource('account', 'MasterCoaController');
+            Route::post('account/bulk-delete', array('as' => 'account.bulk-delete', 'uses' => 'MasterCoaController@bulkDelete'));
+        });
+        
     });
 
-    // Outbound
-    Route::group(['prefix' => 'outbound', 'namespace' => 'Outbound'], function () {
-        Route::resource('guide', 'GuideController');
-        Route::post('guide/bulk-delete', array('as' => 'guide.bulk-delete', 'uses' => 'GuideController@bulkDelete'));
-        Route::resource('itin', 'ItinController');
-        Route::post('itin/bulk-delete', array('as' => 'itin.bulk-delete', 'uses' => 'ItinController@bulkDelete'));
-        Route::post('itin/get-detail-data', array('as' => 'itin.get-detail-data', 'uses' => 'ItinController@detailData'));
-        Route::post('itin/itinerary-detail', array('as' => 'itin.itinerary-detail.post', 'uses' => 'ItinController@itineraryDetailStore'));
-        Route::post('itin/itinerary-detail/delete', array('as' => 'itin.itinerary-detail.delete', 'uses' => 'ItinController@itineraryDetailDelete'));
-        Route::post('itin/itinerary-detail/detail', array('as' => 'itin.itinerary-detail.detail', 'uses' => 'ItinController@itineraryDetailGetDetail'));
-        Route::post('itin/itinerary-service', array('as' => 'itin.itinerary-service.post', 'uses' => 'ItinController@itineraryServiceStore'));
-        Route::post('itin/itinerary-optional', array('as' => 'itin.itinerary-optional.post', 'uses' => 'ItinController@itineraryOptionalStore'));
+     // System
+    Route::group(['prefix' => 'system', 'namespace' => 'System'], function () {
 
-    });
-
-    // GL
-    Route::group(['prefix' => 'gl', 'namespace' => 'GL'], function () {
-        Route::resource('jvperiod', 'JvPeriodController');
-        Route::post('jvperiod/bulk-delete', array('as' => 'jvperiod.bulk-delete', 'uses' => 'JvPeriodController@bulkDelete'));
-        Route::resource('fx-trans', 'FxTransactionController');
-        Route::post('fx-trans/bulk-delete', array('as' => 'fx-trans.bulk-delete', 'uses' => 'FxTransactionController@bulkDelete'));
-        Route::post('fx-trans/get-detail-data', array('as' => 'fx-trans.get-detail-data', 'uses' => 'FxTransactionController@detailData'));
-        Route::post('fx-trans/fx-detail', array('as' => 'fx-trans.fx-detail.post', 'uses' => 'FxTransactionController@fxTransDetailStore'));
-        Route::post('fx-trans/fx-detail/delete', array('as' => 'fx-trans.fx-detail.delete', 'uses' => 'FxTransactionController@fxTransDetailDelete'));
-        Route::post('fx-trans/fx-detail/detail', array('as' => 'fx-trans.fx-detail.detail', 'uses' => 'FxTransactionController@fxTransDetailGetDetail'));
-         Route::resource('account', 'MasterCoaController');
-         Route::post('account/bulk-delete', array('as' => 'account.bulk-delete', 'uses' => 'MasterCoaController@bulkDelete'));
-         Route::resource('periodend', 'TrxPostingController');
-         Route::post('periodend/bulk-delete', array('as' => 'periodend.bulk-delete', 'uses' => 'TrxPostingController@bulkDelete'));
-         Route::post('periodend/get-detail-data', array('as' => 'periodend.get-detail-data', 'uses' => 'TrxPostingController@detailData'));
-        Route::post('periodend/trx-detail', array('as' => 'periodend.posting-detail.post', 'uses' => 'TrxPostingController@trxTransDetailStore'));
-        Route::post('periodend/trx-detail/delete', array('as' => 'periodend.posting-detail.delete', 'uses' => 'TrxPostingController@trxTransDetailDelete'));
-        Route::post('periodend/trx-detail/detail', array('as' => 'periodend.posting-detail.detail', 'uses' => 'TrxPostingController@trxTransDetailGetDetail'));
-    });
-
-    // Outbound
-    Route::group(['prefix' => 'accounting'], function () {
-        Route::resource('lg', 'Business\LGController');
-    });
-
-    // Budget
-    Route::group(['prefix' => 'budget', 'namespace' => 'Budget'], function () {
-        Route::resource('budget-rate', 'BudgetRateController');
-        Route::post('budget-rate/bulk-delete', array('as' => 'budget-rate.bulk-delete', 'uses' => 'BudgetRateController@bulkDelete'));
-    });
-
-    // Budget
-    Route::group(['prefix' => 'internals', 'namespace' => 'Internals'], function () {
-        Route::resource('profile', 'MasterProfileController');
-        Route::post('profile/bulk-delete', array('as' => 'profile.bulk-delete', 'uses' => 'MasterProfileController@bulkDelete'));
     });
 
     // Audit Trail
     Route::get('audit-trail', array('as' => 'audit-trail.index', 'uses' => 'AuditTrailController@index', 'middleware' => 'sentinel_access:audit-trail'));
+
+
+
+    // Master
+    // Route::group(['prefix' => 'master', 'namespace' => 'Master'], function () {
+    //     Route::resource('company', 'CompanyController')->middleware('sentinel_access:company');
+    //     Route::get('export/excel/company', [ 'as' => 'export.company.excel', 'uses' => 'CompanyController@export_excel' ]);
+    //     Route::get('export/pdf/company', [ 'as' => 'export.company.pdf', 'uses' => 'CompanyController@export_pdf' ]);
+        
+    // });
 });

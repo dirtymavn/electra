@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Business;
+namespace App\Http\Controllers\MasterData;
 
+use App\Models\Business\Voucher\MasterVoucher as Voucher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Business\SupplierDataTable;
-
-use App\Models\Business\Supplier\MasterSupplier as Supplier;
+use App\DataTables\Business\VoucherDataTable;
 
 use DB;
 
-class SupplierController extends Controller
+class VoucherController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(SupplierDataTable $dataTable)
+    public function index(VoucherDataTable $dataTable)
     {
-        return $dataTable->render('contents.business.supplier.index');
+        return $dataTable->render('contents.business.voucher.index');
     }
 
     /**
@@ -29,7 +28,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('contents.business.supplier.create');
+        return view('contents.business.voucher.create');
     }
 
     /**
@@ -42,7 +41,6 @@ class SupplierController extends Controller
     {
         DB::beginTransaction();
         try {
-
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
@@ -53,15 +51,14 @@ class SupplierController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
+            $insert = Voucher::create( $request->all() );
 
-            $insert = Supplier::create( $request->all() );
-            
             if ($insert) {
-                $redirect = redirect()->route('supplier.index');
+                $redirect = redirect()->route('voucher.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('supplier.edit', $insert->id);
+                    $redirect = redirect()->route('voucher.edit', $insert->id);
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('supplier.create');
+                    $redirect = redirect()->route('voucher.create');
                 }
                 flash()->success($msgSuccess);
                 \DB::commit();
@@ -71,7 +68,7 @@ class SupplierController extends Controller
                 return redirect()->back()->withInput();
             }
         } catch (\Exception $e) {
-            flash()->error('<strong>Whoops! </strong> Something went wrong '. $e->getMessage());
+            flash()->error('<strong>Whoops! </strong> Something went wrong');
             \DB::rollback();
             return redirect()->back()->withInput();
         }
@@ -80,55 +77,50 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Business\Supplier  $supplier
+     * @param  \App\Models\Business\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
-    public function show(Supplier $supplier)
+    public function show(Voucher $voucher)
     {
-        //
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Business\Supplier  $supplier
+     * @param  \App\Models\Business\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Supplier $supplier)
+    public function edit(Voucher $voucher)
     {
-        $parent = $supplier->toArray();
-        $detail = $supplier->detail->toArray();
-        $merge = array_merge($parent, $detail);
-        $supplier = (object) $merge;
-
-        return view('contents.business.supplier.edit', compact('supplier'));
+        return view('contents.business.voucher.edit', compact('voucher'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Business\Supplier  $supplier
+     * @param  \App\Models\Business\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(Request $request, Voucher $voucher)
     {
         DB::beginTransaction();
         try {
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('supplier.index');
+                $redirect = redirect()->route('voucher.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('supplier.create');
+                $redirect = redirect()->route('voucher.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('supplier.edit', $supplier->id);
+                $redirect = redirect()->route('voucher.index');
             }
-
-            $insert = $supplier->update( $request->all() );
+           
+            $insert = $voucher->update( $request->all() );
             
             if ($insert) {
                 \DB::commit();
@@ -140,7 +132,7 @@ class SupplierController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-
+            
             DB::rollback();
             flash()->error('Data is failed to updated');
             return redirect()->back()->withInput();
@@ -150,16 +142,21 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Business\Supplier  $supplier
+     * @param  \App\Models\Business\voucher\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Supplier $supplier)
+    public function destroy(Voucher $voucher)
     {
-        $destroy = $supplier->delete();
-        flash()->success('Data is successfully deleted');
-        return redirect()->route('supplier.index');
+        if ($voucher->transactions) {
+            flash()->error(trans('message.have_related'));
+        } else {
+            $destroy = $voucher->delete();
+            flash()->success('Data is successfully deleted');
+        }
+        
+        return redirect()->route('voucher.index');
     }
-
+    
     /**
      * Remove the many resource from storage.
      *
@@ -170,11 +167,12 @@ class SupplierController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            Supplier::whereIn('id', $ids)->delete();
+            Voucher::whereIn('id', $ids)->delete();
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
-        return redirect()->route('supplier.index');
+
+        return redirect()->route('voucher.index');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Business;
+namespace App\Http\Controllers\MasterData;
 
 use App\Models\Business\Customer;
 use App\Models\Business\Customer\MasterCustomer;

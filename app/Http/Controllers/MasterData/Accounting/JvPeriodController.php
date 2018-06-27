@@ -1,38 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\Budget;
+namespace App\Http\Controllers\MasterData\Outbound;
 
-use App\Models\Budget\BudgetRate;
+use App\Models\GL\JvPeriod;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Budget\BudgetRateDataTable;
-use App\Http\Requests\Budget\BudgetRateRequest;
+use App\DataTables\GL\JvPeriodDataTable;
+use App\Http\Requests\GL\JvPeriodRequest;
 
-class BudgetRateController extends Controller
+class JvPeriodController extends Controller
 {
     /**
-     * @var App\Models\Budget\BudgetRate
+     * @var App\Models\GL\JvPeriod
     */
-    protected $budgetRate;
+    protected $jvPeriod;
 
     /**
-     * Create a new BudgetRateController instance.
+     * Create a new JvPeriodController instance.
      *
-     * @param \App\Models\Budget\BudgetRate  $budgetRate
+     * @param \App\Models\GL\JvPeriod  $jvPeriod
     */
-    public function __construct(BudgetRate $budgetRate)
+    public function __construct(JvPeriod $jvPeriod)
     {
-        $this->budgetRate = $budgetRate;
+        $this->jvPeriod = $jvPeriod;
     }
-
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(BudgetRateDataTable $dataTable)
+    public function index(JvPeriodDataTable $dataTable)
     {
-        return $dataTable->render('contents.budgets.budget_rate.index');
+        return $dataTable->render('contents.gl.jvperiod.index');
     }
 
     /**
@@ -42,18 +42,17 @@ class BudgetRateController extends Controller
      */
     public function create()
     {
-        return view('contents.budgets.budget_rate.create');
+        return view('contents.gl.jvperiod.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Budget\BudgetRateRequest  $request
+     * @param  \App\Http\Requests\GL\JvPeriodRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BudgetRateRequest $request)
+    public function store(JvPeriodRequest $request)
     {
-        
         \DB::beginTransaction();
         try {
             if (@$request->is_draft == 'true') {
@@ -66,14 +65,14 @@ class BudgetRateController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $insert = $this->budgetRate->create($request->all());
+            $insert = $this->jvPeriod->create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('budget-rate.index');
+                $redirect = redirect()->route('jvperiod.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('budget-rate.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('jvperiod.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('budget-rate.create');
+                    $redirect = redirect()->route('jvperiod.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -91,10 +90,10 @@ class BudgetRateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Budget\BudgetRate  $budgetrate
+     * @param  \App\Models\GL\JvPeriod  $jvPeriod
      * @return \Illuminate\Http\Response
      */
-    public function show(BudgetRate $budgetrate)
+    public function show(JvPeriod $jvPeriod)
     {
         //
     }
@@ -102,39 +101,39 @@ class BudgetRateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Budget\BudgetRate  $budgetRate
+     * @param  \App\Models\GL\JvPeriod  $jvperiod
      * @return \Illuminate\Http\Response
      */
-    public function edit(BudgetRate $budgetRate)
+    public function edit(JvPeriod $jvperiod)
     {
-        return view('contents.budgets.budget_rate.edit', compact('budgetRate'));
+        return view('contents.gl.jvperiod.edit', compact('jvperiod'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Budget\BudgetRateRequest  $request
-     * @param  \App\Models\Budget\BudgetRate  $budgetRate
+     * @param  \App\Http\Requests\GL\JvPeriodRequest  $request
+     * @param  \App\Models\GL\JvPeriod  $jvperiod
      * @return \Illuminate\Http\Response
      */
-    public function update(BudgetRateRequest $request, BudgetRate $budgetRate)
+    public function update(JvPeriodRequest $request, JvPeriod $jvperiod)
     {
         \DB::beginTransaction();
         try {
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('budget-rate.index');
+                $redirect = redirect()->route('jvperiod.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('budget-rate.create');
+                $redirect = redirect()->route('jvperiod.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('budget-rate.edit', $budgetRate->id);
+                $redirect = redirect()->route('jvperiod.edit', $jvperiod->id);
             }
 
-            $update = $budgetRate->update($request->all());
+            $update = $jvperiod->update($request->all());
 
             if ($update) {
 
@@ -154,18 +153,15 @@ class BudgetRateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Budget\BudgetRate  $budgetRate
+     * @param  \App\Models\GL\JvPeriod  $jvperiod
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BudgetRate $budgetRate)
+    public function destroy(JvPeriod $jvperiod)
     {
-        if ($budgetRate->delete()) {
-            flash()->success(trans('message.delete.success'));
-        } else {
-            flash()->error(trans('message.delete.error'));
-        }
+        $jvperiod->delete();
+        flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('budget-rate.index');
+        return redirect()->route('jvperiod.index');
 
     }
 
@@ -179,13 +175,13 @@ class BudgetRateController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            BudgetRate::whereIn('id', $ids)->delete();
+            JvPeriod::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('budget-rate.index');
+        return redirect()->route('jvperiod.index');
     }
 }
