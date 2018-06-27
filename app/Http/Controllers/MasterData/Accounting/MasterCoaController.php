@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\MasterData\Outbound;
+namespace App\Http\Controllers\MasterData\Accounting;
 
-use App\Models\GL\MasterCoa;
+use App\Models\MasterData\Accounting\MasterCoa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\GL\MasterCoaDataTable;
+use App\DataTables\MasterData\Accounting\MasterCoaDataTable;
 
 class MasterCoaController extends Controller
 {
@@ -16,7 +16,7 @@ class MasterCoaController extends Controller
      */
     public function index(MasterCoaDataTable $dataTable)
     {
-        return $dataTable->render('contents.gl.account.index');
+        return $dataTable->render('contents.master_datas.accountings.account.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class MasterCoaController extends Controller
      */
     public function create()
     {
-        return view('contents.gl.account.create');
+        return view('contents.master_datas.accountings.account.create');
     }
 
     /**
@@ -73,7 +73,7 @@ class MasterCoaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GL\MasterCoa  $account
+     * @param  \App\Models\MasterData\Accounting\MasterCoa  $account
      * @return \Illuminate\Http\Response
      */
     public function show(MasterCoa $account)
@@ -84,19 +84,19 @@ class MasterCoaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GL\MasterCoa  $account
+     * @param  \App\Models\MasterData\Accounting\MasterCoa  $account
      * @return \Illuminate\Http\Response
      */
     public function edit(MasterCoa $account)
     {
-        return view('contents.gl.account.edit', compact('account'));
+        return view('contents.master_datas.accountings.account.edit', compact('account'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\GL\MasterCoa  $account
+     * @param  \App\Models\MasterData\Accounting\MasterCoa  $account
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MasterCoa $account)
@@ -135,7 +135,7 @@ class MasterCoaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GL\MasterCoa  $account
+     * @param  \App\Models\MasterData\Accounting\MasterCoa  $account
      * @return \Illuminate\Http\Response
      */
     public function destroy(MasterCoa $account)

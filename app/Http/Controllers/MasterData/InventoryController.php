@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\MasterData;
 
-use App\Models\Business\Inventory\MasterInventory;
+use App\Models\MasterData\Inventory\MasterInventory;
 
-use App\DataTables\Business\InventoryDataTable;
+use App\DataTables\MasterData\InventoryDataTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Business\Inventory\MasterInventory as Inventory;
-use App\Models\Business\Inventory\TrxSales as Trx;
+use App\Models\MasterData\Inventory\MasterInventory as Inventory;
+use App\Models\MasterData\Inventory\TrxSales as Trx;
 
 use DB;
 
@@ -21,7 +21,7 @@ class InventoryController extends Controller
      */
     public function index(InventoryDataTable $dataTable)
     {
-        return $dataTable->render('contents.business.inventory.index');
+        return $dataTable->render('contents.master_datas.inventory.index');
     }
 
     /**
@@ -31,7 +31,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        return view('contents.business.inventory.create');
+        return view('contents.master_datas.inventory.create');
     }
 
     /**
@@ -83,7 +83,7 @@ class InventoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Business\Inventory\MasterInventory  $masterInventory
+     * @param  \App\Models\MasterData\Inventory\MasterInventory  $masterInventory
      * @return \Illuminate\Http\Response
      */
     public function show(Inventory $inventory)
@@ -94,7 +94,7 @@ class InventoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Business\Inventory\Inventory  $inventory
+     * @param  \App\Models\MasterData\Inventory\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
     public function edit(Inventory $inventory)
@@ -106,14 +106,14 @@ class InventoryController extends Controller
         $merge = array_merge($inventory, $trx);
 
         $inventory = (object) $merge;
-        return view('contents.business.inventory.edit', compact('inventory'));
+        return view('contents.master_datas.inventory.edit', compact('inventory'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Business\Inventory\Inventory  $inventory
+     * @param  \App\Models\MasterData\Inventory\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Inventory $inventory)
@@ -145,7 +145,7 @@ class InventoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Business\Inventory\Inventory  $inventory
+     * @param  \App\Models\MasterData\Inventory\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
     public function destroy(Inventory $inventory)

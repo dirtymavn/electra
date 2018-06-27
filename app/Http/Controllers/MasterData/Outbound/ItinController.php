@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\MasterData\Outbound;
 
-use App\Models\Outbound\Itinerary\MasterItinerary;
-use App\Models\Outbound\Itinerary\MasterItineraryDetail;
-use App\Models\Outbound\Itinerary\MasterItineraryOptional;
-use App\Models\Outbound\Itinerary\MasterItineraryService;
-use App\Models\Outbound\Itinerary\MasterItineraryServiceCostInterval;
-use App\Models\Outbound\Itinerary\MasterItineraryServiceFoc;
-use App\Models\Outbound\Itinerary\MasterItineraryServiceOtherPtc;
-use App\Models\Outbound\Itinerary\MasterItineraryServiceRoute;
-use App\Models\Outbound\Itinerary\MasterItineraryServiceTax;
+use App\Models\MasterData\Outbound\Itinerary\MasterItinerary;
+use App\Models\MasterData\Outbound\Itinerary\MasterItineraryDetail;
+use App\Models\MasterData\Outbound\Itinerary\MasterItineraryOptional;
+use App\Models\MasterData\Outbound\Itinerary\MasterItineraryService;
+use App\Models\MasterData\Outbound\Itinerary\MasterItineraryServiceCostInterval;
+use App\Models\MasterData\Outbound\Itinerary\MasterItineraryServiceFoc;
+use App\Models\MasterData\Outbound\Itinerary\MasterItineraryServiceOtherPtc;
+use App\Models\MasterData\Outbound\Itinerary\MasterItineraryServiceRoute;
+use App\Models\MasterData\Outbound\Itinerary\MasterItineraryServiceTax;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Outbound\ItinDataTable;
-use App\Http\Requests\Outbound\ItinRequest;
+use App\DataTables\MasterData\Outbound\ItinDataTable;
+use App\Http\Requests\MasterData\Outbound\ItinRequest;
 
 class ItinController extends Controller
 {
     /**
-     * @var App\Models\Outbound\Itinerary\MasterItinerary
+     * @var App\Models\MasterData\Outbound\Itinerary\MasterItinerary
     */
     protected $itin;
 
     /**
      * Create a new ItinController instance.
      *
-     * @param \App\Models\Outbound\Itinerary\MasterItinerary  $itin
+     * @param \App\Models\MasterData\Outbound\Itinerary\MasterItinerary  $itin
     */
     public function __construct(MasterItinerary $itin)
     {
@@ -40,7 +40,7 @@ class ItinController extends Controller
      */
     public function index(ItinDataTable $dataTable)
     {
-        return $dataTable->render('contents.outbounds.itin.index');
+        return $dataTable->render('contents.master_datas.outbounds.itin.index');
     }
 
     /**
@@ -53,13 +53,13 @@ class ItinController extends Controller
         // clear temporary data
         \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
 
-        return view('contents.outbounds.itin.create');
+        return view('contents.master_datas.outbounds.itin.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Outbound\ItinRequest  $request
+     * @param  \App\Http\Requests\MasterData\Outbound\ItinRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(ItinRequest $request)
@@ -205,7 +205,7 @@ class ItinController extends Controller
             ]);
         }
 
-        return view('contents.outbounds.itin.edit', compact('itin'));
+        return view('contents.master_datas.outbounds.itin.edit', compact('itin'));
     }
 
     /**

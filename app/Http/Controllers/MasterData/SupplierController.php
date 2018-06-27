@@ -4,9 +4,9 @@ namespace App\Http\Controllers\MasterData;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Business\SupplierDataTable;
+use App\DataTables\MasterData\SupplierDataTable;
 
-use App\Models\Business\Supplier\MasterSupplier as Supplier;
+use App\Models\MasterData\Supplier\MasterSupplier as Supplier;
 
 use DB;
 
@@ -19,7 +19,7 @@ class SupplierController extends Controller
      */
     public function index(SupplierDataTable $dataTable)
     {
-        return $dataTable->render('contents.business.supplier.index');
+        return $dataTable->render('contents.master_datas.supplier.index');
     }
 
     /**
@@ -29,7 +29,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('contents.business.supplier.create');
+        return view('contents.master_datas.supplier.create');
     }
 
     /**
@@ -80,7 +80,7 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Business\Supplier  $supplier
+     * @param  \App\Models\MasterData\Supplier\MasterSupplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function show(Supplier $supplier)
@@ -91,7 +91,7 @@ class SupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Business\Supplier  $supplier
+     * @param  \App\Models\MasterData\Supplier\MasterSupplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function edit(Supplier $supplier)
@@ -101,14 +101,14 @@ class SupplierController extends Controller
         $merge = array_merge($parent, $detail);
         $supplier = (object) $merge;
 
-        return view('contents.business.supplier.edit', compact('supplier'));
+        return view('contents.master_datas.supplier.edit', compact('supplier'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Business\Supplier  $supplier
+     * @param  \App\Models\MasterData\Supplier\MasterSupplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Supplier $supplier)
@@ -150,7 +150,7 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Business\Supplier  $supplier
+     * @param  \App\Models\MasterData\Supplier\MasterSupplier  $supplier
      * @return \Illuminate\Http\Response
      */
     public function destroy(Supplier $supplier)

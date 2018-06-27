@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\MasterData\Outbound;
 
-use App\Models\Outbound\Guide\MasterTourGuide;
-use App\Models\Outbound\Guide\TourGuideVisa;
+use App\Models\MasterData\Outbound\Guide\MasterTourGuide;
+use App\Models\MasterData\Outbound\Guide\TourGuideVisa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Outbound\GuideDataTable;
+use App\DataTables\MasterData\Outbound\GuideDataTable;
 
 class GuideController extends Controller
 {
     /**
-     * @var App\Models\Outbound\Guide\MasterTourGuide
-     * @var App\Models\Outbound\Guide\TourGuideVisa
+     * @var App\Models\MasterData\Outbound\Guide\MasterTourGuide
+     * @var App\Models\MasterData\Outbound\Guide\TourGuideVisa
     */
     protected $guide;
     protected $guideVisa;
@@ -20,8 +20,8 @@ class GuideController extends Controller
     /**
      * Create a new GuideController instance.
      *
-     * @param \App\Models\Outbound\Guide\MasterTourGuide  $guide
-     * @param \App\Models\Outbound\Guide\TourGuideVisa  $guideVisa
+     * @param \App\Models\MasterData\Outbound\Guide\MasterTourGuide  $guide
+     * @param \App\Models\MasterData\Outbound\Guide\TourGuideVisa  $guideVisa
     */
     public function __construct(MasterTourGuide $guide, TourGuideVisa $guideVisa)
     {
@@ -36,7 +36,7 @@ class GuideController extends Controller
      */
     public function index(GuideDataTable $dataTable)
     {
-        return $dataTable->render('contents.outbounds.guide.index');
+        return $dataTable->render('contents.master_datas.outbounds.guide.index');
     }
 
     /**
@@ -46,7 +46,7 @@ class GuideController extends Controller
      */
     public function create()
     {
-        return view('contents.outbounds.guide.create');
+        return view('contents.master_datas.outbounds.guide.create');
     }
 
     /**
@@ -101,7 +101,7 @@ class GuideController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Outbound\Guide\MasterTourGuide  $guide
+     * @param  \App\Models\MasterData\Outbound\Guide\MasterTourGuide  $guide
      * @return \Illuminate\Http\Response
      */
     public function show(MasterTourGuide $guide)
@@ -112,7 +112,7 @@ class GuideController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Outbound\Guide\MasterTourGuide  $guide
+     * @param  \App\Models\MasterData\Outbound\Guide\MasterTourGuide  $guide
      * @return \Illuminate\Http\Response
      */
     public function edit(MasterTourGuide $guide)
@@ -128,14 +128,14 @@ class GuideController extends Controller
 
         $guide = (object) $arrayMerge;
 
-        return view('contents.outbounds.guide.edit', compact('guide'));
+        return view('contents.master_datas.outbounds.guide.edit', compact('guide'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Outbound\Guide\MasterTourGuide  $guide
+     * @param  \App\Models\MasterData\Outbound\Guide\MasterTourGuide  $guide
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, MasterTourGuide $guide)
@@ -176,7 +176,7 @@ class GuideController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Outbound\Guide\MasterTourGuide  $guide
+     * @param  \App\Models\MasterData\Outbound\Guide\MasterTourGuide  $guide
      * @return \Illuminate\Http\Response
      */
     public function destroy(MasterTourGuide $guide)

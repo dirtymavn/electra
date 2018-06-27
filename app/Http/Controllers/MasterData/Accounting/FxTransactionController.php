@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers\MasterData\Accounting;
 
-use App\Models\GL\FxTrans\TrxFxTrans;
-use App\Models\GL\FxTrans\TrxFxTransDetail;
+use App\Models\MasterData\Accounting\FxTrans\TrxFxTrans;
+use App\Models\MasterData\Accounting\FxTrans\TrxFxTransDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\GL\TrxFxTransactionDataTable;
-use App\Http\Requests\GL\TrxFxTransRequest;
+use App\DataTables\MasterData\Accounting\TrxFxTransactionDataTable;
+use App\Http\Requests\MasterData\Accounting\TrxFxTransRequest;
 
 class FxTransactionController extends Controller
 {
     /**
-     * @var App\Models\GL\FxTrans\TrxFxTrans
+     * @var App\Models\MasterData\Accounting\FxTrans\TrxFxTrans
     */
     protected $trxFxTrans;
 
     /**
      * Create a new FxTransactionController instance.
      *
-     * @param \App\Models\GL\FxTrans\TrxFxTrans  $trxFxTrans
+     * @param \App\Models\MasterData\Accounting\FxTrans\TrxFxTrans  $trxFxTrans
     */
     public function __construct(TrxFxTrans $trxFxTrans)
     {
@@ -33,7 +33,7 @@ class FxTransactionController extends Controller
      */
     public function index(TrxFxTransactionDataTable $dataTable)
     {
-        return $dataTable->render('contents.gl.trx_fx_trans.index');
+        return $dataTable->render('contents.master_datas.accountings.trx_fx_trans.index');
     }
 
     /**
@@ -47,13 +47,13 @@ class FxTransactionController extends Controller
         \DB::table('temporaries')->whereType('fxTrans-detail')
             ->whereUserId(user_info('id'))->delete();
 
-        return view('contents.gl.trx_fx_trans.create');
+        return view('contents.master_datas.accountings.trx_fx_trans.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\GL\TrxFxTransRequest  $request
+     * @param  \App\Http\Requests\MasterData\Accounting\TrxFxTransRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(TrxFxTransRequest $request)
@@ -95,7 +95,7 @@ class FxTransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GL\FxTrans\TrxFxTrans  $trxFxTrans
+     * @param  \App\Models\MasterData\Accounting\FxTrans\TrxFxTrans  $trxFxTrans
      * @return \Illuminate\Http\Response
      */
     public function show(TrxFxTrans $trxFxTrans)
@@ -106,7 +106,7 @@ class FxTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GL\FxTrans\TrxFxTrans  $trxFxTrans
+     * @param  \App\Models\MasterData\Accounting\FxTrans\TrxFxTrans  $trxFxTrans
      * @return \Illuminate\Http\Response
      */
     public function edit(TrxFxTrans $trxFxTrans, $id)
@@ -125,15 +125,15 @@ class FxTransactionController extends Controller
             ]);
         }
 
-        return view('contents.gl.trx_fx_trans.edit', compact('trxFxTrans'));
+        return view('contents.master_datas.accountings.trx_fx_trans.edit', compact('trxFxTrans'));
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\GL\TrxFxTransRequest  $request
-     * @param  \App\Models\GL\FxTrans\TrxFxTrans  $trxFxTrans
+     * @param  \App\Http\Requests\MasterData\Accounting\TrxFxTransRequest  $request
+     * @param  \App\Models\MasterData\Accounting\FxTrans\TrxFxTrans  $trxFxTrans
      * @return \Illuminate\Http\Response
      */
     public function update(TrxFxTransRequest $request, TrxFxTrans $trxFxTrans, $id)
@@ -202,7 +202,7 @@ class FxTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GL\FxTrans\TrxFxTrans  $trxFxTrans
+     * @param  \App\Models\MasterData\Accounting\FxTrans\TrxFxTrans  $trxFxTrans
      * @return \Illuminate\Http\Response
      */
     public function destroy(TrxFxTrans $trxFxTrans, $id)

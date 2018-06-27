@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\Accounting\GL;
 
-use App\Models\GL\JvPeriod;
+use App\Models\Accounting\GL\JvPeriod;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\GL\JvPeriodDataTable;
-use App\Http\Requests\GL\JvPeriodRequest;
+use App\DataTables\Accounting\GL\JvPeriodDataTable;
+use App\Http\Requests\Accounting\GL\JvPeriodRequest;
 
 class JvPeriodController extends Controller
 {
     /**
-     * @var App\Models\GL\JvPeriod
+     * @var App\Models\Accounting\GL\JvPeriod
     */
     protected $jvPeriod;
 
     /**
      * Create a new JvPeriodController instance.
      *
-     * @param \App\Models\GL\JvPeriod  $jvPeriod
+     * @param \App\Models\Accounting\GL\JvPeriod  $jvPeriod
     */
     public function __construct(JvPeriod $jvPeriod)
     {
@@ -32,7 +32,7 @@ class JvPeriodController extends Controller
      */
     public function index(JvPeriodDataTable $dataTable)
     {
-        return $dataTable->render('contents.gl.jvperiod.index');
+        return $dataTable->render('contents.accountings.gl.jvperiod.index');
     }
 
     /**
@@ -42,13 +42,13 @@ class JvPeriodController extends Controller
      */
     public function create()
     {
-        return view('contents.gl.jvperiod.create');
+        return view('contents.accountings.gl.jvperiod.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\GL\JvPeriodRequest  $request
+     * @param  \App\Http\Requests\Accounting\GL\JvPeriodRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(JvPeriodRequest $request)
@@ -90,7 +90,7 @@ class JvPeriodController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GL\JvPeriod  $jvPeriod
+     * @param  \App\Models\Accounting\GL\JvPeriod  $jvPeriod
      * @return \Illuminate\Http\Response
      */
     public function show(JvPeriod $jvPeriod)
@@ -101,19 +101,19 @@ class JvPeriodController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GL\JvPeriod  $jvperiod
+     * @param  \App\Models\Accounting\GL\JvPeriod  $jvperiod
      * @return \Illuminate\Http\Response
      */
     public function edit(JvPeriod $jvperiod)
     {
-        return view('contents.gl.jvperiod.edit', compact('jvperiod'));
+        return view('contents.accountings.gl.jvperiod.edit', compact('jvperiod'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\GL\JvPeriodRequest  $request
-     * @param  \App\Models\GL\JvPeriod  $jvperiod
+     * @param  \App\Http\Requests\Accounting\GL\JvPeriodRequest  $request
+     * @param  \App\Models\Accounting\GL\JvPeriod  $jvperiod
      * @return \Illuminate\Http\Response
      */
     public function update(JvPeriodRequest $request, JvPeriod $jvperiod)
@@ -153,7 +153,7 @@ class JvPeriodController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GL\JvPeriod  $jvperiod
+     * @param  \App\Models\Accounting\GL\JvPeriod  $jvperiod
      * @return \Illuminate\Http\Response
      */
     public function destroy(JvPeriod $jvperiod)

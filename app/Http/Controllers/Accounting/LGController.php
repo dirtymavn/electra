@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Accounting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Business\LGDataTable;
+use App\DataTables\Accounting\LGDataTable;
 
 class LGController extends Controller
 {
@@ -15,7 +15,7 @@ class LGController extends Controller
      */
     public function index(LGDataTable $dataTable)
     {
-        return $dataTable->render('contents.business.lg.index');
+        return $dataTable->render('contents.accountings.lg.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class LGController extends Controller
      */
     public function create()
     {
-        return view('contents.business.lg.create');
+        return view('contents.accountings.lg.create');
     }
 
     /**

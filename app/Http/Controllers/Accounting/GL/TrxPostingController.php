@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Accounting\GL;
 
-use App\Models\GL\TrxPosting\TrxPosting;
-use App\Models\GL\TrxPosting\TrxPostingDetail;
-use App\DataTables\GL\TrxPostingDataTable;
+use App\Models\Accounting\GL\TrxPosting\TrxPosting;
+use App\Models\Accounting\GL\TrxPosting\TrxPostingDetail;
+use App\DataTables\Accounting\GL\TrxPostingDataTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -77,7 +77,7 @@ class TrxPostingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GL\TrxPosting\TrxPosting  $trxPosting
+     * @param  \App\Models\Accounting\GL\TrxPosting\TrxPosting  $trxPosting
      * @return \Illuminate\Http\Response
      */
     public function show(TrxPosting $trxPosting)
@@ -88,7 +88,7 @@ class TrxPostingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GL\TrxPosting\TrxPosting  $trxPosting
+     * @param  \App\Models\Accounting\GL\TrxPosting\TrxPosting  $trxPosting
      * @return \Illuminate\Http\Response
      */
     public function edit(TrxPosting $trxPosting, $id)
@@ -115,7 +115,7 @@ class TrxPostingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\GL\Request  $request
-     * @param  \App\Models\GL\TrxPosting\TrxPosting  $trxPosting
+     * @param  \App\Models\Accounting\GL\TrxPosting\TrxPosting  $trxPosting
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, TrxPosting $trxPosting, $id)
