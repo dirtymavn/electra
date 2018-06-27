@@ -623,7 +623,7 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu">
+        <li class=" has-sub-menu {!! (Request::is('system*') OR Request::is('system')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-star"></div>
@@ -634,6 +634,18 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
+                        @if(user_info()->inRole('super-admin'))
+                            <li class="{!! (url(route('company.index')) == Request::url() OR Request::is('system/company*')) ? ' active' : '' !!}">
+                                <a href=" {{ route('company.index') }} ">
+                                    <i class="fa fa-circle-o"></i><span>Company</span>
+                                </a>
+                            </li>
+                            <li class="{!! (url(route('audit-trail.index')) == Request::url() OR Request::is('system/logs*')) ? ' active' : '' !!}">
+                                <a href=" {{ route('audit-trail.index') }} ">
+                                    <i class="fa fa-circle-o"></i><span>Logs</span>
+                                </a>
+                            </li>
+                        @endif
                         <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Users</span>

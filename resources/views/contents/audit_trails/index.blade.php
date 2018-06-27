@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Audit Trail')
+@section('title', 'Log')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -11,11 +11,11 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item">Audit Trail</li>
+    <li class="breadcrumb-item">Log</li>
 </ul>
 @endsection
 
-@section('page_title', 'Audit Trail Lists')
+@section('page_title', 'Log Lists')
 
 @section('content')
 @include('flash::message')
