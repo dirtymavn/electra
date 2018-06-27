@@ -41,7 +41,7 @@
 						{!! Form::number('credit_days', null, [ 'class' => 'form-control', 'placeholder' => 'credit_days' ]) !!}
 					</div>
 					<div class="form-group">
-						{!! Form::label('credit_term_type', trans('Credit Limit'), ['class' => 'control-label']) !!}
+						{!! Form::label('credit_term_type', trans('Credit Term Type'), ['class' => 'control-label']) !!}
 						{{-- {!! Form::number('credit_term_type', null, [ 'class' => 'form-control', 'placeholder' => 'credit_term_type' ]) !!} --}}
 						<select class="form-control">
 							<option>Option 1</option>
