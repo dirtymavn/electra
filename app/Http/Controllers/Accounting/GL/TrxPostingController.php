@@ -17,7 +17,7 @@ class TrxPostingController extends Controller
      */
     public function index(TrxPostingDataTable $dataTable)
     {
-        return $dataTable->render('contents.gl.periodend.index');
+        return $dataTable->render('contents.accountings.gl.periodend.index');
     }
 
     /**
@@ -30,7 +30,7 @@ class TrxPostingController extends Controller
         \DB::table('temporaries')->whereType('fxTrans-detail')
         ->whereUserId(user_info('id'))->delete();
 
-        return view('contents.gl.periodend.create');
+        return view('contents.accountings.gl.periodend.create');
     }
 
     /**
@@ -107,7 +107,7 @@ class TrxPostingController extends Controller
             ]);
         }
 
-        return view('contents.gl.periodend.edit', compact('trxPosting'));
+        return view('contents.accountings.gl.periodend.edit', compact('trxPosting'));
 
     }
 
