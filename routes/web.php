@@ -87,9 +87,13 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('itin/itinerary-optional', array('as' => 'itin.itinerary-optional.post', 'uses' => 'ItinController@itineraryOptionalStore'));
 
         }); 
-        // Outbound
-        Route::group(['prefix' => 'accounting-setup', 'namespace' => 'Accounting'], function () {
 
+        // Accounting
+        Route::group(['prefix' => 'accounting-setup', 'namespace' => 'Accounting'], function () {
+            Route::resource('budget-rate', 'BudgetRateController');
+            Route::post('budget-rate/bulk-delete', array('as' => 'budget-rate.bulk-delete', 'uses' => 'BudgetRateController@bulkDelete'));
+            Route::resource('account', 'MasterCoaController');
+            Route::post('account/bulk-delete', array('as' => 'account.bulk-delete', 'uses' => 'MasterCoaController@bulkDelete'));
         });
         
     });

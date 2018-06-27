@@ -148,32 +148,26 @@
             </a>
         </li>
         <!--<li class="sub-header"><span>Business</span></li>-->
-        <li class=" has-sub-menu">
-            <a href="apps_bank.html">
+        <li class="has-sub-menu {!! (Request::is('user-management*') OR Request::is('user-management')) ? ' active' : '' !!}">
+            <a href="#">
                 <div class="icon-w">
-                    <div class="os-icon os-icon-user"></div>
-                </div>
-                <span>User Management</span>
-            </a>
+                    <div class="os-icon os-icon-users"></div>
+                </div><span>User Management</span></a>
             <div class="sub-menu-w">
-                <div class="sub-menu-icon"><i class="os-icon os-icon-package"></i></div>
+                <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Register User</span>
-                            </a>
+                        <li class="{!! (url(route('user.index')) == Request::url() OR Request::is('user-management/user*')) ? ' active' : '' !!}">
+                            <a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i><span>Register User</span></a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o-check"></i><span>Role User</span>
-                            </a>
+                        <li class="{!! (url(route('role.index')) == Request::url() OR Request::is('user-management/role*')) ? ' active' : '' !!}">
+                            <a href="{{route('role.index')}}"><i class="fa fa-circle-o"></i><span>Role User</span></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu">
+        <li class=" has-sub-menu {!! (Request::is('business*') OR Request::is('business')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-folder"></div>
@@ -184,20 +178,16 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Sales</span>
-                            </a>
+                        <li class="{!! (url(route('sales.index')) == Request::url() OR Request::is('business/sales*')) ? ' active' : '' !!}">
+                            <a href=" {{ route('sales.index') }} "><i class="fa fa-circle-o"></i><span>Sales</span></a>
                         </li>
                         <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Invoice</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Delivery</span>
-                            </a>
+                        <li class="{!! (url(route('delivery.index')) == Request::url() OR Request::is('business/delivery*')) ? ' active' : '' !!}">
+                            <a href=" {{ route('delivery.index') }} "><i class="fa fa-circle-o"></i><span>Delivery</span></a>
                         </li>
                         <li>
                             <a href="#">
@@ -555,7 +545,7 @@
                 </div>
             </div>
         </li>
-        <li class="has-sub-menu {!! (Request::is('business*') OR Request::is('business')) ? ' active' : '' !!}">
+        <li class="has-sub-menu {!! (Request::is('master-data*') OR Request::is('master-data')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-folder"></div>
@@ -565,19 +555,19 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-folder"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li class="{!! (url(route('customer.index')) == Request::url() OR Request::is('business/customer*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('customer.index')) == Request::url() OR Request::is('master-data/customer*')) ? ' active' : '' !!}">
                             <a href="{{route('customer.index')}}"><i class="fa fa-circle-o"></i><span>Customer</span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-circle-o"></i><span>Hotel</span></a>
                         </li>
-                        <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('business/supplier*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('master-data/supplier*')) ? ' active' : '' !!}">
                             <a href=" {{ route('supplier.index') }} "><i class="fa fa-circle-o"></i><span>Supplier</span></a>
                         </li>
                         <li>
                             <a href="{{ route('inventory.index') }}"><i class="fa fa-circle-o"></i><span>Inventory</span></a>
                         </li>
-                        <li class="{!! (url(route('voucher.index')) == Request::url() OR Request::is('business/voucher*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('voucher.index')) == Request::url() OR Request::is('master-data/voucher*')) ? ' active' : '' !!}">
                             <a href="{{ route('voucher.index') }}"><i class="fa fa-circle-o"></i><span>Voucher</span></a>
                         </li>
                         <li>
@@ -590,16 +580,13 @@
                             <div class="sub-menu-w third-menu">
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Guide</span>
-                                            </a>
+                                        <li class="{!! (url(route('guide.index')) == Request::url() OR Request::is('outbound/guide*')) ? ' active' : '' !!}">
+                                            <a href="{{ route('guide.index') }}"><i class="fa fa-circle-o"></i><span>Guide</span></a>
+                                        </li>
+                                        <li class="{!! (url(route('itin.index')) == Request::url() OR Request::is('outbound/itin*')) ? ' active' : '' !!}">
+                                            <a href="{{ route('itin.index') }}"><i class="fa fa-circle-o"></i><span>Itinerary</span></a>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Itinerary</span>
-                                            </a>
-                                        </li><li>
                                             <a href="#">
                                                 <i class="fa fa-circle-o"></i><span>Air Allotment</span>
                                             </a>
@@ -620,14 +607,11 @@
                                                 <i class="fa fa-circle-o"></i><span>FX Transaction</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Budget Rate</span>
-                                            </a>
-                                        </li><li>
-                                            <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Account</span>
-                                            </a>
+                                        <li class="{!! (url(route('budget-rate.index')) == Request::url() OR Request::is('gl/budget-rate*')) ? ' active' : '' !!}">
+                                            <a href="{{route('budget-rate.index')}}"><i class="fa fa-circle-o"></i><span>Budget Rate</span></a>
+                                        </li>
+                                         <li class="{!! (url(route('account.index')) == Request::url() OR Request::is('gl/account*')) ? ' active' : '' !!}">
+                                            <a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i><span>Account</span></a>
                                         </li>
                                     <ul>
                                 </div>
