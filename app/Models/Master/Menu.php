@@ -10,61 +10,121 @@ class Menu extends Model
     public static function getPermission()
     {
         $permissions = [
-            'Master' => [
-                'company' => [
-                    'company.create' => 'Create',
-                    'company.edit' => 'Edit',
-                    'company.destroy' => 'Delete',
-                    'company.show' => 'Show',
-                    'company.approval' => 'Approval'
-                ]
-            ],
             'User Management' => [
                 'register' => [
+                    'user.read' => 'Read',
                     'user.create' => 'Create',
                     'user.edit' => 'Edit',
                     'user.destroy' => 'Delete',
-                    'user.show' => 'Show',
                     'user.approval' => 'Approval'
                 ],
                 'role' => [
+                    'role.read' => 'Read',
                     'role.create' => 'Create',
                     'role.edit' => 'Edit',
                     'role.destroy' => 'Delete',
-                    'role.show' => 'Show',
                     'role.approval' => 'Approval'
                 ]
             ],
             'Business' => [
-                'customer' => [
-                    'customer.create' => 'Create',
-                    'customer.edit' => 'Edit',
-                    'customer.destroy' => 'Delete',
-                    'customer.show' => 'Show',
-                    'customer.approval' => 'Approval'
-                ],
-                'supplier' => [
-                    'supplier.create' => 'Create',
-                    'supplier.edit' => 'Edit',
-                    'supplier.destroy' => 'Delete',
-                    'supplier.show' => 'Show',
-                    'supplier.approval' => 'Approval'
-                ],
                 'sales-folder' => [
+                    'sales.read' => 'Read',
                     'sales.create' => 'Create',
                     'sales.edit' => 'Edit',
                     'sales.destroy' => 'Delete',
-                    'sales.show' => 'Show',
+                    'sales.approval' => 'Approval'
+                ]
+            ],
+            'Accounting' => [
+                'LG' => [
+                    'lg.read' => 'Read',
+                    'lg.create' => 'Create',
+                    'lg.edit' => 'Edit',
+                    'lg.destroy' => 'Delete',
+                    'lg.approval' => 'Approval'
+                ],
+                'Period End' => [
+                    'periodend.read' => 'Read',
+                    'periodend.create' => 'Create',
+                    'periodend.edit' => 'Edit',
+                    'periodend.destroy' => 'Delete',
+                    'periodend.approval' => 'Approval'
+                ],
+                'JV Period' => [
+                    'jvperiod.read' => 'Read',
+                    'jvperiod.create' => 'Create',
+                    'jvperiod.edit' => 'Edit',
+                    'jvperiod.destroy' => 'Delete',
+                    'jvperiod.approval' => 'Approval'
+                ]
+            ],
+            'Master Data' => [
+                'customer' => [
+                    'customer.read' => 'Read',
+                    'customer.create' => 'Create',
+                    'customer.edit' => 'Edit',
+                    'customer.destroy' => 'Delete',
+                    'customer.approval' => 'Approval'
+                ],
+                'supplier' => [
+                    'supplier.read' => 'Read',
+                    'supplier.create' => 'Create',
+                    'supplier.edit' => 'Edit',
+                    'supplier.destroy' => 'Delete',
+                    'supplier.approval' => 'Approval'
+                ],
+                'sales-folder' => [
+                    'sales.read' => 'Read',
+                    'sales.create' => 'Create',
+                    'sales.edit' => 'Edit',
+                    'sales.destroy' => 'Delete',
                     'sales.approval' => 'Approval'
                 ],
-                'transaction' => [
-                    'transaction.create' => 'Create',
-                    'transaction.edit' => 'Edit',
-                    'transaction.destroy' => 'Delete',
-                    'transaction.show' => 'Show',
-                    'transaction.approval' => 'Approval'
+                'guide' => [
+                    'guide.read' => 'Read',
+                    'guide.create' => 'Create',
+                    'guide.edit' => 'Edit',
+                    'guide.destroy' => 'Delete',
+                    'guide.approval' => 'Approval'
                 ],
-            ]
+                'itinerary' => [
+                    'itin.read' => 'Read',
+                    'itin.create' => 'Create',
+                    'itin.edit' => 'Edit',
+                    'itin.destroy' => 'Delete',
+                    'itin.approval' => 'Approval'
+                ],
+                'FX Transfer' => [
+                    'fx-trans.read' => 'Read',
+                    'fx-trans.create' => 'Create',
+                    'fx-trans.edit' => 'Edit',
+                    'fx-trans.destroy' => 'Delete',
+                    'fx-trans.approval' => 'Approval'
+                ],
+                'Budget' => [
+                    'budget-rate.read' => 'Read',
+                    'budget-rate.create' => 'Create',
+                    'budget-rate.edit' => 'Edit',
+                    'budget-rate.destroy' => 'Delete',
+                    'budget-rate.approval' => 'Approval'
+                ],
+                'Account' => [
+                    'account.read' => 'Read',
+                    'account.create' => 'Create',
+                    'account.edit' => 'Edit',
+                    'account.destroy' => 'Delete',
+                    'account.approval' => 'Approval'
+                ],
+            ],
+            'System' => [
+                'company' => [
+                    'company.read' => 'Read',
+                    'company.create' => 'Create',
+                    'company.edit' => 'Edit',
+                    'company.destroy' => 'Delete',
+                    'company.approval' => 'Approval'
+                ]
+            ],
 
         ];
 
