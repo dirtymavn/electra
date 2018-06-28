@@ -1427,7 +1427,7 @@ pre code {
 	}
 }*/
 
-/*@media (min-width: 992px) {
+@media (min-width: 992px) {
 	.col-lg {
 		-ms-flex-preferred-size: 0;
 		flex-basis: 0;
@@ -1626,9 +1626,9 @@ pre code {
 	.offset-lg-11 {
 		margin-left: 91.6666666667%
 	}
-}*/
+}
 
-/*@media (min-width: 1250px) {
+@media (min-width: 1250px) {
 	.col-xl {
 		-ms-flex-preferred-size: 0;
 		flex-basis: 0;
@@ -2430,7 +2430,7 @@ pre code {
 	.offset-xxxxl-11 {
 		margin-left: 91.6666666667%
 	}
-}*/
+}
 
 .table {
 	width: 100%;
@@ -10653,11 +10653,11 @@ a.text-dark:focus {
 	white-space: nowrap
 }
 
-/*@media (min-width: 1100px) {
+@media (min-width: 1100px) {
 	.table-responsive {
 		overflow: visible
 	}
-}*/
+}
 
 .table-lg td {
 	padding: 1.2rem 1.5rem
