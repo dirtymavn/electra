@@ -9,18 +9,18 @@
             {!! Form::text('customer_name', old('customer_name') , ['class' => 'form-control', 'placeholder' => 'Input the Customer Name']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('company_name', trans('Company Name'), ['class' => 'control-label']) !!}
-            {!! Form::text('company_name', old('company_name') , ['class' => 'form-control', 'placeholder' => 'Input the Company Name']) !!}
+            {!! Form::label('company_id', trans('Company Name'), ['class' => 'control-label']) !!}
+            {!! Form::select('company_id', $companies, old('status'), ['class' => 'form-control', 'placeholder' => 'Select Company Name']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-            {!! Form::select('status', ['active' => 'Active', 'non_active' => 'Non Active'], old('status'), ['class' => 'form-control']) !!}
+            {!! Form::select('status', ['active' => 'Active', 'inactive' => 'In Active', 'suspend' => 'Suspend'], old('status'), ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('salutation', trans('Salutation'), ['class' => 'control-label']) !!}
-            {!! Form::select('salutation', ['yes' => 'Yes', 'no' => 'No'], old('salutation'), ['class' => 'form-control']) !!}
+            {!! Form::select('salutation', ['mr' => 'MR.', 'mrs' => 'Mrs.'], old('salutation'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('sales_id', trans('Sales ID'), ['class' => 'control-label']) !!}
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('cust_type_id', trans('Cust. Type'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('cust_type_id', ['yes' => 'Yes', 'no' => 'No'], old('cust_type_id'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('cust_type_id', ['fit' => 'FIT', 'agent' => 'Agent', 'commercial' => 'Commercial'], old('cust_type_id'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('mailing_address', trans('Mailing Address'), ['class' => 'control-label']) !!}
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('office_address', trans('Office Address'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('office_address', ['yes' => 'Yes', 'no' => 'No'], old('office_address') , ['class' => 'form-control']) !!}
+                                        {!! Form::select('office_address', ['mailing' => 'Mailing', 'billing' => 'Billing'], old('office_address') , ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('travel_policy', trans('Travel Policy'), ['class' => 'control-label']) !!}
@@ -93,7 +93,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('contact_type', trans('Contact Type'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('contact_type', ['yes' => 'Yes', 'no' => 'No'], old('contact_type'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('contact_type', ['contact' => 'Contact', 'passenger' => 'Passenger'], old('contact_type'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('surname', trans('Surname'), ['class' => 'control-label']) !!}
@@ -105,21 +105,21 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('title', trans('Title'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('title', old('title') , ['class' => 'form-control', 'placeholder' => 'Input the Title']) !!}
+                                        {!! Form::select('title', ['mr' => 'Mr.', 'mrs' => 'Mrs.', 'msl' => 'Msl.'], old('contact_type'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('office_phone', trans('Office Phone'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('office_phone', old('office_phone') , ['class' => 'form-control', 'placeholder' => 'Input the Office Phone']) !!}
+                                        {!! Form::number('office_phone', old('office_phone') , ['class' => 'form-control', 'placeholder' => 'Input the Office Phone']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('home_phone', trans('Home Phone'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('home_phone', old('home_phone') , ['class' => 'form-control', 'placeholder' => 'Input the Home Phone']) !!}
+                                        {!! Form::number('home_phone', old('home_phone') , ['class' => 'form-control', 'placeholder' => 'Input the Home Phone']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('mobile_phone', trans('Mobile Phone'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('mobile_phone', old('mobile_phone') , ['class' => 'form-control', 'placeholder' => 'Input the Mobile Phone']) !!}
+                                        {!! Form::number('mobile_phone', old('mobile_phone') , ['class' => 'form-control', 'placeholder' => 'Input the Mobile Phone']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('fax_1', trans('Fax 1'), ['class' => 'control-label']) !!}
@@ -135,7 +135,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('email', trans('Email'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('email', old('email') , ['class' => 'form-control', 'placeholder' => 'Input the Email']) !!}
+                                        {!! Form::email('email', old('email') , ['class' => 'form-control', 'placeholder' => 'Input the Email']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -149,11 +149,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('gender', trans('Gender'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('gender', ['1' => 'Laki-laki', '2' => 'Perempuan'], old('gender'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('gender', ['1' => 'Male', '2' => 'Female'], old('gender'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('marital_status', trans('Marital Status'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('marital_status', ['yes' => 'Yes', 'no' => 'No'], old('marital_status'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('marital_status', ['divorced' => 'Divorced', 'single' => 'Single', 'married' => 'Married'], old('marital_status'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('insurance_no', trans('Insurance No'), ['class' => 'control-label']) !!}
@@ -183,7 +183,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('ic_no_1', trans('IC No 1'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('ic_no_1', old('ic_no_1') , ['class' => 'form-control', 'placeholder' => 'Input the IC No 1']) !!}
+                                        {!! Form::text('ic_no_1', old('ic_no_1') , ['class' => 'form-control', 'placeholder' => 'Input the IC No 1', 'maxlength' => 40]) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('ic_no_1_country', trans('IC No 1 Country'), ['class' => 'control-label']) !!}
@@ -191,7 +191,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('ic_no_2', trans('IC No 2'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('ic_no_2', old('ic_no_2') , ['class' => 'form-control', 'placeholder' => 'Input the IC No 2']) !!}
+                                        {!! Form::text('ic_no_2', old('ic_no_2') , ['class' => 'form-control','maxlength' => 40, 'placeholder' => 'Input the IC No 2']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('ic_no_2_country', trans('IC No 2 Country'), ['class' => 'control-label']) !!}
@@ -225,7 +225,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('seat_pref', trans('Seat Pref'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('seat_pref', old('seat_pref') , ['class' => 'form-control', 'placeholder' => 'Input the Seat Pref']) !!}
+                                        {!! Form::select('seat_pref', ['window' => 'Window', 'aisle' => 'Aisle', 'bulkhead' => 'Bulkhead'], old('contact_type'), ['class' => 'form-control', 'placeholder' => 'the Seat Pref']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('seat_pref_remark', trans('Seat Pref Remark'), ['class' => 'control-label']) !!}
@@ -235,15 +235,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('meal', trans('Meal'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('meal', old('meal') , ['class' => 'form-control', 'placeholder' => 'Input the Meal']) !!}
+                                        {!! Form::select('meal', $meals, old('contact_type'), ['class' => 'form-control', 'placeholder' => 'Select the Meal']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('meal_remark', trans('Meal Remark'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('meal_remark', old('meal_remark') , ['class' => 'form-control', 'placeholder' => 'Input the Meal Remark']) !!}
+                                        {!! Form::textarea('meal_remark', old('meal_remark') , ['class' => 'form-control', 'rows' => '3x5', 'placeholder' => 'Input the Meal Remark']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('other_pref', trans('Other Pref'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('other_pref', old('other_pref') , ['class' => 'form-control', 'placeholder' => 'Input the Other Pref']) !!}
+                                        {!! Form::textarea('other_pref', old('other_pref') , ['class' => 'form-control','rows' => '3x5', 'placeholder' => 'Input the Other Pref']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +304,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('product_code', trans('Product Code'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('product_code', old('product_code') , ['class' => 'form-control', 'placeholder' => 'Input the Product Code']) !!}
+                                        {!! Form::select('product_code',[], old('product_code') , ['class' => 'form-control', 'placeholder' => 'Select the Product Code']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -332,7 +332,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('card_type', trans('Card Type'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('card_type', old('card_type') , ['class' => 'form-control', 'placeholder' => 'Input the Card Type']) !!}
+                                        {!! Form::text('card_type', old('card_type') , ['class' => 'form-control', 'placeholder' => 'Input the Card Type', 'readonly' => true]) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('merchant_no', trans('Merchant No.'), ['class' => 'control-label']) !!}
@@ -366,7 +366,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('sof', trans('Sof'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('sof', old('sof') , ['class' => 'form-control', 'placeholder' => 'Input the Sof']) !!}
+                                        {!! Form::select('sof', ['true' => 'YES', 'false' => 'NO'],old('sof') , ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('remark', trans('Remark'), ['class' => 'control-label']) !!}
@@ -384,7 +384,7 @@
                                  <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('credit_limit', trans('Credit Limit'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('credit_limit', old('credit_limit') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Credit Limit']) !!}
+                                        {!! Form::number('credit_limit', old('credit_limit') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Credit Limit']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('share_credit_code', trans('Share Credit Code'), ['class' => 'control-label']) !!}
@@ -392,7 +392,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('addon_credit_limit', trans('Addon Credit Limit'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('addon_credit_limit', old('addon_credit_limit') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Addon Credit Limit']) !!}
+                                        {!! Form::number('addon_credit_limit', old('addon_credit_limit') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Addon Credit Limit']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('addon_from_date', trans('Addon From Date'), ['class' => 'control-label']) !!}
@@ -410,15 +410,15 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('invoice_delivery_method', trans('Invoice Delivery Method'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('invoice_delivery_method', ['yes' => 'Yes', 'no' => 'No'],old('invoice_delivery_method') , ['class' => 'form-control']) !!}
+                                        {!! Form::select('invoice_delivery_method', ['fortnightly-statement' => 'Fortnightly Statement', 'monthly-statement' => 'Monthly Statement'],old('invoice_delivery_method') , ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('recall_commission_method', trans('Recall Commission Method'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('recall_commission_method', ['yes' => 'Yes', 'no' => 'No'],old('recall_commission_method') , ['class' => 'form-control']) !!}
+                                        {!! Form::select('recall_commission_method', ['credit-card' => 'Credit Card', 'invoice' => 'Invoice'],old('recall_commission_method') , ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('rebate_method', trans('Rebate Method'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('rebate_method', ['yes' => 'Yes', 'no' => 'No'],old('rebate_method') , ['class' => 'form-control']) !!}
+                                        {!! Form::select('rebate_method', ['cn' => 'C/N', 'credit-card' => 'Credit Card', 'same-inv' => 'Same Inv'],old('rebate_method') , ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('rebate_amount_type_id', trans('Rebate Amount Type'), ['class' => 'control-label']) !!}

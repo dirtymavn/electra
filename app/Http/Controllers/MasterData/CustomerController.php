@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Models\MasterData\Customer\MasterCustomer;
+use App\Models\Master\Company;
+use App\Models\Master\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\CustomerDataTable;
@@ -12,17 +14,23 @@ class CustomerController extends Controller
 {
     /**
      * @var \App\Models\MasterData\Customer\MasterCustomer
+     * @var \App\Models\Master\Company
     */
     protected $masterCustomer;
+    protected $companies;
+    protected $countries;
 
     /**
      * Create a new CustomerController instance.
      *
      * @param \App\Models\MasterData\Customer\MasterCustomer  $masterCustomer
+     * @param \App\Models\Master\Company  $companies
     */
-    public function __construct(MasterCustomer $masterCustomer)
+    public function __construct(MasterCustomer $masterCustomer, Company $companies, Country $countries)
     {
         $this->masterCustomer = $masterCustomer;
+        $this->companies = $companies;
+        $this->countries = $countries;
     }
 
     /**
@@ -42,7 +50,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.customer.create');
+        $companies = $this->companies->all()->pluck('name', 'id');
+        $meals = $this->masterCustomer->meals();
+        return view('contents.master_datas.customer.create', compact('companies', 'meals'));
     }
 
     /**

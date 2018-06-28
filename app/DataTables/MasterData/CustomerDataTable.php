@@ -38,7 +38,7 @@ class CustomerDataTable extends DataTable
             'id',
             'customer_no',
             'customer_name',
-            'company_name',
+            'company_id',
             'status',
             'salutation',
             'sales_id',
@@ -52,7 +52,7 @@ class CustomerDataTable extends DataTable
         // return $empty;
         // return $model->getDataByCompany(@user_info()->company->id)->select('customers.id',
         //     'customers.name', 'customers.address', 'customers.created_at', 'customers.updated_at',
-        //     'companies.name as company_name');
+        //     'companies.name as company_id');
     }
 
     /**
@@ -80,14 +80,14 @@ class CustomerDataTable extends DataTable
         // return [
         //     'name' => ['name' => 'customers.name', 'data' => 'name', 'title' => trans('Name'), 'id' => 'name'],
         //     'address' => ['name' => 'customers.address', 'data' => 'address', 'title' => trans('Address'), 'id' => 'address'],
-        //     'company_name' => ['name' => 'companies.name', 'data' => 'company_name', 'title' => trans('Company Name'), 'id' => 'company_name'],
+        //     'company_id' => ['name' => 'companies.name', 'data' => 'company_id', 'title' => trans('Company Name'), 'id' => 'company_id'],
         //     'created_at' => ['name' => 'customers.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at'],
         // ];
 
         return [
             'customer_no',
             'customer_name',
-            'company_name',
+            'company_id',
             'status',
             'salutation',
             'sales_id',

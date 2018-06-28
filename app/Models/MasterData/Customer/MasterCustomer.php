@@ -22,7 +22,7 @@ class MasterCustomer extends Model
     protected $fillable = [
         'customer_no',
         'customer_name',
-        'company_name',
+        'company_id',
         'status',
         'salutation',
         'sales_id',
@@ -140,5 +140,30 @@ class MasterCustomer extends Model
 
         // });
 
+    }
+
+    /**
+     * For Enum Meals
+     *
+     * @return array
+     */
+    public static function meals()
+    {
+        $meals = [
+            'Asian Vegetarian' => 'Asian Vegetarian',
+            'Baby Meal' => 'Baby Meal',
+            'Bland' => 'Bland',
+            'Child' => 'Child',
+            'Diabetic' => 'Diabetic',
+            'Easy' => 'Easy',
+            'Fruit Platter' => 'Fruit Platter',
+            'Gluten Free' => 'Gluten Free',
+            'Hindu' => 'Hindu',
+            'Japanese' => 'Japanese',
+            'Kosher' => 'Kosher',
+            'Moslem' => 'Moslem'
+        ];
+        
+        return collect($meals);
     }
 }

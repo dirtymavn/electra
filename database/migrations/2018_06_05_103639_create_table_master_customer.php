@@ -19,7 +19,7 @@ class CreateTableMasterCustomer extends Migration
             $table->increments('id');
             $table->string('customer_no')->nullable();
             $table->string('customer_name')->nullable();
-            $table->string('company_name')->nullable();
+            $table->string('company_id')->nullable();
             $table->enum('status', ['active', 'non_active'])->nullable();
             $table->enum('salutation', ['yes', 'no'])->nullable();
             $table->integer('sales_id')->nullable();
