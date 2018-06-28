@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\MasterData;
 
-use App\Models\Business\Voucher\MasterVoucher as Voucher;
+use App\Models\MasterData\Voucher\MasterVoucher as Voucher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Business\VoucherDataTable;
+use App\DataTables\MasterData\VoucherDataTable;
 
 use DB;
 
@@ -18,7 +18,7 @@ class VoucherController extends Controller
      */
     public function index(VoucherDataTable $dataTable)
     {
-        return $dataTable->render('contents.business.voucher.index');
+        return $dataTable->render('contents.master_datas.voucher.index');
     }
 
     /**
@@ -28,7 +28,7 @@ class VoucherController extends Controller
      */
     public function create()
     {
-        return view('contents.business.voucher.create');
+        return view('contents.master_datas.voucher.create');
     }
 
     /**
@@ -77,7 +77,7 @@ class VoucherController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Business\Voucher  $voucher
+     * @param  \App\Models\MasterData\Voucher\MasterVoucher  $voucher
      * @return \Illuminate\Http\Response
      */
     public function show(Voucher $voucher)
@@ -88,19 +88,20 @@ class VoucherController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Business\Voucher  $voucher
+     * @param  \App\Models\MasterData\Voucher\MasterVoucher  $voucher
      * @return \Illuminate\Http\Response
      */
     public function edit(Voucher $voucher)
     {
-        return view('contents.business.voucher.edit', compact('voucher'));
+        $voucher->voucher_date = date('Y-m-d', strtotime($voucher->voucher_date));
+        return view('contents.master_datas.voucher.edit', compact('voucher'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Business\Voucher  $voucher
+     * @param  \App\Models\MasterData\Voucher\MasterVoucher  $voucher
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Voucher $voucher)
@@ -117,7 +118,7 @@ class VoucherController extends Controller
                 $redirect = redirect()->route('voucher.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('voucher.index');
+                $redirect = redirect()->route('voucher.edit', $voucher->id);
             }
            
             $insert = $voucher->update( $request->all() );
@@ -142,7 +143,7 @@ class VoucherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Business\voucher\Voucher  $voucher
+     * @param  \App\Models\MasterData\Voucher\MasterVoucher\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
     public function destroy(Voucher $voucher)

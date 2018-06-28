@@ -3,6 +3,7 @@
 namespace App\DataTables\Master;
 
 use App\Models\Role;
+use App\Models\Master\Company;
 use Yajra\DataTables\Services\DataTable;
 
 class RoleDataTable extends DataTable
@@ -17,11 +18,18 @@ class RoleDataTable extends DataTable
     {
         return datatables($query)
             ->addColumn('action', function($role){
-                $edit_url = route('role.edit', $role->id);
-                if ($role->slug != 'super-admin') {
-                    $delete_url = route('role.destroy', $role->id);
+                
+                if ($role->slug != 'super-admin' && $role->slug != 'admin') {
+                    $edit_url = route('role.edit', $role->id);
+
+                    if ($role->slug != 'subscriber') {
+                        $delete_url = route('role.destroy', $role->id);
+                    }
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
                 }
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+
+                return '-';
+                
             })
             ->addIndexColumn();
     }
@@ -34,7 +42,19 @@ class RoleDataTable extends DataTable
      */
     public function query(Role $model)
     {
-        return $model->newQuery()->select('id', 'name', 'slug' ,'created_at', 'updated_at');
+        if (@user_info()->company) {
+            $companyId = user_info()->company->id;
+        }
+
+        $query = $model->newQuery()->leftJoin('companies', 'companies.id', '=', 'roles.company_id')
+            ->select('roles.id', 'roles.name', 'roles.slug', 'roles.created_at', 'roles.updated_at',
+                'companies.name as company_name');
+
+        if (!user_info()->inRole('super-admin')) {
+            $query = $query->whereCompanyId($companyId);
+        }
+
+        return $query;
     }
 
     /**
@@ -59,10 +79,9 @@ class RoleDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'name',
-            'created_at',
-            'updated_at'
+            'name' => ['name' => 'roles.name', 'data' => 'name', 'title' => trans('Name'), 'id' => 'name'],
+            'company_name' => ['name' => 'companies.name', 'data' => 'company_name', 'title' => trans('Company'), 'id' => 'company_name'],
+            'created_at' => ['name' => 'roles.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at'],
         ];
     }
 

@@ -11,9 +11,9 @@
             <thead>
                 <tr>
                     <th> Role Action </th>
+                    <th> Read </th>
                     <th> Create </th>
                     <th> Update </th>
-                    <th> Read </th>
                     <th> Delete </th>
                     <th> Approve </th>
                 </tr>

@@ -600,7 +600,7 @@ pre code {
 	margin-left: auto
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
 	.container {
 		max-width: 540px
 	}
@@ -640,7 +640,7 @@ pre code {
 	.container {
 		max-width: 1680px
 	}
-}
+} */
 
 .container-fluid {
 	width: 100%;
@@ -1025,7 +1025,7 @@ pre code {
 	margin-left: 91.6666666667%
 }
 
-@media (min-width: 576px) {
+ @media (min-width: 576px) {
 	.col-sm {
 		-ms-flex-preferred-size: 0;
 		flex-basis: 0;
@@ -1224,7 +1224,7 @@ pre code {
 	.offset-sm-11 {
 		margin-left: 91.6666666667%
 	}
-}
+} 
 
 @media (min-width: 768px) {
 	.col-md {
@@ -2656,7 +2656,7 @@ pre code {
 	background-color: rgba(255, 255, 255, 0.075)
 }
 
-@media (max-width: 575.98px) {
+/*@media (max-width: 575.98px) {
 	.table-responsive-sm {
 		display: block;
 		width: 100%;
@@ -2745,7 +2745,7 @@ pre code {
 	.table-responsive-xxxxl>.table-bordered {
 		border: 0
 	}
-}
+}*/
 
 .table-responsive {
 	display: block;
@@ -3241,7 +3241,7 @@ select.form-control-lg:not([size]):not([multiple]),
 	width: 100%
 }
 
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
 	.form-inline label {
 		display: -webkit-box;
 		display: -ms-flexbox;
@@ -3311,7 +3311,7 @@ select.form-control-lg:not([size]):not([multiple]),
 	.form-inline .custom-control-label {
 		margin-bottom: 0
 	}
-}
+}*/
 
 .btn,
 .all-wrapper .fc-button {
@@ -5620,7 +5620,7 @@ button.close {
 	overflow: scroll
 }
 
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
 	.modal-dialog {
 		max-width: 550px;
 		margin: 1.75rem auto
@@ -5637,7 +5637,7 @@ button.close {
 	.modal-lg {
 		max-width: 900px
 	}
-}
+}*/
 
 .tooltip {
 	position: absolute;
@@ -6439,7 +6439,7 @@ button.bg-dark:focus {
 	display: inline-flex !important
 }
 
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
 	.d-sm-none {
 		display: none !important
 	}
@@ -6709,7 +6709,7 @@ button.bg-dark:focus {
 		display: -ms-inline-flexbox !important;
 		display: inline-flex !important
 	}
-}
+}*/
 
 .embed-responsive {
 	position: relative;
@@ -6916,7 +6916,7 @@ button.bg-dark:focus {
 	align-self: stretch !important
 }
 
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
 	.flex-sm-row {
 		-webkit-box-orient: horizontal !important;
 		-webkit-box-direction: normal !important;
@@ -7866,7 +7866,7 @@ button.bg-dark:focus {
 		-ms-flex-item-align: stretch !important;
 		align-self: stretch !important
 	}
-}
+}*/
 
 .float-left {
 	float: left !important
@@ -7880,7 +7880,7 @@ button.bg-dark:focus {
 	float: none !important
 }
 
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
 	.float-sm-left {
 		float: left !important
 	}
@@ -7962,7 +7962,7 @@ button.bg-dark:focus {
 	.float-xxxxl-none {
 		float: none !important
 	}
-}
+}*/
 
 .position-static {
 	position: static !important
@@ -8387,7 +8387,7 @@ button.bg-dark:focus {
 	margin-left: auto !important
 }
 
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
 	.m-sm-0 {
 		margin: 0 !important
 	}
@@ -10135,7 +10135,7 @@ button.bg-dark:focus {
 	.mx-xxxxl-auto {
 		margin-left: auto !important
 	}
-}
+}*/
 
 .text-justify {
 	text-align: justify !important
@@ -10163,7 +10163,7 @@ button.bg-dark:focus {
 	text-align: center !important
 }
 
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
 	.text-sm-left {
 		text-align: left !important
 	}
@@ -10245,7 +10245,7 @@ button.bg-dark:focus {
 	.text-xxxxl-center {
 		text-align: center !important
 	}
-}
+}*/
 
 .text-lowercase {
 	text-transform: lowercase !important
@@ -12400,14 +12400,14 @@ div.dataTables_scrollFoot table {
 	border-top: none
 }
 
-@media screen and (max-width: 767px) {
+/*@media screen and (max-width: 767px) {
 	div.dataTables_wrapper div.dataTables_length,
 	div.dataTables_wrapper div.dataTables_filter,
 	div.dataTables_wrapper div.dataTables_info,
 	div.dataTables_wrapper div.dataTables_paginate {
 		text-align: center
 	}
-}
+}*/
 
 table.dataTable.table-condensed>thead>tr>th {
 	padding-right: 20px
@@ -13659,7 +13659,7 @@ body.menu-side-right .layout-w {
 	text-decoration: none
 }
 
-@media (min-width: 1025px) {
+/*@media (min-width: 1025px) {
 	.menu-w ul.main-menu>li>a:hover .icon-w {
 		-webkit-transform: translateX(8px);
 		transform: translateX(8px)
@@ -13668,7 +13668,7 @@ body.menu-side-right .layout-w {
 		-webkit-transform: translateX(5px);
 		transform: translateX(5px)
 	}
-}
+}*/
 
 .menu-w ul.main-menu>li .icon-w {
 	color: #ed0b19;
@@ -14467,7 +14467,7 @@ body.menu-side-right .layout-w {
 	text-decoration: none
 }
 
-@media (min-width: 1025px) {
+/*@media (min-width: 1025px) {
 	.menu-w.menu-layout-compact ul.main-menu>li>a:hover .icon-w {
 		-webkit-transform: translateX(8px);
 		transform: translateX(8px)
@@ -14476,7 +14476,7 @@ body.menu-side-right .layout-w {
 		-webkit-transform: translateX(5px);
 		transform: translateX(5px)
 	}
-}
+}*/
 
 .menu-w.menu-layout-compact ul.main-menu>li .icon-w {
 	font-size: 18px;
@@ -15962,7 +15962,7 @@ body.menu-side-right .layout-w {
 	text-decoration: none
 }
 
-@media (min-width: 1025px) {
+/*@media (min-width: 1025px) {
 	.menu-mobile ul.main-menu>li>a:hover .icon-w {
 		-webkit-transform: translateX(10px);
 		transform: translateX(10px)
@@ -15971,7 +15971,7 @@ body.menu-side-right .layout-w {
 		-webkit-transform: translateX(5px);
 		transform: translateX(5px)
 	}
-}
+}*/
 
 .menu-mobile ul.main-menu>li .icon-w {
 	color: #0073ff;
@@ -18196,7 +18196,7 @@ a.el-tablo:hover .label {
 	margin-bottom: 1rem
 }
 
-@media (min-width: 992px) {
+/*@media (min-width: 992px) {
 	.padded-lg {
 		padding: 1rem 2rem
 	}
@@ -18230,7 +18230,7 @@ a.el-tablo:hover .label {
 	.b-b-xl {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.1)
 	}
-}
+}*/
 
 .example-column {
 	padding: 12px 15px;
@@ -24941,7 +24941,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
 	margin-left: -18px
 }
 
-@media (min-width: 1650px) {
+/*@media (min-width: 1650px) {
 	.rentals-list-w .property-items.as-grid .property-item {
 		-webkit-box-flex: 0;
 		-ms-flex: 0 0 33.3%;
@@ -24953,7 +24953,7 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
 	.rentals-list-w .property-items.as-grid .property-item:nth-child(3n) {
 		border-right: none
 	}
-}
+}*/
 
 .support-index {
 	display: -webkit-box;
@@ -28657,11 +28657,10 @@ body.color-scheme-dark .page-item.disabled .page-link,
 		padding: 2rem
 	}
 	.all-wrapper {
-		max-width: 100%
+		max-width: 1346px;
 	}
 }
-
-@media (max-width: 1550px) {
+/*@media (max-width: 1550px) {
 	body,
 	body.auth-wrapper .all-wrapper {
 		padding: 20px
@@ -29743,7 +29742,7 @@ body.color-scheme-dark .page-item.disabled .page-link,
 		transform: translate(0, -50%);
 		margin: 0px auto
 	}
-}
+}*/
 
 
 /*# sourceMappingURL=main.css.map */

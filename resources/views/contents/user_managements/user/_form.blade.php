@@ -39,10 +39,12 @@
             {!! Form::label('company_id', trans('Company ID'), ['class' => 'control-label']) !!}
             {!! Form::select('company_id', ['' => "Choose Company"] + @$companies, old('company_id'), ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group {{ $errors->has('role_id') ? 'has-error' : ''}}">
-            {!! Form::label('role_id', trans('Role'), ['class' => 'control-label']) !!}
-            {!! Form::select('role_id', ['' => "Choose Role"] + @$roles, old('role_id'), ['class' => 'form-control']) !!}
-        </div>
+        {{-- @if(user_info()->inRole('super-admin') || user_info()->inRole('admin')) --}}
+            <div class="form-group {{ $errors->has('role_id') ? 'has-error' : ''}}">
+                {!! Form::label('role_id', trans('Role'), ['class' => 'control-label']) !!}
+                {!! Form::select('role_id', ['' => "Choose Role"] + @$roles, old('role_id'), ['class' => 'form-control']) !!}
+            </div>
+        {{-- @endif --}}
     </div>
 </div>
 

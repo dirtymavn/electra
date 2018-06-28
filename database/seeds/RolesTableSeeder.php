@@ -11,26 +11,42 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('role_users')->truncate();
+        // DB::table('role_users')->truncate();
         DB::table('roles')->truncate();
 
         Sentinel::getRoleRepository()->createModel()->create([
             'slug' => 'super-admin',
             'name' => 'Super Administrator',
             'permissions' => [
-            'admin' => true
+                'admin' => true
             ]
         ]);
 
         Sentinel::getRoleRepository()->createModel()->create([
             'slug' => 'admin',
             'name' => 'Administrator',
-            'permissions' => []
+            'permissions' => [
+                'admin.company' => true
+            ]
         ]);
 
         Sentinel::getRoleRepository()->createModel()->create([
             'slug' => 'subscriber',
             'name' => 'Subscriber',
+            'permissions' => [],
+        ]);
+
+        Sentinel::getRoleRepository()->createModel()->create([
+            'slug' => 'subscriber-1',
+            'name' => 'Subscriber',
+            'company_id' => 1,
+            'permissions' => [],
+        ]);
+
+        Sentinel::getRoleRepository()->createModel()->create([
+            'slug' => 'subscriber-2',
+            'name' => 'Subscriber',
+            'company_id' => 2,
             'permissions' => [],
         ]);
 

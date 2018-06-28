@@ -2,32 +2,35 @@
 
 namespace App\Http\Controllers\MasterData;
 
-use App\Models\Business\Customer;
-use App\Models\Business\Customer\MasterCustomer;
+use App\Models\MasterData\Customer\MasterCustomer;
+use App\Models\Master\Company;
+use App\Models\Master\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Business\CustomerDataTable;
-use App\Http\Requests\Business\CustomerRequest;
+use App\DataTables\MasterData\CustomerDataTable;
+use App\Http\Requests\MasterData\CustomerRequest;
 
 class CustomerController extends Controller
 {
     /**
-     * @var \App\Models\Business\Customer
-     * @var \App\Models\Business\Customer\MasterCustomer
+     * @var \App\Models\MasterData\Customer\MasterCustomer
+     * @var \App\Models\Master\Company
     */
-    protected $customer;
     protected $masterCustomer;
+    protected $companies;
+    protected $countries;
 
     /**
      * Create a new CustomerController instance.
      *
-     * @param \App\Models\Business\Customer  $customer
-     * @param \App\Models\Business\Customer\MasterCustomer  $masterCustomer
+     * @param \App\Models\MasterData\Customer\MasterCustomer  $masterCustomer
+     * @param \App\Models\Master\Company  $companies
     */
-    public function __construct(Customer $customer, MasterCustomer $masterCustomer)
+    public function __construct(MasterCustomer $masterCustomer, Company $companies, Country $countries)
     {
-        $this->customer = $customer;
         $this->masterCustomer = $masterCustomer;
+        $this->companies = $companies;
+        $this->countries = $countries;
     }
 
     /**
@@ -37,7 +40,7 @@ class CustomerController extends Controller
      */
     public function index(CustomerDataTable $dataTable)
     {
-        return $dataTable->render('contents.business.customer.index');
+        return $dataTable->render('contents.master_datas.customer.index');
     }
 
     /**
@@ -47,13 +50,16 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('contents.business.customer.create');
+        $companies = $this->companies->all()->pluck('name', 'id');
+        $meals = $this->masterCustomer->meals();
+        $countries = $this->countries->pluck('name', 'name');
+        return view('contents.master_datas.customer.create', compact('companies', 'meals', 'countries'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Business\CustomerRequest  $request
+     * @param  \App\Http\Requests\MasterData\CustomerRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CustomerRequest $request)
@@ -104,7 +110,7 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Business\Customer\MasterCustomer  $customer
+     * @param  \App\Models\MasterData\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
     public function show(MasterCustomer $customer)
@@ -115,7 +121,7 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Business\Customer\MasterCustomer  $customer
+     * @param  \App\Models\MasterData\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
     public function edit(MasterCustomer $customer)
@@ -138,14 +144,17 @@ class CustomerController extends Controller
 
 
         $customer = (object) $arrayMerge;
-        return view('contents.business.customer.edit', compact('customer'));
+        $companies = $this->companies->all()->pluck('name', 'id');
+        $meals = $this->masterCustomer->meals();
+        $countries = $this->countries->pluck('name', 'id');
+        return view('contents.master_datas.customer.edit', compact('customer', 'companies', 'meals', 'countries'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Business\CustomerRequest  $request
-     * @param  \App\Models\Business\Customer\MasterCustomer  $customer
+     * @param  \App\Http\Requests\MasterData\CustomerRequest  $request
+     * @param  \App\Models\MasterData\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
     public function update(CustomerRequest $request, MasterCustomer $customer)
@@ -204,7 +213,7 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Business\Customer\MasterCustomer  $customer
+     * @param  \App\Models\MasterData\Customer\MasterCustomer  $customer
      * @return \Illuminate\Http\Response
      */
     public function destroy(MasterCustomer $customer)

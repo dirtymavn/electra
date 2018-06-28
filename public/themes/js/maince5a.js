@@ -78,7 +78,7 @@ $(function () {
 
   // #1. CHAT APP
 
-  $('.floated-chat-btn, .floated-chat-w .chat-close').on('click', function () {
+/*  $('.floated-chat-btn, .floated-chat-w .chat-close').on('click', function () {
     $('.floated-chat-w').toggleClass('active');
     return false;
   });
@@ -94,7 +94,7 @@ $(function () {
     }
   });
 
-  $('.floated-chat-w .chat-messages').perfectScrollbar();
+  $('.floated-chat-w .chat-messages').perfectScrollbar();*/
 
   // #2. CALENDAR INIT
 

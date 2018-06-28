@@ -18,11 +18,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     Route::group(['prefix' => 'user-management', 'namespace' => 'UserManagement'], function () {
         Route::resource( 'user', 'UserController' );
         Route::patch('user/{id}/reset-password', array('as' => 'user.reset-password', 'uses' => 'UserController@resetPassword'));
-    });
-
-    Route::group(['prefix' => 'user-management', 'namespace' => 'Master'], function () {
-        Route::resource('role', 'RoleController');
-
+        Route::resource('role', 'RoleController')->middleware('sentinel_access:admin,admin.company');
     });
 
      // Business
@@ -116,21 +112,23 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         
     });
 
-     // System
+    // System
     Route::group(['prefix' => 'system', 'namespace' => 'System'], function () {
+        // Audit Trail
+        Route::get('logs', array('as' => 'audit-trail.index', 'uses' => 'AuditTrailController@index', 'middleware' => 'sentinel_access:audit-trail'));
+
+        // Company
+        Route::resource('company', 'CompanyController')->middleware('sentinel_access:company');
+        Route::get('company/export/excel', ['as' => 'export.company.excel', 'uses' => 'CompanyController@export_excel']);
+        Route::get('company/export/pdf', ['as' => 'export.company.pdf', 'uses' => 'CompanyController@export_pdf']);
 
     });
-
-    // Audit Trail
-    Route::get('audit-trail', array('as' => 'audit-trail.index', 'uses' => 'AuditTrailController@index', 'middleware' => 'sentinel_access:audit-trail'));
 
 
 
     // Master
     Route::group(['prefix' => 'master', 'namespace' => 'Master'], function () {
-        Route::resource('company', 'CompanyController')->middleware('sentinel_access:company');
-        Route::get('export/excel/company', [ 'as' => 'export.company.excel', 'uses' => 'CompanyController@export_excel' ]);
-        Route::get('export/pdf/company', [ 'as' => 'export.company.pdf', 'uses' => 'CompanyController@export_pdf' ]);
+        
 
     });
 });

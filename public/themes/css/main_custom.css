@@ -167,3 +167,24 @@ ul.tabs li a:hover
 {
 	font-size:.93rem;
 }
+body.full-screen .all-wrapper
+{
+	max-width: 1580px;
+	border-radius: 0px;
+}
+body
+{
+	overflow-x:auto;
+}
+body.auth-wrapper
+{
+	overflow:auto;
+}
+body.auth-wrapper .all-wrapper
+{
+	width:1310px;
+}
+body.auth-wrapper
+{
+	background-size:auto;
+}

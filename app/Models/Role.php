@@ -12,7 +12,7 @@ class Role extends Model
      * {@inheritDoc}
      */
     protected $fillable = [
-        'name', 'slug', 'permissions'
+        'name', 'slug', 'permissions', 'company_id'
     ];
 
     /**

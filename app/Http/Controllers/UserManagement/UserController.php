@@ -60,8 +60,26 @@ class UserController extends Controller
         } else {
             $companies = $this->company->getData()->pluck('name', 'id')->all();
         }
-        $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
+
+        // $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
+        $roles = $this->getRoleUsers(user_info('roles')[0]->slug);
+
         return view('contents.user_managements.user.create', compact('companies', 'roles'));
+    }
+
+    protected function getRoleUsers($role)
+    {
+        if ($role == 'super-admin') {
+            $roles = Role::whereSlug('admin')->pluck('name', 'slug')->all();
+        } elseif ($role == 'admin') {
+            $roles = Role::whereCompanyId(user_info()->company->id)->pluck('name', 'slug')->all();
+        } else {
+            $roles = Role::whereCompanyId(user_info()->company->id)
+                ->where('slug', '<>', user_info('roles')[0]->slug)
+                ->pluck('name', 'slug')->all();
+        }
+
+        return $roles;
     }
 
     /**
@@ -115,7 +133,9 @@ class UserController extends Controller
     {
         $user->role_id = $user->roles[0]->slug;
         $companies = $user->company()->pluck('name', 'id')->all();
-        $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
+        // $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
+        $roles = $this->getRoleUsers(user_info('roles')[0]->slug);
+
         return view('contents.user_managements.user.edit', compact('user', 'companies', 'roles'));
     }
 

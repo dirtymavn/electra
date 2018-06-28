@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\MasterData\Accounting;
 
-use App\Models\Budget\BudgetRate;
+use App\Models\MasterData\Accounting\BudgetRate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Budget\BudgetRateDataTable;
-use App\Http\Requests\Budget\BudgetRateRequest;
+use App\DataTables\MasterData\Accounting\BudgetRateDataTable;
+use App\Http\Requests\MasterData\Accounting\BudgetRateRequest;
 
 class BudgetRateController extends Controller
 {
     /**
-     * @var App\Models\Budget\BudgetRate
+     * @var App\Models\MasterData\Accounting\BudgetRate
     */
     protected $budgetRate;
 
     /**
      * Create a new BudgetRateController instance.
      *
-     * @param \App\Models\Budget\BudgetRate  $budgetRate
+     * @param \App\Models\MasterData\Accounting\BudgetRate  $budgetRate
     */
     public function __construct(BudgetRate $budgetRate)
     {
@@ -32,7 +32,7 @@ class BudgetRateController extends Controller
      */
     public function index(BudgetRateDataTable $dataTable)
     {
-        return $dataTable->render('contents.budgets.budget_rate.index');
+        return $dataTable->render('contents.master_datas.accountings.budget_rate.index');
     }
 
     /**
@@ -42,7 +42,7 @@ class BudgetRateController extends Controller
      */
     public function create()
     {
-        return view('contents.budgets.budget_rate.create');
+        return view('contents.master_datas.accountings.budget_rate.create');
     }
 
     /**
@@ -91,7 +91,7 @@ class BudgetRateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Budget\BudgetRate  $budgetrate
+     * @param  \App\Models\MasterData\Accounting\BudgetRate  $budgetrate
      * @return \Illuminate\Http\Response
      */
     public function show(BudgetRate $budgetrate)
@@ -102,19 +102,19 @@ class BudgetRateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Budget\BudgetRate  $budgetRate
+     * @param  \App\Models\MasterData\Accounting\BudgetRate  $budgetRate
      * @return \Illuminate\Http\Response
      */
     public function edit(BudgetRate $budgetRate)
     {
-        return view('contents.budgets.budget_rate.edit', compact('budgetRate'));
+        return view('contents.master_datas.accountings.budget_rate.edit', compact('budgetRate'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Budget\BudgetRateRequest  $request
-     * @param  \App\Models\Budget\BudgetRate  $budgetRate
+     * @param  \App\Models\MasterData\Accounting\BudgetRate  $budgetRate
      * @return \Illuminate\Http\Response
      */
     public function update(BudgetRateRequest $request, BudgetRate $budgetRate)
@@ -154,7 +154,7 @@ class BudgetRateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Budget\BudgetRate  $budgetRate
+     * @param  \App\Models\MasterData\Accounting\BudgetRate  $budgetRate
      * @return \Illuminate\Http\Response
      */
     public function destroy(BudgetRate $budgetRate)

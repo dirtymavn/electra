@@ -1,0 +1,179 @@
+.fixed-menu.menu-w
+{
+	position:relative;
+	background:#f7f7f7;
+	z-index:9;
+	width:225px;
+}
+.all-wrapper.solid-bg-all .content-w
+{
+	min-height:630px;
+}
+.menu-w.menu-layout-compact ul.main-menu
+{
+	padding-top:0;
+}
+ul.tabs
+{
+	padding:0;
+	margin-bottom:0;
+}
+ul.tabs li
+{
+	display:inline-block;
+	list-style:none;
+}
+ul.tabs li a
+{
+	display:block;
+	padding:5px 15px;
+}
+ul.tabs li a.active
+{
+	color:#000;
+	border-top:1px solid #dde2ec;
+	border-left:1px solid #dde2ec;
+	border-right:1px solid #dde2ec;
+	border-bottom:1px solid #fff;
+}
+ul.tabs li a:hover
+{
+	text-decoration:none;
+}
+.tab-content
+{
+	border:1px solid #dde2ec;
+	padding:25px;
+	margin-top:-1px;
+}
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.accordion.active, .accordion:hover {
+    background-color: #ccc; 
+}
+
+.accordion-wrapper .panel {
+    padding: 20px 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+.accordion i
+{
+	float:right;
+}
+.nopadding
+{
+	padding:0px !important;
+}
+.invoice-w:before
+{
+	display:none;
+}
+.table-with-checkbox tbody tr td:first-child
+{
+	width:5%;
+}
+.table-with-checkbox tbody tr.active
+{
+	background:#e2e2e2;
+}
+.menu-w.sub-menu-style-over .sub-menu-w
+{
+	display:none;
+	position: relative;
+	transform: none;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	top: 0;
+	left: 0;
+	background:transparent;
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow:none;
+	-ms-box-shadow:none;
+	-o-box-shadow:none;
+	transition:all 0.2s ease;
+	-moz-transition:all 0.2s ease;
+	-webkit-transition:all 0.2s ease;
+	-ms-transition:all 0.2s ease;
+	-o-transition:all 0.2s ease;
+}
+.menu-w ul.sub-menu
+{
+	display:block;
+}
+.menu-w.sub-menu-style-over .sub-menu-w > ul, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul
+{
+	min-width:auto;
+	border:none;
+}
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li
+{
+	border:none;
+}
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li > a, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li > a
+{
+	padding:5px 20px;
+}
+.has-sub-menu.active .sub-menu-w
+{
+	display:block;
+}
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li > a::before, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li > a::before
+{
+	display:none;
+}
+.menu-w ul.sub-menu li a:hover
+{
+	transform:translateX(5px);
+}
+.menu-w ul.main-menu > li.has-sub-menu.active .sub-menu,
+.menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i
+{
+	display:block;
+}
+.third-menu
+{
+	display:none !important;
+	padding-bottom:0 !important;
+}
+.third-menu.expanded
+{
+	display:block !important;
+}
+.third-menu .sub-menu li a
+{
+	padding:5px 40px !important;
+}
+.menu-w.menu-layout-compact ul.main-menu > li > a
+{
+	font-size:1rem;
+}
+.menu-w.sub-menu-style-over .sub-menu-w > ul > li > a, .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i > ul > li > a
+{
+	font-size:.93rem;
+}
+body.full-screen .all-wrapper
+{
+	max-width: 1580px;
+	border-radius: 0px;
+	width: 1346px;
+}
+body
+{
+	overflow-x:auto;
+}

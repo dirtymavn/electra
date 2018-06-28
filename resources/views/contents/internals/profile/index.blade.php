@@ -47,10 +47,12 @@
             return false;
         }
         
-        $('td .checklist:checked').each(function(i, obj) {
-            var href = $('td.row-actions').eq(i).find('.deleteData').data('href');
-            var id = href.split('/')[5];
-            ids.push(id);
+        $('td .checklist').each(function(i, obj) {
+            if ($('td .checklist').eq(i).is(':checked')) {
+                var href = $('td.row-actions').eq(i).find('.deleteData').data('href');
+                var id = href.split('/')[5];
+                ids.push(id);
+            }
         });
         
         if (ids.length > 0) {

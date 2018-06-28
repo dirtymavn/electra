@@ -594,20 +594,20 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="sub-submenu">
+                        <li class="sub-submenu {!! (Request::is('master-data/accounting-setup*') OR Request::is('master-data/accounting-setup')) ? ' active' : '' !!}">
                             <a>
                                 <i class="fa fa-circle-o"></i><span>Accounting Setup</span><i class="arrow-third-menu os-icon os-icon-chevron-down"></i>
                             </a>
                             <div class="sub-menu-w third-menu">
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li class="{!! (url(route('fx-trans.index')) == Request::url() OR Request::is('gl/fx-trans*')) ? ' active' : '' !!}">
+                                        <li class="{!! (url(route('fx-trans.index')) == Request::url() OR Request::is('master-data/accounting-setup/fx-trans*')) ? ' active' : '' !!}">
                                             <a href="{{route('fx-trans.index')}}"><i class="fa fa-circle-o"></i><span>FX Trans.</span></a>
                                         </li>
-                                        <li class="{!! (url(route('budget-rate.index')) == Request::url() OR Request::is('gl/budget-rate*')) ? ' active' : '' !!}">
+                                        <li class="{!! (url(route('budget-rate.index')) == Request::url() OR Request::is('master-data/accounting-setup/budget-rate*')) ? ' active' : '' !!}">
                                             <a href="{{route('budget-rate.index')}}"><i class="fa fa-circle-o"></i><span>Budget Rate</span></a>
                                         </li>
-                                         <li class="{!! (url(route('account.index')) == Request::url() OR Request::is('gl/account*')) ? ' active' : '' !!}">
+                                         <li class="{!! (url(route('account.index')) == Request::url() OR Request::is('master-data/accounting-setup/account*')) ? ' active' : '' !!}">
                                             <a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i><span>Account</span></a>
                                         </li>
                                     <ul>
@@ -623,7 +623,7 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu">
+        <li class=" has-sub-menu {!! (Request::is('system*') OR Request::is('system')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-star"></div>
@@ -634,6 +634,18 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
+                        @if(user_info()->inRole('super-admin'))
+                            <li class="{!! (url(route('company.index')) == Request::url() OR Request::is('system/company*')) ? ' active' : '' !!}">
+                                <a href=" {{ route('company.index') }} ">
+                                    <i class="fa fa-circle-o"></i><span>Company</span>
+                                </a>
+                            </li>
+                            <li class="{!! (url(route('audit-trail.index')) == Request::url() OR Request::is('system/logs*')) ? ' active' : '' !!}">
+                                <a href=" {{ route('audit-trail.index') }} ">
+                                    <i class="fa fa-circle-o"></i><span>Logs</span>
+                                </a>
+                            </li>
+                        @endif
                         <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Users</span>
