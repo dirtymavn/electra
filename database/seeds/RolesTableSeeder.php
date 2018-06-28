@@ -30,25 +30,25 @@ class RolesTableSeeder extends Seeder
             ]
         ]);
 
-        Sentinel::getRoleRepository()->createModel()->create([
-            'slug' => 'subscriber',
-            'name' => 'Subscriber',
-            'permissions' => [],
-        ]);
+        // Sentinel::getRoleRepository()->createModel()->create([
+        //     'slug' => 'subscriber',
+        //     'name' => 'Subscriber',
+        //     'permissions' => [],
+        // ]);
 
-        Sentinel::getRoleRepository()->createModel()->create([
-            'slug' => 'subscriber-1',
-            'name' => 'Subscriber',
-            'company_id' => 1,
-            'permissions' => [],
-        ]);
+        // Sentinel::getRoleRepository()->createModel()->create([
+        //     'slug' => 'subscriber-1',
+        //     'name' => 'Subscriber',
+        //     'company_id' => 1,
+        //     'permissions' => [],
+        // ]);
 
-        Sentinel::getRoleRepository()->createModel()->create([
-            'slug' => 'subscriber-2',
-            'name' => 'Subscriber',
-            'company_id' => 2,
-            'permissions' => [],
-        ]);
+        // Sentinel::getRoleRepository()->createModel()->create([
+        //     'slug' => 'subscriber-2',
+        //     'name' => 'Subscriber',
+        //     'company_id' => 2,
+        //     'permissions' => [],
+        // ]);
 
     }
 }
