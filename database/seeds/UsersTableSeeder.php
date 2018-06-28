@@ -36,7 +36,8 @@ class UsersTableSeeder extends Seeder
             'first_name' => $datas[ 'first_name' ],
             'last_name' => $datas[ 'last_name' ],
             'username' => 'superadmin',
-            'status' => 1
+            'status' => 1,
+            'company_role' => 'super-admin'
         ] );
         Sentinel::findRoleBySlug( $datas[ 'role' ] )->users()->attach( $user );
 
@@ -74,7 +75,8 @@ class UsersTableSeeder extends Seeder
                 'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
                 'phone'   => '622157905788',
                 'status' => 1,
-                'company_id' => 1
+                'company_id' => 1,
+                'company_role' => 'admin'
                 
             ),
             array(
@@ -86,7 +88,8 @@ class UsersTableSeeder extends Seeder
                 'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
                 'phone'   => '622157905788',
                 'status' => 1,
-                'company_id' => 2
+                'company_id' => 2,
+                'company_role' => 'admin'
                 
             ),
         );
@@ -99,7 +102,8 @@ class UsersTableSeeder extends Seeder
                 'username' => $user['username'],
                 'status' => 1,
                 'password' => '12345678',
-                'company_id' => $user['company_id']
+                'company_id' => $user['company_id'],
+                'company_role' => $user['company_role']
             ]);
 
             Sentinel::findRoleBySlug( $user[ 'role' ] )->users()->attach( $sentinel );

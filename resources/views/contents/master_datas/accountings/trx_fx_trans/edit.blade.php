@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit FX Transaction')
+@section('title', 'Edit FX Transfer')
 
 @section('style')
 <link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" />
@@ -9,12 +9,12 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('fx-trans.index')}}">FX Transaction</a></li>
+        <li class="breadcrumb-item"><a href="{{route('fx-trans.index')}}">FX Transfer</a></li>
         <li class="breadcrumb-item">Edit</li>
     </ul>
 @endsection
 
-@section('page_title', 'Edit FX Transaction')
+@section('page_title', 'Edit FX Transfer')
 
 @section('content')
     @include('flash::message')

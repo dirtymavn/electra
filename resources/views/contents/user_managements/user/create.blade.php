@@ -29,7 +29,7 @@
                 @include('contents.user_managements.user._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{route('user.index')}}" class="btn btn-white">Cancel</a>
+                        <a href="{{route('user.index')}}" class="btn btn-grey">Cancel</a>
                         <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
                     </div>
                 </div>              

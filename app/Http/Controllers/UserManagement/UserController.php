@@ -36,6 +36,7 @@ class UserController extends Controller
     {
         $this->user = $user;
         $this->company = $company;
+        $this->role = $role;
     }
 
     /**
@@ -90,12 +91,13 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        \DB::beginTransaction();
         try {
             if (user_info('company_role') == 'super-admin') {
                 $companyRole = 'admin';
                 $parentId = null;
             } else {
-                $companyRole = 'subscriber';
+                $companyRole = $request->role_id;
                 $parentId = (user_info('parent_id')) ? user_info('parent_id') : user_info()->id;
             }
             
@@ -104,10 +106,13 @@ class UserController extends Controller
 
             Sentinel::findRoleBySlug( $request->role_id )->users()->attach( $user );
             flash()->success( trans('message.create.success') );
-            
+
+            \DB::commit();
+
             return redirect()->route( 'user.index' );
         } catch (Exception $e) {
             flash()->error( trans('message.error') );
+            \DB::rollback();
             return back()->withInput();
         }
     }
@@ -156,9 +161,13 @@ class UserController extends Controller
                 $user = $user_find->update($request->except(['password']));
             }
            
-            if(!empty($request->role)){
-                Sentinel::findRoleBySlug( $user_find->roles()->first()->slug )->users()->detach($user);
-                Sentinel::findRoleBySlug( $request->role )->users()->attach( $user );
+            if(!empty($request->role_id)){
+                $companyRole = $request->role_id;
+
+                $user_find->update(['company_role' => $companyRole]);
+
+                Sentinel::findRoleBySlug( $user_find->roles()->first()->slug )->users()->detach($user_find);
+                Sentinel::findRoleBySlug( $request->role_id )->users()->attach( $user_find );
             }
 
             flash()->success( trans('message.update.success') );

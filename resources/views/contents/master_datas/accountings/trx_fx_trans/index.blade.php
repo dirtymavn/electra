@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'FX Transaction')
+@section('title', 'FX Transfer')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,16 +9,16 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item">FX Transaction</li>
+    <li class="breadcrumb-item">FX Transfer</li>
 </ul>
 @endsection
 
-@section('page_title', 'FX Transaction Lists')
+@section('page_title', 'FX Transfer Lists')
 
 @section('content')
 @include('flash::message')
 <a href="{{ route('fx-trans.create')}}" class="btn btn-primary" id="btn-submit">
-    <i class="fa fa-plus m-right-10"></i> Add FX Transaction
+    <i class="fa fa-plus m-right-10"></i> Add FX Transfer
 </a>
 <button class="btn btn-danger" id="bulk-delete">
     <i class="fa fa-trash m-right-10"></i> Bulk Delete
