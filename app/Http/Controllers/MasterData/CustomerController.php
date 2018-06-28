@@ -52,7 +52,7 @@ class CustomerController extends Controller
     {
         $companies = $this->companies->all()->pluck('name', 'id');
         $meals = $this->masterCustomer->meals();
-        $countries = $this->countries->pluck('name', 'id');
+        $countries = $this->countries->pluck('name', 'name');
         return view('contents.master_datas.customer.create', compact('companies', 'meals', 'countries'));
     }
 

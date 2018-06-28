@@ -45,22 +45,24 @@ class UsersTableSeeder extends Seeder
                 'email' => 'wit2@mailinator.com',
                 'first_name' => 'Ilham',
                 'last_name' => 'Ilham',
-                'role' => 'subscriber',
+                'role' => 'subscriber-2',
                 'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
                 'phone'   => '622157905788',
                 'username' => 'wit2',
                 'status' => 1,
+                'company_id' => 2
             
             ),
             array(
                 'email' => 'wit1@mailinator.com',
                 'first_name' => 'Arya',
                 'last_name' => 'Nugraha',
-                'role' => 'subscriber',
+                'role' => 'subscriber-1',
                 'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
                 'phone'   => '622157905788',
                 'username' => 'wit1',
                 'status' => 1,
+                'company_id' => 1
                 
             ),
             array(
@@ -72,6 +74,7 @@ class UsersTableSeeder extends Seeder
                 'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
                 'phone'   => '622157905788',
                 'status' => 1,
+                'company_id' => 1
                 
             ),
             array(
@@ -83,6 +86,7 @@ class UsersTableSeeder extends Seeder
                 'address' => 'Wisma KEIAI, 22nd Floor  Jl. Jend. Sudirman Kav. 3 Jakarta 10210. Indonesia ',
                 'phone'   => '622157905788',
                 'status' => 1,
+                'company_id' => 2
                 
             ),
         );
@@ -94,7 +98,8 @@ class UsersTableSeeder extends Seeder
                 'last_name' => $user['last_name'],
                 'username' => $user['username'],
                 'status' => 1,
-                'password' => '12345678'
+                'password' => '12345678',
+                'company_id' => $user['company_id']
             ]);
 
             Sentinel::findRoleBySlug( $user[ 'role' ] )->users()->attach( $sentinel );
