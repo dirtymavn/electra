@@ -29,7 +29,7 @@
                 @include('contents.masters.roles._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{ route('role.index') }}" class="btn btn-white">{{trans('Cancel')}}</a>
+                        <a href="{{ route('role.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-primary" id="btn-submit">{{ trans('Submit') }}</button>
                     </div>
                 </div>              
