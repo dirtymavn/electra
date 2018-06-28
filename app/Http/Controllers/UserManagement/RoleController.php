@@ -41,6 +41,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         try {
+            $request->merge(['company_id' => @user_info()->company->id]);
             $roles = Role::create( $request->all() );
             flash()->success('Data is successfully created');
             return redirect()->route('role.index');

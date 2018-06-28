@@ -65,7 +65,7 @@
                                         <div class="avatar-w"><img alt="" src="{{link_to_avatar(user_info('avatar'))}}"></div>
                                         <div class="logged-user-info-w">
                                             <div class="logged-user-name">{{ user_info('full_name') }}</div>
-                                            <div class="logged-user-role">{{ str_replace('-',' ',user_info('company_role')) }}</div>
+                                            <div class="logged-user-role">{{ str_replace('-',' ',user_info('roles')[0]->name) }}</div>
                                         </div>
                                     </div>
                                     <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
