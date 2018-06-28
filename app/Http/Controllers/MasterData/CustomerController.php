@@ -52,7 +52,8 @@ class CustomerController extends Controller
     {
         $companies = $this->companies->all()->pluck('name', 'id');
         $meals = $this->masterCustomer->meals();
-        return view('contents.master_datas.customer.create', compact('companies', 'meals'));
+        $countries = $this->countries->pluck('name', 'id');
+        return view('contents.master_datas.customer.create', compact('companies', 'meals', 'countries'));
     }
 
     /**
@@ -143,7 +144,10 @@ class CustomerController extends Controller
 
 
         $customer = (object) $arrayMerge;
-        return view('contents.master_datas.customer.edit', compact('customer'));
+        $companies = $this->companies->all()->pluck('name', 'id');
+        $meals = $this->masterCustomer->meals();
+        $countries = $this->countries->pluck('name', 'id');
+        return view('contents.master_datas.customer.edit', compact('customer', 'companies', 'meals', 'countries'));
     }
 
     /**
