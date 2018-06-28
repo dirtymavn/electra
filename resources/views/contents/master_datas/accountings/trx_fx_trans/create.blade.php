@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create FX Transaction')
+@section('title', 'Create FX Transfer')
 
 @section('style')
 @endsection
@@ -8,12 +8,12 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('fx-trans.index')}}">FX Transaction</a></li>
+        <li class="breadcrumb-item"><a href="{{route('fx-trans.index')}}">FX Transfer</a></li>
         <li class="breadcrumb-item">Create</li>
     </ul>
 @endsection
 
-@section('page_title', 'Create FX Transaction')
+@section('page_title', 'Create FX Transfer')
 
 @section('content')
     @include('flash::message')
