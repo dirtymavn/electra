@@ -139,13 +139,11 @@
     </div>
     <h1 class="menu-page-header">Page Header</h1>
     <ul class="main-menu">
-        <li class="selected">
-            <a href="dashboard-sabre.html">
+        <li class="{!! (url(route('dashboard')) == Request::url() OR Request::is('/*')) ? ' active' : '' !!}">
+            <a href="{{route('dashboard')}}">
                 <div class="icon-w">
                     <div class="os-icon os-icon-layout"></div>
-                </div>
-                <span>Dashboard</span>
-            </a>
+                </div><span>Dashboard</span></a>
         </li>
         <!--<li class="sub-header"><span>Business</span></li>-->
         <li class="has-sub-menu {!! (Request::is('user-management*') OR Request::is('user-management')) ? ' active' : '' !!}">
@@ -322,7 +320,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>FIT Older</span>
+                                <i class="fa fa-circle-o"></i><span>FIT Order</span>
                             </a>
                         </li>
                         <li>
@@ -447,7 +445,7 @@
                                             </a>
                                         </li>
                                         <li class="{!! (url(route('periodend.index')) == Request::url() OR Request::is('gl/periodend*')) ? ' active' : '' !!}">
-                                            <a href="{{ route('periodend.index') }}"><i class="fa fa-circle-o"></i><span>Per. End</span></a>
+                                            <a href="{{ route('periodend.index') }}"><i class="fa fa-circle-o"></i><span>Period End</span></a>
                                         </li>
                                         <li class="{!! (url(route('jvperiod.index')) == Request::url() OR Request::is('gl/jvperiod*')) ? ' active' : '' !!}">
                                             <a href="{{route('jvperiod.index')}}"><i class="fa fa-circle-o"></i><span>JV Period</span></a>
@@ -602,7 +600,7 @@
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
                                         <li class="{!! (url(route('fx-trans.index')) == Request::url() OR Request::is('master-data/accounting-setup/fx-trans*')) ? ' active' : '' !!}">
-                                            <a href="{{route('fx-trans.index')}}"><i class="fa fa-circle-o"></i><span>FX Trans.</span></a>
+                                            <a href="{{route('fx-trans.index')}}"><i class="fa fa-circle-o"></i><span>FX Transfer</span></a>
                                         </li>
                                         <li class="{!! (url(route('budget-rate.index')) == Request::url() OR Request::is('master-data/accounting-setup/budget-rate*')) ? ' active' : '' !!}">
                                             <a href="{{route('budget-rate.index')}}"><i class="fa fa-circle-o"></i><span>Budget Rate</span></a>
