@@ -7,7 +7,7 @@
     <meta content="template language" name="keywords">
     <meta content="Electra" name="author">
     <meta content="Admin" name="description">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="width=1024" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{asset('themes/img/favicon.png')}}" rel="shortcut icon"><link href="{{asset('themes/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
     <!-- <link href="../fast.fonts.net/cssapi/487b73f1-c2d1-43db-8526-db577e4c822b.css" rel="stylesheet" type="text/css"> -->
