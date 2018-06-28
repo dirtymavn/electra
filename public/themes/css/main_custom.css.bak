@@ -171,6 +171,7 @@ body.full-screen .all-wrapper
 {
 	max-width: 1580px;
 	border-radius: 0px;
+	width: 1346px;
 }
 body
 {
