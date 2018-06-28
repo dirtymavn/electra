@@ -5620,7 +5620,7 @@ button.close {
 	overflow: scroll
 }
 
-/*@media (min-width: 576px) {
+@media (min-width: 576px) {
 	.modal-dialog {
 		max-width: 550px;
 		margin: 1.75rem auto
@@ -5637,7 +5637,7 @@ button.close {
 	.modal-lg {
 		max-width: 900px
 	}
-}*/
+}
 
 .tooltip {
 	position: absolute;
@@ -29727,7 +29727,7 @@ body.color-scheme-dark .page-item.disabled .page-link,
 	.breadcrumb {
 		margin-bottom: 1rem
 	}
-}
+}*/
 
 @media (min-height: 700px) and (min-width: 768px) {
 	.modal-dialog.modal-centered {
@@ -29742,7 +29742,7 @@ body.color-scheme-dark .page-item.disabled .page-link,
 		transform: translate(0, -50%);
 		margin: 0px auto
 	}
-}*/
+}
 
 
 /*# sourceMappingURL=main.css.map */

@@ -192,3 +192,8 @@ body.auth-wrapper
 {
 	display:none;
 }
+.modal-dialog
+{
+	width:700px;
+	margin:.5rem auto;
+}
