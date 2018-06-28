@@ -188,3 +188,7 @@ body.auth-wrapper
 {
 	background-size:auto;
 }
+.element-search.autosuggest-search-activator
+{
+	display:none;
+}
