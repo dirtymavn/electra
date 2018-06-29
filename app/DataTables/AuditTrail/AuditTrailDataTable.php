@@ -45,13 +45,13 @@ class AuditTrailDataTable extends DataTable
      */
     public function html()
     {
-        $parameters = array_merge($this->getBuilderParameters(), ['responsive' => true,
-            'order' => [[8, 'desc']]]);
+        $parameters = array_merge($this->getBuilderParameters(), ['pageLength' => 20, 'responsive' => true,
+            'order' => [[4, 'desc']]]);
 
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->parameters($this->getBuilderParameters());
+                    ->parameters($parameters);
     }
 
     /**
