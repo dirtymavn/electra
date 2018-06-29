@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-md-6">
-        <div class="form-group">
+        {{-- <div class="form-group">
             {!! Form::label('customer_no', trans('Customer No.'), ['class' => 'control-label']) !!}
             {!! Form::text('customer_no', old('customer_no') , ['class' => 'form-control', 'placeholder' => 'Input the Customer No.']) !!}
-        </div>
+        </div> --}}
         <div class="form-group">
             {!! Form::label('customer_name', trans('Customer Name'), ['class' => 'control-label']) !!}
             {!! Form::text('customer_name', old('customer_name') , ['class' => 'form-control', 'placeholder' => 'Input the Customer Name']) !!}
