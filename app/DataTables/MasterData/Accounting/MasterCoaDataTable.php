@@ -34,26 +34,36 @@ class MasterCoaDataTable extends DataTable
      */
     public function query(MasterCoa $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'branch_id',
-            'acc_no_key',
-            'acc_no_interface',
-            'acc_description',
-            'sub_acc_id',
-            'acc_type',
-            'rollup_key_acc_no',
-            'acc_liquidity',
-            'rollup_detail',
-            'analysis_type',
-            'foregin_currency_only_flag',
-            'ap_ar_control_flag',
-            'tour_account_flag',
-            'fx_adjusment_flag',
-            'inter_branch_acc_flag',
-            'internal_payment_flag',
-            'is_draft'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'master_coa.company_id')
+            ->select(
+                'master_coa.id',
+                'master_coa.branch_id',
+                'master_coa.acc_no_key',
+                'master_coa.acc_no_interface',
+                'master_coa.acc_description',
+                'master_coa.sub_acc_id',
+                'master_coa.acc_type',
+                'master_coa.rollup_key_acc_no',
+                'master_coa.acc_liquidity',
+                'master_coa.rollup_detail',
+                'master_coa.analysis_type',
+                'master_coa.foregin_currency_only_flag',
+                'master_coa.ap_ar_control_flag',
+                'master_coa.tour_account_flag',
+                'master_coa.fx_adjusment_flag',
+                'master_coa.inter_branch_acc_flag',
+                'master_coa.internal_payment_flag',
+                'master_coa.is_draft'
+            );
+        
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**

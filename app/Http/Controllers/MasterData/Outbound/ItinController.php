@@ -31,6 +31,13 @@ class ItinController extends Controller
     public function __construct(MasterItinerary $itin)
     {
         $this->itin = $itin;
+
+        // middleware
+        $this->middleware('sentinel_access:admin.company,itin.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,itin.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,itin.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,itin.destroy', ['only' => ['destroy']]);
+
     }
 
     /**
@@ -76,6 +83,7 @@ class ItinController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
+            $request->merge(['company_id' => @user_info()->company->id]);
             $insertItin = $this->itin->create($request->all());
 
             if ($insertItin) {

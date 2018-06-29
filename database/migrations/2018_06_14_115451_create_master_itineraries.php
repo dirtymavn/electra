@@ -19,6 +19,7 @@ class CreateMasterItineraries extends Migration
             $table->increments('id');
             $table->string('itinerary_code')->nullable();
             $table->string('itinerary_direction')->nullable();
+            $table->integer('company_id')->nullable();
             $table->integer('branch_id')->nullable();
             $table->string('itinerary_name')->nullable();
             $table->string('airline')->nullable();

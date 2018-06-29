@@ -13,7 +13,9 @@ class TrxPosting extends Model
     	'postdate_end',
     	'user_id',
     	'branch_id',
-    	'is_draft'
+        'is_draft',
+        'company_id',
+        'branch_id'
     ];
 
     /**

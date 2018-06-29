@@ -638,6 +638,8 @@
                                     <i class="fa fa-circle-o"></i><span>Company</span>
                                 </a>
                             </li>
+                        @endif
+                        @if(user_info()->inRole('super-admin') || user_info()->inRole('admin'))
                             <li class="{!! (url(route('audit-trail.index')) == Request::url() OR Request::is('system/logs*')) ? ' active' : '' !!}">
                                 <a href=" {{ route('audit-trail.index') }} ">
                                     <i class="fa fa-circle-o"></i><span>Logs</span>

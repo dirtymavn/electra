@@ -27,6 +27,13 @@ class GuideController extends Controller
     {
         $this->guide = $guide;
         $this->guideVisa = $guideVisa;
+
+        // middleware
+        $this->middleware('sentinel_access:admin.company,guide.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,guide.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,guide.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,guide.destroy', ['only' => ['destroy']]);
+
     }
 
     /**
@@ -73,6 +80,7 @@ class GuideController extends Controller
                     $msgSuccess = trans('message.published');
                 }
 
+                $request->merge(['company_id' => @user_info()->company->id]);
                 $insertGuide = $this->guide->create($request->all());
 
                 if ($insertGuide) {

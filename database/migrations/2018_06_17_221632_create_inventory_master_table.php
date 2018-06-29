@@ -44,6 +44,8 @@ class CreateInventoryMasterTable extends Migration
             $table->integer('nights')->nullable();
             $table->integer('rooms')->nullable();
             $table->boolean('is_draft')->nullable()->default(true);
+            $table->integer('company_id')->nullable();
+            $table->integer('branch_id')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

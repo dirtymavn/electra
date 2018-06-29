@@ -34,25 +34,35 @@ class VoucherDataTable extends DataTable
      */
     public function query(MasterVoucher $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'voucher_no',
-            'voucher_status',
-            'voucher_date',
-            'voucher_currency',
-            'voucher_amt',
-            'valid_from',
-            'valid_to',
-            'transferrable_flag',
-            'internal_desc',
-            'desc',
-            'cust_no',
-            'cust_name',
-            'cust_address',
-            'is_draft',
-            'created_at',
-            'updated_at'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'master_voucher.company_id')
+            ->select(
+                'master_voucher.id',
+                'master_voucher.voucher_no',
+                'master_voucher.voucher_status',
+                'master_voucher.voucher_date',
+                'master_voucher.voucher_currency',
+                'master_voucher.voucher_amt',
+                'master_voucher.valid_from',
+                'master_voucher.valid_to',
+                'master_voucher.transferrable_flag',
+                'master_voucher.internal_desc',
+                'master_voucher.desc',
+                'master_voucher.cust_no',
+                'master_voucher.cust_name',
+                'master_voucher.cust_address',
+                'master_voucher.is_draft',
+                'master_voucher.created_at',
+                'master_voucher.updated_at'
+            );
+        
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**

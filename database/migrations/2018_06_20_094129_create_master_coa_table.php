@@ -15,6 +15,7 @@ class CreateMasterCoaTable extends Migration
     {
         Schema::create('master_coa', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('company_id')->nullable();
             $table->integer('branch_id')->nullable();
             $table->string('acc_no_key');
             $table->string('acc_no_interface');

@@ -41,8 +41,14 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         try {
-            $request->merge(['company_id' => @user_info()->company->id]);
+            $permissions = null;
+            foreach ($request->permissions as $key => $permission) {
+                $permissions[$permission] = true;
+            }
+
+            $request->merge(['company_id' => @user_info()->company->id, 'permissions' => $permissions]);
             $roles = Role::create( $request->all() );
+
             flash()->success('Data is successfully created');
             return redirect()->route('role.index');
         } catch (\Exception $e) {
@@ -71,6 +77,15 @@ class RoleController extends Controller
     {
         $permissions = Menu::getPermission();
         $role = Role::find($id);
+
+        $rolePermissions = collect($role->permissions);
+        $rolePermissionss = [];
+        $x = 0;
+        foreach ($rolePermissions as $key => $permission) {
+            $rolePermissionss[$x] = $key;
+            $x++;
+        }
+        $role->permissions = $rolePermissionss;
         return view( 'contents.masters.roles.edit', compact('role', 'permissions') );
     }
 
@@ -84,6 +99,13 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $permissions = null;
+            foreach ($request->permissions as $key => $permission) {
+                $permissions[$permission] = true;
+            }
+
+            $request->merge(['company_id' => @user_info()->company->id, 'permissions' => $permissions]);
+
             $role = Role::find($id)->update( $request->all() );
             flash()->success('Data is successfully updated');
             return redirect()->route('role.index');

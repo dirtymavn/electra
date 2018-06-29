@@ -14,6 +14,15 @@ use DB;
 
 class InventoryController extends Controller
 {
+    public function __construct()
+    {
+        // middleware
+        $this->middleware('sentinel_access:admin.company,inventory.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,inventory.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,inventory.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,inventory.destroy', ['only' => ['destroy']]);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -56,7 +65,8 @@ class InventoryController extends Controller
             }
 
             $trx = Trx::create( $request->all() );
-            $request->merge([ 'trx_sales_id' => $trx->id ]);
+            $request->merge([ 'trx_sales_id' => $trx->id, 'company_id' => @user_info()->company->id ]);
+
             $insert = Inventory::create( $request->all() );
 
             if ($insert) {

@@ -25,9 +25,17 @@ class AuditTrailDataTable extends DataTable
      */
     public function query()
     {
-        return DB::table('audits')->join('users', 'users.id', 'audits.user_id')
+        $return = DB::table('audits')->join('users', 'users.id', 'audits.user_id')
             ->select('users.first_name', 'users.last_name', 'users.email', 'users.username',
                 'audits.*');
+            
+        if (user_info()->inRole('admin')) {
+
+            $return = $return->where('users.company_id',@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**
