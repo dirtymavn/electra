@@ -4,9 +4,12 @@ namespace App\Models\MasterData\Supplier;
 
 use Illuminate\Database\Eloquent\Model;
 use Request;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MasterSupplier extends Model
+class MasterSupplier extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $table = 'master_supplier';
 
     protected $fillable = [

@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Cartalyst\Sentinel\Roles\EloquentRole as Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Role extends Model
+class Role extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use Sluggable;
     /**
      * {@inheritDoc}
