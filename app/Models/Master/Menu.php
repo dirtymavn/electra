@@ -26,15 +26,15 @@ class Menu extends Model
                     'role.approval' => 'Approval'
                 ]
             ],
-            'Business' => [
-                'sales-folder' => [
-                    'sales.read' => 'Read',
-                    'sales.create' => 'Create',
-                    'sales.edit' => 'Edit',
-                    'sales.destroy' => 'Delete',
-                    'sales.approval' => 'Approval'
-                ]
-            ],
+            // 'Business' => [
+            //     'sales-folder' => [
+            //         'sales.read' => 'Read',
+            //         'sales.create' => 'Create',
+            //         'sales.edit' => 'Edit',
+            //         'sales.destroy' => 'Delete',
+            //         'sales.approval' => 'Approval'
+            //     ]
+            // ],
             'Accounting' => [
                 'LG' => [
                     'lg.read' => 'Read',
