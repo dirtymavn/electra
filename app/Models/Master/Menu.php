@@ -65,6 +65,20 @@ class Menu extends Model
                         'supplier.destroy' => 'Delete',
                         'supplier.approval' => 'Approval',
                     ],
+                    'Inventory' => [
+                        'inventory.read' => 'Read',
+                        'inventory.create' => 'Create',
+                        'inventory.edit' => 'Edit',
+                        'inventory.destroy' => 'Delete',
+                        'inventory.approval' => 'Approval',
+                    ],
+                    'Voucher' => [
+                        'voucher.read' => 'Read',
+                        'voucher.create' => 'Create',
+                        'voucher.edit' => 'Edit',
+                        'voucher.destroy' => 'Delete',
+                        'voucher.approval' => 'Approval',
+                    ],
                     'Guide' => [
                         'guide.read' => 'Read',
                         'guide.create' => 'Create',
@@ -152,6 +166,20 @@ class Menu extends Model
                         'supplier.edit' => 'Edit',
                         'supplier.destroy' => 'Delete',
                         'supplier.approval' => 'Approval',
+                    ],
+                    'Inventory' => [
+                        'inventory.read' => 'Read',
+                        'inventory.create' => 'Create',
+                        'inventory.edit' => 'Edit',
+                        'inventory.destroy' => 'Delete',
+                        'inventory.approval' => 'Approval',
+                    ],
+                    'Voucher' => [
+                        'voucher.read' => 'Read',
+                        'voucher.create' => 'Create',
+                        'voucher.edit' => 'Edit',
+                        'voucher.destroy' => 'Delete',
+                        'voucher.approval' => 'Approval',
                     ],
                     'Guide' => [
                         'guide.read' => 'Read',
