@@ -146,25 +146,27 @@
                 </div><span>Dashboard</span></a>
         </li>
         <!--<li class="sub-header"><span>Business</span></li>-->
-        <li class="has-sub-menu {!! (Request::is('user-management*') OR Request::is('user-management')) ? ' active' : '' !!}">
-            <a href="#">
-                <div class="icon-w">
-                    <div class="os-icon os-icon-users"></div>
-                </div><span>User Management</span></a>
-            <div class="sub-menu-w">
-                <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
-                <div class="sub-menu-i">
-                    <ul class="sub-menu">
-                        <li class="{!! (url(route('user.index')) == Request::url() OR Request::is('user-management/user*')) ? ' active' : '' !!}">
-                            <a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i><span>Register User</span></a>
-                        </li>
-                        <li class="{!! (url(route('role.index')) == Request::url() OR Request::is('user-management/role*')) ? ' active' : '' !!}">
-                            <a href="{{route('role.index')}}"><i class="fa fa-circle-o"></i><span>Role User</span></a>
-                        </li>
-                    </ul>
+        @if(user_info()->hasAnyAccess(['admin', 'admin.company']))
+            <li class="has-sub-menu {!! (Request::is('user-management*') OR Request::is('user-management')) ? ' active' : '' !!}">
+                <a href="#">
+                    <div class="icon-w">
+                        <div class="os-icon os-icon-users"></div>
+                    </div><span>User Management</span></a>
+                <div class="sub-menu-w">
+                    <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
+                    <div class="sub-menu-i">
+                        <ul class="sub-menu">
+                            <li class="{!! (url(route('user.index')) == Request::url() OR Request::is('user-management/user*')) ? ' active' : '' !!}">
+                                <a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i><span>Register User</span></a>
+                            </li>
+                            <li class="{!! (url(route('role.index')) == Request::url() OR Request::is('user-management/role*')) ? ' active' : '' !!}">
+                                <a href="{{route('role.index')}}"><i class="fa fa-circle-o"></i><span>Role User</span></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+        @endif
         <li class=" has-sub-menu {!! (Request::is('business*') OR Request::is('business')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
@@ -176,7 +178,7 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-file-text"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li class="{!! (url(route('sales.index')) == Request::url() OR Request::is('business/sales*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('sales.index')) == Request::url() OR Request::is('business/sales*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','sales.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('sales.index') }} "><i class="fa fa-circle-o"></i><span>Sales</span></a>
                         </li>
                         <li>
@@ -184,7 +186,7 @@
                                 <i class="fa fa-circle-o"></i><span>Invoice</span>
                             </a>
                         </li>
-                        <li class="{!! (url(route('delivery.index')) == Request::url() OR Request::is('business/delivery*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('delivery.index')) == Request::url() OR Request::is('business/delivery*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','delivery.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('delivery.index') }} "><i class="fa fa-circle-o"></i><span>Delivery</span></a>
                         </li>
                         <li>
@@ -368,7 +370,7 @@
                                 <i class="fa fa-circle-o"></i><span>Billing</span>
                             </a>
                         </li>
-                        <li class="{!! (url(route('lg.index')) == Request::url() OR Request::is('accounting/lg*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('lg.index')) == Request::url() OR Request::is('accounting/lg*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','lg.read'])) ? '' : 'display:none;' }}">
                             <a href="{{ route('lg.index') }}"><i class="fa fa-circle-o"></i><span>LG</span></a>
                         </li>
                         <li>
@@ -444,10 +446,10 @@
                                                 <i class="fa fa-circle-o"></i><span>Posting</span>
                                             </a>
                                         </li>
-                                        <li class="{!! (url(route('periodend.index')) == Request::url() OR Request::is('gl/periodend*')) ? ' active' : '' !!}">
+                                        <li class="{!! (url(route('periodend.index')) == Request::url() OR Request::is('gl/periodend*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','periodend.read'])) ? '' : 'display:none;' }}">
                                             <a href="{{ route('periodend.index') }}"><i class="fa fa-circle-o"></i><span>Period End</span></a>
                                         </li>
-                                        <li class="{!! (url(route('jvperiod.index')) == Request::url() OR Request::is('gl/jvperiod*')) ? ' active' : '' !!}">
+                                        <li class="{!! (url(route('jvperiod.index')) == Request::url() OR Request::is('gl/jvperiod*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','jvperiod.read'])) ? '' : 'display:none;' }}">
                                             <a href="{{route('jvperiod.index')}}"><i class="fa fa-circle-o"></i><span>JV Period</span></a>
                                         </li>
                                         <li>
@@ -552,19 +554,19 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-folder"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li class="{!! (url(route('customer.index')) == Request::url() OR Request::is('master-data/customer*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('customer.index')) == Request::url() OR Request::is('master-data/customer*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','customer.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('customer.index')}}"><i class="fa fa-circle-o"></i><span>Customer</span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-circle-o"></i><span>Hotel</span></a>
                         </li>
-                        <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('master-data/supplier*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('master-data/supplier*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','supplier.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('supplier.index') }} "><i class="fa fa-circle-o"></i><span>Supplier</span></a>
                         </li>
                         <li>
                             <a href="{{ route('inventory.index') }}"><i class="fa fa-circle-o"></i><span>Inventory</span></a>
                         </li>
-                        <li class="{!! (url(route('voucher.index')) == Request::url() OR Request::is('master-data/voucher*')) ? ' active' : '' !!}">
+                        <li class="{!! (url(route('voucher.index')) == Request::url() OR Request::is('master-data/voucher*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','voucher.read'])) ? '' : 'display:none;' }}">
                             <a href="{{ route('voucher.index') }}"><i class="fa fa-circle-o"></i><span>Voucher</span></a>
                         </li>
                         <li>
@@ -577,10 +579,10 @@
                             <div class="sub-menu-w third-menu">
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li class="{!! (url(route('guide.index')) == Request::url() OR Request::is('outbound/guide*')) ? ' active' : '' !!}">
+                                        <li class="{!! (url(route('guide.index')) == Request::url() OR Request::is('outbound/guide*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','guide.read'])) ? '' : 'display:none;' }}">
                                             <a href="{{ route('guide.index') }}"><i class="fa fa-circle-o"></i><span>Guide</span></a>
                                         </li>
-                                        <li class="{!! (url(route('itin.index')) == Request::url() OR Request::is('outbound/itin*')) ? ' active' : '' !!}">
+                                        <li class="{!! (url(route('itin.index')) == Request::url() OR Request::is('outbound/itin*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','itin.read'])) ? '' : 'display:none;' }}">
                                             <a href="{{ route('itin.index') }}"><i class="fa fa-circle-o"></i><span>Itinerary</span></a>
                                         </li>
                                         <li>
@@ -592,20 +594,20 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="sub-submenu {!! (Request::is('master-data/accounting-setup*') OR Request::is('master-data/accounting-setup')) ? ' active' : '' !!}">
+                        <li class="sub-submenu {!! (Request::is('master-data/accounting-setup*') OR Request::is('master-data/accounting-setup')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','fx-trans.read','budget-rate','account.read'])) ? '' : 'display:none;' }}">
                             <a>
                                 <i class="fa fa-circle-o"></i><span>Accounting Setup</span><i class="arrow-third-menu os-icon os-icon-chevron-down"></i>
                             </a>
                             <div class="sub-menu-w third-menu">
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li class="{!! (url(route('fx-trans.index')) == Request::url() OR Request::is('master-data/accounting-setup/fx-trans*')) ? ' active' : '' !!}">
+                                        <li class="{!! (url(route('fx-trans.index')) == Request::url() OR Request::is('master-data/accounting-setup/fx-trans*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','fx-trans.read'])) ? '' : 'display:none;' }}">
                                             <a href="{{route('fx-trans.index')}}"><i class="fa fa-circle-o"></i><span>FX Transfer</span></a>
                                         </li>
-                                        <li class="{!! (url(route('budget-rate.index')) == Request::url() OR Request::is('master-data/accounting-setup/budget-rate*')) ? ' active' : '' !!}">
+                                        <li class="{!! (url(route('budget-rate.index')) == Request::url() OR Request::is('master-data/accounting-setup/budget-rate*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','budget-rate.read'])) ? '' : 'display:none;' }}">
                                             <a href="{{route('budget-rate.index')}}"><i class="fa fa-circle-o"></i><span>Budget Rate</span></a>
                                         </li>
-                                         <li class="{!! (url(route('account.index')) == Request::url() OR Request::is('master-data/accounting-setup/account*')) ? ' active' : '' !!}">
+                                         <li class="{!! (url(route('account.index')) == Request::url() OR Request::is('master-data/accounting-setup/account*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','account.read'])) ? '' : 'display:none;' }}">
                                             <a href="{{ route('account.index') }}"><i class="fa fa-circle-o"></i><span>Account</span></a>
                                         </li>
                                     <ul>
@@ -621,54 +623,56 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu {!! (Request::is('system*') OR Request::is('system')) ? ' active' : '' !!}">
-            <a href="#">
-                <div class="icon-w">
-                    <div class="os-icon os-icon-star"></div>
-                </div>
-                <span>System</span>
-            </a>
-            <div class="sub-menu-w">
-                <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
-                <div class="sub-menu-i">
-                    <ul class="sub-menu">
-                        @if(user_info()->inRole('super-admin'))
-                            <li class="{!! (url(route('company.index')) == Request::url() OR Request::is('system/company*')) ? ' active' : '' !!}">
-                                <a href=" {{ route('company.index') }} ">
-                                    <i class="fa fa-circle-o"></i><span>Company</span>
+        @if(user_info()->hasAnyAccess(['admin', 'admin.company']))
+            <li class=" has-sub-menu {!! (Request::is('system*') OR Request::is('system')) ? ' active' : '' !!}">
+                <a href="#">
+                    <div class="icon-w">
+                        <div class="os-icon os-icon-star"></div>
+                    </div>
+                    <span>System</span>
+                </a>
+                <div class="sub-menu-w">
+                    <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
+                    <div class="sub-menu-i">
+                        <ul class="sub-menu">
+                            @if(user_info()->inRole('super-admin'))
+                                <li class="{!! (url(route('company.index')) == Request::url() OR Request::is('system/company*')) ? ' active' : '' !!}">
+                                    <a href=" {{ route('company.index') }} ">
+                                        <i class="fa fa-circle-o"></i><span>Company</span>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(user_info()->inRole('super-admin') || user_info()->inRole('admin'))
+                                <li class="{!! (url(route('audit-trail.index')) == Request::url() OR Request::is('system/logs*')) ? ' active' : '' !!}">
+                                    <a href=" {{ route('audit-trail.index') }} ">
+                                        <i class="fa fa-circle-o"></i><span>Logs</span>
+                                    </a>
+                                </li>
+                            @endif
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i><span>Users</span>
                                 </a>
                             </li>
-                        @endif
-                        @if(user_info()->inRole('super-admin') || user_info()->inRole('admin'))
-                            <li class="{!! (url(route('audit-trail.index')) == Request::url() OR Request::is('system/logs*')) ? ' active' : '' !!}">
-                                <a href=" {{ route('audit-trail.index') }} ">
-                                    <i class="fa fa-circle-o"></i><span>Logs</span>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i><span>Role</span>
                                 </a>
                             </li>
-                        @endif
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Users</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Role</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Permission</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>System Config</span>
-                            </a>
-                        </li>
-                    </ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i><span>Permission</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i><span>System Config</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+        @endif
     </ul>
 </div>
