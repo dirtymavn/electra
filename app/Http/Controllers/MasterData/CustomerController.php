@@ -50,7 +50,11 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $companies = $this->companies->all()->pluck('name', 'id');
+        if (user_info()->inRole('super-admin')) {
+            $companies = $this->companies->all()->pluck('name', 'id');
+        } else {
+            $companies = user_info()->company()->pluck('name', 'id')->all();
+        }
         $meals = $this->masterCustomer->meals();
         $countries = $this->countries->pluck('name', 'name');
         return view('contents.master_datas.customer.create', compact('companies', 'meals', 'countries'));
@@ -102,7 +106,7 @@ class CustomerController extends Controller
                 return redirect()->back()->withInput();
             }
         } catch (\Exception $e) {
-            flash()->error('<strong>Whoops! </strong> Something went wrong');
+            flash()->error('<strong>Whoops! </strong> Something went wrong '.$e->getMessage());
             \DB::rollback();
             return redirect()->back()->withInput();
         }
@@ -145,7 +149,12 @@ class CustomerController extends Controller
 
 
         $customer = (object) $arrayMerge;
-        $companies = $this->companies->all()->pluck('name', 'id');
+        if (user_info()->inRole('super-admin')) {
+            $companies = $this->companies->all()->pluck('name', 'id');
+        } else {
+            $companies = user_info()->company()->pluck('name', 'id')->all();
+        }
+
         $meals = $this->masterCustomer->meals();
         $countries = $this->countries->pluck('name', 'id');
         return view('contents.master_datas.customer.edit', compact('customer', 'companies', 'meals', 'countries'));

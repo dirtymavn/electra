@@ -34,20 +34,28 @@ class CustomerDataTable extends DataTable
      */
     public function query(MasterCustomer $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'customer_no',
-            'customer_name',
-            'company_id',
-            'status',
-            'salutation',
-            'sales_id',
-            'customer_group_id',
-            'is_draft',
-            'created_at',
-            'updated_at'
-        );
+        $return = $model
+            ->join('companies', 'companies.id', '=', 'master_customers.company_id')
+            ->select(
+                'master_customers.id',
+                'master_customers.customer_no',
+                'master_customers.customer_name',
+                'master_customers.company_id',
+                'master_customers.status',
+                'master_customers.salutation',
+                'master_customers.sales_id',
+                'master_customers.customer_group_id',
+                'master_customers.is_draft',
+                'master_customers.created_at',
+                'master_customers.updated_at',
+                'companies.name as company_name'
+            );
+        if (!user_info()->inRole('super-admin')) {
 
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
         // $empty = collect();
         // return $empty;
         // return $model->getDataByCompany(@user_info()->company->id)->select('customers.id',
@@ -78,16 +86,13 @@ class CustomerDataTable extends DataTable
     protected function getColumns()
     {
         // return [
-        //     'name' => ['name' => 'customers.name', 'data' => 'name', 'title' => trans('Name'), 'id' => 'name'],
-        //     'address' => ['name' => 'customers.address', 'data' => 'address', 'title' => trans('Address'), 'id' => 'address'],
-        //     'company_id' => ['name' => 'companies.name', 'data' => 'company_id', 'title' => trans('Company Name'), 'id' => 'company_id'],
-        //     'created_at' => ['name' => 'customers.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at'],
+        //     'customer_no' => ['name' => 'master_customers.customer_no', 'data' => 'customer_no', 'title' => trans('Customer No'), 'id' => 'customer_no'],
         // ];
 
         return [
             'customer_no',
             'customer_name',
-            'company_id',
+            'company_name' => ['name' => 'companies.name', 'data' => 'company_name'],
             'status',
             'salutation',
             'sales_id',
