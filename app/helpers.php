@@ -387,3 +387,20 @@ if (!function_exists('wew')) {
         print_r($data);die();
     }
 }
+
+ function randomString( $length = 6 )
+ {
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $number = '0123456789';
+    $charactersLength = strlen($characters);
+    $numberLength = strlen($number);
+    $randomString = '';
+    for ($i = 0; $i < 3; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    for ($i = 0; $i < 3; $i++) {
+        $randomString .= $number[rand(0, $numberLength - 1)];
+    }
+    $randomString = str_shuffle($randomString);
+    return $randomString;
+}
