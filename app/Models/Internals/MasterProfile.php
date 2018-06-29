@@ -3,9 +3,12 @@
 namespace App\Models\Internals;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MasterProfile extends Model
+class MasterProfile extends Model implements Auditable
 {
+	use \OwenIt\Auditing\Auditable;
+
     protected $table = 'master_profile';
 
     protected $fillable = [

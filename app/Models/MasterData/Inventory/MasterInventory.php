@@ -3,9 +3,12 @@
 namespace App\Models\MasterData\Inventory;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MasterInventory extends Model
+class MasterInventory extends Model implements Auditable
 {
+	use \OwenIt\Auditing\Auditable;
+
     protected $table = 'master_inventory';
 
     protected $fillable = [

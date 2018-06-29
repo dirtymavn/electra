@@ -3,9 +3,12 @@
 namespace App\Models\Accounting\GL\TrxPosting;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class TrxPosting extends Model
+class TrxPosting extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $table = 'trx_posting';
 
     protected $fillable = [
