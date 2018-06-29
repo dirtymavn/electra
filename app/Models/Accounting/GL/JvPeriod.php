@@ -26,6 +26,8 @@ class JvPeriod extends Model
         'end_date',
         'report_date',
         'is_draft',
+        'company_id',
+        'branch_id'
 
     ];
 }

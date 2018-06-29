@@ -37,6 +37,9 @@ class CreateMasterGuide extends Migration
             $table->string('guide_name_last')->nullable();
             $table->integer('tour_guide_visa_id');
             $table->boolean('is_draft')->nullable()->default(true);
+            $table->integer('company_id')->nullable();
+            $table->integer('branch_id')->nullable();
+
             $table->timestamps();
 
             $table->foreign('tour_guide_visa_id')->references('id')->on('tour_guide_visas')->onDelete('cascade');

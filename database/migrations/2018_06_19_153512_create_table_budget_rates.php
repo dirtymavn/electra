@@ -20,6 +20,9 @@ class CreateTableBudgetRates extends Migration
             $table->string('to_currency')->nullable();
             $table->float('exchange_rate')->nullable()->default(0);
             $table->boolean('is_draft')->nullable()->default(true);
+            $table->integer('company_id')->nullable();
+            $table->integer('branch_id')->nullable();
+
             $table->timestamps();
         });
     }

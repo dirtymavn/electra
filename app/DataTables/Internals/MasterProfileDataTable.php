@@ -34,26 +34,36 @@ class MasterProfileDataTable extends DataTable
      */
     public function query(MasterProfile $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'staff_no',
-            'staff_fullname',
-            'status',
-            'type',
-            'title',
-            'home_tel',
-            'mobile',
-            'employment_date',
-            'branch_id',
-            'office_tel',
-            'fax_no',
-            'email',
-            'office_address',
-            'home_address',
-            'remark',
-            'dr_account',
-            'is_draft'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'master_profile.company_id')
+            ->select(
+                'master_profile.id',
+                'master_profile.staff_no',
+                'master_profile.staff_fullname',
+                'master_profile.status',
+                'master_profile.type',
+                'master_profile.title',
+                'master_profile.home_tel',
+                'master_profile.mobile',
+                'master_profile.employment_date',
+                'master_profile.branch_id',
+                'master_profile.office_tel',
+                'master_profile.fax_no',
+                'master_profile.email',
+                'master_profile.office_address',
+                'master_profile.home_address',
+                'master_profile.remark',
+                'master_profile.dr_account',
+                'master_profile.is_draft'
+            );
+        
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**

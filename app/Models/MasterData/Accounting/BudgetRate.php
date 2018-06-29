@@ -24,6 +24,8 @@ class BudgetRate extends Model
         'to_currency',
         'exchange_rate',
         'is_draft',
+        'company_id',
+        'branch_id'
 
     ];
 }

@@ -37,16 +37,25 @@ class JvPeriodDataTable extends DataTable
      */
     public function query(JvPeriod $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'fiscal_year',
-            'period_month',
-            'period_status',
-            'start_date',
-            'end_date',
-            'report_date',
-            'is_draft'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'master_jv_periods.company_id')
+            ->select(
+                'master_jv_periods.id',
+                'master_jv_periods.fiscal_year',
+                'master_jv_periods.period_month',
+                'master_jv_periods.period_status',
+                'master_jv_periods.start_date',
+                'master_jv_periods.end_date',
+                'master_jv_periods.report_date',
+                'master_jv_periods.is_draft'
+            );
+        
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
     }
 
     /**

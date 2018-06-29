@@ -26,7 +26,9 @@ class MasterTourGuide extends Model
         'guide_name_first',
         'guide_name_last',
         'tour_guide_visa_id',
-        'is_draft'
+        'is_draft',
+        'company_id',
+        'branch_id'
     ];
 
     /**

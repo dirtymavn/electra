@@ -24,6 +24,13 @@ class FxTransactionController extends Controller
     public function __construct(TrxFxTrans $trxFxTrans)
     {
         $this->trxFxTrans = $trxFxTrans;
+
+        // middleware
+        $this->middleware('sentinel_access:admin.company,fx-trans.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,fx-trans.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,fx-trans.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,fx-trans.destroy', ['only' => ['destroy']]);
+
     }
 
     /**
@@ -70,6 +77,7 @@ class FxTransactionController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
+            $request->merge(['company_id' => @user_info()->company->id]);
             $insert = $this->trxFxTrans->create($request->all());
 
             if ($insert) {

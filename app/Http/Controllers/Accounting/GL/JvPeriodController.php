@@ -23,6 +23,13 @@ class JvPeriodController extends Controller
     public function __construct(JvPeriod $jvPeriod)
     {
         $this->jvPeriod = $jvPeriod;
+
+        // middleware
+        $this->middleware('sentinel_access:admin.company,jvperiod.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,jvperiod.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,jvperiod.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,jvperiod.destroy', ['only' => ['destroy']]);
+
     }
     
     /**
@@ -65,6 +72,7 @@ class JvPeriodController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
+            $request->merge(['company_id' => @user_info()->company->id]);
             $insert = $this->jvPeriod->create($request->all());
 
             if ($insert) {

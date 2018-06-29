@@ -35,14 +35,25 @@ class SupplierDataTable extends DataTable
      */
     public function query(MasterSupplier $model)
     {
-        return $model->newQuery()->select('id', 
-            'supplier_no',
-            'supplier_type',
-            'name',
-            'status', 
-            'is_draft',
-            'created_at'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'master_supplier.company_id')
+            ->select(
+                'master_supplier.id', 
+                'master_supplier.supplier_no',
+                'master_supplier.supplier_type',
+                'master_supplier.name',
+                'master_supplier.status', 
+                'master_supplier.is_draft',
+                'master_supplier.created_at'
+            );
+        
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**

@@ -22,6 +22,8 @@ class MasterVoucher extends Model
         'cust_no',
         'cust_name',
         'cust_address',
-        'is_draft'
+        'is_draft',
+        'company_id',
+        'branch_id'
     ];
 }

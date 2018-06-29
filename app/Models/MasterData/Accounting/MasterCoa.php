@@ -9,7 +9,8 @@ class MasterCoa extends Model
 	protected $table = 'master_coa';
 	
     protected $fillable = [
-    	'branch_id',
+        'company_id',
+        'branch_id',
     	'acc_no_key',
     	'acc_no_interface',
     	'acc_description',

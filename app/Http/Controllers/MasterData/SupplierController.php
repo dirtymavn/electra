@@ -12,6 +12,16 @@ use DB;
 
 class SupplierController extends Controller
 {
+    public function __construct()
+    {
+        // middleware
+        $this->middleware('sentinel_access:admin.company,supplier.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,supplier.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,supplier.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,supplier.destroy', ['only' => ['destroy']]);
+
+    }
+
      /**
      * Display a listing of the resource.
      *
@@ -53,7 +63,7 @@ class SupplierController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-
+            $request->merge(['company_id' => @user_info()->company->id]);
             $insert = Supplier::create( $request->all() );
             
             if ($insert) {

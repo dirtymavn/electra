@@ -17,7 +17,9 @@ class MasterSupplier extends Model
     	'status',
     	'hotel_vendor_flag',
     	'sundry_profile_flag',
-        'is_draft'
+        'is_draft',
+        'company_id',
+        'branch_id'
     ];
 
     public function detail()

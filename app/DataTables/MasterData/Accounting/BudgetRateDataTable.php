@@ -34,14 +34,24 @@ class BudgetRateDataTable extends DataTable
      */
     public function query(BudgetRate $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'acc_period_mo',
-            'from_currency',
-            'to_currency',
-            'exchange_rate',
-            'is_draft'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'budget_rates.company_id')
+            ->select(
+                'budget_rates.id',
+                'budget_rates.acc_period_mo',
+                'budget_rates.from_currency',
+                'budget_rates.to_currency',
+                'budget_rates.exchange_rate',
+                'budget_rates.is_draft'
+            );
+
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**

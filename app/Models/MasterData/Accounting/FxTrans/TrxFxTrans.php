@@ -30,7 +30,9 @@ class TrxFxTrans extends Model
         'jv_period',
         'acc_type',
         'fx_acc',
-        'is_draft'
+        'is_draft',
+        'company_id',
+        'branch_id'
 
     ];
 

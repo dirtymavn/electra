@@ -23,6 +23,7 @@ class MasterCustomer extends Model
         'customer_no',
         'customer_name',
         'company_id',
+        'branch_id',
         'status',
         'salutation',
         'sales_id',

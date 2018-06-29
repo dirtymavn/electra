@@ -22,6 +22,9 @@ class CreateTableMasterJvPeriods extends Migration
             $table->date('end_date')->nullable();
             $table->date('report_date')->nullable();
             $table->boolean('is_draft')->nullable()->default(true);
+            $table->integer('company_id')->nullable();
+            $table->integer('branch_id')->nullable();
+
             $table->timestamps();
         });
     }

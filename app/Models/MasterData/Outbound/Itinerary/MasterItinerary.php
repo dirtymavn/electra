@@ -22,6 +22,7 @@ class MasterItinerary extends Model
     protected $fillable = [
         'itinerary_code',
         'itinerary_direction',
+        'company_id',
         'branch_id',
         'itinerary_name',
         'airline',

@@ -24,7 +24,9 @@ class MasterInventory extends Model
     	'coupon_no',
     	'nights',
     	'rooms',
-    	'is_draft'
+    	'is_draft',
+        'company_id',
+        'branch_id'
     ];
 
 

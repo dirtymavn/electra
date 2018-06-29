@@ -9,6 +9,16 @@ use App\DataTables\MasterData\Accounting\MasterCoaDataTable;
 
 class MasterCoaController extends Controller
 {
+    public function __construct()
+    {
+        // middleware
+        $this->middleware('sentinel_access:admin.company,account.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,account.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,account.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,account.destroy', ['only' => ['destroy']]);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +58,8 @@ class MasterCoaController extends Controller
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
             }
-
+            
+            $request->merge(['company_id' => @user_info()->company->id]);
             $insert = MasterCoa::create($request->all());
 
             if ($insert) {

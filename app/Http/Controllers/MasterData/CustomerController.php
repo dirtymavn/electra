@@ -31,6 +31,13 @@ class CustomerController extends Controller
         $this->masterCustomer = $masterCustomer;
         $this->companies = $companies;
         $this->countries = $countries;
+
+        // middleware
+        $this->middleware('sentinel_access:admin.company,customer.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,customer.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,customer.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,customer.destroy', ['only' => ['destroy']]);
+
     }
 
     /**
