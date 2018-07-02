@@ -65,21 +65,31 @@ class TrxFxTransactionDataTable extends DataTable
      */
     public function query(TrxFxTrans $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'invoice_flag',
-            'letter_of_guarantee_flag',
-            'credit_note_flag',
-            'deposit_overpayment_flag',
-            'ap_deposit_flag',
-            'cash_account_flag',
-            'bank_account_flag',
-            'other_account_flag',
-            'jv_period',
-            'acc_type',
-            'fx_acc',
-            'is_draft'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'trx_fx_transactions.company_id')
+            ->select(
+                'trx_fx_transactions.id',
+                'trx_fx_transactions.invoice_flag',
+                'trx_fx_transactions.letter_of_guarantee_flag',
+                'trx_fx_transactions.credit_note_flag',
+                'trx_fx_transactions.deposit_overpayment_flag',
+                'trx_fx_transactions.ap_deposit_flag',
+                'trx_fx_transactions.cash_account_flag',
+                'trx_fx_transactions.bank_account_flag',
+                'trx_fx_transactions.other_account_flag',
+                'trx_fx_transactions.jv_period',
+                'trx_fx_transactions.acc_type',
+                'trx_fx_transactions.fx_acc',
+                'trx_fx_transactions.is_draft'
+            );
+        
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**

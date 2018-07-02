@@ -4,9 +4,12 @@ namespace App\Models\MasterData\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 use Request;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MasterCustomer extends Model
+class MasterCustomer extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     /**
      * The table associated with the model.
      *
@@ -23,6 +26,7 @@ class MasterCustomer extends Model
         'customer_no',
         'customer_name',
         'company_id',
+        'branch_id',
         'status',
         'salutation',
         'sales_id',

@@ -29,6 +29,9 @@ class CreateTableTrxFxTransactions extends Migration
             $table->string('acc_type')->nullable();
             $table->string('fx_acc')->nullable();
             $table->boolean('is_draft')->nullable()->default(true);
+            $table->integer('company_id')->nullable();
+            $table->integer('branch_id')->nullable();
+
             $table->timestamps();
         });
 

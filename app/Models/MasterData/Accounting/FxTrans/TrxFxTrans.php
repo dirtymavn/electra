@@ -3,9 +3,12 @@
 namespace App\Models\MasterData\Accounting\FxTrans;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class TrxFxTrans extends Model
+class TrxFxTrans extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     /**
      * The table associated with the model.
      *
@@ -30,7 +33,9 @@ class TrxFxTrans extends Model
         'jv_period',
         'acc_type',
         'fx_acc',
-        'is_draft'
+        'is_draft',
+        'company_id',
+        'branch_id'
 
     ];
 

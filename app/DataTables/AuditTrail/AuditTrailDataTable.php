@@ -25,9 +25,17 @@ class AuditTrailDataTable extends DataTable
      */
     public function query()
     {
-        return DB::table('audits')->join('users', 'users.id', 'audits.user_id')
+        $return = DB::table('audits')->join('users', 'users.id', 'audits.user_id')
             ->select('users.first_name', 'users.last_name', 'users.email', 'users.username',
                 'audits.*');
+            
+        if (user_info()->inRole('admin')) {
+
+            $return = $return->where('users.company_id',@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**
@@ -37,13 +45,13 @@ class AuditTrailDataTable extends DataTable
      */
     public function html()
     {
-        $parameters = array_merge($this->getBuilderParameters(), ['responsive' => true,
-            'order' => [[8, 'desc']]]);
+        $parameters = array_merge($this->getBuilderParameters(), ['pageLength' => 20, 'responsive' => true,
+            'order' => [[4, 'desc']]]);
 
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->parameters($this->getBuilderParameters());
+                    ->parameters($parameters);
     }
 
     /**

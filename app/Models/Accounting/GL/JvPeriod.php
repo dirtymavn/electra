@@ -3,9 +3,12 @@
 namespace App\Models\Accounting\GL;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class JvPeriod extends Model
+class JvPeriod extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     /**
      * The table associated with the model.
      *
@@ -26,6 +29,8 @@ class JvPeriod extends Model
         'end_date',
         'report_date',
         'is_draft',
+        'company_id',
+        'branch_id'
 
     ];
 }

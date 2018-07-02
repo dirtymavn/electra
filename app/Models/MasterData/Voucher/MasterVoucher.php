@@ -3,9 +3,12 @@
 namespace App\Models\MasterData\Voucher;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MasterVoucher extends Model
+class MasterVoucher extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     protected $table = 'master_voucher';
     
     protected $fillable = [
@@ -22,6 +25,8 @@ class MasterVoucher extends Model
         'cust_no',
         'cust_name',
         'cust_address',
-        'is_draft'
+        'is_draft',
+        'company_id',
+        'branch_id'
     ];
 }

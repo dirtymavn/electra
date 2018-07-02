@@ -10,6 +10,15 @@ use App\Http\Controllers\Controller;
 
 class TrxPostingController extends Controller
 {
+    public function __construct()
+    {
+        // middleware
+        $this->middleware('sentinel_access:admin.company,periodend.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,periodend.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,periodend.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,periodend.destroy', ['only' => ['destroy']]);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +61,7 @@ class TrxPostingController extends Controller
             $request->merge(['is_draft' => false]);
             $msgSuccess = trans('message.published');
         }
-        $request->merge([ 'user_id' => user_info('id'), 'branch_id' => 0 ]);
+        $request->merge([ 'user_id' => user_info('id'), 'branch_id' => 0, 'company_id' => @user_info()->company->id ]);
         $insert = TrxPosting::create($request->all());
 
         if ($insert) {

@@ -35,25 +35,36 @@ class InventoryDataTable extends DataTable
      */
     public function query(MasterInventory $model)
     {
-        return $model->newQuery()->select('id', 
-         'trx_sales_id',
-         'inventory_type',
-         'voucher_no',
-         'product_code',
-         'recevied_date',
-         'booked_qty',
-         'sold_qty',
-         'status',
-         'qty',
-         'guest_name',
-         'iata_no',
-         'tour_code',
-         'coupon_no',
-         'nights',
-         'rooms',
-         'is_draft',
-         'created_at'
-     );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'master_inventory.company_id')
+            ->select(
+                'master_inventory.id', 
+                'master_inventory.trx_sales_id',
+                'master_inventory.inventory_type',
+                'master_inventory.voucher_no',
+                'master_inventory.product_code',
+                'master_inventory.recevied_date',
+                'master_inventory.booked_qty',
+                'master_inventory.sold_qty',
+                'master_inventory.status',
+                'master_inventory.qty',
+                'master_inventory.guest_name',
+                'master_inventory.iata_no',
+                'master_inventory.tour_code',
+                'master_inventory.coupon_no',
+                'master_inventory.nights',
+                'master_inventory.rooms',
+                'master_inventory.is_draft',
+                'master_inventory.created_at'
+            );
+        
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**
