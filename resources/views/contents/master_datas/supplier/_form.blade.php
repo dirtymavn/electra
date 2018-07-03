@@ -38,6 +38,7 @@
 					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#term">Term</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#contact">Contact</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#bank">Bank</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#bank_detail">Bank Detail</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#bank_crpd">Bank CRPD</a></li>
 				</ul>
 			</div>
@@ -49,6 +50,8 @@
 				@include('contents.master_datas.supplier.parts.contact')
 
 				@include('contents.master_datas.supplier.parts.bank')
+
+				@include('contents.master_datas.supplier.parts.bank_detail')
 
 				@include('contents.master_datas.supplier.parts.bank_crpd')
 			</div>
