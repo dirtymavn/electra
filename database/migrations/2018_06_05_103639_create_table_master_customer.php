@@ -19,9 +19,11 @@ class CreateTableMasterCustomer extends Migration
             $table->increments('id');
             $table->string('customer_no')->nullable();
             $table->string('customer_name')->nullable();
-            $table->string('company_id')->nullable();
+            $table->integer('company_id')->nullable();
+            $table->integer('branch_id')->nullable();
             $table->enum('status', ['active', 'non_active'])->nullable();
-            $table->enum('salutation', ['yes', 'no'])->nullable();
+            // $table->enum('salutation', ['mr', 'mrs'])->nullable();
+            $table->string('salutation')->nullable();
             $table->integer('sales_id')->nullable();
             $table->integer('customer_group_id')->nullable();
             $table->boolean('is_draft')->nullable()->default(true);
@@ -33,10 +35,12 @@ class CreateTableMasterCustomer extends Migration
             $table->unsignedInteger('customer_id');
             $table->integer('servicing_branch_id')->nullable();
             $table->integer('rpt_group_id')->nullable();
-            $table->enum('cust_type_id', ['yes', 'no'])->nullable();
+            // $table->enum('cust_type_id', ['yes', 'no'])->nullable();
+            $table->string('cust_type_id')->nullable();
             $table->string('mailing_address')->nullable();
             $table->string('billing_address')->nullable();
-            $table->enum('office_address', ['yes', 'no'])->nullable();
+            // $table->enum('office_address', ['yes', 'no'])->nullable();
+            $table->string('office_address')->nullable();
             $table->text('travel_policy')->nullable();
             $table->timestamps();
 
@@ -46,7 +50,8 @@ class CreateTableMasterCustomer extends Migration
         Schema::create('master_customer_main_contacts', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('customer_main_id');
-            $table->enum('contact_type', ['yes', 'no'])->nullable();
+            // $table->enum('contact_type', ['yes', 'no'])->nullable();
+            $table->string('contact_type')->nullable();
             $table->string('surname')->nullable();
             $table->string('gname')->nullable();
             $table->string('title')->nullable();
@@ -66,7 +71,8 @@ class CreateTableMasterCustomer extends Migration
             $table->increments('id');
             $table->unsignedInteger('customer_id');
             $table->integer('gender')->nullable();
-            $table->enum('marital_status', ['yes', 'no'])->nullable();
+            // $table->enum('marital_status', ['yes', 'no'])->nullable();
+            $table->string('marital_status')->nullable();
             $table->string('insurance_no')->nullable();
             $table->string('country_of_birth')->nullable();
             $table->date('dob')->nullable();
@@ -155,9 +161,12 @@ class CreateTableMasterCustomer extends Migration
             $table->date('addon_from_date')->nullable();
             $table->date('addon_to_date')->nullable();
             $table->string('credit_term_type')->nullable();
-            $table->enum('invoce_delivery_method', ['yes', 'no'])->nullable();
-            $table->enum('recall_commission_method', ['yes', 'no'])->nullable();
-            $table->enum('rebate_method', ['yes', 'no'])->nullable();
+            // $table->enum('invoce_delivery_method', ['yes', 'no'])->nullable();
+            // $table->enum('recall_commission_method', ['yes', 'no'])->nullable();
+            // $table->enum('rebate_method', ['yes', 'no'])->nullable();
+            $table->string('invoce_delivery_method')->nullable();
+            $table->string('recall_commission_method')->nullable();
+            $table->string('rebate_method')->nullable();
             $table->integer('rebate_amount_type_id')->nullable();
             $table->timestamps();
 

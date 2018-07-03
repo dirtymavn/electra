@@ -4,9 +4,12 @@ namespace App\Models\MasterData\Outbound\Guide;
 
 use Illuminate\Database\Eloquent\Model;
 use Request;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MasterTourGuide extends Model
+class MasterTourGuide extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     /**
      * The table associated with the model.
      *
@@ -26,7 +29,9 @@ class MasterTourGuide extends Model
         'guide_name_first',
         'guide_name_last',
         'tour_guide_visa_id',
-        'is_draft'
+        'is_draft',
+        'company_id',
+        'branch_id'
     ];
 
     /**

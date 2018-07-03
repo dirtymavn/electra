@@ -34,14 +34,24 @@ class TrxPostingDataTable extends DataTable
      */
     public function query(TrxPosting $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'postdate_start',
-            'postdate_end',
-            'user_id',
-            'branch_id',
-            'is_draft'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'trx_posting.company_id')
+            ->select(
+                'trx_posting.id',
+                'trx_posting.postdate_start',
+                'trx_posting.postdate_end',
+                'trx_posting.user_id',
+                'trx_posting.branch_id',
+                'trx_posting.is_draft'
+            );
+
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**

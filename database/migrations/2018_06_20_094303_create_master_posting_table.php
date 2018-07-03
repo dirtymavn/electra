@@ -20,7 +20,8 @@ class CreateMasterPostingTable extends Migration
             $table->date('postdate_start');
             $table->date('postdate_end');
             $table->integer('user_id')->unsigned();
-            $table->integer('branch_id');
+            $table->integer('company_id')->nullable();
+            $table->integer('branch_id')->nullable();
             $table->boolean('is_draft')->nullable()->default(true);
 
             $table->timestamps();

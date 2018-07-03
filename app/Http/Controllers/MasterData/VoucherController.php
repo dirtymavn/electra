@@ -11,6 +11,16 @@ use DB;
 
 class VoucherController extends Controller
 {
+    public function __construct()
+    {
+        // middleware
+        $this->middleware('sentinel_access:admin.company,voucher.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,voucher.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,voucher.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,voucher.destroy', ['only' => ['destroy']]);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +61,7 @@ class VoucherController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
+            $request->merge(['company_id' => @user_info()->company->id]);
             $insert = Voucher::create( $request->all() );
 
             if ($insert) {

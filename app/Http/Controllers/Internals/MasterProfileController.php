@@ -51,6 +51,7 @@ class MasterProfileController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
+            $request->merge(['company_id' => @user_info()->company->id]);
             $insert = MasterProfile::create( $request->all() );
 
             if ($insert) {

@@ -4,9 +4,12 @@ namespace App\Models\MasterData\Outbound\Itinerary;
 
 use Illuminate\Database\Eloquent\Model;
 use Request;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MasterItinerary extends Model
+class MasterItinerary extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
     /**
      * The table associated with the model.
      *
@@ -22,6 +25,7 @@ class MasterItinerary extends Model
     protected $fillable = [
         'itinerary_code',
         'itinerary_direction',
+        'company_id',
         'branch_id',
         'itinerary_name',
         'airline',

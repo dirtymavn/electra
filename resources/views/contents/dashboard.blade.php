@@ -13,7 +13,7 @@
 @section('page_title', 'Dashboard')
 
 @section('content')
-
+        @include('flash::message')
         <div class="row">
             <div class="col-sm-12">
                 <div class="element-wrapper">

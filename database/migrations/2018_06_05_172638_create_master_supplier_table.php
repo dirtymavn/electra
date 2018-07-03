@@ -23,6 +23,8 @@ class CreateMasterSupplierTable extends Migration
             $table->boolean('hotel_vendor_flag', [true, false] )->nullable();
             $table->boolean('sundry_profile_flag', [true, false] )->nullable();
             $table->boolean('is_draft')->nullable()->default(true);
+            $table->integer('company_id')->nullable();
+            $table->integer('branch_id')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

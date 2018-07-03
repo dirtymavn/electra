@@ -23,6 +23,13 @@ class BudgetRateController extends Controller
     public function __construct(BudgetRate $budgetRate)
     {
         $this->budgetRate = $budgetRate;
+
+        // middleware
+        $this->middleware('sentinel_access:admin.company,budget-rate.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,budget-rate.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,budget-rate.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,budget-rate.destroy', ['only' => ['destroy']]);
+
     }
 
     /**
@@ -65,7 +72,8 @@ class BudgetRateController extends Controller
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
             }
-
+            
+            $request->merge(['company_id' => @user_info()->company->id]);
             $insert = $this->budgetRate->create($request->all());
 
             if ($insert) {

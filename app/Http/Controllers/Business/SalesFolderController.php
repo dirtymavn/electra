@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Business;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Business\SupplierDataTable;
+use App\DataTables\Business\SalesDataTable;
 
 use App\Models\Business\Supplier;
 
@@ -16,7 +16,7 @@ class SalesFolderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(SupplierDataTable $dataTable)
+    public function index(SalesDataTable $dataTable)
     {
         return $dataTable->render('contents.business.sales.index');
     }

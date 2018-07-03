@@ -3,13 +3,17 @@
 namespace App\Models\MasterData\Accounting;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class MasterCoa extends Model
+class MasterCoa extends Model implements Auditable
 {
+	use \OwenIt\Auditing\Auditable;
+
 	protected $table = 'master_coa';
 	
     protected $fillable = [
-    	'branch_id',
+        'company_id',
+        'branch_id',
     	'acc_no_key',
     	'acc_no_interface',
     	'acc_description',

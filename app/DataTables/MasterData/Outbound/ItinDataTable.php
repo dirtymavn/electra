@@ -34,28 +34,38 @@ class ItinDataTable extends DataTable
      */
     public function query(MasterItinerary $model)
     {
-        return $model->newQuery()->select(
-            'id',
-            'itinerary_code',
-            'itinerary_direction',
-            'branch_id',
-            'itinerary_name',
-            'airline',
-            'category',
-            'city_code',
-            'type',
-            'nationality',
-            'description',
-            'min_cap',
-            'max_cap',
-            'validity_start',
-            'validity_end',
-            'departure',
-            'days_duration',
-            'cutoff_days',
-            'remark',
-            'is_draft'
-        );
+        $return = $model->newQuery()
+            ->join('companies', 'companies.id', '=', 'master_itineraries.company_id')
+            ->select(
+                'master_itineraries.id',
+                'master_itineraries.itinerary_code',
+                'master_itineraries.itinerary_direction',
+                'master_itineraries.branch_id',
+                'master_itineraries.itinerary_name',
+                'master_itineraries.airline',
+                'master_itineraries.category',
+                'master_itineraries.city_code',
+                'master_itineraries.type',
+                'master_itineraries.nationality',
+                'master_itineraries.description',
+                'master_itineraries.min_cap',
+                'master_itineraries.max_cap',
+                'master_itineraries.validity_start',
+                'master_itineraries.validity_end',
+                'master_itineraries.departure',
+                'master_itineraries.days_duration',
+                'master_itineraries.cutoff_days',
+                'master_itineraries.remark',
+                'master_itineraries.is_draft'
+            );
+        
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->whereCompanyId(@user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**
