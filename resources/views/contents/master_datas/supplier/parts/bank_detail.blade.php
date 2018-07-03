@@ -24,13 +24,13 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('ac_no', trans('Ac No 1'), ['class' => 'control-label']) !!}
+						{!! Form::label('ac_no', trans('Acc No 1'), ['class' => 'control-label']) !!}
 						{!! Form::text('ac_no', null, [ 'class' => 'form-control', 'placeholder' => 'Acc No 1' ]) !!}
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('ac_no', trans('Ac No 1 Currency'), ['class' => 'control-label']) !!}
+						{!! Form::label('ac_no', trans('Acc No 1 Currency'), ['class' => 'control-label']) !!}
 						{!! Form::text('ac_no', null, [ 'class' => 'form-control', 'placeholder' => 'Acc No 1 Currency' ]) !!}
 					</div>
 					
@@ -44,13 +44,13 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('ac_no', trans('Ac No 2'), ['class' => 'control-label']) !!}
+						{!! Form::label('ac_no', trans('Acc No 2'), ['class' => 'control-label']) !!}
 						{!! Form::text('ac_no', null, [ 'class' => 'form-control', 'placeholder' => 'Acc No 2' ]) !!}
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('ac_no', trans('Ac No 2 Currency'), ['class' => 'control-label']) !!}
+						{!! Form::label('ac_no', trans('Acc No 2 Currency'), ['class' => 'control-label']) !!}
 						{!! Form::text('ac_no', null, [ 'class' => 'form-control', 'placeholder' => 'Acc No 2 Currency' ]) !!}
 					</div>
 					
@@ -64,13 +64,13 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('ac_no', trans('Ac No 3'), ['class' => 'control-label']) !!}
+						{!! Form::label('ac_no', trans('Acc No 3'), ['class' => 'control-label']) !!}
 						{!! Form::text('ac_no', null, [ 'class' => 'form-control', 'placeholder' => 'Acc No 3' ]) !!}
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('ac_no', trans('Ac No 3 Currency'), ['class' => 'control-label']) !!}
+						{!! Form::label('ac_no', trans('Acc No 3 Currency'), ['class' => 'control-label']) !!}
 						{!! Form::text('ac_no', null, [ 'class' => 'form-control', 'placeholder' => 'Acc No 3 Currency' ]) !!}
 					</div>
 					
@@ -84,13 +84,13 @@
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('ac_no', trans('Ac No 4'), ['class' => 'control-label']) !!}
+						{!! Form::label('ac_no', trans('Acc No 4'), ['class' => 'control-label']) !!}
 						{!! Form::text('ac_no', null, [ 'class' => 'form-control', 'placeholder' => 'Acc No 4' ]) !!}
 					</div>
 				</div>
 				<div class="col-sm-4">
 					<div class="form-group">
-						{!! Form::label('ac_no', trans('Ac No 4 Currency'), ['class' => 'control-label']) !!}
+						{!! Form::label('ac_no', trans('Acc No 4 Currency'), ['class' => 'control-label']) !!}
 						{!! Form::text('ac_no', null, [ 'class' => 'form-control', 'placeholder' => 'Acc No 4 Currency' ]) !!}
 					</div>
 					
