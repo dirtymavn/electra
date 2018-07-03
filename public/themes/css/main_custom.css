@@ -137,9 +137,29 @@ ul.tabs li a:hover
 {
 	display:none;
 }
-.menu-w ul.sub-menu li a:hover
+.menu-w ul.sub-menu li a:hover,
+.menu-w ul.sub-menu li.active a
 {
 	transform:translateX(5px);
+}
+.menu-w ul.sub-menu li:hover,
+.menu-w ul.sub-menu li.active
+{
+	background:#1b55e2;
+}
+.menu-w.sub-menu-style-over .sub-menu-w .sub-menu-icon
+{
+	display:none;
+}
+.menu-w ul.sub-menu li a:hover,
+.menu-w ul.sub-menu li.active a
+{
+	color:#fff !important;
+}
+.menu-w ul.sub-menu li a:hover i,
+.menu-w ul.sub-menu li.active i
+{
+	color:#fff !important;
 }
 .menu-w ul.main-menu > li.has-sub-menu.active .sub-menu,
 .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i
