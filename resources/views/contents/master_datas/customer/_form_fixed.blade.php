@@ -329,48 +329,30 @@
                     <div class="element-wrapper">
                         <div class="element-box">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        {!! Form::label('card_type', trans('Card Type'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('card_type', old('card_type') , ['class' => 'form-control', 'placeholder' => 'Input the Card Type', 'readonly' => true]) !!}
+                                        <button type="button" class="btn btn-primary form-control btn-add-creditcard col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
                                     </div>
                                     <div class="form-group">
-                                        {!! Form::label('merchant_no', trans('Merchant No.'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('merchant_no', old('merchant_no') , ['class' => 'form-control', 'placeholder' => 'Input the Merchant No.']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('merchant_no_int', trans('Merchant No. Int'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('merchant_no_int', old('merchant_no_int') , ['class' => 'form-control', 'placeholder' => 'Input the Merchant No. Int']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('credit_card_no', trans('Credit Card No.'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('credit_card_no', old('credit_card_no') , ['class' => 'form-control', 'placeholder' => 'Input the Credit Card No.']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('cc_expiry_date', trans('Expiry Date'), ['class' => 'control-label']) !!}
-                                        {!! Form::date('cc_expiry_date', old('cc_expiry_date') , ['class' => 'form-control', 'placeholder' => 'Input the Expiry Date']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label('cardholder_name', trans('Cardholder Name'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('cardholder_name', old('cardholder_name') , ['class' => 'form-control', 'placeholder' => 'Input the Cardholder Name']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('bill_type', trans('Billing Type'), ['class' => 'control-label']) !!}
-                                        {!! Form::text('bill_type', old('bill_type') , ['class' => 'form-control', 'placeholder' => 'Input the Billing Type']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('preferred_card', trans('Preferred Card'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('preferred_card', ['true' => 'YES', 'false' => 'NO'],old('preferred_card') , ['class' => 'form-control']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('sof', trans('Sof'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('sof', ['true' => 'YES', 'false' => 'NO'],old('sof') , ['class' => 'form-control']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('remark', trans('Remark'), ['class' => 'control-label']) !!}
-                                        {!! Form::textarea('remark', old('remark') , ['class' => 'form-control', 'placeholder' => 'Input the Remark', 'rows' => '5']) !!}
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" id="customer-creditcard" style="width:100%;">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>Type</th>
+                                                        <th>Merchant No</th>
+                                                        <th>Merchant No. Int</th>
+                                                        <th>CreditCard No</th>
+                                                        <th>Expiry Date</th>
+                                                        <th>Cardholder Name</th>
+                                                        <th>Bill. Type</th>
+                                                        <th>Preferred Card</th>
+                                                        <th>Sof</th>
+                                                        <th>Remark</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -434,13 +416,171 @@
     </div>
 </div>
 
+
+@push('models')
+    <!-- Form Credit Card .Start -->
+    <div id="form-creditcard" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                {!! Form::open(['id' => 'form-customer-creditcard', 'method' => 'post']) !!}
+                <div class="modal-header">
+                    <h4 class="modal-title">Itinerary Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" value="" name="customer_creditcard_id" id="customer_creditcard_id">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('card_type', trans('Card Type'), ['class' => 'control-label']) !!}
+                                {!! Form::text('card_type', old('card_type') , ['class' => 'form-control', 'placeholder' => 'Input the Card Type', 'readonly' => true]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('merchant_no', trans('Merchant No.'), ['class' => 'control-label']) !!}
+                                {!! Form::text('merchant_no', old('merchant_no') , ['class' => 'form-control', 'placeholder' => 'Input the Merchant No.']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('merchant_no_int', trans('Merchant No. Int'), ['class' => 'control-label']) !!}
+                                {!! Form::text('merchant_no_int', old('merchant_no_int') , ['class' => 'form-control', 'placeholder' => 'Input the Merchant No. Int']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('credit_card_no', trans('Credit Card No.'), ['class' => 'control-label']) !!}
+                                {!! Form::text('credit_card_no', old('credit_card_no') , ['class' => 'form-control', 'placeholder' => 'Input the Credit Card No.']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('cc_expiry_date', trans('Expiry Date'), ['class' => 'control-label']) !!}
+                                {!! Form::date('cc_expiry_date', old('cc_expiry_date') , ['class' => 'form-control', 'placeholder' => 'Input the Expiry Date']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('cardholder_name', trans('Cardholder Name'), ['class' => 'control-label']) !!}
+                                {!! Form::text('cardholder_name', old('cardholder_name') , ['class' => 'form-control', 'placeholder' => 'Input the Cardholder Name']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('bill_type', trans('Billing Type'), ['class' => 'control-label']) !!}
+                                {!! Form::text('bill_type', old('bill_type') , ['class' => 'form-control', 'placeholder' => 'Input the Billing Type']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('preferred_card', trans('Preferred Card'), ['class' => 'control-label']) !!}
+                                {!! Form::select('preferred_card', ['1' => 'YES', '0' => 'NO'],old('preferred_card') , ['class' => 'form-control']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('sof', trans('Sof'), ['class' => 'control-label']) !!}
+                                {!! Form::select('sof', ['1' => 'YES', '0' => 'NO'],old('sof') , ['class' => 'form-control']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('cc_remark', trans('Remark'), ['class' => 'control-label']) !!}
+                                {!! Form::textarea('cc_remark', old('cc_remark') , ['class' => 'form-control', 'placeholder' => 'Input the Remark', 'rows' => '5']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
+                    </button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+    <!-- Form Credit Card .End -->
+@endpush
+
 @section('part_script')
 <!-- <script src="{{ asset('themes/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js') }}"></script> -->
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! JsValidator::formRequest('App\Http\Requests\MasterData\CustomerRequest', '#form-customer') !!}
 <script>
-$(function(){
-    spinnerLoad($('#form-customer'));
-});
+    $(function(){
+        spinnerLoad($('#form-customer'));
+    });
+
+    $(document).ready(function() {
+        var columns = [
+            { data: 'card_type', name: 'card_type'},
+            { data: 'merchant_no', name: 'merchant_no'},
+            { data: 'merchant_no_int', name: 'merchant_no_int'},
+            { data: 'credit_card_no', name: 'optional_reference_no'},
+            { data: 'cc_expiry_date', name: 'optional_currency'},
+            { data: 'cardholder_name', name: 'cardholder_name'},
+            { data: 'bill_type', name: 'bill_type'},
+            { data: 'preferred_card', name: 'preferred_card'},
+            { data: 'sof', name: 'sof'},
+            { data: 'cc_remark', name: 'cc_remark'},
+            { data: 'action', name: 'action', className: 'dt-center'},
+        ];
+
+        var datas = {
+            'type': 'customer-creditcard'
+        };
+
+        initDatatable($('#customer-creditcard'), "{{route('customer.get-data')}}", columns, datas);
+
+        $('#form-customer-creditcard').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: "{{route('customer.creditcard.post')}}",
+                method: "POST",
+                processData: false,
+                contentType: false,
+                dataType: "JSON",
+                data: formData,
+                success: function(data) {
+                    $('#form-creditcard').modal('hide');
+                    $('#customer-creditcard').DataTable().ajax.reload();
+                }
+            });
+        });
+    });
+
+    $(document).on('click', '.btn-add-creditcard', function(e) {
+        $('#form-customer-creditcard').find("input[type=text], textarea, input[type=hidden], input[type=date]").val("");
+        $('#form-creditcard').modal({backdrop: 'static', keyboard: false});
+        e.preventDefault();
+    });
+
+    $(document).on('click', '.deleteData', function() {
+        var id = $(this).data('id');
+        $.ajax({
+            url: "{{route('customer.data.delete')}}",
+            method: "POST",
+            dataType: "JSON",
+            data: {'id':id},
+            success: function(data) {
+                $('#customer-creditcard').DataTable().ajax.reload();
+            }
+        })
+    });
+
+    $(document).on('click', '.editData', function() {
+        $('#form-customer-creditcard').find("input[type=text], textarea, input[type=hidden], input[type=date]").val("");
+        var id = $(this).data('id');
+        $.ajax({
+            url: "{{route('customer.data.detail')}}",
+            method: "POST",
+            dataType: "JSON",
+            data: {'id':id},
+            success: function(data) {
+                var value = data.data.data;
+                console.log(value);
+                $('#card_type').val(value.card_type);
+                $('#merchant_no').val(value.merchant_no);
+                $('#merchant_no_int').val(value.merchant_no_int);
+                $('#credit_card_no').val(value.credit_card_no);
+                $('#cc_expiry_date').val(value.cc_expiry_date);
+                $('#cardholder_name').val(value.cardholder_name);
+                $('#bill_type').val(value.bill_type);
+                $('#preferred_card').val(value.preferred_card);
+                $('#sof').val(value.sof);
+                $('#cc_remark').val(value.cc_remark);
+                $('#customer_creditcard_id').val(data.data.id);
+                $('#form-creditcard').modal({backdrop: 'static', keyboard: false});
+            }
+        })
+    });
 </script>
 @endsection

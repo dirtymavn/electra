@@ -71,6 +71,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     Route::group(['prefix' => 'master-data', 'namespace' => 'MasterData'], function () {
         Route::resource('customer', 'CustomerController');
         Route::post('customer/bulk-delete', array('as' => 'customer.bulk-delete', 'uses' => 'CustomerController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,customer.destroy'));
+        Route::post('customer/get-data', array('as' => 'customer.get-data', 'uses' => 'CustomerController@getData'));
+        Route::post('customer/credit-card', array('as' => 'customer.creditcard.post', 'uses' => 'CustomerController@customerCreditCardStore', 'middleware' => 'sentinel_access:admin.company,customer.create'));
+        Route::post('customer/data/delete', array('as' => 'customer.data.delete', 'uses' => 'CustomerController@dataDelete', 'middleware' => 'sentinel_access:admin.company,customer.create'));
+        Route::post('customer/data/detail', array('as' => 'customer.data.detail', 'uses' => 'CustomerController@dataDetail', 'middleware' => 'sentinel_access:admin.company,customer.create'));
 
         Route::resource('supplier', 'SupplierController');
         Route::post('supplier/bulk-delete', array('as' => 'supplier.bulk-delete', 'uses' => 'SupplierController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,supplier.destroy'));

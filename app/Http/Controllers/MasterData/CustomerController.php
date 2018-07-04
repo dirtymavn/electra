@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Models\MasterData\Customer\MasterCustomer;
+use App\Models\MasterData\Customer\MasterCustomerCreditCard;
 use App\Models\Master\Company;
 use App\Models\Master\Country;
+use App\Models\Temporary;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\CustomerDataTable;
@@ -57,6 +59,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
+        // clear temporary data
+        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+
         if (user_info()->inRole('super-admin')) {
             $companies = $this->companies->all()->pluck('name', 'id');
         } else {
@@ -138,21 +143,44 @@ class CustomerController extends Controller
      */
     public function edit(MasterCustomer $customer)
     {        
+        // clear temporary data
+        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+
         $main = $customer->mains()->first()->toArray();
         $mainContact = $customer->mains()->first()->contacts()->first()->toArray();
         $basic = $customer->basics()->first()->toArray();
         $general = $customer->generals()->first()->toArray();
         $generalDoc = $customer->generals()->first()->docs()->first()->toArray();
         $discRate = $customer->discountRates()->first()->toArray();
-        $creditCard = $customer->creditCards()->first()->toArray();
-        $creditCard['cc_expiry_date'] = $creditCard['expiry_date'];
+
+        foreach ($customer->creditCards as $creditCard) {
+            $data = [
+                'card_type' => $creditCard->card_type,
+                'merchant_no' => $creditCard->merchant_no,
+                'merchant_no_int' => $creditCard->merchant_no_int,
+                'credit_card_no' => $creditCard->credit_card_no,
+                'cc_expiry_date' => $creditCard->expiry_date,
+                'cardholder_name' => $creditCard->cardholder_name,
+                'bill_type' => $creditCard->bill_type,
+                'preferred_card' => ($creditCard->preferred_card) ? '1' : '0',
+                'sof' => $creditCard->sof,
+                'cc_remark' => $creditCard->remark
+            ];
+
+            Temporary::create([
+                'type' => 'customer-creditcard',
+                'user_id' => user_info('id'),
+                'data' => json_encode($data)
+            ]);
+        }
+
         $termFee = $customer->termFees()->first()->toArray();
 
         $customer = $customer->toArray();
 
-        unset($main['id'], $mainContact['id'], $basic['id'], $general['id'], $generalDoc['id'], $discRate['id'], $creditCard['id'], $termFee['id']);
+        unset($main['id'], $mainContact['id'], $basic['id'], $general['id'], $generalDoc['id'], $discRate['id'], $termFee['id']);
 
-        $arrayMerge = array_merge($customer, $main, $mainContact, $basic, $general, $generalDoc, $discRate, $creditCard, $termFee);
+        $arrayMerge = array_merge($customer, $main, $mainContact, $basic, $general, $generalDoc, $discRate, $termFee);
 
 
         $customer = (object) $arrayMerge;
@@ -212,9 +240,35 @@ class CustomerController extends Controller
             $discountrate = $customer->discountRates()->first();
             $discountrate->update($input);
 
-            $creditcard = $customer->creditCards()->first();
-            $input['expiry_date'] = $input['cc_expiry_date'];
-            $creditcard->update($input);
+            $creditCards =  $customer->creditCards;
+            foreach ($creditCards as $value) {
+                $value->delete();
+            }
+
+            $creditCards = \DB::table('temporaries')->whereType('customer-creditcard')
+                ->whereUserId(user_info('id'))
+                ->get();
+            if (count($creditCards) > 0) {
+                foreach ($creditCards as $creditCard) {
+                    $creditCard = json_decode($creditCard->data);
+
+                    $cc = new MasterCustomerCreditCard;
+
+                    $cc->customer_id = $customer->id;
+                    $cc->card_type = $creditCard->card_type;
+                    $cc->merchant_no = $creditCard->merchant_no;
+                    $cc->merchant_no_int = $creditCard->merchant_no_int;
+                    $cc->credit_card_no = $creditCard->credit_card_no;
+                    $cc->expiry_date = $creditCard->cc_expiry_date;
+                    $cc->cardholder_name = $creditCard->cardholder_name;
+                    $cc->bill_type = $creditCard->bill_type;
+                    $cc->preferred_card = $creditCard->preferred_card;
+                    $cc->sof = $creditCard->sof;
+                    $cc->remark = $creditCard->cc_remark;
+
+                    $cc->save();
+                }
+            }
 
             $termfee = $customer->termFees()->first();
             $termfee->update($input);
@@ -262,5 +316,103 @@ class CustomerController extends Controller
         }
 
         return redirect()->route('customer.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getData(Request $request)
+    {
+        $datas = [];
+        $results = \DB::table('temporaries')->whereType($request->type)
+            ->whereUserId(user_info('id'))
+            ->select('id','data')
+            ->get();
+
+        if (count($results) > 0) {
+            foreach ($results as $result) {
+                $value = collect(json_decode($result->data))->toArray();
+                
+                $value['id'] = $result->id;
+
+                array_push($datas, $value);
+            }
+        }
+
+        $datas = collect($datas);
+
+        return datatables()->of($datas)
+            ->addColumn('action', function ($customer) use($request) {
+                return '<a href="javascript:void(0)" class="editData" title="Edit" data-element="'.$request->type.'" data-id="' . $customer['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                                        <a href="javascript:void(0)" class="danger deleteData" data-element="'.$request->type.'" title="Delete" data-id="' . $customer['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            })
+            ->editColumn('preferred_card', function ($customer) use($request) {
+                return ($customer['preferred_card']) ? '<div class="status-pill green" data-title="Yes" data-toggle="tooltip" data-original-title="" title=""></div>' : '<div class="status-pill red" data-title="No" data-toggle="tooltip" data-original-title="" title=""></div>';
+            })
+            ->editColumn('sof', function ($customer) use($request) {
+                return ($customer['sof']) ? '<div class="status-pill green" data-title="Yes" data-toggle="tooltip" data-original-title="" title=""></div>' : '<div class="status-pill red" data-title="No" data-toggle="tooltip" data-original-title="" title=""></div>';
+            })
+            ->rawColumns(['preferred_card', 'sof', 'action'])
+            ->make(true);
+    }
+
+    /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function customerCreditCardStore(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            if (@$request->customer_creditcard_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->customer_creditcard_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'customer-creditcard',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'customer_creditcard_id']))
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    /**
+     * Delete resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function dataDelete(Request $request)
+    {
+        $findTemp = \DB::table('temporaries')->whereId($request->id)->delete(); 
+        if ($findTemp) {
+            return response()->json(['result' => true], 200);
+        }
+        return response()->json(['result' => false], 200);
+    }
+
+    /**
+     * Get detail resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function dataDetail(Request $request)
+    {
+        $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
+        $findTemp->data = json_decode($findTemp->data);
+        return response()->json(['result' => true, 'data' => $findTemp], 200);   
     }
 }

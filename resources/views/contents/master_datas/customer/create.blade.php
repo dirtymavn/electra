@@ -40,6 +40,8 @@
                     </div>
                 </div>              
     </form>
+
+    @stack('models')
 @endsection
 
 @section('script')

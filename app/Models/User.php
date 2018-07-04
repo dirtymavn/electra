@@ -105,7 +105,8 @@ class User extends CartalystUser implements Auditable, UserContract
             $results->whereNotIn('role_id', [1]);
         }
         if (user_info('company_role') == 'super-admin') {
-            $results = $results;
+            $results = $results->whereNull('users.parent_id')
+                ->where('users.company_role', '<>','super-admin');
         } else {
             if (user_info()->parent) {
                 $id = user_info()->parent->id;
