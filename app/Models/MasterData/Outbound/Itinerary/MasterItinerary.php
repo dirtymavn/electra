@@ -140,67 +140,112 @@ class MasterItinerary extends Model implements Auditable
                 ->get();
             if (count($itinServices) > 0) {
                 foreach ($itinServices as $itinService) {
-                    $itinService = json_decode($itinService->data);
+                    $itinServiceData = json_decode($itinService->data);
 
                     $service = new MasterItineraryService;
 
                     $service->master_itinerary_id = $itin->id;
-                    $service->product_code = $itinService->product_code;
-                    $service->type = $itinService->service_type;
-                    $service->ref_no = $itinService->ref_no;
-                    $service->charge_method = $itinService->charge_method;
-                    $service->supplier_no = $itinService->supplier_no;
-                    $service->currency = $itinService->currency;
-                    $service->remark = $itinService->service_remark;
-                    $service->tax_type = $itinService->tax_type;
-                    $service->tax_currency = $itinService->tax_currency;
-                    $service->tax_free_foc_flag = ($itinService->tax_free_foc_flag === true || $itinService->tax_free_foc_flag == 'true') ? true : false;
-                    $service->foc_discount_type = $itinService->foc_discount_type;
+                    $service->product_code = $itinServiceData->product_code;
+                    $service->type = $itinServiceData->service_type;
+                    $service->ref_no = $itinServiceData->ref_no;
+                    $service->charge_method = $itinServiceData->charge_method;
+                    $service->supplier_no = $itinServiceData->supplier_no;
+                    $service->currency = $itinServiceData->currency;
+                    $service->remark = $itinServiceData->service_remark;
+                    $service->tax_type = $itinServiceData->tax_type;
+                    $service->tax_currency = $itinServiceData->tax_currency;
+                    $service->tax_free_foc_flag = ($itinServiceData->tax_free_foc_flag === true || $itinServiceData->tax_free_foc_flag == 'true') ? true : false;
+                    $service->foc_discount_type = $itinServiceData->foc_discount_type;
 
                     $service->save();
 
-                    $interval = new MasterItineraryServiceCostInterval;
-                    $interval->master_itinerary_service_id = $service->id;
-                    $interval->pax_from = $itinService->interval_pax_from;
-                    $interval->pax_to = $itinService->interval_pax_to;
-                    $interval->unit_cost = $itinService->interval_unit_cost;
-                    $interval->discount_percent = $itinService->interval_discount_percent;
-                    $interval->discount_amount = $itinService->interval_discount_amount;
-                    $interval->net_cost = $itinService->interval_net_cost;
-                    $interval->save();
+                    $itinServiceIntervals = \DB::table('temporaries')->where('type', 'itinerary-service-interval')
+                        ->whereUserId(user_info('id'))
+                        ->whereParentId($itinService->id)
+                        ->get();
+                    if (count($itinServiceIntervals) > 0) {
+                        foreach ($itinServiceIntervals as $itinServiceInterval) {
+                            $itinServiceInterval = json_decode($itinServiceInterval->data);
+                            $interval = new MasterItineraryServiceCostInterval;
+                            $interval->master_itinerary_service_id = $service->id;
+                            $interval->pax_from = $itinServiceInterval->interval_pax_from;
+                            $interval->pax_to = $itinServiceInterval->interval_pax_to;
+                            $interval->unit_cost = $itinServiceInterval->interval_unit_cost;
+                            $interval->discount_percent = $itinServiceInterval->interval_discount_percent;
+                            $interval->discount_amount = $itinServiceInterval->interval_discount_amount;
+                            $interval->net_cost = $itinServiceInterval->interval_net_cost;
+                            $interval->save();
+                        }
+                    }
 
-                    $foc = new MasterItineraryServiceFoc;
-                    $foc->master_itinerary_service_id = $service->id;
-                    $foc->pax_no = $itinService->foc_pax_no;
-                    $foc->foc = $itinService->foc_foc;
-                    $foc->save();
+                    $itinServiceFocs = \DB::table('temporaries')->where('type', 'itinerary-service-foc')
+                        ->whereUserId(user_info('id'))
+                        ->whereParentId($itinService->id)
+                        ->get();
+                    if (count($itinServiceFocs) > 0) {
+                        foreach ($itinServiceFocs as $itinServiceFoc) {
+                            $itinServiceFoc = json_decode($itinServiceFoc->data);
+                            $foc = new MasterItineraryServiceFoc;
+                            $foc->master_itinerary_service_id = $service->id;
+                            $foc->pax_no = $itinServiceFoc->foc_pax_no;
+                            $foc->foc = $itinServiceFoc->foc_foc;
+                            $foc->save();
+                        }
+                    }
 
-                    $ptc = new MasterItineraryServiceOtherPtc;
-                    $ptc->master_itinerary_service_id = $service->id;
-                    $ptc->pax_ptc = $itinService->ptc_pax_ptc;
-                    $ptc->pax_from = $itinService->ptc_pax_from;
-                    $ptc->pax_to = $itinService->ptc_pax_to;
-                    $ptc->unit_cost = $itinService->ptc_unit_cost;
-                    $ptc->discount_percent = $itinService->ptc_discount_percent;
-                    $ptc->discount_amount = $itinService->ptc_discount_amount;
-                    $ptc->net_cost = $itinService->ptc_net_cost;
-                    $ptc->save();
+                    $itinServicePtcs = \DB::table('temporaries')->where('type', 'itinerary-service-ptc')
+                        ->whereUserId(user_info('id'))
+                        ->whereParentId($itinService->id)
+                        ->get();
+                    if (count($itinServicePtcs) > 0) {
+                        foreach ($itinServicePtcs as $itinServicePtc) {
+                            $itinServicePtc = json_decode($itinServicePtc->data);
+                            $ptc = new MasterItineraryServiceOtherPtc;
+                            $ptc->master_itinerary_service_id = $service->id;
+                            $ptc->pax_ptc = $itinServiceFoc->ptc_pax_ptc;
+                            $ptc->pax_from = $itinServiceFoc->ptc_pax_from;
+                            $ptc->pax_to = $itinServiceFoc->ptc_pax_to;
+                            $ptc->unit_cost = $itinServiceFoc->ptc_unit_cost;
+                            $ptc->discount_percent = $itinServiceFoc->ptc_discount_percent;
+                            $ptc->discount_amount = $itinServiceFoc->ptc_discount_amount;
+                            $ptc->net_cost = $itinServiceFoc->ptc_net_cost;
+                            $ptc->save();
+                        }
+                    }
 
-                    $route = new MasterItineraryServiceRoute;
-                    $route->master_itinerary_service_id = $service->id;
-                    $route->description = $itinService->route_description;
-                    $route->start_date = $itinService->start_date;
-                    $route->end_date = $itinService->end_date;
-                    $route->start_description = $itinService->start_description;
-                    $route->end_description = $itinService->end_description;
-                    $route->status = $itinService->status;
-                    $route->save();
+                    $itinServiceRoutes = \DB::table('temporaries')->where('type', 'itinerary-service-route')
+                        ->whereUserId(user_info('id'))
+                        ->whereParentId($itinService->id)
+                        ->get();
+                    if (count($itinServiceRoutes) > 0) {
+                        foreach ($itinServiceRoutes as $itinServiceRoute) {
+                            $itinServiceRoute = json_decode($itinServiceRoute->data);
+                            $route = new MasterItineraryServiceRoute;
+                            $route->master_itinerary_service_id = $service->id;
+                            $route->description = $itinServiceRoute->route_description;
+                            $route->start_date = $itinServiceRoute->start_date;
+                            $route->end_date = $itinServiceRoute->end_date;
+                            $route->start_description = $itinServiceRoute->start_description;
+                            $route->end_description = $itinServiceRoute->end_description;
+                            $route->status = $itinServiceRoute->status;
+                            $route->save();
+                        }
+                    }
 
-                    $tax = new MasterItineraryServiceTax;
-                    $tax->master_itinerary_service_id = $service->id;
-                    $tax->ptc = $itinService->tax_ptc;
-                    $tax->tax_amount = $itinService->tax_tax_amount;
-                    $tax->save();
+                    $itinServiceTaxs = \DB::table('temporaries')->where('type', 'itinerary-service-tax')
+                        ->whereUserId(user_info('id'))
+                        ->whereParentId($itinService->id)
+                        ->get();
+                    if (count($itinServiceTaxs) > 0) {
+                        foreach ($itinServiceTaxs as $itinServiceTax) {
+                            $itinServiceTax = json_decode($itinServiceTax->data);
+                            $tax = new MasterItineraryServiceTax;
+                            $tax->master_itinerary_service_id = $service->id;
+                            $tax->ptc = $itinServiceTax->tax_ptc;
+                            $tax->tax_amount = $itinServiceTax->tax_tax_amount;
+                            $tax->save();
+                        }
+                    }
 
                 }
             }

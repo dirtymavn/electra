@@ -362,13 +362,14 @@
     <div id="form-service" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                {!! Form::open(['id' => 'form-itinerary-service', 'method' => 'post']) !!}
                 <div class="modal-header">
                     <h4 class="modal-title">Itinerary Service</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                    {!! Form::open(['id' => 'form-itinerary-service', 'method' => 'post']) !!}
                     <input type="hidden" value="" name="itinerary_service_id" id="itinerary_service_id">
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -420,6 +421,7 @@
                             </div>
                         </div>
                     </div>
+                    {!! Form::close() !!}
                     <div class="os-tabs-w">
                         <div class="os-tabs-controls">
                             <ul class="nav nav-tabs smaller">
@@ -435,34 +437,83 @@
                                 <div class="element-wrapper">
                                     <div class="element-box">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
-                                                    {!! Form::label('route_description', trans('Description'), ['class' => 'control-label']) !!}
-                                                    {!! Form::textarea('route_description', old('route_description'), ['class' => 'form-control', 'placeholder' => 'Input the Description', 'rows' => '4']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('start_date', trans('Start Date'), ['class' => 'control-label']) !!}
-                                                    {!! Form::date('start_date', old('start_date'), ['class' => 'form-control']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('end_date', trans('End Date'), ['class' => 'control-label']) !!}
-                                                    {!! Form::date('end_date', old('end_date'), ['class' => 'form-control']) !!}
+                                                    <button class="btn btn-primary btn-add-service-route form-control"><i class="fa fa-plus m-right-10"></i> Add</button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {!! Form::label('start_description', trans('Start Description'), ['class' => 'control-label']) !!}
-                                                    {!! Form::textarea('start_description', old('start_description'), ['class' => 'form-control', 'placeholder' => 'Input the Start Description', 'rows' => '4']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('end_description', trans('End Description'), ['class' => 'control-label']) !!}
-                                                    {!! Form::textarea('end_description', old('end_description'), ['class' => 'form-control', 'placeholder' => 'Input the End Description', 'rows' => '4']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('status', old('status'), ['class' => 'form-control', 'placeholder' => 'Input the Status']) !!}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped" id="itinerary-service-route" style="width:100%;">
+                                                        <thead>
+                                                            <tr class="text-center">
+                                                                <th>Desc.</th>
+                                                                <th>Start Date</th>
+                                                                <th>Start Desc.</th>
+                                                                <th>End Date</th>
+                                                                <th>End Desc.</th>
+                                                                <th>Status</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
                                                 </div>
                                             </div>
+                                            <!-- Form Itinerary Service Route .Start -->
+                                            <div id="form-service-route" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        {!! Form::open(['id' => 'form-itinerary-service-route', 'method' => 'post']) !!}
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Itinerary Service Route</h4>
+                                                            <button type="button" class="close close-service-route"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input type="hidden" value="" name="itinerary_service_route_id" id="itinerary_service_route_id">
+                                                            <input type="hidden" value="add" name="itinerary_service_route_method" id="itinerary_service_route_method">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('route_description', trans('Description'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::textarea('route_description', old('route_description'), ['class' => 'form-control', 'placeholder' => 'Input the Description', 'rows' => '4']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('start_date', trans('Start Date'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::date('start_date', old('start_date'), ['class' => 'form-control']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('end_date', trans('End Date'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::date('end_date', old('end_date'), ['class' => 'form-control']) !!}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('start_description', trans('Start Description'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::textarea('start_description', old('start_description'), ['class' => 'form-control', 'placeholder' => 'Input the Start Description', 'rows' => '4']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('end_description', trans('End Description'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::textarea('end_description', old('end_description'), ['class' => 'form-control', 'placeholder' => 'Input the End Description', 'rows' => '4']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('status', old('status'), ['class' => 'form-control', 'placeholder' => 'Input the Status']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" href="#" class="btn btn-grey pull-left close-service-route"><i class="fa fa-times m-right-10"></i> Cancel</button>
+                                                            <button type="button" id="submit-service-route" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
+                                                            </button>
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Form Itinerary Service Route .End -->
                                         </div>
                                     </div>
                                 </div>
@@ -471,34 +522,83 @@
                                 <div class="element-wrapper">
                                     <div class="element-box">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
-                                                    {!! Form::label('interval_pax_from', trans('Pax From'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('interval_pax_from', old('interval_pax_from'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Pax From']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('interval_pax_to', trans('Pax To'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('interval_pax_to', old('interval_pax_to'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Pax To']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('interval_unit_cost', trans('Unit Cost'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('interval_unit_cost', old('interval_unit_cost'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Unit Cost']) !!}
+                                                    <button class="btn btn-primary btn-add-service-interval form-control"><i class="fa fa-plus m-right-10"></i> Add</button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {!! Form::label('interval_discount_percent', trans('Discount Percent'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('interval_discount_percent', old('interval_discount_percent'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount Percent']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('interval_discount_amount', trans('Discount Amount'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('interval_discount_amount', old('interval_discount_amount'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount Amount']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('interval_net_cost', trans('Net Cost'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('interval_net_cost', old('interval_net_cost'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Net Cost']) !!}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped" id="itinerary-service-interval" style="width:100%;">
+                                                        <thead>
+                                                            <tr class="text-center">
+                                                                <th>Pax From</th>
+                                                                <th>Pax To</th>
+                                                                <th>Unit Cost</th>
+                                                                <th>Disc. Percent</th>
+                                                                <th>Disc. Amount</th>
+                                                                <th>Net Cost</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
                                                 </div>
                                             </div>
+                                            <!-- Form Itinerary Service Interval .Start -->
+                                            <div id="form-service-interval" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        {!! Form::open(['id' => 'form-itinerary-service-interval', 'method' => 'post']) !!}
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Itinerary Service Cost Interval</h4>
+                                                            <button type="button" class="close close-service-interval"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input type="hidden" value="" name="itinerary_service_interval_id" id="itinerary_service_interval_id">
+                                                            <input type="hidden" value="add" name="itinerary_service_interval_method" id="itinerary_service_interval_method">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('interval_pax_from', trans('Pax From'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('interval_pax_from', old('interval_pax_from'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Pax From']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('interval_pax_to', trans('Pax To'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('interval_pax_to', old('interval_pax_to'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Pax To']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('interval_unit_cost', trans('Unit Cost'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('interval_unit_cost', old('interval_unit_cost'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Unit Cost']) !!}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('interval_discount_percent', trans('Discount Percent'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('interval_discount_percent', old('interval_discount_percent'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount Percent']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('interval_discount_amount', trans('Discount Amount'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('interval_discount_amount', old('interval_discount_amount'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount Amount']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('interval_net_cost', trans('Net Cost'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('interval_net_cost', old('interval_net_cost'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Net Cost']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" href="#" class="btn btn-grey pull-left close-service-interval"><i class="fa fa-times m-right-10"></i> Cancel</button>
+                                                            <button type="button" id="submit-service-interval" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
+                                                            </button>
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Form Itinerary Service Interval .End -->
                                         </div>
                                     </div>
                                 </div>
@@ -507,38 +607,88 @@
                                 <div class="element-wrapper">
                                     <div class="element-box">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
-                                                    {!! Form::label('ptc_pax_ptc', trans('Pax Ptc'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('ptc_pax_ptc', old('ptc_pax_ptc'), ['class' => 'form-control', 'placeholder' => 'Input the Pax Ptc']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('ptc_pax_from', trans('Pax From'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('ptc_pax_from', old('ptc_pax_from'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Pax From']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('ptc_pax_to', trans('Pax To'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('ptc_pax_to', old('ptc_pax_to'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Pax To']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('ptc_unit_cost', trans('Unit Cost'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('ptc_unit_cost', old('ptc_unit_cost'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Unit Cost']) !!}
+                                                    <button class="btn btn-primary btn-add-service-ptc form-control"><i class="fa fa-plus m-right-10"></i> Add</button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {!! Form::label('ptc_discount_percent', trans('Discount Percent'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('ptc_discount_percent', old('ptc_discount_percent'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount Percent']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('ptc_discount_amount', trans('Discount Amount'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('ptc_discount_amount', old('ptc_discount_amount'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount Amount']) !!}
-                                                </div>
-                                                <div class="form-group">
-                                                    {!! Form::label('ptc_net_cost', trans('Net Cost'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('ptc_net_cost', old('ptc_net_cost'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Net Cost']) !!}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped" id="itinerary-service-ptc" style="width:100%;">
+                                                        <thead>
+                                                            <tr class="text-center">
+                                                                <th>Pax Ptc</th>
+                                                                <th>Pax From</th>
+                                                                <th>Pax To</th>
+                                                                <th>Unit Cost</th>
+                                                                <th>Disc. Percent</th>
+                                                                <th>Disc. Amount</th>
+                                                                <th>Net Cost</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
                                                 </div>
                                             </div>
+                                            <!-- Form Itinerary Service Ptc .Start -->
+                                            <div id="form-service-ptc" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        {!! Form::open(['id' => 'form-itinerary-service-ptc', 'method' => 'post']) !!}
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Itinerary Service Other Ptc</h4>
+                                                            <button type="button" class="close close-service-ptc"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input type="hidden" value="" name="itinerary_service_ptc_id" id="itinerary_service_ptc_id">
+                                                            <input type="hidden" value="add" name="itinerary_service_ptc_method" id="itinerary_service_ptc_method">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('ptc_pax_ptc', trans('Pax Ptc'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('ptc_pax_ptc', old('ptc_pax_ptc'), ['class' => 'form-control', 'placeholder' => 'Input the Pax Ptc']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('ptc_pax_from', trans('Pax From'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('ptc_pax_from', old('ptc_pax_from'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Pax From']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('ptc_pax_to', trans('Pax To'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('ptc_pax_to', old('ptc_pax_to'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Pax To']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('ptc_unit_cost', trans('Unit Cost'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('ptc_unit_cost', old('ptc_unit_cost'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Unit Cost']) !!}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('ptc_discount_percent', trans('Discount Percent'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('ptc_discount_percent', old('ptc_discount_percent'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount Percent']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('ptc_discount_amount', trans('Discount Amount'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('ptc_discount_amount', old('ptc_discount_amount'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount Amount']) !!}
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('ptc_net_cost', trans('Net Cost'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('ptc_net_cost', old('ptc_net_cost'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Net Cost']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" href="#" class="btn btn-grey pull-left close-service-ptc"><i class="fa fa-times m-right-10"></i> Cancel</button>
+                                                            <button type="button" id="submit-service-ptc" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
+                                                            </button>
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Form Itinerary Service Ptc .End -->
                                         </div>
                                     </div>
                                 </div>
@@ -547,18 +697,63 @@
                                 <div class="element-wrapper">
                                     <div class="element-box">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
-                                                    {!! Form::label('foc_pax_no', trans('Pax No'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('foc_pax_no', old('foc_pax_no'), ['class' => 'form-control', 'placeholder' => 'Input the Pax No']) !!}
+                                                    <button class="btn btn-primary btn-add-service-foc form-control"><i class="fa fa-plus m-right-10"></i> Add</button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {!! Form::label('foc_foc', trans('Foc'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('foc_foc', old('foc_foc'), ['class' => 'form-control', 'placeholder' => 'Input the Foc']) !!}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped" id="itinerary-service-foc" style="width:100%;">
+                                                        <thead>
+                                                            <tr class="text-center">
+                                                                <th>Pax No</th>
+                                                                <th>Foc</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
                                                 </div>
                                             </div>
+                                            <!-- Form Itinerary Service Foc .Start -->
+                                            <div id="form-service-foc" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        {!! Form::open(['id' => 'form-itinerary-service-foc', 'method' => 'post']) !!}
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Itinerary Service Foc</h4>
+                                                            <button type="button" class="close close-service-foc"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input type="hidden" value="" name="itinerary_service_foc_id" id="itinerary_service_foc_id">
+                                                            <input type="hidden" value="add" name="itinerary_service_foc_method" id="itinerary_service_foc_method">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('foc_pax_no', trans('Pax No'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('foc_pax_no', old('foc_pax_no'), ['class' => 'form-control', 'placeholder' => 'Input the Pax No']) !!}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('foc_foc', trans('Foc'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('foc_foc', old('foc_foc'), ['class' => 'form-control', 'placeholder' => 'Input the Foc']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" href="#" class="btn btn-grey pull-left close-service-foc"><i class="fa fa-times m-right-10"></i> Cancel</button>
+                                                            <button type="button" id="submit-service-foc" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
+                                                            </button>
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Form Itinerary Service Foc .End -->
                                         </div>
                                     </div>
                                 </div>
@@ -567,18 +762,63 @@
                                 <div class="element-wrapper">
                                     <div class="element-box">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
-                                                    {!! Form::label('tax_ptc', trans('Ptc'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('tax_ptc', old('tax_ptc'), ['class' => 'form-control', 'placeholder' => 'Input the Ptc']) !!}
+                                                    <button class="btn btn-primary btn-add-service-tax form-control"><i class="fa fa-plus m-right-10"></i> Add</button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {!! Form::label('tax_tax_amount', trans('Tax Amount'), ['class' => 'control-label']) !!}
-                                                    {!! Form::text('tax_tax_amount', old('tax_tax_amount'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Tax Amount']) !!}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped" id="itinerary-service-tax" style="width:100%;">
+                                                        <thead>
+                                                            <tr class="text-center">
+                                                                <th>Ptc</th>
+                                                                <th>Tax Amount</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
                                                 </div>
                                             </div>
+                                            <!-- Form Itinerary Service Tax .Start -->
+                                            <div id="form-service-tax" class="modal fade" role="dialog">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        {!! Form::open(['id' => 'form-itinerary-service-tax', 'method' => 'post']) !!}
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Itinerary Service Tax</h4>
+                                                            <button type="button" class="close close-service-tax"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input type="hidden" value="" name="itinerary_service_tax_id" id="itinerary_service_tax_id">
+                                                            <input type="hidden" value="add" name="itinerary_service_tax_method" id="itinerary_service_tax_method">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('tax_ptc', trans('Ptc'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('tax_ptc', old('tax_ptc'), ['class' => 'form-control', 'placeholder' => 'Input the Ptc']) !!}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        {!! Form::label('tax_tax_amount', trans('Tax Amount'), ['class' => 'control-label']) !!}
+                                                                        {!! Form::text('tax_tax_amount', old('tax_tax_amount'), ['class' => 'form-control only_number', 'placeholder' => 'Input the Tax Amount']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" href="#" class="btn btn-grey pull-left close-service-tax"><i class="fa fa-times m-right-10"></i> Cancel</button>
+                                                            <button type="button" id="submit-service-tax" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
+                                                            </button>
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Form Itinerary Service Tax .End -->
                                         </div>
                                     </div>
                                 </div>
@@ -589,10 +829,9 @@
                 <div class="modal-footer">
                     <a id="form-service-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
                     </a>
-                    <button id="form-service-accept" type="submit" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
+                    <button id="form-service-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
                     </button>
                 </div>
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

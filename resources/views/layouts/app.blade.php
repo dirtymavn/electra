@@ -249,6 +249,8 @@
         });
 
         function initDatatable(element, url, columnss, datas = null) {
+            var table = element.DataTable();
+            table.destroy();
             element.DataTable({
                 processing: true,
                 serverSide: true,
