@@ -23,6 +23,7 @@
         $('#form-itinerary-service').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
+            $('div.spinner').show();
             $.ajax({
                 url: "{{route('itin.itinerary-service.post')}}",
                 method: "POST",
@@ -31,8 +32,12 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#form-service').modal('hide');
                     $('.itinerary-service').DataTable().ajax.reload();
+                },
+                error: function(data) {
+                    $('div.spinner').hide();
                 }
             });
         });
@@ -40,6 +45,7 @@
         // submit service route
         $('#form-itinerary-service-route').submit(function(e) {
             e.preventDefault();
+            $('div.spinner').show();
             var formData = new FormData(this);
             $.ajax({
                 url: "{{route('itin.itinerary-service-route.post')}}",
@@ -49,12 +55,16 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#itinerary-service-route').DataTable().ajax.reload();
                     $('#form-service-route').modal('hide');
                     $('#form-service').modal('hide');
                     setTimeout(function() {
                         $('#form-service').modal({backdrop: 'static', keyboard: false});
                     }, 500)
+                },
+                error: function(data) {
+                    $('div.spinner').hide();
                 }
             });
         });
@@ -62,6 +72,7 @@
         // submit service interval
         $('#form-itinerary-service-interval').submit(function(e) {
             e.preventDefault();
+            $('div.spinner').show();
             var formData = new FormData(this);
             $.ajax({
                 url: "{{route('itin.itinerary-service-interval.post')}}",
@@ -71,12 +82,16 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#itinerary-service-interval').DataTable().ajax.reload();
                     $('#form-service-interval').modal('hide');
                     $('#form-service').modal('hide');
                     setTimeout(function() {
                         $('#form-service').modal({backdrop: 'static', keyboard: false});
                     }, 500)
+                },
+                error: function(data) {
+                    $('div.spinner').hide();
                 }
             });
         });
@@ -84,6 +99,7 @@
         // submit service ptc
         $('#form-itinerary-service-ptc').submit(function(e) {
             e.preventDefault();
+            $('div.spinner').show();
             var formData = new FormData(this);
             $.ajax({
                 url: "{{route('itin.itinerary-service-ptc.post')}}",
@@ -93,12 +109,16 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#itinerary-service-ptc').DataTable().ajax.reload();
                     $('#form-service-ptc').modal('hide');
                     $('#form-service').modal('hide');
                     setTimeout(function() {
                         $('#form-service').modal({backdrop: 'static', keyboard: false});
                     }, 500)
+                },
+                error: function(data) {
+                    $('div.spinner').hide();
                 }
             });
         });
@@ -106,6 +126,7 @@
         // submit service foc
         $('#form-itinerary-service-foc').submit(function(e) {
             e.preventDefault();
+            $('div.spinner').show();
             var formData = new FormData(this);
             $.ajax({
                 url: "{{route('itin.itinerary-service-foc.post')}}",
@@ -115,12 +136,16 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#itinerary-service-foc').DataTable().ajax.reload();
                     $('#form-service-foc').modal('hide');
                     $('#form-service').modal('hide');
                     setTimeout(function() {
                         $('#form-service').modal({backdrop: 'static', keyboard: false});
                     }, 500)
+                },
+                error: function(data) {
+                    $('div.spinner').hide();
                 }
             });
         });
@@ -128,6 +153,7 @@
         // submit service tax
         $('#form-itinerary-service-tax').submit(function(e) {
             e.preventDefault();
+            $('div.spinner').show();
             var formData = new FormData(this);
             $.ajax({
                 url: "{{route('itin.itinerary-service-tax.post')}}",
@@ -137,12 +163,16 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#itinerary-service-tax').DataTable().ajax.reload();
                     $('#form-service-tax').modal('hide');
                     $('#form-service').modal('hide');
                     setTimeout(function() {
                         $('#form-service').modal({backdrop: 'static', keyboard: false});
                     }, 500)
+                },
+                error: function(data) {
+                    $('div.spinner').hide();
                 }
             });
         });
