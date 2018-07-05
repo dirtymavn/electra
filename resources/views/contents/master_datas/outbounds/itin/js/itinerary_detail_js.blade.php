@@ -24,6 +24,7 @@
 
         $('#form-itinerary-detail').submit(function(e) {
             e.preventDefault();
+            $('div.spinner').show();
             var formData = new FormData(this);
             $.ajax({
                 url: "{{route('itin.itinerary-detail.post')}}",
@@ -33,8 +34,12 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#form-detail').modal('hide');
                     $('#itinerary-detail').DataTable().ajax.reload();
+                },
+                error: function(data) {
+                    $('div.spinner').hide();
                 }
             });
         });
