@@ -3,7 +3,7 @@
 namespace App\Http\Requests\UserManagement;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Request;
 class UserRequest extends FormRequest
 {
     /**
@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
     {
         $userName = 'required|unique:users,username';
         $email = 'required|email|unique:users,email';
-
+        
         if ($this->method() == 'PATCH') {
             $userName = 'required|unique:users,username,' . $this->segment(3);
             $email = 'required|email|unique:users,email,' . $this->segment(3);
@@ -38,7 +38,7 @@ class UserRequest extends FormRequest
             'email' => $email,
             'password' => 'required_if:is_required,==,requirred|min:8',
             'conf_password' => 'required_if:is_required,==,requirred|min:8|same:password',
-            'company_id' => 'required',
+            'company_id' => Request::segment(3) != 1 ? 'required' : '',
             'role_id' => 'required',
         ];
     }

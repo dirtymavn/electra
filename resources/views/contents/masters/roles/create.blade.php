@@ -38,4 +38,5 @@
 @endsection
 
 @section('script')
+@include('contents.masters.roles.js._js')
 @endsection
