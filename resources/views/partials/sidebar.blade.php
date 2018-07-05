@@ -628,6 +628,9 @@
                         <li class="{!! (url(route('region.index')) == Request::url() OR Request::is('master-data/region*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','region.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('region.index')}}"><i class="fa fa-circle-o"></i><span>Region</span></a>
                         </li>
+                        <li class="{!! (url(route('gst.index')) == Request::url() OR Request::is('master-data/gst*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','gst.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('gst.index')}}"><i class="fa fa-circle-o"></i><span>Gst</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

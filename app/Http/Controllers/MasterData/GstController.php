@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\MasterData;
 
-use App\Models\MasterData\Region;
+use App\Models\MasterData\Gst;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\MasterData\RegionDataTable;
-use App\Http\Requests\MasterData\RegionRequest;
+use App\DataTables\MasterData\GstDataTable;
+use App\Http\Requests\MasterData\GstRequest;
 
-class RegionController extends Controller
+class GstController extends Controller
 {
     public function __construct()
     {
         // middleware
-        $this->middleware('sentinel_access:admin.company,region.read', ['only' => ['index']]);
-        $this->middleware('sentinel_access:admin.company,region.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel_access:admin.company,region.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel_access:admin.company,region.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel_access:admin.company,gst.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,gst.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,gst.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,gst.destroy', ['only' => ['destroy']]);
 
     }
 
@@ -25,9 +25,9 @@ class RegionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RegionDataTable $dataTable)
+    public function index(GstDataTable $dataTable)
     {
-        return $dataTable->render('contents.master_datas.region.index');
+        return $dataTable->render('contents.master_datas.gst.index');
     }
 
     /**
@@ -37,16 +37,16 @@ class RegionController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.region.create');
+        return view('contents.master_datas.gst.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\RegionRequest  $request
+     * @param  \App\Http\Requests\MasterData\GstRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegionRequest $request)
+    public function store(GstRequest $request)
     {
         \DB::beginTransaction();
         try {
@@ -61,14 +61,14 @@ class RegionController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = Region::create($request->all());
+            $insert = Gst::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('region.index');
+                $redirect = redirect()->route('gst.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('region.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('gst.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('region.create');
+                    $redirect = redirect()->route('gst.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -85,10 +85,10 @@ class RegionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MasterData\Region  $region
+     * @param  \App\Models\MasterData\Gst  $gst
      * @return \Illuminate\Http\Response
      */
-    public function show(Region $region)
+    public function show(Gst $gst)
     {
         //
     }
@@ -96,39 +96,39 @@ class RegionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MasterData\Region  $region
+     * @param  \App\Models\MasterData\Gst  $gst
      * @return \Illuminate\Http\Response
      */
-    public function edit(Region $region)
+    public function edit(Gst $gst)
     {
-        return view('contents.master_datas.region.edit', compact('region'));
+        return view('contents.master_datas.gst.edit', compact('gst'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\RegionRequest  $request
-     * @param  \App\Models\MasterData\Region  $region
+     * @param  \App\Http\Requests\MasterData\GstRequest  $request
+     * @param  \App\Models\MasterData\Gst  $gst
      * @return \Illuminate\Http\Response
      */
-    public function update(RegionRequest $request, Region $region)
+    public function update(GstRequest $request, Gst $gst)
     {
         \DB::beginTransaction();
         try {
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('region.index');
+                $redirect = redirect()->route('gst.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('region.create');
+                $redirect = redirect()->route('gst.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('region.edit', $region->id);
+                $redirect = redirect()->route('gst.edit', $gst->id);
             }
 
-            $update = $region->update($request->all());
+            $update = $gst->update($request->all());
 
             if ($update) {
 
@@ -147,15 +147,15 @@ class RegionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MasterData\Region  $region
+     * @param  \App\Models\MasterData\Gst  $gst
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Region $region)
+    public function destroy(Gst $gst)
     {
-        $region->delete();
+        $gst->delete();
         flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('region.index');
+        return redirect()->route('gst.index');
     }
 
     /**
@@ -168,13 +168,13 @@ class RegionController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            Region::whereIn('id', $ids)->delete();
+            Gst::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('region.index');
+        return redirect()->route('gst.index');
     }
 }

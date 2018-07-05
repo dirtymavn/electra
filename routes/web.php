@@ -144,6 +144,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Region
         Route::resource('region', 'RegionController');
         Route::post('region/bulk-delete', array('as' => 'region.bulk-delete', 'uses' => 'RegionController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,region.destroy'));
+
+        // Gst
+        Route::resource('gst', 'GstController');
+        Route::post('gst/bulk-delete', array('as' => 'gst.bulk-delete', 'uses' => 'GstController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,gst.destroy'));
     });
 
     // System
