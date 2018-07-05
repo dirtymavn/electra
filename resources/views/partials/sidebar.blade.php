@@ -619,6 +619,9 @@
                         <li class="{!! (url(route('passenger.index')) == Request::url() OR Request::is('master-data/passenger*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','passenger.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('passenger.index')}}"><i class="fa fa-circle-o"></i><span>Passenger</span></a>
                         </li>
+                        <li class="{!! (url(route('airline.index')) == Request::url() OR Request::is('master-data/airline*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','airline.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('airline.index')}}"><i class="fa fa-circle-o"></i><span>Airline</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

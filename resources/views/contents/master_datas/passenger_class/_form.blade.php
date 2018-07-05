@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('passenger_class_type', trans('Passenger Class Type'), ['class' => 'control-label']) !!}
-            {!! Form::text('passenger_class_type', old('passenger_class_type') , ['class' => 'form-control', 'placeholder' => 'Input the Passenger Class Code']) !!}
+            {!! Form::text('passenger_class_type', old('passenger_class_type') , ['class' => 'form-control', 'placeholder' => 'Input the Passenger Class Type']) !!}
         </div>
         
     </div>

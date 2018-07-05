@@ -133,6 +133,9 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('passenger', 'PassengerClassController');
         Route::post('passenger/bulk-delete', array('as' => 'passenger.bulk-delete', 'uses' => 'PassengerClassController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,passenger.destroy'));
         
+        // Airline
+        Route::resource('airline', 'AirlineController');
+        Route::post('airline/bulk-delete', array('as' => 'airline.bulk-delete', 'uses' => 'AirlineController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,airline.destroy'));
     });
 
     // System
