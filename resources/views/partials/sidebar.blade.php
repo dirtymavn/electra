@@ -616,6 +616,21 @@
                                 <i class="fa fa-circle-o"></i><span>Credit Card</span>
                             </a>
                         </li>
+                        <li class="{!! (url(route('passenger.index')) == Request::url() OR Request::is('master-data/passenger*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','passenger.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('passenger.index')}}"><i class="fa fa-circle-o"></i><span>Passenger</span></a>
+                        </li>
+                        <li class="{!! (url(route('airline.index')) == Request::url() OR Request::is('master-data/airline*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','airline.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('airline.index')}}"><i class="fa fa-circle-o"></i><span>Airline</span></a>
+                        </li>
+                        <li class="{!! (url(route('product-type.index')) == Request::url() OR Request::is('master-data/product-type*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','product-type.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('product-type.index')}}"><i class="fa fa-circle-o"></i><span>Product Type</span></a>
+                        </li>
+                        <li class="{!! (url(route('region.index')) == Request::url() OR Request::is('master-data/region*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','region.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('region.index')}}"><i class="fa fa-circle-o"></i><span>Region</span></a>
+                        </li>
+                        <li class="{!! (url(route('gst.index')) == Request::url() OR Request::is('master-data/gst*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','gst.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('gst.index')}}"><i class="fa fa-circle-o"></i><span>Gst</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

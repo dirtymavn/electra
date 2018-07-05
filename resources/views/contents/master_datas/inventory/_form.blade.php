@@ -154,4 +154,5 @@
 
 @include('contents.master_datas.inventory.js.misc')
 @include('contents.master_datas.inventory.js.pkg')
+@include('contents.master_datas.inventory.js.car')
 @endsection

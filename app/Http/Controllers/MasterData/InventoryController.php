@@ -295,6 +295,122 @@ class InventoryController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryDetailCar(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            if (@$request->car_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->car_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'car-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'car_id']))
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryCarTransfer(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            if (@$request->car_transfer_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->car_transfer_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'car-transfer-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'car_transfer_id']))
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryRouteAir(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            if (@$request->route_air) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->route_air)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'route-air-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'route_air']))
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryRouteHotel(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            if (@$request->route_hotel) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->route_hotel)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'route-hotel-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'route_hotel']))
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    /**
      * Delete resource in storage temporary.
      *
      * @param  \Illuminate\Http\Request  $request

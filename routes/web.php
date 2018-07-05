@@ -90,6 +90,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('inventory/inventory-misc-detail', array('as' => 'inventory.misc-detail.post', 'uses' => 'InventoryController@inventoryDetailMisc', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         Route::post('inventory/inventory-pkg-detail', array('as' => 'inventory.pkg-detail.post', 'uses' => 'InventoryController@inventoryDetailPkg', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         Route::post('inventory/inventory-detail/detail', array('as' => 'inventory.detail.detail', 'uses' => 'InventoryController@inventoryDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
+        Route::post('inventory/inventory-car-detail', array('as' => 'inventory.car-detail.post', 'uses' => 'InventoryController@inventoryDetailCar', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         // end Inventory
         // Outbound
         Route::group(['prefix' => 'outbound', 'namespace' => 'Outbound'], function () {
@@ -128,7 +129,26 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('fx-trans/fx-detail/delete', array('as' => 'fx-trans.fx-detail.delete', 'uses' => 'FxTransactionController@fxTransDetailDelete', 'middleware' => 'sentinel_access:admin.company,fx-trans.create'));
             Route::post('fx-trans/fx-detail/detail', array('as' => 'fx-trans.fx-detail.detail', 'uses' => 'FxTransactionController@fxTransDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,fx-trans.create'));
         });
+
+        // Passenger Class
+        Route::resource('passenger', 'PassengerClassController');
+        Route::post('passenger/bulk-delete', array('as' => 'passenger.bulk-delete', 'uses' => 'PassengerClassController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,passenger.destroy'));
         
+        // Airline
+        Route::resource('airline', 'AirlineController');
+        Route::post('airline/bulk-delete', array('as' => 'airline.bulk-delete', 'uses' => 'AirlineController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,airline.destroy'));
+
+        // Product Type
+        Route::resource('product-type', 'ProductTypeController');
+        Route::post('product-type/bulk-delete', array('as' => 'product-type.bulk-delete', 'uses' => 'ProductTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,product-type.destroy'));
+
+        // Region
+        Route::resource('region', 'RegionController');
+        Route::post('region/bulk-delete', array('as' => 'region.bulk-delete', 'uses' => 'RegionController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,region.destroy'));
+
+        // Gst
+        Route::resource('gst', 'GstController');
+        Route::post('gst/bulk-delete', array('as' => 'gst.bulk-delete', 'uses' => 'GstController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,gst.destroy'));
     });
 
     // System
