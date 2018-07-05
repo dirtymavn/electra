@@ -35,7 +35,7 @@ class BudgetRateDataTable extends DataTable
     public function query(BudgetRate $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'budget_rates.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'budget_rates.company_id')
             ->select(
                 'budget_rates.id',
                 'budget_rates.acc_period_mo',

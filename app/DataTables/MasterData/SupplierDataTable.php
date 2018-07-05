@@ -36,7 +36,7 @@ class SupplierDataTable extends DataTable
     public function query(MasterSupplier $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'master_supplier.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_supplier.company_id')
             ->select(
                 'master_supplier.id', 
                 'master_supplier.supplier_no',

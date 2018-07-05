@@ -35,7 +35,7 @@ class CustomerDataTable extends DataTable
     public function query(MasterCustomer $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'master_customers.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_customers.company_id')
             ->select(
                 'master_customers.id',
                 'master_customers.customer_no',

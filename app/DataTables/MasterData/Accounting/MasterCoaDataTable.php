@@ -35,7 +35,7 @@ class MasterCoaDataTable extends DataTable
     public function query(MasterCoa $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'master_coa.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_coa.company_id')
             ->select(
                 'master_coa.id',
                 'master_coa.branch_id',

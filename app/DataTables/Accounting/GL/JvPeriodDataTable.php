@@ -38,7 +38,7 @@ class JvPeriodDataTable extends DataTable
     public function query(JvPeriod $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'master_jv_periods.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_jv_periods.company_id')
             ->select(
                 'master_jv_periods.id',
                 'master_jv_periods.fiscal_year',
