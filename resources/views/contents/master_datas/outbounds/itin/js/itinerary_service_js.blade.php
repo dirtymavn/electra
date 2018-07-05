@@ -51,6 +51,10 @@
                 success: function(data) {
                     $('#itinerary-service-route').DataTable().ajax.reload();
                     $('#form-service-route').modal('hide');
+                    $('#form-service').modal('hide');
+                    setTimeout(function() {
+                        $('#form-service').modal({backdrop: 'static', keyboard: false});
+                    }, 500)
                 }
             });
         });
@@ -69,6 +73,10 @@
                 success: function(data) {
                     $('#itinerary-service-interval').DataTable().ajax.reload();
                     $('#form-service-interval').modal('hide');
+                    $('#form-service').modal('hide');
+                    setTimeout(function() {
+                        $('#form-service').modal({backdrop: 'static', keyboard: false});
+                    }, 500)
                 }
             });
         });
@@ -87,6 +95,10 @@
                 success: function(data) {
                     $('#itinerary-service-ptc').DataTable().ajax.reload();
                     $('#form-service-ptc').modal('hide');
+                    $('#form-service').modal('hide');
+                    setTimeout(function() {
+                        $('#form-service').modal({backdrop: 'static', keyboard: false});
+                    }, 500)
                 }
             });
         });
@@ -105,6 +117,10 @@
                 success: function(data) {
                     $('#itinerary-service-foc').DataTable().ajax.reload();
                     $('#form-service-foc').modal('hide');
+                    $('#form-service').modal('hide');
+                    setTimeout(function() {
+                        $('#form-service').modal({backdrop: 'static', keyboard: false});
+                    }, 500)
                 }
             });
         });
@@ -123,6 +139,10 @@
                 success: function(data) {
                     $('#itinerary-service-tax').DataTable().ajax.reload();
                     $('#form-service-tax').modal('hide');
+                    $('#form-service').modal('hide');
+                    setTimeout(function() {
+                        $('#form-service').modal({backdrop: 'static', keyboard: false});
+                    }, 500)
                 }
             });
         });
@@ -301,6 +321,10 @@
 
     $(document).on('click', '.close-service-route', function(e) {
         $('#form-service-route').modal('hide');
+        $('#form-service').modal('hide');
+        setTimeout(function() {
+            $('#form-service').modal({backdrop: 'static', keyboard: false});
+        }, 500)
     });
 
     $(document).on('click', '.btn-add-service-route', function(e) {
@@ -344,6 +368,10 @@
 
     $(document).on('click', '.close-service-interval', function(e) {
         $('#form-service-interval').modal('hide');
+        $('#form-service').modal('hide');
+        setTimeout(function() {
+            $('#form-service').modal({backdrop: 'static', keyboard: false});
+        }, 500)
     });
 
     $(document).on('click', '.btn-add-service-interval', function(e) {
@@ -388,6 +416,10 @@
 
     $(document).on('click', '.close-service-ptc', function(e) {
         $('#form-service-ptc').modal('hide');
+        $('#form-service').modal('hide');
+        setTimeout(function() {
+            $('#form-service').modal({backdrop: 'static', keyboard: false});
+        }, 500)
     });
 
     $(document).on('click', '.btn-add-service-ptc', function(e) {
@@ -427,6 +459,10 @@
 
     $(document).on('click', '.close-service-foc', function(e) {
         $('#form-service-foc').modal('hide');
+        $('#form-service').modal('hide');
+        setTimeout(function() {
+            $('#form-service').modal({backdrop: 'static', keyboard: false});
+        }, 500)
     });
 
     $(document).on('click', '.btn-add-service-foc', function(e) {
@@ -466,6 +502,10 @@
 
     $(document).on('click', '.close-service-tax', function(e) {
         $('#form-service-tax').modal('hide');
+        $('#form-service').modal('hide');
+        setTimeout(function() {
+            $('#form-service').modal({backdrop: 'static', keyboard: false});
+        }, 500)
     });
 
     $(document).on('click', '.btn-add-service-tax', function(e) {

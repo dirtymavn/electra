@@ -35,7 +35,7 @@ class TrxPostingDataTable extends DataTable
     public function query(TrxPosting $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'trx_posting.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'trx_posting.company_id')
             ->select(
                 'trx_posting.id',
                 'trx_posting.postdate_start',

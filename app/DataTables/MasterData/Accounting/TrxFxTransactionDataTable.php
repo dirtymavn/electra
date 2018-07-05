@@ -66,7 +66,7 @@ class TrxFxTransactionDataTable extends DataTable
     public function query(TrxFxTrans $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'trx_fx_transactions.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'trx_fx_transactions.company_id')
             ->select(
                 'trx_fx_transactions.id',
                 'trx_fx_transactions.invoice_flag',

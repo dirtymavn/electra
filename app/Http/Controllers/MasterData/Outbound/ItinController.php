@@ -218,13 +218,13 @@ class ItinController extends Controller
 
             foreach ($service->otherPtcs as $ptc) {
                 $data = [
-                    'ptc_pax_ptc' => $otherPtc->pax_ptc,
-                    'ptc_pax_from' => $otherPtc->pax_from,
-                    'ptc_pax_to' => $otherPtc->pax_to,
-                    'ptc_unit_cost' => $otherPtc->unit_cost,
-                    'ptc_discount_percent' => $otherPtc->discount_percent,
-                    'ptc_discount_amount' => $otherPtc->discount_amount,
-                    'ptc_net_cost' => $otherPtc->net_cost
+                    'ptc_pax_ptc' => $ptc->pax_ptc,
+                    'ptc_pax_from' => $ptc->pax_from,
+                    'ptc_pax_to' => $ptc->pax_to,
+                    'ptc_unit_cost' => $ptc->unit_cost,
+                    'ptc_discount_percent' => $ptc->discount_percent,
+                    'ptc_discount_amount' => $ptc->discount_amount,
+                    'ptc_net_cost' => $ptc->net_cost
                 ];
 
                 Temporary::create([
@@ -384,8 +384,11 @@ class ItinController extends Controller
             }
         }
 
-        $itinServices = \DB::table('temporaries')->where('type', 'itinerary-service-fixed')
-            ->orWhere('type', 'itinerary-service-variable')
+        $itinServices = \DB::table('temporaries')
+            ->where(function($query) {
+                return $query->where('type', 'itinerary-service-fixed')
+                    ->orWhere('type', 'itinerary-service-variable');
+            })
             ->whereUserId(user_info('id'))
             ->get();
         if (count($itinServices) > 0) {
@@ -452,13 +455,13 @@ class ItinController extends Controller
                         $itinServicePtc = json_decode($itinServicePtc->data);
                         $ptc = new MasterItineraryServiceOtherPtc;
                         $ptc->master_itinerary_service_id = $service->id;
-                        $ptc->pax_ptc = $itinServiceFoc->ptc_pax_ptc;
-                        $ptc->pax_from = $itinServiceFoc->ptc_pax_from;
-                        $ptc->pax_to = $itinServiceFoc->ptc_pax_to;
-                        $ptc->unit_cost = $itinServiceFoc->ptc_unit_cost;
-                        $ptc->discount_percent = $itinServiceFoc->ptc_discount_percent;
-                        $ptc->discount_amount = $itinServiceFoc->ptc_discount_amount;
-                        $ptc->net_cost = $itinServiceFoc->ptc_net_cost;
+                        $ptc->pax_ptc = $itinServicePtc->ptc_pax_ptc;
+                        $ptc->pax_from = $itinServicePtc->ptc_pax_from;
+                        $ptc->pax_to = $itinServicePtc->ptc_pax_to;
+                        $ptc->unit_cost = $itinServicePtc->ptc_unit_cost;
+                        $ptc->discount_percent = $itinServicePtc->ptc_discount_percent;
+                        $ptc->discount_amount = $itinServicePtc->ptc_discount_amount;
+                        $ptc->net_cost = $itinServicePtc->ptc_net_cost;
                         $ptc->save();
                     }
                 }

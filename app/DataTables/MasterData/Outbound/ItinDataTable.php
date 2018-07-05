@@ -35,7 +35,7 @@ class ItinDataTable extends DataTable
     public function query(MasterItinerary $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'master_itineraries.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_itineraries.company_id')
             ->select(
                 'master_itineraries.id',
                 'master_itineraries.itinerary_code',

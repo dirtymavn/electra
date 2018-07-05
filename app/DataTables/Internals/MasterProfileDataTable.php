@@ -35,7 +35,7 @@ class MasterProfileDataTable extends DataTable
     public function query(MasterProfile $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'master_profile.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_profile.company_id')
             ->select(
                 'master_profile.id',
                 'master_profile.staff_no',

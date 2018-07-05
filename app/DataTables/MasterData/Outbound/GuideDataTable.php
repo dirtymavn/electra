@@ -40,7 +40,7 @@ class GuideDataTable extends DataTable
         // $empty = collect();
         // return $empty;
         $return = $model->newQuery()->join('master_tour_guide_mains', 'master_tour_guide_mains.master_tour_guide_id', '=', 'master_tour_guides.id')
-            ->join('companies', 'companies.id', '=', 'master_tour_guides.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_tour_guides.company_id')
             ->select('master_tour_guides.id', 'master_tour_guides.guide_code', 'master_tour_guides.guide_status', 'master_tour_guides.supplier_no',
                 'master_tour_guides.is_draft', 'master_tour_guide_mains.start_date', 'master_tour_guide_mains.remark');
 

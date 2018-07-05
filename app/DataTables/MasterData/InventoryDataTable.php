@@ -36,7 +36,7 @@ class InventoryDataTable extends DataTable
     public function query(MasterInventory $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'master_inventory.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_inventory.company_id')
             ->select(
                 'master_inventory.id', 
                 'master_inventory.trx_sales_id',

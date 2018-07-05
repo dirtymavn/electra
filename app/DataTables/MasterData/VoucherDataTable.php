@@ -35,7 +35,7 @@ class VoucherDataTable extends DataTable
     public function query(MasterVoucher $model)
     {
         $return = $model->newQuery()
-            ->join('companies', 'companies.id', '=', 'master_voucher.company_id')
+            ->leftJoin('companies', 'companies.id', '=', 'master_voucher.company_id')
             ->select(
                 'master_voucher.id',
                 'master_voucher.voucher_no',
