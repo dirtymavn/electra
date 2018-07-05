@@ -128,6 +128,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('fx-trans/fx-detail/delete', array('as' => 'fx-trans.fx-detail.delete', 'uses' => 'FxTransactionController@fxTransDetailDelete', 'middleware' => 'sentinel_access:admin.company,fx-trans.create'));
             Route::post('fx-trans/fx-detail/detail', array('as' => 'fx-trans.fx-detail.detail', 'uses' => 'FxTransactionController@fxTransDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,fx-trans.create'));
         });
+
+        // Passenger Class
+        Route::resource('passenger', 'PassengerClassController');
+        Route::post('passenger/bulk-delete', array('as' => 'passenger.bulk-delete', 'uses' => 'PassengerClassController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,passenger.destroy'));
         
     });
 

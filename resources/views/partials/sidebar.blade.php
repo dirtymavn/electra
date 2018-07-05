@@ -616,6 +616,9 @@
                                 <i class="fa fa-circle-o"></i><span>Credit Card</span>
                             </a>
                         </li>
+                        <li class="{!! (url(route('passenger.index')) == Request::url() OR Request::is('master-data/passenger*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','passenger.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('passenger.index')}}"><i class="fa fa-circle-o"></i><span>Passenger</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
