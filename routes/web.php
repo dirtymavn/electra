@@ -140,6 +140,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Product Type
         Route::resource('product-type', 'ProductTypeController');
         Route::post('product-type/bulk-delete', array('as' => 'product-type.bulk-delete', 'uses' => 'ProductTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,product-type.destroy'));
+
+        // Region
+        Route::resource('region', 'RegionController');
+        Route::post('region/bulk-delete', array('as' => 'region.bulk-delete', 'uses' => 'RegionController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,region.destroy'));
     });
 
     // System
