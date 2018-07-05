@@ -147,6 +147,23 @@ ul.tabs li a:hover
 {
 	background:#1b55e2;
 }
+.sub-menu .sub-submenu.opened
+{
+	background:#1b55e2;
+}
+.sub-submenu.opened > a,
+.sub-submenu.opened > a > i
+{
+	color:#fff !important;
+}
+.menu-w ul.sub-menu li:hover .sub-menu-w.third-menu,
+.sub-menu .sub-submenu.opened .sub-menu-w.third-menu.expanded
+{
+	background:#fff;
+	transition:none;
+	padding:10px 0 !important;
+	top:1px;
+}
 .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-icon
 {
 	display:none;
@@ -216,4 +233,8 @@ body.auth-wrapper
 {
 	width:900px;
 	margin:.5rem auto;
+}
+.top-icon.top-settings
+{
+	display:none;
 }
