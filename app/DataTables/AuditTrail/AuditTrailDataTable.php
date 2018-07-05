@@ -15,7 +15,37 @@ class AuditTrailDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables($query);
+        return datatables($query)
+            ->editColumn('auditable_type', function($log) {
+                $arrType = explode("\\", $log->auditable_type);
+                $lengthType = count($arrType);
+
+                return $arrType[$lengthType - 1];
+            })
+            ->editColumn('created_at', function($log) {
+                return date('d F Y, H:i:s', strtotime($log->created_at));
+            })
+            ->editColumn('old_values', function($log) {
+                $arrVal = (array)json_decode($log->old_values);
+                $return = '<ul>';
+                foreach ($arrVal as $key => $value) {
+                    // if (!empty($value)) {
+                        $return .= '<li><b>'.$key.'</b> : '.$value.'</li>';
+                    // }
+                }
+                return $return.'</ul>';
+            })
+            ->editColumn('new_values', function($log) {
+                $arrVal = (array)json_decode($log->new_values);
+                $return = '<ul>';
+                foreach ($arrVal as $key => $value) {
+                    // if (!empty($value)) {
+                        $return .= '<li><b>'.$key.'</b> : '.$value.'</li>';
+                    // }
+                }
+                return $return.'</ul>';
+            })
+            ->rawColumns(['old_values', 'new_values']);
     }
 
     /**
@@ -27,7 +57,8 @@ class AuditTrailDataTable extends DataTable
     {
         $return = DB::table('audits')->join('users', 'users.id', 'audits.user_id')
             ->select('users.first_name', 'users.last_name', 'users.email', 'users.username',
-                'audits.*');
+                'audits.*')
+            ->whereRaw(\DB::raw("audits.old_values::TEXT NOT ILIKE '%last_login%'"));
             
         if (user_info()->inRole('admin')) {
 
@@ -65,7 +96,7 @@ class AuditTrailDataTable extends DataTable
             'username' => ['name' => 'users.username', 'data' => 'username', 'title' => trans('UserName')],
             // 'email' => ['name' => 'users.email', 'data' => 'email', 'title' => trans('Email')],
             'event' => ['name' => 'audits.event', 'data' => 'event', 'title' => trans('Event')],
-            'auditable_type' => ['name' => 'audits.auditable_type', 'data' => 'auditable_type', 'title' => trans('Type')],
+            'auditable_type' => ['name' => 'audits.auditable_type', 'data' => 'auditable_type', 'title' => trans('Form')],
             'ip_address' => ['name' => 'audits.ip_address', 'data' => 'ip_address', 'title' => trans('IP Address')],
             'created_at' => ['name' => 'audits.created_at', 'data' => 'created_at', 'title' => trans('Created_at')],
             'user_agent' => ['name' => 'audits.user_agent', 'data' => 'user_agent', 'title' => trans('User Agent'), 'class' => 'none'],

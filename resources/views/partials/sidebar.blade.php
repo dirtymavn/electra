@@ -569,9 +569,6 @@
                         <li class="{!! (url(route('voucher.index')) == Request::url() OR Request::is('master-data/voucher*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','voucher.read'])) ? '' : 'display:none;' }}">
                             <a href="{{ route('voucher.index') }}"><i class="fa fa-circle-o"></i><span>Voucher</span></a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-circle-o"></i><span>Tour Guide</span></a>
-                        </li>
                         <li class="sub-submenu">
                             <a>
                                 <i class="fa fa-circle-o"></i><span>Outbound</span><i class="arrow-third-menu os-icon os-icon-chevron-down"></i>
@@ -649,21 +646,6 @@
                                     </a>
                                 </li>
                             @endif
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i><span>Users</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i><span>Role</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i><span>Permission</span>
-                                </a>
-                            </li>
                             <li>
                                 <a href="#">
                                     <i class="fa fa-circle-o"></i><span>System Config</span>

@@ -134,7 +134,7 @@
             $('#reset-password').attr('action', url );
             $('#import').attr( 'method', 'reset' );
             $('#reset-modal').modal('show');
-            $("#text-body-confirm-reset").text("{{ trans('Are you sure want to reset this data ?') }}");
+            $("#text-body-confirm-reset").text("{{ trans('Are you sure want to reset password for this data ?') }}");
             $('#submit-reset').attr('value','Reset');
             e.preventDefault();
         });

@@ -109,9 +109,30 @@ class MasterCustomer extends Model implements Auditable
             $discountrate = new MasterCustomerDiscountRate;
             $discountrate->create($input);
             
-            $creditcard = new MasterCustomerCreditCard;
-            $input['expiry_date'] = $input['cc_expiry_date'];
-            $creditcard->create($input);
+            $creditCards = \DB::table('temporaries')->whereType('customer-creditcard')
+                ->whereUserId(user_info('id'))
+                ->get();
+            if (count($creditCards) > 0) {
+                foreach ($creditCards as $creditCard) {
+                    $creditCard = json_decode($creditCard->data);
+
+                    $cc = new MasterCustomerCreditCard;
+
+                    $cc->customer_id = $customer->id;
+                    $cc->card_type = $creditCard->card_type;
+                    $cc->merchant_no = $creditCard->merchant_no;
+                    $cc->merchant_no_int = $creditCard->merchant_no_int;
+                    $cc->credit_card_no = $creditCard->credit_card_no;
+                    $cc->expiry_date = $creditCard->cc_expiry_date;
+                    $cc->cardholder_name = $creditCard->cardholder_name;
+                    $cc->bill_type = $creditCard->bill_type;
+                    $cc->preferred_card = $creditCard->preferred_card;
+                    $cc->sof = $creditCard->sof;
+                    $cc->remark = $creditCard->cc_remark;
+
+                    $cc->save();
+                }
+            }
 
             $termfee = new MasterCustomerTermFee;
             $termfee->create($input);

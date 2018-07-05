@@ -71,6 +71,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     Route::group(['prefix' => 'master-data', 'namespace' => 'MasterData'], function () {
         Route::resource('customer', 'CustomerController');
         Route::post('customer/bulk-delete', array('as' => 'customer.bulk-delete', 'uses' => 'CustomerController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,customer.destroy'));
+        Route::post('customer/get-data', array('as' => 'customer.get-data', 'uses' => 'CustomerController@getData'));
+        Route::post('customer/credit-card', array('as' => 'customer.creditcard.post', 'uses' => 'CustomerController@customerCreditCardStore', 'middleware' => 'sentinel_access:admin.company,customer.create'));
+        Route::post('customer/data/delete', array('as' => 'customer.data.delete', 'uses' => 'CustomerController@dataDelete', 'middleware' => 'sentinel_access:admin.company,customer.create'));
+        Route::post('customer/data/detail', array('as' => 'customer.data.detail', 'uses' => 'CustomerController@dataDetail', 'middleware' => 'sentinel_access:admin.company,customer.create'));
 
         Route::resource('supplier', 'SupplierController');
         Route::post('supplier/bulk-delete', array('as' => 'supplier.bulk-delete', 'uses' => 'SupplierController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,supplier.destroy'));
@@ -99,6 +103,14 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('itin/itinerary-detail/delete', array('as' => 'itin.itinerary-detail.delete', 'uses' => 'ItinController@itineraryDetailDelete', 'middleware' => 'sentinel_access:admin.company,itin.create'));
             Route::post('itin/itinerary-detail/detail', array('as' => 'itin.itinerary-detail.detail', 'uses' => 'ItinController@itineraryDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,itin.create'));
             Route::post('itin/itinerary-service', array('as' => 'itin.itinerary-service.post', 'uses' => 'ItinController@itineraryServiceStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
+            
+            // related service
+            Route::post('itin/itinerary-service-route', array('as' => 'itin.itinerary-service-route.post', 'uses' => 'ItinController@itineraryServiceRouteStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
+            Route::post('itin/itinerary-service-interval', array('as' => 'itin.itinerary-service-interval.post', 'uses' => 'ItinController@itineraryServiceIntervalStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
+            Route::post('itin/itinerary-service-ptc', array('as' => 'itin.itinerary-service-ptc.post', 'uses' => 'ItinController@itineraryServicePtcStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
+            Route::post('itin/itinerary-service-foc', array('as' => 'itin.itinerary-service-foc.post', 'uses' => 'ItinController@itineraryServiceFocStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
+            Route::post('itin/itinerary-service-tax', array('as' => 'itin.itinerary-service-tax.post', 'uses' => 'ItinController@itineraryServiceTaxStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
+
             Route::post('itin/itinerary-optional', array('as' => 'itin.itinerary-optional.post', 'uses' => 'ItinController@itineraryOptionalStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
 
         }); 
