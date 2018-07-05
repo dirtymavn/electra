@@ -10,15 +10,15 @@
             <div class="col-md-6">
                 <div class="form-group">
                     {!! Form::label('lg_no', trans('LG No'), ['class' => 'control-label']) !!}
-                    {!! Form::text('lg_no', old('lg_no'), ['class' => 'form-control']) !!}
+                    {!! Form::text('lg_no', old('lg_no'), ['class' => 'form-control', 'placeholder' => 'Input the LG No']) !!}
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    {!! Form::label('supplier_no', trans('Cost Type'), ['class' => 'control-label']) !!}
-                    {!! Form::text('supplier_no', old('supplier_no') , ['class' => 'form-control', 'placeholder' => 'Input the Cost Type']) !!}
+                    {!! Form::label('supplier_no', trans('Supplier No'), ['class' => 'control-label']) !!}
+                    {!! Form::text('supplier_no', old('supplier_no') , ['class' => 'form-control', 'placeholder' => 'Input the Supplier No']) !!}
                 </div>
             </div>
         </div>

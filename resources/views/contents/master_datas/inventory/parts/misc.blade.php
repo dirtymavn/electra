@@ -63,16 +63,16 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label('start_desc', trans('Start Desc'), ['class' => 'control-label']) !!}
-                            {!! Form::textarea('start_desc', old('start_desc') , ['class' => 'form-control', 'placeholder' => 'Input the Start Desc', 'rows' => '4x2', 'id' => 'start_desc']) !!}
+                            {!! Form::label('start_desc', trans('Start Description'), ['class' => 'control-label']) !!}
+                            {!! Form::textarea('start_desc', old('start_desc') , ['class' => 'form-control', 'placeholder' => 'Input the Start Description', 'rows' => '4x2', 'id' => 'start_desc']) !!}
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label('end_desc', trans('End Date'), ['class' => 'control-label']) !!}
-                            {!! Form::textarea('end_desc', old('end_desc') , ['class' => 'form-control', 'placeholder' => 'Input the End Date', 'rows' => '4x2', 'id' => 'end_desc']) !!}
+                            {!! Form::label('end_desc', trans('End Description'), ['class' => 'control-label']) !!}
+                            {!! Form::textarea('end_desc', old('end_desc') , ['class' => 'form-control', 'placeholder' => 'Input the End Description', 'rows' => '4x2', 'id' => 'end_desc']) !!}
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
             <div class="modal-footer">
                 <a id="form-detail-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
                 </a>
-                <button id="form-detail-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-times m-right-10"></i> Submit
+                <button id="form-detail-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-check"></i> Submit
                 </button>
             </div>
             {!! Form::close() !!}
