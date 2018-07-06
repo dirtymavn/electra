@@ -631,6 +631,9 @@
                         <li class="{!! (url(route('gst.index')) == Request::url() OR Request::is('master-data/gst*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','gst.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('gst.index')}}"><i class="fa fa-circle-o"></i><span>Gst</span></a>
                         </li>
+                        <li class="{!! (url(route('currencyrate.index')) == Request::url() OR Request::is('master-data/currencyrate*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','currencyrate.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('currencyrate.index')}}"><i class="fa fa-circle-o"></i><span>Currency Rate</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
