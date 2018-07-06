@@ -165,6 +165,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // City
         Route::resource('city', 'CityController');
         Route::post('city/bulk-delete', array('as' => 'city.bulk-delete', 'uses' => 'CityController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,city.destroy'));
+
+        // Airport
+        Route::resource('airport', 'AirportController');
+        Route::post('airport/bulk-delete', array('as' => 'airport.bulk-delete', 'uses' => 'AirportController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,airport.destroy'));
     });
 
     // System

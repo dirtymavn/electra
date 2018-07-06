@@ -640,6 +640,9 @@
                         <li class="{!! (url(route('city.index')) == Request::url() OR Request::is('master-data/city*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','city.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('city.index')}}"><i class="fa fa-circle-o"></i><span>City</span></a>
                         </li>
+                        <li class="{!! (url(route('airport.index')) == Request::url() OR Request::is('master-data/airport*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','airport.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('airport.index')}}"><i class="fa fa-circle-o"></i><span>Airport</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

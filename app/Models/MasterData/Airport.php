@@ -5,7 +5,7 @@ namespace App\Models\MasterData;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class City extends Model implements Auditable
+class Airport extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
 
@@ -14,7 +14,7 @@ class City extends Model implements Auditable
      *
      * @var string
      */
-    protected $table = 'cities';
+    protected $table = 'airports';
 
     /**
      * The attributes that aren't mass assignable.
@@ -22,9 +22,10 @@ class City extends Model implements Auditable
      * @var array
      */
     protected $fillable = [
-        'country_id',
-        'city_name',
-        'city_code',
+        'city_id',
+        'airport_name',
+        'airport_code_icao',
+        'airport_code_iata',
         'status',
         'company_id',
         'branch_id',
@@ -32,17 +33,10 @@ class City extends Model implements Auditable
     ];
 
     /**
-     * Get the airport for the city.
+     * Get the city for the airport.
      */
-    public function airport()
+    public function city()
     {
-        return $this->hasOne(Airport::class, 'city_id');
-    }
-
-    public static function getDataAvailable()
-    {
-        return self::whereCompanyId(user_info('company_id'))
-            ->whereStatus(true)
-            ->whereDoesntHave('airport');
+        return $this->hasOne(City::class, 'id', 'city_id');
     }
 }

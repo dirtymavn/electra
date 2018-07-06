@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('country_id', trans('Country'), ['class' => 'control-label']) !!}
-            {!! Form::select('country_id', ['' => 'Choose Country'] + @$countries, old('status'), ['class' => 'form-control']) !!}
+            {!! Form::select('country_id', ['' => 'Choose Country'] + @$countries, old('country_id'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('city_name', trans('City Name'), ['class' => 'control-label']) !!}
