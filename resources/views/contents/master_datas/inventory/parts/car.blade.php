@@ -86,9 +86,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a id="form-detail-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
+                <a id="form-car-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
                 </a>
-                <button id="form-detail-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-check"></i> Submit
+                <button id="form-car-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-check"></i> Submit
                 </button>
             </div>
             {!! Form::close() !!}

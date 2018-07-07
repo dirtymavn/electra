@@ -1,12 +1,13 @@
 <script>
     $(document).ready(function() {
         var detailColumns = [
-            { data: 'start_date', name: 'start_date'},
-            { data: 'end_date', name: 'end_date'},
-            { data: 'start_desc', name: 'start_desc'},
-            { data: 'end_desc', name: 'end_desc'},
-            { data: 'status', name: 'status', className: 'dt-center'},
-            { data: 'description', name: 'description'},
+            { data: 'from', name: 'from'},
+            { data: 'to', name: 'to'},
+            { data: 'company', name: 'company'},
+            { data: 'class', name: 'class'},
+            { data: 'departure', name: 'departure'},
+            { data: 'arrival', name: 'arrival'},
+            { data: 'status', name: 'status'},
             { data: 'action', name: 'action'},
         ];
 
@@ -27,7 +28,7 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
-                    $('#form-detail').modal('hide');
+                    $('#form-car').modal('hide');
                     $('#car-detail').DataTable().ajax.reload();
                 }
             });
@@ -40,7 +41,7 @@
         e.preventDefault();
     });
 
-    $(document).on('click', '#form-detail-accept', function() {
+    $(document).on('click', '#form-car-accept', function() {
         $('#form-car-detail').submit();
     })
 
@@ -74,7 +75,7 @@
                 $("#status").val(value.status)
                 $("#misc_id").val(data.data.id)
 
-                $('#form-detail').modal({backdrop: 'static', keyboard: false});
+                $('#form-car').modal({backdrop: 'static', keyboard: false});
             }
         })
     });
