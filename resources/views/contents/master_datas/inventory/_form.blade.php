@@ -156,4 +156,6 @@
 @include('contents.master_datas.inventory.js.pkg')
 @include('contents.master_datas.inventory.js.car')
 @include('contents.master_datas.inventory.js.car_transfer')
+@include('contents.master_datas.inventory.js.route_air')
+@include('contents.master_datas.inventory.js.route_hotel')
 @endsection
