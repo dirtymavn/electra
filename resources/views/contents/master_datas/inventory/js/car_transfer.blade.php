@@ -1,47 +1,51 @@
 <script>
     $(document).ready(function() {
         var detailColumns = [
-            { data: 'start_date', name: 'start_date'},
-            { data: 'end_date', name: 'end_date'},
-            { data: 'start_desc', name: 'start_desc'},
-            { data: 'end_desc', name: 'end_desc'},
-            { data: 'status', name: 'status', className: 'dt-center'},
-            { data: 'description', name: 'description'},
+            { data: 'city', name: 'city'},
+            { data: 'company_code', name: 'company_code'},
+            { data: 'vehicle', name: 'vehicle'},
+            { data: 'days_hired', name: 'days_hired'},
+            { data: 'pickup_date', name: 'pickup_date'},
+            { data: 'pickup_location', name: 'pickup_location'},
+            { data: 'dropoff_date', name: 'dropoff_date'},
+            { data: 'dropoff_location', name: 'dropoff_location'},
+            { data: 'rate_type', name: 'rate_type'},
+            { data: 'status', name: 'status'},
             { data: 'action', name: 'action'},
         ];
 
         var detailDatas = {
-            'type': 'car-detail'
+            'type': 'car-transfer-detail'
         };
 
-        initDatatable($('#car-detail'), "{{route('inventory.get-detail-data')}}", detailColumns, detailDatas);
+        initDatatable($('#car-transfer-detail'), "{{route('inventory.get-detail-data')}}", detailColumns, detailDatas);
 
-        $('#form-car-detail').submit(function(e) {
+        $('#form-car-transfer-detail').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                url: "{{route('inventory.car-detail.post')}}",
+                url: "{{route('inventory.car-transfer-detail.post')}}",
                 method: "POST",
                 processData: false,
                 contentType: false,
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
-                    $('#form-detail').modal('hide');
-                    $('#car-detail').DataTable().ajax.reload();
+                    $('#form-car-transfer').modal('hide');
+                    $('#car-transfer-detail').DataTable().ajax.reload();
                 }
             });
         });
     });
 
-    $(document).on('click', '.btn-add-car', function(e) {
-        $('#form-car-detail').find("input[type=text], textarea, input[type=hidden]").val("");
-        $('#form-car').modal({backdrop: 'static', keyboard: false});
+    $(document).on('click', '.btn-add-car-transfer', function(e) {
+        $('#form-car-transfer-detail').find("input[type=text], textarea, input[type=hidden]").val("");
+        $('#form-car-transfer').modal({backdrop: 'static', keyboard: false});
         e.preventDefault();
     });
 
     $(document).on('click', '#form-detail-accept', function() {
-        $('#form-car-detail').submit();
+        $('#form-car-transfer-detail').submit();
     })
 
     $(document).on('click', '.deleteData', function() {
@@ -52,7 +56,7 @@
             dataType: "JSON",
             data: {'id':id},
             success: function(data) {
-                $('#car-detail').DataTable().ajax.reload();
+                $('#car-transfer-detail').DataTable().ajax.reload();
             }
         })
     });
@@ -74,7 +78,7 @@
                 $("#status").val(value.status)
                 $("#misc_id").val(data.data.id)
 
-                $('#form-detail').modal({backdrop: 'static', keyboard: false});
+                $('#form-car-transfer').modal({backdrop: 'static', keyboard: false});
             }
         })
     });
