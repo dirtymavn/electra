@@ -91,6 +91,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('inventory/inventory-pkg-detail', array('as' => 'inventory.pkg-detail.post', 'uses' => 'InventoryController@inventoryDetailPkg', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         Route::post('inventory/inventory-detail/detail', array('as' => 'inventory.detail.detail', 'uses' => 'InventoryController@inventoryDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         Route::post('inventory/inventory-car-detail', array('as' => 'inventory.car-detail.post', 'uses' => 'InventoryController@inventoryDetailCar', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
+        Route::post('inventory/inventory-car-transfer-detail', array('as' => 'inventory.car-transfer-detail.post', 'uses' => 'InventoryController@inventoryCarTransfer', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         // end Inventory
         // Outbound
         Route::group(['prefix' => 'outbound', 'namespace' => 'Outbound'], function () {
