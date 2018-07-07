@@ -150,6 +150,26 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Gst
         Route::resource('gst', 'GstController');
         Route::post('gst/bulk-delete', array('as' => 'gst.bulk-delete', 'uses' => 'GstController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,gst.destroy'));
+
+        // Currency Rate
+        Route::resource('currencyrate', 'CurrencyController');
+        Route::post('currencyrate/bulk-delete', array('as' => 'currencyrate.bulk-delete', 'uses' => 'CurrencyController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,currencyrate.destroy'));
+        Route::post('currencyrate/get-data', array('as' => 'currencyrate.get-data', 'uses' => 'CurrencyController@getData'));
+        Route::post('currencyrate/credit-card', array('as' => 'currencyrate.rate.post', 'uses' => 'CurrencyController@currencyrateStore', 'middleware' => 'sentinel_access:admin.company,currencyrate.create'));
+        Route::post('currencyrate/data/delete', array('as' => 'currencyrate.data.delete', 'uses' => 'CurrencyController@dataDelete', 'middleware' => 'sentinel_access:admin.company,currencyrate.create'));
+        Route::post('currencyrate/data/detail', array('as' => 'currencyrate.data.detail', 'uses' => 'CurrencyController@dataDetail', 'middleware' => 'sentinel_access:admin.company,currencyrate.create'));
+
+        // Country
+        Route::resource('country', 'CountryController');
+        Route::post('country/bulk-delete', array('as' => 'country.bulk-delete', 'uses' => 'CountryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,country.destroy'));
+
+        // City
+        Route::resource('city', 'CityController');
+        Route::post('city/bulk-delete', array('as' => 'city.bulk-delete', 'uses' => 'CityController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,city.destroy'));
+
+        // Airport
+        Route::resource('airport', 'AirportController');
+        Route::post('airport/bulk-delete', array('as' => 'airport.bulk-delete', 'uses' => 'AirportController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,airport.destroy'));
     });
 
     // System

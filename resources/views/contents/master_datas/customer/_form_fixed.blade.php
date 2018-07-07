@@ -566,7 +566,6 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                console.log(value);
                 $('#card_type').val(value.card_type);
                 $('#merchant_no').val(value.merchant_no);
                 $('#merchant_no_int').val(value.merchant_no_int);

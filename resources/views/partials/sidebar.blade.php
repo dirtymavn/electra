@@ -631,6 +631,18 @@
                         <li class="{!! (url(route('gst.index')) == Request::url() OR Request::is('master-data/gst*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','gst.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('gst.index')}}"><i class="fa fa-circle-o"></i><span>Gst</span></a>
                         </li>
+                        <li class="{!! (url(route('currencyrate.index')) == Request::url() OR Request::is('master-data/currencyrate*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','currencyrate.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('currencyrate.index')}}"><i class="fa fa-circle-o"></i><span>Currency Rate</span></a>
+                        </li>
+                        <li class="{!! (url(route('country.index')) == Request::url() OR Request::is('master-data/country*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','country.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('country.index')}}"><i class="fa fa-circle-o"></i><span>Country</span></a>
+                        </li>
+                        <li class="{!! (url(route('city.index')) == Request::url() OR Request::is('master-data/city*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','city.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('city.index')}}"><i class="fa fa-circle-o"></i><span>City</span></a>
+                        </li>
+                        <li class="{!! (url(route('airport.index')) == Request::url() OR Request::is('master-data/airport*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','airport.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('airport.index')}}"><i class="fa fa-circle-o"></i><span>Airport</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
