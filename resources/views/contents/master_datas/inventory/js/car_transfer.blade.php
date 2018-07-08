@@ -44,7 +44,7 @@
         e.preventDefault();
     });
 
-    $(document).on('click', '#form-detail-accept', function() {
+    $(document).on('click', '#form-car-transfer', function() {
         $('#form-car-transfer-detail').submit();
     })
 
