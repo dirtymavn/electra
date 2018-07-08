@@ -43,6 +43,7 @@ class City extends Model implements Auditable
     {
         return self::whereCompanyId(user_info('company_id'))
             ->whereStatus(true)
+            ->whereIsDraft(false)
             ->whereDoesntHave('airport');
     }
 }
