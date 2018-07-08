@@ -15,17 +15,6 @@ class CreateInventoryMasterTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('trx_sales', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('invoice_no');
-            $table->date('sales_date');
-            $table->float('ticket_amt');
-            $table->float('rebate');
-
-            $table->timestamps();
-            $table->softDeletes();            
-        });
-
         Schema::create('master_inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_sales_id')->unsigned();
@@ -236,7 +225,6 @@ class CreateInventoryMasterTable extends Migration
             Schema::dropIfExists('master_inventory_route_car_transfer');
             Schema::dropIfExists('master_inventory_cost');
             Schema::dropIfExists('master_inventory');
-            Schema::dropIfExists('trx_sales');
             
         Schema::enableForeignKeyConstraints();
     }
