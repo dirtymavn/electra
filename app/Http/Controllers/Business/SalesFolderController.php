@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\DataTables\Business\SalesDataTable;
 
 use App\Models\Business\Sales;
+use App\Models\MasterData\Customer\MasterCustomer;
 
 use DB;
 
@@ -39,7 +40,9 @@ class SalesFolderController extends Controller
      */
     public function create()
     {
-        return view('contents.business.sales.create');
+        $company_id = user_info()->company_id;
+        $customers = MasterCustomer::whereCompanyId($company_id)->pluck('customer_name', 'id');
+        return view('contents.business.sales.create', compact('customers'));
     }
 
     /**
