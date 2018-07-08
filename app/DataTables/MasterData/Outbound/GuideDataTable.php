@@ -19,7 +19,15 @@ class GuideDataTable extends DataTable
             ->addColumn('action', function($guide){
                 $edit_url = route('guide.edit', $guide->id);
                 $delete_url = route('guide.destroy', $guide->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('guide.update') && user_info()->hasAccess('guide.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'guide.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'guide.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($guide){
                 return ($guide->is_draft) ? 'Yes' : 'No';

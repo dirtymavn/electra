@@ -19,7 +19,15 @@ class CustomerDataTable extends DataTable
             ->addColumn('action', function($customer){
                 $edit_url = route('customer.edit', $customer->id);
                 $delete_url = route('customer.destroy', $customer->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('customer.update') && user_info()->hasAccess('customer.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'customer.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'customer.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($customer){
                 return ($customer->is_draft) ? 'Yes' : 'No';

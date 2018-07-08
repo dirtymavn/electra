@@ -19,7 +19,15 @@ class TrxPostingDataTable extends DataTable
         ->addColumn('action', function($periodend){
             $edit_url = route('periodend.edit', $periodend->id);
             $delete_url = route('periodend.destroy', $periodend->id);
-            return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('periodend.update') && user_info()->hasAccess('periodend.destroy')) ) {
+                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            } elseif (user_info()->hasAnyAccess(['admin.company', 'periodend.update'])) {
+                return view('partials.action-button')->with(compact('edit_url'));    
+            } elseif (user_info()->hasAnyAccess(['admin.company', 'periodend.destroy'])) {
+                return view('partials.action-button')->with(compact('delete_url'));
+            } else {
+                return '-';
+            }
         })
         ->editColumn('is_draft', function($periodend){
             return ($periodend->is_draft) ? 'Yes' : 'No';

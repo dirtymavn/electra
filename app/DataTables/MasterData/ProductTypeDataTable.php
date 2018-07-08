@@ -19,7 +19,15 @@ class ProductTypeDataTable extends DataTable
             ->addColumn('action', function($productype){
                 $edit_url = route('product-type.edit', $productype->id);
                 $delete_url = route('product-type.destroy', $productype->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('product-type.update') && user_info()->hasAccess('product-type.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'product-type.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'product-type.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($productype){
                 return ($productype->is_draft) ? 'Yes' : 'No';

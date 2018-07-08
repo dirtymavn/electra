@@ -19,7 +19,15 @@ class TrxFxTransactionDataTable extends DataTable
             ->addColumn('action', function($fxTrans){
                 $edit_url = route('fx-trans.edit', $fxTrans->id);
                 $delete_url = route('fx-trans.destroy', $fxTrans->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('fx-trans.update') && user_info()->hasAccess('fx-trans.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'fx-trans.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'fx-trans.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('invoice_flag', function($fxTrans){
                 return ($fxTrans->invoice_flag) ? '<div class="status-pill green" data-title="Yes" data-toggle="tooltip" data-original-title="" title=""></div>' : '<div class="status-pill red" data-title="Yes" data-toggle="tooltip" data-original-title="" title=""></div>';

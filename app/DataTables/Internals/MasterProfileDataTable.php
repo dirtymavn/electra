@@ -19,7 +19,15 @@ class MasterProfileDataTable extends DataTable
         ->addColumn('action', function($profile){
             $edit_url = route('profile.edit', $profile->id);
             $delete_url = route('profile.destroy', $profile->id);
-            return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('profile.update') && user_info()->hasAccess('profile.destroy')) ) {
+                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            } elseif (user_info()->hasAnyAccess(['admin.company', 'profile.update'])) {
+                return view('partials.action-button')->with(compact('edit_url'));    
+            } elseif (user_info()->hasAnyAccess(['admin.company', 'profile.destroy'])) {
+                return view('partials.action-button')->with(compact('delete_url'));
+            } else {
+                return '-';
+            }
         })
         ->editColumn('is_draft', function($profile){
             return ($profile->is_draft) ? 'Yes' : 'No';

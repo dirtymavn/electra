@@ -17,12 +17,16 @@
 
 @section('content')
 @include('flash::message')
-<a href="{{ route('itin.create')}}" class="btn btn-primary" id="btn-submit">
-    <i class="fa fa-plus m-right-10"></i> Add Itinerary
-</a>
-<button class="btn btn-danger" id="bulk-delete">
-    <i class="fa fa-trash m-right-10"></i> Bulk Delete
-</button>
+@if(user_info()->hasAnyAccess(['admin.company', 'itin.create']))
+    <a href="{{ route('itin.create')}}" class="btn btn-primary" id="btn-submit">
+        <i class="fa fa-plus m-right-10"></i> Add Itinerary
+    </a>
+@endif
+@if(user_info()->hasAnyAccess(['admin.company', 'itin.destroy']))
+    <button class="btn btn-danger" id="bulk-delete">
+        <i class="fa fa-trash m-right-10"></i> Bulk Delete
+    </button>
+@endif
 <br>
 
 <div class="table-responsive">

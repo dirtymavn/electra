@@ -19,7 +19,15 @@ class GstDataTable extends DataTable
             ->addColumn('action', function($gst){
                 $edit_url = route('gst.edit', $gst->id);
                 $delete_url = route('gst.destroy', $gst->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('gst.update') && user_info()->hasAccess('gst.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'gst.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'gst.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('absorb_ppn', function($gst){
                 return ($gst->absorb_ppn) ? 'Yes' : 'No';

@@ -19,7 +19,15 @@ class CurrencyRateDataTable extends DataTable
             ->addColumn('action', function($currencyrate){
                 $edit_url = route('currencyrate.edit', $currencyrate->id);
                 $delete_url = route('currencyrate.destroy', $currencyrate->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('currencyrate.update') && user_info()->hasAccess('currencyrate.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'currencyrate.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'currencyrate.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($currencyrate){
                 return ($currencyrate->is_draft) ? 'Yes' : 'No';

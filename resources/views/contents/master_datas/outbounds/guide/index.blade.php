@@ -17,12 +17,16 @@
 
 @section('content')
 @include('flash::message')
-<a href="{{ route('guide.create')}}" class="btn btn-primary" id="btn-submit">
-    <i class="fa fa-plus m-right-10"></i> Add Tour Guide
-</a>
-<button class="btn btn-danger" id="bulk-delete">
-    <i class="fa fa-trash m-right-10"></i> Bulk Delete
-</button>
+@if(user_info()->hasAnyAccess(['admin.company', 'guide.create']))
+    <a href="{{ route('guide.create')}}" class="btn btn-primary" id="btn-submit">
+        <i class="fa fa-plus m-right-10"></i> Add Tour Guide
+    </a>
+@endif
+@if(user_info()->hasAnyAccess(['admin.company', 'guide.destroy']))
+    <button class="btn btn-danger" id="bulk-delete">
+        <i class="fa fa-trash m-right-10"></i> Bulk Delete
+    </button>
+@endif
 <br>
 
 <div class="table-responsive">

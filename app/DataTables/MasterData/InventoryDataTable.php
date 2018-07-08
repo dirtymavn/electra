@@ -19,7 +19,15 @@ class InventoryDataTable extends DataTable
         ->addColumn('action', function($inventory){
             $edit_url = route('inventory.edit', $inventory->id);
             $delete_url = route('inventory.destroy', $inventory->id);
-            return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('inventory.update') && user_info()->hasAccess('inventory.destroy')) ) {
+                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            } elseif (user_info()->hasAnyAccess(['admin.company', 'inventory.update'])) {
+                return view('partials.action-button')->with(compact('edit_url'));    
+            } elseif (user_info()->hasAnyAccess(['admin.company', 'inventory.destroy'])) {
+                return view('partials.action-button')->with(compact('delete_url'));
+            } else {
+                return '-';
+            }
         })
         ->editColumn('is_draft', function($inventory){
             return ($inventory->is_draft) ? 'Yes' : 'No';

@@ -19,7 +19,15 @@ class JvPeriodDataTable extends DataTable
             ->addColumn('action', function($jvperiod){
                 $edit_url = route('jvperiod.edit', $jvperiod->id);
                 $delete_url = route('jvperiod.destroy', $jvperiod->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('jvperiod.update') && user_info()->hasAccess('jvperiod.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'jvperiod.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'jvperiod.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($jvperiod){
                 return ($jvperiod->is_draft) ? 'Yes' : 'No';

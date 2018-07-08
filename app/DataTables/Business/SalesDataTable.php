@@ -19,7 +19,15 @@ class SalesDataTable extends DataTable
         ->addColumn('action', function($sales){
             $edit_url = route('sales.edit', $sales->id);
             $delete_url = route('sales.destroy', $sales->id);
-            return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('sales.update') && user_info()->hasAccess('sales.destroy')) ) {
+                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            } elseif (user_info()->hasAnyAccess(['admin.company', 'sales.update'])) {
+                return view('partials.action-button')->with(compact('edit_url'));    
+            } elseif (user_info()->hasAnyAccess(['admin.company', 'sales.destroy'])) {
+                return view('partials.action-button')->with(compact('delete_url'));
+            } else {
+                return '-';
+            }
         })
         ->editColumn('is_draft', function($sales){
             return ($sales->is_draft) ? 'Yes' : 'No';

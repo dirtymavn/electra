@@ -19,7 +19,15 @@ class MasterCoaDataTable extends DataTable
         ->addColumn('action', function($account){
             $edit_url = route('account.edit', $account->id);
             $delete_url = route('account.destroy', $account->id);
-            return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+            if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('account.update') && user_info()->hasAccess('account.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'account.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'account.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
         })
         ->editColumn('is_draft', function($account){
             return ($account->is_draft) ? 'Yes' : 'No';

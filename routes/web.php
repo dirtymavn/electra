@@ -24,6 +24,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
      // Business
     Route::group(['prefix' => 'business', 'namespace' => 'Business'], function () {
         Route::resource('sales', 'SalesFolderController');
+        Route::post('sales/bulk-delete', array('as' => 'sales.bulk-delete', 'uses' => 'SalesFolderController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,sales.destroy'));
+        Route::post('sales/get-detail-data', array('as' => 'sales.get-detail-data', 'uses' => 'SalesFolderController@detailData', 'middleware' => 'sentinel_access:admin.company,sales.create'));
+        Route::post('sales/sales-detail/delete', array('as' => 'sales.detail.delete', 'uses' => 'SalesFolderController@salesDetailDelete', 'middleware' => 'sentinel_access:admin.company,sales.create'));
+        Route::post('sales/sales-sales-detail', array('as' => 'sales.sales-detail.post', 'uses' => 'SalesFolderController@salesDetail', 'middleware' => 'sentinel_access:admin.company,sales.create'));
+        Route::post('sales/sales-detail/detail', array('as' => 'sales.detail.detail', 'uses' => 'salesDetail@inventoryDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
+       
         Route::resource('delivery', 'DeliveryController');
     });
 

@@ -19,7 +19,15 @@ class AirlineDataTable extends DataTable
             ->addColumn('action', function($airline){
                 $edit_url = route('airline.edit', $airline->id);
                 $delete_url = route('airline.destroy', $airline->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('airline.update') && user_info()->hasAccess('airline.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'airline.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'airline.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($airline){
                 return ($airline->is_draft) ? 'Yes' : 'No';

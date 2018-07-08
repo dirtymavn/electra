@@ -8,7 +8,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('customer_id', trans('Customer'), ['class' => 'control-label']) !!}
-            {!! Form::text('customer_id', old('customer_id') , ['class' => 'form-control', 'placeholder' => 'Input the Customer']) !!}
+            {!! Form::select('customer_id', ['' => 'Choose Customer'] + @$customers, old('customer_id'), ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-sm-6">
@@ -92,3 +92,14 @@
         </div>
     </div>
 </div>
+
+@section('part_script')
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+<script>
+    $(function(){
+        spinnerLoad($('#form-sales'));
+    });
+</script>
+
+@include('contents.business.sales.js.detail')
+@endsection
