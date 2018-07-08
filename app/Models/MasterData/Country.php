@@ -44,6 +44,6 @@ class Country extends Model implements Auditable
      */
     public static function scopeGetDataByCompany($query)
     {
-        return $query->whereCompanyId(user_info('company_id'));
+        return $query->whereCompanyId(user_info('company_id'))->whereIsDraft(false);
     }
 }

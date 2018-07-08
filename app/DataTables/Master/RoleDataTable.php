@@ -49,9 +49,11 @@ class RoleDataTable extends DataTable
         $query = $model->newQuery()->leftJoin('companies', 'companies.id', '=', 'roles.company_id')
             ->select('roles.id', 'roles.name', 'roles.slug', 'roles.created_at', 'roles.updated_at',
                 'companies.name as company_name');
-
+        
         if (!user_info()->inRole('super-admin')) {
             $query = $query->whereCompanyId($companyId);
+        } else {
+            $query->whereNull('company_id');
         }
 
         return $query;

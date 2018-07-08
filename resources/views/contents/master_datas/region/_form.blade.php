@@ -9,8 +9,8 @@
             {!! Form::text('region_code', old('region_code') , ['class' => 'form-control', 'placeholder' => 'Input the Region Code']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('region_description', trans('Region Class'), ['class' => 'control-label']) !!}
-            {!! Form::textarea('region_description', old('region_description') , ['class' => 'form-control', 'placeholder' => 'Input the Region Class', 'rows' => '4']) !!}
+            {!! Form::label('region_description', trans('Region Description'), ['class' => 'control-label']) !!}
+            {!! Form::textarea('region_description', old('region_description') , ['class' => 'form-control', 'placeholder' => 'Input the Region Description', 'rows' => '4']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
