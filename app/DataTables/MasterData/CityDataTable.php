@@ -19,7 +19,15 @@ class CityDataTable extends DataTable
             ->addColumn('action', function($city){
                 $edit_url = route('city.edit', $city->id);
                 $delete_url = route('city.destroy', $city->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('city.update') && user_info()->hasAccess('city.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'city.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'city.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('status', function($city){
                 return ($city->status) ? 'Active' : 'Non Active';

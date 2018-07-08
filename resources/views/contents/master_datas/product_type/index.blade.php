@@ -17,12 +17,16 @@
 
 @section('content')
 @include('flash::message')
-<a href="{{ route('product-type.create')}}" class="btn btn-primary" id="btn-submit">
-    <i class="fa fa-plus m-right-10"></i> Add Product Type
-</a>
-<button class="btn btn-danger" id="bulk-delete">
-    <i class="fa fa-trash m-right-10"></i> Bulk Delete
-</button>
+@if(user_info()->hasAnyAccess(['admin.company', 'product-type.create']))
+    <a href="{{ route('product-type.create')}}" class="btn btn-primary" id="btn-submit">
+        <i class="fa fa-plus m-right-10"></i> Add Product Type
+    </a>
+@endif
+@if(user_info()->hasAnyAccess(['admin.company', 'product-type.destroy']))
+    <button class="btn btn-danger" id="bulk-delete">
+        <i class="fa fa-trash m-right-10"></i> Bulk Delete
+    </button>
+@endif
 <br>
 
 <div class="table-responsive">

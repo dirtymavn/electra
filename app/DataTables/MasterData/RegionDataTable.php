@@ -19,7 +19,15 @@ class RegionDataTable extends DataTable
             ->addColumn('action', function($region){
                 $edit_url = route('region.edit', $region->id);
                 $delete_url = route('region.destroy', $region->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('region.update') && user_info()->hasAccess('region.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'region.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'region.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($region){
                 return ($region->is_draft) ? 'Yes' : 'No';

@@ -19,7 +19,15 @@ class BudgetRateDataTable extends DataTable
             ->addColumn('action', function($budgetrate){
                 $edit_url = route('budget-rate.edit', $budgetrate->id);
                 $delete_url = route('budget-rate.destroy', $budgetrate->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('budget-rate.update') && user_info()->hasAccess('budget-rate.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'budget-rate.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'budget-rate.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($budgetrate){
                 return ($budgetrate->is_draft) ? 'Yes' : 'No';

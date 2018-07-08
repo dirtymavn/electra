@@ -19,7 +19,15 @@ class CountryDataTable extends DataTable
             ->addColumn('action', function($country){
                 $edit_url = route('country.edit', $country->id);
                 $delete_url = route('country.destroy', $country->id);
-                return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('country.update') && user_info()->hasAccess('country.destroy')) ) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'country.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));    
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'country.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
             })
             ->editColumn('is_draft', function($country){
                 return ($country->is_draft) ? 'Yes' : 'No';
