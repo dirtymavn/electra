@@ -42,6 +42,7 @@
             </div>
         </div>            
     {!! Form::close() !!}
+    @stack('models')
 @endsection
 
 
