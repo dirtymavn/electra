@@ -98,9 +98,9 @@ class MasterProfileDataTable extends DataTable
          'mobile',
          'employment_date',
          'is_draft',
-     ];
+        ];
 
- }
+    }
 
     /**
      * Get filename for export.
