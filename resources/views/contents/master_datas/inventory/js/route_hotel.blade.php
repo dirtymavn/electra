@@ -2,19 +2,19 @@
     $(document).ready(function() {
         var detailColumns = [
             { data: 'city', name: 'city'},
-            { data: 'company_code', name: 'company_code'},
-            { data: 'vehicle', name: 'vehicle'},
-            { data: 'days_hired', name: 'days_hired'},
-            { data: 'pickup_date', name: 'pickup_date'},
-            { data: 'pickup_location', name: 'pickup_location'},
-            { data: 'dropoff_date', name: 'dropoff_date'},
-            { data: 'dropoff_location', name: 'dropoff_location'},
-            { data: 'rate_type', name: 'rate_type'},
+            { data: 'hotel_name', name: 'hotel_name'},
+            { data: 'hotel_chain', name: 'hotel_chain'},
+            { data: 'phone', name: 'phone'},
+            { data: 'fax', name: 'fax'},
+            { data: 'checkin_date', name: 'checkin_date'},
+            { data: 'checkout_date', name: 'checkout_date'},
+            { data: 'ref_code', name: 'ref_code'},
+            { data: 'status', name: 'status'},
             { data: 'action', name: 'action'},
         ];
 
         var detailDatas = {
-            'type': 'hotel-detail'
+            'type': 'route-hotel-detail'
         };
 
         initDatatable($('#hotel-detail'), "{{route('inventory.get-detail-data')}}", detailColumns, detailDatas);
@@ -43,11 +43,11 @@
         e.preventDefault();
     });
 
-    $(document).on('click', '#form-detail-accept', function() {
+    $(document).on('click', '#form-hotel-accept', function() {
         $('#form-hotel-detail').submit();
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataHotel', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.delete')}}",
@@ -60,7 +60,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataHotel', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.detail')}}",
@@ -69,13 +69,25 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
-                $("#status").val(value.status)
-                $("#misc_id").val(data.data.id)
+                $('#city').val(value.city);
+                $('#hotel_name').val(value.hotel_name);
+                $('#hotel_chain').val(value.hotel_chain);
+                $('#phone').val(value.phone);
+                $('#fax').val(value.fax);
+                $('#checkin_date').val(value.checkin_date);
+                $('#checkout_date').val(value.checkout_date);
+                $('#status').val(value.status);
+                $('#rm_type').val(value.rm_type);
+                $('#rm_cat').val(value.rm_cat);
+                $('#guest_prm').val(value.guest_prm);
+                $('#meals').val(value.meals);
+                $('#other_svc').val(value.other_svc);
+                $('#ref_code').val(value.ref_code);
+                $('#confirmation_code').val(value.confirmation_code);
+                $('#address').val(value.address);
+                $('#remark').val(value.remark);
+
+                $("#route_hotel_id").val(data.data.id)
 
                 $('#form-hotel').modal({backdrop: 'static', keyboard: false});
             }

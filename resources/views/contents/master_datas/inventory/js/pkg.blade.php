@@ -42,7 +42,7 @@
         $('#form-pkg-detail').submit();
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataPkg', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.delete')}}",
@@ -55,7 +55,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataPkg', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.detail')}}",
@@ -64,12 +64,10 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
-                $("#status").val(value.status)
+                $('package_name').val(value.package_name);
+                $('start_date').val(value.start_date);
+                $('end_date').val(value.end_date);
+                $('status').val(value.status);
                 $("#pkg_id").val(data.data.id)
 
                 $('#form-pkg').modal({backdrop: 'static', keyboard: false});

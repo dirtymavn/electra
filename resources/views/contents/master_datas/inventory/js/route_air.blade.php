@@ -1,21 +1,21 @@
 <script>
     $(document).ready(function() {
         var detailColumns = [
-            { data: 'city', name: 'city'},
-            { data: 'company_code', name: 'company_code'},
-            { data: 'vehicle', name: 'vehicle'},
-            { data: 'days_hired', name: 'days_hired'},
-            { data: 'pickup_date', name: 'pickup_date'},
-            { data: 'pickup_location', name: 'pickup_location'},
-            { data: 'dropoff_date', name: 'dropoff_date'},
-            { data: 'dropoff_location', name: 'dropoff_location'},
-            { data: 'rate_type', name: 'rate_type'},
+            { data: 'route_from', name: 'route_from'},
+            { data: 'route_to', name: 'route_to'},
+            { data: 'airline_code', name: 'airline_code'},
+            { data: 'flight_no', name: 'flight_no'},
+            { data: 'class', name: 'class'},
+            { data: 'farebasis', name: 'farebasis'},
+            { data: 'depart_date', name: 'depart_date'},
+            { data: 'arrival', name: 'arrival'},
+            { data: 'departure', name: 'departure'},
             { data: 'status', name: 'status'},
             { data: 'action', name: 'action'},
         ];
 
         var detailDatas = {
-            'type': 'air-detail'
+            'type': 'route-air-detail'
         };
 
         initDatatable($('#air-detail'), "{{route('inventory.get-detail-data')}}", detailColumns, detailDatas);
@@ -44,11 +44,11 @@
         e.preventDefault();
     });
 
-    $(document).on('click', '#form-detail-accept', function() {
+    $(document).on('click', '#form-air-accept', function() {
         $('#form-air-detail').submit();
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataAir', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.delete')}}",
@@ -61,7 +61,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataAir', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.detail')}}",
@@ -70,13 +70,32 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
-                $("#status").val(value.status)
-                $("#misc_id").val(data.data.id)
+                $('#route_from').val(value.route_from);
+                $('#route_to').val(value.route_to);
+                $('#airline_code').val(value.airline_code);
+                $('#flight_no').val(value.flight_no);
+                $('#class').val(value.class);
+                $('#farebasis').val(value.farebasis);
+                $('#depart_date').val(value.depart_date);
+                $('#arrival').val(value.arrival);
+                $('#departure').val(value.departure);
+                $('#status').val(value.status);
+                $('#equip').val(value.equip);
+                $('#stopover_city').val(value.stopover_city);
+                $('#stopover_qty').val(value.stopover_qty);
+                $('#seat_no').val(value.seat_no);
+                $('#airlane_pnr').val(value.airlane_pnr);
+                $('#fly_duration').val(value.fly_duration);
+                $('#meal_srv').val(value.meal_srv);
+                $('#terminal').val(value.terminal);
+                $('#ssr').val(value.ssr);
+                $('#sector_pair').val(value.sector_pair);
+                $('#miliage').val(value.miliage);
+                $('#path_code').val(value.path_code);
+                $('#land_sector_flag').val(value.land_sector_flag);
+                $('#land_sector_desc').val(value.land_sector_desc);
+
+                $("#route_air_id").val(data.data.id)
 
                 $('#form-air').modal({backdrop: 'static', keyboard: false});
             }

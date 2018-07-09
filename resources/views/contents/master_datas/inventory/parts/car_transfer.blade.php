@@ -53,8 +53,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('company', trans('Company'), ['class' => 'control-label']) !!}
-                            {!! Form::text('company', old('company') , ['class' => 'form-control', 'placeholder' => 'Input the Company', 'id' => 'company']) !!}
+                            {!! Form::label('company_code', trans('Company'), ['class' => 'control-label']) !!}
+                            {!! Form::text('company_code', old('company_code') , ['class' => 'form-control', 'placeholder' => 'Input the Company', 'id' => 'company_code']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">

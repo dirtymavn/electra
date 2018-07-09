@@ -45,7 +45,7 @@
         $('#form-car-detail').submit();
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataCar', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.delete')}}",
@@ -58,7 +58,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataCar', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.detail')}}",
@@ -67,13 +67,14 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
-                $("#status").val(value.status)
-                $("#misc_id").val(data.data.id)
+                $('#from').val(value.from);
+                $('#to').val(value.to);
+                $('#company').val(value.company);
+                $('#class').val(value.class);
+                $('#departure').val(value.departure);
+                $('#arrival').val(value.arrival);
+                $('#status').val(value.status);
+                $("#car_id").val(data.data.id)
 
                 $('#form-car').modal({backdrop: 'static', keyboard: false});
             }

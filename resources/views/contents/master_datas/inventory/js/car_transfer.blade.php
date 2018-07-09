@@ -44,11 +44,11 @@
         e.preventDefault();
     });
 
-    $(document).on('click', '#form-car-transfer', function() {
+    $(document).on('click', '#form-car-transfer-accept', function() {
         $('#form-car-transfer-detail').submit();
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataCarTrf', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.delete')}}",
@@ -61,7 +61,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataCarTrf', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('inventory.detail.detail')}}",
@@ -70,13 +70,17 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
-                $("#status").val(value.status)
-                $("#misc_id").val(data.data.id)
+                $('#city').val(value.city);
+                $('#company_code').val(value.company_code);
+                $('#vehicle').val(value.vehicle);
+                $('#days_hired').val(value.days_hired);
+                $('#pickup_date').val(value.pickup_date);
+                $('#pickup_location').val(value.pickup_location);
+                $('#dropoff_date').val(value.dropoff_date);
+                $('#dropoff_location').val(value.dropoff_location);
+                $('#rate_type').val(value.rate_type);
+                $('#status').val(value.status);
+                $("#car_transfer_id").val(data.data.id)
 
                 $('#form-car-transfer').modal({backdrop: 'static', keyboard: false});
             }

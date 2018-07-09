@@ -2,7 +2,7 @@
     <div class="col-sm-12">
         <div class="form-group">
             {!! Form::label('invoice_no', trans('Invoice No'), ['class' => 'control-label']) !!}
-            {!! Form::text('invoice_no', old('invoice_no') , ['class' => 'form-control', 'placeholder' => 'Input the Code']) !!}
+            {!! Form::text('invoice_no', old('invoice_no') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Code']) !!}
         </div>
     </div>
 </div>

@@ -40,6 +40,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
+        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
         return view('contents.master_datas.inventory.create');
     }
 
@@ -209,31 +210,33 @@ class InventoryController extends Controller
 
         $datas = collect($datas);
 
-        if ($request->type == 'misc-detail') {
-            return datatables()->of($datas)
-                ->addColumn('action', function ($inventory) {
-                    return '<a href="javascript:void(0)" class="editData" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                                <a href="javascript:void(0)" class="danger deleteData" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        } elseif ($request->type == 'pkg-detail') {
-            return datatables()->of($datas)
-                ->addColumn('action', function ($inventory) {
-                    return '<a href="javascript:void(0)" class="editDataOptional" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                                                        <a href="javascript:void(0)" class="danger deleteDataOptional" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+        if ($request->type == 'pkg-detail') {
+            $classEdit = 'editDataPkg';
+            $classDelete = 'deleteDataPkg';
+        } elseif ($request->type == 'car-detail') {
+            $classEdit = 'editDataCar';
+            $classDelete = 'deleteDataCar';
+        } elseif ($request->type == 'car-transfer-detail') {
+            $classEdit = 'editDataCarTrf';
+            $classDelete = 'deleteDataCarTrf';
+        } elseif ($request->type == 'route-air-detail') {
+            $classEdit = 'editDataAir';
+            $classDelete = 'deleteDataAir';
+        } elseif ($request->type == 'route-hotel-detail') {
+            $classEdit = 'editDataHotel';
+            $classDelete = 'deleteDataHotel';
         } else {
-            return datatables()->of($datas)
-                ->addColumn('action', function ($inventory) {
-                    return '<a href="javascript:void(0)" class="editDataService" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                                            <a href="javascript:void(0)" class="danger deleteDataService" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+            $classEdit = 'editData';
+            $classDelete = 'deleteData';
         }
+
+        return datatables()->of($datas)
+            ->addColumn('action', function ($inventory) use($classEdit, $classDelete) {
+                return '<a href="javascript:void(0)" class="'.$classEdit.'" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                            <a href="javascript:void(0)" class="danger '.$classDelete.'" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     /**
@@ -362,14 +365,14 @@ class InventoryController extends Controller
     {
         \DB::beginTransaction();
         try {
-            if (@$request->route_air) {
+            if (@$request->route_air_id) {
                 // Delete temporaries
-                \DB::table('temporaries')->whereId($request->route_air)->delete();
+                \DB::table('temporaries')->whereId($request->route_air_id)->delete();
             }
             \DB::table('temporaries')->insert([
                 'type' => 'route-air-detail',
                 'user_id' => user_info('id'),
-                'data' => json_encode($request->except(['_token', 'route_air']))
+                'data' => json_encode($request->except(['_token', 'route_air_id']))
             ]);
 
             \DB::commit();
@@ -391,14 +394,14 @@ class InventoryController extends Controller
     {
         \DB::beginTransaction();
         try {
-            if (@$request->route_hotel) {
+            if (@$request->route_hotel_id) {
                 // Delete temporaries
-                \DB::table('temporaries')->whereId($request->route_hotel)->delete();
+                \DB::table('temporaries')->whereId($request->route_hotel_id)->delete();
             }
             \DB::table('temporaries')->insert([
                 'type' => 'route-hotel-detail',
                 'user_id' => user_info('id'),
-                'data' => json_encode($request->except(['_token', 'route_hotel']))
+                'data' => json_encode($request->except(['_token', 'route_hotel_id']))
             ]);
 
             \DB::commit();
