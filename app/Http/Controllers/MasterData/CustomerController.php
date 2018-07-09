@@ -90,7 +90,7 @@ class CustomerController extends Controller
             // }
             // $request->merge(['company_id' => $companyId]);
             // $insert = $this->customer->create($request->all());
-            $request->merge([ 'customer_no' => randomString() ]);
+            $request->merge([ 'customer_no' => randomString(), 'company_id' =>  @user_info()->company->id ]);
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
