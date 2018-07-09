@@ -37,7 +37,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             {!! Form::open(['id' => 'form-air-detail', 'method' => 'post']) !!}
-            <input type="hidden" value="" name="car_transfer_id" id="car_transfer_id">
+            <input type="hidden" value="" name="route_air_id" id="route_air_id">
                         
             <div class="modal-header">
                 <h4 class="modal-title">Route Air</h4>
@@ -47,8 +47,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('route_form', trans('Route From'), ['class' => 'control-label']) !!}
-                            {!! Form::text('route_form', old('route_form') , ['class' => 'form-control', 'placeholder' => 'Input the Route From', 'id' => 'route_form']) !!}
+                            {!! Form::label('route_from', trans('Route From'), ['class' => 'control-label']) !!}
+                            {!! Form::text('route_from', old('route_from') , ['class' => 'form-control', 'placeholder' => 'Input the Route From', 'id' => 'route_from']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
