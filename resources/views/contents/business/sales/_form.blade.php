@@ -77,11 +77,11 @@
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#billing">Sales Billing</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#detail">Detail</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#routing">Detail Routing</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Mis</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Cost</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Price</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Segments</a></li>
-                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Passenger</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#mis">Detail Mis</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cost">Detail Cost</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#price">Detail Price</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#segment">Detail Segments</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#passenger">Detail Passenger</a></li>
                     
                 </ul>
             </div>
@@ -97,6 +97,24 @@
                 </div>
                 <div class="tab-pane" id="routing">
                     @include('contents.business.sales.parts.detail_routing')
+                </div>
+                <div class="tab-pane" id="mis">
+                    @include('contents.business.sales.parts.mis')
+                </div>
+                <div class="tab-pane" id="cost">
+                    @include('contents.business.sales.parts.cost')
+                </div>
+                <div class="tab-pane" id="price">
+                    @include('contents.business.sales.parts.price')
+                </div>
+                <div class="tab-pane" id="segment">
+                    @include('contents.business.sales.parts.segment')
+                </div>
+                <div class="tab-pane" id="segment">
+                    @include('contents.business.sales.parts.segment')
+                </div>
+                <div class="tab-pane" id="segment">
+                    @include('contents.business.sales.parts.passenger')
                 </div>
             </div>
         </div>

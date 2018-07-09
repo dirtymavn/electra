@@ -10,7 +10,8 @@
         </div>
         <div class="form-group">
             {!! Form::label('company_id', trans('Company Name'), ['class' => 'control-label']) !!}
-            {!! Form::select('company_id', $companies, old('status'), ['class' => 'form-control', 'placeholder' => 'Select Company Name']) !!}
+            {{-- {!! Form::select('company_id', $companies, old('status'), ['class' => 'form-control', 'placeholder' => 'Select Company Name']) !!} --}}
+             {!! Form::text('company_name', old('company_name') , ['class' => 'form-control', 'placeholder' => 'Input the Company Name']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
