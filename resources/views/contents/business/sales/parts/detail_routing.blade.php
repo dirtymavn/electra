@@ -38,7 +38,7 @@
             <input type="hidden" value="" name="car_transfer_id" id="car_transfer_id">
                         
             <div class="modal-header">
-                <h4 class="modal-title">Route Air</h4>
+                <h4 class="modal-title">Detail Routing</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
