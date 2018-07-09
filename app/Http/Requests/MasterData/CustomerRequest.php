@@ -26,7 +26,8 @@ class CustomerRequest extends FormRequest
         return [
             'customer_name' => 'required',
             // 'customer_no' => 'required',
-            'company_id' => 'required',
+            // 'company_id' => 'required',
+            'company_name' => 'required',
         ];
     }
 }

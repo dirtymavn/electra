@@ -49,14 +49,15 @@ class CustomerDataTable extends DataTable
                 'master_customers.customer_no',
                 'master_customers.customer_name',
                 'master_customers.company_id',
+                'master_customers.company_name',
                 'master_customers.status',
                 'master_customers.salutation',
                 'master_customers.sales_id',
                 'master_customers.customer_group_id',
                 'master_customers.is_draft',
                 'master_customers.created_at',
-                'master_customers.updated_at',
-                'companies.name as company_name'
+                'master_customers.updated_at'
+                // 'companies.name as company_name'
             );
         if (!user_info()->inRole('super-admin')) {
 
@@ -100,7 +101,8 @@ class CustomerDataTable extends DataTable
         return [
             'customer_no',
             'customer_name',
-            'company_name' => ['name' => 'companies.name', 'data' => 'company_name'],
+            'company_name',
+            // 'company_name' => ['name' => 'companies.name', 'data' => 'company_name'],
             'status',
             'salutation',
             'sales_id',

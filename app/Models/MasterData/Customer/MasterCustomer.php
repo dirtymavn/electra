@@ -26,6 +26,7 @@ class MasterCustomer extends Model implements Auditable
         'customer_no',
         'customer_name',
         'company_id',
+        'company_name',
         'branch_id',
         'status',
         'salutation',
