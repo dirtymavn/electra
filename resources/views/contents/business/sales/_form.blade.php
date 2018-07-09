@@ -73,20 +73,30 @@
         <div class="os-tabs-w">
             <div class="os-tabs-controls">
                 <ul class="nav nav-tabs smaller">
-                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#detail">Detail</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#credit">Credit Card</a></li>
+                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#credit">Credit Card</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#billing">Sales Billing</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#detail">Detail</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#routing">Detail Routing</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Mis</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Cost</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Price</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Segments</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#detail">Detail Passenger</a></li>
+                    
                 </ul>
             </div>
             <div class="tab-content">
-                <div class="tab-pane active show" id="detail">
-                    @include('contents.business.sales.parts.detail')
-                </div>
-                <div class="tab-pane" id="credit">
+                <div class="tab-pane active show" id="credit">
                     @include('contents.business.sales.parts.credit')
                 </div>
                 <div class="tab-pane" id="billing">
                     @include('contents.business.sales.parts.billing')
+                </div>
+                <div class="tab-pane" id="detail">
+                    @include('contents.business.sales.parts.detail')
+                </div>
+                <div class="tab-pane" id="routing">
+                    @include('contents.business.sales.parts.detail_routing')
                 </div>
             </div>
         </div>
@@ -102,4 +112,5 @@
 </script>
 
 @include('contents.business.sales.js.detail')
+@include('contents.business.sales.js.routing')
 @endsection
