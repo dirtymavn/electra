@@ -79,20 +79,26 @@ for (i = 0; i < acc.length; i++) {
 
 //THIRD SUBMENU CHILD
 $('li.sub-submenu a').click(function () {
+	  
+	  $(".expanded").removeClass("expanded");
+			$(".opened").removeClass("opened");
+	  
 		if($(this).children(".arrow-third-menu").hasClass("os-icon-chevron-down"))
 		{
+			$(this).siblings(".third-menu").addClass("expanded");
 			$(this).parent(".sub-submenu").addClass("opened");
 			$(this).children(".arrow-third-menu").removeClass("os-icon-chevron-down");
 			$(this).children(".arrow-third-menu").addClass("os-icon-chevron-right");
 		}
 		else if($(this).children(".arrow-third-menu").hasClass("os-icon-chevron-right"))
 		{
+			$(this).siblings(".third-menu").removeClass("expanded");
 			$(this).parent(".sub-submenu").removeClass("opened");
 			$(this).children(".arrow-third-menu").removeClass("os-icon-chevron-right");
 			$(this).children(".arrow-third-menu").addClass("os-icon-chevron-down");
 		}
 
-    $(this).siblings(".third-menu").toggleClass("expanded");
+    
   });
   
 //STAY MENU WHEN PAGE ACTICE

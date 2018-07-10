@@ -242,3 +242,15 @@ body.auth-wrapper
 {
 	background-color:#E50000;
 }
+sub-menu-w.third-menu.expanded .sub-menu-i
+{
+	background:#F7F7F7;
+}
+sub-menu-w.third-menu.expanded .sub-menu-i ul li a
+{
+	color:#3E4B5B !important;
+}
+sub-menu-w.third-menu.expanded .sub-menu-i ul li a i
+{
+	color:#E50000;
+}
