@@ -47,7 +47,7 @@
         $('#form-sales-detail').submit();
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataSales', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.delete')}}",

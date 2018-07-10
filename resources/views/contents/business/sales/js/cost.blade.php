@@ -36,6 +36,7 @@
     $(document).on('click', '.btn-add-cost', function(e) {
         $('#form-cost-detail').find("input[type=text], textarea, input[type=hidden]").val("");
         $('#form-cost').modal({backdrop: 'static', keyboard: false});
+        $('#form-cost').css("z-index", "99999");
         e.preventDefault();
     });
 
