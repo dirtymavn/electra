@@ -92,7 +92,7 @@ class SalesFolderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MasterData\Inventory\MasterInventory  $masterInventory
+     * @param  \App\Models\MasterData\sales\Mastersales  $mastersales
      * @return \Illuminate\Http\Response
      */
     public function show(Sales $sales)
@@ -103,7 +103,7 @@ class SalesFolderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MasterData\Inventory\Inventory  $sales
+     * @param  \App\Models\MasterData\sales\sales  $sales
      * @return \Illuminate\Http\Response
      */
     public function edit(Sales $sales)
@@ -115,14 +115,14 @@ class SalesFolderController extends Controller
         $merge = array_merge($sales, $trx);
 
         $sales = (object) $merge;
-        return view('contents.master_datas.inventory.edit', compact('inventory'));
+        return view('contents.master_datas.sales.edit', compact('sales'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\MasterData\Inventory\Inventory  $sales
+     * @param  \App\Models\MasterData\sales\sales  $sales
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Sales $sales)
@@ -131,14 +131,14 @@ class SalesFolderController extends Controller
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('inventory.index');
+                $redirect = redirect()->route('sales.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('inventory.create');
+                $redirect = redirect()->route('sales.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('inventory.edit', $sales->id);
+                $redirect = redirect()->route('sales.edit', $sales->id);
             }
 
             $update = $sales->update( $request->all() );
@@ -154,14 +154,14 @@ class SalesFolderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Business\Sales\Inventory  $sales
+     * @param  \App\Models\Business\Sales\sales  $sales
      * @return \Illuminate\Http\Response
      */
     public function destroy(Sales $sales)
     {
         $destroy = $sales->delete();
         flash()->success('Data is successfully deleted');
-        return redirect()->route('inventory.index');
+        return redirect()->route('sales.index');
     }
 
     /**
@@ -174,12 +174,12 @@ class SalesFolderController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            Inventory::whereIn('id', $ids)->delete();
+            sales::whereIn('id', $ids)->delete();
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
-        return redirect()->route('inventory.index');
+        return redirect()->route('sales.index');
     }
 
     /**
@@ -235,9 +235,9 @@ class SalesFolderController extends Controller
         }
 
         return datatables()->of($datas)
-            ->addColumn('action', function ($inventory) use($classEdit, $classDelete) {
-                return '<a href="javascript:void(0)" class="'.$classEdit.'" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                            <a href="javascript:void(0)" class="danger '.$classDelete.'" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            ->addColumn('action', function ($sales) use($classEdit, $classDelete) {
+                return '<a href="javascript:void(0)" class="'.$classEdit.'" title="Edit" data-id="' . $sales['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                            <a href="javascript:void(0)" class="danger '.$classDelete.'" title="Delete" data-id="' . $sales['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
             })
             ->rawColumns(['action'])
             ->make(true);

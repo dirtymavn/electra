@@ -39,6 +39,7 @@
     $(document).on('click', '.btn-add-mis', function(e) {
         $('#form-mis-detail').find("input[type=text], textarea, input[type=hidden]").val("");
         $('#form-mis').modal({backdrop: 'static', keyboard: false});
+        $('#form-mis').css("z-index", "99999");
         e.preventDefault();
     });
 
