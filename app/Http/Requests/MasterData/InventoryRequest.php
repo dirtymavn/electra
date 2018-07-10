@@ -25,9 +25,10 @@ class InventoryRequest extends FormRequest
     {
         return [
             'invoice_no' => 'required',
-            'sales_date' => 'required',
-            'ticket_amt' => 'required',
-            'rebate' => 'required',
+            // 'sales_date' => 'required',
+            // 'ticket_amt' => 'required',
+            // 'rebate' => 'required',
+            'trx_sales_id' => 'required',
             'inventory_type' => 'required',
             'voucher_no' => 'required',
             'product_code' => 'required',

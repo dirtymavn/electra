@@ -1,4 +1,4 @@
-<div class="row">
+{{-- <div class="row">
     <div class="col-sm-12">
         <div class="form-group">
             {!! Form::label('invoice_no', trans('Invoice No'), ['class' => 'control-label']) !!}
@@ -26,7 +26,7 @@
         </div>
     </div>
 </div>
-<hr>
+<hr> --}}
 <div class="row">
     <div class="col-md-6">
 
@@ -65,6 +65,11 @@
         </div>
     </div>
     <div class="col-md-6">
+
+        <div class="form-group">
+            {!! Form::label('trx_sales_id', trans('Sales'), ['class' => 'control-label']) !!}
+            {!! Form::select('trx_sales_id', ['' => "Choose Sales"] + @$sales, old('trx_sales_id'), ['class' => 'form-control']) !!}
+        </div>
 
         <div class="form-group">
             {!! Form::label('guest_name', trans('Guest Name'), ['class' => 'control-label']) !!}
