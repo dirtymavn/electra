@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary form-control btn-add-air col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
+                    <button type="button" class="btn btn-primary form-control btn-add-routing col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
                 </div>
                 <div class="form-group">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="air-detail" style="width:100%;">
+                        <table class="table table-bordered table-striped" id="routing-detail" style="width:100%;">
                             <thead>
                                 <tr class="text-center">
                                     <th>City From</th>
@@ -31,10 +31,10 @@
 </div>
 
 @push('models')
-<div id="form-air" class="modal fade" role="dialog">
+<div id="form-routing" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            {!! Form::open(['id' => 'form-air-detail', 'method' => 'post']) !!}
+            {!! Form::open(['id' => 'form-routing-detail', 'method' => 'post']) !!}
             <input type="hidden" value="" name="car_transfer_id" id="car_transfer_id">
                         
             <div class="modal-header">
@@ -203,9 +203,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a id="form-air-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
+                <a id="form-routing-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
                 </a>
-                <button id="form-air-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-check"></i> Submit
+                <button id="form-routing-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-check"></i> Submit
                 </button>
             </div>
             {!! Form::close() !!}

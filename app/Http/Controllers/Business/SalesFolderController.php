@@ -224,14 +224,23 @@ class SalesFolderController extends Controller
         $datas = collect($datas);
 
         if ($request->type == 'sales-detail') {
-            return datatables()->of($datas)
-                ->addColumn('action', function ($sales) {
-                    return '<a href="javascript:void(0)" class="editData" title="Edit" data-id="' . $sales['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                                <a href="javascript:void(0)" class="danger deleteData" title="Delete" data-id="' . $sales['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+            $classEdit = 'editDataSales';
+            $classDelete = 'deleteDataSales';
+        } elseif ($request->type == 'mis-detail') {
+            $classEdit = 'editDataMis';
+            $classDelete = 'deleteDataMis';
+        } else {
+            $classEdit = 'editData';
+            $classDelete = 'deleteData';
         }
+
+        return datatables()->of($datas)
+            ->addColumn('action', function ($inventory) use($classEdit, $classDelete) {
+                return '<a href="javascript:void(0)" class="'.$classEdit.'" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                            <a href="javascript:void(0)" class="danger '.$classDelete.'" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 
     /**

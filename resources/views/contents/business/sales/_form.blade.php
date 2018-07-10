@@ -76,13 +76,13 @@
                     <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#credit">Credit Card</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#billing">Sales Billing</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#detail">Detail</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#routing">Detail Routing</a></li>
+                    {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#routing">Detail Routing</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#mis">Detail Mis</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#cost">Detail Cost</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#price">Detail Price</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#segment">Detail Segments</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#passenger">Detail Passenger</a></li>
-                    
+                     --}}
                 </ul>
             </div>
             <div class="tab-content">
@@ -95,7 +95,7 @@
                 <div class="tab-pane" id="detail">
                     @include('contents.business.sales.parts.detail')
                 </div>
-                <div class="tab-pane" id="routing">
+                {{-- <div class="tab-pane" id="routing">
                     @include('contents.business.sales.parts.detail_routing')
                 </div>
                 <div class="tab-pane" id="mis">
@@ -115,7 +115,7 @@
                 </div>
                 <div class="tab-pane" id="segment">
                     @include('contents.business.sales.parts.passenger')
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -130,5 +130,5 @@
 </script>
 
 @include('contents.business.sales.js.detail')
-@include('contents.business.sales.js.routing')
+@yield('sales_js')
 @endsection

@@ -15,6 +15,7 @@
                                     <th>Start Description</th>
                                     <th>End Description</th>
                                     <th>Description</th>
+                                    <th>Status</th>
                                     
                                     <th>Action</th>
                                 </tr>
@@ -28,40 +29,46 @@
 </div>
 
 @push('models')
-<div id="form-cost" class="modal fade" role="dialog">
+<div id="form-segment" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            {!! Form::open(['id' => 'form-cost-detail', 'method' => 'post']) !!}
-            <input type="hidden" value="" name="cost_id" id="cost_id">
+            {!! Form::open(['id' => 'form-segment-detail', 'method' => 'post']) !!}
+            <input type="hidden" value="" name="segment_id" id="segment_id">
                         
             <div class="modal-header">
-                <h4 class="modal-title">Detail Cost</h4>
+                <h4 class="modal-title">Detail Segment</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('pay_amt', trans('Pay AMT'), ['class' => 'control-label']) !!}
-                            {!! Form::number('pay_amt', old('pay_amt') , ['class' => 'form-control', 'placeholder' => 'Input the Pay AMT', 'id' => 'pay_amt']) !!}
+                            {!! Form::label('start_date', trans('Start Date'), ['class' => 'control-label']) !!}
+                            {!! Form::text('start_date', old('start_date') , ['class' => 'form-control', 'placeholder' => 'Input the Start Date', 'id' => 'start_date']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('currency_code_id', trans('Currency Code'), ['class' => 'control-label']) !!}
-                            {!! Form::text('currency_code_id', old('currency_code_id') , ['class' => 'form-control', 'placeholder' => 'Input the Currency Code', 'id' => 'currency_code_id']) !!}
+                            {!! Form::label('end_date', trans('End Date'), ['class' => 'control-label']) !!}
+                            {!! Form::text('end_date', old('end_date') , ['class' => 'form-control', 'placeholder' => 'Input the End Date', 'id' => 'end_date']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('supplier_reference_id', trans('Supplier Reference ID'), ['class' => 'control-label']) !!}
-                            {!! Form::text('supplier_reference_id', old('supplier_reference_id') , ['class' => 'form-control', 'placeholder' => 'Input the Supplier Reference ID', 'id' => 'supplier_reference_id']) !!}
+                            {!! Form::label('start_description', trans('Start Description'), ['class' => 'control-label']) !!}
+                            {!! Form::text('start_description', old('start_description') , ['class' => 'form-control', 'placeholder' => 'Input the Start Description', 'rows' => '3x5', 'id' => 'start_description']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('voucher_reference_id', trans('Voucher Reference ID'), ['class' => 'control-label']) !!}
-                            {!! Form::text('voucher_reference_id', old('voucher_reference_id') , ['class' => 'form-control', 'placeholder' => 'Input the Voucher Reference ID', 'id' => 'voucher_reference_id']) !!}
+                            {!! Form::label('end_description', trans('End Descripton'), ['class' => 'control-label']) !!}
+                            {!! Form::text('end_description', old('end_description') , ['class' => 'form-control', 'placeholder' => 'Input the End Descripton', 'rows' => '3x5', 'id' => 'end_description']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('description', trans('Descripton'), ['class' => 'control-label']) !!}
+                            {!! Form::textarea('description', old('description') , ['class' => 'form-control', 'placeholder' => 'Input the Descripton','rows' => '3x6', 'id' => 'description']) !!}
                         </div>
                     </div>
                     
