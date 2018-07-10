@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MasterData\Inventory\MasterInventory as Inventory;
 use App\Models\MasterData\Inventory\TrxSales as Trx;
+use App\Models\Business\Sales;
 
 use DB;
 
@@ -41,7 +42,8 @@ class InventoryController extends Controller
     public function create()
     {
         \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
-        return view('contents.master_datas.inventory.create');
+        $sales = Sales::where('is_draft', false)->pluck('sales_no', 'id')->all();
+        return view('contents.master_datas.inventory.create', compact('sales'));
     }
 
     /**
@@ -65,8 +67,8 @@ class InventoryController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $trx = Trx::create( $request->all() );
-            $request->merge([ 'trx_sales_id' => $trx->id, 'company_id' => @user_info()->company->id ]);
+            // $trx = Trx::create( $request->all() );
+            $request->merge([ 'trx_sales_id' => 1, 'company_id' => @user_info()->company->id ]);
 
             $insert = Inventory::create( $request->all() );
 
