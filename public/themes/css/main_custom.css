@@ -145,11 +145,11 @@ ul.tabs li a:hover
 .menu-w ul.sub-menu li:hover,
 .menu-w ul.sub-menu li.active
 {
-	background:#1b55e2;
+	background:#E50000;
 }
 .sub-menu .sub-submenu.opened
 {
-	background:#1b55e2;
+	background:#E50000;
 }
 .sub-submenu.opened > a,
 .sub-submenu.opened > a > i
@@ -237,4 +237,8 @@ body.auth-wrapper
 .top-icon.top-settings
 {
 	display:none;
+}
+.menu-w.sub-menu-style-over.sub-menu-color-bright ul.main-menu > li.active > a
+{
+	background-color:#E50000;
 }
