@@ -23,4 +23,31 @@ class Sales extends Model
         'is_draft',
         'company_id'
     ];
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::created(function($sales) {
+            $input = Request::all();
+            $input['sales_id'] = $sales->id;
+
+            $itinDetails = \DB::table('temporaries')->whereType('sales-detail')
+                ->whereUserId(user_info('id'))
+                ->get();
+
+            if (count($itinDetails) > 0) {
+                foreach ($itinDetails as $itinDetail) {
+                    $detail = new TrxSalesDetail;
+
+                    $itinDetail = json_decode($itinDetail->data);
+                }
+            }
+        }
+    }
 }
