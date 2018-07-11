@@ -23,8 +23,9 @@ class CreateMasterProfileTable extends Migration
             $table->string('home_tel');
             $table->string('mobile');
             $table->date('employment_date');
-            $table->integer('company_id')->nullable();
-            $table->integer('branch_id')->nullable();
+            $table->integer('company_id')->unsigned()->nullable();
+            $table->integer('branch_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->string('office_tel')->nullable();
             $table->string('fax_no')->nullable();
             $table->string('email')->nullable();

@@ -196,4 +196,12 @@ class User extends CartalystUser implements Auditable, UserContract
     {
         return \DB::table('persistences')->whereUserId($userId)->first();
     }
+
+    /**
+     * Get the masterProfile that owns the user.
+    */
+    public function masterProfile()
+    {
+        return $this->hasOne('App\Models\Internals\MasterProfile', 'user_id');
+    }
 }
