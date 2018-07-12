@@ -43,6 +43,8 @@ class SalesFolderController extends Controller
     {
         $company_id = user_info()->company_id;
         $customers = MasterCustomer::whereCompanyId($company_id)->pluck('customer_name', 'id')->all();
+         // clear temporary data
+        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
         return view('contents.business.sales.create', compact('customers'));
     }
 
