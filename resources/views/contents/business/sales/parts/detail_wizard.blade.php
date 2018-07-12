@@ -19,7 +19,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         {!! Form::label('passenger_class_code', trans('Passenger Class Code'), ['class' => 'control-label']) !!}
-                        {!! Form::text('passenger_class_code', old('passenger_class_code') , ['class' => 'form-control', 'placeholder' => 'Input the Passenger Class Code', 'id' => 'hotel_name']) !!}
+                        {!! Form::text('passenger_class_code', old('passenger_class_code') , ['class' => 'form-control', 'placeholder' => 'Input the Passenger Class Code', 'id' => 'passenger_class_code']) !!}
                     </div>
                 </div>
                 <div class="col-md-3">

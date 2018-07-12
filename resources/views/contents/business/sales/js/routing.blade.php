@@ -1,24 +1,19 @@
 <script>
-    $(document).ready(function() {
-        var detailColumns = [
-            { data: 'city_from', name: 'city_from'},
-            { data: 'city_to', name: 'city_to'},
-            { data: 'airline_id', name: 'airline_id'},
-            { data: 'passenger_class_id', name: 'passenger_class_id'},
-            { data: 'depart_date', name: 'depart_date'},
-            { data: 'arrival_date', name: 'arrival_date'},
-            { data: 'stopover_count', name: 'stopover_count'},
-            { data: 'flight_status', name: 'flight_status'},
-            
-            { data: 'action', name: 'action'},
+    var routingColumns = [
+        { data: 'city_from_id', name: 'city_from_id'},
+        { data: 'city_to_id', name: 'city_to_id'},
+        { data: 'airline_id', name: 'airline_id'},
+        { data: 'passenger_class_id', name: 'passenger_class_id'},
+        { data: 'depart_date', name: 'depart_date'},
+        { data: 'arrival_date', name: 'arrival_date'},
+        { data: 'stopover_count', name: 'stopover_count'},
+        { data: 'flight_status', name: 'flight_status'},
+
+        { data: 'action', name: 'action'},
         ];
 
-        var detailDatas = {
-            'type': 'routing-detail'
-        };
-
-        initDatatable($('#routing-detail'), "{{route('sales.get-detail-data')}}", detailColumns, detailDatas);
-
+    $(document).ready(function() {
+    
         $('#form-routing-detail').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
@@ -30,8 +25,13 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#form-routing').modal('hide');
                     $('#routing-detail').DataTable().ajax.reload();
+                    $('#form-sales-trx').modal('hide');
+                    setTimeout(function() {
+                        $('#form-sales-trx').modal({backdrop: 'static', keyboard: false});
+                    }, 500)
                 }
             });
         });
@@ -40,13 +40,20 @@
     $(document).on('click', '.btn-add-routing', function(e) {
         $('#form-routing-detail').find("input[type=text], textarea, input[type=hidden]").val("");
         $('#form-routing').modal({backdrop: 'static', keyboard: false});
-        $('#form-routing').css("z-index", "99999");
-
+        $("#routing_id").val(id)
         e.preventDefault();
     });
 
-    $(document).on('click', '#form-detail-accept', function() {
+    $(document).on('click', '#form-routing-accept', function() {
         $('#form-routing-detail').submit();
+    })
+
+    $(document).on('click', '#form-routing-cancel', function() {
+        $('#form-routing').modal('hide');
+        $('#form-sales-trx').modal('hide');
+        setTimeout(function() {
+            $('#form-sales-trx').modal({backdrop: 'static', keyboard: false});
+        }, 500)
     })
 
     $(document).on('click', '.deleteData', function() {
@@ -83,4 +90,19 @@
             }
         })
     });
+
+    function Routing(add = true) {
+        if (add) {
+            return {
+                'type': 'routing-detail',
+                'parent_id': $('#routing_id').val()
+            };    
+        } else {
+            return {
+                'type': 'routing-detail',
+                'parent_id': $('#detail_id').val()
+            };
+        }
+        
+    }
 </script>

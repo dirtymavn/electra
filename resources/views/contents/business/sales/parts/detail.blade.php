@@ -55,4 +55,6 @@
         </div>
     </div>
 </div>
+
+@yield('modal_detail')
 @endpush

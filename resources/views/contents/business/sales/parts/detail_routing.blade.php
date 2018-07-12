@@ -29,13 +29,13 @@
         </div>
     </div>
 </div>
-
-@push('models')
+@section('modal_detail')
 <div id="form-routing" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             {!! Form::open(['id' => 'form-routing-detail', 'method' => 'post']) !!}
-            <input type="hidden" value="" name="car_transfer_id" id="car_transfer_id">
+            <input type="hidden" value="" name="routing_id" id="routing_id">
+            <input type="hidden" value="" name="routing_method" id="routing_method">
                         
             <div class="modal-header">
                 <h4 class="modal-title">Detail Routing</h4>
@@ -203,7 +203,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a id="form-routing-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
+                <a id="form-routing-cancel" href="#" class="btn btn-grey pull-left">    <i class="fa fa-times m-right-10"></i> Cancel
                 </a>
                 <button id="form-routing-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-check"></i> Submit
                 </button>
@@ -212,4 +212,4 @@
         </div>
     </div>
 </div>
-@endpush
+@endsection
