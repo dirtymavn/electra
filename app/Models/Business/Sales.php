@@ -49,6 +49,6 @@ class Sales extends Model
             //         $itinDetail = json_decode($itinDetail->data);
             //     }
             // }
-        }
+        });
     }
 }
