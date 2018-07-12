@@ -22,6 +22,7 @@ class MasterProfile extends Model implements Auditable
     	'employment_date',
         'company_id',
         'branch_id',
+        'user_id',
     	'office_tel',
     	'fax_no',
     	'email',
@@ -31,4 +32,12 @@ class MasterProfile extends Model implements Auditable
     	'dr_account',
     	'is_draft'
     ];
+
+    /**
+     * Get the user that owns the master profile.
+    */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

@@ -22,7 +22,7 @@ class CreateTableMasterCustomer extends Migration
             $table->integer('company_id')->nullable();
             $table->string('company_name')->nullable();
             $table->integer('branch_id')->nullable();
-            $table->enum('status', ['active', 'non_active'])->nullable();
+            $table->enum('status', ['active', 'inactive', 'suspend'])->nullable();
             // $table->enum('salutation', ['mr', 'mrs'])->nullable();
             $table->string('salutation')->nullable();
             $table->integer('sales_id')->nullable();

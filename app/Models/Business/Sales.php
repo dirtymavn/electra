@@ -29,25 +29,26 @@ class Sales extends Model
      *
      * @return void
      */
-    // protected static function boot()
-    // {
-    //     parent::boot();
+    protected static function boot()
+    {
+        parent::boot();
 
-    //     self::created(function($sales) {
-    //         $input = Request::all();
-    //         $input['sales_id'] = $sales->id;
+        self::created(function($sales) {
+            $input = Request::all();
+            $input['sales_id'] = $sales->id;
 
-    //         $itinDetails = \DB::table('temporaries')->whereType('sales-detail')
-    //             ->whereUserId(user_info('id'))
-    //             ->get();
+            
 
-    //         if (count($itinDetails) > 0) {
-    //             foreach ($itinDetails as $itinDetail) {
-    //                 $detail = new TrxSalesDetail;
+            // $salesDetail = \DB::table('temporaries')->whereType('sales-detail')
+            //     ->whereUserId(user_info('id'))
+            //     ->get();
 
-    //                 $itinDetail = json_decode($itinDetail->data);
-    //             }
-    //         }
-    //     }
-    // }
+            // if (count($salesDetail) > 0) {
+            //     foreach ($salesDetail as $itinDetail) {
+            //         $detail = new TrxSalesDetail;
+            //         $itinDetail = json_decode($itinDetail->data);
+            //     }
+            // }
+        }
+    }
 }

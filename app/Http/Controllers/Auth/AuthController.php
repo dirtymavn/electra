@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Sentinel;
 use App\Models\User;
+use App\Models\Internals\MasterProfile;
 use App\Http\Requests\Auth\ProfileRequest;
 
 class AuthController extends Controller
@@ -73,6 +74,17 @@ class AuthController extends Controller
     {
         $user = user_info();
         $user->company_name = @$user->company->name;
+        $masterProfile = $user->masterProfile->toArray();
+
+        $userTemp = $user->toArray();
+        unset($userTemp['company'], $userTemp['master_profile'], $masterProfile['id']);
+
+        $arrayMerge = array_merge($userTemp, $masterProfile);
+
+        $user = (object) $arrayMerge;
+
+        
+
 
         return view('contents.auths.profile', compact('user'));
     }
@@ -108,9 +120,17 @@ class AuthController extends Controller
                 $updateUser = Sentinel::update($user, $dataInput);
             }
 
+            if ($user->masterProfile) {
+                $user->masterProfile->update($dataInput);
+            } else {
+                $request->merge(['company_id' => user_info('company_id'), 'user_id' => user_info('id')]);
+                MasterProfile::create($request->except(['_method', '_token', 'conf_password', 'company_name']));
+            }
+
             flash()->success('Profile is successfully updated');
             return redirect()->back();
         } catch (\Exception $e) {
+            wew($e->getMessage());
             flash()->error('<strong>Whoops! </strong> Something went wrong');
             return redirect()->back()->withInput();
         }

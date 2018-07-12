@@ -8,6 +8,7 @@ use App\DataTables\Business\SalesDataTable;
 
 use App\Models\Business\Sales;
 use App\Models\MasterData\Customer\MasterCustomer;
+use App\Models\Temporary;
 
 use DB;
 
@@ -198,6 +199,19 @@ class SalesFolderController extends Controller
     }
 
     /**
+     * Get detail resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function salesDetailGetDetail(Request $request)
+    {
+        $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
+        $findTemp->data = json_decode($findTemp->data);
+        return response()->json(['result' => true, 'data' => $findTemp], 200);   
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -206,11 +220,20 @@ class SalesFolderController extends Controller
     public function detailData(Request $request)
     {
         $datas = [];
-        $results = \DB::table('temporaries')->whereType($request->type)
-            ->whereUserId(user_info('id'))
-            ->select('id','data')
-            ->get();
-
+        if (!empty(@$request->parent_id)) {
+            $results = \DB::table('temporaries')->whereType($request->type)
+                ->whereUserId(user_info('id'))
+                ->whereParentId($request->parent_id)
+                ->select('id','data')
+                ->get();   
+        
+        } else {
+            $results = \DB::table('temporaries')->whereType($request->type)
+                ->whereUserId(user_info('id'))
+                ->select('id','data')
+                ->get();
+        }
+            
         if (count($results) > 0) {
             foreach ($results as $result) {
                 $value = collect(json_decode($result->data))->toArray();
@@ -229,14 +252,17 @@ class SalesFolderController extends Controller
         } elseif ($request->type == 'mis-detail') {
             $classEdit = 'editDataMis';
             $classDelete = 'deleteDataMis';
-        } else {
+        } elseif($request->type == 'routing-detail') {
+            $classEdit = 'editDataRouting';
+            $classDelete = 'deleteDataRouting';
+        }else {
             $classEdit = 'editData';
             $classDelete = 'deleteData';
         }
 
         return datatables()->of($datas)
-            ->addColumn('action', function ($sales) use($classEdit, $classDelete) {
-                return '<a href="javascript:void(0)" class="'.$classEdit.'" title="Edit" data-id="' . $sales['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+            ->addColumn('action', function ($sales) use($classEdit, $classDelete, $request) {
+                return '<a href="javascript:void(0)" class="'.$classEdit.'" title="Edit" data-id="' . $sales['id'] . '" data-button="edit" data-element="'. $request->type .'"><i class="os-icon os-icon-ui-49"></i></a>
                             <a href="javascript:void(0)" class="danger '.$classDelete.'" title="Delete" data-id="' . $sales['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
             })
             ->rawColumns(['action'])
@@ -257,10 +283,48 @@ class SalesFolderController extends Controller
                 // Delete temporaries
                 \DB::table('temporaries')->whereId($request->sales_id)->delete();
             }
-            \DB::table('temporaries')->insert([
+             $temp = Temporary::create([
                 'type' => 'sales-detail',
                 'user_id' => user_info('id'),
                 'data' => json_encode($request->except(['_token', 'sales_id']))
+            ]);
+
+             \Log::info($request->all());
+
+            Temporary::where('type', 'routing-detail')
+                ->whereParentId($request->sales_id)
+                ->whereUserId(user_info('id'))
+                ->update([ 'parent_id' => $temp->id ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function salesRouting(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            \Log::info($request->all());
+            if (@$request->routing_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->routing_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'routing-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'routing_id'])),
+                'parent_id' => $request->routing_id
             ]);
 
             \DB::commit();
