@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\Business\SalesDataTable;
 
-use App\Models\Business\Sales;
+use App\Models\Business\Sales\TrxSales as Sales;
 use App\Models\MasterData\Customer\MasterCustomer;
 use App\Models\Temporary;
 

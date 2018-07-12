@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Business;
 
-use App\Models\Business\Sales;
+use App\Models\Business\Sales\TrxSales as Sales;
 use Yajra\DataTables\Services\DataTable;
 
 class SalesDataTable extends DataTable
