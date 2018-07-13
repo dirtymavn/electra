@@ -9,8 +9,8 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    {!! Form::label('co_id', trans('Co ID'), ['class' => 'control-label']) !!}
-                    {!! Form::number('co_id', old('co_id') , ['class' => 'form-control', 'placeholder' => 'Input the Co ID']) !!}
+                    {!! Form::label('cc_id', trans('CC ID'), ['class' => 'control-label']) !!}
+                    {!! Form::number('cc_id', old('cc_id') , ['class' => 'form-control', 'placeholder' => 'Input the CC ID']) !!}
                 </div>
             </div>
             <div class="col-sm-6">

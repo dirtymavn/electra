@@ -10,16 +10,13 @@ class TrxSalesBilling extends Model
 
     protected $fillable = [
     	'trx_sales_id',
-    	'card_type',
-    	'card_no',
-    	'cardholder_name',
-    	'expiry_date',
-    	'security_id',
-    	'merchant_no',
-    	'roc_no',
-    	'amount',
-    	'sof_flag',
-    	'authorisation_code',
-    	'authorisation_date'
+        'ta_no',
+        'cc_id',
+        'purpose_code',
+        'prcj_no',
+        'department',
+        'employee_no',
+        'account_no',
+        'job_title',
     ];
 }
