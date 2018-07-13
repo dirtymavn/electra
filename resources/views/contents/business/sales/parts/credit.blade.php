@@ -22,7 +22,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('expiry_date', trans('Expiry Date'), ['class' => 'control-label']) !!}
-                    {!! Form::text('expiry_date', old('expiry_date') , ['class' => 'form-control', 'placeholder' => 'Input the Expiry Date']) !!}
+                    {!! Form::date('expiry_date', old('expiry_date') , ['class' => 'form-control', 'placeholder' => 'Input the Expiry Date']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
@@ -34,7 +34,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('merchant_no', trans('Merchant No'), ['class' => 'control-label']) !!}
-                    {!! Form::text('merchant_no', old('merchant_no') , ['class' => 'form-control', 'placeholder' => 'Input the Merchant No']) !!}
+                    {!! Form::number('merchant_no', old('merchant_no') , ['class' => 'form-control', 'placeholder' => 'Input the Merchant No']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
