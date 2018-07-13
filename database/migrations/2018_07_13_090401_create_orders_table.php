@@ -13,7 +13,9 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_tour', function (Blueprint $table) {
+        Schema::disableForeignKeyConstraints();
+
+        Schema::create('master_tours', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tour_name');
             $table->string('tour_code');
@@ -27,9 +29,10 @@ class CreateOrdersTable extends Migration
             $table->integer('infant')->nullable();
             $table->integer('senior')->nullable();
             $table->string('ticket_only')->nullable();
-            $table->string('tour_type')->nullable();
-            $table->integer('avaliability')->nullable();
+            $table->boolean('tour_type')->nullable()->default(false);
+            $table->integer('availability')->nullable();
             $table->integer('company_id')->unsigned()->nullable();
+            $table->integer('branch_id')->unsigned()->nullable();
             $table->boolean('is_draft')->nullable()->default(true);
 
             $table->timestamps();
@@ -37,22 +40,25 @@ class CreateOrdersTable extends Migration
         });
 
 
-        Schema::create('trx_tour_order', function (Blueprint $table) {
+        Schema::create('trx_tour_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('order_no');
-            $table->integer('customer_id');
+            $table->integer('customer_id')->unsigned()->nullable();
             $table->string('order_type')->nullable();
             $table->date('trip_date')->nullable();
             $table->date('deadline')->nullable();
             $table->string('your_ref')->nullable();
             $table->string('our_ref')->nullable();
             $table->integer('tc_id')->nullable();
+            $table->integer('company_id')->unsigned()->nullable();
+            $table->integer('branch_id')->unsigned()->nullable();
+            $table->boolean('is_draft')->nullable()->default(true);
 
             $table->timestamps();
         });
 
 
-        Schema::create('trx_tour_order_tour', function (Blueprint $table) {
+        Schema::create('trx_tour_order_tours', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('master_tour_id')->unsigned();
             $table->integer('trx_tour_order_id')->unsigned();
@@ -72,11 +78,11 @@ class CreateOrdersTable extends Migration
             $table->string('tour_type')->nullable();
 
             $table->timestamps();
-            $table->foreign('master_tour_id')->references('id')->on('master_tour')->onDelete('cascade');
-            $table->foreign('trx_tour_order_id')->references('id')->on('trx_tour_order')->onDelete('cascade');
+            $table->foreign('master_tour_id')->references('id')->on('master_tours')->onDelete('cascade');
+            $table->foreign('trx_tour_order_id')->references('id')->on('trx_tour_orders')->onDelete('cascade');
         });
 
-        Schema::create('trx_tour_order_pax_list', function (Blueprint $table) {
+        Schema::create('trx_tour_order_pax_lists', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_tour_order_id')->unsigned();
             $table->integer('customer_id')->nullable();
@@ -90,10 +96,10 @@ class CreateOrdersTable extends Migration
             $table->date('dub')->nullable();
 
             $table->timestamps();
-            $table->foreign('trx_tour_order_id')->references('id')->on('trx_tour_order')->onDelete('cascade');
+            $table->foreign('trx_tour_order_id')->references('id')->on('trx_tour_orders')->onDelete('cascade');
         });
 
-        Schema::create('trx_tour_order_pax_list_tour_accomodation', function (Blueprint $table) {
+        Schema::create('trx_tour_order_pax_list_tour_accomodations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_tour_order_pax_list_id')->unsigned();
             $table->string('room_type')->nullable();
@@ -102,10 +108,10 @@ class CreateOrdersTable extends Migration
             $table->string('adjoin_room_id')->nullable();
 
             $table->timestamps();
-            $table->foreign('trx_tour_order_pax_list_id')->references('id')->on('trx_tour_order_pax_list')->onDelete('cascade');
+            $table->foreign('trx_tour_order_pax_list_id')->references('id')->on('trx_tour_order_pax_lists')->onDelete('cascade');
         });
 
-        Schema::create('trx_tour_order_pax_list_tour', function (Blueprint $table) {
+        Schema::create('trx_tour_order_pax_list_tours', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_tour_order_pax_list_id')->unsigned();
             $table->string('return_date')->nullable();
@@ -115,10 +121,10 @@ class CreateOrdersTable extends Migration
             $table->text('special_req')->nullable();
 
             $table->timestamps();
-            $table->foreign('trx_tour_order_id')->references('id')->on('trx_tour_order_pax_list')->onDelete('cascade');
+            $table->foreign('trx_tour_order_pax_list_id')->references('id')->on('trx_tour_order_pax_lists')->onDelete('cascade');
         });
 
-         Schema::create('trx_tour_order_pax_list_tour_flight', function (Blueprint $table) {
+         Schema::create('trx_tour_order_pax_list_tour_flights', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_tour_order_pax_list_tour_id')->unsigned();
             $table->integer('flight_from')->nullable();
@@ -132,10 +138,10 @@ class CreateOrdersTable extends Migration
             $table->string('status')->nullable();
 
             $table->timestamps();
-            $table->foreign('trx_tour_order_pax_list_tour_id')->references('id')->on('trx_tour_order_pax_list_tour')->onDelete('cascade');
+            $table->foreign('trx_tour_order_pax_list_tour_id')->references('id')->on('trx_tour_order_pax_list_tours')->onDelete('cascade');
         });
 
-         Schema::create('trx_tour_order_pax_list_tour_selling', function (Blueprint $table) {
+         Schema::create('trx_tour_order_pax_list_tour_sellings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_tour_order_pax_list_tour_id')->unsigned();
             $table->string('price_type')->nullable();
@@ -153,9 +159,10 @@ class CreateOrdersTable extends Migration
             $table->float('remark')->nullable();
 
             $table->timestamps();
-            $table->foreign('trx_tour_order_pax_list_tour_id')->references('id')->on('trx_tour_order_pax_list_tour')->onDelete('cascade');
+            $table->foreign('trx_tour_order_pax_list_tour_id')->references('id')->on('trx_tour_order_pax_list_tours')->onDelete('cascade');
         });
 
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -165,13 +172,17 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trx_tour_order_pax_list_tour_selling');
-        Schema::dropIfExists('trx_tour_order_pax_list_tour_flight');
-        Schema::dropIfExists('trx_tour_order_pax_list_tour_accomodation');
-        Schema::dropIfExists('trx_tour_order_pax_list_tour_accomodation');
-        Schema::dropIfExists('trx_tour_order_pax_list');
-        Schema::dropIfExists('trx_tour_order_tour');
-        Schema::dropIfExists('trx_tour_order');
-        Schema::dropIfExists('master_tour');
+        Schema::disableForeignKeyConstraints();
+
+        Schema::dropIfExists('trx_tour_order_pax_list_tour_sellings');
+        Schema::dropIfExists('trx_tour_order_pax_list_tour_flights');
+        Schema::dropIfExists('trx_tour_order_pax_list_tours');
+        Schema::dropIfExists('trx_tour_order_pax_list_tour_accomodations');
+        Schema::dropIfExists('trx_tour_order_pax_lists');
+        Schema::dropIfExists('trx_tour_order_tours');
+        Schema::dropIfExists('trx_tour_orders');
+        Schema::dropIfExists('master_tours');
+
+        Schema::enableForeignKeyConstraints();
     }
 }
