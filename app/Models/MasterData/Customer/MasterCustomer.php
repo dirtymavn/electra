@@ -192,4 +192,33 @@ class MasterCustomer extends Model implements Auditable
         
         return collect($meals);
     }
+
+    /**
+     * Get available customer
+     *
+     * @return array
+     */
+    public static function getAvailableData()
+    {
+        $return = self::join('companies', 'companies.id', '=', 'master_customers.company_id')
+            ->where(function($query) {
+                return $query->where('master_customers.is_draft', false)
+                    ->where('master_customers.status', 'active');
+            });
+
+        if (user_info()->inRole('admin')) {
+            $return = $return->where('master_customers.company_id', user_info('company_id'));
+        }
+
+        return $return;
+
+    }
+
+    /**
+     * Get the order for the customer.
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Outbound\TrxTourOrder\TourOrder', 'customer_id');
+    }
 }
