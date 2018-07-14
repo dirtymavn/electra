@@ -27,7 +27,7 @@
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.master_datas.delivery._form')  
+                @include('contents.business.delivery._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('delivery.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>

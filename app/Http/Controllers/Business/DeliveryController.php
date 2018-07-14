@@ -146,8 +146,12 @@ class DeliveryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        $delivery = TrxDelivery::find($id);
+        $delivery->delete();
+        flash()->success(trans('message.delete.success'));
+
+        return redirect()->route('delivery.index');
     }
 
      /**

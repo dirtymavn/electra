@@ -15,8 +15,8 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    {!! Form::label('realeted_so', trans('Realeted SO'), ['class' => 'control-label']) !!}
-                    {!! Form::text('realeted_so', old('realeted_so') , ['class' => 'form-control', 'placeholder' => 'Input the Realeted SO']) !!}
+                    {!! Form::label('related_so', trans('Related SO'), ['class' => 'control-label']) !!}
+                    {!! Form::text('related_so', old('related_so') , ['class' => 'form-control', 'placeholder' => 'Input the Related SO']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
@@ -27,8 +27,8 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    {!! Form::label('to_deliver', trans('To Deliver'), ['class' => 'control-label']) !!}
-                    {!! Form::text('to_deliver', old('to_deliver') , ['class' => 'form-control', 'placeholder' => 'Input the To Deliver']) !!}
+                    {!! Form::label('to_delivery', trans('To Delivery'), ['class' => 'control-label']) !!}
+                    {!! Form::text('to_delivery', old('to_delivery') , ['class' => 'form-control', 'placeholder' => 'Input the To Delivery']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
