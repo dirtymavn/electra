@@ -93,6 +93,14 @@ class DeliveryController extends Controller
     public function edit($id)
     {
         $delivery = TrxDelivery::find($id);
+        $deliveries = TrxDelivery::find($id)->toArray();
+        $trx_customer = $delivery->trx_customer->toArray();
+        $trx_dispatch = $delivery->trx_dispatch->toArray();
+
+        unset($trx_customer['id'], $trx_customer['created_at'], $trx_customer['updated_at'], $trx_dispatch['id'], $trx_dispatch['created_at'], $trx_dispatch['updated_at']);
+        $arrayMerge = array_merge($trx_customer, $trx_dispatch, $deliveries);
+        $delivery = (object) $arrayMerge;
+
         return view('contents.business.delivery.edit', compact('delivery'));
     }
 
@@ -118,7 +126,7 @@ class DeliveryController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = TrxDelivery::create($request->all());
+            $insert = TrxDelivery::find($id)->update($request->all());
 
             if ($insert) {
                 $redirect = redirect()->route('delivery.index');
