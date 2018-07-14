@@ -10,7 +10,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('despatch_time', trans('Despatch Time'), ['class' => 'control-label']) !!}
-                    {!! Form::text('despatch_time', old('despatch_time') , ['class' => 'form-control', 'placeholder' => 'Input the Despatch Time']) !!}
+                    {!! Form::date('despatch_time', old('despatch_time') , ['class' => 'form-control', 'placeholder' => 'Input the Despatch Time']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
@@ -40,7 +40,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('received_by', trans('Received By'), ['class' => 'control-label']) !!}
-                    {!! Form::text('received_by', old('received_by') , ['class' => 'form-control', 'placeholder' => 'Input the Received By']) !!}
+                    {!! Form::date('received_by', old('received_by') , ['class' => 'form-control', 'placeholder' => 'Input the Received By']) !!}
                 </div>
             </div>
             <div class="col-sm-6">

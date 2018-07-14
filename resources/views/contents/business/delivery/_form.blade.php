@@ -14,7 +14,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('do_date', trans('DO Date'), ['class' => 'control-label']) !!}
-            {!! Form::text('do_date', old('do_date') , ['class' => 'form-control', 'placeholder' => 'Input the DO Date']) !!}
+            {!! Form::date('do_date', old('do_date') , ['class' => 'form-control', 'placeholder' => 'Input the DO Date']) !!}
         </div>
     </div>
     <div class="col-sm-6">
