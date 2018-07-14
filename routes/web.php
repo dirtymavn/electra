@@ -34,6 +34,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('sales/sales-cost-detail', array('as' => 'sales.cost-detail.post', 'uses' => 'SalesFolderController@salesDetail', 'middleware' => 'sentinel_access:admin.company,sales.create'));
         
         Route::resource('delivery', 'DeliveryController');
+        Route::post('delivery/bulk-delete', array('as' => 'delivery.bulk-delete', 'uses' => 'DeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,delivery.destroy'));
     });
 
      // Outbound
@@ -181,6 +182,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Airport
         Route::resource('airport', 'AirportController');
         Route::post('airport/bulk-delete', array('as' => 'airport.bulk-delete', 'uses' => 'AirportController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,airport.destroy'));
+
+        // Tour
+        Route::resource('tour', 'TourController');
+        Route::post('tour/bulk-delete', array('as' => 'tour.bulk-delete', 'uses' => 'TourController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,tour.destroy'));
     });
 
     // System

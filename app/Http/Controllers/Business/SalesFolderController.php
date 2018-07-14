@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\Business\SalesDataTable;
 
-use App\Models\Business\Sales;
+use App\Models\Business\Sales\TrxSales as Sales;
 use App\Models\MasterData\Customer\MasterCustomer;
 use App\Models\Temporary;
 
@@ -43,6 +43,8 @@ class SalesFolderController extends Controller
     {
         $company_id = user_info()->company_id;
         $customers = MasterCustomer::whereCompanyId($company_id)->pluck('customer_name', 'id')->all();
+         // clear temporary data
+        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
         return view('contents.business.sales.create', compact('customers'));
     }
 

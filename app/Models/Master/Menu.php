@@ -177,6 +177,13 @@ class Menu extends Model
                         'airport.destroy' => 'Delete',
                         'airport.approval' => 'Approval',
                     ],
+                    'Tour' => [
+                        'tour.read' => 'Read',
+                        'tour.create' => 'Create',
+                        'tour.update' => 'Edit',
+                        'tour.destroy' => 'Delete',
+                        'tour.approval' => 'Approval',
+                    ],
                 ],
                 'System' => [
                     'Company' => [
@@ -341,6 +348,13 @@ class Menu extends Model
                         'airport.update' => 'Edit',
                         'airport.destroy' => 'Delete',
                         'airport.approval' => 'Approval',
+                    ],
+                    'Tour' => [
+                        'tour.read' => 'Read',
+                        'tour.create' => 'Create',
+                        'tour.update' => 'Edit',
+                        'tour.destroy' => 'Delete',
+                        'tour.approval' => 'Approval',
                     ],
                 ]
 

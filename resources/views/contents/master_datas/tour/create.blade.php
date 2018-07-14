@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Delivery')
+@section('title', 'Create Tour')
 
 @section('style')
 @endsection
@@ -8,27 +8,27 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('delivery.index')}}">Delivery</a></li>
+        <li class="breadcrumb-item"><a href="{{route('tour.index')}}">Tour</a></li>
         <li class="breadcrumb-item">Create</li>
     </ul>
 @endsection
 
-@section('page_title', 'Create Delivery')
+@section('page_title', 'Create Tour')
 
 @section('content')
     @include('flash::message')
     {!! Form::open([
-            'route' =>  'delivery.store',
+            'route' =>  'tour.store',
             'class' =>  'form-horizontal',
-            'id'    =>  'form-delivery',
+            'id'    =>  'form-tour',
             'enctype' => 'multipart/form-data',
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.business.delivery._form')  
+                @include('contents.master_datas.tour._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{route('delivery.index')}}" class="btn btn-grey">Cancel</a>
+                        <a href="{{route('tour.index')}}" class="btn btn-grey">Cancel</a>
                         <button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>
                         <button type="button" class="btn btn-primary" id="btn-submit">Publish</button>
                         <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
@@ -41,6 +41,6 @@
 
 @section('script')
 <script>
-    submitForm("{{route('delivery.store')}}", $('#form-delivery'), 'create');
+    submitForm("{{route('tour.store')}}", $('#form-tour'), 'create');
 </script>
 @endsection

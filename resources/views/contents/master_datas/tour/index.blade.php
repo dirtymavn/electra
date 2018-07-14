@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Business - Sales')
+@section('title', 'Tour')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,25 +9,24 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{route('sales.index')}}">Sales</a></li>
+    <li class="breadcrumb-item">Tour</li>
 </ul>
 @endsection
 
-@section('page_title', 'Sales')
+@section('page_title', 'Tour Lists')
 
 @section('content')
 @include('flash::message')
-@if(user_info()->hasAnyAccess(['admin.company', 'sales.create']))
-    <a href="{{ route('sales.create')}}" class="btn btn-primary" id="btn-submit">
-        <i class="fa fa-plus m-right-10"></i> Add Sales
+@if(user_info()->hasAnyAccess(['admin.company', 'tour.create']))
+    <a href="{{ route('tour.create')}}" class="btn btn-primary" id="btn-submit">
+        <i class="fa fa-plus m-right-10"></i> Add Tour
     </a>
 @endif
-@if(user_info()->hasAnyAccess(['admin.company', 'sales.destroy']))
+@if(user_info()->hasAnyAccess(['admin.company', 'tour.destroy']))
     <button class="btn btn-danger" id="bulk-delete">
         <i class="fa fa-trash m-right-10"></i> Bulk Delete
     </button>
 @endif
-<br>
 <br>
 
 <div class="table-responsive">
@@ -41,7 +40,7 @@
 
 <script>
     $(document).ready(function() {
-        spinnerLoad($('#form-sales'));
+        spinnerLoad($('#form-tour'));
     });
 
     $(document).on('click', '#bulk-delete', function() {
@@ -61,7 +60,7 @@
         });
         
         if (ids.length > 0) {
-            bulkDelete("{{ route('sales.bulk-delete') }}", ids);
+            bulkDelete("{{ route('tour.bulk-delete') }}", ids);
         } else {
             alert('Something went wrong!');
             return false;

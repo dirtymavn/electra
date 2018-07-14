@@ -1,24 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Business;
+namespace App\Http\Controllers\MasterData;
 
+use App\Models\MasterData\Tour;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Business\DeliveryDataTable;
+use App\DataTables\MasterData\TourDataTable;
+use App\Http\Requests\MasterData\TourRequest;
 
-use App\Models\Business\Delivery\TrxDeliveryOrder as TrxDelivery;
-
-
-class DeliveryController extends Controller
+class TourController extends Controller
 {
+    public function __construct()
+    {
+        // middleware
+        $this->middleware('sentinel_access:admin.company,tour.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,tour.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,tour.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,tour.destroy', ['only' => ['destroy']]);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DeliveryDataTable $dataTable)
+    public function index(TourDataTable $dataTable)
     {
-        return $dataTable->render('contents.business.delivery.index');
+        return $dataTable->render('contents.master_datas.tour.index');
     }
 
     /**
@@ -28,16 +37,16 @@ class DeliveryController extends Controller
      */
     public function create()
     {
-        return view('contents.business.delivery.create');
+        return view('contents.master_datas.tour.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\MasterData\TourRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TourRequest $request)
     {
         \DB::beginTransaction();
         try {
@@ -52,14 +61,14 @@ class DeliveryController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = TrxDelivery::create($request->all());
+            $insert = Tour::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('delivery.index');
+                $redirect = redirect()->route('tour.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('delivery.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('tour.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('delivery.create');
+                    $redirect = redirect()->route('tour.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -76,10 +85,10 @@ class DeliveryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\MasterData\Tour  $tour
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tour $tour)
     {
         //
     }
@@ -87,50 +96,46 @@ class DeliveryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\MasterData\Tour  $tour
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tour $tour)
     {
-        $delivery = TrxDelivery::find($id);
-        return view('contents.business.delivery.edit', compact('delivery'));
+        return view('contents.master_datas.tour.edit', compact('tour'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\MasterData\TourRequest  $request
+     * @param  \App\Models\MasterData\Tour  $tour
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TourRequest $request, Tour $tour)
     {
         \DB::beginTransaction();
         try {
-            if (@$request->is_draft == 'true') {
-                $msgSuccess = trans('message.save_as_draft');
+            if (@$request->is_draft == 'false') {
+                $request->merge(['is_draft' => false]);
+                $msgSuccess = trans('message.published');
+                $redirect = redirect()->route('tour.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
+                $redirect = redirect()->route('tour.create');
             } else {
-                $request->merge(['is_draft' => false]);
-                $msgSuccess = trans('message.published');
+                $msgSuccess = trans('message.update.success');
+                $redirect = redirect()->route('tour.edit', $tour->id);
             }
 
-            $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = TrxDelivery::create($request->all());
+            $update = $tour->update($request->all());
 
-            if ($insert) {
-                $redirect = redirect()->route('delivery.index');
-                if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('delivery.edit', $insert->id)->withInput();
-                } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('delivery.create');
-                }
+            if ($update) {
 
                 flash()->success($msgSuccess);
                 \DB::commit();
                 return $redirect;
+
             }
         } catch (\Exception $e) {
             \DB::rollback();
@@ -142,15 +147,18 @@ class DeliveryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\MasterData\Tour  $tour
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tour $tour)
     {
-        //
+        $tour->delete();
+        flash()->success(trans('message.delete.success'));
+
+        return redirect()->route('tour.index');
     }
 
-     /**
+    /**
      * Remove the many resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -160,13 +168,13 @@ class DeliveryController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            TrxDelivery::whereIn('id', $ids)->delete();
+            Tour::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('delivery.index');
+        return redirect()->route('tour.index');
     }
 }
