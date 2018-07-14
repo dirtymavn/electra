@@ -46,7 +46,7 @@ class CreateDeliveriesTable extends Migration
             $table->string('attn')->nullable();
 
             $table->timestamps();
-            $table->foreign('trx_delivery_order_id')->references('id')->on('trx_delivery_order')->onDelete('cascade');
+            $table->foreign('trx_delivery_order_id')->references('id')->on('trx_delivery_orders')->onDelete('cascade');
         });
 
         Schema::create('trx_delivery_order_despatchs', function (Blueprint $table) {
@@ -63,7 +63,7 @@ class CreateDeliveriesTable extends Migration
             $table->datetime('date_received')->nullable();
 
             $table->timestamps();
-            $table->foreign('trx_delivery_order_id')->references('id')->on('trx_delivery_order')->onDelete('cascade');
+            $table->foreign('trx_delivery_order_id')->references('id')->on('trx_delivery_orders')->onDelete('cascade');
         });
 
 
