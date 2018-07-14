@@ -167,6 +167,6 @@ class DeliveryController extends Controller
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('airline.index');
+        return redirect()->route('delivery.index');
     }
 }
