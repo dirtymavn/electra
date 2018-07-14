@@ -34,6 +34,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('sales/sales-cost-detail', array('as' => 'sales.cost-detail.post', 'uses' => 'SalesFolderController@salesDetail', 'middleware' => 'sentinel_access:admin.company,sales.create'));
         
         Route::resource('delivery', 'DeliveryController');
+        Route::post('delivery/bulk-delete', array('as' => 'delivery.bulk-delete', 'uses' => 'DeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,delivery.destroy'));
     });
 
      // Outbound

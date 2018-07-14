@@ -84,4 +84,24 @@ class DeliveryController extends Controller
     {
         //
     }
+
+     /**
+     * Remove the many resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function bulkDelete(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        if ( count($ids) > 0 ) {
+            Airline::whereIn('id', $ids)->delete();
+
+            flash()->success(trans('message.delete.success'));
+        } else {
+            flash()->success(trans('message.delete.error'));
+        }
+
+        return redirect()->route('airline.index');
+    }
 }

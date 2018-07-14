@@ -61,27 +61,7 @@
         });
         
         if (ids.length > 0) {
-            bulkDelete("{{ route('inventory.bulk-delete') }}", ids);
-            // $.ajax({
-            //     url: "{{ route('inventory.bulk-delete') }}",
-            //     method: "POST",
-            //     dataType: "json",
-            //     data: {
-            //         'ids': ids
-            //     },
-            //     beforeSend: function(data) {
-            //         $('div.spinner').show();
-            //     },
-            //     success: function(data) {
-            //         $('div.spinner').hide();
-            //         $('.datatable').DataTable().ajax.reload();
-            //         $('th .checklist').prop('checked', false);
-            //     },
-            //     error: function(data) {
-            //         alert('Something went wrong!');
-            //         location.reload();
-            //     }
-            // });
+            bulkDelete("{{ route('sales.bulk-delete') }}", ids);
         } else {
             alert('Something went wrong!');
             return false;
