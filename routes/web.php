@@ -38,7 +38,17 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
      // Outbound
     Route::group(['prefix' => 'outbound', 'namespace' => 'Outbound'], function () {
+        // Tour Order
+        Route::resource('tourorder', 'TourOrderController');
+        Route::post('tourorder/bulk-delete', array('as' => 'tourorder.bulk-delete', 'uses' => 'TourOrderController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,tourorder.destroy'));
+        Route::post('tourorder/get-data', array('as' => 'tourorder.get-data', 'uses' => 'TourOrderController@getData'));
+        Route::post('tourorder/data/delete', array('as' => 'tourorder.data.delete', 'uses' => 'TourOrderController@dataDelete', 'middleware' => 'sentinel_access:admin.company,tourorder.create'));
+        Route::post('tourorder/data/detail', array('as' => 'tourorder.data.detail', 'uses' => 'TourOrderController@dataDetail', 'middleware' => 'sentinel_access:admin.company,tourorder.create'));
+        // Tour Order Paxlist
+        Route::post('tourorder/paxlist', array('as' => 'tourorder.paxlist.post', 'uses' => 'TourOrderController@tourOrderPaxlistStore', 'middleware' => 'sentinel_access:admin.company,tourorder.create'));
 
+        //Tour Order Paxlist Flight
+        Route::post('tourorder/paxlist-flight', array('as' => 'tourorder.paxlist-flight.post', 'uses' => 'TourOrderController@tourOrderPaxlistFlightStore', 'middleware' => 'sentinel_access:admin.company,tourorder.create'));
     });
 
     // Hotel

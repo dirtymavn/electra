@@ -49,7 +49,7 @@ class CreateOrdersTable extends Migration
             $table->date('deadline')->nullable();
             $table->string('your_ref')->nullable();
             $table->string('our_ref')->nullable();
-            $table->integer('tc_id')->nullable();
+            $table->integer('tc_id')->unsigned()->nullable();
             $table->integer('company_id')->unsigned()->nullable();
             $table->integer('branch_id')->unsigned()->nullable();
             $table->boolean('is_draft')->nullable()->default(true);
@@ -78,7 +78,7 @@ class CreateOrdersTable extends Migration
             $table->string('tour_type')->nullable();
 
             $table->timestamps();
-            $table->foreign('master_tour_id')->references('id')->on('master_tours')->onDelete('cascade');
+            $table->foreign('master_tour_id')->references('id')->on('master_tours');
             $table->foreign('trx_tour_order_id')->references('id')->on('trx_tour_orders')->onDelete('cascade');
         });
 
@@ -93,29 +93,17 @@ class CreateOrdersTable extends Migration
             $table->string('title')->nullable();
             $table->string('gender')->nullable();
             $table->string('id_no')->nullable();
-            $table->date('dub')->nullable();
+            $table->date('dob')->nullable();
 
             $table->timestamps();
             $table->foreign('trx_tour_order_id')->references('id')->on('trx_tour_orders')->onDelete('cascade');
         });
 
-        Schema::create('trx_tour_order_pax_list_tour_accomodations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('trx_tour_order_pax_list_id')->unsigned();
-            $table->string('room_type')->nullable();
-            $table->string('room_share')->nullable();
-            $table->string('room_id')->nullable();
-            $table->string('adjoin_room_id')->nullable();
-
-            $table->timestamps();
-            $table->foreign('trx_tour_order_pax_list_id')->references('id')->on('trx_tour_order_pax_lists')->onDelete('cascade');
-        });
-
         Schema::create('trx_tour_order_pax_list_tours', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_tour_order_pax_list_id')->unsigned();
-            $table->string('return_date')->nullable();
-            $table->date('deviation')->nullable();
+            $table->date('return_date')->nullable();
+            $table->string('deviation')->nullable();
             $table->string('meal')->nullable();
             $table->text('remark')->nullable();
             $table->text('special_req')->nullable();
@@ -124,12 +112,25 @@ class CreateOrdersTable extends Migration
             $table->foreign('trx_tour_order_pax_list_id')->references('id')->on('trx_tour_order_pax_lists')->onDelete('cascade');
         });
 
+        Schema::create('trx_tour_order_pax_list_tour_accomodations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('trx_tour_order_pax_list_tour_id')->unsigned();
+            $table->string('room_type')->nullable();
+            $table->string('room_category')->nullable();
+            $table->string('room_share')->nullable();
+            $table->string('room_id')->nullable();
+            $table->string('adjoin_room_id')->nullable();
+
+            $table->timestamps();
+            $table->foreign('trx_tour_order_pax_list_tour_id')->references('id')->on('trx_tour_order_pax_list_tours')->onDelete('cascade');
+        });
+
          Schema::create('trx_tour_order_pax_list_tour_flights', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_tour_order_pax_list_tour_id')->unsigned();
-            $table->integer('flight_from')->nullable();
-            $table->integer('flight_to')->nullable();
-            $table->integer('airline_is')->nullable();
+            $table->integer('flight_from')->unsigned()->nullable();
+            $table->integer('flight_to')->unsigned()->nullable();
+            $table->integer('airline_is')->unsigned()->nullable();
             $table->string('flight_no')->nullable();
             $table->string('class')->nullable();
             $table->text('farebasis')->nullable();
@@ -155,8 +156,8 @@ class CreateOrdersTable extends Migration
             $table->string('ticket_no')->nullable();
             $table->date('register_date')->nullable();
             $table->string('currency')->nullable();
-            $table->float('special_req')->nullable();
-            $table->float('remark')->nullable();
+            $table->text('special_req')->nullable();
+            $table->text('remark')->nullable();
 
             $table->timestamps();
             $table->foreign('trx_tour_order_pax_list_tour_id')->references('id')->on('trx_tour_order_pax_list_tours')->onDelete('cascade');
@@ -176,8 +177,8 @@ class CreateOrdersTable extends Migration
 
         Schema::dropIfExists('trx_tour_order_pax_list_tour_sellings');
         Schema::dropIfExists('trx_tour_order_pax_list_tour_flights');
-        Schema::dropIfExists('trx_tour_order_pax_list_tours');
         Schema::dropIfExists('trx_tour_order_pax_list_tour_accomodations');
+        Schema::dropIfExists('trx_tour_order_pax_list_tours');
         Schema::dropIfExists('trx_tour_order_pax_lists');
         Schema::dropIfExists('trx_tour_order_tours');
         Schema::dropIfExists('trx_tour_orders');

@@ -224,10 +224,8 @@
                                 <i class="fa fa-circle-o"></i><span>Tour Folder</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Tour Order</span>
-                            </a>
+                        <li class="{!! (url(route('tourorder.index')) == Request::url() OR Request::is('outbound/tourorder*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','tourorder.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('tourorder.index')}}"><i class="fa fa-circle-o"></i><span>Tour Order</span></a>
                         </li>
                         <li>
                             <a href="#">

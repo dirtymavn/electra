@@ -154,8 +154,12 @@ class AirlineController extends Controller
     public function destroy($id)
     {
         $airline = Airline::find($id);
-        $airline->delete();
-        flash()->success(trans('message.delete.success'));
+        if ($airline->orderSellings->count() > 0) {
+            flash()->error(trans('message.have_related'));
+        } else {
+            $airline->delete();
+            flash()->success(trans('message.delete.success'));
+        }
 
         return redirect()->route('airline.index');
     }

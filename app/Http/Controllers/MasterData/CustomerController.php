@@ -289,7 +289,7 @@ class CustomerController extends Controller
      */
     public function destroy(MasterCustomer $customer)
     {
-        if ($customer->transactions) {
+        if ($customer->transactions || $customer->orders) {
             flash()->error(trans('message.have_related'));
         } else {
             $destroy = $customer->delete();
