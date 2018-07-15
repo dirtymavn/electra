@@ -69,7 +69,7 @@
 
 @section('part_script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\Business\SalesRequest', '#form-delivery') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Business\DeliveryRequest', '#form-delivery') !!}
 <script>
     $(function(){
         spinnerLoad($('#form-delivery'));
