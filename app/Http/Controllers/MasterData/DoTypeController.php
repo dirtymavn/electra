@@ -1,25 +1,36 @@
 <?php
 
-namespace App\Http\Controllers\Business;
+namespace App\Http\Controllers\MasterData;
 
+
+use App\Models\MasterData\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Business\DeliveryDataTable;
+use App\DataTables\MasterData\DoTypeDataTable;
+use App\Http\Requests\MasterData\DoTypeRequest;
 
-use App\Models\Business\Delivery\TrxDeliveryOrder as TrxDelivery;
 use App\Models\Business\Delivery\DoType;
 
-
-class DeliveryController extends Controller
+class DoTypeController extends Controller
 {
+    public function __construct()
+    {
+        // middleware
+        $this->middleware('sentinel_access:admin.company,dotype.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,dotype.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,dotype.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,dotype.destroy', ['only' => ['destroy']]);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DeliveryDataTable $dataTable)
+    public function index(DoTypeDataTable $dataTable)
     {
-        return $dataTable->render('contents.business.delivery.index');
+        return $dataTable->render('contents.master_datas.dotype.index');
     }
 
     /**
@@ -29,17 +40,16 @@ class DeliveryController extends Controller
      */
     public function create()
     {
-        $dotypes = DoType::where('is_draft', false)->pluck('do_type_name', 'id')->all();
-        return view('contents.business.delivery.create', compact('dotypes'));
+        return view('contents.master_datas.dotype.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\MasterData\DoTypeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DoTypeRequest $request)
     {
         \DB::beginTransaction();
         try {
@@ -54,14 +64,14 @@ class DeliveryController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = TrxDelivery::create($request->all());
+            $insert = DoType::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('delivery.index');
+                $redirect = redirect()->route('dotype.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('delivery.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('dotype.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('delivery.create');
+                    $redirect = redirect()->route('dotype.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -78,10 +88,10 @@ class DeliveryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\MasterData\DoType  $dotype
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(DoType $dotype)
     {
         //
     }
@@ -89,58 +99,46 @@ class DeliveryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\MasterData\DoType  $dotype
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(DoType $dotype)
     {
-        $delivery = TrxDelivery::find($id);
-        $deliveries = TrxDelivery::find($id)->toArray();
-        $trx_customer = $delivery->trx_customer->toArray();
-        $trx_dispatch = $delivery->trx_dispatch->toArray();
-        $dotypes = DoType::where('company_id', user_info()->company_id)->pluck('do_type_name', 'id')->all();
-        unset($trx_customer['id'], $trx_customer['created_at'], $trx_customer['updated_at'], $trx_dispatch['id'], $trx_dispatch['created_at'], $trx_dispatch['updated_at']);
-        $arrayMerge = array_merge($trx_customer, $trx_dispatch, $deliveries);
-        $delivery = (object) $arrayMerge;
-
-        return view('contents.business.delivery.edit', compact('delivery', 'dotypes'));
+        return view('contents.master_datas.dotype.edit', compact('dotype'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\MasterData\DoTypeRequest  $request
+     * @param  \App\Models\MasterData\DoType  $dotype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DoTypeRequest $request, DoType $dotype)
     {
         \DB::beginTransaction();
         try {
-            if (@$request->is_draft == 'true') {
-                $msgSuccess = trans('message.save_as_draft');
+            if (@$request->is_draft == 'false') {
+                $request->merge(['is_draft' => false]);
+                $msgSuccess = trans('message.published');
+                $redirect = redirect()->route('dotype.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
+                $redirect = redirect()->route('dotype.create');
             } else {
-                $request->merge(['is_draft' => false]);
-                $msgSuccess = trans('message.published');
+                $msgSuccess = trans('message.update.success');
+                $redirect = redirect()->route('dotype.edit', $dotype->id);
             }
 
-            $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = TrxDelivery::find($id)->update($request->all());
+            $update = $dotype->update($request->all());
 
-            if ($insert) {
-                $redirect = redirect()->route('delivery.index');
-                if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('delivery.edit', $insert->id)->withInput();
-                } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('delivery.create');
-                }
+            if ($update) {
 
                 flash()->success($msgSuccess);
                 \DB::commit();
                 return $redirect;
+
             }
         } catch (\Exception $e) {
             \DB::rollback();
@@ -152,19 +150,18 @@ class DeliveryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\MasterData\DoType  $dotype
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {   
-        $delivery = TrxDelivery::find($id);
-        $delivery->delete();
+    public function destroy(DoType $dotype)
+    {
+        $dotype->delete();
         flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('delivery.index');
+        return redirect()->route('dotype.index');
     }
 
-     /**
+    /**
      * Remove the many resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -174,13 +171,13 @@ class DeliveryController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            TrxDelivery::whereIn('id', $ids)->delete();
+            DoType::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('delivery.index');
+        return redirect()->route('dotype.index');
     }
 }

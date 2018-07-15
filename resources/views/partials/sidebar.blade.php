@@ -620,6 +620,9 @@
                         <li class="{!! (url(route('airline.index')) == Request::url() OR Request::is('master-data/airline*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','airline.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('airline.index')}}"><i class="fa fa-circle-o"></i><span>Airline</span></a>
                         </li>
+                        <li class="{!! (url(route('productcode.index')) == Request::url() OR Request::is('master-data/productcode*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','productcode.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('productcode.index')}}"><i class="fa fa-circle-o"></i><span>Product Code</span></a>
+                        </li>
                         <li class="{!! (url(route('product-type.index')) == Request::url() OR Request::is('master-data/product-type*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','product-type.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('product-type.index')}}"><i class="fa fa-circle-o"></i><span>Product Type</span></a>
                         </li>
@@ -643,6 +646,9 @@
                         </li>
                         <li class="{!! (url(route('tour.index')) == Request::url() OR Request::is('master-data/tour*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','tour.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('tour.index')}}"><i class="fa fa-circle-o"></i><span>Tour</span></a>
+                        </li>
+                        <li class="{!! (url(route('dotype.index')) == Request::url() OR Request::is('master-data/dotype*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','dotype.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('dotype.index')}}"><i class="fa fa-circle-o"></i><span>Do Type</span></a>
                         </li>
                     </ul>
                 </div>
