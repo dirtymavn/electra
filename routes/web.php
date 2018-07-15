@@ -196,6 +196,14 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Tour
         Route::resource('tour', 'TourController');
         Route::post('tour/bulk-delete', array('as' => 'tour.bulk-delete', 'uses' => 'TourController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,tour.destroy'));
+
+        // Product Code
+        Route::resource('productcode', 'ProductCodeController');
+        Route::post('productcode/bulk-delete', array('as' => 'productcode.bulk-delete', 'uses' => 'ProductCodeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,productcode.destroy'));
+        Route::post('productcode/get-data', array('as' => 'productcode.get-data', 'uses' => 'ProductCodeController@getData'));
+        Route::post('productcode/credit-card', array('as' => 'productcode.rate.post', 'uses' => 'ProductCodeController@productCodeDetailStore', 'middleware' => 'sentinel_access:admin.company,productcode.create'));
+        Route::post('productcode/data/delete', array('as' => 'productcode.data.delete', 'uses' => 'ProductCodeController@dataDelete', 'middleware' => 'sentinel_access:admin.company,productcode.create'));
+        Route::post('productcode/data/detail', array('as' => 'productcode.data.detail', 'uses' => 'ProductCodeController@dataDetail', 'middleware' => 'sentinel_access:admin.company,productcode.create'));
     });
 
     // System
