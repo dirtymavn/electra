@@ -40,13 +40,13 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('received_by', trans('Received By'), ['class' => 'control-label']) !!}
-                    {!! Form::date('received_by', old('received_by') , ['class' => 'form-control', 'placeholder' => 'Input the Received By']) !!}
+                    {!! Form::text('received_by', old('received_by') , ['class' => 'form-control', 'placeholder' => 'Input the Received By']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('date_received', trans('Date Received'), ['class' => 'control-label']) !!}
-                    {!! Form::text('date_received', old('date_received') , ['class' => 'form-control', 'placeholder' => 'Input the Date Received']) !!}
+                    {!! Form::date('date_received', old('date_received') , ['class' => 'form-control', 'placeholder' => 'Input the Date Received']) !!}
                 </div>
             </div>
 
