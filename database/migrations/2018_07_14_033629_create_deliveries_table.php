@@ -18,6 +18,8 @@ class CreateDeliveriesTable extends Migration
             $table->string('do_type_name');
             $table->string('do_type_code');
             $table->string('do_type_status');
+            $table->integer('company_id')->unsigned()->nullable();
+            $table->boolean('is_draft')->nullable()->default(true);
 
             $table->timestamps();
         });

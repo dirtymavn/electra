@@ -196,6 +196,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Tour
         Route::resource('tour', 'TourController');
         Route::post('tour/bulk-delete', array('as' => 'tour.bulk-delete', 'uses' => 'TourController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,tour.destroy'));
+
+        // Do Type
+        Route::resource('dotype', 'DoTypeController');
+        Route::post('dotype/bulk-delete', array('as' => 'dotype.bulk-delete', 'uses' => 'DoTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,dotype.destroy'));
     });
 
     // System
