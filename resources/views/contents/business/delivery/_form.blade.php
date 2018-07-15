@@ -8,7 +8,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('do_type_id', trans('DO Type'), ['class' => 'control-label']) !!}
-            {!! Form::text('do_type_id', old('do_type_id') , ['class' => 'form-control', 'placeholder' => 'Input the DO Type']) !!}
+            {!! Form::select('do_type_id', ['' => 'Choose Do Type'] + @$dotypes, old('do_type'), ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-sm-6">

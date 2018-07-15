@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\DataTables\Business\DeliveryDataTable;
 
 use App\Models\Business\Delivery\TrxDeliveryOrder as TrxDelivery;
+use App\Models\Business\Delivery\DoType;
 
 
 class DeliveryController extends Controller
@@ -28,7 +29,8 @@ class DeliveryController extends Controller
      */
     public function create()
     {
-        return view('contents.business.delivery.create');
+        $dotypes = DoType::where('is_draft', false)->pluck('do_type_name', 'id')->all();
+        return view('contents.business.delivery.create', compact('dotypes'));
     }
 
     /**
@@ -96,12 +98,12 @@ class DeliveryController extends Controller
         $deliveries = TrxDelivery::find($id)->toArray();
         $trx_customer = $delivery->trx_customer->toArray();
         $trx_dispatch = $delivery->trx_dispatch->toArray();
-
+        $dotypes = DoType::where('company_id', user_info()->company_id)->pluck('do_type_name', 'id')->all();
         unset($trx_customer['id'], $trx_customer['created_at'], $trx_customer['updated_at'], $trx_dispatch['id'], $trx_dispatch['created_at'], $trx_dispatch['updated_at']);
         $arrayMerge = array_merge($trx_customer, $trx_dispatch, $deliveries);
         $delivery = (object) $arrayMerge;
 
-        return view('contents.business.delivery.edit', compact('delivery'));
+        return view('contents.business.delivery.edit', compact('delivery', 'dotypes'));
     }
 
     /**
