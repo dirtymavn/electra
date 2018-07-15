@@ -184,6 +184,22 @@ class Menu extends Model
                         'tour.destroy' => 'Delete',
                         'tour.approval' => 'Approval',
                     ],
+                    'Product Code' => [
+                        'productcode.read' => 'Read',
+                        'productcode.create' => 'Create',
+                        'productcode.update' => 'Edit',
+                        'productcode.destroy' => 'Delete',
+                        'productcode.approval' => 'Approval',
+                    ],
+                ],
+                'Outbound' => [
+                    'Tour Order' => [
+                        'toruorder.read' => 'Read',
+                        'toruorder.create' => 'Create',
+                        'toruorder.update' => 'Edit',
+                        'toruorder.destroy' => 'Delete',
+                        'toruorder.approval' => 'Approval',
+                    ],
                 ],
                 'System' => [
                     'Company' => [
@@ -355,6 +371,22 @@ class Menu extends Model
                         'tour.update' => 'Edit',
                         'tour.destroy' => 'Delete',
                         'tour.approval' => 'Approval',
+                    ],
+                    'Product Code' => [
+                        'productcode.read' => 'Read',
+                        'productcode.create' => 'Create',
+                        'productcode.update' => 'Edit',
+                        'productcode.destroy' => 'Delete',
+                        'productcode.approval' => 'Approval',
+                    ],
+                ],
+                'Outbound' => [
+                    'Tour Order' => [
+                        'toruorder.read' => 'Read',
+                        'toruorder.create' => 'Create',
+                        'toruorder.update' => 'Edit',
+                        'toruorder.destroy' => 'Delete',
+                        'toruorder.approval' => 'Approval',
                     ],
                 ]
 
