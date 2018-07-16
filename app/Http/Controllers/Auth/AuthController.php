@@ -74,18 +74,16 @@ class AuthController extends Controller
     {
         $user = user_info();
         $user->company_name = @$user->company->name;
-        $masterProfile = $user->masterProfile->toArray();
+        $masterProfile = $user->masterProfile;
+        if ($masterProfile) {
+            $masterProfile = $user->masterProfile->toArray();
+            $userTemp = $user->masterProfile->toArray();
+            unset($userTemp['company'], $userTemp['master_profile'], $masterProfile['id']);
 
-        $userTemp = $user->toArray();
-        unset($userTemp['company'], $userTemp['master_profile'], $masterProfile['id']);
+            $arrayMerge = array_merge($userTemp, $masterProfile);
 
-        $arrayMerge = array_merge($userTemp, $masterProfile);
-
-        $user = (object) $arrayMerge;
-
-        
-
-
+            $user = (object) $arrayMerge;   
+        }
         return view('contents.auths.profile', compact('user'));
     }
 
