@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\DataTables\Business\SalesDataTable;
 
 use App\Models\Business\Sales\TrxSales as Sales;
+use App\Models\Business\Sales\TrxSalesCreditCard;
+use App\Models\Business\Sales\TrxSalesBilling;
 use App\Models\MasterData\Customer\MasterCustomer;
 use App\Models\Temporary;
 
@@ -42,7 +44,7 @@ class SalesFolderController extends Controller
     public function create()
     {
         $company_id = user_info()->company_id;
-        $customers = MasterCustomer::whereCompanyId($company_id)->pluck('customer_name', 'id')->all();
+        $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
          // clear temporary data
         \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
         return view('contents.business.sales.create', compact('customers'));
@@ -109,16 +111,19 @@ class SalesFolderController extends Controller
      * @param  \App\Models\MasterData\sales\sales  $sales
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sales $sales)
+    public function edit($id)
     {
-        $trx = $sales->trx->toArray();
-        $sales = $sales->toArray();
-        unset($trx['id']);
+        $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
+        $sales = Sales::find($id);
+        $trxsales = Sales::find($id)->toArray();
+        $credit = TrxSalesCreditCard::where('trx_sales_id', $id)->first()->toArray();
+        $billing = TrxSalesBilling::where('trx_sales_id', $id)->first()->toArray();
+        unset($credit['id'], $credit['created_at'], $credit['updated_at'], $billing['id'], $billing['created_at'], $billing['updated_at']);
 
-        $merge = array_merge($sales, $trx);
+        $merge = array_merge($trxsales, $credit, $billing);
 
         $sales = (object) $merge;
-        return view('contents.master_datas.sales.edit', compact('sales'));
+        return view('contents.business.sales.edit', compact('sales', 'customers'));
     }
 
     /**
@@ -128,7 +133,7 @@ class SalesFolderController extends Controller
      * @param  \App\Models\MasterData\sales\sales  $sales
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sales $sales)
+    public function update(Request $request, $id)
     {
         try {
             if (@$request->is_draft == 'false') {
@@ -141,10 +146,10 @@ class SalesFolderController extends Controller
                 $redirect = redirect()->route('sales.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('sales.edit', $sales->id);
+                $redirect = redirect()->route('sales.edit', $id);
             }
 
-            $update = $sales->update( $request->all() );
+            $update = Sales::find($id)->update( $request->all() );
 
             flash()->success($msgSuccess);
             return $redirect;
