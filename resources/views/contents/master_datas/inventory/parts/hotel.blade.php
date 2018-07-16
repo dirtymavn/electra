@@ -57,14 +57,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('city', trans('City'), ['class' => 'control-label']) !!}
-                            {!! Form::text('city', old('city') , ['class' => 'form-control', 'placeholder' => 'Input the City', 'id' => 'city']) !!}
+                            {!! Form::label('hotel_city', trans('City'), ['class' => 'control-label']) !!}
+                            {!! Form::text('hotel_city', old('hotel_city') , ['class' => 'form-control', 'placeholder' => 'Input the City', 'id' => 'hotel_city']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('status', old('status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'status']) !!}
+                            {!! Form::label('hotel_status', trans('Status'), ['class' => 'control-label']) !!}
+                            {!! Form::text('hotel_status', old('hotel_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'hotel_status']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -82,13 +82,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('checkin_date', trans('Checkin Date'), ['class' => 'control-label']) !!}
-                            {!! Form::text('checkin_date', old('checkin_date') , ['class' => 'form-control', 'placeholder' => 'Input the Checkin Date', 'id' => 'checkin_date']) !!}
+                            {!! Form::date('checkin_date', old('checkin_date') , ['class' => 'form-control', 'placeholder' => 'Input the Checkin Date', 'id' => 'checkin_date']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('checkout_date', trans('Checkout Date'), ['class' => 'control-label']) !!}
-                            {!! Form::text('checkout_date', old('checkout_date') , ['class' => 'form-control', 'placeholder' => 'Input the Checkout Date', 'id' => 'checkout_date']) !!}
+                            {!! Form::date('checkout_date', old('checkout_date') , ['class' => 'form-control', 'placeholder' => 'Input the Checkout Date', 'id' => 'checkout_date']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">

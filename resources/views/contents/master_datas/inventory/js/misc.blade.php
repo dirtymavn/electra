@@ -5,7 +5,7 @@
             { data: 'end_date', name: 'end_date'},
             { data: 'start_desc', name: 'start_desc'},
             { data: 'end_desc', name: 'end_desc'},
-            { data: 'status', name: 'status', className: 'dt-center'},
+            { data: 'misc_status', name: 'misc_status', className: 'dt-center'},
             { data: 'description', name: 'description'},
             { data: 'action', name: 'action'},
         ];
@@ -71,7 +71,7 @@
                 $("#start_desc").val(value.start_desc)
                 $("#end_desc").val(value.end_desc)
                 $("#description").val(value.description)
-                $("#status").val(value.status)
+                $("#misc_status").val(value.misc_status)
                 $("#misc_id").val(data.data.id)
 
                 $('#form-detail').modal({backdrop: 'static', keyboard: false});

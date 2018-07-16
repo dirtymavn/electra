@@ -51,7 +51,7 @@ class InventoryDataTable extends DataTable
                 'master_inventory.inventory_type',
                 'master_inventory.voucher_no',
                 'master_inventory.product_code',
-                'master_inventory.recevied_date',
+                'master_inventory.received_date',
                 'master_inventory.booked_qty',
                 'master_inventory.sold_qty',
                 'master_inventory.status',
@@ -100,7 +100,7 @@ class InventoryDataTable extends DataTable
         return [
             'voucher_no' => ['title' => 'Voucher No'],
             'product_code' => ['title' => 'Product Code'],
-            'recevied_date' => ['title' => 'Recevied Date'],
+            'received_date' => ['title' => 'Received Date'],
             'booked_qty' => ['title' => 'Booked'],
             'sold_qty' => ['title' => 'Sold'],
             'status' => ['title' => 'Status'],
