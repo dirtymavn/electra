@@ -8,7 +8,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('do_type_id', trans('DO Type'), ['class' => 'control-label']) !!}
-            {!! Form::text('do_type_id', old('do_type_id') , ['class' => 'form-control', 'placeholder' => 'Input the DO Type']) !!}
+            {!! Form::select('do_type_id', ['' => 'Choose Do Type'] + @$dotypes, old('do_type'), ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-sm-6">
@@ -69,7 +69,7 @@
 
 @section('part_script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\Business\SalesRequest', '#form-delivery') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Business\DeliveryRequest', '#form-delivery') !!}
 <script>
     $(function(){
         spinnerLoad($('#form-delivery'));

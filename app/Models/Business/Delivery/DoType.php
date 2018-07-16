@@ -12,5 +12,7 @@ class DoType extends Model
     	'do_type_name',
     	'do_type_code',
     	'do_type_status',
+    	'company_id',
+    	'is_draft'
     ];
 }
