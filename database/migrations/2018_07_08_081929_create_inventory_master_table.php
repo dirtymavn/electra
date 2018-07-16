@@ -21,7 +21,7 @@ class CreateInventoryMasterTable extends Migration
             $table->string('inventory_type')->nullable();
             $table->string('voucher_no')->nullable();
             $table->string('product_code')->nullable();
-            $table->date('recevied_date')->nullable();
+            $table->date('received_date')->nullable();
             $table->integer('booked_qty')->nullable();
             $table->integer('sold_qty')->nullable();
             $table->string('status')->nullable();
@@ -59,7 +59,7 @@ class CreateInventoryMasterTable extends Migration
             $table->string('stopover_city')->nullable();
             $table->integer('stopover_qty')->nullable();
             $table->string('seat_no')->nullable();
-            $table->string('airlane_pnr')->nullable();
+            $table->string('airline_pnr')->nullable();
             $table->time('fly_duration')->nullable();
             $table->string('meal_srv')->nullable();
             $table->string('terminal')->nullable();
@@ -164,7 +164,7 @@ class CreateInventoryMasterTable extends Migration
         Schema::create('master_inventory_route_misc', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('master_inventory_id')->unsigned();
-            $table->text('desc')->nullable();
+            $table->text('description')->nullable();
             $table->datetime('start_date')->nullable();
             $table->datetime('end_date')->nullable();
             $table->text('start_desc')->nullable();

@@ -66,7 +66,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('days_hired', trans('Days Hired'), ['class' => 'control-label']) !!}
-                            {!! Form::text('days_hired', old('days_hired') , ['class' => 'form-control', 'placeholder' => 'Input the Days Hired', 'id' => 'days_hired']) !!}
+                            {!! Form::text('days_hired', old('days_hired') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Days Hired', 'id' => 'days_hired']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -95,8 +95,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('status', old('status') , ['class' => 'form-control', 'placeholder' => 'Input the Pickup Location', 'id' => 'status']) !!}
+                            {!! Form::label('trans_status', trans('Status'), ['class' => 'control-label']) !!}
+                            {!! Form::text('trans_status', old('trans_status') , ['class' => 'form-control', 'placeholder' => 'Input the Pickup Location', 'id' => 'trans_status']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">

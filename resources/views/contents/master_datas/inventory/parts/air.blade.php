@@ -101,8 +101,8 @@
                     </div> 
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('status', old('status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'status']) !!}
+                            {!! Form::label('air_status', trans('Status'), ['class' => 'control-label']) !!}
+                            {!! Form::text('air_status', old('air_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'air_status']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -167,8 +167,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('mileage', trans('Mileage'), ['class' => 'control-label']) !!}
-                            {!! Form::text('mileage', old('mileage') , ['class' => 'form-control', 'placeholder' => 'Input the Mileage', 'id' => 'mileage']) !!}
+                            {!! Form::label('miliage', trans('Mileage'), ['class' => 'control-label']) !!}
+                            {!! Form::text('miliage', old('miliage') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Mileage', 'id' => 'miliage']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">

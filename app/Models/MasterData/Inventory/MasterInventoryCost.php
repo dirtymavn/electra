@@ -9,6 +9,7 @@ class MasterInventoryCost extends Model
     protected $table = 'master_inventory_cost';
 
     protected $fillable = [
+        'master_inventory_id',
     	'cost_type',
     	'lg_no',
     	'supplier_no',

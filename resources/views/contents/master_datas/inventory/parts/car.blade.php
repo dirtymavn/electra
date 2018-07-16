@@ -44,13 +44,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('from', trans('From'), ['class' => 'control-label']) !!}
-                            {!! Form::text('from', old('from') , ['class' => 'form-control', 'placeholder' => 'Input the From', 'id' => 'from']) !!}
+                            {!! Form::date('from', old('from') , ['class' => 'form-control', 'placeholder' => 'Input the From', 'id' => 'from']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('to', trans('To'), ['class' => 'control-label']) !!}
-                            {!! Form::text('to', old('to') , ['class' => 'form-control', 'placeholder' => 'Input the To', 'id' => 'to']) !!}
+                            {!! Form::date('to', old('to') , ['class' => 'form-control', 'placeholder' => 'Input the To', 'id' => 'to']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -79,8 +79,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('status', old('status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'status']) !!}
+                            {!! Form::label('car_status', trans('Status'), ['class' => 'control-label']) !!}
+                            {!! Form::text('car_status', old('car_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'car_status']) !!}
                         </div>
                     </div>
                 </div>

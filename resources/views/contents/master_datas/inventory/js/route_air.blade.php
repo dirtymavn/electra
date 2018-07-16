@@ -10,7 +10,7 @@
             { data: 'depart_date', name: 'depart_date'},
             { data: 'arrival', name: 'arrival'},
             { data: 'departure', name: 'departure'},
-            { data: 'status', name: 'status'},
+            { data: 'air_status', name: 'air_status'},
             { data: 'action', name: 'action'},
         ];
 
@@ -79,7 +79,7 @@
                 $('#depart_date').val(value.depart_date);
                 $('#arrival').val(value.arrival);
                 $('#departure').val(value.departure);
-                $('#status').val(value.status);
+                $('#air_status').val(value.air_status);
                 $('#equip').val(value.equip);
                 $('#stopover_city').val(value.stopover_city);
                 $('#stopover_qty').val(value.stopover_qty);

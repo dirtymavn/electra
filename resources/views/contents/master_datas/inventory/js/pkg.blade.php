@@ -2,9 +2,9 @@
     $(document).ready(function() {
         var detailColumns = [
             { data: 'package_name', name: 'package_name'},
-            { data: 'start_date', name: 'start_date'},
-            { data: 'end_date', name: 'end_date'},
-            { data: 'status', name: 'status', className: 'dt-center'},
+            { data: 'pkg_start_date', name: 'pkg_start_date'},
+            { data: 'pkg_end_date', name: 'pkg_end_date'},
+            { data: 'pkg_status', name: 'pkg_status', className: 'dt-center'},
             { data: 'action', name: 'action'},
         ];
 
@@ -64,10 +64,10 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $('package_name').val(value.package_name);
-                $('start_date').val(value.start_date);
-                $('end_date').val(value.end_date);
-                $('status').val(value.status);
+                $('#package_name').val(value.package_name);
+                $('#pkg_start_date').val(value.pkg_start_date);
+                $('#pkg_end_date').val(value.pkg_end_date);
+                $('#pkg_status').val(value.pkg_status);
                 $("#pkg_id").val(data.data.id)
 
                 $('#form-pkg').modal({backdrop: 'static', keyboard: false});

@@ -68,7 +68,7 @@
 
         <div class="form-group">
             {!! Form::label('trx_sales_id', trans('Sales'), ['class' => 'control-label']) !!}
-            {!! Form::select('trx_sales_id', ['' => "Choose Sales"] + @$sales, old('trx_sales_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('trx_sales_id', @$sales, old('trx_sales_id'), ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
@@ -93,12 +93,12 @@
 
         <div class="form-group">
             {!! Form::label('nights', trans('Night'), ['class' => 'control-label']) !!}
-            {!! Form::text('nights', old('nights') , ['class' => 'form-control', 'placeholder' => 'Input the Night']) !!}
+            {!! Form::text('nights', old('nights') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Night']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('rooms', trans('Tour Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('rooms', old('rooms') , ['class' => 'form-control', 'placeholder' => 'Input the Room']) !!}
+            {!! Form::label('rooms', trans('Room'), ['class' => 'control-label']) !!}
+            {!! Form::text('rooms', old('rooms') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Room']) !!}
         </div>
     </div>
 </div>

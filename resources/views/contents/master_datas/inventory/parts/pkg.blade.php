@@ -46,20 +46,20 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('start_date', trans('Start Date'), ['class' => 'control-label']) !!}
-                            {!! Form::date('start_date', old('start_date') , ['class' => 'form-control', 'placeholder' => 'Input the Start Date', 'id' => 'start_date']) !!}
+                            {!! Form::label('pkg_start_date', trans('Start Date'), ['class' => 'control-label']) !!}
+                            {!! Form::date('pkg_start_date', old('pkg_start_date') , ['class' => 'form-control', 'placeholder' => 'Input the Start Date', 'id' => 'pkg_start_date']) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('end_date', trans('End Date'), ['class' => 'control-label']) !!}
-                            {!! Form::date('end_date', old('end_date') , ['class' => 'form-control', 'placeholder' => 'Input the End Date', 'id' => 'end_date']) !!}
+                            {!! Form::label('pkg_end_date', trans('End Date'), ['class' => 'control-label']) !!}
+                            {!! Form::date('pkg_end_date', old('pkg_end_date') , ['class' => 'form-control', 'placeholder' => 'Input the End Date', 'id' => 'pkg_end_date']) !!}
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('status', old('status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'status']) !!}
+                            {!! Form::label('pkg_status', trans('Status'), ['class' => 'control-label']) !!}
+                            {!! Form::text('pkg_status', old('pkg_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'pkg_status']) !!}
                         </div>
                     </div>
                 </div>

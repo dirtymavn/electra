@@ -10,7 +10,7 @@
             { data: 'dropoff_date', name: 'dropoff_date'},
             { data: 'dropoff_location', name: 'dropoff_location'},
             { data: 'rate_type', name: 'rate_type'},
-            { data: 'status', name: 'status'},
+            { data: 'trans_status', name: 'trans_status'},
             { data: 'action', name: 'action'},
         ];
 
@@ -79,7 +79,7 @@
                 $('#dropoff_date').val(value.dropoff_date);
                 $('#dropoff_location').val(value.dropoff_location);
                 $('#rate_type').val(value.rate_type);
-                $('#status').val(value.status);
+                $('#trans_status').val(value.trans_status);
                 $("#car_transfer_id").val(data.data.id)
 
                 $('#form-car-transfer').modal({backdrop: 'static', keyboard: false});
