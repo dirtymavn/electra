@@ -26,7 +26,7 @@
     </div>
 </div>
 
-@push('models')
+@push('modal_detail')
 <div id="form-cost" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

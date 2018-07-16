@@ -1,7 +1,7 @@
 <script>
     $(document).ready(function() {
         var detailColumns = [
-            { data: 'city', name: 'city'},
+            { data: 'hotel_city', name: 'hotel_city'},
             { data: 'hotel_name', name: 'hotel_name'},
             { data: 'hotel_chain', name: 'hotel_chain'},
             { data: 'phone', name: 'phone'},
@@ -9,7 +9,7 @@
             { data: 'checkin_date', name: 'checkin_date'},
             { data: 'checkout_date', name: 'checkout_date'},
             { data: 'ref_code', name: 'ref_code'},
-            { data: 'status', name: 'status'},
+            { data: 'hotel_status', name: 'hotel_status'},
             { data: 'action', name: 'action'},
         ];
 
@@ -69,14 +69,14 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $('#city').val(value.city);
+                $('#hotel_city').val(value.hotel_city);
                 $('#hotel_name').val(value.hotel_name);
                 $('#hotel_chain').val(value.hotel_chain);
                 $('#phone').val(value.phone);
                 $('#fax').val(value.fax);
                 $('#checkin_date').val(value.checkin_date);
                 $('#checkout_date').val(value.checkout_date);
-                $('#status').val(value.status);
+                $('#hotel_status').val(value.hotel_status);
                 $('#rm_type').val(value.rm_type);
                 $('#rm_cat').val(value.rm_cat);
                 $('#guest_prm').val(value.guest_prm);

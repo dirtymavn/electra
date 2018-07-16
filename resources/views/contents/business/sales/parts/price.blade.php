@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary form-control btn-add-cost col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
+                    <button type="button" class="btn btn-primary form-control btn-add-price col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
                 </div>
                 <div class="form-group">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="cost-detail" style="width:100%;">
+                        <table class="table table-bordered table-striped" id="price-detail" style="width:100%;">
                             <thead>
                                 <tr class="text-center">
                                     <th>Billing Currency ID</th>
@@ -16,6 +16,7 @@
                                     <th>GST AMT</th>
                                     <th>Rebate Percent</th>
                                     <th>Rebate AMT</th>
+                                    <th>Description</th>
                                     
                                     <th>Action</th>
                                 </tr>
@@ -28,7 +29,7 @@
     </div>
 </div>
 
-@push('models')
+@push('modal_detail')
 <div id="form-price" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -45,6 +46,12 @@
                         <div class="form-group">
                             {!! Form::label('billing_currency_id', trans('Billing Currency ID'), ['class' => 'control-label']) !!}
                             {!! Form::number('billing_currency_id', old('billing_currency_id') , ['class' => 'form-control', 'placeholder' => 'Input the Billing Currency ID', 'id' => 'billing_currency_id']) !!}
+                        </div>
+                    </div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            {!! Form::label('description', trans('Description'), ['class' => 'control-label']) !!}
+                            {!! Form::textarea('description', old('description') , ['class' => 'form-control', 'placeholder' => 'Input the Rebate AMT', 'id' => 'description', 'rows' => '3x5']) !!}
                         </div>
                     </div>
                     <div class="col-md-4">

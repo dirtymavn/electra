@@ -1,21 +1,23 @@
 <script>
-    var segmentColumns = [
-            { data: 'start_date', name: 'start_date'},
-            { data: 'end_date', name: 'end_date'},
-            { data: 'start_description', name: 'start_description'},
-            { data: 'end_description', name: 'end_description'},
-            { data: 'status', name: 'status'},
-            { data: 'description', name: 'description'},
-            { data: 'action', name: 'action'},
-        ];
+    var priceColumns = [
+    { data: 'billing_currency_id', name: 'billing_currency_id'},
+    { data: 'gst_id', name: 'gst_id'},
+    { data: 'gst_percent', name: 'gst_percent'},
+    { data: 'gst_amt', name: 'gst_amt'},
+    { data: 'rebate_percent', name: 'rebate_percent'},
+    { data: 'rebate_amt', name: 'rebate_amt'},
+    { data: 'description', name: 'description'},
+
+    { data: 'action', name: 'action'},
+    ];
 
     $(document).ready(function() {
-    
-        $('#form-segment-detail').submit(function(e) {
+
+        $('#form-price-detail').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                url: "{{route('sales.segment-detail.post')}}",
+                url: "{{route('sales.price-detail.post')}}",
                 method: "POST",
                 processData: false,
                 contentType: false,
@@ -23,8 +25,8 @@
                 data: formData,
                 success: function(data) {
                     $('div.spinner').hide();
-                    $('#form-segment').modal('hide');
-                    $('#segment-detail').DataTable().ajax.reload();
+                    $('#form-price').modal('hide');
+                    $('#price-detail').DataTable().ajax.reload();
                     $('#form-sales-trx').modal('hide');
                     setTimeout(function() {
                         $('#form-sales-trx').modal({backdrop: 'static', keyboard: false});
@@ -34,19 +36,19 @@
         });
     });
 
-    $(document).on('click', '.btn-add-segment', function(e) {
-        $('#form-segment-detail').find("input[type=text], textarea, input[type=hidden]").val("");
-        $('#form-segment').modal({backdrop: 'static', keyboard: false});
-        $("#segment_id").val(id)
+    $(document).on('click', '.btn-add-price', function(e) {
+        $('#form-price-detail').find("input[type=text], textarea, input[type=hidden]").val("");
+        $('#form-price').modal({backdrop: 'static', keyboard: false});
+        $("#price_id").val(id)
         e.preventDefault();
     });
 
-    $(document).on('click', '#form-segment-accept', function() {
-        $('#form-segment-detail').submit();
+    $(document).on('click', '#form-price-accept', function() {
+        $('#form-price-detail').submit();
     })
 
-    $(document).on('click', '#form-segment-cancel', function() {
-        $('#form-segment').modal('hide');
+    $(document).on('click', '#form-price-cancel', function() {
+        $('#form-price').modal('hide');
         $('#form-sales-trx').modal('hide');
         setTimeout(function() {
             $('#form-sales-trx').modal({backdrop: 'static', keyboard: false});
@@ -61,7 +63,7 @@
             dataType: "JSON",
             data: {'id':id},
             success: function(data) {
-                $('#segment-detail').DataTable().ajax.reload();
+                $('#price-detail').DataTable().ajax.reload();
             }
         })
     });
@@ -81,22 +83,22 @@
                 $("#end_desc").val(value.end_desc)
                 $("#description").val(value.description)
                 $("#status").val(value.status)
-                $("#segmentc_id").val(data.data.id)
+                $("#misc_id").val(data.data.id)
 
-                $('#form-segment').modal({backdrop: 'static', keyboard: false});
+                $('#form-price').modal({backdrop: 'static', keyboard: false});
             }
         })
     });
 
-    function Segment(add = true) {
+    function Price(add = true) {
         if (add) {
             return {
-                'type': 'segment-detail',
-                'parent_id': $('#segment_id').val()
+                'type': 'price-detail',
+                'parent_id': $('#price_id').val()
             };    
         } else {
             return {
-                'type': 'segment-detail',
+                'type': 'price-detail',
                 'parent_id': $('#detail_id').val()
             };
         }

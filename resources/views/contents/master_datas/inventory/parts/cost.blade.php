@@ -26,19 +26,19 @@
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('ticket_cost', trans('Ticket Cost'), ['class' => 'control-label']) !!}
-                    {!! Form::number('ticket_cost', old('ticket_cost') , ['class' => 'form-control', 'placeholder' => 'Input the Ticket Cost']) !!}
+                    {!! Form::text('ticket_cost', old('ticket_cost') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Ticket Cost']) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('published_r', trans('Published'), ['class' => 'control-label']) !!}
-                    {!! Form::number('published_r', old('published_r') , ['class' => 'form-control', 'placeholder' => 'Input the Ticket Cost']) !!}
+                    {!! Form::text('published_r', old('published_r') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Ticket Cost']) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('exch_rate', trans('Exch Rate'), ['class' => 'control-label']) !!}
-                    {!! Form::number('exch_rate', old('exch_rate') , ['class' => 'form-control', 'placeholder' => 'Input the Ticket Cost']) !!}
+                    {!! Form::text('exch_rate', old('exch_rate') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Ticket Cost']) !!}
                 </div>
             </div>
         </div>
@@ -46,19 +46,19 @@
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('tax', trans('Tax'), ['class' => 'control-label']) !!}
-                    {!! Form::number('tax', old('tax') , ['class' => 'form-control', 'placeholder' => 'Input the Tax']) !!}
+                    {!! Form::text('tax', old('tax') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Tax']) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('discount', trans('Discount'), ['class' => 'control-label']) !!}
-                    {!! Form::number('discount', old('discount') , ['class' => 'form-control', 'placeholder' => 'Input the Discount']) !!}
+                    {!! Form::text('discount', old('discount') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Discount']) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('comm_amt', trans('Comm Amt'), ['class' => 'control-label']) !!}
-                    {!! Form::number('comm_amt', old('comm_amt') , ['class' => 'form-control', 'placeholder' => 'Input the Comm Amt']) !!}
+                    {!! Form::text('comm_amt', old('comm_amt') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Comm Amt']) !!}
                 </div>
             </div>
         </div>

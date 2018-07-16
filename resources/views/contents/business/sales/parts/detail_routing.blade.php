@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-@section('modal_detail')
+@push('modal_detail')
 <div id="form-routing" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -212,4 +212,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endpush

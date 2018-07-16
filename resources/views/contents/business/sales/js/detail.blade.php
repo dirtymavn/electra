@@ -52,6 +52,11 @@
         $("#routing_id").val(makeId)
 
         initDatatable($('#routing-detail'), "{{route('sales.get-detail-data')}}", routingColumns, Routing());
+        initDatatable($('#mis-detail'), "{{route('sales.get-detail-data')}}", misColumns, Mis());
+        initDatatable($('#price-detail'), "{{route('sales.get-detail-data')}}", priceColumns, Price());
+        initDatatable($('#cost-detail'), "{{route('sales.get-detail-data')}}", costColumns, Cost());
+        initDatatable($('#segment-detail'), "{{route('sales.get-detail-data')}}", segmentColumns, Segment());
+        initDatatable($('#passenger-detail'), "{{route('sales.get-detail-data')}}", passengerColumns, Passenger());
         e.preventDefault();
     });
 

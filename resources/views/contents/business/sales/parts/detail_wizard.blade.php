@@ -6,6 +6,7 @@
         <a class="step-trigger" href="#stepContent4">Cost </a>
         <a class="step-trigger" href="#stepContent5">Price </a>
         <a class="step-trigger" href="#stepContent6">Segments </a>
+        <a class="step-trigger" href="#stepContent7">Passenger </a>
     </div>
     <div class="step-contents">
         <div class="step-content active" id="stepContent1">
@@ -109,6 +110,9 @@
             @include('contents.business.sales.parts.price')
         </div>
         <div class="step-content" id="stepContent6">
+            @include('contents.business.sales.parts.segment')
+        </div>
+        <div class="step-content" id="stepContent7">
             @include('contents.business.sales.parts.passenger')
         </div>
     </div>
@@ -118,4 +122,7 @@
 @include('contents.business.sales.js.routing')
 @include('contents.business.sales.js.mis')
 @include('contents.business.sales.js.cost')
+@include('contents.business.sales.js.price')
+@include('contents.business.sales.js.segment')
+@include('contents.business.sales.js.passenger')
 @endsection

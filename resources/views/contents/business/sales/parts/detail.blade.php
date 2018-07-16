@@ -56,5 +56,5 @@
     </div>
 </div>
 
-@yield('modal_detail')
+@stack('modal_detail')
 @endpush

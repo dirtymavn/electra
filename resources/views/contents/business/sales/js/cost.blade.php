@@ -1,6 +1,5 @@
 <script>
-    $(document).ready(function() {
-        var detailColumns = [
+     var costColumns = [
             { data: 'pay_amt', name: 'pay_amt'},
             { data: 'currency_code_id', name: 'currency_code_id'},
             { data: 'supplier_reference_id', name: 'supplier_reference_id'},
@@ -9,12 +8,8 @@
             { data: 'action', name: 'action'},
         ];
 
-        var detailDatas = {
-            'type': 'cost-detail'
-        };
-
-        initDatatable($('#cost-detail'), "{{route('sales.get-detail-data')}}", detailColumns, detailDatas);
-
+    $(document).ready(function() {
+    
         $('#form-cost-detail').submit(function(e) {
             e.preventDefault();
             var formData = new FormData(this);
@@ -26,8 +21,13 @@
                 dataType: "JSON",
                 data: formData,
                 success: function(data) {
+                    $('div.spinner').hide();
                     $('#form-cost').modal('hide');
                     $('#cost-detail').DataTable().ajax.reload();
+                    $('#form-sales-trx').modal('hide');
+                    setTimeout(function() {
+                        $('#form-sales-trx').modal({backdrop: 'static', keyboard: false});
+                    }, 500)
                 }
             });
         });
@@ -36,12 +36,20 @@
     $(document).on('click', '.btn-add-cost', function(e) {
         $('#form-cost-detail').find("input[type=text], textarea, input[type=hidden]").val("");
         $('#form-cost').modal({backdrop: 'static', keyboard: false});
-        $('#form-cost').css("z-index", "99999");
+        $("#cost_id").val(id)
         e.preventDefault();
     });
 
-    $(document).on('click', '#form-detail-accept', function() {
+    $(document).on('click', '#form-cost-accept', function() {
         $('#form-cost-detail').submit();
+    })
+
+    $(document).on('click', '#form-cost-cancel', function() {
+        $('#form-cost').modal('hide');
+        $('#form-sales-trx').modal('hide');
+        setTimeout(function() {
+            $('#form-sales-trx').modal({backdrop: 'static', keyboard: false});
+        }, 500)
     })
 
     $(document).on('click', '.deleteData', function() {
@@ -72,10 +80,25 @@
                 $("#end_desc").val(value.end_desc)
                 $("#description").val(value.description)
                 $("#status").val(value.status)
-                $("#misc_id").val(data.data.id)
+                $("#costc_id").val(data.data.id)
 
                 $('#form-cost').modal({backdrop: 'static', keyboard: false});
             }
         })
     });
+
+    function Cost(add = true) {
+        if (add) {
+            return {
+                'type': 'cost-detail',
+                'parent_id': $('#cost_id').val()
+            };    
+        } else {
+            return {
+                'type': 'cost-detail',
+                'parent_id': $('#detail_id').val()
+            };
+        }
+        
+    }
 </script>

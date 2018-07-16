@@ -55,8 +55,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('status', old('status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'status']) !!}
+                            {!! Form::label('misc_status', trans('Status'), ['class' => 'control-label']) !!}
+                            {!! Form::text('misc_status', old('misc_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'misc_status']) !!}
                         </div>
                     </div>
                 </div>

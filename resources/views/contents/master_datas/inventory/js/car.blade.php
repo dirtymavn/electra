@@ -7,7 +7,7 @@
             { data: 'class', name: 'class'},
             { data: 'departure', name: 'departure'},
             { data: 'arrival', name: 'arrival'},
-            { data: 'status', name: 'status'},
+            { data: 'car_status', name: 'car_status'},
             { data: 'action', name: 'action'},
         ];
 
@@ -73,7 +73,7 @@
                 $('#class').val(value.class);
                 $('#departure').val(value.departure);
                 $('#arrival').val(value.arrival);
-                $('#status').val(value.status);
+                $('#car_status').val(value.car_status);
                 $("#car_id").val(data.data.id)
 
                 $('#form-car').modal({backdrop: 'static', keyboard: false});

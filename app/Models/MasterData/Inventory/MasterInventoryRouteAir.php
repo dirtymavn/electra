@@ -24,7 +24,7 @@ class MasterInventoryRouteAir extends Model
     	'stopover_city',
     	'stopover_qty',
     	'seat_no',
-    	'airlane_pnr',
+    	'airline_pnr',
     	'fly_duration',
     	'meal_srv',
     	'terminal',
