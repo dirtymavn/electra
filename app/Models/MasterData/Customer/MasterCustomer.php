@@ -221,4 +221,11 @@ class MasterCustomer extends Model implements Auditable
     {
         return $this->hasMany('App\Models\Outbound\TrxTourOrder\TourOrder', 'customer_id');
     }
+
+    public static function getAvaliable()
+    {
+        $return = self::where('company_id', user_info()->company_id)->whereIsDraft(false);
+
+        return $return;
+    }
 }
