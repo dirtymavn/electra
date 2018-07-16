@@ -87,7 +87,6 @@ class TrxSales extends Model
             $input = Request::all();
             $input['sales_id'] = $sales->id;
 
-
             // Save Trx Sales Credit Card
             $credit = TrxSalesCreditCard::where('trx_sales_id', $sales->id)->first();
             $credit->trx_sales_id = $sales->id;
@@ -106,7 +105,7 @@ class TrxSales extends Model
             $credit->save();
 
             // Save Trx Billing 
-            $billing = new TrxSalesBilling();
+            $billing = TrxSalesBilling::where('trx_sales_id', $sales->id)->first();
             $billing->trx_sales_id = $sales->id;
             $billing->ta_no = $input['ta_no'];
             $billing->cc_id = $input['cc_id'];
@@ -118,6 +117,7 @@ class TrxSales extends Model
             $billing->job_title = $input['job_title'];
 
             $billing->save();
+
 
             // $salesDetail = \DB::table('temporaries')->whereType('sales-detail')
             //     ->whereUserId(user_info('id'))
