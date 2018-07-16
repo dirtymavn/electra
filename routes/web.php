@@ -30,8 +30,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('sales/sales-detail/detail', array('as' => 'sales.detail.detail', 'uses' => 'SalesFolderController@salesDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         Route::post('sales/sales-sales-detail', array('as' => 'sales.sales-detail.post', 'uses' => 'SalesFolderController@salesDetail', 'middleware' => 'sentinel_access:admin.company,sales.create'));
         Route::post('sales/sales-routing-detail', array('as' => 'sales.routing-detail.post', 'uses' => 'SalesFolderController@salesRouting', 'middleware' => 'sentinel_access:admin.company,sales.create'));
-        Route::post('sales/sales-mis-detail', array('as' => 'sales.mis-detail.post', 'uses' => 'SalesFolderController@salesDetail', 'middleware' => 'sentinel_access:admin.company,sales.create'));
-        Route::post('sales/sales-cost-detail', array('as' => 'sales.cost-detail.post', 'uses' => 'SalesFolderController@salesDetail', 'middleware' => 'sentinel_access:admin.company,sales.create'));
+        Route::post('sales/sales-mis-detail', array('as' => 'sales.mis-detail.post', 'uses' => 'SalesFolderController@salesMis', 'middleware' => 'sentinel_access:admin.company,sales.create'));
+        Route::post('sales/sales-cost-detail', array('as' => 'sales.cost-detail.post', 'uses' => 'SalesFolderController@salesCost', 'middleware' => 'sentinel_access:admin.company,sales.create'));
         Route::post('sales/sales-price-detail', array('as' => 'sales.price-detail.post', 'uses' => 'SalesFolderController@salesPrice', 'middleware' => 'sentinel_access:admin.company,sales.create'));
         Route::post('sales/sales-segment-detail', array('as' => 'sales.segment-detail.post', 'uses' => 'SalesFolderController@salesSegment', 'middleware' => 'sentinel_access:admin.company,sales.create'));
         Route::post('sales/sales-passenger-detail', array('as' => 'sales.passenger-detail.post', 'uses' => 'SalesFolderController@salesPassenger', 'middleware' => 'sentinel_access:admin.company,sales.create'));

@@ -262,7 +262,7 @@ class SalesFolderController extends Controller
         } elseif($request->type == 'routing-detail') {
             $classEdit = 'editDataRouting';
             $classDelete = 'deleteDataRouting';
-        }else {
+        } else {
             $classEdit = 'editData';
             $classDelete = 'deleteData';
         }
@@ -456,6 +456,37 @@ class SalesFolderController extends Controller
                 'user_id' => user_info('id'),
                 'data' => json_encode($request->except(['_token', 'segment_id'])),
                 'parent_id' => $request->segment_id
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+     /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function salesPassenger(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            \Log::info($request->all());
+            if (@$request->passenger_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->passenger_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'passenger-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'passenger_id'])),
+                'parent_id' => $request->passenger_id
             ]);
 
             \DB::commit();

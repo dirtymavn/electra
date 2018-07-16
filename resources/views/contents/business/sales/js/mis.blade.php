@@ -3,7 +3,7 @@
             { data: 'lowest_fare_rejection', name: 'lowest_fare_rejection'},
             { data: 'destination_id', name: 'destination_id'},
             { data: 'deal_code', name: 'deal_code'},
-            { data: 'region_code', name: 'region_code'},
+            { data: 'region_code_id', name: 'region_code_id'},
             { data: 'realised_saving_code', name: 'realised_saving_code'},
             { data: 'iata_no', name: 'iata_no'},
             { data: 'fare_type_id', name: 'fare_type_id'},
