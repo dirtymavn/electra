@@ -342,4 +342,128 @@ class SalesFolderController extends Controller
             return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
         }
     }
+
+     /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function salesPrice(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            \Log::info($request->all());
+            if (@$request->price_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->price_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'price-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'price_id'])),
+                'parent_id' => $request->price_id
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function salesMis(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            \Log::info($request->all());
+            if (@$request->mis_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->mis_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'mis-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'mis_id'])),
+                'parent_id' => $request->mis_id
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+     /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function salesCost(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            \Log::info($request->all());
+            if (@$request->cost_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->cost_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'cost-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'cost_id'])),
+                'parent_id' => $request->cost_id
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+     /**
+     * Store a newly created resource in storage temporary.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function salesSegment(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            \Log::info($request->all());
+            if (@$request->segment_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->segment_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'segment-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'segment_id'])),
+                'parent_id' => $request->segment_id
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true],200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
 }

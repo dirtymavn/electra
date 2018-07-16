@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary form-control btn-add-cost col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
+                    <button type="button" class="btn btn-primary form-control btn-add-passenger col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
                 </div>
                 <div class="form-group">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="cost-detail" style="width:100%;">
+                        <table class="table table-bordered table-striped" id="passenger-detail" style="width:100%;">
                             <thead>
                                 <tr class="text-center">
                                     <th>Passenger Name</th>
@@ -25,7 +25,7 @@
     </div>
 </div>
 
-@push('models')
+@push('modal_detail')
 <div id="form-passenger" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

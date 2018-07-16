@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary form-control btn-add-cost col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
+                    <button type="button" class="btn btn-primary form-control btn-add-segment col-md-2"><i class="fa fa-plus m-right-10"></i> Add</button>
                 </div>
                 <div class="form-group">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="cost-detail" style="width:100%;">
+                        <table class="table table-bordered table-striped" id="segment-detail" style="width:100%;">
                             <thead>
                                 <tr class="text-center">
                                     <th>Start Date</th>
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-@push('models')
+@push('modal_detail')
 <div id="form-segment" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -76,9 +76,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a id="form-cost-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
+                <a id="form-segment-cancel" href="#" class="btn btn-grey pull-left" data-dismiss="modal">    <i class="fa fa-times m-right-10"></i> Cancel
                 </a>
-                <button id="form-cost-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-check"></i> Submit
+                <button id="form-segment-accept" type="button" class="btn btn-success pull-left">    <i class="fa fa-check"></i> Submit
                 </button>
             </div>
             {!! Form::close() !!}
