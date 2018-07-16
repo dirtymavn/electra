@@ -337,8 +337,8 @@
                                                                                         {!! Form::text('flight_to', old('flight_to'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Flight To']) !!}
                                                                                     </div>
                                                                                     <div class="form-group">
-                                                                                        {!! Form::label('flight_airline_is', trans('Airline'), ['class' => 'control-label']) !!}
-                                                                                        {!! Form::select('flight_airline_is', @$airlines, old('flight_airline_is'), ['class' => 'form-control']) !!}
+                                                                                        {!! Form::label('flight_airline_id', trans('Airline'), ['class' => 'control-label']) !!}
+                                                                                        {!! Form::select('flight_airline_id', @$airlines, old('flight_airline_id'), ['class' => 'form-control']) !!}
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         {!! Form::label('flight_no', trans('Flight No'), ['class' => 'control-label']) !!}
@@ -577,7 +577,7 @@
                         
                     $('#flight_from').val(value.flight_from),
                     $('#flight_to').val(value.flight_to),
-                    $('#flight_airline_is').val(value.flight_airline_is),
+                    $('#flight_airline_id').val(value.flight_airline_id),
                     $('#flight_no').val(value.flight_no),
                     $('#class').val(value.class),
                     $('#farebasis').val(value.farebasis),
@@ -609,7 +609,7 @@
     var flightColumns = [
         {data: 'flight_from', name: 'flight_from'},
         {data: 'flight_to', name: 'flight_to'},
-        {data: 'flight_airline_is', name: 'flight_airline_is'},
+        {data: 'flight_airline_id', name: 'flight_airline_id'},
         {data: 'flight_no', name: 'flight_no'},
         {data: 'class', name: 'class'},
         {data: 'farebasis', name: 'farebasis'},
