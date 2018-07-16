@@ -130,7 +130,7 @@ class CreateOrdersTable extends Migration
             $table->integer('trx_tour_order_pax_list_tour_id')->unsigned();
             $table->integer('flight_from')->unsigned()->nullable();
             $table->integer('flight_to')->unsigned()->nullable();
-            $table->integer('airline_is')->unsigned()->nullable();
+            $table->integer('airline_id')->unsigned()->nullable();
             $table->string('flight_no')->nullable();
             $table->string('class')->nullable();
             $table->text('farebasis')->nullable();

@@ -22,7 +22,7 @@ class TourOrderPaxListTourFlight extends Model
         'trx_tour_order_pax_list_tour_id',
         'flight_from',
         'flight_to',
-        'airline_is',
+        'airline_id',
         'flight_no',
         'class',
         'farebasis',
