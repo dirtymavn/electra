@@ -216,7 +216,7 @@ class TourOrderController extends Controller
                 $data = [
                     'flight_from' => $flight->flight_from,
                     'flight_to' => $flight->flight_to,
-                    'flight_airline_is' => $flight->airline_is,
+                    'flight_airline_id' => $flight->airline_id,
                     'flight_no' => $flight->flight_no,
                     'class' => $flight->class,
                     'farebasis' => $flight->farebasis,
@@ -363,7 +363,7 @@ class TourOrderController extends Controller
                                 $flight->trx_tour_order_pax_list_tour_id = $paxlistTour->id;
                                 $flight->flight_from = $tourPaxlistTourFlight->flight_from;
                                 $flight->flight_to = $tourPaxlistTourFlight->flight_to;
-                                $flight->airline_is = $tourPaxlistTourFlight->flight_airline_is;
+                                $flight->airline_id = $tourPaxlistTourFlight->flight_airline_id;
                                 $flight->flight_no = $tourPaxlistTourFlight->flight_no;
                                 $flight->class = $tourPaxlistTourFlight->class;
                                 $flight->farebasis = $tourPaxlistTourFlight->farebasis;
