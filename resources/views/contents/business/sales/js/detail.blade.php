@@ -108,11 +108,12 @@
                     $("#passenger_class_code").val(value.passenger_class_code)
                     $("#pnr_no").val(value.pnr_no)
                     $("#dk_no").val(value.dk_no)
-                    $("#airline_form").val(value.airline_form)
+                    $("#airline_from").val(value.airline_from)
                     $("#sales_type").val(value.sales_type)
                     $("#confirm_date").val(value.confirm_date)
                     $("#mpd_no").val(value.mpd_no)
                     $("#sales_detail_remark").val(value.sales_detail_remark)
+                    $("#confirm_by").val(value.confirm_by)
                     
                     initDatatable($('#routing-detail'), "{{route('sales.get-detail-data')}}", routingColumns, Routing(false));
                     initDatatable($('#mis-detail'), "{{route('sales.get-detail-data')}}", misColumns, Mis(false));

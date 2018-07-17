@@ -44,13 +44,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('start_date', trans('Start Date'), ['class' => 'control-label']) !!}
-                            {!! Form::text('start_date', old('start_date') , ['class' => 'form-control', 'placeholder' => 'Input the Start Date', 'id' => 'start_date']) !!}
+                            {!! Form::date('start_date', old('start_date') , ['class' => 'form-control', 'placeholder' => 'Input the Start Date', 'id' => 'start_date']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('end_date', trans('End Date'), ['class' => 'control-label']) !!}
-                            {!! Form::text('end_date', old('end_date') , ['class' => 'form-control', 'placeholder' => 'Input the End Date', 'id' => 'end_date']) !!}
+                            {!! Form::date('end_date', old('end_date') , ['class' => 'form-control', 'placeholder' => 'Input the End Date', 'id' => 'end_date']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
