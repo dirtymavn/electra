@@ -29,13 +29,13 @@
     </div>
 </div>
 
-@push('models')
+@push('modal_detail')
 <div id="form-mis" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             {!! Form::open(['id' => 'form-mis-detail', 'method' => 'post']) !!}
             <input type="hidden" value="" name="mis_id" id="mis_id">
-                        
+            <input type="hidden" value="" name="mis_method" id="mis_method">            
             <div class="modal-header">
                 <h4 class="modal-title">Detail Mis</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>

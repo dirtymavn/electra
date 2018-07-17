@@ -71,23 +71,180 @@ class TrxSales extends Model
 
             $billing->save();
 
-            // $salesDetail = \DB::table('temporaries')->whereType('sales-detail')
-            //     ->whereUserId(user_info('id'))
-            //     ->get();
 
-            // if (count($salesDetail) > 0) {
-            //     foreach ($salesDetail as $itinDetail) {
-            //         $detail = new TrxSalesDetail;
-            //         $itinDetail = json_decode($itinDetail->data);
-            //     }
-            // }
+            $salesDetail = \DB::table('temporaries')->whereType('sales-detail')
+            ->whereUserId(user_info('id'))
+            ->get();
+            // dd($salesDetail);
+            if (count($salesDetail) > 0) {
+
+                foreach ($salesDetail as $data) {
+                    $detailData = json_decode($data->data);
+                    $trx = new TrxSalesDetail;
+                    // dd($detailData);
+                    $trx->trx_sales_id = $sales->id;
+                    $trx->product_code = $detailData->product_code;
+                    $trx->passenger_class_code = $detailData->passenger_class_code;
+                    $trx->is_group_flag = $detailData->is_group_flag;
+                    $trx->is_suppress_flag = $detailData->is_suppress_flag;
+                    $trx->is_pax_sup = $detailData->is_pax_sup;
+                    $trx->is_group_item = $detailData->is_group_item;
+                    $trx->pnr_no = $detailData->pnr_no;
+                    $trx->dk_no = $detailData->dk_no;
+                    $trx->airline_from = $detailData->airline_from;
+                    $trx->sales_type = $detailData->sales_type;
+                    $trx->sales_detail_remark = $detailData->sales_detail_remark;
+                    $trx->confirm_by = $detailData->confirm_by;
+                    $trx->confirm_date = $detailData->confirm_date;
+                    $trx->mpd_no = $detailData->mpd_no;
+
+                    $trx->save();
+
+                    $temp_routing = \DB::table('temporaries')->where('type', 'routing-detail')
+                    ->whereUserId(user_info('id'))
+                    ->whereParentId($data->id)
+                    ->get();
+                    if (count($temp_routing) > 0) {
+                        foreach ($temp_routing as $data) {
+                            $dataRouting = json_decode($data->data);
+                            $routing = new TrxSalesDetailRouting;
+                            $routing->trx_sales_detail_id = $trx->id;
+                            $routing->city_from_id = $dataRouting->city_from_id;
+                            $routing->city_to_id = $dataRouting->city_to_id;
+                            $routing->airline_id = $dataRouting->airline_id;
+                            $routing->passenger_class_id = $dataRouting->passenger_class_id;
+                            $routing->depart_date = $dataRouting->depart_date;
+                            $routing->arrival_date = $dataRouting->arrival_date;
+                            $routing->stopover_count = $dataRouting->stopover_count;
+                            $routing->airline_pnr = $dataRouting->airline_pnr;
+                            $routing->fly_hr = $dataRouting->fly_hr;
+                            $routing->meal_srv = $dataRouting->meal_srv;
+                            $routing->ssr = $dataRouting->ssr;
+                            $routing->sector_pair = $dataRouting->sector_pair;
+                            $routing->path_code = $dataRouting->path_code;
+                            $routing->land_sector_desc = $dataRouting->land_sector_desc;
+                            $routing->operating_carrier_id = $dataRouting->operating_carrier_id;
+                            $routing->flight_no = $dataRouting->flight_no;
+                            $routing->flight_status = $dataRouting->flight_status;
+                            $routing->equip = $dataRouting->equip;
+                            $routing->seat_no = $dataRouting->seat_no;
+                            $routing->terminal = $dataRouting->terminal;
+                            $routing->mileage = $dataRouting->mileage;
+                            $routing->land_sector_flag = $dataRouting->land_sector_flag;
+                            $routing->stopover = $dataRouting->stopover;
+                            $routing->nuc = $dataRouting->nuc;
+                            $routing->roe = $dataRouting->roe;
+
+                            $routing->save();
+                        }
+                    }
+
+                    $temp_mis = \DB::table('temporaries')->where('type', 'mis-detail')
+                    ->whereUserId(user_info('id'))
+                    ->whereParentId($data->id)
+                    ->get();
+                    if (count($temp_mis) > 0) {
+                        foreach ($temp_mis as $data) {
+                            $dataMis = json_decode($data->data);
+                            $mis = new TrxSalesDetailMis;
+                            $mis->trx_sales_detail_id = $trx->id;
+                            $mis->lowest_fare_rejection = $dataMis->lowest_fare_rejection;
+                            $mis->destination_id = $dataMis->destination_id;
+                            $mis->deal_code = $dataMis->deal_code;
+                            $mis->region_code_id = $dataMis->region_code_id;
+                            $mis->realised_saving_code = $dataMis->realised_saving_code;
+                            $mis->iata_no = $dataMis->iata_no;
+                            $mis->fare_type_id = $dataMis->fare_type_id;
+
+                            $mis->save();
+                        }
+                    }
+
+                    $temp_cost = \DB::table('temporaries')->where('type', 'cost-detail')
+                    ->whereUserId(user_info('id'))
+                    ->whereParentId($data->id)
+                    ->get();
+                    if (count($temp_cost) > 0) {
+                        foreach ($temp_cost as $data) {
+                            $dataCost = json_decode($data->data);
+                            $cost = new TrxSalesDetailCost;
+                            $cost->trx_sales_detail_id = $trx->id;
+                            $cost->pay_amt = $dataCost->pay_amt;
+                            $cost->currency_code_id = $dataCost->currency_code_id;
+                            $cost->supplier_reference_id = $dataCost->supplier_reference_id;
+                            $cost->voucher_reference_id = $dataCost->voucher_reference_id;
+
+                            $cost->save();
+                        }
+                    }
+
+                    $temp_price = \DB::table('temporaries')->where('type', 'price-detail')
+                    ->whereUserId(user_info('id'))
+                    ->whereParentId($data->id)
+                    ->get();
+                    if (count($temp_price) > 0) {
+                        foreach ($temp_price as $data) {
+                            $dataPrice = json_decode($data->data);
+                            $price = new TrxSalesDetailCost;
+                            $price->trx_sales_detail_id = $trx->id;
+                            $price->description = $dataPrice->description;
+                            $price->billing_currency_id = $dataPrice->billing_currency_id;
+                            $price->gst_id = $dataPrice->gst_id;
+                            $price->gst_percent = $dataPrice->gst_percent;
+                            $price->gst_amt = $dataPrice->gst_amt;
+                            $price->rebate_percent = $dataPrice->rebate_percent;
+                            $price->rebate_amt = $dataPrice->rebate_amt;
+
+                            $price->save();
+                        }
+                    }
+
+                    $temp_segment = \DB::table('temporaries')->where('type', 'segment-detail')
+                    ->whereUserId(user_info('id'))
+                    ->whereParentId($data->id)
+                    ->get();
+                    if (count($temp_segment) > 0) {
+                        foreach ($temp_segment as $data) {
+                            $dataSegment = json_decode($data->data);
+                            $segment = new TrxSalesDetailSegment;
+                            $segment->trx_sales_detail_id = $dataSegment->trx_sales_detail_id;
+                            $segment->description = $dataSegment->description;
+                            $segment->start_date = $dataSegment->start_date;
+                            $segment->end_date = $dataSegment->end_date;
+                            $segment->start_description = $dataSegment->start_description;
+                            $segment->end_description = $dataSegment->end_description;
+                            $segment->status = $dataSegment->status;
+
+                            $segment->save();
+
+                        }
+                    }
+
+                    $temp_segment = \DB::table('temporaries')->where('type', 'segment-detail')
+                    ->whereUserId(user_info('id'))
+                    ->whereParentId($data->id)
+                    ->get();
+                    if (count($temp_segment) > 0) {
+                        foreach ($temp_segment as $data) {
+                            $dataSegment = json_decode($data->data);
+                            $segment = new TrxSalesDetailSegment;
+                            $segment->trx_sales_detail_id = $trx->id;
+                            $segment->passenger_name = $dataSegment->passenger_name;
+                            $segment->ticket_no = $dataSegment->ticket_no;
+                            $segment->conj_ticket_no = $dataSegment->conj_ticket_no;
+
+                            $segment->save();
+                        }
+                    }
+                }
+            }
         });
 
         self::saved(function($sales) {
             $input = Request::all();
             $input['sales_id'] = $sales->id;
 
-            // Save Trx Sales Credit Card
+                            // Save Trx Sales Credit Card
             $credit = TrxSalesCreditCard::where('trx_sales_id', $sales->id)->first();
             $credit->trx_sales_id = $sales->id;
             $credit->card_type = $input['card_type'];
@@ -104,7 +261,7 @@ class TrxSales extends Model
 
             $credit->save();
 
-            // Save Trx Billing 
+                            // Save Trx Billing 
             $billing = TrxSalesBilling::where('trx_sales_id', $sales->id)->first();
             $billing->trx_sales_id = $sales->id;
             $billing->ta_no = $input['ta_no'];
@@ -117,18 +274,6 @@ class TrxSales extends Model
             $billing->job_title = $input['job_title'];
 
             $billing->save();
-
-
-            // $salesDetail = \DB::table('temporaries')->whereType('sales-detail')
-            //     ->whereUserId(user_info('id'))
-            //     ->get();
-
-            // if (count($salesDetail) > 0) {
-            //     foreach ($salesDetail as $itinDetail) {
-            //         $detail = new TrxSalesDetail;
-            //         $itinDetail = json_decode($itinDetail->data);
-            //     }
-            // }
         });
     }
 }

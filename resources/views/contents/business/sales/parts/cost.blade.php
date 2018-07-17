@@ -26,13 +26,13 @@
     </div>
 </div>
 
-@push('models')
+@push('modal_detail')
 <div id="form-cost" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             {!! Form::open(['id' => 'form-cost-detail', 'method' => 'post']) !!}
             <input type="hidden" value="" name="cost_id" id="cost_id">
-                        
+            <input type="hidden" value="" name="cost_method" id="cost_method">            
             <div class="modal-header">
                 <h4 class="modal-title">Detail Cost</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>

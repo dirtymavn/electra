@@ -29,7 +29,7 @@
         </div>
     </div>
 </div>
-@section('modal_detail')
+@push('modal_detail')
 <div id="form-routing" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -46,25 +46,25 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('city_from_id', trans('City From'), ['class' => 'control-label']) !!}
-                            {!! Form::text('city_from_id', old('city_from_id') , ['class' => 'form-control', 'placeholder' => 'Input the City From', 'id' => 'city_from_id']) !!}
+                            {!! Form::number('city_from_id', old('city_from_id') , ['class' => 'form-control', 'placeholder' => 'Input the City From', 'id' => 'city_from_id']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('city_to_id', trans('City To'), ['class' => 'control-label']) !!}
-                            {!! Form::text('city_to_id', old('city_to_id') , ['class' => 'form-control', 'placeholder' => 'Input the City To', 'id' => 'city_to_id']) !!}
+                            {!! Form::number('city_to_id', old('city_to_id') , ['class' => 'form-control', 'placeholder' => 'Input the City To', 'id' => 'city_to_id']) !!}
                         </div>
                     </div>    
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('airline_id', trans('Airline'), ['class' => 'control-label']) !!}
-                            {!! Form::text('airline_id', old('airline_id') , ['class' => 'form-control', 'placeholder' => 'Input the Airline', 'id' => 'airline_id']) !!}
+                            {!! Form::number('airline_id', old('airline_id') , ['class' => 'form-control', 'placeholder' => 'Input the Airline', 'id' => 'airline_id']) !!}
                         </div>
                     </div> 
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('passenger_class_id', trans('Passenger Class ID'), ['class' => 'control-label']) !!}
-                            {!! Form::text('passenger_class_id', old('passenger_class_id') , ['class' => 'form-control', 'placeholder' => 'Input the Passenger Class ID', 'id' => 'passenger_class_id']) !!}
+                            {!! Form::number('passenger_class_id', old('passenger_class_id') , ['class' => 'form-control', 'placeholder' => 'Input the Passenger Class ID', 'id' => 'passenger_class_id']) !!}
                         </div>
                     </div>    
                     <div class="col-md-6">
@@ -212,4 +212,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endpush
