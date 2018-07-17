@@ -53,7 +53,7 @@
         }, 500)
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataSegment', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.delete')}}",
@@ -75,6 +75,7 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
+                $("#segment_id").val(data.data.id)
                 $("#description").val(value.description)
                 $("#start_date").val(value.start_date)
                 $("#end_date").val(value.end_date)

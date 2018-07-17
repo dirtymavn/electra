@@ -182,7 +182,7 @@ class SalesFolderController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            sales::whereIn('id', $ids)->delete();
+            Sales::whereIn('id', $ids)->delete();
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));

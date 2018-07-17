@@ -51,7 +51,7 @@
         }, 500)
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataPassenger', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.delete')}}",
@@ -73,6 +73,7 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
+                $("#passenger_id").val(data.data.id)
                 $("#passenger_name").val(value.passenger_name)
                 $("#ticket_no").val(value.ticket_no)
                 $("#conj_ticket_no").val(value.conj_ticket_no)
