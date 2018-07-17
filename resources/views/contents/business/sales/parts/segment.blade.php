@@ -56,19 +56,25 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('start_description', trans('Start Description'), ['class' => 'control-label']) !!}
-                            {!! Form::text('start_description', old('start_description') , ['class' => 'form-control', 'placeholder' => 'Input the Start Description', 'rows' => '3x5', 'id' => 'start_description']) !!}
+                            {!! Form::text('start_description', old('start_description') , ['class' => 'form-control', 'placeholder' => 'Input the Start Description', 'rows' => '3x6', 'id' => 'start_description']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('end_description', trans('End Descripton'), ['class' => 'control-label']) !!}
-                            {!! Form::text('end_description', old('end_description') , ['class' => 'form-control', 'placeholder' => 'Input the End Descripton', 'rows' => '3x5', 'id' => 'end_description']) !!}
+                            {!! Form::text('end_description', old('end_description') , ['class' => 'form-control', 'placeholder' => 'Input the End Descripton', 'rows' => '3x6', 'id' => 'end_description']) !!}
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('description', trans('Descripton'), ['class' => 'control-label']) !!}
                             {!! Form::textarea('description', old('description') , ['class' => 'form-control', 'placeholder' => 'Input the Descripton','rows' => '3x6', 'id' => 'description']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
+                            {!! Form::text('status', old('status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'status']) !!}
                         </div>
                     </div>
                     

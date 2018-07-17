@@ -46,13 +46,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('city_from_id', trans('City From'), ['class' => 'control-label']) !!}
-                            {!! Form::number('city_from_id', old('city_from_id') , ['class' => 'form-control', 'placeholder' => 'Input the City From', 'id' => 'city_from_id']) !!}
+                            {!! Form::select('city_from_id', $cities, old('city_from_id'), ['class' => 'form-control', 'placeholder' => 'Choose City From']) !!}
+                            {{-- {!! Form::number('city_from_id', old('city_from_id') , ['class' => 'form-control', 'placeholder' => 'Input the City From', 'id' => 'city_from_id']) !!} --}}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('city_to_id', trans('City To'), ['class' => 'control-label']) !!}
-                            {!! Form::number('city_to_id', old('city_to_id') , ['class' => 'form-control', 'placeholder' => 'Input the City To', 'id' => 'city_to_id']) !!}
+                            {!! Form::select('city_to_id', $cities, old('city_to_id'), ['class' => 'form-control', 'placeholder' => 'Choose City To']) !!}
+                            {{-- {!! Form::number('city_to_id', old('city_to_id') , ['class' => 'form-control', 'placeholder' => 'Input the City To', 'id' => 'city_to_id']) !!} --}}
                         </div>
                     </div>    
                     <div class="col-md-6">
