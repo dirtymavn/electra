@@ -626,6 +626,9 @@
                         <li class="{!! (url(route('product-type.index')) == Request::url() OR Request::is('master-data/product-type*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','product-type.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('product-type.index')}}"><i class="fa fa-circle-o"></i><span>Product Type</span></a>
                         </li>
+                        <li class="{!! (url(route('product-category.index')) == Request::url() OR Request::is('master-data/product-category*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','product-category.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('product-category.index')}}"><i class="fa fa-circle-o"></i><span>Product Category</span></a>
+                        </li>
                         <li class="{!! (url(route('region.index')) == Request::url() OR Request::is('master-data/region*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','region.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('region.index')}}"><i class="fa fa-circle-o"></i><span>Region</span></a>
                         </li>
