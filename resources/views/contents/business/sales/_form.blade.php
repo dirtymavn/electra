@@ -44,7 +44,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('invoice_no', trans('Invoice No'), ['class' => 'control-label']) !!}
-            {!! Form::text('invoice_no', old('invoice_no') , ['class' => 'form-control', 'placeholder' => 'Input the Invoice No']) !!}
+            {!! Form::number('invoice_no', old('invoice_no') , ['class' => 'form-control', 'placeholder' => 'Input the Invoice No']) !!}
         </div>
     </div>
     <div class="col-sm-6">
@@ -56,13 +56,13 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('ticket_amt', trans('Ticket AMT'), ['class' => 'control-label']) !!}
-            {!! Form::number('ticket_amt', old('ticket_amt') , ['class' => 'form-control', 'placeholder' => 'Input the Ticket AMT']) !!}
+            {!! Form::text('ticket_amt', old('ticket_amt') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Ticket AMT']) !!}
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('rebate', trans('Rebate'), ['class' => 'control-label']) !!}
-            {!! Form::text('rebate', old('rebate') , ['class' => 'form-control', 'placeholder' => 'Input the Rebate']) !!}
+            {!! Form::text('rebate', old('rebate') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Rebate']) !!}
         </div>
     </div>
 </div>
