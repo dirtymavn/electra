@@ -4,8 +4,8 @@
             { data: 'end_date', name: 'end_date'},
             { data: 'start_description', name: 'start_description'},
             { data: 'end_description', name: 'end_description'},
-            { data: 'status', name: 'status'},
             { data: 'description', name: 'description'},
+            { data: 'status', name: 'status'},
             { data: 'action', name: 'action'},
         ];
 
