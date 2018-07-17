@@ -81,7 +81,7 @@ class ProductCodeController extends Controller
             }
         } catch (\Exception $e) {
             \DB::rollback();
-            flash()->success(trans('message.error') . ' : ' . $e->getMessage());
+            flash()->error(trans('message.error') . ' : ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
     }
@@ -201,7 +201,7 @@ class ProductCodeController extends Controller
             }
         } catch (\Exception $e) {
             \DB::rollback();
-            flash()->success(trans('message.error') . ' : ' . $e->getMessage());
+            flash()->error(trans('message.error') . ' : ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
     }
