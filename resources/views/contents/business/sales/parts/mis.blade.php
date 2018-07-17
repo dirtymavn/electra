@@ -57,7 +57,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('deal_code', trans('Deal Code'), ['class' => 'control-label']) !!}
-                            {!! Form::text('deal_code', old('deal_code') , ['class' => 'form-control', 'placeholder' => 'Input the Deal Code', 'id' => 'deal_code']) !!}
+                            {!! Form::number('deal_code', old('deal_code') , ['class' => 'form-control', 'placeholder' => 'Input the Deal Code', 'id' => 'deal_code']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">

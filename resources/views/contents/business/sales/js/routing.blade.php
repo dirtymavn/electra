@@ -56,7 +56,7 @@
         }, 500)
     })
 
-    $(document).on('click', '.deleteData', function() {
+    $(document).on('click', '.deleteDataRouting', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.delete')}}",
