@@ -114,6 +114,10 @@
                     $("#mpd_no").val(value.mpd_no)
                     $("#sales_detail_remark").val(value.sales_detail_remark)
                     $("#confirm_by").val(value.confirm_by)
+                    $("#is_group_flag").val(value.is_group_flag)
+                    $("#is_suppress_flag").val(value.is_suppress_flag)
+                    $("#is_pax_sup").val(value.is_pax_sup)
+                    $("#is_group_item").val(value.is_group_item)
                     
                     initDatatable($('#routing-detail'), "{{route('sales.get-detail-data')}}", routingColumns, Routing(false));
                     initDatatable($('#mis-detail'), "{{route('sales.get-detail-data')}}", misColumns, Mis(false));
