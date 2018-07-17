@@ -66,7 +66,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataSegment', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.detail')}}",
@@ -75,13 +75,12 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
+                $("#description").val(value.description)
                 $("#start_date").val(value.start_date)
                 $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
+                $("#start_description").val(value.start_description)
+                $("#end_description").val(value.end_description)
                 $("#status").val(value.status)
-                $("#segmentc_id").val(data.data.id)
 
                 $('#form-segment').modal({backdrop: 'static', keyboard: false});
             }

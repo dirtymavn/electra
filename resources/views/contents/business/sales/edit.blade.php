@@ -40,7 +40,8 @@
                 </div>              
             </div>
         </div>
-    </form>
+    {!! Form::close() !!}
+    @stack('models')
 @endsection
 
 @section('script')

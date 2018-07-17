@@ -64,7 +64,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataPassenger', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.detail')}}",
@@ -73,13 +73,9 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
-                $("#status").val(value.status)
-                $("#passengerc_id").val(data.data.id)
+                $("#passenger_name").val(value.passenger_name)
+                $("#ticket_no").val(value.ticket_no)
+                $("#conj_ticket_no").val(value.conj_ticket_no)
 
                 $('#form-passenger').modal({backdrop: 'static', keyboard: false});
             }

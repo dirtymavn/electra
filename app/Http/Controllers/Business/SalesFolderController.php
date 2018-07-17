@@ -262,6 +262,18 @@ class SalesFolderController extends Controller
         } elseif($request->type == 'routing-detail') {
             $classEdit = 'editDataRouting';
             $classDelete = 'deleteDataRouting';
+        } elseif($request->type == 'cost-detail') {
+            $classEdit = 'editDataCost';
+            $classDelete = 'deleteDataCost';
+        } elseif($request->type == 'price-detail') {
+            $classEdit = 'editDataPrice';
+            $classDelete = 'deleteDataPrice';
+        } elseif($request->type == 'segment-detail') {
+            $classEdit = 'editDataSegment';
+            $classDelete = 'deleteDataSegment';
+        } elseif($request->type == 'passenger-detail') {
+            $classEdit = 'editDataPassenger';
+            $classDelete = 'deleteDataPassenger';
         } else {
             $classEdit = 'editData';
             $classDelete = 'deleteData';
@@ -303,6 +315,32 @@ class SalesFolderController extends Controller
                 ->whereUserId(user_info('id'))
                 ->update([ 'parent_id' => $temp->id ]);
 
+            Temporary::where('type', 'mis-detail')
+                ->whereParentId($request->sales_id)
+                ->whereUserId(user_info('id'))
+                ->update([ 'parent_id' => $temp->id ]);
+
+            Temporary::where('type', 'cost-detail')
+                ->whereParentId($request->sales_id)
+                ->whereUserId(user_info('id'))
+                ->update([ 'parent_id' => $temp->id ]);
+
+            Temporary::where('type', 'price-detail')
+                ->whereParentId($request->sales_id)
+                ->whereUserId(user_info('id'))
+                ->update([ 'parent_id' => $temp->id ]);
+
+            Temporary::where('type', 'segment-detail')
+                ->whereParentId($request->sales_id)
+                ->whereUserId(user_info('id'))
+                ->update([ 'parent_id' => $temp->id ]);
+
+            Temporary::where('type', 'passenger-detail')
+                ->whereParentId($request->sales_id)
+                ->whereUserId(user_info('id'))
+                ->update([ 'parent_id' => $temp->id ]);
+
+                
             \DB::commit();
 
             return response()->json(['result' => true],200);
@@ -384,7 +422,6 @@ class SalesFolderController extends Controller
     {
         \DB::beginTransaction();
         try {
-            \Log::info($request->all());
             if (@$request->mis_id) {
                 // Delete temporaries
                 \DB::table('temporaries')->whereId($request->mis_id)->delete();

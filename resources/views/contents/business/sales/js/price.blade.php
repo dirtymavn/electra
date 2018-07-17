@@ -68,7 +68,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataPrice', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.detail')}}",
@@ -77,13 +77,13 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
                 $("#description").val(value.description)
-                $("#status").val(value.status)
-                $("#misc_id").val(data.data.id)
+                $("#billing_currency_id").val(value.billing_currency_id)
+                $("#gst_id").val(value.gst_id)
+                $("#gst_percent").val(value.gst_percent)
+                $("#gst_amt").val(value.gst_amt)
+                $("#rebate_percent").val(value.rebate_percent)
+                $("#rebate_amt").val(value.rebate_amt)
 
                 $('#form-price').modal({backdrop: 'static', keyboard: false});
             }
