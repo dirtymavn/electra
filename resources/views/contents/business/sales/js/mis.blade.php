@@ -77,6 +77,7 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
+                $("#mis_id").val(data.data.id)
                 $("#lowest_fare_rejection").val(value.lowest_fare_rejection)
                 $("#destination_id").val(value.destination_id)
                 $("#deal_code").val(value.deal_code)

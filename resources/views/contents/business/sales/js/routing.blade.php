@@ -78,6 +78,7 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
+                $("#routing_id").val(data.data.id)
                 $("#city_from_id").val(value.city_from_id)
                 $("#city_to_id").val(value.city_to_id)
                 $("#airline_id").val(value.airline_id)

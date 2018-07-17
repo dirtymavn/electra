@@ -5,12 +5,12 @@
             { data: 'product_code', name: 'product_code'},
             { data: 'passenger_class_code', name: 'passenger_class_code'},
             { data: 'is_group_flag', name: 'is_group_flag'},
-            { data: 'is_supperss_flag', name: 'is_supperss_flag'},
+            { data: 'is_suppress_flag', name: 'is_suppress_flag'},
             { data: 'is_pax_sup', name: 'is_pax_sup'},
             { data: 'is_group_item', name: 'is_group_item'},
             { data: 'pnr_no', name: 'pnr_no'},
             { data: 'dk_no', name: 'dk_no'},
-            { data: 'airline_form', name: 'airline_form'},
+            { data: 'airline_from', name: 'airline_from'},
             { data: 'action', name: 'action'},
         ];
 

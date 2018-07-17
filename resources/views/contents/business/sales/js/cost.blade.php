@@ -74,6 +74,7 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
+                $("#cost_id").val(data.data.id)
                 $("#pay_amt").val(value.pay_amt)
                 $("#currency_code_id").val(value.currency_code_id)
                 $("#supplier_reference_id").val(value.supplier_reference_id)

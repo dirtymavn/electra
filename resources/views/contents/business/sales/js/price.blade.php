@@ -77,6 +77,7 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
+                $("#price_id").val(data.data.id)
                 $("#description").val(value.description)
                 $("#billing_currency_id").val(value.billing_currency_id)
                 $("#gst_id").val(value.gst_id)

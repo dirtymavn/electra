@@ -73,6 +73,7 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
+                $("#passenger_id").val(data.data.id)
                 $("#passenger_name").val(value.passenger_name)
                 $("#ticket_no").val(value.ticket_no)
                 $("#conj_ticket_no").val(value.conj_ticket_no)
