@@ -14,13 +14,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         {!! Form::label('product_code', trans('Product Code'), ['class' => 'control-label']) !!}
-                        {!! Form::text('product_code', old('product_code') , ['class' => 'form-control', 'placeholder' => 'Input the Product Code', 'id' => 'product_code']) !!}
+                        {!! Form::number('product_code', old('product_code') , ['class' => 'form-control', 'placeholder' => 'Input the Product Code', 'id' => 'product_code']) !!}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         {!! Form::label('passenger_class_code', trans('Passenger Class Code'), ['class' => 'control-label']) !!}
-                        {!! Form::text('passenger_class_code', old('passenger_class_code') , ['class' => 'form-control', 'placeholder' => 'Input the Passenger Class Code', 'id' => 'passenger_class_code']) !!}
+                        {!! Form::number('passenger_class_code', old('passenger_class_code') , ['class' => 'form-control', 'placeholder' => 'Input the Passenger Class Code', 'id' => 'passenger_class_code']) !!}
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -31,8 +31,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('is_supperss_flag', trans('Is Supperss Flag'), ['class' => 'control-label']) !!}
-                        {!! Form::select('is_supperss_flag', [ 'true' => 'TRUE', 'false' => 'FALSE' ], old('is_supperss_flag'), ['class' => 'form-control', 'placeholder' => 'Choose Supperss Flag']) !!}
+                        {!! Form::label('is_suppress_flag', trans('Is Suppress Flag'), ['class' => 'control-label']) !!}
+                        {!! Form::select('is_suppress_flag', [ 'true' => 'TRUE', 'false' => 'FALSE' ], old('is_suppress_flag'), ['class' => 'form-control', 'placeholder' => 'Choose Suppress Flag']) !!}
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -61,8 +61,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        {!! Form::label('airline_form', trans('Airline Form'), ['class' => 'control-label']) !!}
-                        {!! Form::text('airline_form', old('airline_form') , ['class' => 'form-control', 'placeholder' => 'Input the Airline Form', 'id' => 'airline_form']) !!}
+                        {!! Form::label('airline_from', trans('Airline From'), ['class' => 'control-label']) !!}
+                        {!! Form::text('airline_from', old('airline_from') , ['class' => 'form-control', 'placeholder' => 'Input the Airline From', 'id' => 'airline_from']) !!}
                     </div>
                 </div>
                 <div class="col-md-6">

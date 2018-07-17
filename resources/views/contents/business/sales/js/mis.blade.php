@@ -3,7 +3,7 @@
             { data: 'lowest_fare_rejection', name: 'lowest_fare_rejection'},
             { data: 'destination_id', name: 'destination_id'},
             { data: 'deal_code', name: 'deal_code'},
-            { data: 'region_code', name: 'region_code'},
+            { data: 'region_code_id', name: 'region_code_id'},
             { data: 'realised_saving_code', name: 'realised_saving_code'},
             { data: 'iata_no', name: 'iata_no'},
             { data: 'fare_type_id', name: 'fare_type_id'},
@@ -68,7 +68,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataMis', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.detail')}}",
@@ -77,13 +77,13 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
-                $("#status").val(value.status)
-                $("#misc_id").val(data.data.id)
+                $("#lowest_fare_rejection").val(value.lowest_fare_rejection)
+                $("#destination_id").val(value.destination_id)
+                $("#deal_code").val(value.deal_code)
+                $("#region_code_id").val(value.region_code_id)
+                $("#realised_saving_code").val(value.realised_saving_code)
+                $("#iata_no").val(value.iata_no)
+                $("#fare_type_id").val(value.fare_type_id)
 
                 $('#form-mis').modal({backdrop: 'static', keyboard: false});
             }

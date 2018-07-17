@@ -69,7 +69,7 @@
         })
     });
 
-    $(document).on('click', '.editData', function() {
+    $(document).on('click', '.editDataRouting', function() {
         var id = $(this).data('id');
         $.ajax({
             url: "{{route('sales.detail.detail')}}",
@@ -78,13 +78,31 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $("#start_date").val(value.start_date)
-                $("#end_date").val(value.end_date)
-                $("#start_desc").val(value.start_desc)
-                $("#end_desc").val(value.end_desc)
-                $("#description").val(value.description)
-                $("#status").val(value.status)
-                $("#misc_id").val(data.data.id)
+                $("#city_from_id").val(value.city_from_id)
+                $("#city_to_id").val(value.city_to_id)
+                $("#airline_id").val(value.airline_id)
+                $("#passenger_class_id").val(value.passenger_class_id)
+                $("#depart_date").val(value.depart_date)
+                $("#arrival_date").val(value.arrival_date)
+                $("#stopover_count").val(value.stopover_count)
+                $("#airline_pnr").val(value.airline_pnr)
+                $("#fly_hr").val(value.fly_hr)
+                $("#meal_srv").val(value.meal_srv)
+                $("#ssr").val(value.ssr)
+                $("#sector_pair").val(value.sector_pair)
+                $("#path_code").val(value.path_code)
+                $("#land_sector_desc").val(value.land_sector_desc)
+                $("#operating_carrier_id").val(value.operating_carrier_id)
+                $("#flight_no").val(value.flight_no)
+                $("#flight_status").val(value.flight_status)
+                $("#equip").val(value.equip)
+                $("#seat_no").val(value.seat_no)
+                $("#terminal").val(value.terminal)
+                $("#mileage").val(value.mileage)
+                $("#land_sector_flag").val(value.land_sector_flag)
+                $("#stopover").val(value.stopover)
+                $("#nuc").val(value.nuc)
+                $("#roe").val(value.roe)
 
                 $('#form-routing').modal({backdrop: 'static', keyboard: false});
             }

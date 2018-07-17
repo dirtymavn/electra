@@ -50,6 +50,11 @@
         id = makeId
         $("#sales_id").val(makeId)
         $("#routing_id").val(makeId)
+        $("#mis_id").val(makeId)
+        $("#price_id").val(makeId)
+        $("#cost_id").val(makeId)
+        $("#segment_id").val(makeId)
+        $("#passenger_id").val(makeId)
 
         initDatatable($('#routing-detail'), "{{route('sales.get-detail-data')}}", routingColumns, Routing());
         initDatatable($('#mis-detail'), "{{route('sales.get-detail-data')}}", misColumns, Mis());
@@ -82,6 +87,11 @@
         var element = $(this).data('element');
         editTempData(element, id); 
         $('#routing_method').val('edit');
+        $('#mis_method').val('edit');
+        $('#cost_method').val('edit');
+        $('#price_method').val('edit');
+        $('#segment_method').val('edit');
+        $('#passenger_method').val('edit');
     });
 
      function editTempData(element, id) {
@@ -105,6 +115,11 @@
                     $("#sales_detail_remark").val(value.sales_detail_remark)
                     
                     initDatatable($('#routing-detail'), "{{route('sales.get-detail-data')}}", routingColumns, Routing(false));
+                    initDatatable($('#mis-detail'), "{{route('sales.get-detail-data')}}", misColumns, Mis(false));
+                    initDatatable($('#cost-detail'), "{{route('sales.get-detail-data')}}", costColumns, Cost(false));
+                    initDatatable($('#price-detail'), "{{route('sales.get-detail-data')}}", priceColumns, Price(false));
+                    initDatatable($('#segment-detail'), "{{route('sales.get-detail-data')}}", segmentColumns, Segment(false));
+                    initDatatable($('#passenger-detail'), "{{route('sales.get-detail-data')}}", passengerColumns, Passenger(false));
                     $('#form-sales-trx').modal({backdrop: 'static', keyboard: false});
                 }
             }

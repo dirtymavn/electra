@@ -59,10 +59,10 @@ class CreateSalesTable extends Migration
         Schema::create('trx_sales_detail_routing', function (Blueprint $table) {
              $table->increments('id');
              $table->integer('trx_sales_detail_id')->unsigned();
-             $table->integer('city_from_id')->unsigned();
-             $table->integer('city_to_id')->unsigned();
-             $table->integer('airline_id')->unsigned();
-             $table->integer('passenger_class_id')->unsigned();
+             $table->integer('city_from_id')->nullable();
+             $table->integer('city_to_id')->nullable();
+             $table->integer('airline_id')->nullable();
+             $table->integer('passenger_class_id')->nullable();
              $table->datetime('depart_date')->nullable();
              $table->datetime('arrival_date')->nullable();
              $table->integer('stopover_count')->nullable();
