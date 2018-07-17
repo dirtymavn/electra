@@ -64,7 +64,13 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
     // accounting
     Route::group(['prefix' => 'accounting', 'namespace' => 'Accounting'], function () {
+        // LG
         Route::resource('lg', 'LGController');
+        Route::post('lg/bulk-delete', array('as' => 'lg.bulk-delete', 'uses' => 'LGController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,lg.destroy'));
+        Route::post('lg/get-data', array('as' => 'lg.get-data', 'uses' => 'LGController@getData'));
+        Route::post('lg/credit-card', array('as' => 'lg.detail.post', 'uses' => 'LGController@lgDetailStore', 'middleware' => 'sentinel_access:admin.company,lg.create'));
+        Route::post('lg/data/delete', array('as' => 'lg.data.delete', 'uses' => 'LGController@dataDelete', 'middleware' => 'sentinel_access:admin.company,lg.create'));
+        Route::post('lg/data/detail', array('as' => 'lg.data.detail', 'uses' => 'LGController@dataDetail', 'middleware' => 'sentinel_access:admin.company,lg.create'));
 
         // GL
         Route::group(['prefix' => 'gl', 'namespace' => 'GL'], function () {
@@ -223,9 +229,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
 
 
-    // Master
-    Route::group(['prefix' => 'master', 'namespace' => 'Master'], function () {
+    // Finance
+    Route::group(['prefix' => 'finance', 'namespace' => 'Finance'], function () {
         
-
     });
 });

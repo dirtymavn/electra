@@ -43,6 +43,8 @@ class CreateProductCodes extends Migration
             $table->boolean('profit_markup')->nullable()->default(false);
             $table->float('profit_markup_amt')->nullable()->default(0);
             $table->timestamps();
+
+            $table->foreign('product_code_id')->references('id')->on('product_codes')->onDelete('cascade');
         });
 
         Schema::enableForeignKeyConstraints();

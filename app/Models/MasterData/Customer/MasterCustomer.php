@@ -206,9 +206,9 @@ class MasterCustomer extends Model implements Auditable
                     ->where('master_customers.status', 'active');
             });
 
-        if (user_info()->inRole('admin')) {
+        // if (user_info()->inRole('admin')) {
             $return = $return->where('master_customers.company_id', user_info('company_id'));
-        }
+        // }
 
         return $return;
 

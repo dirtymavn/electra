@@ -42,9 +42,9 @@ class Airline extends Model implements Auditable
             ->where('airlines.is_draft', false)
             ->where('airlines.status', true);
 
-        if (user_info()->inRole('admin')) {
+        // if (user_info()->inRole('admin')) {
             $return = $return->where('airlines.company_id', user_info('company_id'));
-        }
+        // }
 
         return $return;
 

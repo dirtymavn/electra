@@ -48,4 +48,22 @@ class MasterSupplier extends Model implements Auditable
         });
     }
 
+    /**
+     * Get available supplier
+     *
+     * @return array
+     */
+    public static function getAvailableData()
+    {
+        $return = self::join('companies', 'companies.id', '=', 'master_supplier.company_id')
+            ->where('master_supplier.is_draft', false);
+
+        // if (user_info()->inRole('admin')) {
+            $return = $return->where('master_supplier.company_id', user_info('company_id'));
+        // }
+
+        return $return;
+
+    }
+
 }
