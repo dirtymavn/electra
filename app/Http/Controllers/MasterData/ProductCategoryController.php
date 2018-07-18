@@ -37,7 +37,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        $parents = ProductCategory::whereIsDraft(false)->whereCompanyId(user_info()->company_id)->pluck()->all();
+        $parents = ProductCategory::active()->pluck('category_name', 'id')->all();
         return view('contents.master_datas.product_category.create', compact('parents'));
     }
 
