@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\MasterData;
+namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\MasterData\ProductCategory;
-use App\DataTables\MasterData\ProductCategoryDataTable;
-use App\Http\Requests\MasterData\ProductCategoryRequest;
+use App\DataTables\System\CoreStatusDataTable;
+use App\Http\Requests\System\CoreStatusRequest;
+use App\Models\System\CoreStatus;
 
-class ProductCategoryController extends Controller
+class CoreStatusController extends Controller
 {
     public function __construct()
     {
         // middleware
-        $this->middleware('sentinel_access:admin.company,product-category.read', ['only' => ['index']]);
-        $this->middleware('sentinel_access:admin.company,product-category.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel_access:admin.company,product-category.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel_access:admin.company,product-category.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel_access:admin.company,core-status.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,core-status.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,core-status.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,core-status.destroy', ['only' => ['destroy']]);
 
     }
 
@@ -25,9 +25,9 @@ class ProductCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ProductCategoryDataTable $dataTable)
+    public function index(CoreStatusDataTable $dataTable)
     {
-        return $dataTable->render('contents.master_datas.product_category.index');
+        return $dataTable->render('contents.system.core_status.index');
     }
 
     /**
@@ -37,17 +37,16 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        $parents = ProductCategory::active()->pluck('category_name', 'id')->all();
-        return view('contents.master_datas.product_category.create', compact('parents'));
+        return view('contents.system.core_status.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\ProductCategoryRequest  $request
+     * @param  \App\Http\Requests\System\CoreStatusRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductCategoryRequest $request)
+    public function store(Request $request)
     {
         \DB::beginTransaction();
         try {
@@ -62,14 +61,14 @@ class ProductCategoryController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = ProductCategory::create($request->all());
+            $insert = CoreStatus::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('product-category.index');
+                $redirect = redirect()->route('core-status.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('product-category.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('core-status.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('product-category.create');
+                    $redirect = redirect()->route('core-status.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -86,53 +85,50 @@ class ProductCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MasterData\ProductCategory  $productType
+     * @param  \App\Models\System\CoreStatus $status
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductCategory $productType)
+    public function show(CoreStatus $status)
     {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\MasterData\ProductCategory  $productType
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
-        $category = ProductCategory::find($id);
-        $parents = ProductCategory::active()->whereNotIn('id', [ $id ])->pluck('category_name', 'id')->all();
-        return view('contents.master_datas.product_category.edit')->with(['category' => $category, 'parents' => $parents]);
+    {
+    	$status = CoreStatus::find($id);
+        return view('contents.system.core_status.edit', compact('status'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\ProductCategoryRequest  $request
-     * @param  \App\Models\MasterData\ProductCategory  $productType
+     * @param  \App\Http\Requests\System\CoreStatusRequest  $request
+     * @param  \App\Models\System\CoreStatus $status
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductCategoryRequest $request, $id)
+    public function update(CoreStatusRequest $request, $id)
     {
         \DB::beginTransaction();
         try {
-            $category = ProductCategory::find($id);
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('product-category.index');
+                $redirect = redirect()->route('core-status.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('product-category.create');
+                $redirect = redirect()->route('core-status.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('product-category.edit', $category->id);
+                $redirect = redirect()->route('core-status.edit', $id);
             }
 
-            $update = $category->update($request->all());
+            $update = CoreStatus::find($id)->update($request->all());
 
             if ($update) {
 
@@ -151,15 +147,15 @@ class ProductCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MasterData\ProductCategory  $productType
+     * @param  \App\Models\System\CoreStatus $status
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        ProductCategory::find($id)->delete();
+        CoreStatus::find($id)->delete();
         flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('product-category.index');
+        return redirect()->route('core-status.index');
     }
 
     /**
@@ -172,13 +168,13 @@ class ProductCategoryController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            ProductCategory::whereIn('id', $ids)->delete();
+            CoreStatus::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('product-category.index');
+        return redirect()->route('core-status.index');
     }
 }
