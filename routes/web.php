@@ -174,6 +174,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('product-type', 'ProductTypeController');
         Route::post('product-type/bulk-delete', array('as' => 'product-type.bulk-delete', 'uses' => 'ProductTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,product-type.destroy'));
 
+        // Product Category
+        Route::resource('product-category', 'ProductCategoryController');
+        Route::post('product-category/bulk-delete', array('as' => 'product-category.bulk-delete', 'uses' => 'ProductCategoryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,product-category.destroy'));
+
         // Region
         Route::resource('region', 'RegionController');
         Route::post('region/bulk-delete', array('as' => 'region.bulk-delete', 'uses' => 'RegionController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,region.destroy'));
