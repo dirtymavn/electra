@@ -683,10 +683,26 @@
                                     </a>
                                 </li>
                             @endif
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i><span>System Config</span>
+                            <li class="sub-submenu">
+                                <a>
+                                    <i class="fa fa-circle-o"></i><span>System Config</span><i class="arrow-third-menu os-icon os-icon-chevron-down"></i>
                                 </a>
+                                <div class="sub-menu-w third-menu">
+                                    <div class="sub-menu-i">
+                                        <ul class="sub-menu">
+                                            <li>
+                                                <a href="#">
+                                                    <i class="fa fa-circle-o"></i><span>Core Config</span>
+                                                </a>
+                                            </li>
+                                            <li class="{!! (url(route('core-status.index')) == Request::url() OR Request::is('system/core-status*')) ? ' active' : '' !!}">
+                                                    <a href=" {{ route('core-status.index') }} ">
+                                                    <i class="fa fa-circle-o"></i><span>Core Status</span>
+                                                </a>
+                                            </li>
+                                        <ul>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
