@@ -5,8 +5,8 @@
             {!! Form::text('status_name', old('status_name') , ['class' => 'form-control', 'placeholder' => 'Input the Status Name']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('status_code', trans('Status Name'), ['class' => 'control-label']) !!}
-            {!! Form::text('status_code', old('status_code') , ['class' => 'form-control', 'placeholder' => 'Input the Status Name']) !!}
+            {!! Form::label('status_code', trans('Status Code'), ['class' => 'control-label']) !!}
+            {!! Form::text('status_code', old('status_code') , ['class' => 'form-control', 'placeholder' => 'Input the Status Code']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('status_order', trans('Status Order'), ['class' => 'control-label']) !!}
