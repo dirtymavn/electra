@@ -240,9 +240,13 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('company/export/excel', ['as' => 'export.company.excel', 'uses' => 'CompanyController@export_excel', 'middleware' => 'sentinel_access:admin']);
         Route::get('company/export/pdf', ['as' => 'export.company.pdf', 'uses' => 'CompanyController@export_pdf', 'middleware' => 'sentinel_access:admin']);
 
-        // Tour
+        // Core Status
         Route::resource('core-status', 'CoreStatusController');
         Route::post('core-status/bulk-delete', array('as' => 'core-status.bulk-delete', 'uses' => 'CoreStatusController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,core-status.destroy'));
+
+        // Core Config
+        Route::resource('core-config', 'CoreConfigController');
+        Route::post('core-config/bulk-delete', array('as' => 'core-config.bulk-delete', 'uses' => 'CoreConfigController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,core-config.destroy'));
 
     });
 

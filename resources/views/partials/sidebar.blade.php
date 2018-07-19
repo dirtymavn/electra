@@ -693,15 +693,13 @@
                                 <div class="sub-menu-w third-menu">
                                     <div class="sub-menu-i">
                                         <ul class="sub-menu">
-                                            <li>
-                                                <a href="#">
-                                                    <i class="fa fa-circle-o"></i><span>Core Config</span>
-                                                </a>
-                                            </li>
-                                            <li class="{!! (url(route('core-status.index')) == Request::url() OR Request::is('system/core-status*')) ? ' active' : '' !!}">
+                                            <li class="{!! (url(route('core-status.index')) == Request::url() OR Request::is('system/core-status*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','core-status.read'])) ? '' : 'display:none;' }}">
                                                     <a href=" {{ route('core-status.index') }} ">
                                                     <i class="fa fa-circle-o"></i><span>Core Status</span>
                                                 </a>
+                                            </li>
+                                            <li class="{!! (url(route('core-config.index')) == Request::url() OR Request::is('system/core-config*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','core-config.read'])) ? '' : 'display:none;' }}">
+                                                <a href="{{route('core-config.index')}}"><i class="fa fa-circle-o"></i><span>Core Config</span></a>
                                             </li>
                                         <ul>
                                     </div>

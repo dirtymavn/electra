@@ -209,6 +209,20 @@ class Menu extends Model
                         'company.destroy' => 'Delete',
                         'company.approval' => 'Approval',
                     ],
+                    'Core Status' => [
+                        'core-status.read' => 'Read',
+                        'core-status.create' => 'Create',
+                        'core-status.update' => 'Edit',
+                        'core-status.destroy' => 'Delete',
+                        'core-status.approval' => 'Approval',
+                    ],
+                    'Core Config' => [
+                        'core-config.read' => 'Read',
+                        'core-config.create' => 'Create',
+                        'core-config.update' => 'Edit',
+                        'core-config.destroy' => 'Delete',
+                        'core-config.approval' => 'Approval',
+                    ],
                 ],
 
             ];
@@ -387,6 +401,22 @@ class Menu extends Model
                         'toruorder.update' => 'Edit',
                         'toruorder.destroy' => 'Delete',
                         'toruorder.approval' => 'Approval',
+                    ],
+                ],
+                'System' => [
+                    'Core Status' => [
+                        'core-status.read' => 'Read',
+                        'core-status.create' => 'Create',
+                        'core-status.update' => 'Edit',
+                        'core-status.destroy' => 'Delete',
+                        'core-status.approval' => 'Approval',
+                    ],
+                    'Core Config' => [
+                        'core-config.read' => 'Read',
+                        'core-config.create' => 'Create',
+                        'core-config.update' => 'Edit',
+                        'core-config.destroy' => 'Delete',
+                        'core-config.approval' => 'Approval',
                     ],
                 ]
 
