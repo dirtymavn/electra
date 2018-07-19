@@ -5,6 +5,7 @@ namespace App\Models\Business\Sales;
 use Illuminate\Database\Eloquent\Model;
 
 use Request;
+use App\Models\MasterData\Customer\MasterCustomer;
 
 class TrxSales extends Model
 {
@@ -25,6 +26,12 @@ class TrxSales extends Model
         'is_draft',
         'company_id'
     ];
+
+
+    public function customer()
+    {
+        return $this->belongsTo( MasterCustomer::class, 'customer_id', 'id' );
+    }
 
     /**
      * The "booting" method of the model.

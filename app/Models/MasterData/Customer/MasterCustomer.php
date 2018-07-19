@@ -224,7 +224,9 @@ class MasterCustomer extends Model implements Auditable
 
     public static function getAvaliable()
     {
-        $return = self::where('company_id', user_info()->company_id)->whereIsDraft(false);
+        $return = self::where('company_id', user_info()->company_id)
+        ->whereNotIn('status', ['inactive', 'suspend'])
+        ->whereIsDraft(false);
 
         return $return;
     }

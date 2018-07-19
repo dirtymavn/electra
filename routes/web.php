@@ -220,6 +220,14 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('productcode/credit-card', array('as' => 'productcode.rate.post', 'uses' => 'ProductCodeController@productCodeDetailStore', 'middleware' => 'sentinel_access:admin.company,productcode.create'));
         Route::post('productcode/data/delete', array('as' => 'productcode.data.delete', 'uses' => 'ProductCodeController@dataDelete', 'middleware' => 'sentinel_access:admin.company,productcode.create'));
         Route::post('productcode/data/detail', array('as' => 'productcode.data.detail', 'uses' => 'ProductCodeController@dataDetail', 'middleware' => 'sentinel_access:admin.company,productcode.create'));
+
+         // Master Document
+        Route::resource('document', 'MasterDocumentController');
+        Route::post('document/bulk-delete', array('as' => 'document.bulk-delete', 'uses' => 'MasterDocumentController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,document.destroy'));
+        Route::post('document/get-data', array('as' => 'document.get-data', 'uses' => 'MasterDocumentController@getData'));
+        Route::post('document/credit-card', array('as' => 'document.rate.post', 'uses' => 'MasterDocumentController@documentStore', 'middleware' => 'sentinel_access:admin.company,document.create'));
+        Route::post('document/data/delete', array('as' => 'document.data.delete', 'uses' => 'MasterDocumentController@dataDelete', 'middleware' => 'sentinel_access:admin.company,document.create'));
+        Route::post('document/data/detail', array('as' => 'document.data.detail', 'uses' => 'MasterDocumentController@dataDetail', 'middleware' => 'sentinel_access:admin.company,document.create'));
     });
 
     // System

@@ -29,6 +29,9 @@ class SalesDataTable extends DataTable
                 return '-';
             }
         })
+        ->editColumn('customer_id', function ($sales) {
+            return $sales->customer->customer_name;
+        })
         ->editColumn('is_draft', function($sales){
             return ($sales->is_draft) ? 'Yes' : 'No';
         });
@@ -56,7 +59,9 @@ class SalesDataTable extends DataTable
             'sales_date',
             'ticket_amt',
             'rebate',
-            'trx_sales.id'
+            'trx_sales.id',
+            'is_draft',
+            'trx_sales.created_at'
         );
         
         if (!user_info()->inRole('super-admin')) {
@@ -95,13 +100,10 @@ class SalesDataTable extends DataTable
             'customer_id',
             'trip_date',
             'deadline',
-            'your_ref',
-            'our_ref',
-            'tc_id',
             'invoice_no',
             'sales_date',
-            'ticket_amt',
-            'rebate',
+            'is_draft',
+            'created_at'
         ];
         
     }
