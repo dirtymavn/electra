@@ -31,6 +31,9 @@ class CoreStatusDataTable extends DataTable
         })
         ->editColumn('is_draft', function($status){
             return ($status->is_draft) ? 'Yes' : 'No';
+        })
+        ->editColumn('status_approval_flag', function($status){
+            return ($status->status_approval_flag) ? 'Yes' : 'No';
         });
     }
 
