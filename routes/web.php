@@ -228,6 +228,14 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('document/credit-card', array('as' => 'document.rate.post', 'uses' => 'MasterDocumentController@documentStore', 'middleware' => 'sentinel_access:admin.company,document.create'));
         Route::post('document/data/delete', array('as' => 'document.data.delete', 'uses' => 'MasterDocumentController@dataDelete', 'middleware' => 'sentinel_access:admin.company,document.create'));
         Route::post('document/data/detail', array('as' => 'document.data.detail', 'uses' => 'MasterDocumentController@dataDetail', 'middleware' => 'sentinel_access:admin.company,document.create'));
+
+        // Branch
+        Route::resource('branch', 'CompanyBranchController');
+        Route::post('branch/bulk-delete', array('as' => 'branch.bulk-delete', 'uses' => 'CompanyBranchController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,branch.destroy'));
+
+        // Department
+        Route::resource('department', 'CompanyDepartmentController');
+        Route::post('department/bulk-delete', array('as' => 'department.bulk-delete', 'uses' => 'CompanyDepartmentController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,department.destroy'));
     });
 
     // System

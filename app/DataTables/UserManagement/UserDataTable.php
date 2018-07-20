@@ -38,8 +38,11 @@ class UserDataTable extends DataTable
     public function query(User $model)
     {
         return $model->usersUnderCompany()
+            ->leftJoin('company_branchs', 'company_branchs.id', '=', 'users.branch_id')
+            ->leftJoin('company_departments', 'company_departments.id', '=', 'users.company_department_id')
             ->select('users.id', 'users.first_name','users.last_name','users.email','users.username',
-                'users.created_at','companies.name as company_name', 'users.company_role');
+                'users.created_at','companies.name as company_name', 'users.company_role',
+                'company_branchs.branch_name', 'company_departments.department_name', 'roles.name as role_name');
     }
 
     /**
@@ -63,16 +66,30 @@ class UserDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
-            'first_name' => ['name' => 'users.first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
-            'last_name' => ['name' => 'users.last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
-            'email' => ['name' => 'users.email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],
-            'username' => ['name' => 'users.username', 'data' => 'username', 'title' => trans('Username'), 'id' => 'username'],
-            'company_name' => ['name' => 'companies.name', 'data' => 'company_name', 'title' => trans('Company'), 'id' => 'company'],
-            'company_role' => ['name' => 'users.company_role', 'data' => 'company_role', 'title' => trans('Role'), 'id' => 'company_role'],
-            'created_at' => ['name' => 'users.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at']
-        ];
+        if (user_info()->inRole('super-admin')) {
+            $return = [
+                'first_name' => ['name' => 'users.first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
+                'last_name' => ['name' => 'users.last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
+                'email' => ['name' => 'users.email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],
+                'username' => ['name' => 'users.username', 'data' => 'username', 'title' => trans('Username'), 'id' => 'username'],
+                'company_name' => ['name' => 'companies.name', 'data' => 'company_name', 'title' => trans('Company'), 'id' => 'company'],
+                'role_name' => ['name' => 'roles.role_name', 'data' => 'role_name', 'title' => trans('Role'), 'id' => 'role_name'],
+                'created_at' => ['name' => 'users.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at']
+            ];
+        } else {
+            $return = [
+                'first_name' => ['name' => 'users.first_name', 'data' => 'first_name', 'title' => trans('First Name'), 'id' => 'first_name'],
+                'last_name' => ['name' => 'users.last_name', 'data' => 'last_name', 'title' => trans('Last Name'), 'id' => 'last_name'],
+                'email' => ['name' => 'users.email', 'data' => 'email', 'title' => trans('Email'), 'id' => 'email'],
+                'username' => ['name' => 'users.username', 'data' => 'username', 'title' => trans('Username'), 'id' => 'username'],
+                'branch_name' => ['name' => 'company_branchs.branch_name', 'data' => 'branch_name', 'title' => trans('Branch'), 'id' => 'company-branch'],
+                'department_name' => ['name' => 'company_departments.department_name', 'data' => 'department_name', 'title' => trans('Department'), 'id' => 'company-department'],
+                'role_name' => ['name' => 'roles.role_name', 'data' => 'role_name', 'title' => trans('Role'), 'id' => 'role_name'],
+                'created_at' => ['name' => 'users.created_at', 'data' => 'created_at', 'title' => trans('Created At'), 'id' => 'created_at']
+            ];
+        }
 
+        return $return;
     }
 
     /**

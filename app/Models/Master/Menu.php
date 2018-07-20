@@ -191,6 +191,20 @@ class Menu extends Model
                         'productcode.destroy' => 'Delete',
                         'productcode.approval' => 'Approval',
                     ],
+                    'Branch' => [
+                        'branch.read' => 'Read',
+                        'branch.create' => 'Create',
+                        'branch.update' => 'Edit',
+                        'branch.destroy' => 'Delete',
+                        'branch.approval' => 'Approval',
+                    ],
+                    'Department' => [
+                        'department.read' => 'Read',
+                        'department.create' => 'Create',
+                        'department.update' => 'Edit',
+                        'department.destroy' => 'Delete',
+                        'department.approval' => 'Approval',
+                    ],
                 ],
                 'Outbound' => [
                     'Tour Order' => [
@@ -392,6 +406,20 @@ class Menu extends Model
                         'productcode.update' => 'Edit',
                         'productcode.destroy' => 'Delete',
                         'productcode.approval' => 'Approval',
+                    ],
+                    'Branch' => [
+                        'branch.read' => 'Read',
+                        'branch.create' => 'Create',
+                        'branch.update' => 'Edit',
+                        'branch.destroy' => 'Delete',
+                        'branch.approval' => 'Approval',
+                    ],
+                    'Department' => [
+                        'department.read' => 'Read',
+                        'department.create' => 'Create',
+                        'department.update' => 'Edit',
+                        'department.destroy' => 'Delete',
+                        'department.approval' => 'Approval',
                     ],
                 ],
                 'Outbound' => [

@@ -10,6 +10,8 @@ use Sentinel;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Master\Company;
+use App\Models\MasterData\Branch;
+use App\Models\MasterData\Department;
 use App\Http\Requests\UserManagement\UserRequest;
 use App\Mail\UserManagement\ResetPassword;
 use Mail;
@@ -62,10 +64,21 @@ class UserController extends Controller
             $companies = $this->company->getData()->pluck('name', 'id')->all();
         }
 
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
+        $departments = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
+
+        if (count($branchs) == 0) {
+            $branchs = ['' => '- Not Available -'];
+        }
+
+        if (count($departments) == 0) {
+            $departments = ['' => '- Not Available -'];
+        }
+
         // $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
         $roles = $this->getRoleUsers(user_info('roles')[0]->slug);
 
-        return view('contents.user_managements.user.create', compact('companies', 'roles'));
+        return view('contents.user_managements.user.create', compact('companies', 'roles', 'branchs', 'departments'));
     }
 
     protected function getRoleUsers($role)
@@ -141,7 +154,18 @@ class UserController extends Controller
         // $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
         $roles = $this->getRoleUsers(user_info('roles')[0]->slug);
 
-        return view('contents.user_managements.user.edit', compact('user', 'companies', 'roles'));
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
+        $departments = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
+
+        if (count($branchs) == 0) {
+            $branchs = ['' => '- Not Available -'];
+        }
+
+        if (count($departments) == 0) {
+            $departments = ['' => '- Not Available -'];
+        }
+
+        return view('contents.user_managements.user.edit', compact('user', 'companies', 'roles', 'branchs', 'departments'));
     }
 
     /**

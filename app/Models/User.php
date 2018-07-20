@@ -28,7 +28,7 @@ class User extends CartalystUser implements Auditable, UserContract
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password','username','status','company_id', 'parent_id', 'company_role', 'avatar'
+        'first_name', 'last_name', 'email', 'password','username','status','company_id', 'parent_id', 'company_role', 'avatar', 'branch_id', 'company_department_id'
     ];
 
     protected $loginNames = ['username'];
@@ -100,7 +100,8 @@ class User extends CartalystUser implements Auditable, UserContract
    public function usersUnderCompany()
     {
         $results = self::leftJoin('companies', 'companies.id', '=', 'users.company_id')
-        ->join('role_users', 'role_users.user_id', '=', 'users.id');
+            ->join('role_users', 'role_users.user_id', '=', 'users.id')
+            ->join('roles', 'roles.id', '=', 'role_users.role_id');
         if (user_info()->roles[0]->slug != 'super-admin') {
             $results->whereNotIn('role_id', [1]);
         }
