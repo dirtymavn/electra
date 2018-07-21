@@ -208,11 +208,11 @@ class Menu extends Model
                 ],
                 'Outbound' => [
                     'Tour Order' => [
-                        'toruorder.read' => 'Read',
-                        'toruorder.create' => 'Create',
-                        'toruorder.update' => 'Edit',
-                        'toruorder.destroy' => 'Delete',
-                        'toruorder.approval' => 'Approval',
+                        'tourorder.read' => 'Read',
+                        'tourorder.create' => 'Create',
+                        'tourorder.update' => 'Edit',
+                        'tourorder.destroy' => 'Delete',
+                        'tourorder.approval' => 'Approval',
                     ],
                 ],
                 'System' => [
@@ -424,11 +424,11 @@ class Menu extends Model
                 ],
                 'Outbound' => [
                     'Tour Order' => [
-                        'toruorder.read' => 'Read',
-                        'toruorder.create' => 'Create',
-                        'toruorder.update' => 'Edit',
-                        'toruorder.destroy' => 'Delete',
-                        'toruorder.approval' => 'Approval',
+                        'tourorder.read' => 'Read',
+                        'tourorder.create' => 'Create',
+                        'tourorder.update' => 'Edit',
+                        'tourorder.destroy' => 'Delete',
+                        'tourorder.approval' => 'Approval',
                     ],
                 ],
                 'System' => [
