@@ -40,6 +40,8 @@ class UserRequest extends FormRequest
             'conf_password' => 'required_if:is_required,==,requirred|min:8|same:password',
             'company_id' => Request::segment(3) != 1 ? 'required' : '',
             'role_id' => 'required',
+            'branch_id' => 'required_if:company_role,==,admin',
+            'company_department_id' => 'required_if:company_role,==,admin',
         ];
     }
 
@@ -48,6 +50,8 @@ class UserRequest extends FormRequest
         return [
             'password.required_if' => 'The password field is required.',
             'conf_password.required_if' => 'The confirmation password field is required.',
+            'branch_id.required_if' => 'The branch id field is required.',
+            'company_department_id.required_if' => 'The department id field is required.',
         ];
     }
 }

@@ -656,6 +656,12 @@
                         <li class="{!! (url(route('document.index')) == Request::url() OR Request::is('master-data/document*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','document.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('document.index')}}"><i class="fa fa-circle-o"></i><span>Master Document</span></a>
                         </li>
+                        <li class="{!! (url(route('branch.index')) == Request::url() OR Request::is('master-data/branch*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','branch.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('branch.index')}}"><i class="fa fa-circle-o"></i><span>Branch</span></a>
+                        </li>
+                        <li class="{!! (url(route('department.index')) == Request::url() OR Request::is('master-data/department*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','department.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('department.index')}}"><i class="fa fa-circle-o"></i><span>Department</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
