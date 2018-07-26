@@ -13,6 +13,8 @@ use App\Models\MasterData\Customer\MasterCustomer;
 use App\Models\MasterData\Airline;
 use App\Models\MasterData\Tour;
 use App\Models\Temporary;
+use App\Models\MasterData\Currency\Currency;
+use App\Models\MasterData\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\Outbound\TourOrderDataTable;
@@ -60,20 +62,29 @@ class TourOrderController extends Controller
             ->all();
         $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
             ->all();
+        $meals = MasterCustomer::meals();
+        $roomTypes = TourOrder::roomTypes();
+        $roomCategories = TourOrder::roomCategories();
+        $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
+        $cities = City::getAvailableData()
+            ->select(\DB::raw("(cities.id ||'/'|| countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as slug"), 
+                \DB::raw("(countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as text"))
+            ->pluck('text', 'slug')->all();
 
-        if (count($customers) == 0) {
-            $customers = ['' => '- Not Available -'];
-        }
+        $newCode = TourOrder::getAutoNumber();
+        // if (count($customers) == 0) {
+        //     $customers = ['' => '- Not Available -'];
+        // }
 
-        if (count($tours) == 0) {
-            $tours = ['' => '- Not Available -'];
-        }
+        // if (count($tours) == 0) {
+        //     $tours = ['' => '- Not Available -'];
+        // }
 
-        if (count($airlines) == 0) {
-            $airlines = ['' => '- Not Available -'];
-        }
+        // if (count($airlines) == 0) {
+        //     $airlines = ['' => '- Not Available -'];
+        // }
 
-        return view('contents.outbounds.tour_order.create', compact('customers', 'tours', 'airlines'));
+        return view('contents.outbounds.tour_order.create', compact('customers', 'tours', 'airlines', 'meals', 'roomTypes', 'roomCategories', 'currencys', 'cities', 'newCode'));
     }
 
     /**
@@ -149,23 +160,31 @@ class TourOrderController extends Controller
             ->all();
         $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
             ->all();
+        $meals = MasterCustomer::meals();
+        $roomTypes = TourOrder::roomTypes();
+        $roomCategories = TourOrder::roomCategories();
+        $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
+        $cities = City::getAvailableData()
+            ->select(\DB::raw("(cities.id ||'/'|| countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as slug"), 
+                \DB::raw("(countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as text"))
+            ->pluck('text', 'slug')->all();
+        // if (count($customers) == 0) {
+        //     $customers = ['' => '- Not Available -'];
+        // }
 
-        if (count($customers) == 0) {
-            $customers = ['' => '- Not Available -'];
-        }
+        // if (count($tours) == 0) {
+        //     $tours = ['' => '- Not Available -'];
+        // }
 
-        if (count($tours) == 0) {
-            $tours = ['' => '- Not Available -'];
-        }
-
-        if (count($airlines) == 0) {
-            $airlines = ['' => '- Not Available -'];
-        }
+        // if (count($airlines) == 0) {
+        //     $airlines = ['' => '- Not Available -'];
+        // }
 
         
         $tourOrder = TourOrder::find($id);
-        $tourOrder->master_tour_id = $tourOrder->tour->id;
+        $tourOrder->master_tour_id = $tourOrder->tour->master_tour_id;
         $tourOrder->days = $tourOrder->tour->days;
+        $newCode = $tourOrder->order_no;
 
         foreach ($tourOrder->paxLists as $key => $value) {
             $data = [
@@ -215,8 +234,13 @@ class TourOrderController extends Controller
             foreach ($value->paxListTour->paxListTourFlights as $flight) {
                 $data = [
                     'flight_from' => $flight->flight_from,
+                    'flight_from_name' => (@$flight->flight_from) ? $flight->cityFrom->country->country_name.'-'.$flight->cityFrom->city_name.'-'.$flight->cityFrom->city_code : '',
+                    'flight_from_ori' => (@$flight->flight_from) ? $flight->flight_from.'/'.$flight->cityFrom->country->country_name.'-'.$flight->cityFrom->city_name.'-'.$flight->cityFrom->city_code : '',
                     'flight_to' => $flight->flight_to,
+                    'flight_to_name' => (@$flight->flight_to) ? $flight->cityTo->country->country_name.'-'.$flight->cityTo->city_name.'-'.$flight->cityTo->city_code : '',
+                    'flight_to_ori' => (@$flight->flight_to) ? $flight->flight_to.'/'.$flight->cityTo->country->country_name.'-'.$flight->cityTo->city_name.'-'.$flight->cityTo->city_code : '',
                     'flight_airline_id' => $flight->airline_id,
+                    'flight_airline_name' => (@$flight->airline_id) ? Airline::find($flight->airline_id)->airline_name : '',
                     'flight_no' => $flight->flight_no,
                     'class' => $flight->class,
                     'farebasis' => $flight->farebasis,
@@ -234,7 +258,7 @@ class TourOrderController extends Controller
             }
         }
 
-        return view('contents.outbounds.tour_order.edit', compact('customers', 'tours', 'airlines', 'tourOrder'));
+        return view('contents.outbounds.tour_order.edit', compact('customers', 'tours', 'airlines', 'meals', 'roomTypes', 'roomCategories', 'currencys', 'cities', 'tourOrder', 'newCode'));
     }
 
     /**
@@ -568,6 +592,16 @@ class TourOrderController extends Controller
         \DB::beginTransaction();
         try {
             $parent_id = $request->tour_paxlist_flight_id;
+            $request->merge(['flight_from_ori' => $request->flight_from, 'flight_to_ori' => $request->flight_to]);
+            $flightFrom = explode('/', $request->flight_from);
+            $flightTo = explode('/', $request->flight_to);
+            $request->merge([
+                'flight_from' => @$flightFrom[0],
+                'flight_from_name' => @$flightFrom[1],
+                'flight_to' => @$flightTo[0],
+                'flight_to_name' => @$flightTo[1],
+                'flight_airline_name' => (@$request->flight_airline_id) ? Airline::find($request->flight_airline_id)->airline_name : ''
+            ]);
             if (@$request->tour_paxlist_flight_id && @$request->tour_paxlist_flight_method == 'edit') {
                 // Delete temporaries
                 $temporary = Temporary::whereId($request->tour_paxlist_flight_id)->first();

@@ -183,4 +183,27 @@ class AirlineController extends Controller
 
         return redirect()->route('airline.index');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Airline::getAvailableData()
+            ->select('airlines.id', 'airlines.airline_name as text')
+            ->where('airlines.airline_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    public function getAirlineById(Request $request)
+    {
+        $result = Airline::find($request->id);
+
+        return json_encode($result);
+    }
 }

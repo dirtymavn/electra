@@ -34,10 +34,10 @@ class TourOrderDataTable extends DataTable
             })
             ->editColumn('return_date', function($tourorder){
                 return date('d F Y', strtotime($tourorder->return_date));
-            })
-            ->editColumn('is_draft', function($tourorder){
-                return ($tourorder->is_draft) ? 'Yes' : 'No';
             });
+            // ->editColumn('is_draft', function($tourorder){
+            //     return ($tourorder->is_draft) ? 'Yes' : 'No';
+            // });
     }
 
     /**
@@ -98,7 +98,7 @@ class TourOrderDataTable extends DataTable
             'tour_name' =>['name' => 'trx_tour_order_tours.tour_name', 'data' => 'tour_name'],
             'depart_date' =>['name' => 'trx_tour_order_tours.depart_date', 'data' => 'depart_date'],
             'return_date' =>['name' => 'trx_tour_order_tours.return_date', 'data' => 'return_date'],
-            'is_draft' =>['name' => 'trx_tour_orders.is_draft', 'data' => 'is_draft'],
+            // 'is_draft' =>['name' => 'trx_tour_orders.is_draft', 'data' => 'is_draft'],
             'created_at' =>['name' => 'trx_tour_orders.created_at', 'data' => 'created_at']
         ];
     }

@@ -53,16 +53,9 @@
 					</div>
 					<div class="form-group">
 						{!! Form::label('trading_currency', trans('Trading Currency'), ['class' => 'control-label']) !!}
-						{{-- {!! Form::text('trading_currency', null, [ 'class' => 'form-control', 'placeholder' => 'trading_currency' ]) !!} --}}
-						<select class="form-control">
-							<option>Option 1</option>
-							<option>Option 2</option>
-							<option>Option 3</option>
-							<option>Option 4</option>
-							<option>Option 5</option>
-						</select>
+						{!! Form::select('trading_currency', ['' => 'Choose Currency'] + @$currencys, [ 'class' => 'form-control']) !!}
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="display: none;">
 						{!! Form::label('xo_calculated_by', trans('XO Calculated By'), ['class' => 'control-label']) !!}
 						{!! Form::text('xo_calculated_by', null, [ 'class' => 'form-control', 'placeholder' => 'XO Calculated By' ]) !!}
 					</div>

@@ -2,15 +2,15 @@
     <div class="col-sm-6">
         <div class="form-group {{ $errors->has('first_name') ? 'has-error' : ''}}">
             {!! Form::label('First Name', trans('First Name'), ['class' => 'control-label']) !!}
-            {!! Form::text('first_name', old('first_name') , ['class' => 'form-control', 'placeholder' => 'Input the First Name']) !!}
+            {!! Form::text('first_name', old('first_name') , ['class' => 'form-control', 'maxlength' => '100', 'placeholder' => 'Input the First Name']) !!}
         </div>
         <div class="form-group {{ $errors->has('last_name') ? 'has-error' : ''}}">
             {!! Form::label('Last Name', trans('Last Name'), ['class' => 'control-label']) !!}
-            {!! Form::text('last_name', old('last_name') , ['class' => 'form-control', 'placeholder' => 'Input the Last Name']) !!}
+            {!! Form::text('last_name', old('last_name') , ['class' => 'form-control', 'maxlength' => '100', 'placeholder' => 'Input the Last Name']) !!}
         </div>
         <div class="form-group {{ $errors->has('username') ? 'has-error' : ''}}">
             {!! Form::label('Username', trans('Username'), ['class' => 'control-label']) !!}
-            {!! Form::text('username', old('username') , ['class' => 'form-control', 'placeholder' => 'Input the Username']) !!}
+            {!! Form::text('username', old('username') , ['class' => 'form-control', 'maxlength' => '20', 'placeholder' => 'Input the Username']) !!}
         </div>
         <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
             {!! Form::label('email', trans('Email'), ['class' => 'control-label']) !!}
@@ -30,16 +30,16 @@
     </div>
     <div class="col-sm-6">
         <div class="form-group {{ $errors->has('company_id') ? 'has-error' : ''}}">
-            {!! Form::label('company_id', trans('Company ID'), ['class' => 'control-label']) !!}
+            {!! Form::label('company_id', trans('Company'), ['class' => 'control-label']) !!}
             {!! Form::select('company_id', ['' => "Choose Company"] + @$companies, old('company_id'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group {{ $errors->has('branch_id') ? 'has-error' : ''}}">
-            {!! Form::label('branch_id', trans('Branch ID'), ['class' => 'control-label']) !!}
-            {!! Form::select('branch_id', @$branchs, old('branch_id'), ['class' => 'form-control']) !!}
+            {!! Form::label('branch_id', trans('Branch'), ['class' => 'control-label']) !!}
+            {!! Form::select('branch_id', ['' => "Choose Branch"] + @$branchs, old('branch_id'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group {{ $errors->has('company_department_id') ? 'has-error' : ''}}">
-            {!! Form::label('company_department_id', trans('Department ID'), ['class' => 'control-label']) !!}
-            {!! Form::select('company_department_id', @$departments, old('company_department_id'), ['class' => 'form-control']) !!}
+            {!! Form::label('company_department_id', trans('Department'), ['class' => 'control-label']) !!}
+            {!! Form::select('company_department_id', ['' => "Choose Department"] + @$departments, old('company_department_id'), ['class' => 'form-control']) !!}
         </div>
         {{-- @if(user_info()->id != 1) --}}
             <div class="form-group {{ $errors->has('role_id') ? 'has-error' : ''}}">
@@ -63,6 +63,12 @@
             $('.password-user').remove();
             $('.is-required-password').val('not_required');
         @endif
+
+        initSelect2Remote($('#company_id'), "{{ route('company.search-data') }}", "Choose Company", 0);
+        initSelect2Remote($('#branch_id'), "{{ route('branch.search-data') }}", "Choose Branch", 0);
+        initSelect2Remote($('#company_department_id'), "{{ route('department.search-data') }}", "Choose Department", 0);
+        initSelect2Remote($('#role_id'), "{{ route('role.search-data') }}", "Choose Role", 0, true);
+
     });
 </script>
 @endsection

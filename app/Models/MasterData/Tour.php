@@ -58,4 +58,32 @@ class Tour extends Model implements Auditable
         return $return;
 
     }
+
+    public static function tourCategories()
+    {
+        $categories = [
+            'Holiday Tour' => 'Holiday Tour',
+            'Familiarization Tour' => 'Familiarization Tour',
+            'Educational Tour' => 'Educational Tour',
+            'Pileimage Tour' => 'Pileimage Tour',
+            'Special Mission Tour' => 'Special Mission Tour',
+            'Hunting Tour' => 'Hunting Tour'
+        ];
+        
+        return collect($categories);
+    }
+
+    public static function tourTypes()
+    {
+        $categories = [
+            'Holiday Tour' => 'Holiday Tour',
+            'Familiarization Tour' => 'Familiarization Tour',
+            'Educational Tour' => 'Educational Tour',
+            'Pileimage Tour' => 'Pileimage Tour',
+            'Special Mission Tour' => 'Special Mission Tour',
+            'Hunting Tour' => 'Hunting Tour'
+        ];
+        
+        return collect($categories);
+    }
 }

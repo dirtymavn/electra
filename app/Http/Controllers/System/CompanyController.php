@@ -159,4 +159,26 @@ class CompanyController extends Controller
         $pdf = PDF::loadView('contents.masters.company.parts.pdf', compact('companies'));
         return $pdf->download('company.pdf');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        if (@user_info()->company) {
+            $companies = user_info()->company()
+                ->select('id', 'name as text')
+                ->where('name', 'ilike', '%'.$request->search.'%')
+                ->get();
+        } else {
+            $companies = Company::getData()
+                ->select('id', 'name as text')
+                ->where('name', 'ilike', '%'.$request->search.'%')
+                ->get();
+        }
+
+        return response()->json(['message' => 'Success', 'items' => $companies]);
+    }
 }

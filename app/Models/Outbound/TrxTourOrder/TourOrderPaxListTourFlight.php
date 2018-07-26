@@ -30,4 +30,14 @@ class TourOrderPaxListTourFlight extends Model
         'arrived_date',
         'status',
     ];
+
+    public function cityFrom()
+    {
+        return $this->belongsTo('App\Models\MasterData\City', 'flight_from');
+    }
+
+    public function cityTo()
+    {
+        return $this->belongsTo('App\Models\MasterData\City', 'flight_to');
+    }
 }

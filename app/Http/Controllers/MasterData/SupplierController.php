@@ -5,8 +5,10 @@ namespace App\Http\Controllers\MasterData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\SupplierDataTable;
-
 use App\Models\MasterData\Supplier\MasterSupplier as Supplier;
+use App\Models\MasterData\Currency\Currency;
+use App\Models\MasterData\Country;
+use App\Models\MasterData\City;
 
 use DB;
 
@@ -39,7 +41,12 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.supplier.create');
+        $newCode = Supplier::getAutoNumber();
+        $types = Supplier::types();
+        $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
+        $countries = Country::getDataByCompany()->pluck('countries.country_name', 'countries.id')->all();
+        $cities = ['' => '- Not Available -'];
+        return view('contents.master_datas.supplier.create', compact('newCode', 'types', 'currencys', 'countries', 'cities'));
     }
 
     /**
@@ -108,10 +115,21 @@ class SupplierController extends Controller
     {
         $parent = $supplier->toArray();
         $detail = $supplier->detail->toArray();
-        $merge = array_merge($parent, $detail);
-        $supplier = (object) $merge;
+        // wew($detail);
+        // unset($main['id'], $mainContact['id'], $basic['id'], $general['id'], $generalDoc['id'], $discRate['id'], $termFee['id']);
 
-        return view('contents.master_datas.supplier.edit', compact('supplier'));
+        // $arrayMerge = array_merge($customer, $main, $mainContact, $basic, $general, $generalDoc, $discRate, $termFee);
+
+        // $supplier = (object) $arrayMerge;
+        $newCode = $supplier->supplier_no;
+        $types = Supplier::types();
+        $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
+        $countries = Country::getDataByCompany()->pluck('countries.country_name', 'countries.id')->all();
+        // wew($supplier);
+        // $cities = City::getAvailableData()->where('cities.country_id', $supplier->country)->pluck('cities.city_name', 'cities.id')->all();
+        $cities = ['' => '- Not Available -'];
+
+        return view('contents.master_datas.supplier.edit', compact('supplier', 'newCode', 'types', 'currencys', 'countries', 'cities'));
     }
 
     /**

@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\MasterData;
+namespace App\Http\Controllers\System;
 
-use App\Models\MasterData\City;
-use App\Models\MasterData\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\MasterData\CityDataTable;
-use App\Http\Requests\MasterData\CityRequest;
+use App\DataTables\System\CoreDataTable;
+use App\Http\Requests\System\CoreStatusRequest;
+use App\Models\System\CoreStatus;
 
-class CityController extends Controller
+class CoreController extends Controller
 {
     public function __construct()
     {
         // middleware
-        $this->middleware('sentinel_access:admin.company,city.read', ['only' => ['index']]);
-        $this->middleware('sentinel_access:admin.company,city.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel_access:admin.company,city.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel_access:admin.company,city.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel_access:admin.company,core.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,core.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,core.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,core.destroy', ['only' => ['destroy']]);
 
     }
 
@@ -26,9 +25,9 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CityDataTable $dataTable)
+    public function index(CoreDataTable $dataTable)
     {
-        return $dataTable->render('contents.master_datas.city.index');
+        return $dataTable->render('contents.system.core_module.index');
     }
 
     /**
@@ -38,14 +37,13 @@ class CityController extends Controller
      */
     public function create()
     {
-        $countries = Country::getDataByCompany()->pluck('country_name', 'id')->all();
-        return view('contents.master_datas.city.create', compact('countries'));
+        return view('contents.system.core_module.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\CityRequest  $request
+     * @param  \App\Http\Requests\System\CoreStatusRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -63,14 +61,14 @@ class CityController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = City::create($request->all());
+            $insert = CoreStatus::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('city.index');
+                $redirect = redirect()->route('core.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('city.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('core.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('city.create');
+                    $redirect = redirect()->route('core.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -87,51 +85,50 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MasterData\City  $city
+     * @param  \App\Models\System\CoreStatus $status
      * @return \Illuminate\Http\Response
      */
-    public function show(City $city)
+    public function show(CoreStatus $status)
     {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\MasterData\City  $city
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(City $city)
+    public function edit($id)
     {
-        $countries = Country::getDataByCompany()->pluck('country_name', 'id')->all();
-        return view('contents.master_datas.city.edit', compact('city', 'countries'));
+    	$status = CoreStatus::find($id);
+        return view('contents.system.core_module.edit', compact('status'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\CityRequest  $request
-     * @param  \App\Models\MasterData\City  $city
+     * @param  \App\Http\Requests\System\CoreStatusRequest  $request
+     * @param  \App\Models\System\CoreStatus $status
      * @return \Illuminate\Http\Response
      */
-    public function update(CityRequest $request, City $city)
+    public function update(CoreStatusRequest $request, $id)
     {
         \DB::beginTransaction();
         try {
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('city.index');
+                $redirect = redirect()->route('core.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('city.create');
+                $redirect = redirect()->route('core.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('city.edit', $city->id);
+                $redirect = redirect()->route('core.edit', $id);
             }
 
-            $update = $city->update($request->all());
+            $update = CoreStatus::find($id)->update($request->all());
 
             if ($update) {
 
@@ -150,15 +147,15 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MasterData\City  $city
+     * @param  \App\Models\System\CoreStatus $status
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city)
+    public function destroy($id)
     {
-        $city->delete();
+        CoreStatus::find($id)->delete();
         flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('city.index');
+        return redirect()->route('core.index');
     }
 
     /**
@@ -171,44 +168,13 @@ class CityController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            City::whereIn('id', $ids)->delete();
+            CoreStatus::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('city.index');
-    }
-
-    /**
-     * Search data
-     * @param  \Illuminate\Http\Request  $request
-     * @return json
-     */
-    public function searchData(Request $request)
-    {
-        $results = City::getAvailableData()
-            ->select(\DB::raw("(cities.id ||'/'|| countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as slug"), 
-                \DB::raw("(countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as text"))
-            ->where('cities.city_name', 'ilike', '%'.$request->search.'%')
-            ->get();
-        
-
-        return response()->json(['message' => 'Success', 'items' => $results]);
-    }
-
-    /**
-     * Search data by country
-     * @param  \Illuminate\Http\Request  $request
-     * @return json
-     */
-    public function searchByCountry(Request $request)
-    {
-        $results = City::getAvailableData()
-            ->where('cities.country_id', $request->country_id)
-            ->get();
-
-        return json_encode($results);
+        return redirect()->route('core.index');
     }
 }

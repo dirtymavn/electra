@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\RegionDataTable;
 use App\Http\Requests\MasterData\RegionRequest;
 
+use Excel;
+use PDF;
+
 class RegionController extends Controller
 {
     public function __construct()
@@ -176,5 +179,31 @@ class RegionController extends Controller
         }
 
         return redirect()->route('region.index');
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $airline = Region::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($airline) {
+            $excel->sheet('Sheet 1', function($sheet) use ($airline) {
+                $sheet->fromArray($airline);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $airlines = Region::all();
+        $pdf = PDF::loadView('contents.master_datas.airline.pdf', compact('airlines'));
+        return $pdf->download('airline.pdf');
     }
 }

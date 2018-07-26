@@ -39,11 +39,36 @@ class City extends Model implements Auditable
         return $this->hasOne(Airport::class, 'city_id');
     }
 
+    /**
+     * Get the country for the city.
+     */
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
     public static function getDataAvailable()
     {
         return self::whereCompanyId(user_info('company_id'))
             ->whereStatus(true)
             ->whereIsDraft(false)
             ->whereDoesntHave('airport');
+    }
+
+    /**
+     * Get available city
+     *
+     * @return array
+     */
+    public static function getAvailableData()
+    {
+        $return = self::join('companies', 'companies.id', '=', 'cities.company_id')
+            ->join('countries', 'countries.id', '=', 'cities.country_id')
+            ->where('cities.is_draft', false)
+            ->where('cities.status', true)
+            ->where('cities.company_id', user_info('company_id'));
+
+        return $return;
+
     }
 }
