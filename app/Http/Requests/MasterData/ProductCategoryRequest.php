@@ -25,7 +25,7 @@ class ProductCategoryRequest extends FormRequest
     {
         return [
             'category_name' => 'required',
-            'category_code' => 'required',
+            'category_code' => 'required|max:20',
             'status' => 'required'
         ];
     }

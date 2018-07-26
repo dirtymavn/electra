@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('category_code', trans('Category Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('category_code', old('category_code') , ['class' => 'form-control', 'placeholder' => 'Input the Category Code']) !!}
+            {!! Form::text('category_code', old('category_code') , ['class' => 'form-control', 'placeholder' => 'Input the Category Code', 'maxlength' => '20']) !!}
         </div>
     </div>
     <div class="col-sm-6">
@@ -16,7 +16,7 @@
         </div>
          <div class="form-group">
             {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-            {!! Form::select('status', [true => 'TRUE', false => 'False'], old('status'), ['class' => 'form-control', 'placeholder' => 'Choose Status']) !!}
+            {!! Form::select('status', [true => 'Active', false => 'Disabled'], old('status'), ['class' => 'form-control', 'placeholder' => 'Choose Status']) !!}
         </div>
     </div>
 </div>

@@ -68,10 +68,12 @@
             success: function(data) {
                 var value = data.data.data;
                 $('#optional_product_description').val(value.optional_product_description);
-                $('#optional_supplier_no').val(value.optional_supplier_no);
+                $('#optional_supplier_no').select2().val(value.optional_supplier_no).trigger('change');
+                initSelect2Remote($('#optional_supplier_no'), "{{ route('supplier.search-data') }}", "Choose Supplier", 0, true);
                 $('#optional_product_code').val(value.optional_product_code);
                 $('#optional_reference_no').val(value.optional_reference_no);
-                $('#optional_currency').val(value.optional_currency);
+                $('#optional_currency').select2().val(value.optional_currency).trigger('change');
+                initSelect2Remote($('#optional_currency'), "{{ route('currencyrate.search-data') }}", "Choose Currency", 0, true);
                 $('#optional_cost').val(value.optional_cost);
                 $('#itinerary_optional_id').val(data.data.id);
                 $('#form-optional').modal({backdrop: 'static', keyboard: false});

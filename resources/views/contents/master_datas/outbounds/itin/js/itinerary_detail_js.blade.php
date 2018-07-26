@@ -2,8 +2,8 @@
     $(document).ready(function() {
         var detailColumns = [
             { data: 'day', name: 'day'},
-            { data: 'as_remark_flag', name: 'as_remark_flag', className: 'dt-center'},
-            { data: 'remark_seq', name: 'remark_seq'},
+            // { data: 'as_remark_flag', name: 'as_remark_flag', className: 'dt-center'},
+            // { data: 'remark_seq', name: 'remark_seq'},
             { data: 'city', name: 'city'},
             { data: 'itinerary_item_code', name: 'itinerary_item_code'},
             { data: 'brief_description', name: 'brief_description'},
@@ -80,7 +80,8 @@
                 $('#day').val(value.day);
                 $('#as_remark_flag').val(value.as_remark_flag);
                 $('#remark_seq').val(value.remark_seq);
-                $('#city').val(value.city);
+                $('#city').select2().val(value.city).trigger('change');
+                initSelect2Remote($('#city'), "{{ route('city.search-data-normal') }}", "Choose City", 0, true);
                 $('#itinerary_item_code').val(value.itinerary_item_code);
                 $('#brief_description').val(value.brief_description);
                 $('#breakfast').val(value.breakfast);

@@ -193,7 +193,21 @@ class CityController extends Controller
                 \DB::raw("(countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as text"))
             ->where('cities.city_name', 'ilike', '%'.$request->search.'%')
             ->get();
-        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchDataNormal(Request $request)
+    {
+        $results = City::getAvailableData()
+            ->select("cities.city_code as slug", \DB::raw("(cities.city_name || '-' || cities.city_code) as text"))
+            ->where('cities.city_name', 'ilike', '%'.$request->search.'%')
+            ->get();
 
         return response()->json(['message' => 'Success', 'items' => $results]);
     }

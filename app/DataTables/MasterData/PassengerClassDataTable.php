@@ -29,6 +29,9 @@ class PassengerClassDataTable extends DataTable
                     return '-';
                 }
             })
+            ->editColumn('passenger_class_type', function($passenger){
+                return ucwords(str_replace('_', ' ', $passenger->passenger_class_type));
+            })
             ->editColumn('is_draft', function($passenger){
                 return ($passenger->is_draft) ? 'Yes' : 'No';
             });

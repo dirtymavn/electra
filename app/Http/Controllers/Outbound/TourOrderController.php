@@ -408,7 +408,8 @@ class TourOrderController extends Controller
         } catch (\Exception $e) {
             \DB::rollback();
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
-            return redirect()->back()->withInput();
+            $url = route('tourorder.edit', $tourOrder->id).'?error=y';
+            return redirect()->to($url)->withInput();
         }
     }
 

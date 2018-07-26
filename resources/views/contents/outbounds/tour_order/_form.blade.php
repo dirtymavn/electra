@@ -541,6 +541,7 @@
 
                 if (element == 'paxlist') {
                     $('.customer_id').select2({placeholder: 'Choose Customer', allowClear: true}).val(value.customer_id).trigger('change');
+                    initSelect2Remote($('.customer_id'), "{{ route('customer.search-data') }}", "Choose Customer", 0);
                     $('#vip_status_flag').val(value.vip_status_flag);
                     $('#surname').val(value.surname);
                     $('#given_name').val(value.given_name);
@@ -586,6 +587,9 @@
                     $('#flight_from').select2({placeholder: 'Choose Flight From', allowClear: true}).val(value.flight_from_ori).trigger('change');
                     $('#flight_to').select2({placeholder: 'Choose Flight To', allowClear: true}).val(value.flight_to_ori).trigger('change');
                     $('#flight_airline_id').select2({placeholder: 'Choose Airline', allowClear: true}).val(value.flight_airline_id).trigger('change'),
+                    initSelect2Remote($('.airline_id'), "{{ route('airline.search-data') }}", "Choose Airline", 0);
+                    initSelect2Remote($('#flight_from'), "{{ route('city.search-data') }}", "Choose Flight From", 0, true);
+                    initSelect2Remote($('#flight_to'), "{{ route('city.search-data') }}", "Choose Flight To", 0, true);
                     $('#flight_no').val(value.flight_no),
                     $('#class').val(value.class),
                     $('#farebasis').val(value.farebasis),
