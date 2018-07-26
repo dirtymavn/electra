@@ -36,7 +36,8 @@ class PassengerClassController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.passenger_class.create');
+        $types = PassengerClass::classTypes();
+        return view('contents.master_datas.passenger_class.create', compact('types'));
     }
 
     /**
@@ -101,7 +102,8 @@ class PassengerClassController extends Controller
     public function edit(PassengerClass $passengerClass, $id)
     {
         $passenger = PassengerClass::find($id);
-        return view('contents.master_datas.passenger_class.edit')->with(['passenger' => $passenger]);
+        $types = PassengerClass::classTypes();
+        return view('contents.master_datas.passenger_class.edit', compact('passenger', 'types'));
     }
 
     /**

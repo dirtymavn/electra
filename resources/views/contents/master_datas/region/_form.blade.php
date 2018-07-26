@@ -13,7 +13,7 @@
             {!! Form::textarea('region_description', old('region_description') , ['class' => 'form-control', 'placeholder' => 'Input the Region Description', 'rows' => '4']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
+            {!! Form::label('status', trans('Active'), ['class' => 'control-label']) !!}
             {!! Form::select('status', ['1' => 'Yes', '0' => 'No'], old('status'), ['class' => 'form-control']) !!}
         </div>
         

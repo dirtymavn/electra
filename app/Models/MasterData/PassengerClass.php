@@ -29,4 +29,17 @@ class PassengerClass extends Model implements Auditable
         'branch_id',
         'is_draft'
     ];
+
+    public static function classTypes()
+    {
+        $types = [
+            'suite' => 'Suite',
+            'first_class' => 'First Class',
+            'business_class' => 'Business Class',
+            'premium_economy' => 'Premium Economy',
+            'economy' => 'Economy'
+        ];
+
+        return $types;
+    }
 }

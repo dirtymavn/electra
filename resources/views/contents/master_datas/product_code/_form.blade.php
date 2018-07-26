@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('product_code', trans('Product Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('product_code', old('product_code') , ['class' => 'form-control', 'placeholder' => 'Input the Product Code']) !!}
+            {!! Form::text('product_code', old('product_code') , ['class' => 'form-control', 'placeholder' => 'Input the Product Code', 'maxlength' => '20']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('product_name', trans('Product Name'), ['class' => 'control-label']) !!}
@@ -15,7 +15,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
+            {!! Form::label('status', trans('Active'), ['class' => 'control-label']) !!}
             {!! Form::select('status', [1 => 'Yes', 0 => 'No'], old('status'), ['class' => 'form-control']) !!}
         </div>
     </div>

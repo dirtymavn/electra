@@ -2,17 +2,17 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('itinerary_code', trans('Itinerary Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('itinerary_code', old('itinerary_code') , ['class' => 'form-control', 'placeholder' => 'Input the Code']) !!}
+            {!! Form::text('itinerary_code', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the Code', 'readonly' => true]) !!}
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             {!! Form::label('itinerary_direction', trans('Itinerary Direction'), ['class' => 'control-label']) !!}
             {!! Form::text('itinerary_direction', old('itinerary_direction') , ['class' => 'form-control', 'placeholder' => 'Input the Direction']) !!}
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('branch_id', trans('Branch ID'), ['class' => 'control-label']) !!}
-            {!! Form::select('branch_id', ['' => "Choose Branch"], old('branch_id'), ['class' => 'form-control']) !!}
+            {!! Form::label('branch_id', trans('Branch Name'), ['class' => 'control-label']) !!}
+            {!! Form::select('branch_id', ['' => "Choose Branch"] + @$branchs, old('branch_id'), ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>
@@ -49,7 +49,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 {!! Form::label('city_code', trans('City Code'), ['class' => 'control-label']) !!}
-                                                {!! Form::select('city_code', ['' => "Choose City Code"], old('city_code'), ['class' => 'form-control']) !!}
+                                                {!! Form::select('city_code', ['' => "Choose City"] + @$cities, old('city_code'), ['class' => 'form-control city-list']) !!}
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -63,11 +63,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         {!! Form::label('airline', trans('Airline'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('airline', ['' => "Choose Airline"], old('airline'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('airline', ['' => "Choose Airline"] + @$airlines, old('airline'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('nationality', trans('Nationality'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('nationality', ['' => "Choose Nationality"], old('nationality'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('nationality', ['' => "Choose Nationality"] + @$nationalities, old('nationality'), ['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -108,8 +108,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        {!! Form::label('depature', trans('Depature'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('depature', ['' => "Choose Depature", '1' => 'Daily', '2' => 'Only on day of week', '3' => 'Only on the following date'], old('depature'), ['class' => 'form-control']) !!}
+                                        {!! Form::label('departure', trans('Departure'), ['class' => 'control-label']) !!}
+                                        {!! Form::select('departure', ['' => "Choose departure"] + @$departures, old('departure'), ['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -150,8 +150,8 @@
                                                 <thead>
                                                     <tr class="text-center">
                                                         <th>Day</th>
-                                                        <th>Remark</th>
-                                                        <th>Remark</th>
+                                                        <!-- <th>Remark</th>
+                                                        <th>Remark</th> -->
                                                         <th>City</th>
                                                         <th>Code</th>
                                                         <th>Bried Description</th>
@@ -282,23 +282,23 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {!! Form::label('day', trans('Day'), ['class' => 'control-label']) !!}
-                                    {!! Form::text('day', old('day'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Day']) !!}
+                                    {!! Form::number('day', old('day'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Day']) !!}
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display: none;">
                                     {!! Form::label('as_remark_flag', trans('As Remark Flag'), ['class' => 'control-label']) !!}
                                     {!! Form::select('as_remark_flag', ['true' => 'YES', 'false' => 'NO'], old('as_remark_flag'), ['class' => 'form-control']) !!}
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display: none;">
                                     {!! Form::label('remark_seq', trans('Remark Seq'), ['class' => 'control-label']) !!}
                                     {!! Form::text('remark_seq', old('remark_seq'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Remark Seq']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('itinerary_item_code', trans('Itinerary Item Code'), ['class' => 'control-label']) !!}
-                                    {!! Form::text('itinerary_item_code', old('itinerary_item_code'), ['class' => 'form-control', 'placeholder' => 'Input the Itinerary Item Code']) !!}
+                                    {!! Form::text('itinerary_item_code', old('itinerary_item_code'), ['class' => 'form-control', 'placeholder' => 'Input the Itinerary Item Code', 'maxlength' => '20']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('city', trans('City'), ['class' => 'control-label']) !!}
-                                    {!! Form::text('city', old('city'), ['class' => 'form-control', 'placeholder' => 'Input the City']) !!}
+                                    {!! Form::select('city', ['' => 'Choose City'] + @$cities, old('city'), ['class' => 'form-control city-list']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('brief_description', trans('Brief Description'), ['class' => 'control-label']) !!}
@@ -390,11 +390,11 @@
                             </div>
                             <div class="form-group">
                                 {!! Form::label('supplier_no', trans('Supplier'), ['class' => 'control-label']) !!}
-                                {!! Form::select('supplier_no', ['' => 'Choose Supplier'], old('supplier_no'), ['class' => 'form-control']) !!}
+                                {!! Form::select('supplier_no', ['' => 'Choose Supplier'] + @$suppliers, old('supplier_no'), ['class' => 'form-control supplier-no']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('currency', trans('Currency'), ['class' => 'control-label']) !!}
-                                {!! Form::text('currency', old('currency'), ['class' => 'form-control', 'placeholder' => 'Input the Currency']) !!}
+                                {!! Form::select('currency', ['' => 'Choose Currency'] + @$currencys, old('currency'), ['class' => 'form-control currency-rate']) !!}
                             </div>
                             
                         </div>
@@ -409,13 +409,13 @@
                             </div>
                             <div class="form-group">
                                 {!! Form::label('tax_currency', trans('Tax Currency'), ['class' => 'control-label']) !!}
-                                {!! Form::text('tax_currency', old('tax_currency'), ['class' => 'form-control', 'placeholder' => 'Input the Tax Currency']) !!}
+                                {!! Form::select('tax_currency', ['' => 'Choose Tax Currency'], old('tax_currency'), ['class' => 'form-control']) !!}
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 {!! Form::label('tax_free_foc_flag', trans('Tax Free Foc Flag'), ['class' => 'control-label']) !!}
                                 {!! Form::select('tax_free_foc_flag', ['true' => 'Yes', 'false' => 'No'], old('tax_free_foc_flag'), ['class' => 'form-control']) !!}
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 {!! Form::label('foc_discount_type', trans('Foc Discount Type'), ['class' => 'control-label']) !!}
                                 {!! Form::text('foc_discount_type', old('foc_discount_type'), ['class' => 'form-control', 'placeholder' => 'Input the Foc Discount Type']) !!}
                             </div>
@@ -454,7 +454,7 @@
                                                                 <th>Start Desc.</th>
                                                                 <th>End Date</th>
                                                                 <th>End Desc.</th>
-                                                                <th>Status</th>
+                                                                <!-- <th>Status</th> -->
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -497,7 +497,7 @@
                                                                         {!! Form::label('end_description', trans('End Description'), ['class' => 'control-label']) !!}
                                                                         {!! Form::textarea('end_description', old('end_description'), ['class' => 'form-control', 'placeholder' => 'Input the End Description', 'rows' => '4']) !!}
                                                                     </div>
-                                                                    <div class="form-group">
+                                                                    <div class="form-group" style="display: none;">
                                                                         {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
                                                                         {!! Form::text('status', old('status'), ['class' => 'form-control', 'placeholder' => 'Input the Status']) !!}
                                                                     </div>
@@ -856,7 +856,7 @@
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('optional_supplier_no', trans('Supplier'), ['class' => 'control-label']) !!}
-                                    {!! Form::select('optional_supplier_no', ['' => 'Choose Supplier'], old('optional_supplier_no'), ['class' => 'form-control']) !!}
+                                    {!! Form::select('optional_supplier_no', ['' => 'Choose Supplier'] + @$suppliers, old('optional_supplier_no'), ['class' => 'form-control supplier-no']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('optional_product_code', trans('Product Code'), ['class' => 'control-label']) !!}
@@ -870,7 +870,7 @@
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('optional_currency', trans('Currency'), ['class' => 'control-label']) !!}
-                                    {!! Form::text('optional_currency', old('optional_currency'), ['class' => 'form-control', 'placeholder' => 'Input the Currency']) !!}
+                                    {!! Form::select('optional_currency', ['' => 'Choose Currency'] + @$currencys, old('optional_currency'), ['class' => 'form-control currency-rate']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('optional_cost', trans('Cost'), ['class' => 'control-label']) !!}
@@ -900,6 +900,15 @@
 <script>
     $(function(){
         spinnerLoad($('#form-itin'));
+        initSelect2Remote($('#branch_id'), "{{ route('branch.search-data') }}", "Choose Branch", 0);
+        initSelect2Remote($('.city-list'), "{{ route('city.search-data-normal') }}", "Choose City", 0, true);
+        initSelect2Remote($('#airline'), "{{ route('airline.search-data') }}", "Choose Airline", 0);
+        initSelect2Remote($('#departure'), "{{ route('city.search-data') }}", "Choose Departure", 0, true);
+        initSelect2Remote($('.supplier-no'), "{{ route('supplier.search-data') }}", "Choose Supplier", 0, true);
+        initSelect2Remote($('#nationality'), "{{ route('country.search-data-nationality') }}", "Choose Nationality", 0);
+        initSelect2Remote($('.currency-rate'), "{{ route('currencyrate.search-data') }}", "Choose Currency", 0, true);
+        initSelect2($('#type'), 'Choose Type');
+        initSelect2($('#category'), 'Choose Category');
     });
 </script>
 

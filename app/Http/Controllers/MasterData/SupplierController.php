@@ -205,4 +205,23 @@ class SupplierController extends Controller
         }
         return redirect()->route('supplier.index');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Supplier::getAvailableData()
+            ->select('master_supplier.id', \DB::raw("(master_supplier.supplier_no||'-'||master_supplier.name) as text"), 'master_supplier.supplier_no as slug')
+            ->where(function($q) {
+                return $q->where('master_supplier.name', 'ilike', '%'.$request->search.'%')
+                    ->orWhere('master_supplier.supplier_no', 'ilike', '%'.$request->search.'%');
+            })
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

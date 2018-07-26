@@ -251,13 +251,16 @@
                 if (element == 'itinerary-service-variable' || element == 'itinerary-service-fixed') {
                     $('#itinerary_service_id').val(data.data.id);
                     $('#charge_method').val(value.charge_method);
-                    $('#currency').val(value.currency);
+                    $.when( $('#currency').select2().val(value.currency).trigger('change') ).then(function( data, textStatus, jqXHR ) {
+                        initSelect2Remote($('#currency'), "{{ route('currencyrate.search-data') }}", "Choose Currency", 0, true);
+                        $('#tax_currency').val(value.tax_currency);
+                    });
                     $('#service_type').val(value.service_type);
                     $('#product_code').val(value.product_code);
                     $('#ref_no').val(value.ref_no);
                     $('#service_remark').val(value.service_remark);
-                    $('#supplier_no').val(value.supplier_no);
-                    $('#tax_currency').val(value.tax_currency);
+                    $('#supplier_no').select2().val(value.supplier_no).trigger('change');
+                    initSelect2Remote($('#supplier_no'), "{{ route('supplier.search-data') }}", "Choose Supplier", 0, true);
                     $('#tax_free_foc_flag').val(value.tax_free_foc_flag);
                     $('#tax_type').val(value.tax_type);
                     $('#foc_discount_type').val(value.foc_discount_type);
@@ -330,7 +333,7 @@
         { data: 'end_date', name: 'end_date'},
         { data: 'start_description', name: 'start_description'},
         { data: 'end_description', name: 'end_description'},
-        { data: 'status', name: 'status'},
+        // { data: 'status', name: 'status'},
         { data: 'action', name: 'action', className: 'dt-center'},
     ];
 
@@ -566,4 +569,23 @@
         $('#itinerary_service_tax_method').val('add');
     });
     
+    $(document).on('change', '#currency', function() {
+        var _this = $(this);
+        if (_this == '') {
+            $('#tax_currency').html('<option value="">Choose Tax Currency</option>');
+        }
+        $.ajax({
+            url: "{{ route('currencyrate.search-data-by-code') }}",
+            method: "get",
+            dataType: "json",
+            data: {currency_code: _this.val()},
+            success: function(data) {
+                $('#tax_currency').html('<option value="">Choose Tax Currency</option>');
+                $.each(data.items, function(key, value) {
+                    $('#tax_currency').append('<option value="'+value.rate+'">'+value.rate+'</option>');
+                });
+            }
+        });
+    });
+
 </script>

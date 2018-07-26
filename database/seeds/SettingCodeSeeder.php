@@ -22,7 +22,15 @@ class SettingCodeSeeder extends Seeder
         	[
         		'name' => 'Tour Order',
         		'type' => 'TO'
-        	]
+        	],
+            [
+                'name' => 'Itinerary',
+                'type' => 'ITIN'
+            ],
+            [
+                'name' => 'Tour Guide',
+                'type' => 'TG'
+            ]
         ]);
     }
 }

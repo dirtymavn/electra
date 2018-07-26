@@ -193,4 +193,23 @@ class CountryController extends Controller
 
         return response()->json(['message' => 'Success', 'items' => $results]);
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchDataNationality(Request $request)
+    {
+        $results = Country::getDataByCompany()
+            ->select('countries.id', \DB::raw("(countries.country_name || '-' || countries.nationality) as text"))
+            ->where(function($q) {
+                return $q->where('countries.nationality', 'ilike', '%'.$request->search.'%')
+                    ->orWhere('countries.country_name', 'ilike', '%'.$request->search.'%');
+            })
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

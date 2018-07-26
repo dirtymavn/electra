@@ -12,6 +12,12 @@ use App\Models\MasterData\Outbound\Itinerary\MasterItineraryServiceOtherPtc;
 use App\Models\MasterData\Outbound\Itinerary\MasterItineraryServiceRoute;
 use App\Models\MasterData\Outbound\Itinerary\MasterItineraryServiceTax;
 use App\Models\Temporary;
+use App\Models\MasterData\Branch;
+use App\Models\MasterData\City;
+use App\Models\MasterData\Airline;
+use App\Models\MasterData\Country;
+use App\Models\MasterData\Supplier\MasterSupplier;
+use App\Models\MasterData\Currency\Currency;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\Outbound\ItinDataTable;
@@ -56,12 +62,34 @@ class ItinController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         // clear temporary data
-        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        if (!$request->error) {
+            \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        }
 
-        return view('contents.master_datas.outbounds.itin.create');
+        $newCode = MasterItinerary::getAutoNumber();
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
+        $cities = City::getAvailableData()
+            ->select("cities.city_code as slug", \DB::raw("(cities.city_name || '-' || cities.city_code) as text"))
+            ->pluck('text', 'slug')->all();
+        $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
+            ->all();
+        $departures = City::getAvailableData()
+            ->select(\DB::raw("(cities.id ||'/'|| countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as slug"), 
+                \DB::raw("(countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as text"))
+            ->pluck('text', 'slug')->all();
+        $nationalities = Country::getDataByCompany()
+            ->select(\DB::raw("(countries.country_name || '-' || countries.nationality) as text"), 'countries.id')
+            ->pluck('text', 'countries.id')->all();
+        $suppliers = MasterSupplier::getAvailableData()
+            ->select('master_supplier.id', \DB::raw("(master_supplier.supplier_no||'-'||master_supplier.name) as text"), 'master_supplier.supplier_no as slug')
+            ->pluck('text', 'slug')
+            ->all();
+        $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
+
+        return view('contents.master_datas.outbounds.itin.create', compact('newCode', 'branchs', 'cities', 'airlines', 'departures', 'nationalities', 'suppliers', 'currencys'));
     }
 
     /**
@@ -102,7 +130,8 @@ class ItinController extends Controller
         } catch (\Exception $e) {
             \DB::rollback();
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
-            return redirect()->back()->withInput();
+            $url = route('itin.create').'?error=y';
+            return redirect()->to($url)->withInput();
         }
 
     }
@@ -124,10 +153,12 @@ class ItinController extends Controller
      * @param  \App\Outbound\Itinerary\MasterItinerary  $itin
      * @return \Illuminate\Http\Response
      */
-    public function edit(MasterItinerary $itin)
+    public function edit(MasterItinerary $itin, Request $request)
     {
         // clear temporary data
-        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        if (!$request->error) {
+            \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        }
 
         $details = $itin->details;
         foreach ($details as $detail) {
@@ -268,7 +299,27 @@ class ItinController extends Controller
             }
         }
 
-        return view('contents.master_datas.outbounds.itin.edit', compact('itin'));
+        $newCode = $itin->itinerary_code;
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
+        $cities = City::getAvailableData()
+            ->select("cities.city_code as slug", \DB::raw("(cities.city_name || '-' || cities.city_code) as text"))
+            ->pluck('text', 'slug')->all();
+        $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
+            ->all();
+        $departures = City::getAvailableData()
+            ->select(\DB::raw("(cities.id ||'/'|| countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as slug"), 
+                \DB::raw("(countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as text"))
+            ->pluck('text', 'slug')->all();
+        $nationalities = Country::getDataByCompany()
+            ->select(\DB::raw("(countries.country_name || '-' || countries.nationality) as text"), 'countries.id')
+            ->pluck('text', 'countries.id')->all();
+        $suppliers = MasterSupplier::getAvailableData()
+            ->select('master_supplier.id', \DB::raw("(master_supplier.supplier_no||'-'||master_supplier.name) as text"), 'master_supplier.supplier_no as slug')
+            ->pluck('text', 'slug')
+            ->all();
+        $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
+
+        return view('contents.master_datas.outbounds.itin.edit', compact('itin', 'newCode', 'branchs', 'cities', 'airlines', 'departures', 'nationalities', 'suppliers', 'currencys'));
     }
 
     /**
@@ -309,7 +360,8 @@ class ItinController extends Controller
         } catch (\Exception $e) {
             \DB::rollback();
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
-            return redirect()->back()->withInput();
+            $url = route('itin.edit', $itin->id).'?error=y';
+            return redirect()->to($url)->withInput();
         }
 
     }

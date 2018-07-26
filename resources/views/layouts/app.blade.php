@@ -328,7 +328,8 @@
                         }
                     },
                     placeholder: placeholder,
-                    minimumInputLength: minLength
+                    minimumInputLength: minLength,
+                    allowClear: true
                 });
             } else {
                 element.select2({
