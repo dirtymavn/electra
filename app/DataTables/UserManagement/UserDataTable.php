@@ -26,6 +26,9 @@ class UserDataTable extends DataTable
                // return strtoupper(str_replace('-', ' ', $user->company_role));
                return $user->roles[0]->slug;
             })
+            ->editColumn('created_at', function($user) {
+               return date('d-m-Y H:i:s', strtotime($user->created_at));
+            })
             ->addIndexColumn();
     }
 

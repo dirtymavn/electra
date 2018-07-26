@@ -6,6 +6,7 @@ use App\Models\MasterData\Voucher\MasterVoucher as Voucher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\VoucherDataTable;
+use App\Models\MasterData\Customer\MasterCustomer;
 
 use DB;
 
@@ -38,7 +39,9 @@ class VoucherController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.voucher.create');
+        $customers = MasterCustomer::getAvailableData()->pluck('master_customers.customer_name', 'master_customers.id')
+            ->all();
+        return view('contents.master_datas.voucher.create', compact('customers'));
     }
 
     /**
@@ -105,7 +108,10 @@ class VoucherController extends Controller
     public function edit(Voucher $voucher)
     {
         $voucher->voucher_date = date('Y-m-d', strtotime($voucher->voucher_date));
-        return view('contents.master_datas.voucher.edit', compact('voucher'));
+        $customers = MasterCustomer::getAvailableData()->pluck('master_customers.customer_name', 'master_customers.id')
+            ->all();
+            
+        return view('contents.master_datas.voucher.edit', compact('voucher', 'customers'));
     }
 
     /**

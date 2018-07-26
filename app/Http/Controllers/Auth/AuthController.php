@@ -73,18 +73,24 @@ class AuthController extends Controller
     public function profile()
     {
         $user = user_info();
+
         $user->company_name = @$user->company->name;
         $masterProfile = $user->masterProfile;
         if ($masterProfile) {
             $masterProfile = $user->masterProfile->toArray();
             $userTemp = $user->masterProfile->toArray();
-            unset($userTemp['company'], $userTemp['master_profile'], $masterProfile['id']);
+            unset($userTemp['company'], $userTemp['master_profile'], $masterProfile['id'], $userTemp['branch_id']);
 
             $arrayMerge = array_merge($userTemp, $masterProfile);
 
             $user = (object) $arrayMerge;   
         }
-        return view('contents.auths.profile', compact('user'));
+        // wew($user->branch);
+        $branchs = $user->branch()->select('branch_name', 'id')->pluck('branch_name', 'id')->all();
+
+        // wew($branchs);
+
+        return view('contents.auths.profile', compact('user', 'branchs'));
     }
 
     /**

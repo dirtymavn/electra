@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::select('status', ['1' => 'Yes', '0' => 'No'], old('status'), ['class' => 'form-control']) !!}
+                            {!! Form::select('status', ['1' => 'Active', '0' => 'Inactive'], old('status'), ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('type', trans('Type'), ['class' => 'control-label']) !!}
@@ -101,7 +101,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('id_branch', trans('ID Branch'), ['class' => 'control-label']) !!}
-                            {!! Form::select('id_branch', ['' => 'Choose Branch'], old('id_branch'), ['class' => 'form-control']) !!}
+                            {!! Form::select('id_branch', @$branchs, old('branch_id'), ['class' => 'form-control', 'readonly' => true]) !!}   
                         </div>
                         <div class="form-group">
                             {!! Form::label('office_tel', trans('Office Tel.'), ['class' => 'control-label']) !!}
@@ -123,7 +123,7 @@
                             {!! Form::label('remark', trans('Remark'), ['class' => 'control-label']) !!}
                             {!! Form::textarea('remark', old('remark') , ['class' => 'form-control', 'placeholder' => 'Input the Remark', 'rows' => '4']) !!}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="display: none;">
                             {!! Form::label('dr_account', trans('DR Account'), ['class' => 'control-label']) !!}
                             {!! Form::text('dr_account', old('dr_account') , ['class' => 'form-control', 'placeholder' => 'Input the DR Account']) !!}
                         </div>
@@ -138,7 +138,7 @@
                                         </div>
                                         <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
                                         <div>
-                                            <span class="btn btn-white btn-file">
+                                            <span class="btn btn-grey btn-file">
                                                 <span class="fileinput-new">Choose</span>
                                                 <span class="fileinput-exists">Edit</span>
                                                 <input type="file" accept="image/jpg, image/png" name="avatar" value="{{@$user->avatar}}">

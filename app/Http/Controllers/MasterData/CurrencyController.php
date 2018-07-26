@@ -310,4 +310,20 @@ class CurrencyController extends Controller
         $findTemp->data = json_decode($findTemp->data);
         return response()->json(['result' => true, 'data' => $findTemp], 200);   
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Currency::getAvailableData()
+            ->select('currency.id', 'currency.currency_name as text', 'currency.currency_code as slug')
+            ->where('currency.currency_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

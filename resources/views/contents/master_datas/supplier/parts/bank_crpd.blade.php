@@ -7,7 +7,7 @@
 			</div>
 			<div class="form-group">
 				{!! Form::label('name_bank', trans('Name'), ['class' => 'control-label']) !!}
-				{!! Form::text('name_bank', null, [ 'class' => 'form-control', 'placeholder' => 'Name' ]) !!}
+				{!! Form::text('name_bank', null, [ 'class' => 'form-control', 'placeholder' => 'Account Name' ]) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('swift', trans('swift'), ['class' => 'control-label']) !!}

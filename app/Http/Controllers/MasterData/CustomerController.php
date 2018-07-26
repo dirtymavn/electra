@@ -60,7 +60,7 @@ class CustomerController extends Controller
     public function create()
     {
         // clear temporary data
-        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        \DB::table('temporaries')->whereUserId(user_info('id'))->whereType('customer-creditcard')->delete();
 
         if (user_info()->inRole('super-admin')) {
             $companies = $this->companies->all()->pluck('name', 'id');
@@ -144,7 +144,7 @@ class CustomerController extends Controller
     public function edit(MasterCustomer $customer)
     {        
         // clear temporary data
-        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        \DB::table('temporaries')->whereUserId(user_info('id'))->whereType('customer-creditcard')->delete();
 
         $main = $customer->mains()->first()->toArray();
         $mainContact = $customer->mains()->first()->contacts()->first()->toArray();
@@ -414,5 +414,52 @@ class CustomerController extends Controller
         $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
         $findTemp->data = json_decode($findTemp->data);
         return response()->json(['result' => true, 'data' => $findTemp], 200);   
+    }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = MasterCustomer::getAvailableData()
+            ->select('master_customers.id', 'master_customers.customer_name as text')
+            ->where('master_customers.customer_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getCustomerById(Request $request)
+    {
+        $customer = MasterCustomer::find($request->id);
+
+        $main = $customer->mains()->first()->toArray();
+        $mainContact = $customer->mains()->first()->contacts()->first()->toArray();
+        $basic = $customer->basics()->first()->toArray();
+        $general = $customer->generals()->first()->toArray();
+        $generalDoc = $customer->generals()->first()->docs()->first()->toArray();
+        $discRate = $customer->discountRates()->first()->toArray();
+
+        $termFee = $customer->termFees()->first()->toArray();
+
+        $customer = $customer->toArray();
+
+        unset($main['id'], $mainContact['id'], $basic['id'], $general['id'], $generalDoc['id'], $discRate['id'], $termFee['id']);
+
+        $arrayMerge = array_merge($customer, $main, $mainContact, $basic, $general, $generalDoc, $discRate, $termFee);
+
+
+        $customer = (object) $arrayMerge;
+
+        return json_encode($customer);
     }
 }

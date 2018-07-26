@@ -4,6 +4,7 @@ namespace App\DataTables\MasterData;
 
 use App\Models\MasterData\Customer\MasterCustomer;
 use Yajra\DataTables\Services\DataTable;
+use Request;
 
 class CustomerDataTable extends DataTable
 {
@@ -42,6 +43,7 @@ class CustomerDataTable extends DataTable
      */
     public function query(MasterCustomer $model)
     {
+        // print_r(Request::input()); die();
         $return = $model->newQuery()
             ->leftJoin('companies', 'companies.id', '=', 'master_customers.company_id')
             ->select(

@@ -67,14 +67,6 @@ class UserController extends Controller
         $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
         $departments = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
 
-        if (count($branchs) == 0) {
-            $branchs = ['' => '- Not Available -'];
-        }
-
-        if (count($departments) == 0) {
-            $departments = ['' => '- Not Available -'];
-        }
-
         // $roles = Role::whereNotIn('slug', ['super-admin'])->pluck('name', 'slug')->all();
         $roles = $this->getRoleUsers(user_info('roles')[0]->slug);
 
@@ -156,14 +148,6 @@ class UserController extends Controller
 
         $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
         $departments = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
-
-        if (count($branchs) == 0) {
-            $branchs = ['' => '- Not Available -'];
-        }
-
-        if (count($departments) == 0) {
-            $departments = ['' => '- Not Available -'];
-        }
 
         return view('contents.user_managements.user.edit', compact('user', 'companies', 'roles', 'branchs', 'departments'));
     }

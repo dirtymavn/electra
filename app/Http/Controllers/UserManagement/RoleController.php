@@ -126,4 +126,33 @@ class RoleController extends Controller
         flash()->success('Data is successfully deleted');
         return redirect()->back();
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        if (user_info()->inRole('super-admin')) {
+            $results = Role::whereSlug('admin')
+                ->select('roles.slug', 'roles.name as text')
+                ->where('roles.name', 'ilike', '%'.$request->search.'%')
+                ->get();
+        } elseif (user_info()->inRole('admin')) {
+            $results = Role::whereCompanyId(user_info()->company->id)
+                ->select('roles.slug', 'roles.name as text')
+                ->where('roles.name', 'ilike', '%'.$request->search.'%')
+                ->get();
+        } else {
+            $results = Role::whereCompanyId(user_info()->company->id)
+                ->where('slug', '<>', user_info('roles')[0]->slug)
+                ->select('roles.slug', 'roles.name as text')
+                ->where('roles.name', 'ilike', '%'.$request->search.'%')
+                ->get();
+        }
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

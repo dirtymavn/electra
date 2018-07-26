@@ -692,7 +692,7 @@
                                     </a>
                                 </li>
                             @endif
-                            <li class="sub-submenu">
+                            {{--<li class="sub-submenu">
                                 <a>
                                     <i class="fa fa-circle-o"></i><span>System Config</span><i class="arrow-third-menu os-icon os-icon-chevron-down"></i>
                                 </a>
@@ -710,7 +710,7 @@
                                         <ul>
                                     </div>
                                 </div>
-                            </li>
+                            </li>--}}
                         </ul>
                     </div>
                 </div>

@@ -37,7 +37,8 @@ class TourController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.tour.create');
+        $categories = Tour::tourCategories();
+        return view('contents.master_datas.tour.create', compact('categories'));
     }
 
     /**
@@ -101,7 +102,8 @@ class TourController extends Controller
      */
     public function edit(Tour $tour)
     {
-        return view('contents.master_datas.tour.edit', compact('tour'));
+        $categories = Tour::tourCategories();
+        return view('contents.master_datas.tour.edit', compact('tour', 'categories'));
     }
 
     /**
@@ -176,5 +178,21 @@ class TourController extends Controller
         }
 
         return redirect()->route('tour.index');
+    }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Tour::getAvailableData()
+            ->select('master_tours.id', 'master_tours.tour_name as text')
+            ->where('master_tours.tour_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
     }
 }

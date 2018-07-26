@@ -23,17 +23,17 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $userName = 'required|unique:users,username';
+        $userName = 'required|max:20|unique:users,username';
         $email = 'required|email|unique:users,email';
         
         if ($this->method() == 'PATCH') {
-            $userName = 'required|unique:users,username,' . $this->segment(3);
+            $userName = 'required|max:20|unique:users,username,' . $this->segment(3);
             $email = 'required|email|unique:users,email,' . $this->segment(3);
         }
 
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'first_name' => 'required|max:100',
+            'last_name' => 'required|max:100',
             'username' => $userName,
             'email' => $email,
             'password' => 'required_if:is_required,==,requirred|min:8',

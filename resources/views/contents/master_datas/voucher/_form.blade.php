@@ -21,7 +21,7 @@
                             {!! Form::select('voucher_currency', ['idr' => 'IDR', 'dollar' => 'Dollar'], old('voucher_currency') , ['class' => 'form-control']) !!}
                         </div>
                         <div class="col-md-9">
-                            {!! Form::text('voucher_amt', old('voucher_amt') , ['class' => 'form-control', 'placeholder' => 'Input the Nominal']) !!}
+                            {!! Form::text('voucher_amt', old('voucher_amt') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Nominal']) !!}
                         </div>
                     </div>
                 </div> 
@@ -51,16 +51,16 @@
             <p class="element-header">Customer</p>
             <div class="element-box">
                 <div class="form-group">
-                    {!! Form::label('customer_no', trans('Customer No.'), ['class' => 'control-label']) !!}
-                    {!! Form::select('customer_no', ['' => 'Choose Customer'], old('customer_no') , ['class' => 'form-control col-md-6']) !!}
+                    {!! Form::label('cust_no', trans('Customer No.'), ['class' => 'control-label']) !!}
+                    {!! Form::select('cust_no', ['' => 'Choose Customer'] + @$customers, old('cust_no') , ['class' => 'form-control col-md-6']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('cust_name', trans('Name'), ['class' => 'control-label']) !!}
-                    {!! Form::text('cust_name', old('cust_name') , ['class' => 'form-control', 'placeholder' => 'Input the Customer Name']) !!}
+                    {!! Form::text('cust_name', old('cust_name') , ['class' => 'form-control', 'placeholder' => 'Input the Customer Name', 'readonly' => true]) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('cust_address', trans('Address'), ['class' => 'control-label']) !!}
-                    {!! Form::textarea('cust_address', old('cust_address') , ['class' => 'form-control', 'placeholder' => 'Input the Address', 'rows' => '6']) !!}
+                    {!! Form::textarea('cust_address', old('cust_address') , ['class' => 'form-control', 'placeholder' => 'Input the Address', 'rows' => '6', 'readonly' => true]) !!}
                 </div>
             </div>
         </div>
@@ -85,4 +85,36 @@
 @section('part_script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 {!! JsValidator::formRequest('App\Http\Requests\MasterData\VoucherRequest', '#form-voucher') !!}
+<script type="text/javascript">
+    $(document).ready(function() {
+        initSelect2Remote($('#cust_no'), "{{ route('customer.search-data') }}", "Choose Customer", 0);
+        @if(@$voucher->cust_no)
+            $('#cust_no').select2({placeholder: 'Choose Customer', allowClear: true}).val("{{$voucher->cust_no}}").trigger('change');
+        @endif
+    });
+
+    $(document).on('change', '#cust_no', function() {
+        var _this = $(this);
+        if (_this.val() == '') {
+            $('#cust_name').val('');
+            $('#cust_address').val('');
+            return false;
+        }
+
+        $.ajax({
+            url: "{{route('customer.get-data-by-id')}}",
+            method: "get",
+            dataType: "json",
+            data: {id: _this.val()},
+            success: function(data) {
+                $('#cust_name').val(data.customer_name);
+                $('#cust_address').val(data.billing_address);
+            }
+        });
+    });
+</script>
+
+
+
+
 @endsection
