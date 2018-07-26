@@ -113,6 +113,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
         Route::resource('voucher', 'VoucherController');
         Route::post('voucher/bulk-delete', array('as' => 'voucher.bulk-delete', 'uses' => 'VoucherController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,voucher.destroy'));
+        Route::get('voucher/export/excel', ['as' => 'export.voucher.excel', 'uses' => 'VoucherController@export_excel']);
+        Route::get('voucher/export/pdf', ['as' => 'export.voucher.pdf', 'uses' => 'VoucherController@export_pdf']);
 
         // Inventory
         Route::resource('inventory', 'InventoryController');
@@ -268,6 +270,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Core Config
         Route::resource('core-config', 'CoreConfigController');
         Route::post('core-config/bulk-delete', array('as' => 'core-config.bulk-delete', 'uses' => 'CoreConfigController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,core-config.destroy'));
+
+        // Core Module
+        Route::resource('core', 'CoreController');
+        Route::post('core/bulk-delete', array('as' => 'core.bulk-delete', 'uses' => 'CoreController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,core.destroy'));
 
     });
 
