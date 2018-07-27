@@ -205,4 +205,12 @@ class User extends CartalystUser implements Auditable, UserContract
     {
         return $this->hasOne('App\Models\Internals\MasterProfile', 'user_id');
     }
+
+    /**
+     * Get the branch that owns the user.
+    */
+   public function branch()
+    {
+        return $this->belongsTo('App\Models\MasterData\Branch');
+    }
 }

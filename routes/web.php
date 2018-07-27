@@ -19,6 +19,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource( 'user', 'UserController' )->middleware('sentinel_access:admin,admin.company');
         Route::patch('user/{id}/reset-password', array('as' => 'user.reset-password', 'uses' => 'UserController@resetPassword', 'middleware' => 'sentinel_access:admin,admin.company'));
         Route::resource('role', 'RoleController')->middleware('sentinel_access:admin,admin.company');
+        Route::get('role/search/data', ['as' => 'role.search-data', 'uses' => 'RoleController@searchData']);
     });
 
      // Business
@@ -104,12 +105,17 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('customer/credit-card', array('as' => 'customer.creditcard.post', 'uses' => 'CustomerController@customerCreditCardStore', 'middleware' => 'sentinel_access:admin.company,customer.create'));
         Route::post('customer/data/delete', array('as' => 'customer.data.delete', 'uses' => 'CustomerController@dataDelete', 'middleware' => 'sentinel_access:admin.company,customer.create'));
         Route::post('customer/data/detail', array('as' => 'customer.data.detail', 'uses' => 'CustomerController@dataDetail', 'middleware' => 'sentinel_access:admin.company,customer.create'));
+        Route::get('customer/search/data', ['as' => 'customer.search-data', 'uses' => 'CustomerController@searchData', 'middleware' => 'sentinel_access:admin.company,customer.create']);
+        Route::get('customer/get/data', ['as' => 'customer.get-data-by-id', 'uses' => 'CustomerController@getCustomerById', 'middleware' => 'sentinel_access:admin.company,customer.create']);
 
         Route::resource('supplier', 'SupplierController');
         Route::post('supplier/bulk-delete', array('as' => 'supplier.bulk-delete', 'uses' => 'SupplierController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,supplier.destroy'));
+        Route::get('supplier/search/data', ['as' => 'supplier.search-data', 'uses' => 'SupplierController@searchData', 'middleware' => 'sentinel_access:admin.company,supplier.create']);
 
         Route::resource('voucher', 'VoucherController');
         Route::post('voucher/bulk-delete', array('as' => 'voucher.bulk-delete', 'uses' => 'VoucherController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,voucher.destroy'));
+        Route::get('voucher/export/excel', ['as' => 'export.voucher.excel', 'uses' => 'VoucherController@export_excel']);
+        Route::get('voucher/export/pdf', ['as' => 'export.voucher.pdf', 'uses' => 'VoucherController@export_pdf']);
 
         // Inventory
         Route::resource('inventory', 'InventoryController');
@@ -169,6 +175,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Airline
         Route::resource('airline', 'AirlineController');
         Route::post('airline/bulk-delete', array('as' => 'airline.bulk-delete', 'uses' => 'AirlineController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,airline.destroy'));
+        Route::get('airline/search/data', ['as' => 'airline.search-data', 'uses' => 'AirlineController@searchData', 'middleware' => 'sentinel_access:admin.company,airline.create']);
+        Route::get('airline/get/data', ['as' => 'airline.get-data-by-id', 'uses' => 'AirlineController@getAirlineById', 'middleware' => 'sentinel_access:admin.company,airline.create']);
 
         // Product Type
         Route::resource('product-type', 'ProductTypeController');
@@ -193,14 +201,21 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('currencyrate/credit-card', array('as' => 'currencyrate.rate.post', 'uses' => 'CurrencyController@currencyrateStore', 'middleware' => 'sentinel_access:admin.company,currencyrate.create'));
         Route::post('currencyrate/data/delete', array('as' => 'currencyrate.data.delete', 'uses' => 'CurrencyController@dataDelete', 'middleware' => 'sentinel_access:admin.company,currencyrate.create'));
         Route::post('currencyrate/data/detail', array('as' => 'currencyrate.data.detail', 'uses' => 'CurrencyController@dataDetail', 'middleware' => 'sentinel_access:admin.company,currencyrate.create'));
+        Route::get('currencyrate/search/data', ['as' => 'currencyrate.search-data', 'uses' => 'CurrencyController@searchData', 'middleware' => 'sentinel_access:admin.company,currencyrate.create']);
+        Route::get('currencyrate/search/data-by-code', ['as' => 'currencyrate.search-data-by-code', 'uses' => 'CurrencyController@searchDataByCode', 'middleware' => 'sentinel_access:admin.company,currencyrate.create']);
 
         // Country
         Route::resource('country', 'CountryController');
         Route::post('country/bulk-delete', array('as' => 'country.bulk-delete', 'uses' => 'CountryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,country.destroy'));
+        Route::get('country/search/data', ['as' => 'country.search-data', 'uses' => 'CountryController@searchData', 'middleware' => 'sentinel_access:admin.company,country.create']);
+        Route::get('country/search/data-nationality', ['as' => 'country.search-data-nationality', 'uses' => 'CountryController@searchDataNationality', 'middleware' => 'sentinel_access:admin.company,country.create']);
 
         // City
         Route::resource('city', 'CityController');
         Route::post('city/bulk-delete', array('as' => 'city.bulk-delete', 'uses' => 'CityController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,city.destroy'));
+        Route::get('city/search/data', ['as' => 'city.search-data', 'uses' => 'CityController@searchData', 'middleware' => 'sentinel_access:admin.company,city.create']);
+        Route::get('city/search/byCountry', ['as' => 'city.search-data-by-country', 'uses' => 'CityController@searchByCountry', 'middleware' => 'sentinel_access:admin.company,city.create']);
+        Route::get('city/search/data-normal', ['as' => 'city.search-data-normal', 'uses' => 'CityController@searchDataNormal', 'middleware' => 'sentinel_access:admin.company,city.create']);
 
         // Airport
         Route::resource('airport', 'AirportController');
@@ -209,6 +224,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Tour
         Route::resource('tour', 'TourController');
         Route::post('tour/bulk-delete', array('as' => 'tour.bulk-delete', 'uses' => 'TourController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,tour.destroy'));
+        Route::get('tour/search/data', ['as' => 'tour.search-data', 'uses' => 'TourController@searchData', 'middleware' => 'sentinel_access:admin.company,tour.create']);
 
         // Do Type
         Route::resource('dotype', 'DoTypeController');
@@ -232,10 +248,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Branch
         Route::resource('branch', 'CompanyBranchController');
         Route::post('branch/bulk-delete', array('as' => 'branch.bulk-delete', 'uses' => 'CompanyBranchController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,branch.destroy'));
+        Route::get('branch/search/data', ['as' => 'branch.search-data', 'uses' => 'CompanyBranchController@searchData']);
 
         // Department
         Route::resource('department', 'CompanyDepartmentController');
         Route::post('department/bulk-delete', array('as' => 'department.bulk-delete', 'uses' => 'CompanyDepartmentController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,department.destroy'));
+        Route::get('department/search/data', ['as' => 'department.search-data', 'uses' => 'CompanyDepartmentController@searchData']);
     });
 
     // System
@@ -247,6 +265,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('company', 'CompanyController')->middleware('sentinel_access:admin');
         Route::get('company/export/excel', ['as' => 'export.company.excel', 'uses' => 'CompanyController@export_excel', 'middleware' => 'sentinel_access:admin']);
         Route::get('company/export/pdf', ['as' => 'export.company.pdf', 'uses' => 'CompanyController@export_pdf', 'middleware' => 'sentinel_access:admin']);
+        Route::get('company/search/data', ['as' => 'company.search-data', 'uses' => 'CompanyController@searchData']);
 
         // Core Status
         Route::resource('core-status', 'CoreStatusController');
@@ -255,6 +274,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         // Core Config
         Route::resource('core-config', 'CoreConfigController');
         Route::post('core-config/bulk-delete', array('as' => 'core-config.bulk-delete', 'uses' => 'CoreConfigController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,core-config.destroy'));
+
+        // Core Module
+        Route::resource('core', 'CoreController');
+        Route::post('core/bulk-delete', array('as' => 'core.bulk-delete', 'uses' => 'CoreController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,core.destroy'));
 
     });
 

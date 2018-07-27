@@ -2,11 +2,11 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('order_no', trans('Order No'), ['class' => 'control-label']) !!}
-            {!! Form::text('order_no', old('order_no') , ['class' => 'form-control', 'placeholder' => 'Input the Order No']) !!}
+            {!! Form::text('order_no', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the Order No', 'readonly' => true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('customer_id', trans('Customer'), ['class' => 'control-label']) !!}
-            {!! Form::select('customer_id', @$customers, old('customer_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('customer_id', ['' => 'Choose Customer'] + @$customers, old('customer_id'), ['class' => 'form-control customer_id']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('order_type', trans('Order Type'), ['class' => 'control-label']) !!}
@@ -30,15 +30,15 @@
             {!! Form::label('our_ref', trans('Our Ref'), ['class' => 'control-label']) !!}
             {!! Form::text('our_ref', old('our_ref') , ['class' => 'form-control', 'placeholder' => 'Input the Our Ref']) !!}
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             {!! Form::label('tc_id', trans('TC ID'), ['class' => 'control-label']) !!}
             {!! Form::select('tc_id', ['' => '- Not Available -'], old('tc_id'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('master_tour_id', trans('Tour'), ['class' => 'control-label']) !!}
-            {!! Form::select('master_tour_id', @$tours, old('master_tour_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('master_tour_id', ['' => 'Choose Tour'] + @$tours, old('master_tour_id'), ['class' => 'form-control']) !!}
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display: none;">
             {!! Form::label('days', trans('Days'), ['class' => 'control-label']) !!}
             {!! Form::text('days', old('days') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Days']) !!}
         </div>
@@ -70,7 +70,7 @@
                                                         <th>VIP</th>
                                                         <th>Surname</th>
                                                         <th>Given Name</th>
-                                                        <th>Ptc</th>
+                                                        <!-- <th>Ptc</th> -->
                                                         <th>Title</th>
                                                         <th>Gender</th>
                                                         <th>ID No.</th>
@@ -97,7 +97,7 @@
     <div id="form-paxlist" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                {!! Form::open(['id' => 'form-tour-paxlist', 'method' => 'post']) !!}
+                {!! Form::open(['id' => 'form-tour-paxlist', 'method' => 'post', 'class' => 'form-horizontal']) !!}
                 <div class="modal-header">
                     <h4 class="modal-title">Pax List</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
@@ -108,7 +108,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('customer_id', trans('Customer'), ['class' => 'control-label']) !!}
-                                {!! Form::select('customer_id', @$customers, old('customer_id'), ['class' => 'form-control']) !!}
+                                {!! Form::select('customer_id', ['' => 'Choose Custome'] + @$customers, old('customer_id'), ['class' => 'form-control customer_id customer-paxlist']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('vip_status_flag', trans('VIP Status Flag'), ['class' => 'control-label']) !!}
@@ -116,13 +116,13 @@
                             </div>
                             <div class="form-group">
                                 {!! Form::label('surname', trans('Surname'), ['class' => 'control-label']) !!}
-                                {!! Form::text('surname', old('surname') , ['class' => 'form-control', 'placeholder' => 'Input the Surname']) !!}
+                                {!! Form::text('surname', old('surname') , ['class' => 'form-control', 'placeholder' => 'Input the Surname', 'readonly' => true]) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('given_name', trans('Given Name'), ['class' => 'control-label']) !!}
-                                {!! Form::text('given_name', old('given_name') , ['class' => 'form-control', 'placeholder' => 'Input the Given Name']) !!}
+                                {!! Form::text('given_name', old('given_name') , ['class' => 'form-control', 'placeholder' => 'Input the Given Name', 'readonly' => true]) !!}
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 {!! Form::label('ptc', trans('Ptc'), ['class' => 'control-label']) !!}
                                 {!! Form::text('ptc', old('ptc') , ['class' => 'form-control', 'placeholder' => 'Input the Ptc']) !!}
                             </div>
@@ -130,19 +130,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('title', trans('Title'), ['class' => 'control-label']) !!}
-                                {!! Form::text('title', old('title') , ['class' => 'form-control', 'placeholder' => 'Input the Title']) !!}
+                                {!! Form::text('title', old('title') , ['class' => 'form-control', 'placeholder' => 'Input the Title', 'readonly' => true]) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('gender', trans('Gender'), ['class' => 'control-label']) !!}
-                                {!! Form::text('gender', old('gender') , ['class' => 'form-control', 'placeholder' => 'Input the Gender']) !!}
+                                {!! Form::text('gender', old('gender') , ['class' => 'form-control', 'placeholder' => 'Input the Gender', 'readonly' => true]) !!}
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 {!! Form::label('id_no', trans('ID No.'), ['class' => 'control-label']) !!}
-                                {!! Form::text('id_no', old('id_no') , ['class' => 'form-control', 'placeholder' => 'Input the ID No.']) !!}
+                                {!! Form::text('id_no', old('id_no') , ['class' => 'form-control', 'placeholder' => 'Input the ID No.', 'readonly' => true]) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('dob', trans('Dob'), ['class' => 'control-label']) !!}
-                                {!! Form::date('dob', old('dob') , ['class' => 'form-control', 'placeholder' => 'Input the Dob']) !!}
+                                {!! Form::date('dob', old('dob') , ['class' => 'form-control', 'placeholder' => 'Input the Dob', 'readonly' => true]) !!}
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                                             </div>
                                             <div class="form-group">
                                                 {!! Form::label('meal', trans('Meal'), ['class' => 'control-label']) !!}
-                                                {!! Form::text('meal', old('meal') , ['class' => 'form-control', 'placeholder' => 'Input the Meal']) !!}
+                                                {!! Form::select('meal', @$meals,old('meal') , ['class' => 'form-control']) !!}
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -196,25 +196,25 @@
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         {!! Form::label('room_type', trans('Room Type'), ['class' => 'control-label']) !!}
-                                                                        {!! Form::text('room_type', old('room_type') , ['class' => 'form-control', 'placeholder' => 'Input the Room Type']) !!}
+                                                                        {!! Form::select('room_type', @$roomTypes,old('room_type') , ['class' => 'form-control']) !!}
                                                                     </div>
                                                                     <div class="form-group">
                                                                         {!! Form::label('room_category', trans('Room Category'), ['class' => 'control-label']) !!}
-                                                                        {!! Form::text('room_category', old('room_category') , ['class' => 'form-control', 'placeholder' => 'Input the Room Category']) !!}
+                                                                        {!! Form::select('room_category', @$roomCategories,old('room_category') , ['class' => 'form-control']) !!}
                                                                     </div>
                                                                     <div class="form-group">
                                                                         {!! Form::label('room_share', trans('Room Share'), ['class' => 'control-label']) !!}
-                                                                        {!! Form::text('room_share', old('room_share') , ['class' => 'form-control', 'placeholder' => 'Input the Room Share']) !!}
+                                                                        {!! Form::select('room_share', ['Yes' => 'Yes', 'No' => 'No'] ,old('room_share') , ['class' => 'form-control']) !!}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         {!! Form::label('room_id', trans('Room ID'), ['class' => 'control-label']) !!}
-                                                                        {!! Form::text('room_id', old('room_id') , ['class' => 'form-control', 'placeholder' => 'Input the Room ID']) !!}
+                                                                        {!! Form::text('room_id', old('room_id') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Room ID']) !!}
                                                                     </div>
                                                                     <div class="form-group">
                                                                         {!! Form::label('adjoin_room_id', trans('Adjoin Room ID'), ['class' => 'control-label']) !!}
-                                                                        {!! Form::text('adjoin_room_id', old('adjoin_room_id') , ['class' => 'form-control', 'placeholder' => 'Input the Adjoin Room ID']) !!}
+                                                                        {!! Form::text('adjoin_room_id', old('adjoin_room_id') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Adjoin Room ID']) !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -257,7 +257,7 @@
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         {!! Form::label('airline_id', trans('Airline'), ['class' => 'control-label']) !!}
-                                                                        {!! Form::select('airline_id', @$airlines, old('airline_id'), ['class' => 'form-control']) !!}
+                                                                        {!! Form::select('airline_id', ['' => 'Choose Airline'] + @$airlines, old('airline_id'), ['class' => 'form-control airline_id']) !!}
                                                                     </div>
                                                                     <div class="form-group">
                                                                         {!! Form::label('ticket_no', trans('Ticket No'), ['class' => 'control-label']) !!}
@@ -269,7 +269,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         {!! Form::label('currency', trans('Currency'), ['class' => 'control-label']) !!}
-                                                                        {!! Form::text('currency', old('currency') , ['class' => 'form-control', 'placeholder' => 'Input the Currency']) !!}
+                                                                        {!! Form::select('currency', ['' => 'Choose Currency'] + @$currencys, old('currency'), ['class' => 'form-control']) !!}
                                                                     </div>
                                                                     <div class="form-group">
                                                                         {!! Form::label('selling_special_req', trans('Special Req.'), ['class' => 'control-label']) !!}
@@ -330,15 +330,15 @@
                                                                                 <div class="col-md-6">
                                                                                     <div class="form-group">
                                                                                         {!! Form::label('flight_from', trans('Flight From'), ['class' => 'control-label']) !!}
-                                                                                        {!! Form::text('flight_from', old('flight_from'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Flight From']) !!}
+                                                                                        {!! Form::select('flight_from', ['' => 'Choose Flight From'] + @$cities, old('flight_from'), ['class' => 'form-control flight-paxlist']) !!}
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         {!! Form::label('flight_to', trans('Flight To'), ['class' => 'control-label']) !!}
-                                                                                        {!! Form::text('flight_to', old('flight_to'), ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Flight To']) !!}
+                                                                                        {!! Form::select('flight_to', ['' => 'Choose Flight To'] + @$cities, old('flight_to'), ['class' => 'form-control flight-paxlist']) !!}
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         {!! Form::label('flight_airline_id', trans('Airline'), ['class' => 'control-label']) !!}
-                                                                                        {!! Form::select('flight_airline_id', @$airlines, old('flight_airline_id'), ['class' => 'form-control']) !!}
+                                                                                        {!! Form::select('flight_airline_id', ['' => 'Choose Airline'] + @$airlines, old('flight_airline_id'), ['class' => 'form-control airline_id']) !!}
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         {!! Form::label('flight_no', trans('Flight No'), ['class' => 'control-label']) !!}
@@ -346,7 +346,7 @@
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         {!! Form::label('class', trans('Class'), ['class' => 'control-label']) !!}
-                                                                                        {!! Form::text('class', old('class'), ['class' => 'form-control', 'placeholder' => 'Input the Class']) !!}
+                                                                                        {!! Form::text('class', old('class'), ['class' => 'form-control', 'placeholder' => 'Input the Class', 'readonly' => true]) !!}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
@@ -412,11 +412,18 @@
     });
 
     $(document).ready(function() {
+        initSelect2Remote($('.customer_id'), "{{ route('customer.search-data') }}", "Choose Customer", 0);
+        initSelect2Remote($('#master_tour_id'), "{{ route('tour.search-data') }}", "Choose Tour", 0);
+        initSelect2Remote($('.airline_id'), "{{ route('airline.search-data') }}", "Choose Airline", 0);
+        initSelect2Remote($('#currency'), "{{ route('currencyrate.search-data') }}", "Choose Currency", 0, true);
+        initSelect2Remote($('#flight_from'), "{{ route('city.search-data') }}", "Choose Flight From", 0, true);
+        initSelect2Remote($('#flight_to'), "{{ route('city.search-data') }}", "Choose Flight To", 0, true);
+
         var columns = [
             { data: 'vip_status_flag', name: 'vip_status_flag'},
             { data: 'surname', name: 'surname'},
             { data: 'given_name', name: 'given_name'},
-            { data: 'ptc', name: 'ptc'},
+            // { data: 'ptc', name: 'ptc'},
             { data: 'title', name: 'title'},
             { data: 'gender', name: 'gender'},
             { data: 'id_no', name: 'id_no'},
@@ -533,6 +540,8 @@
                 var value = data.data.data;
 
                 if (element == 'paxlist') {
+                    $('.customer_id').select2({placeholder: 'Choose Customer', allowClear: true}).val(value.customer_id).trigger('change');
+                    initSelect2Remote($('.customer_id'), "{{ route('customer.search-data') }}", "Choose Customer", 0);
                     $('#vip_status_flag').val(value.vip_status_flag);
                     $('#surname').val(value.surname);
                     $('#given_name').val(value.given_name);
@@ -575,9 +584,12 @@
                 if (element == 'paxlist-flight') {
                     $('#tour_paxlist_flight_id').val(data.data.id);
                         
-                    $('#flight_from').val(value.flight_from),
-                    $('#flight_to').val(value.flight_to),
-                    $('#flight_airline_id').val(value.flight_airline_id),
+                    $('#flight_from').select2({placeholder: 'Choose Flight From', allowClear: true}).val(value.flight_from_ori).trigger('change');
+                    $('#flight_to').select2({placeholder: 'Choose Flight To', allowClear: true}).val(value.flight_to_ori).trigger('change');
+                    $('#flight_airline_id').select2({placeholder: 'Choose Airline', allowClear: true}).val(value.flight_airline_id).trigger('change'),
+                    initSelect2Remote($('.airline_id'), "{{ route('airline.search-data') }}", "Choose Airline", 0);
+                    initSelect2Remote($('#flight_from'), "{{ route('city.search-data') }}", "Choose Flight From", 0, true);
+                    initSelect2Remote($('#flight_to'), "{{ route('city.search-data') }}", "Choose Flight To", 0, true);
                     $('#flight_no').val(value.flight_no),
                     $('#class').val(value.class),
                     $('#farebasis').val(value.farebasis),
@@ -607,9 +619,9 @@
 
     // Tour Flight
     var flightColumns = [
-        {data: 'flight_from', name: 'flight_from'},
-        {data: 'flight_to', name: 'flight_to'},
-        {data: 'flight_airline_id', name: 'flight_airline_id'},
+        {data: 'flight_from_name', name: 'flight_from_name'},
+        {data: 'flight_to_name', name: 'flight_to_name'},
+        {data: 'flight_airline_name', name: 'flight_airline_name'},
         {data: 'flight_no', name: 'flight_no'},
         {data: 'class', name: 'class'},
         {data: 'farebasis', name: 'farebasis'},
@@ -672,6 +684,52 @@
 
     $(document).on('click', '.btn-add-paxlist-flight', function(e) {
         $('#tour_paxlist_flight_method').val('add');
+    });
+
+    $(document).on('change', '.customer-paxlist', function() {
+        var _this = $(this);
+        if (_this.val() == '') {
+            $('#surname').val('');
+            $('#given_name').val('');
+            $('#given_name').val('');
+            $('#title').val('');
+            $('#gender').val('');
+            $('#dob').val('');
+            return false;
+        }
+
+        $.ajax({
+            url: "{{route('customer.get-data-by-id')}}",
+            method: "get",
+            dataType: "json",
+            data: {id: _this.val()},
+            success: function(data) {
+                $('#surname').val(data.surname);
+                $('#given_name').val(data.gname);
+                $('#given_name').val(data.gname);
+                $('#title').val(data.title);
+                $('#gender').val((data.gender == 1) ? 'Male' : 'Female');
+                $('#dob').val(data.dob);
+            }
+        });
+    });
+
+    $(document).on('change', '#flight_airline_id', function() {
+        var _this = $(this);
+        if (_this.val() == '') {
+            $('#class').val('');
+            return false;
+        }
+
+        $.ajax({
+            url: "{{route('airline.get-data-by-id')}}",
+            method: "get",
+            dataType: "json",
+            data: {id: _this.val()},
+            success: function(data) {
+                $('#class').val(data.airline_class);
+            }
+        });
     });
 </script>
 @endsection

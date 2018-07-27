@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class MasterSupplierBank extends Model
 {
-    protected $fillable = 'master_supplier_bank';
+    protected $table = 'master_supplier_bank';
 
-    protected $table = [
+    protected $fillable = [
     	'address',
     	'bank_code',
     	'city',
@@ -17,4 +17,14 @@ class MasterSupplierBank extends Model
     	'name',
     	'remark'
     ];
+
+    public function bank_detail()
+    {
+        return $this->belongsTo( MasterSupplierBankDetail::class, 'id', 'supplier_bank_id' );
+    }
+
+    public function crpd()
+    {
+        return $this->belongsTo( MasterSupplierBankCrpd::class, 'id', 'supplier_bank_id' );
+    }
 }

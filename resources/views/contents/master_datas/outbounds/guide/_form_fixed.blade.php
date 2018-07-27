@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('guide_code', trans('Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('guide_code', old('guide_code') , ['class' => 'form-control', 'placeholder' => 'Input the Code']) !!}
+            {!! Form::text('guide_code', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the Code', 'readonly' => true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('guide_status', trans('Status'), ['class' => 'control-label']) !!}
@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('supplier_no', trans('Supplier'), ['class' => 'control-label']) !!}
-            {!! Form::select('supplier_no', ['' => "Choose Supplier"], old('supplier_no'), ['class' => 'form-control']) !!}
+            {!! Form::select('supplier_no', ['' => "Choose Supplier"] + @$suppliers, old('supplier_no'), ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-md-6">
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('religion', trans('Religion'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('religion', ['' => "-"], old('religion'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('religion', ['' => "Choose Religion"] + @$religions, old('religion'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('language', trans('Language'), ['class' => 'control-label']) !!}
@@ -114,11 +114,11 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('marital_status', trans('Marital Status'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('marital_status', ['' => "Choose Marital Status"], old('marital_status'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('marital_status', ['' => "Choose Marital Status", 'single' => 'Single', 'married' => 'Married', 'divorced' => 'Divorced'], old('marital_status'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('country_of_birth', trans('Country'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('country_of_birth', ['' => "Choose Country"], old('country_of_birth'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('country_of_birth', ['' => "Choose Country"] + @$countries, old('country_of_birth'), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('date_of_birth', trans('Date of Birth'), ['class' => 'control-label']) !!}
@@ -136,11 +136,11 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('nationality_1', trans('Nationality #1'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('nationality_1', ['' => "Choose Nationality #1"], old('nationality_1'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('nationality_1', ['' => "Choose Nationality #1"] + @$nationalities, old('nationality_1'), ['class' => 'form-control nationality']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('nationality_2', trans('Nationality #2'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('nationality_2', ['' => "Choose Nationality #2"], old('nationality_2'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('nationality_2', ['' => "Choose Nationality #2"] + @$nationalities, old('nationality_2'), ['class' => 'form-control nationality']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('license_expiry_date', trans('License Expired'), ['class' => 'control-label']) !!}
@@ -270,6 +270,13 @@
 <script>
     $(function(){
         spinnerLoad($('#form-guide'));
+        // @if(@$guide->id)
+        //     console.log("{{ $guide->supplier_no }}");
+        //     $('#supplier_no').select2().val("{{ $guide->supplier_no }}").trigger('change');
+        // @endif
+        initSelect2Remote($('#supplier_no'), "{{ route('supplier.search-data') }}", "Choose Supplier", 0, true);
+        initSelect2Remote($('#country_of_birth'), "{{ route('country.search-data') }}", "Choose Country", 0);
+        initSelect2Remote($('.nationality'), "{{ route('country.search-data-nationality') }}", "Choose Nationality", 0);
     });
     
     $(document).on('click', '.btn-visa', function(e) {

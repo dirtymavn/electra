@@ -25,7 +25,7 @@ class ItinRequest extends FormRequest
     {
         return [
             'itinerary_code' => 'required',
-            'itinerary_direction' => 'required',
+            // 'itinerary_direction' => 'required',
             'itinerary_name' => 'required',
         ];
     }

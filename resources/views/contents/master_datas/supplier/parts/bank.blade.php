@@ -6,16 +6,16 @@
 				{!! Form::text('bank_code', null, [ 'class' => 'form-control', 'placeholder' => 'Bank Code' ]) !!}
 			</div>
 			<div class="form-group">
-				{!! Form::label('name_bank', trans('Name'), ['class' => 'control-label']) !!}
+				{!! Form::label('name_bank', trans('Account Name'), ['class' => 'control-label']) !!}
 				{!! Form::text('name_bank', null, [ 'class' => 'form-control', 'placeholder' => 'Name' ]) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('country', trans('country'), ['class' => 'control-label']) !!}
-				{!! Form::text('country', null, [ 'class' => 'form-control', 'placeholder' => 'Country' ]) !!}
+				{!! Form::select('country', ['' => 'Choose Country'] + @$countries, old('country'), [ 'class' => 'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('city', trans('city'), ['class' => 'control-label']) !!}
-				{!! Form::text('city', null, [ 'class' => 'form-control', 'placeholder' => 'City' ]) !!}
+				{!! Form::select('city', ['' => 'Choose City'] + @$cities, old('city'), [ 'class' => 'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('address_bank', trans('Address'), ['class' => 'control-label']) !!}

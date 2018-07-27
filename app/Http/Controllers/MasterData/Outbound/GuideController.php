@@ -4,6 +4,8 @@ namespace App\Http\Controllers\MasterData\Outbound;
 
 use App\Models\MasterData\Outbound\Guide\MasterTourGuide;
 use App\Models\MasterData\Outbound\Guide\TourGuideVisa;
+use App\Models\MasterData\Supplier\MasterSupplier;
+use App\Models\MasterData\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\Outbound\GuideDataTable;
@@ -53,7 +55,17 @@ class GuideController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.outbounds.guide.create');
+        $newCode = MasterTourGuide::getAutoNumber();
+        $suppliers = MasterSupplier::getAvailableData()
+            ->select('master_supplier.id', \DB::raw("(master_supplier.supplier_no||'-'||master_supplier.name) as text"), 'master_supplier.supplier_no as slug')
+            ->pluck('text', 'slug')
+            ->all();
+        $religions = MasterTourGuide::religions()->toArray();
+        $nationalities = Country::getDataByCompany()
+            ->select(\DB::raw("(countries.country_name || '-' || countries.nationality) as text"), 'countries.id')
+            ->pluck('text', 'countries.id')->all();
+        $countries = Country::getDataByCompany()->pluck('countries.country_name', 'countries.id')->all();
+        return view('contents.master_datas.outbounds.guide.create', compact('newCode', 'suppliers', 'religions', 'nationalities', 'countries'));
     }
 
     /**
@@ -136,7 +148,18 @@ class GuideController extends Controller
 
         $guide = (object) $arrayMerge;
 
-        return view('contents.master_datas.outbounds.guide.edit', compact('guide'));
+        $newCode = $guide->guide_code;
+        $suppliers = MasterSupplier::getAvailableData()
+            ->select('master_supplier.id', \DB::raw("(master_supplier.supplier_no||'-'||master_supplier.name) as text"), 'master_supplier.supplier_no as slug')
+            ->pluck('text', 'slug')
+            ->all();
+        $religions = MasterTourGuide::religions()->toArray();
+        $nationalities = Country::getDataByCompany()
+            ->select(\DB::raw("(countries.country_name || '-' || countries.nationality) as text"), 'countries.id')
+            ->pluck('text', 'countries.id')->all();
+        $countries = Country::getDataByCompany()->pluck('countries.country_name', 'countries.id')->all();
+
+        return view('contents.master_datas.outbounds.guide.edit', compact('guide', 'newCode', 'suppliers', 'religions', 'nationalities', 'countries'));
     }
 
     /**

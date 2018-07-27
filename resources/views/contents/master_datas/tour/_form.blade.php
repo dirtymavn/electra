@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('tour_category', trans('Tour Category'), ['class' => 'control-label']) !!}
-            {!! Form::text('tour_category', old('tour_category') , ['class' => 'form-control', 'placeholder' => 'Input the Tour Category']) !!}
+            {!! Form::select('tour_category', @$categories, old('tour_category'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('pax_no', trans('Pax No'), ['class' => 'control-label']) !!}

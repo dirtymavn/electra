@@ -181,4 +181,20 @@ class CompanyDepartmentController extends Controller
 
         return redirect()->route('department.index');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Department::getAvailableData()
+            ->select('company_departments.id', 'company_departments.department_name as text')
+            ->where('company_departments.department_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

@@ -40,7 +40,7 @@ class CurrencyController extends Controller
     public function create()
     {
         // clear temporary data
-        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        \DB::table('temporaries')->whereUserId(user_info('id'))->whereType('data-currency')->delete();
         return view('contents.master_datas.currency_rate.create');
     }
 
@@ -106,7 +106,7 @@ class CurrencyController extends Controller
     public function edit(Currency $currency, $id)
     {
         // clear temporary data
-        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        \DB::table('temporaries')->whereUserId(user_info('id'))->whereType('data-currency')->delete();
 
         $currency = Currency::find($id);
 
@@ -309,5 +309,43 @@ class CurrencyController extends Controller
         $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
         $findTemp->data = json_decode($findTemp->data);
         return response()->json(['result' => true, 'data' => $findTemp], 200);   
+    }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Currency::getAvailableData()
+            ->select('currency.id', 'currency.currency_name as text', 'currency.currency_code as slug')
+            ->where('currency.currency_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchDataByCode(Request $request)
+    {
+        $findCurrency = Currency::getAvailableData()
+            ->select('currency.id')
+            ->where('currency.currency_code', $request->currency_code)
+            ->first();
+
+        $results = [];
+
+        if ($findCurrency) {
+            $results = $findCurrency->rates;
+        }
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
     }
 }

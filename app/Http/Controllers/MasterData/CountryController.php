@@ -13,10 +13,10 @@ class CountryController extends Controller
     public function __construct()
     {
         // middleware
-        // $this->middleware('sentinel_access:admin.company,country.read', ['only' => ['index']]);
-        // $this->middleware('sentinel_access:admin.company,country.create', ['only' => ['create', 'store']]);
-        // $this->middleware('sentinel_access:admin.company,country.update', ['only' => ['edit', 'update']]);
-        // $this->middleware('sentinel_access:admin.company,country.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel_access:admin.company,country.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,country.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,country.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,country.destroy', ['only' => ['destroy']]);
 
     }
 
@@ -176,5 +176,40 @@ class CountryController extends Controller
         }
 
         return redirect()->route('country.index');
+    }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Country::getDataByCompany()
+            ->select('countries.id', 'countries.country_name as text')
+            ->where('countries.country_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchDataNationality(Request $request)
+    {
+        $results = Country::getDataByCompany()
+            ->select('countries.id', \DB::raw("(countries.country_name || '-' || countries.nationality) as text"))
+            ->where(function($q) {
+                return $q->where('countries.nationality', 'ilike', '%'.$request->search.'%')
+                    ->orWhere('countries.country_name', 'ilike', '%'.$request->search.'%');
+            })
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
     }
 }

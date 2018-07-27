@@ -15,6 +15,7 @@
     {!! Html::style('themes/bower_components/bootstrap-daterangepicker/daterangepicker.css') !!}
     {!! Html::style('themes/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') !!}
     {!! Html::style('themes/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css') !!}
+    {!! Html::style('themes/bower_components/select2/dist/css/select2.min.css') !!}
     {!! Html::style('themes/bower_components/slick-carousel/slick/slick.css') !!}
     {!! Html::style('themes/css/maince5a.css?version=4.4.1') !!}
     {!! Html::style('themes/icon_fonts_assets/font-awesome/css/font-awesome.min.css') !!}
@@ -23,6 +24,9 @@
     <style>
         body {
             height: 100% !important;
+        }
+        .select2.select2-container {
+            width: 100% !important;
         }
     </style>
     @yield('style')
@@ -159,6 +163,7 @@
     {!! Html::script('themes/bower_components/datatables.net/js/jquery.dataTables.min.js') !!}
     {!! Html::script('themes/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') !!}
     {!! Html::script('themes/bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js') !!}
+    {!! Html::script('themes/bower_components/select2/dist/js/select2.full.min.js') !!}
     {!! Html::script('themes/bower_components/slick-carousel/slick/slick.min.js') !!}
     {!! Html::script('themes/bower_components/bootstrap/js/dist/util.js') !!}
     {!! Html::script('themes/bower_components/bootstrap/js/dist/alert.js') !!}
@@ -296,6 +301,54 @@
                 $(document).on('click', '#btn-publish-continue', function() {
                     element.attr('action', url + '?is_publish_continue=true');
                     element.submit();
+                });
+            }
+        }
+
+        function initSelect2Remote(element, url, placeholder, minLength = 1, slug = false) {
+            if (slug) {
+                element.select2({
+                    ajax: {
+                        url: url,
+                        data: function (params) {
+                            return {
+                                search: params.term
+                            }
+                        },
+                        processResults: function (data, params) {
+                            return {
+                                results: $.map(data.items, function (obj) {
+                                    return { 
+                                        id: obj.slug, 
+                                        text: obj.text
+                                    };
+                                })
+                                
+                            };
+                        }
+                    },
+                    placeholder: placeholder,
+                    minimumInputLength: minLength,
+                    allowClear: true
+                });
+            } else {
+                element.select2({
+                    ajax: {
+                        url: url,
+                        data: function (params) {
+                            return {
+                                search: params.term
+                            }
+                        },
+                        processResults: function (data, params) {
+                            return {
+                                results: data.items
+                            };
+                        }
+                    },
+                    placeholder: placeholder,
+                    minimumInputLength: minLength,
+                    allowClear: true
                 });
             }
         }

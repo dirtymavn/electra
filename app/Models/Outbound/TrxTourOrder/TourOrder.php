@@ -162,4 +162,68 @@ class TourOrder extends Model implements Auditable
     {
     	return $this->hasMany(TourOrderPaxList::class, 'trx_tour_order_id');
     }
+
+    public static function roomTypes()
+    {
+    	$types = [
+            'Standard' => 'Standard',
+            'Superior' => 'Superior',
+            'Deluxe' => 'Deluxe',
+            'Junior Suite' => 'Junior Suite',
+            'Suite' => 'Suite',
+            'Presidential' => 'Presidential'
+        ];
+        
+        return collect($types);
+    }
+
+    public static function roomCategories()
+    {
+    	$categories = [
+            'Single' => 'Single',
+            'Twin' => 'Twin',
+            'Double' => 'Double',
+            'Family' => 'Family'
+        ];
+        
+        return collect($categories);
+    }
+
+    public static function getAutoNumber()
+    {
+        $result = self::orderBy('id', 'desc')->first();
+
+        $findCode = \DB::table('setting_codes')->whereType('TO')->first();
+        if ($result) {
+            $lastNumber = (int) substr($result->order_no, strlen($result->order_no) - 4, 4);
+            $newNumber = $lastNumber + 1;
+            
+            if (strlen($newNumber) == 1) {
+                $newNumber = '000'.$newNumber;
+            } elseif (strlen($newNumber) == 2) {
+                $newNumber = '00'.$newNumber;
+            } elseif (strlen($newNumber) == 3) {
+                $newNumber = '0'.$newNumber;
+            } else {
+                $newNumber = $newNumber;
+            }
+
+            $currMonth = (int)substr($result->order_no, 2, 2);
+            $currYear = (int)substr($result->order_no, 4, 2);
+            $nowMonth = (int)date('m');
+            $nowYear = (int)date('y');
+
+            if ( ($currMonth < $nowMonth && $currYear == $nowYear) || ($currMonth == $nowMonth && $currYear < $nowYear) ) {
+                $newNumber = '0001';
+            } else {
+                $newNumber = $newNumber;
+            }
+
+            $newCode = $findCode->type.date('my').$newNumber;
+        } else {
+            $newCode = $findCode->type.date('my').'0001';
+        }
+
+        return $newCode;
+    }
 }

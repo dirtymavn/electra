@@ -180,4 +180,49 @@ class CityController extends Controller
 
         return redirect()->route('city.index');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = City::getAvailableData()
+            ->select(\DB::raw("(cities.id ||'/'|| countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as slug"), 
+                \DB::raw("(countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as text"))
+            ->where('cities.city_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchDataNormal(Request $request)
+    {
+        $results = City::getAvailableData()
+            ->select("cities.city_code as slug", \DB::raw("(cities.city_name || '-' || cities.city_code) as text"))
+            ->where('cities.city_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    /**
+     * Search data by country
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchByCountry(Request $request)
+    {
+        $results = City::getAvailableData()
+            ->where('cities.country_id', $request->country_id)
+            ->get();
+
+        return json_encode($results);
+    }
 }

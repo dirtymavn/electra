@@ -24,14 +24,15 @@ class PaxListTourRequest extends FormRequest
     public function rules()
     {
         return [
+            'customer_id' => 'required',
             'deviation' => 'required',
-            'title' => 'required',
-            'surname' => 'required',
-            'given_name' => 'required',
-            'gender' => 'required',
-            'id_no' => 'required',
-            'ptc' => 'required',
-            'dob' => 'required',
+            // 'title' => 'required',
+            // 'surname' => 'required',
+            // 'given_name' => 'required',
+            // 'gender' => 'required',
+            // 'id_no' => 'required',
+            // 'ptc' => 'required',
+            // 'dob' => 'required',
         ];
     }
 }

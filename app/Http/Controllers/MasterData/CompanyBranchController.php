@@ -181,4 +181,20 @@ class CompanyBranchController extends Controller
 
         return redirect()->route('branch.index');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Branch::getAvailableData()
+            ->select('company_branchs.id', 'company_branchs.branch_name as text')
+            ->where('company_branchs.branch_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

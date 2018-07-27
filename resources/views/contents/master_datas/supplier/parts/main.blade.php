@@ -9,7 +9,7 @@
 					</div>
 					<div class="form-group">
 						{!! Form::label('services_provided', trans('Services Provided'), ['class' => 'control-label']) !!}
-						{!! Form::text('services_provided', null, [ 'class' => 'form-control', 'placeholder' => 'Services Provided' ]) !!}
+						{!! Form::text('service_provided', null, [ 'class' => 'form-control', 'placeholder' => 'Services Provided' ]) !!}
 					</div>
 					<div class="form-group">
 						{!! Form::label('gst_registration_no', trans('GST Registration No.'), ['class' => 'control-label']) !!}
@@ -18,12 +18,12 @@
 					<div class="form-group">
 						{!! Form::label('gst_id', trans('GST'), ['class' => 'control-label']) !!}
 						{{-- {!! Form::text('gst_id', null, [ 'class' => 'form-control', 'placeholder' => 'gst_id' ]) !!} --}}
-						<select class="form-control">
-							<option>Option 1</option>
-							<option>Option 2</option>
-							<option>Option 3</option>
-							<option>Option 4</option>
-							<option>Option 5</option>
+						<select class="form-control" name="gst_id">
+							<option value="1">Option 1</option>
+							<option value="2">Option 2</option>
+							<option value="3">Option 3</option>
+							<option value="4">Option 4</option>
+							<option value="5">Option 5</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -43,26 +43,19 @@
 					<div class="form-group">
 						{!! Form::label('credit_term_type', trans('Credit Term Type'), ['class' => 'control-label']) !!}
 						{{-- {!! Form::number('credit_term_type', null, [ 'class' => 'form-control', 'placeholder' => 'credit_term_type' ]) !!} --}}
-						<select class="form-control">
-							<option>Option 1</option>
-							<option>Option 2</option>
-							<option>Option 3</option>
-							<option>Option 4</option>
-							<option>Option 5</option>
+						<select class="form-control" name="credit_term_type">
+							<option value="1">Option 1</option>
+							<option value="2">Option 2</option>
+							<option value="3">Option 3</option>
+							<option value="4">Option 4</option>
+							<option value="5">Option 5</option>
 						</select>
 					</div>
 					<div class="form-group">
 						{!! Form::label('trading_currency', trans('Trading Currency'), ['class' => 'control-label']) !!}
-						{{-- {!! Form::text('trading_currency', null, [ 'class' => 'form-control', 'placeholder' => 'trading_currency' ]) !!} --}}
-						<select class="form-control">
-							<option>Option 1</option>
-							<option>Option 2</option>
-							<option>Option 3</option>
-							<option>Option 4</option>
-							<option>Option 5</option>
-						</select>
+						{!! Form::select('trading_currency', ['' => 'Choose Currency'] + @$currencys, [ 'class' => 'form-control']) !!}
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="display: none;">
 						{!! Form::label('xo_calculated_by', trans('XO Calculated By'), ['class' => 'control-label']) !!}
 						{!! Form::text('xo_calculated_by', null, [ 'class' => 'form-control', 'placeholder' => 'XO Calculated By' ]) !!}
 					</div>
