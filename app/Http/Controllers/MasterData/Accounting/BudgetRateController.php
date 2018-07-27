@@ -196,4 +196,30 @@ class BudgetRateController extends Controller
 
         return redirect()->route('budget-rate.index');
     }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $trx = BudgetRate::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($trx) {
+            $excel->sheet('Sheet 1', function($sheet) use ($trx) {
+                $sheet->fromArray($trx);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $trxs = BudgetRate::all();
+        $pdf = \PDF::loadView('contents.master_datas.accountings.trx_fx_trans.pdf', compact('trxs'));
+        return $pdf->download('accounting-trx.pdf');
+    }
 }

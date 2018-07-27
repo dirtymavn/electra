@@ -180,4 +180,30 @@ class DoTypeController extends Controller
 
         return redirect()->route('dotype.index');
     }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $dotype = DoType::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($dotype) {
+            $excel->sheet('Sheet 1', function($sheet) use ($dotype) {
+                $sheet->fromArray($dotype);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $dotype = DoType::all();
+        $pdf = PDF::loadView('contents.master_datas.dotype.pdf', compact('dotypes'));
+        return $pdf->download('dotype.pdf');
+    }
 }

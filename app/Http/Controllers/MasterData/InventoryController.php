@@ -20,6 +20,8 @@ use App\Models\Business\Sales;
 use App\Models\Temporary;
 
 use DB;
+use Excel;
+use PDF;
 
 class InventoryController extends Controller
 {
@@ -812,5 +814,31 @@ class InventoryController extends Controller
         $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
         $findTemp->data = json_decode($findTemp->data);
         return response()->json(['result' => true, 'data' => $findTemp], 200);   
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $inventory = Inventory::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($inventory) {
+            $excel->sheet('Sheet 1', function($sheet) use ($inventory) {
+                $sheet->fromArray($inventory);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $inventories = Inventory::all();
+        $pdf = PDF::loadView('contents.master_datas.inventory.pdf', compact('inventories'));
+        return $pdf->download('inventory.pdf');
     }
 }

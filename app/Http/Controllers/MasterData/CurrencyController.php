@@ -10,6 +10,9 @@ use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\CurrencyRateDataTable;
 use App\Http\Requests\MasterData\CurrencyRequest;
 
+use Excel;
+use PDF;
+
 class CurrencyController extends Controller
 {
     public function __construct()
@@ -347,5 +350,31 @@ class CurrencyController extends Controller
         
 
         return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $sales = Currency::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($sales) {
+            $excel->sheet('Sheet 1', function($sheet) use ($sales) {
+                $sheet->fromArray($sales);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $vouchers = Currency::all();
+        $pdf = PDF::loadView('contents.master_datas.airline.pdf', compact('airlines'));
+        return $pdf->download('airline.pdf');
     }
 }

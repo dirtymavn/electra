@@ -12,6 +12,9 @@ use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\CustomerDataTable;
 use App\Http\Requests\MasterData\CustomerRequest;
 
+use Excel;
+use PDF;
+
 class CustomerController extends Controller
 {
     /**
@@ -461,5 +464,31 @@ class CustomerController extends Controller
         $customer = (object) $arrayMerge;
 
         return json_encode($customer);
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $customer = MasterCustomer::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($customer) {
+            $excel->sheet('Sheet 1', function($sheet) use ($customer) {
+                $sheet->fromArray($customer);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $customers = MasterCustomer::all();
+        $pdf = PDF::loadView('contents.master_datas.customer.pdf', compact('customers'));
+        return $pdf->download('customer.pdf');
     }
 }

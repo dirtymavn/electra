@@ -14,6 +14,8 @@ use App\Models\MasterData\City;
 use App\Models\Temporary;
 
 use DB;
+use Excel;
+use PDF;
 
 class SalesFolderController extends Controller
 {
@@ -535,5 +537,39 @@ class SalesFolderController extends Controller
             \DB::rollback();
             return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
         }
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $sales = Sales::select(
+            'trx_sales.sales_no',
+            'master_customers.customer_name',
+            'trx_sales.trip_date',
+            'trx_sales.deadline',
+            'trx_sales.invoice_no',
+            'trx_sales.sales_date',
+            'trx_sales.created_at'
+        )->join('master_customers', 'master_customers.id', '=', 'trx_sales.customer_id' )->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($sales) {
+            $excel->sheet('Sheet 1', function($sheet) use ($sales) {
+                $sheet->fromArray($sales);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $saless = Sales::all();
+        $pdf = PDF::loadView('contents.business.sales.pdf', compact('saless'));
+        return $pdf->download('sales.pdf');
     }
 }

@@ -11,6 +11,8 @@ use App\Models\MasterData\Country;
 use App\Models\MasterData\City;
 
 use DB;
+use Excel;
+use PDF;
 
 class SupplierController extends Controller
 {
@@ -245,5 +247,32 @@ class SupplierController extends Controller
         
 
         return response()->json(['message' => 'Success', 'items' => $results]);
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $supplier = Supplier::select('*')->get();
+        // dd($supplier);
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($supplier) {
+            $excel->sheet('Sheet 1', function($sheet) use ($supplier) {
+                $sheet->fromArray($supplier);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $suppliers = Supplier::all();
+        $pdf = PDF::loadView('contents.master_datas.supplier.pdf', compact('suppliers'));
+        return $pdf->download('supplier.pdf');
     }
 }
