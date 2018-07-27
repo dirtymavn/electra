@@ -1069,4 +1069,30 @@ class ItinController extends Controller
             return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
         }
     }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $guide = MasterItinerary::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($guide) {
+            $excel->sheet('Sheet 1', function($sheet) use ($guide) {
+                $sheet->fromArray($guide);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $itins = MasterItinerary::all();
+        $pdf = \PDF::loadView('contents.master_datas.outbounds.itin.pdf', compact('itins'));
+        return $pdf->download('outbound-itin.pdf');
+    }
 }

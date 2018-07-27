@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\Outbound\GuideDataTable;
 
+use Excel;
+use PDF;
+
 class GuideController extends Controller
 {
     /**
@@ -238,5 +241,31 @@ class GuideController extends Controller
         }
 
         return redirect()->route('guide.index');
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $guide = MasterTourGuide::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($guide) {
+            $excel->sheet('Sheet 1', function($sheet) use ($guide) {
+                $sheet->fromArray($guide);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $guides = MasterTourGuide::all();
+        $pdf = PDF::loadView('contents.master_datas.outbounds.guide.pdf', compact('guides'));
+        return $pdf->download('outbound-guide.pdf');
     }
 }

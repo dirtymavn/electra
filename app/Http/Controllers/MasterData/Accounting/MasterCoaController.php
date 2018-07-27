@@ -176,4 +176,30 @@ class MasterCoaController extends Controller
 
         return redirect()->route('account.index');
     }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $trx = MasterCoa::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($trx) {
+            $excel->sheet('Sheet 1', function($sheet) use ($trx) {
+                $sheet->fromArray($trx);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $trxs = MasterCoa::all();
+        $pdf = \PDF::loadView('contents.master_datas.accountings.account.pdf', compact('trxs'));
+        return $pdf->download('accounting-trx.pdf');
+    }
 }

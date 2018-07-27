@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\AirlineDataTable;
 
+use Excel;
+use PDF;
+
 class AirlineController extends Controller
 {
     public function __construct()
@@ -205,5 +208,31 @@ class AirlineController extends Controller
         $result = Airline::find($request->id);
 
         return json_encode($result);
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $airline = Airline::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($airline) {
+            $excel->sheet('Sheet 1', function($sheet) use ($airline) {
+                $sheet->fromArray($airline);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $airlines = Airline::all();
+        $pdf = PDF::loadView('contents.master_datas.airline.pdf', compact('airlines'));
+        return $pdf->download('airline.pdf');
     }
 }

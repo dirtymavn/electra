@@ -181,4 +181,30 @@ class PassengerClassController extends Controller
 
         return redirect()->route('passenger.index');
     }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $passenger = PassengerClass::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($passenger) {
+            $excel->sheet('Sheet 1', function($sheet) use ($passenger) {
+                $sheet->fromArray($passenger);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $passengers = PassengerClass::all();
+        $pdf = \PDF::loadView('contents.master_datas.passenger_class.pdf', compact('passengers'));
+        return $pdf->download('passenger-class.pdf');
+    }
 }

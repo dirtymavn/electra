@@ -9,6 +9,8 @@ use App\DataTables\Business\DeliveryDataTable;
 use App\Models\Business\Delivery\TrxDeliveryOrder as TrxDelivery;
 use App\Models\Business\Delivery\DoType;
 
+use Excel;
+use PDF;
 
 class DeliveryController extends Controller
 {
@@ -182,5 +184,31 @@ class DeliveryController extends Controller
         }
 
         return redirect()->route('delivery.index');
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $sales = Sales::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($sales) {
+            $excel->sheet('Sheet 1', function($sheet) use ($sales) {
+                $sheet->fromArray($sales);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $vouchers = Sales::all();
+        $pdf = PDF::loadView('contents.master_datas.sales.pdf', compact('saless'));
+        return $pdf->download('sales.pdf');
     }
 }

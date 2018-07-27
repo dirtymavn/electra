@@ -180,4 +180,30 @@ class AirportController extends Controller
 
         return redirect()->route('airport.index');
     }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $sales = Airport::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($sales) {
+            $excel->sheet('Sheet 1', function($sheet) use ($sales) {
+                $sheet->fromArray($sales);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $vouchers = Airport::all();
+        $pdf = PDF::loadView('contents.master_datas.airline.pdf', compact('airlines'));
+        return $pdf->download('airline.pdf');
+    }
 }

@@ -17,16 +17,34 @@
 
 @section('content')
 @include('flash::message')
-@if(user_info()->hasAnyAccess(['admin.company', 'inventory.create']))
-    <a href="{{ route('inventory.create')}}" class="btn btn-primary" id="btn-submit">
-        <i class="fa fa-plus m-right-10"></i> Add Inventory
-    </a>
-@endif
-@if(user_info()->hasAnyAccess(['admin.company', 'inventory.destroy']))
-    <button class="btn btn-danger" id="bulk-delete">
-        <i class="fa fa-trash m-right-10"></i> Bulk Delete
-    </button>
-@endif
+<div class="row">
+    <div class="col-sm-2">
+        @if(user_info()->hasAnyAccess(['admin.company', 'inventory.create']))
+            <a href="{{ route('inventory.create')}}" class="btn btn-primary" id="btn-submit">
+                <i class="fa fa-plus m-right-10"></i> Add Inventory
+            </a>
+        @endif
+    </div>
+    <div class="col-sm-2">
+        @if(user_info()->hasAnyAccess(['admin.company', 'inventory.destroy']))
+            <button class="btn btn-danger" id="bulk-delete">
+                <i class="fa fa-trash m-right-10"></i> Bulk Delete
+            </button>
+        @endif
+    </div>
+    <div class="col-sm-3">
+        <div class="dropdown">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                Actions
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ route('export.inventory.excel') }}">Export XLS</a>
+                <a class="dropdown-item" href="{{ route('export.inventory.pdf') }}">Export PDF</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <br>
 <br>
 
