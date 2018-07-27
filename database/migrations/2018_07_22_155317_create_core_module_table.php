@@ -87,7 +87,7 @@ class CreateCoreModuleTable extends Migration
     {
         Schema::dropIfExists('master_company_form');
         Schema::dropIfExists('master_company_modules');
-        Schema::dropIfExists('core_form_chain');
+        Schema::dropIfExists('core_from_chain');
         Schema::dropIfExists('core_form');
         Schema::dropIfExists('core_report');
         Schema::dropIfExists('core_module');

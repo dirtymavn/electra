@@ -24,15 +24,8 @@ class MasterSupplierDetail extends Model
     	'xo_calculated_by'
     ];
 
-    protected static function boot()
+    public function contact()
     {
-        parent::boot();
-
-        static::created( function ( $supplier ) {
-        	$input = Request::all();
-        	$input['master_supplier_detail_id'] = $supplier->id;
-
-        	MasterSupplierDetailContact::create($input);
-        });
-	}
+        return $this->belongsTo( MasterSupplierDetailContact::class, 'id', 'master_supplier_detail_id' );
+    }
 }

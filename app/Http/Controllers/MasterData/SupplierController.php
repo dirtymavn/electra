@@ -114,13 +114,35 @@ class SupplierController extends Controller
     public function edit(Supplier $supplier)
     {
         $parent = $supplier->toArray();
+        $detailParent = $supplier->detail;
         $detail = $supplier->detail->toArray();
-        // wew($detail);
-        // unset($main['id'], $mainContact['id'], $basic['id'], $general['id'], $generalDoc['id'], $discRate['id'], $termFee['id']);
+        $contact = $supplier->detail->contact->toArray();
+        $bankParent = $supplier->bank;
+        $bank = $supplier->bank;
+        $bank->name_bank = $bank->name;
+        $bank->address_bank = $bank->address;
+        $bank->remark_bank = $bank->remark;
+        $bank = $bank->toArray();
 
-        // $arrayMerge = array_merge($customer, $main, $mainContact, $basic, $general, $generalDoc, $discRate, $termFee);
 
-        // $supplier = (object) $arrayMerge;
+        $bankDetail = $supplier->bank->bank_detail;
+        $bankDetail->name_bank_detail = $bankDetail->name;
+        $bankDetail->swift_bank_detail = $bankDetail->swift;
+        $bankDetail->remark_bank_detail = $bankDetail->remark;
+        $bankDetail = $bankDetail->toArray();
+
+        $bankCrpd = $supplier->bank->crpd;
+        $bankCrpd->name_crpd = $bankCrpd->name;
+        $bankCrpd->address_crpd = $bankCrpd->address;
+        $bankCrpd->remark_crpd = $bankCrpd->remark;
+        $bankCrpd->swift_crpd = $bankCrpd->swift;
+        $bankCrpd = $bankCrpd->toArray();
+        
+        unset($detail['id'], $contact['id'], $bank['id'], $bankDetail['id'], $bankCrpd['id']);
+        $arrayMerge = array_merge($parent, $detail, $contact, $bank, $bankDetail, $bankCrpd);
+        // dd($arrayMerge);
+        
+        $supplier = (object) $arrayMerge;
         $newCode = $supplier->supplier_no;
         $types = Supplier::types();
         $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
@@ -170,7 +192,7 @@ class SupplierController extends Controller
         } catch (\Exception $e) {
 
             DB::rollback();
-            flash()->error('Data is failed to updated');
+            flash()->error('Data is failed to updated '. $e->getMessage());
             return redirect()->back()->withInput();
         }
     }

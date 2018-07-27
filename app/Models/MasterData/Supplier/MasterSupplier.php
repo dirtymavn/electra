@@ -43,8 +43,148 @@ class MasterSupplier extends Model implements Auditable
         	$input = Request::all();
             $input['master_supplier_id'] = $supplier->id;
 
-            MasterSupplierDetail::create( $input );
-            // MasterSupplierBank::create( $input );
+            $detail = new MasterSupplierDetail;
+            $detail->master_supplier_id = $supplier->id;
+            $detail->credit_days = $input['credit_days'];
+            $detail->credit_limit = $input['credit_limit'];
+            $detail->credit_term_type = $input['credit_term_type'];
+            $detail->default_payee = $input['default_payee'];
+            $detail->gst_id = $input['gst_id'];
+            $detail->gst_registration_no = $input['gst_registration_no'];
+            $detail->interface_no = $input['interface_no'];
+            $detail->service_provided = $input['service_provided'];
+            $detail->trading_currency = $input['trading_currency'];
+            $detail->xo_calculated_by = $input['xo_calculated_by'];
+
+            $detail->save();
+
+            $contact = new MasterSupplierDetailContact;
+            $contact->email = $input['email'];
+            $contact->fax = $input['fax'];
+            $contact->given_name = $input['given_name'];
+            $contact->master_supplier_detail_id = $detail->id;
+            $contact->phone = $input['phone'];
+            $contact->surname = $input['surname'];
+            $contact->title = $input['title'];
+
+            $contact->save();
+
+            $bank = new MasterSupplierBank;
+            $bank->address = $input['address_bank'];
+            $bank->bank_code = $input['bank_code'];
+            $bank->city = $input['city'];
+            $bank->country = $input['country'];
+            $bank->master_supplier_id = $supplier->id;
+            $bank->name = $input['name_bank'];
+            $bank->remark = $input['remark_bank'];
+
+            $bank->save();
+
+            $banDetail = new MasterSupplierBankDetail;
+            $banDetail->supplier_bank_id = $bank->id;
+            $banDetail->name = $input['name_bank_detail'];
+            $banDetail->acc_no_1 = $input['acc_no_1'];
+            $banDetail->acc_no_1_currency = $input['acc_no_1_currency'];
+            $banDetail->iban_1 = $input['iban_1'];
+            $banDetail->acc_no_2 = $input['acc_no_2'];
+            $banDetail->acc_no_2_currency = $input['acc_no_2_currency'];
+            $banDetail->iban_2 = $input['iban_2'];
+            $banDetail->acc_no_3 = $input['acc_no_3'];
+            $banDetail->acc_no_3_currency = $input['acc_no_3_currency'];
+            $banDetail->iban_3 = $input['iban_3'];
+            $banDetail->acc_no_4 = $input['acc_no_4'];
+            $banDetail->acc_no_4_currency = $input['acc_no_4_currency'];
+            $banDetail->iban_4 = $input['iban_4'];
+            $banDetail->swift = $input['swift_bank_detail'];
+            $banDetail->bic = $input['bic'];
+            $banDetail->remark = $input['remark_bank_detail'];
+
+            $banDetail->save();
+
+            $crpd = new MasterSupplierBankCrpd;
+            $crpd->supplier_bank_id = $bank->id;
+            $crpd->name = $input['name_crpd'];
+            $crpd->address = $input['address_crpd'];
+            $crpd->ac_no = $input['ac_no'];
+            $crpd->swift = $input['swift_crpd'];
+            $crpd->remark = $input['remark_crpd'];
+            $crpd->save();
+
+            
+        });
+
+        self::saved(function($supplier) {
+            $input = Request::all();
+            $input['master_supplier_id'] = $supplier->id;
+
+
+            $detail = MasterSupplierDetail::where('master_supplier_id', $supplier->id)->first();
+            $detail->master_supplier_id = $supplier->id;
+            $detail->credit_days = $input['credit_days'];
+            $detail->credit_limit = $input['credit_limit'];
+            $detail->credit_term_type = $input['credit_term_type'];
+            $detail->default_payee = $input['default_payee'];
+            $detail->gst_id = $input['gst_id'];
+            $detail->gst_registration_no = $input['gst_registration_no'];
+            $detail->interface_no = $input['interface_no'];
+            $detail->service_provided = $input['service_provided'];
+            $detail->trading_currency = $input['trading_currency'];
+            $detail->xo_calculated_by = $input['xo_calculated_by'];
+
+            $detail->save();
+
+            $contact = MasterSupplierDetailContact::where('master_supplier_detail_id', $detail->id)->first();
+            $contact->email = $input['email'];
+            $contact->fax = $input['fax'];
+            $contact->given_name = $input['given_name'];
+            $contact->master_supplier_detail_id = $detail->id;
+            $contact->phone = $input['phone'];
+            $contact->surname = $input['surname'];
+            $contact->title = $input['title'];
+
+            $contact->save();
+
+
+            $bank = MasterSupplierBank::where('master_supplier_id', $supplier->id)->first();
+            $bank->address = $input['address_bank'];
+            $bank->bank_code = $input['bank_code'];
+            $bank->city = $input['city'];
+            $bank->country = $input['country'];
+            $bank->master_supplier_id = $supplier->id;
+            $bank->name = $input['name_bank'];
+            $bank->remark = $input['remark_bank'];
+
+            $bank->save();
+
+            $banDetail = MasterSupplierBankDetail::where('supplier_bank_id', $bank->id)->first();
+            $banDetail->supplier_bank_id = $bank->id;
+            $banDetail->name = $input['name_bank_detail'];
+            $banDetail->acc_no_1 = $input['acc_no_1'];
+            $banDetail->acc_no_1_currency = $input['acc_no_1_currency'];
+            $banDetail->iban_1 = $input['iban_1'];
+            $banDetail->acc_no_2 = $input['acc_no_2'];
+            $banDetail->acc_no_2_currency = $input['acc_no_2_currency'];
+            $banDetail->iban_2 = $input['iban_2'];
+            $banDetail->acc_no_3 = $input['acc_no_3'];
+            $banDetail->acc_no_3_currency = $input['acc_no_3_currency'];
+            $banDetail->iban_3 = $input['iban_3'];
+            $banDetail->acc_no_4 = $input['acc_no_4'];
+            $banDetail->acc_no_4_currency = $input['acc_no_4_currency'];
+            $banDetail->iban_4 = $input['iban_4'];
+            $banDetail->swift = $input['swift_bank_detail'];
+            $banDetail->bic = $input['bic'];
+            $banDetail->remark = $input['remark_bank_detail'];
+
+            $banDetail->save();
+
+            $crpd = MasterSupplierBankCrpd::where('supplier_bank_id', $bank->id)->first();
+            $crpd->supplier_bank_id = $bank->id;
+            $crpd->name = $input['name_crpd'];
+            $crpd->address = $input['address_crpd'];
+            $crpd->ac_no = $input['ac_no'];
+            $crpd->swift = $input['swift_crpd'];
+            $crpd->remark = $input['remark_crpd'];
+            $crpd->save();
         });
     }
 
