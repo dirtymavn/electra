@@ -30,6 +30,10 @@ class SettingCodeSeeder extends Seeder
             [
                 'name' => 'Tour Guide',
                 'type' => 'TG'
+            ],
+            [
+                'name' => 'Sales Order',
+                'type' => 'SO'
             ]
         ]);
     }

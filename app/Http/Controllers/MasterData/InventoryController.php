@@ -18,6 +18,7 @@ use App\Models\MasterData\Inventory\MasterInventory as Inventory;
 use App\Models\MasterData\Inventory\TrxSales as Trx;
 use App\Models\MasterData\City;
 use App\Models\MasterData\Airport;
+use App\Models\MasterData\InventoryType;
 use App\Models\MasterData\Supplier\MasterSupplier as Supplier;
 use App\Models\Business\Sales;
 use App\Models\Temporary;
@@ -59,12 +60,18 @@ class InventoryController extends Controller
         $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
             ->all();
         $cities = City::getDataAvailable()->pluck('city_name', 'id');
-        $airports = Airport::getDataAvailable()->pluck('airport_name', 'id');
+        $airports = Airport::getDataAvailable()->pluck('airport_name', 'airports.id');
 
         $airline_class = Airline::getAvailableData()->pluck('airlines.airline_class', 'airlines.airline_class')
         ->all();
 
         $suppliers = Supplier::getAvailableData()->pluck('master_supplier.name', 'supplier_no');
+
+        $inventoryTypes = InventoryType::getAvailableData()->pluck('inventory_type_name', 'master_inventory_type.id');
+
+        if (count($inventoryTypes) == 0) {
+            $inventoryTypes = ['' => '- Not Available -'];
+        }
 
         if (count($suppliers) == 0) {
             $suppliers = ['' => '- Not Available -'];
@@ -88,7 +95,7 @@ class InventoryController extends Controller
         if (count($sales) == 0) {
             $sales = ['' => '- Not Available -'];
         }
-        return view('contents.master_datas.inventory.create', compact('sales', 'airlines', 'cities','airports', 'airline_class', 'suppliers'));
+        return view('contents.master_datas.inventory.create', compact('sales', 'airlines', 'cities','airports', 'inventoryTypes' , 'airline_class', 'suppliers'));
     }
 
     /**
@@ -170,6 +177,12 @@ class InventoryController extends Controller
         ->all();
 
         $suppliers = Supplier::getAvailableData()->pluck('master_supplier.name', 'supplier_no');
+
+        $inventoryTypes = InventoryType::getAvailableData()->pluck('inventory_type_name', 'master_inventory_type.id');
+
+        if (count($inventoryTypes) == 0) {
+            $inventoryTypes = ['' => '- Not Available -'];
+        }
 
         if (count($suppliers) == 0) {
             $suppliers = ['' => '- Not Available -'];
@@ -342,7 +355,7 @@ class InventoryController extends Controller
 
         $inventory = (object) $merge;
 
-        return view('contents.master_datas.inventory.edit', compact('inventory', 'sales', 'airlines', 'cities', 'airports', 'airline_class', 'suppliers'));
+        return view('contents.master_datas.inventory.edit', compact('inventory', 'sales', 'airlines', 'cities', 'airports', 'airline_class', 'suppliers', 'inventoryTypes'));
     }
 
     /**

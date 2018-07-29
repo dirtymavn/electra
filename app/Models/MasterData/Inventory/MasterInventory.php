@@ -14,7 +14,7 @@ class MasterInventory extends Model implements Auditable
 
     protected $fillable = [
     	'trx_sales_id',
-    	'inventory_type',
+    	'inventory_type_id',
     	'voucher_no',
     	'product_code',
     	'received_date',

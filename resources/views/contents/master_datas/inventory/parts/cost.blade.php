@@ -18,7 +18,8 @@
             <div class="col-md-12">
                 <div class="form-group">
                     {!! Form::label('supplier_no', trans('Supplier No'), ['class' => 'control-label']) !!}
-                    {!! Form::text('supplier_no', old('supplier_no') , ['class' => 'form-control', 'placeholder' => 'Input the Supplier No']) !!}
+                    {{-- {!! Form::text('supplier_no', old('supplier_no') , ['class' => 'form-control', 'placeholder' => 'Input the Supplier No']) !!} --}}
+                    {!! Form::select('supplier_no', @$suppliers, old('supplier_no'), ['class' => 'form-control', 'supplier_no']) !!}
                 </div>
             </div>
         </div>

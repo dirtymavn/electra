@@ -2,13 +2,13 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('sales_no', trans('Sales No'), ['class' => 'control-label']) !!}
-            {!! Form::text('sales_no', old('sales_no') , ['class' => 'form-control', 'placeholder' => 'Input the Code']) !!}
+            {!! Form::text('sales_no', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the Code', 'readonly' => true]) !!}
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('customer_id', trans('Customer'), ['class' => 'control-label']) !!}
-            {!! Form::select('customer_id', ['' => 'Choose Customer'] + @$customers, old('customer_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('customer_id', @$customers, old('customer_id'), ['class' => 'form-control', 'id' => 'cust_no']) !!}
         </div>
     </div>
     <div class="col-sm-6">
@@ -17,30 +17,30 @@
             {!! Form::date('trip_date', old('trip_date') , ['class' => 'form-control', 'placeholder' => 'Input the Trip Date']) !!}
         </div>
     </div>
-    <div class="col-sm-6">
+    {{-- <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('deadline', trans('Deadline'), ['class' => 'control-label']) !!}
             {!! Form::date('deadline', old('deadline') , ['class' => 'form-control', 'placeholder' => 'Input the Deadline']) !!}
         </div>
-    </div>
+    </div> --}}
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('your_ref', trans('Your Ref'), ['class' => 'control-label']) !!}
             {!! Form::text('your_ref', old('your_ref') , ['class' => 'form-control', 'placeholder' => 'Input the Your Ref']) !!}
         </div>
     </div>
-    <div class="col-sm-6">
+    {{-- <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('our_ref', trans('Our Ref'), ['class' => 'control-label']) !!}
             {!! Form::text('our_ref', old('our_ref') , ['class' => 'form-control', 'placeholder' => 'Input the Our Ref']) !!}
         </div>
-    </div>
-    <div class="col-sm-6">
+    </div> --}}
+    {{-- <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('tc_id', trans('TC'), ['class' => 'control-label']) !!}
             {!! Form::text('tc_id', old('tc_id') , ['class' => 'form-control', 'placeholder' => 'Input the TC']) !!}
         </div>
-    </div>
+    </div> --}}
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('invoice_no', trans('Invoice No'), ['class' => 'control-label']) !!}
@@ -127,6 +127,8 @@
 <script>
     $(function(){
         spinnerLoad($('#form-sales'));
+        initSelect2Remote($('#cust_no'), "{{ route('customer.search-data') }}", "Choose Customer", 0);
+        initSelect2Remote($('#employee_no'), "{{ route('customer.search-data') }}", "Choose Employee", 0);
     });
 </script>
 

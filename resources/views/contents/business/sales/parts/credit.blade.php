@@ -37,36 +37,36 @@
                     {!! Form::number('merchant_no', old('merchant_no') , ['class' => 'form-control', 'placeholder' => 'Input the Merchant No']) !!}
                 </div>
             </div>
-            <div class="col-sm-6">
+            {{-- <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('roc_no', trans('Roc No'), ['class' => 'control-label']) !!}
                     {!! Form::text('roc_no', old('roc_no') , ['class' => 'form-control', 'placeholder' => 'Input the Roc No']) !!}
                 </div>
-            </div>
-            <div class="col-sm-6">
+            </div> --}}
+            {{-- <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('sof_flag', trans('Sof Lag'), ['class' => 'control-label']) !!}
                     {!! Form::text('sof_flag', old('sof_flag') , ['class' => 'form-control', 'placeholder' => 'Input the Sof Lag']) !!}
                 </div>
-            </div>
+            </div> --}}
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('amount', trans('Amount'), ['class' => 'control-label']) !!}
                     {!! Form::number('amount', old('amount') , ['class' => 'form-control', 'placeholder' => 'Input the Amount']) !!}
                 </div>
             </div>
-            <div class="col-sm-6">
+            {{-- <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('authorisation_code', trans('Authorisation Code'), ['class' => 'control-label']) !!}
                     {!! Form::text('authorisation_code', old('authorisation_code') , ['class' => 'form-control', 'placeholder' => 'Input the Authorisation Code']) !!}
                 </div>
-            </div>
-            <div class="col-sm-6">
+            </div> --}}
+            {{-- <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('authorisation_date', trans('Authorisation Date'), ['class' => 'control-label']) !!}
                     {!! Form::date('authorisation_date', old('authorisation_date') , ['class' => 'form-control', 'placeholder' => 'Input the Authorisation Date']) !!}
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

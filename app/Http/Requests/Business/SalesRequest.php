@@ -27,7 +27,7 @@ class SalesRequest extends FormRequest
             'sales_no' => 'required',
             'customer_id' => 'required',
             'trip_date' => 'required',
-            'deadline' => 'required'
+            // 'deadline' => 'required'
         ];
     }
 }

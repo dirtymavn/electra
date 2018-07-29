@@ -28,13 +28,15 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('department', trans('Department'), ['class' => 'control-label']) !!}
-                    {!! Form::text('department', old('department') , ['class' => 'form-control', 'placeholder' => 'Input the Department']) !!}
+                    {{-- {!! Form::text('department', old('department') , ['class' => 'form-control', 'placeholder' => 'Input the Department']) !!} --}}
+                    {!! Form::select('department', ['' => 'Choose Department'] + @$departments, old('department'), ['class' => 'form-control']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('employee_no', trans('Employee No'), ['class' => 'control-label']) !!}
-                    {!! Form::text('employee_no', old('employee_no') , ['class' => 'form-control', 'placeholder' => 'Input the Employee No']) !!}
+                    {{-- {!! Form::text('employee_no', old('employee_no') , ['class' => 'form-control', 'placeholder' => 'Input the Employee No']) !!} --}}
+                    {!! Form::select('employee_no', @$customers, old('employee_no'), ['class' => 'form-control', 'id' => 'employee_no']) !!}
                 </div>
             </div>
             <div class="col-sm-6">

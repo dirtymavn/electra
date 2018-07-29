@@ -11,6 +11,7 @@ use App\Models\Business\Sales\TrxSalesCreditCard;
 use App\Models\Business\Sales\TrxSalesBilling;
 use App\Models\MasterData\Customer\MasterCustomer;
 use App\Models\MasterData\City;
+use App\Models\MasterData\Department;
 use App\Models\Temporary;
 
 use DB;
@@ -46,12 +47,14 @@ class SalesFolderController extends Controller
      */
     public function create()
     {
+        $newCode = Sales::getAutoNumber();
         $company_id = user_info()->company_id;
         $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
         $cities = City::getDataAvailable()->pluck('city_name', 'id')->all();
+        $departments = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
          // clear temporary data
         \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
-        return view('contents.business.sales.create', compact('customers', 'cities'));
+        return view('contents.business.sales.create', compact('customers', 'cities', 'newCode', 'departments'));
     }
 
     /**
@@ -118,6 +121,7 @@ class SalesFolderController extends Controller
     public function edit($id)
     {
         $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
+        $departments = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
         $sales = Sales::find($id);
         $trxsales = Sales::find($id)->toArray();
         $credit = TrxSalesCreditCard::where('trx_sales_id', $id)->first()->toArray();
@@ -127,7 +131,7 @@ class SalesFolderController extends Controller
         $merge = array_merge($trxsales, $credit, $billing);
         $cities = City::getDataAvailable()->pluck('city_name', 'id')->all();
         $sales = (object) $merge;
-        return view('contents.business.sales.edit', compact('sales', 'customers', 'cities'));
+        return view('contents.business.sales.edit', compact('sales', 'customers', 'cities', 'departments'));
     }
 
     /**

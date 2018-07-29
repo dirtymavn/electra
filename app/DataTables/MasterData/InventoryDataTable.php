@@ -48,7 +48,7 @@ class InventoryDataTable extends DataTable
             ->select(
                 'master_inventory.id', 
                 'master_inventory.trx_sales_id',
-                'master_inventory.inventory_type',
+                'master_inventory.inventory_type_id',
                 'master_inventory.voucher_no',
                 'master_inventory.product_code',
                 'master_inventory.received_date',
