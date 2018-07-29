@@ -10,11 +10,12 @@
         </div>
         <div class="form-group">
             {!! Form::label('airline_class', trans('Airline Class'), ['class' => 'control-label']) !!}
-            {!! Form::text('airline_class', old('airline_class') , ['class' => 'form-control', 'placeholder' => 'Input the Airline Class']) !!}
+            {{-- {!! Form::text('airline_class', old('airline_class') , ['class' => 'form-control', 'placeholder' => 'Input the Airline Class']) !!} --}}
+            {!! Form::select('airline_class', ['low-cost' => 'Low Cost', 'fullboard' => 'Full Board'], old('airline_class'), ['class' => 'form-control', 'placeholder' => 'Choose Airline Class']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-            {!! Form::select('status', ['1' => 'Yes', '0' => 'No'], old('status'), ['class' => 'form-control']) !!}
+            {!! Form::select('status', ['1' => 'Active', '0' => 'Inactive'], old('status'), ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>

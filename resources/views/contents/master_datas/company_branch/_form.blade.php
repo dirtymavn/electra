@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('branch_code', trans('Branch Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('branch_code', old('branch_code') , ['class' => 'form-control', 'placeholder' => 'Input the Branch Code']) !!}
+            {!! Form::text('branch_code', old('branch_code') , ['class' => 'form-control', 'placeholder' => 'Input the Branch Code', 'maxlength' => 10]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('branch_address', trans('Branch Address'), ['class' => 'control-label']) !!}

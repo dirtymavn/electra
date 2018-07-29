@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MasterData\Accounting;
 
 use App\Models\MasterData\Accounting\BudgetRate;
+use App\Models\MasterData\Currency\Currency;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\Accounting\BudgetRateDataTable;
@@ -49,7 +50,8 @@ class BudgetRateController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.accountings.budget_rate.create');
+        $currency = Currency::getAvailableData()->pluck('currency_name', 'currency_code');
+        return view('contents.master_datas.accountings.budget_rate.create', compact('currency'));
     }
 
     /**

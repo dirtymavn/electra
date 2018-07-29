@@ -30,7 +30,7 @@ class AirportDataTable extends DataTable
                 }
             })
             ->editColumn('status', function($airport){
-                return ($airport->status) ? 'Active' : 'Non Active';
+                return ($airport->status) ? 'Active' : 'Inactive';
             })
             ->editColumn('is_draft', function($airport){
                 return ($airport->is_draft) ? 'Yes' : 'No';
