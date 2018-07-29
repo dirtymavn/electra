@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('voucher.index')}}" class="btn btn-grey">Cancel</a>
-                        <button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>
+                        {{--<button type="button" class="btn btn-success" id="btn-submit-draft">Save as Draft</button>--}}
                         <button type="submit" class="btn btn-primary" id="btn-submit">Publish</button>
                         <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                     </div>
