@@ -71,10 +71,10 @@
             {!! Form::select('trx_sales_id', @$sales, old('trx_sales_id'), ['class' => 'form-control']) !!}
         </div>
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             {!! Form::label('guest_name', trans('Guest Name'), ['class' => 'control-label']) !!}
             {!! Form::text('guest_name', old('guest_name') , ['class' => 'form-control', 'placeholder' => 'Input the Guest Name']) !!}
-        </div>
+        </div> --}}
 
         <div class="form-group">
             {!! Form::label('iata_no', trans('Iata No'), ['class' => 'control-label']) !!}

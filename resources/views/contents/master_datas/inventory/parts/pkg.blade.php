@@ -59,7 +59,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('pkg_status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('pkg_status', old('pkg_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'pkg_status']) !!}
+                            {{-- {!! Form::text('pkg_status', old('pkg_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'pkg_status']) !!} --}}
+                            {!! Form::select('pkg_status', [ 'active' => 'Active', 'inactive' => 'Inactive' ], old('pkg_status'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
                 </div>

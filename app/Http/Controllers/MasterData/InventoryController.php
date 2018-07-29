@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\MasterData\Inventory\MasterInventory as Inventory;
 use App\Models\MasterData\Inventory\TrxSales as Trx;
+use App\Models\MasterData\City;
+use App\Models\MasterData\Airport;
+use App\Models\MasterData\Supplier\MasterSupplier as Supplier;
 use App\Models\Business\Sales;
 use App\Models\Temporary;
 
@@ -55,6 +58,29 @@ class InventoryController extends Controller
         $sales = Sales::where('is_draft', false)->pluck('sales_no', 'id')->all();
         $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
             ->all();
+        $cities = City::getDataAvailable()->pluck('city_name', 'id');
+        $airports = Airport::getDataAvailable()->pluck('airport_name', 'id');
+
+        $airline_class = Airline::getAvailableData()->pluck('airlines.airline_class', 'airlines.airline_class')
+        ->all();
+
+        $suppliers = Supplier::getAvailableData()->pluck('master_supplier.name', 'supplier_no');
+
+        if (count($suppliers) == 0) {
+            $suppliers = ['' => '- Not Available -'];
+        }
+
+        if (count($airline_class) == 0) {
+            $airline_class = ['' => '- Not Available -'];
+        }
+
+        if (count($airports) == 0) {
+            $airports = ['' => '- Not Available -'];
+        }
+
+        if (count($cities) == 0) {
+            $cities = ['' => '- Not Available -'];
+        }
 
         if (count($airlines) == 0) {
             $airlines = ['' => '- Not Available -'];
@@ -62,7 +88,7 @@ class InventoryController extends Controller
         if (count($sales) == 0) {
             $sales = ['' => '- Not Available -'];
         }
-        return view('contents.master_datas.inventory.create', compact('sales', 'airlines'));
+        return view('contents.master_datas.inventory.create', compact('sales', 'airlines', 'cities','airports', 'airline_class', 'suppliers'));
     }
 
     /**
@@ -135,7 +161,31 @@ class InventoryController extends Controller
         $sales = Sales::where('is_draft', false)->pluck('sales_no', 'id')->all();
         $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
             ->all();
+        
+        $cities = City::getDataAvailable()->pluck('city_name', 'id');
 
+        $airports = Airport::getDataAvailable()->pluck('airport_name', 'airports.id');
+
+        $airline_class = Airline::getAvailableData()->pluck('airlines.airline_class', 'airlines.airline_class')
+        ->all();
+
+        $suppliers = Supplier::getAvailableData()->pluck('master_supplier.name', 'supplier_no');
+
+        if (count($suppliers) == 0) {
+            $suppliers = ['' => '- Not Available -'];
+        }
+
+        if (count($airline_class) == 0) {
+            $airline_class = ['' => '- Not Available -'];
+        }
+
+        if (count($airports) == 0) {
+            $airports = ['' => '- Not Available -'];
+        }
+
+        if (count($cities) == 0) {
+            $cities = ['' => '- Not Available -'];
+        }
         if (count($airlines) == 0) {
             $airlines = ['' => '- Not Available -'];
         }
@@ -292,7 +342,7 @@ class InventoryController extends Controller
 
         $inventory = (object) $merge;
 
-        return view('contents.master_datas.inventory.edit', compact('inventory', 'sales', 'airlines'));
+        return view('contents.master_datas.inventory.edit', compact('inventory', 'sales', 'airlines', 'cities', 'airports', 'airline_class', 'suppliers'));
     }
 
     /**

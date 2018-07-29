@@ -214,6 +214,13 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('product-type/export/excel', ['as' => 'export.product-type.excel', 'uses' => 'ProductTypeController@export_excel']);
         Route::get('product-type/export/pdf', ['as' => 'export.product-type.pdf', 'uses' => 'ProductTypeController@export_pdf']);
 
+        // Inventory Type
+        Route::resource('inventory-type', 'InventoryTypeController');
+        Route::post('inventory-type/bulk-delete', array('as' => 'inventory-type.bulk-delete', 'uses' => 'InventoryTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,inventory-type.destroy'));
+        Route::get('inventory-type/export/excel', ['as' => 'export.inventory-type.excel', 'uses' => 'InventoryTypeController@export_excel']);
+        Route::get('inventory-type/export/pdf', ['as' => 'export.inventory-type.pdf', 'uses' => 'InventoryTypeController@export_pdf']);
+        
+
         // Product Category
         Route::resource('product-category', 'ProductCategoryController');
         Route::post('product-category/bulk-delete', array('as' => 'product-category.bulk-delete', 'uses' => 'ProductCategoryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,product-category.destroy'));

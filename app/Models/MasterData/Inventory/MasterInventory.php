@@ -132,7 +132,8 @@ class MasterInventory extends Model implements Auditable
                     $car->master_inventory_id = $inventory->id;
                     $car->from = $carData->from;
                     $car->to = $carData->to;
-                    $car->company = $carData->company;
+                    // $car->company = $carData->company;
+                    $car->supplier_code = $carData->supplier_code;
                     $car->class = $carData->class;
                     $car->departure = $carData->departure;
                     $car->arrival = $carData->arrival;
@@ -153,7 +154,8 @@ class MasterInventory extends Model implements Auditable
 
                     $carTransfer->master_inventory_id = $inventory->id;
                     $carTransfer->city = $carTransferData->city;
-                    $carTransfer->company_code = $carTransferData->company_code;
+                    // $carTransfer->company_code = $carTransferData->company_code;
+                    $carTransfer->supplier_code = $carTransferData->supplier_code;
                     $carTransfer->vehicle = $carTransferData->vehicle;
                     $carTransfer->days_hired = $carTransferData->days_hired;
                     $carTransfer->pickup_date = $carTransferData->pickup_date;

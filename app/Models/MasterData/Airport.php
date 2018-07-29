@@ -39,4 +39,21 @@ class Airport extends Model implements Auditable
     {
         return $this->hasOne(City::class, 'id', 'city_id');
     }
+
+    /**
+     * Get available city
+     *
+     * @return array
+     */
+    public static function getDataAvailable()
+    {
+        $return = self::join('companies', 'companies.id', '=', 'airports.company_id')
+            ->join('cities', 'cities.id', '=', 'airports.city_id')
+            ->where('airports.is_draft', false)
+            ->where('airports.status', true)
+            ->where('airports.company_id', user_info('company_id'));
+
+        return $return;
+
+    }
 }

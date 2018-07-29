@@ -12,7 +12,7 @@
                                 <tr class="text-center">
                                     <th>From</th>
                                     <th>To</th>
-                                    <th>Company</th>
+                                    <th>Supplier Code</th>
                                     <th>Class</th>
                                     <th>Departure</th>
                                     <th>Arrival</th>
@@ -55,8 +55,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('company', trans('Company'), ['class' => 'control-label']) !!}
-                            {!! Form::text('company', old('company') , ['class' => 'form-control', 'placeholder' => 'Input the Company', 'id' => 'company']) !!}
+                            {!! Form::label('supplier_code', trans('Supplier'), ['class' => 'control-label']) !!}
+                            {{-- {!! Form::text('supplier_code', old('supplier_code') , ['class' => 'form-control', 'placeholder' => 'Input the Company', 'id' => 'supplier_code']) !!} --}}
+                            {!! Form::select('supplier_code', @$suppliers, old('supplier_code'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -80,7 +81,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('car_status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('car_status', old('car_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'car_status']) !!}
+                            {{-- {!! Form::text('car_status', old('car_status') , ['class' => 'form-control', 'placeholder' => 'Input the Status', 'id' => 'car_status']) !!} --}}
+                            {!! Form::select('car_status', [ 'active' => 'Active', 'inactive' => 'Inactive' ], old('car_status'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
                 </div>

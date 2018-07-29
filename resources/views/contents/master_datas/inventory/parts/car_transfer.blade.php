@@ -11,7 +11,7 @@
                             <thead>
                                 <tr class="text-center">
                                     <th>City</th>
-                                    <th>Company Code</th>
+                                    <th>Supplier Code</th>
                                     <th>Vehicle</th>
                                     <th>Days Hired</th>
                                     <th>pickup_date</th>
@@ -48,13 +48,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('city', trans('City'), ['class' => 'control-label']) !!}
-                            {!! Form::text('city', old('city') , ['class' => 'form-control', 'placeholder' => 'Input the City', 'id' => 'city']) !!}
+                            {{-- {!! Form::text('city', old('city') , ['class' => 'form-control', 'placeholder' => 'Input the City', 'id' => 'city']) !!} --}}
+                            {!! Form::select('city', @$cities, old('city'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('company_code', trans('Company'), ['class' => 'control-label']) !!}
-                            {!! Form::text('company_code', old('company_code') , ['class' => 'form-control', 'placeholder' => 'Input the Company', 'id' => 'company_code']) !!}
+                            {!! Form::label('supplier_code', trans('Supplier'), ['class' => 'control-label']) !!}
+                            {{-- {!! Form::text('supplier_code', old('supplier_code') , ['class' => 'form-control', 'placeholder' => 'Input the Company', 'id' => 'supplier_code']) !!} --}}
+                            {!! Form::select('supplier_code', @$suppliers, old('supplier_code'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">

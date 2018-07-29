@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\MasterData;
 
+use App\Models\MasterData\InventoryType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\MasterData\ProductCategory;
-use App\DataTables\MasterData\ProductCategoryDataTable;
-use App\Http\Requests\MasterData\ProductCategoryRequest;
+use App\DataTables\MasterData\InventoryTypeDataTable;
+use App\Http\Requests\MasterData\InventoryTypeRequest;
 
-class ProductCategoryController extends Controller
+class InventoryTypeController extends Controller
 {
     public function __construct()
     {
         // middleware
-        $this->middleware('sentinel_access:admin.company,product-category.read', ['only' => ['index']]);
-        $this->middleware('sentinel_access:admin.company,product-category.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel_access:admin.company,product-category.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel_access:admin.company,product-category.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel_access:admin.company,inventory-type.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,inventory-type.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,inventory-type.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,inventory-type.destroy', ['only' => ['destroy']]);
 
     }
 
@@ -25,9 +25,9 @@ class ProductCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ProductCategoryDataTable $dataTable)
+    public function index(InventoryTypeDataTable $dataTable)
     {
-        return $dataTable->render('contents.master_datas.product_category.index');
+        return $dataTable->render('contents.master_datas.inventory_type.index');
     }
 
     /**
@@ -37,17 +37,16 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        $parents = ProductCategory::active()->pluck('category_name', 'id')->all();
-        return view('contents.master_datas.product_category.create', compact('parents'));
+        return view('contents.master_datas.inventory_type.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\ProductCategoryRequest  $request
+     * @param  \App\Http\Requests\MasterData\InventoryTypeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductCategoryRequest $request)
+    public function store(InventoryTypeRequest $request)
     {
         \DB::beginTransaction();
         try {
@@ -62,14 +61,14 @@ class ProductCategoryController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id]);
-            $insert = ProductCategory::create($request->all());
+            $insert = InventoryType::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('product-category.index');
+                $redirect = redirect()->route('inventory-type.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('product-category.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('inventory-type.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('product-category.create');
+                    $redirect = redirect()->route('inventory-type.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -86,10 +85,10 @@ class ProductCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MasterData\ProductCategory  $productType
+     * @param  \App\Models\MasterData\InventoryType  $InventoryType
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductCategory $productType)
+    public function show(InventoryType $InventoryType)
     {
         //
     }
@@ -97,42 +96,40 @@ class ProductCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MasterData\ProductCategory  $productType
+     * @param  \App\Models\MasterData\InventoryType  $InventoryType
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {   
-        $category = ProductCategory::find($id);
-        $parents = ProductCategory::active()->whereNotIn('id', [ $id ])->pluck('category_name', 'id')->all();
-        return view('contents.master_datas.product_category.edit')->with(['category' => $category, 'parents' => $parents]);
+    public function edit(InventoryType $InventoryType)
+    {
+        return view('contents.master_datas.inventory_type.edit')->with(['Inventorytype' => $InventoryType]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\ProductCategoryRequest  $request
-     * @param  \App\Models\MasterData\ProductCategory  $productType
+     * @param  \App\Http\Requests\MasterData\InventoryTypeRequest  $request
+     * @param  \App\Models\MasterData\InventoryType  $InventoryType
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductCategoryRequest $request, $id)
+    public function update(InventoryTypeRequest $request, InventoryType $InventoryType)
     {
         \DB::beginTransaction();
         try {
-            $category = ProductCategory::find($id);
+            // $airline = Airline::find($id);
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('product-category.index');
+                $redirect = redirect()->route('inventory-type.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('product-category.create');
+                $redirect = redirect()->route('inventory-type.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('product-category.edit', $category->id);
+                $redirect = redirect()->route('inventory-type.edit', $InventoryType->id);
             }
 
-            $update = $category->update($request->all());
+            $update = $InventoryType->update($request->all());
 
             if ($update) {
 
@@ -151,15 +148,15 @@ class ProductCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MasterData\ProductCategory  $productType
+     * @param  \App\Models\MasterData\InventoryType  $InventoryType
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(InventoryType $InventoryType)
     {
-        ProductCategory::find($id)->delete();
+        $InventoryType->delete();
         flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('product-category.index');
+        return redirect()->route('inventory-type.index');
     }
 
     /**
@@ -172,14 +169,14 @@ class ProductCategoryController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            ProductCategory::whereIn('id', $ids)->delete();
+            InventoryType::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('product-category.index');
+        return redirect()->route('inventory-type.index');
     }
 
     /**
@@ -188,7 +185,7 @@ class ProductCategoryController extends Controller
      */
     public function export_excel()
     {
-        $type = ProductCategory::select('*')->get();
+        $type = InventoryType::select('*')->get();
         \Excel::create('testing-'.date('Ymd'), function($excel) use ($type) {
             $excel->sheet('Sheet 1', function($sheet) use ($type) {
                 $sheet->fromArray($type);
@@ -203,8 +200,8 @@ class ProductCategoryController extends Controller
      */
     public function export_pdf()
     {
-        $categories = ProductCategory::all();
-        $pdf = \PDF::loadView('contents.master_datas.product_category.pdf', compact('categories'));
-        return $pdf->download('product-category.pdf');
+        $types = InventoryType::all();
+        $pdf = \PDF::loadView('contents.master_datas.inventory_type.pdf', compact('types'));
+        return $pdf->download('inventory-type.pdf');
     }
 }

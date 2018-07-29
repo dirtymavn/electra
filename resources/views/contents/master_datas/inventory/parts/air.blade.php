@@ -13,7 +13,7 @@
                                     <th>Route From</th>
                                     <th>Route To</th>
                                     <th>Airline Code</th>
-                                    <th>Fligh No</th>
+                                    <th>Flight No</th>
                                     <th>Class</th>
                                     <th>Farebasis</th>
                                     <th>Depart Date</th>
@@ -48,19 +48,22 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('route_from', trans('Route From'), ['class' => 'control-label']) !!}
-                            {!! Form::text('route_from', old('route_from') , ['class' => 'form-control', 'placeholder' => 'Input the Route From', 'id' => 'route_from']) !!}
+                            {{-- {!! Form::text('route_from', old('route_from') , ['class' => 'form-control', 'placeholder' => 'Input the Route From', 'id' => 'route_from']) !!} --}}
+                            {!! Form::select('route_from', @$cities, old('route_from'), ['class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('route_to', trans('Route To'), ['class' => 'control-label']) !!}
-                            {!! Form::text('route_to', old('route_to') , ['class' => 'form-control', 'placeholder' => 'Input the Route From', 'id' => 'route_to']) !!}
+                            {{-- {!! Form::text('route_to', old('route_to') , ['class' => 'form-control', 'placeholder' => 'Input the Route From', 'id' => 'route_to']) !!} --}}
+                            {!! Form::select('route_to', @$cities, old('route_to'), ['class' => 'form-control']) !!}
                         </div>
                     </div>    
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('airline_code', trans('Airline Code'), ['class' => 'control-label']) !!}
-                            {!! Form::text('airline_code', old('airline_code') , ['class' => 'form-control', 'placeholder' => 'Input the Airline Code', 'id' => 'airline_code']) !!}
+                            {{-- {!! Form::text('airline_code', old('airline_code') , ['class' => 'form-control', 'placeholder' => 'Input the Airline Code', 'id' => 'airline_code']) !!} --}}
+                            {!! Form::select('airline_code', @$airlines, old('airline_code'), ['class' => 'form-control']) !!}
                         </div>
                     </div> 
                     <div class="col-md-6">
@@ -72,7 +75,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('class', trans('Class'), ['class' => 'control-label']) !!}
-                            {!! Form::text('class', old('class') , ['class' => 'form-control', 'placeholder' => 'Input the Class', 'id' => 'class']) !!}
+                            {{-- {!! Form::text('class', old('class') , ['class' => 'form-control', 'placeholder' => 'Input the Class', 'id' => 'class']) !!} --}}
+                            {!! Form::select('class', @$airline_class, old('class'), ['class' => 'form-control']) !!}
                         </div>
                     </div>    
                     <div class="col-md-6">
@@ -90,13 +94,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('arrival', trans('Arrival'), ['class' => 'control-label']) !!}
-                            {!! Form::text('arrival', old('arrival') , ['class' => 'form-control', 'placeholder' => 'Input the Arrival', 'id' => 'arrival']) !!}
+                            {{-- {!! Form::text('arrival', old('arrival') , ['class' => 'form-control', 'placeholder' => 'Input the Arrival', 'id' => 'arrival']) !!} --}}
+                            {!! Form::select('arrival', @$airports, old('arrival'), ['class' => 'form-control']) !!}
                         </div>
                     </div> 
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('departure', trans('Departure'), ['class' => 'control-label']) !!}
-                            {!! Form::text('departure', old('departure') , ['class' => 'form-control', 'placeholder' => 'Input the Departure', 'id' => 'departure']) !!}
+                            {{-- {!! Form::text('departure', old('departure') , ['class' => 'form-control', 'placeholder' => 'Input the Departure', 'id' => 'departure']) !!} --}}
+                            {!! Form::select('departure', @$airports, old('departure'), ['class' => 'form-control']) !!}
                         </div>
                     </div> 
                     <div class="col-md-6">

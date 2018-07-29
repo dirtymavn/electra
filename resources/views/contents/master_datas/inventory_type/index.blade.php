@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Product Type')
+@section('title', 'Inventory Type')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,25 +9,25 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item">Product Type</li>
+    <li class="breadcrumb-item">Inventory Type</li>
 </ul>
 @endsection
 
-@section('page_title', 'Product Type Lists')
+@section('page_title', 'Inventory Type Lists')
 
 @section('content')
 @include('flash::message')
 <div class="row">
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'product-type.create']))
-            <a href="{{ route('product-type.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Product Type Lists
+        @if(user_info()->hasAnyAccess(['admin.company', 'inventory-type.create']))
+            <a href="{{ route('inventory-type.create')}}" class="btn btn-primary" id="btn-submit">
+                <i class="fa fa-plus m-right-10"></i> Add Inventory Type Lists
             </a>
         @endif
     </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'product-type.destroy']))
+        @if(user_info()->hasAnyAccess(['admin.company', 'inventory-type.destroy']))
             <button class="btn btn-danger" id="bulk-delete">
                 <i class="fa fa-trash m-right-10"></i> Bulk Delete
             </button>
@@ -39,8 +39,8 @@
                 Actions
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('export.product-type.excel') }}">Export XLS</a>
-                <a class="dropdown-item" href="{{ route('export.product-type.pdf') }}">Export PDF</a>
+                <a class="dropdown-item" href="{{ route('export.inventory-type.excel') }}">Export XLS</a>
+                <a class="dropdown-item" href="{{ route('export.inventory-type.pdf') }}">Export PDF</a>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
 
 <script>
     $(document).ready(function() {
-        spinnerLoad($('#form-product-type'));
+        spinnerLoad($('#form-inventory-type'));
     });
 
     $(document).on('click', '#bulk-delete', function() {
@@ -78,7 +78,7 @@
         });
         
         if (ids.length > 0) {
-            bulkDelete("{{ route('product-type.bulk-delete') }}", ids);
+            bulkDelete("{{ route('inventory-type.bulk-delete') }}", ids);
         } else {
             alert('Something went wrong!');
             return false;
