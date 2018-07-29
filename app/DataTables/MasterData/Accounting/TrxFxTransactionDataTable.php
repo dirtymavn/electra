@@ -134,7 +134,7 @@ class TrxFxTransactionDataTable extends DataTable
             'jv_period',
             'acc_type',
             'fx_acc',
-            'is_draft'
+            // 'is_draft'
         ];
     }
 

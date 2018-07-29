@@ -87,7 +87,7 @@ class RegionDataTable extends DataTable
             'region_name',
             'region_code',
             'region_description',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 

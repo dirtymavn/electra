@@ -84,7 +84,7 @@ class CompanyDepartmentDataTable extends DataTable
         return [
             'department_name',
             'department_code',
-            'is_draft',
+        //    'is_draft',
             'created_at' => ['name' => 'company_departments.created_at', 'data' => 'created_at']
         ];
     }

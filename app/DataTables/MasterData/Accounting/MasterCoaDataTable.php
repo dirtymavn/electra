@@ -104,7 +104,7 @@ class MasterCoaDataTable extends DataTable
             'sub_acc_id',
             'acc_type',
             'rollup_key_acc_no',
-            'is_draft'
+            // 'is_draft'
         ];
     }
 

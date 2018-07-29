@@ -84,7 +84,7 @@ class ProductTypeDataTable extends DataTable
         return [
             'product_type_name',
             'product_type_code',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 

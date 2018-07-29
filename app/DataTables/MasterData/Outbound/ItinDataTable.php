@@ -102,7 +102,7 @@ class ItinDataTable extends DataTable
             'itinerary_code' => ['name' => 'master_itineraries.itinerary_code', 'data' => 'itinerary_code', 'title' => trans('Itinerary Code'), 'id' => 'itinerary_code'],
             'itinerary_name' => ['name' => 'master_itineraries.itinerary_name', 'data' => 'itinerary_name', 'title' => trans('Itinerary Name'), 'id' => 'itinerary_name'],
             'branch_id' => ['name' => 'master_itineraries.branch_id', 'data' => 'branch_id', 'title' => trans('Branch ID'), 'id' => 'branch_id'],
-            'is_draft' => ['name' => 'master_itineraries.is_draft', 'data' => 'is_draft', 'title' => trans('Is Draft'), 'id' => 'is_draft'],
+            // 'is_draft' => ['name' => 'master_itineraries.is_draft', 'data' => 'is_draft', 'title' => trans('Is Draft'), 'id' => 'is_draft'],
             'remark' => ['name' => 'master_itineraries.remark', 'data' => 'remark', 'title' => trans('Remark'), 'id' => 'remark'],
         ];
 

@@ -84,7 +84,7 @@ class MasterDocumentDataTable extends DataTable
         return [
             'document_type',
             'document_uri',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 

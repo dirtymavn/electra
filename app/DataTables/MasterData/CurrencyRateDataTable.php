@@ -84,7 +84,7 @@ class CurrencyRateDataTable extends DataTable
         return [
             'currency_name',
             'currency_code',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 

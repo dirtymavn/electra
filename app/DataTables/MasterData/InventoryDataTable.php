@@ -104,7 +104,7 @@ class InventoryDataTable extends DataTable
             'booked_qty' => ['title' => 'Booked'],
             'sold_qty' => ['title' => 'Sold'],
             'status' => ['title' => 'Status'],
-            'is_draft' => ['title' => 'Is Draft'],
+        //    'is_draft' => ['title' => 'Is Draft'],
             'created_at' => ['title' => 'Created At'],
         ];
     }

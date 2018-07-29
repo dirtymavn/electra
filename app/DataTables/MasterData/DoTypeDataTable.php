@@ -86,7 +86,7 @@ class DoTypeDataTable extends DataTable
             'do_type_name',
             'do_type_code',
             'do_type_status',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 

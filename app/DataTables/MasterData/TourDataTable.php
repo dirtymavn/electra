@@ -88,7 +88,7 @@ class TourDataTable extends DataTable
             'tour_code',
             'depart_date',
             'return_date',
-            'is_draft' => ['name' => 'master_tours.is_draft', 'data' => 'is_draft'],
+        //    'is_draft' => ['name' => 'master_tours.is_draft', 'data' => 'is_draft'],
             'created_at' => ['name' => 'master_tours.created_at', 'data' => 'created_at']
         ];
     }

@@ -91,7 +91,7 @@ class SupplierDataTable extends DataTable
             'supplier_type' => ['title' => 'Supplier Type'],
             'name' => ['title' => 'Name'],
             'status' => ['title' => 'Status'],
-            'is_draft' => ['title' => 'Is Draft'],
+        //    'is_draft' => ['title' => 'Is Draft'],
             'created_at' => ['title' => 'Created At'],
         ];
     }

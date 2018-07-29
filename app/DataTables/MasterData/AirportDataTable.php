@@ -94,7 +94,7 @@ class AirportDataTable extends DataTable
             'airport_code_icao',
             'airport_code_iata',
             'status' => ['name' => 'airports.status', 'data' => 'status'],
-            'is_draft' => ['name' => 'airports.is_draft', 'data' => 'is_draft'],
+        //    'is_draft' => ['name' => 'airports.is_draft', 'data' => 'is_draft'],
             'created_at' => ['name' => 'airports.created_at', 'data' => 'created_at']
         ];
 

@@ -109,7 +109,7 @@ class CustomerDataTable extends DataTable
             'salutation',
             'sales_id',
             'customer_group_id',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 
