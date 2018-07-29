@@ -51,6 +51,7 @@ class MasterDocument extends Model
                    $rate->subject = $value->subject;
                    $rate->target_role = $value->target_role;
                    $rate->spesific_role = $value->spesific_role;
+                   $rate->branch_id = $value->queue_branch_id;
                    $rate->status = $value->status;
 
                    $rate->save();

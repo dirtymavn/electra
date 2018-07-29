@@ -302,7 +302,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('document', 'MasterDocumentController');
         Route::post('document/bulk-delete', array('as' => 'document.bulk-delete', 'uses' => 'MasterDocumentController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,document.destroy'));
         Route::post('document/get-data', array('as' => 'document.get-data', 'uses' => 'MasterDocumentController@getData'));
-        Route::post('document/credit-card', array('as' => 'document.rate.post', 'uses' => 'MasterDocumentController@documentStore', 'middleware' => 'sentinel_access:admin.company,document.create'));
+        Route::post('document/queue-message', array('as' => 'document.rate.post', 'uses' => 'MasterDocumentController@documentStore', 'middleware' => 'sentinel_access:admin.company,document.create'));
         Route::post('document/data/delete', array('as' => 'document.data.delete', 'uses' => 'MasterDocumentController@dataDelete', 'middleware' => 'sentinel_access:admin.company,document.create'));
         Route::post('document/data/detail', array('as' => 'document.data.detail', 'uses' => 'MasterDocumentController@dataDetail', 'middleware' => 'sentinel_access:admin.company,document.create'));
         Route::get('document/export/excel', ['as' => 'export.document.excel', 'uses' => 'MasterDocumentController@export_excel']);

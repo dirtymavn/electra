@@ -60,7 +60,7 @@ class GstController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $request->merge(['company_id' => @user_info()->company->id]);
+            $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
             $insert = Gst::create($request->all());
 
             if ($insert) {

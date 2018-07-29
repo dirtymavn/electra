@@ -95,7 +95,7 @@ class GuideController extends Controller
                     $msgSuccess = trans('message.published');
                 }
 
-                $request->merge(['company_id' => @user_info()->company->id]);
+                $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
                 $insertGuide = $this->guide->create($request->all());
 
                 if ($insertGuide) {

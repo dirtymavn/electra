@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('branch_id', trans('Branch'), ['class' => 'control-label']) !!}
-            {!! Form::select('branch_id', ['' => 'Choose Branch'], old('branch_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('branch_id', ['' => 'Choose Branch'] + @$branchs, old('branch_id'), ['class' => 'form-control branch-id']) !!}
         </div>
         
     </div>
@@ -41,7 +41,7 @@
                                                     <th>Due Date</th>
                                                     <th>Subject</th>
                                                     <th>Target Role</th>
-                                                    <th>Spesific Role</th>
+                                                    <!-- <th>Spesific Role</th> -->
                                                     <th>Status</th>
                                                     <th>Queue Message</th>
                                                     <th>Action</th>
@@ -62,7 +62,7 @@
 @push('models')
 <!-- Form Currency Rate .Start -->
 <div id="form-document-modal" class="modal fade" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             {!! Form::open(['id' => 'form-data-document', 'method' => 'post']) !!}
             <div class="modal-header">
@@ -72,46 +72,46 @@
             <div class="modal-body">
                 <input type="hidden" value="" name="queue_id" id="queue_id">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {!! Form::label('due_date', trans('Due Date'), ['class' => 'control-label']) !!}
-                            {!! Form::date('due_date', old('due_date') , ['class' => 'form-control', 'placeholder' => 'Input the Due Date']) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('subject', trans('Subject'), ['class' => 'control-label']) !!}
                             {!! Form::text('subject', old('subject') , ['class' => 'form-control', 'placeholder' => 'Input the Subject']) !!}
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('target_role', trans('Target Role'), ['class' => 'control-label']) !!}
-                            {!! Form::text('target_role', old('target_role') , ['class' => 'form-control', 'placeholder' => 'Input the Target Role']) !!}
+                            {!! Form::label('due_date', trans('Due Date'), ['class' => 'control-label']) !!}
+                            {!! Form::date('due_date', old('due_date') , ['class' => 'form-control', 'placeholder' => 'Input the Due Date']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('queue_branch_id', trans('Branch'), ['class' => 'control-label']) !!}
+                            {!! Form::select('queue_branch_id', ['' => 'Choose Branch'] + @$branchs, old('queue_branch_id'), ['class' => 'form-control branch-id branch-modal']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="form-group">
+                            {!! Form::label('target_role', trans('Target Role'), ['class' => 'control-label']) !!}
+                            {!! Form::select('target_role', ['' => 'Choose Role'] + @$roles, old('target_role') , ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
+                            {!! Form::select('status', ['active' => 'Active', 'inactive' => 'Inactive'],old('status') , ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="display: none;">
                         <div class="form-group">
                             {!! Form::label('spesific_role', trans('Spesific Role'), ['class' => 'control-label']) !!}
                             {!! Form::number('spesific_role', old('spesific_role') , ['class' => 'form-control', 'placeholder' => 'Input the Spesific Role']) !!}
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {!! Form::label('branch_id', trans('Branch'), ['class' => 'control-label']) !!}
-                            {!! Form::select('branch_id', ['' => 'Choose Branch'], old('branch_id'), ['class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
-                            {!! Form::text('status', old('status') , ['class' => 'form-control', 'placeholder' => 'Input the Status']) !!}
-                        </div>
-                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label('queue_message', trans('Queue Message'), ['class' => 'control-label']) !!}
-                            {!! Form::textarea('queue_message', old('queue_message') , ['class' => 'form-control', 'placeholder' => 'Input the Queue Message', 'rows' => '3x6']) !!}
+                            {!! Form::textarea('queue_message', old('queue_message') , ['class' => 'form-control ckeditor', 'placeholder' => 'Input the Queue Message', 'rows' => '3x6']) !!}
                         </div>
                     </div>
                 </div>
@@ -135,6 +135,8 @@
 <script>
     $(function(){
         spinnerLoad($('#form-document'));
+        initSelect2Remote($('.branch-id'), "{{ route('branch.search-data') }}", "Choose Branch", 0);
+        initSelect2Remote($('#target_role'), "{{ route('role.search-data') }}", "Choose Role", 0, true);
     });
 
     $(document).ready(function() {
@@ -142,7 +144,7 @@
         { data: 'due_date', name: 'due_date'},
         { data: 'subject', name: 'subject'},
         { data: 'target_role', name: 'target_role'},
-        { data: 'spesific_role', name: 'spesific_role'},
+        // { data: 'spesific_role', name: 'spesific_role'},
         { data: 'status', name: 'status'},
         { data: 'queue_message', name: 'queue_message'},
         { data: 'action', name: 'action', className: 'dt-center'},
@@ -156,6 +158,9 @@
 
         $('#form-data-document').submit(function(e) {
             e.preventDefault();
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
             var formData = new FormData(this);
             $.ajax({
                 url: "{{route('document.rate.post')}}",
@@ -174,6 +179,7 @@
 
     $(document).on('click', '.btn-add-document', function(e) {
         $('#form-data-document').find("input[type=text], textarea, input[type=hidden], input[type=date]").val("");
+        CKEDITOR.instances['queue_message'].setData('');
         $('#form-document-modal').modal({backdrop: 'static', keyboard: false});
         e.preventDefault();
     });
@@ -201,13 +207,16 @@
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
-                $('#queue_message').val(value.queue_message);
+                CKEDITOR.instances['queue_message'].setData(value.queue_message);
                 $('#due_date').val(value.due_date);
                 $('#subject').val(value.subject);
-                $('#target_role').val(value.target_role);
+                $('#target_role').select2().val(value.target_role);
+                initSelect2Remote($('#target_role'), "{{ route('role.search-data') }}", "Choose Role", 0, true);
                 $('#spesific_role').val(value.spesific_role);
                 $('#status').val(value.status);
                 $('#queue_id').val(data.data.id);
+                $('.branch-modal').select2().val(value.queue_branch_id).trigger('change');
+                initSelect2Remote($('.branch-modal'), "{{ route('branch.search-data') }}", "Choose Branch", 0);
                 $('#form-document-modal').modal({backdrop: 'static', keyboard: false});
             }
         })
