@@ -80,9 +80,12 @@ for (i = 0; i < acc.length; i++) {
 //THIRD SUBMENU CHILD
 $('li.sub-submenu a').click(function () {
 	  
-	  $(".expanded").removeClass("expanded");
-			$(".opened").removeClass("opened");
-	  
+		$(".expanded").removeClass("expanded");
+		$(".opened").removeClass("opened");
+		
+		$(".sub-submenu.active a i.arrow-third-menu").removeClass("os-icon-chevron-right");
+		$(".sub-submenu.active a i.arrow-third-menu").addClass("os-icon-chevron-down");
+		
 		if($(this).children(".arrow-third-menu").hasClass("os-icon-chevron-down"))
 		{
 			$(this).siblings(".third-menu").addClass("expanded");
@@ -104,4 +107,7 @@ $('li.sub-submenu a').click(function () {
 //STAY MENU WHEN PAGE ACTICE
 $(document).ready(function () {
 	$(".sub-submenu.active .sub-menu-w.third-menu").addClass("expanded");
+	$(".sub-submenu.active a i.arrow-third-menu").removeClass("os-icon-chevron-down");
+	$(".sub-submenu.active a i.arrow-third-menu").addClass("os-icon-chevron-right");
+	$(".sub-submenu.active").addClass("opened");
 });
