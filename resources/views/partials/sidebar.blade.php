@@ -183,7 +183,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Invoice</span>
+                                <i class="fa fa-circle-o"></i><span>Invoice <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li class="{!! (url(route('delivery.index')) == Request::url() OR Request::is('business/delivery*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','delivery.read'])) ? '' : 'display:none;' }}">
@@ -191,17 +191,17 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Visa</span>
+                                <i class="fa fa-circle-o"></i><span>Visa <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Queue</span>
+                                <i class="fa fa-circle-o"></i><span>Queue <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Report</span>
+                                <i class="fa fa-circle-o"></i><span>Report <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                     </ul>
@@ -221,7 +221,7 @@
                     <ul class="sub-menu">
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Tour Folder</span>
+                                <i class="fa fa-circle-o"></i><span>Tour Folder <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li class="{!! (url(route('tourorder.index')) == Request::url() OR Request::is('outbound/tourorder*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','tourorder.read'])) ? '' : 'display:none;' }}">
@@ -229,22 +229,22 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Visa</span>
+                                <i class="fa fa-circle-o"></i><span>Visa <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Availability</span>
+                                <i class="fa fa-circle-o"></i><span>Availability <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Queue</span>
+                                <i class="fa fa-circle-o"></i><span>Queue <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Delivery</span>
+                                <i class="fa fa-circle-o"></i><span>Delivery <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li class="sub-submenu">
@@ -256,7 +256,7 @@
                                     <ul class="sub-menu">
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Visa Report</span>
+                                                <i class="fa fa-circle-o"></i><span>Visa Report <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                     <ul>
@@ -280,17 +280,17 @@
                     <ul class="sub-menu">
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Enquiry</span>
+                                <i class="fa fa-circle-o"></i><span>Enquiry <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Booking</span>
+                                <i class="fa fa-circle-o"></i><span>Booking <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Report</span>
+                                <i class="fa fa-circle-o"></i><span>Report <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>                                   
                     </ul>
@@ -310,27 +310,27 @@
                     <ul class="sub-menu">
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>FIT Folder</span>
+                                <i class="fa fa-circle-o"></i><span>FIT Folder <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Availability</span>
+                                <i class="fa fa-circle-o"></i><span>Availability <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>FIT Order</span>
+                                <i class="fa fa-circle-o"></i><span>FIT Order <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Delivery</span>
+                                <i class="fa fa-circle-o"></i><span>Delivery <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Report</span>
+                                <i class="fa fa-circle-o"></i><span>Report <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                     </ul>
@@ -350,22 +350,22 @@
                     <ul class="sub-menu">
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Invoice</span>
+                                <i class="fa fa-circle-o"></i><span>Invoice <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Misc Invoice</span>
+                                <i class="fa fa-circle-o"></i><span>Misc Invoice <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Credit Note</span>
+                                <i class="fa fa-circle-o"></i><span>Credit Note <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Billing</span>
+                                <i class="fa fa-circle-o"></i><span>Billing <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li class="{!! (url(route('lg.index')) == Request::url() OR Request::is('accounting/lg*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','lg.read'])) ? '' : 'display:none;' }}">
@@ -373,22 +373,22 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>LG Delivery</span>
+                                <i class="fa fa-circle-o"></i><span>LG Delivery <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Pay Request</span>
+                                <i class="fa fa-circle-o"></i><span>Pay Request <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Petty Cash</span>
+                                <i class="fa fa-circle-o"></i><span>Petty Cash <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Report</span>
+                                <i class="fa fa-circle-o"></i><span>Report <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li class="sub-submenu">
@@ -400,27 +400,27 @@
                                     <ul class="sub-menu">
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Deposit</span>
+                                                <i class="fa fa-circle-o"></i><span>Deposit <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Settlement</span>
+                                                <i class="fa fa-circle-o"></i><span>Settlement <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Receipt</span>
+                                                <i class="fa fa-circle-o"></i><span>Receipt <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Receipt Voucher</span>
+                                                <i class="fa fa-circle-o"></i><span>Receipt Voucher <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Payment</span>
+                                                <i class="fa fa-circle-o"></i><span>Payment <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                     <ul>
@@ -436,12 +436,12 @@
                                     <ul class="sub-menu">
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Journal</span>
+                                                <i class="fa fa-circle-o"></i><span>Journal <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Posting</span>
+                                                <i class="fa fa-circle-o"></i><span>Posting <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                         <li class="{!! (url(route('periodend.index')) == Request::url() OR Request::is('gl/periodend*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','periodend.read'])) ? '' : 'display:none;' }}">
@@ -452,16 +452,16 @@
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Reconciliation</span>
+                                                <i class="fa fa-circle-o"></i><span>Reconciliation <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Bank Reconciliation</span>
+                                                <i class="fa fa-circle-o"></i><span>Bank Reconciliation <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li><li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>BSP Reconciliation</span>
+                                                <i class="fa fa-circle-o"></i><span>BSP Reconciliation <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                     <ul>
@@ -470,12 +470,12 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Refund</span>
+                                <i class="fa fa-circle-o"></i><span>Refund <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Budget</span>
+                                <i class="fa fa-circle-o"></i><span>Budget <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li class="sub-submenu">
@@ -487,7 +487,7 @@
                                     <ul class="sub-menu">
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Receipt Enquiry</span>
+                                                <i class="fa fa-circle-o"></i><span>Receipt Enquiry <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                     <ul>
@@ -511,31 +511,31 @@
                     <ul class="sub-menu">
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Invoice</span>
+                                <i class="fa fa-circle-o"></i><span>Invoice <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>L/G</span>
+                                <i class="fa fa-circle-o"></i><span>L/G <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li><li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Financial Analysis</span>
+                                <i class="fa fa-circle-o"></i><span>Financial Analysis <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Cheque Printing</span>
+                                <i class="fa fa-circle-o"></i><span>Cheque Printing <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Bank Deposit</span>
+                                <i class="fa fa-circle-o"></i><span>Bank Deposit <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Deposit</span>
+                                <i class="fa fa-circle-o"></i><span>Deposit <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                     </ul>
@@ -556,7 +556,7 @@
                             <a href="{{route('customer.index')}}"><i class="fa fa-circle-o"></i><span>Customer</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-circle-o"></i><span>Hotel</span></a>
+                            <a href="#"><i class="fa fa-circle-o"></i><span>Hotel <i class="os-icon os-icon-ui-02"></i></span></a>
                         </li>
                         <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('master-data/supplier*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','supplier.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('supplier.index') }} "><i class="fa fa-circle-o"></i><span>Supplier</span></a>
@@ -582,7 +582,7 @@
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Air Allotment</span>
+                                                <i class="fa fa-circle-o"></i><span>Air Allotment <i class="os-icon os-icon-ui-02"></i></span>
                                             </a>
                                         </li>
                                     <ul>
@@ -611,7 +611,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Credit Card</span>
+                                <i class="fa fa-circle-o"></i><span>Credit Card <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li class="{!! (url(route('passenger.index')) == Request::url() OR Request::is('master-data/passenger*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','passenger.read'])) ? '' : 'display:none;' }}">
