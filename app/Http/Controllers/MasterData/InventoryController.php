@@ -904,4 +904,19 @@ class InventoryController extends Controller
         $pdf = PDF::loadView('contents.master_datas.inventory.pdf', compact('inventories'));
         return $pdf->download('inventory.pdf');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Inventory::getAvailableData()
+            ->select(\DB::raw("(master_inventory.id ||'/'|| master_inventory.inventory_type_id"))
+            ->where('master_inventory.inventory_type_id', 'ilike', '%'.$request->search.'%')
+            ->get();
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

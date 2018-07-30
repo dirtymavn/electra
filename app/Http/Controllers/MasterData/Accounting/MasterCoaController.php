@@ -6,6 +6,7 @@ use App\Models\MasterData\Accounting\MasterCoa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\DataTables\MasterData\Accounting\MasterCoaDataTable;
+use App\Models\MasterData\Branch;
 
 class MasterCoaController extends Controller
 {
@@ -36,7 +37,9 @@ class MasterCoaController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.accountings.account.create');
+        $coas = MasterCoa::where('company_id', user_info()->company_id)->pluck('acc_no_key', 'id');
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id');
+        return view('contents.master_datas.accountings.account.create', compact('coas', 'branchs'));
     }
 
     /**
@@ -100,7 +103,9 @@ class MasterCoaController extends Controller
      */
     public function edit(MasterCoa $account)
     {
-        return view('contents.master_datas.accountings.account.edit', compact('account'));
+        $coas = MasterCoa::where('company_id', user_info()->company_id)->pluck('acc_no_key', 'id');
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id');
+        return view('contents.master_datas.accountings.account.edit', compact('account', 'coas', 'branchs'));
     }
 
     /**

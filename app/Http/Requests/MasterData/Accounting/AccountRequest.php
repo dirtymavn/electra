@@ -25,14 +25,14 @@ class AccountRequest extends FormRequest
     {
         return [
             'acc_no_key' => 'required',
-            'acc_no_interface' => 'required',
+            // 'acc_no_interface' => 'required',
             'acc_description' => 'required',
             'sub_acc_id' => 'required',
             'acc_type' => 'required',
-            'rollup_key_acc_no' => 'required',
-            'acc_liquidity' => 'required',
-            'rollup_detail' => 'required',
-            'analysis_type' => 'required'
+            // 'rollup_key_acc_no' => 'required',
+            // 'acc_liquidity' => 'required',
+            // 'rollup_detail' => 'required',
+            // 'analysis_type' => 'required'
         ];
     }
 }

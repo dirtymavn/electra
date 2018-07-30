@@ -2,15 +2,17 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('fiscal_year', trans('Fiscal Year'), ['class' => 'control-label']) !!}
-            {!! Form::text('fiscal_year', old('fiscal_year') , ['class' => 'form-control', 'placeholder' => 'Input the Fiscal Year']) !!}
+            {!! Form::selectYear('fiscal_year', 1900, 2030, old('fiscal_year') ,[ 'class' => 'form-control' ]) !!}
+
         </div>
         <div class="form-group">
             {!! Form::label('period_month', trans('Period Month'), ['class' => 'control-label']) !!}
-            {!! Form::text('period_month', old('period_month') , ['class' => 'form-control', 'placeholder' => 'Input the Period Month']) !!}
+            {!! Form::selectMonth('period_month', old('period_month') ,[ 'class' => 'form-control' ]) !!}
+
         </div>
         <div class="form-group">
             {!! Form::label('period_status', trans('Status'), ['class' => 'control-label']) !!}
-            {!! Form::select('period_status', ['1' => 'Yes', '0' => 'No'], old('period_status'), ['class' => 'form-control']) !!}
+            {!! Form::select('period_status', ['1' => 'Active', '0' => 'Inactive'], old('period_status'), ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-md-6">

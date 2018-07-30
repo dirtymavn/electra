@@ -117,7 +117,8 @@ class BudgetRateController extends Controller
      */
     public function edit(BudgetRate $budgetRate)
     {
-        return view('contents.master_datas.accountings.budget_rate.edit', compact('budgetRate'));
+        $currency = Currency::getAvailableData()->pluck('currency_name', 'currency_code');
+        return view('contents.master_datas.accountings.budget_rate.edit', compact('budgetRate', 'currency'));
     }
 
     /**

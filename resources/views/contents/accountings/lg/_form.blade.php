@@ -2,19 +2,19 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('lg_no', trans('LG No'), ['class' => 'control-label']) !!}
-            {!! Form::text('lg_no', old('lg_no') , ['class' => 'form-control', 'placeholder' => 'Input the LG No']) !!}
+            {!! Form::text('lg_no', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the LG No', 'readOnly' => true]) !!}
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             {!! Form::label('lg_type', trans('LG Type'), ['class' => 'control-label']) !!}
             {!! Form::select('lg_type', ['Yes' => 'Yes', 'No' => 'No'], old('lg_type'), ['class' => 'form-control']) !!}
-        </div>
+        </div> --}}
         <div class="form-group">
             {!! Form::label('lg_date', trans('LG Date'), ['class' => 'control-label']) !!}
             {!! Form::date('lg_date', old('lg_date') , ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('delivery_status', trans('Delivery Status'), ['class' => 'control-label']) !!}
-            {!! Form::select('delivery_status', ['Complete' => 'Complete', 'Incomplete' => 'Incomplete'], old('delivery_status'), ['class' => 'form-control']) !!}
+            {!! Form::select('delivery_status', ['Complete' => 'Complete', 'Inprogress' => 'In Progress'], old('delivery_status'), ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('supplier_ref_no', trans('Supplier Ref No'), ['class' => 'control-label']) !!}

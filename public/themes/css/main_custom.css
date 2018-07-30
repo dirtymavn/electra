@@ -142,15 +142,6 @@ ul.tabs li a:hover
 {
 	transform:translateX(5px);
 }
-.menu-w ul.sub-menu li:hover,
-.menu-w ul.sub-menu li.active
-{
-	background:#E50000;
-}
-.sub-menu .sub-submenu.opened
-{
-	background:#E50000;
-}
 .sub-submenu.opened > a,
 .sub-submenu.opened > a > i
 {
@@ -168,16 +159,7 @@ ul.tabs li a:hover
 {
 	display:none;
 }
-.menu-w ul.sub-menu li a:hover,
-.menu-w ul.sub-menu li.active a
-{
-	color:#fff !important;
-}
-.menu-w ul.sub-menu li a:hover i,
-.menu-w ul.sub-menu li.active i
-{
-	color:#fff !important;
-}
+
 .menu-w ul.main-menu > li.has-sub-menu.active .sub-menu,
 .menu-w.sub-menu-style-over .sub-menu-w .sub-menu-i
 {
@@ -238,19 +220,58 @@ body.auth-wrapper
 {
 	display:none;
 }
-.menu-w.sub-menu-style-over.sub-menu-color-bright ul.main-menu > li.active > a
-{
-	background-color:#E50000;
-}
 sub-menu-w.third-menu.expanded .sub-menu-i
 {
 	background:#F7F7F7;
 }
-sub-menu-w.third-menu.expanded .sub-menu-i ul li a
+.sub-submenu.active .sub-menu-w.third-menu.expanded,
+.sub-submenu.opened .sub-menu-w.third-menu.expanded
 {
-	color:#3E4B5B !important;
+	background:#F7F7F7 !important;
+	padding:10px 0 !important
 }
-sub-menu-w.third-menu.expanded .sub-menu-i ul li a i
+ul.main-menu > li.active > .icon-w,
+ul.main-menu > li a:hover > .icon-w
 {
-	color:#E50000;
+	color:#fff;
+}
+ul.main-menu > li.active > a,
+ul.main-menu > li > a:hover
+{
+	background-color:#E50000 !important;
+	color:#fff;
+}
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.active,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li:hover,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.opened
+{
+	background-color:#E50000;
+}
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.active > a,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li:hover > a,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.active > a > i,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li:hover > a > i
+{
+	color:#fff;
+}
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.active > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li.active,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.active > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li:hover,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.opened > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li.active,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.opened > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li:hover
+{
+	background-color:#E50000;
+}
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.active > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li.active > a,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.active > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li:hover > a,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.active > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li.active > a > i,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.active > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li:hover > a > i
+{
+	color:#fff;
+}
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.opened > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li.active > a,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.opened > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li:hover > a,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.opened > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li.active > a > i,
+ul.main-menu > li.has-sub-menu.active > .sub-menu-w > .sub-menu-i > ul.sub-menu > li.sub-submenu.opened > .sub-menu-w.third-menu.expanded > .sub-menu-i > ul.sub-menu > li:hover > a > i
+{
+	color:#fff;
 }

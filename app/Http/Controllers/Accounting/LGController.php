@@ -51,8 +51,9 @@ class LGController extends Controller
         $creditTerms = ['' => '- Not Available -'];
         $baseCurrencys = ['' => '- Not Available -'];
         $billCurrencys = ['' => '- Not Available -'];
+        $newCode = MasterLG::getAutoNumber();
 
-        return view('contents.accountings.lg.create', compact('suppliers', 'baseCurrencys', 'billCurrencys', 'creditTerms'));
+        return view('contents.accountings.lg.create', compact('suppliers', 'baseCurrencys', 'billCurrencys', 'creditTerms', 'newCode'));
     }
 
     /**
@@ -146,8 +147,8 @@ class LGController extends Controller
                 'data' => json_encode($data)
             ]);
         }
-
-        return view('contents.accountings.lg.edit', compact('lg', 'suppliers', 'baseCurrencys', 'billCurrencys', 'creditTerms'));
+        $newCode = $lg->lg_no;
+        return view('contents.accountings.lg.edit', compact('lg', 'suppliers', 'baseCurrencys', 'billCurrencys', 'creditTerms', 'newCode'));
     }
 
     /**

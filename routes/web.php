@@ -140,6 +140,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('inventory/inventory-hotel-detail', array('as' => 'inventory.hotel-detail.post', 'uses' => 'InventoryController@inventoryRouteHotel', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         Route::get('inventory/export/excel', ['as' => 'export.inventory.excel', 'uses' => 'InventoryController@export_excel']);
         Route::get('inventory/export/pdf', ['as' => 'export.inventory.pdf', 'uses' => 'InventoryController@export_pdf']);
+        Route::get('inventory/search/data', ['as' => 'inventory.search-data', 'uses' => 'InventoryController@searchData', 'middleware' => 'sentinel_access:admin.company,inventory.create']);
 
         // end Inventory
         // Outbound
