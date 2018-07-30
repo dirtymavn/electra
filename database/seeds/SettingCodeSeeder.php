@@ -34,6 +34,14 @@ class SettingCodeSeeder extends Seeder
             [
                 'name' => 'Sales Order',
                 'type' => 'SO'
+            ],
+            [
+                'name' => 'Delivery Order',
+                'type' => 'DO'
+            ],
+            [
+                'name' => 'LG',
+                'type' => 'LG'
             ]
         ]);
     }

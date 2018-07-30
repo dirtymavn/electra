@@ -107,4 +107,42 @@ class TrxDeliveryOrder extends Model
             $despatch->save();
         });
     }
+
+    public static function getAutoNumber()
+    {
+        $result = self::orderBy('id', 'desc')->first();
+
+        $findCode = \DB::table('setting_codes')->whereType('DO')->first();
+        if ($result) {
+            $lastNumber = (int) substr($result->do_no, strlen($result->do_no) - 4, 4);
+            $newNumber = $lastNumber + 1;
+            
+            if (strlen($newNumber) == 1) {
+                $newNumber = '000'.$newNumber;
+            } elseif (strlen($newNumber) == 2) {
+                $newNumber = '00'.$newNumber;
+            } elseif (strlen($newNumber) == 3) {
+                $newNumber = '0'.$newNumber;
+            } else {
+                $newNumber = $newNumber;
+            }
+
+            $currMonth = (int)date('m', strtotime($result->do_no));
+            $currYear = (int)date('y', strtotime($result->do_no));
+            $nowMonth = (int)date('m');
+            $nowYear = (int)date('y');
+
+            if ( ($currMonth < $nowMonth && $currYear == $nowYear) || ($currMonth == $nowMonth && $currYear < $nowYear) ) {
+                $newNumber = '0001';
+            } else {
+                $newNumber = $newNumber;
+            }
+
+            $newCode = $findCode->type.$newNumber;
+        } else {
+            $newCode = $findCode->type.'0001';
+        }
+
+        return $newCode;
+    }
 }

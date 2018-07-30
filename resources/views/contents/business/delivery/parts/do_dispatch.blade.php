@@ -4,7 +4,8 @@
 			<div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('despatch_staff', trans('Despatch Staff'), ['class' => 'control-label']) !!}
-                    {!! Form::number('despatch_staff', old('despatch_staff') , ['class' => 'form-control', 'placeholder' => 'Input the Despatch Staff']) !!}
+                    {{-- {!! Form::number('despatch_staff', old('despatch_staff') , ['class' => 'form-control', 'placeholder' => 'Input the Despatch Staff']) !!} --}}
+                    {!! Form::select('despatch_staff', @$customers, old('despatch_staff'), ['class' => 'form-control', 'id' => 'despatch_staff']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
@@ -28,19 +29,22 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('to_delivery', trans('To Delivery'), ['class' => 'control-label']) !!}
-                    {!! Form::text('to_delivery', old('to_delivery') , ['class' => 'form-control', 'placeholder' => 'Input the To Delivery']) !!}
+                    {{-- {!! Form::text('to_delivery', old('to_delivery') , ['class' => 'form-control', 'placeholder' => 'Input the To Delivery']) !!} --}}
+                    {!! Form::select('to_delivery', @$customers, old('to_delivery'), ['class' => 'form-control', 'id' => 'to_delivery']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('to_collect', trans('To Collect'), ['class' => 'control-label']) !!}
-                    {!! Form::text('to_collect', old('to_collect') , ['class' => 'form-control', 'placeholder' => 'Input the To Collect']) !!}
+                    {{-- {!! Form::text('to_collect', old('to_collect') , ['class' => 'form-control', 'placeholder' => 'Input the To Collect']) !!} --}}
+                    {!! Form::select('to_collect', @$customers, old('to_collect'), ['class' => 'form-control', 'id' => 'to_collect']) !!}
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('received_by', trans('Received By'), ['class' => 'control-label']) !!}
-                    {!! Form::text('received_by', old('received_by') , ['class' => 'form-control', 'placeholder' => 'Input the Received By']) !!}
+                    {{-- {!! Form::text('received_by', old('received_by') , ['class' => 'form-control', 'placeholder' => 'Input the Received By']) !!} --}}
+                    {!! Form::select('received_by', @$customers, old('received_by'), ['class' => 'form-control', 'id' => 'received_by']) !!}
                 </div>
             </div>
             <div class="col-sm-6">

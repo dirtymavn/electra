@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('branch_id', trans('Branch'), ['class' => 'control-label']) !!}
-            {!! Form::select('branch_id', ['' => 'Choose Branch'], old('branch_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('branch_id', $branchs, old('branch_id'), ['class' => 'form-control', 'placeholder' => 'Choose Branch']) !!}
         </div>
     </div>
 </div>
@@ -32,7 +32,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('inventory_id', trans('Invetory'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('inventory_id', ['' => 'Choose Invetory'], old('inventory_id'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('inventory_id', $inventory, old('inventory_id'), ['class' => 'form-control', 'id' => 'inventory']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('inventory_code', trans('Inventory Code'), ['class' => 'control-label']) !!}
@@ -173,6 +173,7 @@
 <script>
     $(function(){
         spinnerLoad($('#form-periodend'));
+        initSelect2Remote($('#inventory'), "{{ route('currencyrate.search-data') }}", "Choose Inventory", 0);
     });
 
     $(document).ready(function() {

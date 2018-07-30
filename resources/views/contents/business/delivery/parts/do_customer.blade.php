@@ -4,7 +4,8 @@
 			<div class="col-sm-6">
                 <div class="form-group">
                     {!! Form::label('customer_no', trans('Customer No'), ['class' => 'control-label']) !!}
-                    {!! Form::text('customer_no', old('customer_no') , ['class' => 'form-control', 'placeholder' => 'Input the Customer No']) !!}
+                    {{-- {!! Form::text('customer_no', old('customer_no') , ['class' => 'form-control', 'placeholder' => 'Input the Customer No']) !!} --}}
+                    {!! Form::select('customer_no', @$customers, old('customer_no'), ['class' => 'form-control', 'id' => 'cust_no']) !!}
                 </div>
             </div>
             <div class="col-sm-6">

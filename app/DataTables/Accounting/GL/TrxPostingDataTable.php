@@ -87,9 +87,9 @@ class TrxPostingDataTable extends DataTable
         return [
          'postdate_start',
          'postdate_end',
-         'user_id',
+         // 'user_id',
          'branch_id',
-         'is_draft'
+         // 'is_draft'
      ];
  }
 

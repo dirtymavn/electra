@@ -2,51 +2,51 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('branch_id', trans('ID Branch'), ['class' => 'control-label']) !!}
-            {!! Form::select('branch_id', ['' => 'Choose Branch'], old('branch_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('branch_id', $branchs, old('branch_id'), ['class' => 'form-control', 'placeholder' => 'Choose Branch']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('acc_no_key', trans('Acc. No. Key'), ['class' => 'control-label']) !!}
             {!! Form::text('acc_no_key', old('acc_no_key') , ['class' => 'form-control', 'placeholder' => 'Input the Acc. No. Key']) !!}
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             {!! Form::label('acc_no_interface', trans('Acc. No. Interface'), ['class' => 'control-label']) !!}
             {!! Form::text('acc_no_interface', old('acc_no_interface') , ['class' => 'form-control', 'placeholder' => 'Input the Acc. No. Interface']) !!}
-        </div>
-        <div class="form-group">
+        </div> --}}
+        {{-- <div class="form-group">
             {!! Form::label('coa_status', trans('COA Status'), ['class' => 'control-label']) !!}
             {!! Form::select('coa_status', ['1' => 'Yes', '0' => 'No'], old('coa_status'), ['class' => 'form-control']) !!}
-        </div>
+        </div> --}}
         <div class="form-group">
             {!! Form::label('acc_description', trans('Acc. Description'), ['class' => 'control-label']) !!}
             {!! Form::textarea('acc_description', old('acc_description') , ['class' => 'form-control', 'placeholder' => 'Input the Acc. Description', 'rows' => '4']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('sub_acc_id', trans('Sub Acc.'), ['class' => 'control-label']) !!}
-            {{-- {!! Form::select('sub_acc_id', ['' => 'Choose Sub Acc.'], old('sub_acc_id'), ['class' => 'form-control']) !!} --}}
-            {!! Form::number('sub_acc_id', old('sub_acc_id') , ['class' => 'form-control', 'placeholder' => 'Input the Sub Acc ID']) !!}
+            {!! Form::label('sub_acc_id', trans('Parent Acc'), ['class' => 'control-label']) !!}
+            {!! Form::select('sub_acc_id', $coas, old('sub_acc_id'), ['class' => 'form-control', 'placeholder' => 'Choose the Parent Acc No']) !!}
+            {{-- {!! Form::number('sub_acc_id', old('sub_acc_id') , ['class' => 'form-control', 'placeholder' => 'Input the Sub Acc ID']) !!} --}}
         </div>
         <div class="form-group">
             {!! Form::label('acc_type', trans('Acc. Type'), ['class' => 'control-label']) !!}
             {!! Form::text('acc_type', old('acc_type') , ['class' => 'form-control', 'placeholder' => 'Input the Acc. Type']) !!}
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             {!! Form::label('rollup_key_acc_no', trans('Rollup Key Acc. No.'), ['class' => 'control-label']) !!}
             {!! Form::text('rollup_key_acc_no', old('rollup_key_acc_no') , ['class' => 'form-control', 'placeholder' => 'Input the Rollup Key Acc. No.']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('acc_liquidity', trans('Acc. Liquidity'), ['class' => 'control-label']) !!}
             {!! Form::number('acc_liquidity', old('acc_liquidity') , ['class' => 'form-control only_numeric', 'placeholder' => 'Input the Acc. Liquidity']) !!}
-        </div>
+        </div> --}}
     </div>
     <div class="col-md-6">
-        <div class="form-group">
+        {{-- <div class="form-group">
             {!! Form::label('rollup_detail', trans('Rollup Detail'), ['class' => 'control-label']) !!}
             {!! Form::text('rollup_detail', old('rollup_detail') , ['class' => 'form-control', 'placeholder' => 'Input the Rollup Detail']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('analysis_type', trans('Analysis Type'), ['class' => 'control-label']) !!}
             {!! Form::text('analysis_type', old('analysis_type') , ['class' => 'form-control', 'placeholder' => 'Input the Analysis Type']) !!}
-        </div>
+        </div> --}}
         <div class="form-group">
             {!! Form::label('foreign_currency_only_flag', trans('Foreign Currency Only Flag'), ['class' => 'control-label']) !!}
             {!! Form::select('foreign_currency_only_flag', ['1' => 'Yes', '0' => 'No'], old('foreign_currency_only_flag'), ['class' => 'form-control']) !!}

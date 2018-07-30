@@ -8,6 +8,8 @@ use App\DataTables\Business\DeliveryDataTable;
 
 use App\Models\Business\Delivery\TrxDeliveryOrder as TrxDelivery;
 use App\Models\Business\Delivery\DoType;
+use App\Models\MasterData\Customer\MasterCustomer;
+use App\Models\MasterData\Department;
 
 use Excel;
 use PDF;
@@ -32,7 +34,10 @@ class DeliveryController extends Controller
     public function create()
     {
         $dotypes = DoType::where('is_draft', false)->pluck('do_type_name', 'id')->all();
-        return view('contents.business.delivery.create', compact('dotypes'));
+        $newCode = TrxDelivery::getAutoNumber();
+        $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
+        $departmens = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
+        return view('contents.business.delivery.create', compact('dotypes', 'newCode', 'customers', 'departmens'));
     }
 
     /**
@@ -104,8 +109,10 @@ class DeliveryController extends Controller
         unset($trx_customer['id'], $trx_customer['created_at'], $trx_customer['updated_at'], $trx_dispatch['id'], $trx_dispatch['created_at'], $trx_dispatch['updated_at']);
         $arrayMerge = array_merge($trx_customer, $trx_dispatch, $deliveries);
         $delivery = (object) $arrayMerge;
-
-        return view('contents.business.delivery.edit', compact('delivery', 'dotypes'));
+        $newCode = $delivery->do_no;
+        $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
+        $departmens = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
+        return view('contents.business.delivery.edit', compact('delivery', 'dotypes', 'newCode', 'customers', 'departmens'));
     }
 
     /**

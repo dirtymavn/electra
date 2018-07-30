@@ -8,6 +8,9 @@ use App\DataTables\Accounting\GL\TrxPostingDataTable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Models\MasterData\Branch;
+use App\Models\MasterData\Inventory\MasterInventory as Inventory;
+
 class TrxPostingController extends Controller
 {
     public function __construct()
@@ -38,8 +41,9 @@ class TrxPostingController extends Controller
     {
         \DB::table('temporaries')->whereType('fxTrans-detail')
         ->whereUserId(user_info('id'))->delete();
-
-        return view('contents.accountings.gl.periodend.create');
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id');
+        $inventory = Inventory::getAvailableData()->pluck('inventory_type_id', 'master_inventory.id');
+        return view('contents.accountings.gl.periodend.create', compact('branchs', 'inventory'));
     }
 
     /**
@@ -61,7 +65,7 @@ class TrxPostingController extends Controller
             $request->merge(['is_draft' => false]);
             $msgSuccess = trans('message.published');
         }
-        $request->merge([ 'user_id' => user_info('id'), 'branch_id' => 0, 'company_id' => @user_info()->company->id ]);
+        $request->merge([ 'user_id' => user_info('id'), 'company_id' => @user_info()->company->id ]);
         $insert = TrxPosting::create($request->all());
 
         if ($insert) {
@@ -106,7 +110,8 @@ class TrxPostingController extends Controller
         // clear temporary data
         \DB::table('temporaries')->whereType('posting-detail')
         ->whereUserId(user_info('id'))->delete();
-
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id');
+        $inventory = Inventory::getAvailableData()->pluck('inventory_type_id', 'master_inventory.id');
         $details = $trxPosting->details;
         foreach ($details as $detail) {
             \DB::table('temporaries')->insert([
@@ -116,7 +121,7 @@ class TrxPostingController extends Controller
             ]);
         }
 
-        return view('contents.accountings.gl.periodend.edit', compact('trxPosting'));
+        return view('contents.accountings.gl.periodend.edit', compact('trxPosting', 'branchs', 'inventory'));
 
     }
 
@@ -144,7 +149,7 @@ class TrxPostingController extends Controller
                 $msgSuccess = trans('message.update.success');
                 $redirect = redirect()->route('periodend.edit', $trxPosting->id);
             }
-            $request->merge([ 'user_id' => user_info('id'), 'branch_id' => 0 ]);
+            $request->merge([ 'user_id' => user_info('id') ]);
             $update = $trxPosting->update($request->all());
 
             if ($update) {
