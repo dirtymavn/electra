@@ -58,7 +58,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('hotel_city', trans('City'), ['class' => 'control-label']) !!}
-                            {!! Form::text('hotel_city', old('hotel_city') , ['class' => 'form-control', 'placeholder' => 'Input the City', 'id' => 'hotel_city']) !!}
+                            {{-- {!! Form::text('hotel_city', old('hotel_city') , ['class' => 'form-control', 'placeholder' => 'Input the City', 'id' => 'hotel_city']) !!} --}}
+                            {!! Form::select('hotel_city', @$cities, old('hotel_city'), ['class' => 'form-control', 'placeholder' => 'Select the City']) !!}
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -91,43 +93,43 @@
                             {!! Form::date('checkout_date', old('checkout_date') , ['class' => 'form-control', 'placeholder' => 'Input the Checkout Date', 'id' => 'checkout_date']) !!}
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('rm_type', trans('RM Type'), ['class' => 'control-label']) !!}
                             {!! Form::text('rm_type', old('rm_type') , ['class' => 'form-control', 'placeholder' => 'Input the RM Type', 'id' => 'rm_type']) !!}
                         </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> --}}
+                    {{-- <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('rm_cat', trans('RM Cat'), ['class' => 'control-label']) !!}
                             {!! Form::text('rm_cat', old('rm_cat') , ['class' => 'form-control', 'placeholder' => 'Input the RM Cat', 'id' => 'rm_cat']) !!}
                         </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> --}}
+                    {{-- <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('guest_prm', trans('Guest PRM'), ['class' => 'control-label']) !!}
                             {!! Form::text('guest_prm', old('guest_prm') , ['class' => 'form-control', 'placeholder' => 'Input the Guest PRM', 'id' => 'guest_prm']) !!}
                         </div>
-                    </div>
-                    <div class="col-md-6">
+                    </div> --}}
+                    <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('meals', trans('Meals'), ['class' => 'control-label']) !!}
                             {!! Form::text('meals', old('meals') , ['class' => 'form-control', 'placeholder' => 'Input the Meals', 'id' => 'meals']) !!}
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('other_svc', trans('Other SVC'), ['class' => 'control-label']) !!}
                             {!! Form::text('other_svc', old('other_svc') , ['class' => 'form-control', 'placeholder' => 'Input the Other SVC', 'id' => 'other_svc']) !!}
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('ref_code', trans('Ref Code'), ['class' => 'control-label']) !!}
                             {!! Form::text('ref_code', old('ref_code') , ['class' => 'form-control', 'placeholder' => 'Input the Ref Code', 'id' => 'ref_code']) !!}
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('confirmation_code', trans('Confirmation Code'), ['class' => 'control-label']) !!}
                             {!! Form::text('confirmation_code', old('confirmation_code') , ['class' => 'form-control', 'placeholder' => 'Input the Confirmation Code', 'id' => 'confirmation_code']) !!}

@@ -168,20 +168,20 @@
                                         {!! Form::label('dob', trans('Date of Birth'), ['class' => 'control-label']) !!}
                                         {!! Form::date('dob', old('dob') , ['class' => 'form-control']) !!}
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         {!! Form::label('security_id', trans('Security ID'), ['class' => 'control-label']) !!}
                                         {!! Form::text('security_id', old('security_id') , ['class' => 'form-control', 'placeholder' => 'Input the Security ID']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('website', trans('Website'), ['class' => 'control-label']) !!}
                                         {!! Form::text('website', old('website') , ['class' => 'form-control', 'placeholder' => 'Input the Website']) !!}
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         {!! Form::label('nickname', trans('Nickname'), ['class' => 'control-label']) !!}
                                         {!! Form::text('nickname', old('nickname') , ['class' => 'form-control', 'placeholder' => 'Input the Nickname']) !!}
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         {!! Form::label('ic_no_1', trans('IC No 1'), ['class' => 'control-label']) !!}
                                         {!! Form::text('ic_no_1', old('ic_no_1') , ['class' => 'form-control', 'placeholder' => 'Input the IC No 1', 'maxlength' => 40]) !!}
@@ -373,7 +373,7 @@
                                         {!! Form::label('share_credit_code', trans('Share Credit Code'), ['class' => 'control-label']) !!}
                                         {!! Form::text('share_credit_code', old('share_credit_code') , ['class' => 'form-control', 'placeholder' => 'Input the Share Credit Code']) !!}
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         {!! Form::label('addon_credit_limit', trans('Addon Credit Limit'), ['class' => 'control-label']) !!}
                                         {!! Form::number('addon_credit_limit', old('addon_credit_limit') , ['class' => 'form-control only_number', 'placeholder' => 'Input the Addon Credit Limit']) !!}
                                     </div>
@@ -384,21 +384,22 @@
                                     <div class="form-group">
                                         {!! Form::label('addon_to_date', trans('Addon To Date'), ['class' => 'control-label']) !!}
                                         {!! Form::date('addon_to_date', old('addon_to_date') , ['class' => 'form-control', 'placeholder' => 'Input the Addon To Date']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                                    </div> --}}
+                                     <div class="form-group">
                                         {!! Form::label('credit_term_type', trans('Credit Term Type'), ['class' => 'control-label']) !!}
                                         {!! Form::text('credit_term_type', old('credit_term_type') , ['class' => 'form-control', 'placeholder' => 'Input the Credit Term Type']) !!}
                                     </div>
-                                    <div class="form-group">
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                   <div class="form-group">
                                         {!! Form::label('invoice_delivery_method', trans('Invoice Delivery Method'), ['class' => 'control-label']) !!}
                                         {!! Form::select('invoice_delivery_method', ['fortnightly-statement' => 'Fortnightly Statement', 'monthly-statement' => 'Monthly Statement'],old('invoice_delivery_method') , ['class' => 'form-control']) !!}
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         {!! Form::label('recall_commission_method', trans('Recall Commission Method'), ['class' => 'control-label']) !!}
                                         {!! Form::select('recall_commission_method', ['credit-card' => 'Credit Card', 'invoice' => 'Invoice'],old('recall_commission_method') , ['class' => 'form-control']) !!}
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group">
                                         {!! Form::label('rebate_method', trans('Rebate Method'), ['class' => 'control-label']) !!}
                                         {!! Form::select('rebate_method', ['cn' => 'C/N', 'credit-card' => 'Credit Card', 'same-inv' => 'Same Inv'],old('rebate_method') , ['class' => 'form-control']) !!}
@@ -448,28 +449,29 @@
                                 {!! Form::label('credit_card_no', trans('Credit Card No.'), ['class' => 'control-label']) !!}
                                 {!! Form::text('credit_card_no', old('credit_card_no') , ['class' => 'form-control', 'placeholder' => 'Input the Credit Card No.']) !!}
                             </div>
+                        </div>
+                        <div class="col-md-6">
+
                             <div class="form-group">
                                 {!! Form::label('cc_expiry_date', trans('Expiry Date'), ['class' => 'control-label']) !!}
                                 {!! Form::date('cc_expiry_date', old('cc_expiry_date') , ['class' => 'form-control', 'placeholder' => 'Input the Expiry Date']) !!}
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('cardholder_name', trans('Cardholder Name'), ['class' => 'control-label']) !!}
                                 {!! Form::text('cardholder_name', old('cardholder_name') , ['class' => 'form-control', 'placeholder' => 'Input the Cardholder Name']) !!}
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 {!! Form::label('bill_type', trans('Billing Type'), ['class' => 'control-label']) !!}
                                 {!! Form::text('bill_type', old('bill_type') , ['class' => 'form-control', 'placeholder' => 'Input the Billing Type']) !!}
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 {!! Form::label('preferred_card', trans('Preferred Card'), ['class' => 'control-label']) !!}
                                 {!! Form::select('preferred_card', ['1' => 'YES', '0' => 'NO'],old('preferred_card') , ['class' => 'form-control']) !!}
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 {!! Form::label('sof', trans('Sof'), ['class' => 'control-label']) !!}
                                 {!! Form::select('sof', ['1' => 'YES', '0' => 'NO'],old('sof') , ['class' => 'form-control']) !!}
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 {!! Form::label('cc_remark', trans('Remark'), ['class' => 'control-label']) !!}
                                 {!! Form::textarea('cc_remark', old('cc_remark') , ['class' => 'form-control', 'placeholder' => 'Input the Remark', 'rows' => '5']) !!}

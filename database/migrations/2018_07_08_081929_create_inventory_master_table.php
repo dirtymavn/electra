@@ -15,10 +15,20 @@ class CreateInventoryMasterTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
+        Schema::create('master_inventory_type', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('inventory_type_code');
+            $table->string('inventory_type_name');
+            $table->boolean('is_draft')->nullable()->default(true);
+            $table->integer('company_id')->nullable();
+
+            $table->timestamps();
+        });
+
         Schema::create('master_inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('trx_sales_id')->unsigned();
-            $table->string('inventory_type')->nullable();
+            $table->integer('inventory_type_id');
             $table->string('voucher_no')->nullable();
             $table->string('product_code')->nullable();
             $table->date('received_date')->nullable();
@@ -107,6 +117,7 @@ class CreateInventoryMasterTable extends Migration
             $table->date('from')->nullable();
             $table->date('to')->nullable();
             $table->string('company')->nullable();
+            $table->string('supplier_code')->nullable();
             $table->string('class')->nullable();
             $table->datetime('departure')->nullable();
             $table->datetime('arrival')->nullable();
@@ -191,6 +202,7 @@ class CreateInventoryMasterTable extends Migration
             $table->increments('id');
             $table->integer('master_inventory_id')->unsigned();
             $table->string('city')->nullable();
+            $table->string('supplier_code')->nullable();
             $table->string('company_code')->nullable();
             $table->string('vehicle')->nullable();
             $table->integer('days_hired')->nullable();
@@ -225,6 +237,7 @@ class CreateInventoryMasterTable extends Migration
             Schema::dropIfExists('master_inventory_route_car_transfer');
             Schema::dropIfExists('master_inventory_cost');
             Schema::dropIfExists('master_inventory');
+            Schema::dropIfExists('master_inventory_type');
             
         Schema::enableForeignKeyConstraints();
     }

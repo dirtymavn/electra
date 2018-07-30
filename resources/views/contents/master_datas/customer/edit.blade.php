@@ -37,10 +37,10 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('customer.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="button" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
-                        @if($customer->is_draft)
+                        {{-- @if($customer->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>              
             </div>

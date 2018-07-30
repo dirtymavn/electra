@@ -88,7 +88,7 @@ class GuideDataTable extends DataTable
             'guide_code' => ['name' => 'master_tour_guides.guide_code', 'data' => 'guide_code', 'title' => trans('Tour Code'), 'id' => 'guide_code'],
             // 'supplier_no' => ['name' => 'master_tour_guides.supplier_no', 'data' => 'supplier_no', 'title' => trans('Staff ID'), 'id' => 'supplier_ni'],
             'guide_status' => ['name' => 'master_tour_guides.guide_status', 'data' => 'guide_status', 'title' => trans('Status'), 'id' => 'guide_status'],
-            'is_draft' => ['name' => 'master_tour_guides.is_draft', 'data' => 'is_draft', 'title' => trans('Is Draft'), 'id' => 'is_draft'],
+            // 'is_draft' => ['name' => 'master_tour_guides.is_draft', 'data' => 'is_draft', 'title' => trans('Is Draft'), 'id' => 'is_draft'],
             'remark' => ['name' => 'master_tour_guide_mains.remark', 'data' => 'remark', 'title' => trans('Remark'), 'id' => 'remark'],
         ];
 

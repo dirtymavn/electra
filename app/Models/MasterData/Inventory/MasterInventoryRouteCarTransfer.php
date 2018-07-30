@@ -11,6 +11,7 @@ class MasterInventoryRouteCarTransfer extends Model
     protected $fillable = [
     	'master_inventory_id',
     	'city',
+        'supplier_code',
     	'company_code',
     	'vehicle',
     	'days_hired',

@@ -140,6 +140,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('inventory/inventory-hotel-detail', array('as' => 'inventory.hotel-detail.post', 'uses' => 'InventoryController@inventoryRouteHotel', 'middleware' => 'sentinel_access:admin.company,inventory.create'));
         Route::get('inventory/export/excel', ['as' => 'export.inventory.excel', 'uses' => 'InventoryController@export_excel']);
         Route::get('inventory/export/pdf', ['as' => 'export.inventory.pdf', 'uses' => 'InventoryController@export_pdf']);
+
         // end Inventory
         // Outbound
         Route::group(['prefix' => 'outbound', 'namespace' => 'Outbound'], function () {
@@ -213,6 +214,13 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('product-type/bulk-delete', array('as' => 'product-type.bulk-delete', 'uses' => 'ProductTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,product-type.destroy'));
         Route::get('product-type/export/excel', ['as' => 'export.product-type.excel', 'uses' => 'ProductTypeController@export_excel']);
         Route::get('product-type/export/pdf', ['as' => 'export.product-type.pdf', 'uses' => 'ProductTypeController@export_pdf']);
+
+        // Inventory Type
+        Route::resource('inventory-type', 'InventoryTypeController');
+        Route::post('inventory-type/bulk-delete', array('as' => 'inventory-type.bulk-delete', 'uses' => 'InventoryTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,inventory-type.destroy'));
+        Route::get('inventory-type/export/excel', ['as' => 'export.inventory-type.excel', 'uses' => 'InventoryTypeController@export_excel']);
+        Route::get('inventory-type/export/pdf', ['as' => 'export.inventory-type.pdf', 'uses' => 'InventoryTypeController@export_pdf']);
+        
 
         // Product Category
         Route::resource('product-category', 'ProductCategoryController');
@@ -294,7 +302,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::resource('document', 'MasterDocumentController');
         Route::post('document/bulk-delete', array('as' => 'document.bulk-delete', 'uses' => 'MasterDocumentController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,document.destroy'));
         Route::post('document/get-data', array('as' => 'document.get-data', 'uses' => 'MasterDocumentController@getData'));
-        Route::post('document/credit-card', array('as' => 'document.rate.post', 'uses' => 'MasterDocumentController@documentStore', 'middleware' => 'sentinel_access:admin.company,document.create'));
+        Route::post('document/queue-message', array('as' => 'document.rate.post', 'uses' => 'MasterDocumentController@documentStore', 'middleware' => 'sentinel_access:admin.company,document.create'));
         Route::post('document/data/delete', array('as' => 'document.data.delete', 'uses' => 'MasterDocumentController@dataDelete', 'middleware' => 'sentinel_access:admin.company,document.create'));
         Route::post('document/data/detail', array('as' => 'document.data.detail', 'uses' => 'MasterDocumentController@dataDetail', 'middleware' => 'sentinel_access:admin.company,document.create'));
         Route::get('document/export/excel', ['as' => 'export.document.excel', 'uses' => 'MasterDocumentController@export_excel']);

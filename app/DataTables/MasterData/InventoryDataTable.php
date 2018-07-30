@@ -48,7 +48,7 @@ class InventoryDataTable extends DataTable
             ->select(
                 'master_inventory.id', 
                 'master_inventory.trx_sales_id',
-                'master_inventory.inventory_type',
+                'master_inventory.inventory_type_id',
                 'master_inventory.voucher_no',
                 'master_inventory.product_code',
                 'master_inventory.received_date',
@@ -104,7 +104,7 @@ class InventoryDataTable extends DataTable
             'booked_qty' => ['title' => 'Booked'],
             'sold_qty' => ['title' => 'Sold'],
             'status' => ['title' => 'Status'],
-            'is_draft' => ['title' => 'Is Draft'],
+        //    'is_draft' => ['title' => 'Is Draft'],
             'created_at' => ['title' => 'Created At'],
         ];
     }

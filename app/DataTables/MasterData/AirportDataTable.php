@@ -30,7 +30,7 @@ class AirportDataTable extends DataTable
                 }
             })
             ->editColumn('status', function($airport){
-                return ($airport->status) ? 'Active' : 'Non Active';
+                return ($airport->status) ? 'Active' : 'Inactive';
             })
             ->editColumn('is_draft', function($airport){
                 return ($airport->is_draft) ? 'Yes' : 'No';
@@ -94,7 +94,7 @@ class AirportDataTable extends DataTable
             'airport_code_icao',
             'airport_code_iata',
             'status' => ['name' => 'airports.status', 'data' => 'status'],
-            'is_draft' => ['name' => 'airports.is_draft', 'data' => 'is_draft'],
+        //    'is_draft' => ['name' => 'airports.is_draft', 'data' => 'is_draft'],
             'created_at' => ['name' => 'airports.created_at', 'data' => 'created_at']
         ];
 

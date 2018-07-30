@@ -10,7 +10,8 @@ use App\Http\Controllers\Controller;
 
 use App\DataTables\MasterData\MasterDocumentDataTable;
 use App\Http\Requests\MasterData\DocumentRequest;
-
+use App\Models\MasterData\Branch;
+use App\Models\Role;
 
 class MasterDocumentController extends Controller
 {
@@ -42,8 +43,15 @@ class MasterDocumentController extends Controller
     public function create()
     {
         // clear temporary data
-        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
-        return view('contents.master_datas.master_document.create');
+        \DB::table('temporaries')->whereUserId(user_info('id'))
+            ->whereType('data-document')
+            ->delete();
+
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
+        $roles = Role::whereCompanyId(user_info('company_id'))
+                ->where('slug', '<>', user_info('roles')[0]->slug)
+                ->pluck('name', 'slug')->all();
+        return view('contents.master_datas.master_document.create', compact('branchs', 'roles'));
     }
 
     /**
@@ -66,7 +74,7 @@ class MasterDocumentController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $request->merge(['company_id' => @user_info()->company->id]);
+            $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
             $insert = MasterDocument::create($request->all());
 
             if ($insert) {
@@ -108,7 +116,9 @@ class MasterDocumentController extends Controller
     public function edit($id)
     {
         // clear temporary data
-        \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
+        \DB::table('temporaries')->whereUserId(user_info('id'))
+            ->whereType('data-document')
+            ->delete();
 
         $document = MasterDocument::find($id);
 
@@ -119,6 +129,7 @@ class MasterDocumentController extends Controller
                 'subject' => $queue->subject,
                 'target_role' => $queue->target_role,
                 'spesific_role' => $queue->spesific_role,
+                'queue_branch_id' => $queue->branch_id,
                 'status' => $queue->status,
             ];
 
@@ -129,7 +140,12 @@ class MasterDocumentController extends Controller
             ]);
         }
 
-        return view('contents.master_datas.master_document.edit')->with(['document' => $document]);
+        $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
+        $roles = Role::whereCompanyId(user_info('company_id'))
+                ->where('slug', '<>', user_info('roles')[0]->slug)
+                ->pluck('name', 'slug')->all();
+
+        return view('contents.master_datas.master_document.edit')->with(['document' => $document, 'branchs' => $branchs, 'roles' => $roles]);
     }
 
     /**
@@ -179,6 +195,7 @@ class MasterDocumentController extends Controller
                         $rate->subject = $value->subject;
                         $rate->target_role = $value->target_role;
                         $rate->spesific_role = $value->spesific_role;
+                        $rate->branch_id = $value->queue_branch_id;
                         $rate->status = $value->status;
 
                         $rate->save();
@@ -191,7 +208,7 @@ class MasterDocumentController extends Controller
             }
         } catch (\Exception $e) {
             \DB::rollback();
-            flash()->success(trans('message.error') . ' : ' . $e->getMessage());
+            flash()->success(trans('message.error') . ' : ' . $e->getMessage().$e->getFile().$e->getLine());
             return redirect()->back()->withInput();
         }
     }
@@ -261,7 +278,7 @@ class MasterDocumentController extends Controller
             return '<a href="javascript:void(0)" class="editData" title="Edit" data-element="'.$request->type.'" data-id="' . $document['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
             <a href="javascript:void(0)" class="danger deleteData" data-element="'.$request->type.'" title="Delete" data-id="' . $document['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action', 'queue_message'])
         ->make(true);
     }
 

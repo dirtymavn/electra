@@ -32,10 +32,10 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('gst.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="button" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
-                        @if($gst->is_draft)
+                        {{-- @if($gst->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>              
             </div>

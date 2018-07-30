@@ -89,7 +89,7 @@ class GstDataTable extends DataTable
             'gst_code',
             'gst_percent',
             'absorb_ppn',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 

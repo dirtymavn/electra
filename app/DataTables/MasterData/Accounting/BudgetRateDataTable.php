@@ -89,7 +89,7 @@ class BudgetRateDataTable extends DataTable
             'from_currency',
             'to_currency',
             'exchange_rate',
-            'is_draft'
+            // 'is_draft'
         ];
     }
 

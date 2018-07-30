@@ -61,7 +61,7 @@ class ProductCategoryController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $request->merge(['company_id' => @user_info()->company->id]);
+            $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
             $insert = ProductCategory::create($request->all());
 
             if ($insert) {
@@ -180,5 +180,31 @@ class ProductCategoryController extends Controller
         }
 
         return redirect()->route('product-category.index');
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $type = ProductCategory::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($type) {
+            $excel->sheet('Sheet 1', function($sheet) use ($type) {
+                $sheet->fromArray($type);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $categories = ProductCategory::all();
+        $pdf = \PDF::loadView('contents.master_datas.product_category.pdf', compact('categories'));
+        return $pdf->download('product-category.pdf');
     }
 }

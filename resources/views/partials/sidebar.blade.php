@@ -662,6 +662,9 @@
                         <li class="{!! (url(route('department.index')) == Request::url() OR Request::is('master-data/department*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','department.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('department.index')}}"><i class="fa fa-circle-o"></i><span>Department</span></a>
                         </li>
+                        <li class="{!! (url(route('inventory-type.index')) == Request::url() OR Request::is('master-data/inventory-type*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','inventory-type.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('inventory-type.index')}}"><i class="fa fa-circle-o"></i><span>Inventory Type</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

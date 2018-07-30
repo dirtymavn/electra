@@ -88,7 +88,7 @@ class CompanyBranchDataTable extends DataTable
             'branch_code',
             'branch_address',
             'branch_phone',
-            'is_draft',
+        //    'is_draft',
             'created_at' => ['name' => 'company_branchs.created_at', 'data' => 'created_at']
         ];
     }

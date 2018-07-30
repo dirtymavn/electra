@@ -89,7 +89,7 @@ class ProductCodeDataTable extends DataTable
             'product_code',
             'product_name',
             'status',
-            'is_draft',
+        //    'is_draft',
             'created_at' => ['name' => 'product_codes.created_at', 'data' => 'created_at']
         ];
     }

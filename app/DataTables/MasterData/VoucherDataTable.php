@@ -103,7 +103,8 @@ class VoucherDataTable extends DataTable
             'cust_no',
             'cust_name',
             'cust_address',
-            'is_draft',
+        //    'is_draft',
+           'created_at',
         ];
 
     }

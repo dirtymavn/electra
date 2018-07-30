@@ -45,7 +45,6 @@
     </div>
 </div>
 <br>
-<br>
 
 <div class="table-responsive">
     {!! $dataTable->table(['class' => 'datatable table table-striped', 'cellspacing'=>"0", 'width'=>"100%"]) !!}

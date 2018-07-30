@@ -87,7 +87,7 @@ class ProductCategoryDataTable extends DataTable
             'category_name',
             'category_code',
             // 'parent_category_id',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 

@@ -30,7 +30,7 @@ class CityDataTable extends DataTable
                 }
             })
             ->editColumn('status', function($city){
-                return ($city->status) ? 'Active' : 'Non Active';
+                return ($city->status) ? 'Active' : 'InActive';
             })
             ->editColumn('is_draft', function($city){
                 return ($city->is_draft) ? 'Yes' : 'No';
@@ -92,7 +92,7 @@ class CityDataTable extends DataTable
             'city_name',
             'city_code',
             'status',
-            'is_draft' => ['name' => 'cities.is_draft', 'data' => 'is_draft'],
+        //    'is_draft' => ['name' => 'cities.is_draft', 'data' => 'is_draft'],
             'created_at' => ['name' => 'cities.created_at', 'data' => 'created_at']
         ];
 

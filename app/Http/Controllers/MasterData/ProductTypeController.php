@@ -60,7 +60,7 @@ class ProductTypeController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $request->merge(['company_id' => @user_info()->company->id]);
+            $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
             $insert = ProductType::create($request->all());
 
             if ($insert) {
@@ -177,5 +177,31 @@ class ProductTypeController extends Controller
         }
 
         return redirect()->route('product-type.index');
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $type = ProductType::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($type) {
+            $excel->sheet('Sheet 1', function($sheet) use ($type) {
+                $sheet->fromArray($type);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $types = ProductType::all();
+        $pdf = \PDF::loadView('contents.master_datas.product_type.pdf', compact('types'));
+        return $pdf->download('product-type.pdf');
     }
 }

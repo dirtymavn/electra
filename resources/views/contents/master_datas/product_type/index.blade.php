@@ -17,16 +17,34 @@
 
 @section('content')
 @include('flash::message')
-@if(user_info()->hasAnyAccess(['admin.company', 'product-type.create']))
-    <a href="{{ route('product-type.create')}}" class="btn btn-primary" id="btn-submit">
-        <i class="fa fa-plus m-right-10"></i> Add Product Type
-    </a>
-@endif
-@if(user_info()->hasAnyAccess(['admin.company', 'product-type.destroy']))
-    <button class="btn btn-danger" id="bulk-delete">
-        <i class="fa fa-trash m-right-10"></i> Bulk Delete
-    </button>
-@endif
+<div class="row">
+    <div class="col-sm-2">
+        @if(user_info()->hasAnyAccess(['admin.company', 'product-type.create']))
+            <a href="{{ route('product-type.create')}}" class="btn btn-primary" id="btn-submit">
+                <i class="fa fa-plus m-right-10"></i> Add Product Type Lists
+            </a>
+        @endif
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-sm-2">
+        @if(user_info()->hasAnyAccess(['admin.company', 'product-type.destroy']))
+            <button class="btn btn-danger" id="bulk-delete">
+                <i class="fa fa-trash m-right-10"></i> Bulk Delete
+            </button>
+        @endif
+    </div>
+    <div class="col-sm-3">
+        <div class="dropdown">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                Actions
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ route('export.product-type.excel') }}">Export XLS</a>
+                <a class="dropdown-item" href="{{ route('export.product-type.pdf') }}">Export PDF</a>
+            </div>
+        </div>
+    </div>
+</div>
 <br>
 
 <div class="table-responsive">

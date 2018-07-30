@@ -86,7 +86,7 @@ class AirlineDataTable extends DataTable
             'airline_name',
             'airline_code',
             'airline_class',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 

@@ -64,7 +64,7 @@ class ProductCodeController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $request->merge(['company_id' => @user_info()->company->id]);
+            $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
             $insert = ProductCode::create($request->all());
 
             if ($insert) {
@@ -371,5 +371,31 @@ class ProductCodeController extends Controller
         $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
         $findTemp->data = json_decode($findTemp->data);
         return response()->json(['result' => true, 'data' => $findTemp], 200);   
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $code = ProductCode::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($code) {
+            $excel->sheet('Sheet 1', function($sheet) use ($code) {
+                $sheet->fromArray($code);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $codes = ProductCode::all();
+        $pdf = \PDF::loadView('contents.master_datas.product_code.pdf', compact('codes'));
+        return $pdf->download('code.pdf');
     }
 }

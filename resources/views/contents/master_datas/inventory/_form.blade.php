@@ -32,7 +32,8 @@
 
         <div class="form-group">
             {!! Form::label('inventory_type', trans('Inventory Type'), ['class' => 'control-label']) !!}
-            {!! Form::text('inventory_type', old('inventory_type') , ['class' => 'form-control', 'placeholder' => 'Input the Code']) !!}
+            {{-- {!! Form::text('inventory_type', old('inventory_type') , ['class' => 'form-control', 'placeholder' => 'Input the Code']) !!} --}}
+             {!! Form::select('inventory_type_id', @$inventoryTypes, old('inventory_type_id'), ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
@@ -71,10 +72,10 @@
             {!! Form::select('trx_sales_id', @$sales, old('trx_sales_id'), ['class' => 'form-control']) !!}
         </div>
 
-        <div class="form-group">
+        {{-- <div class="form-group">
             {!! Form::label('guest_name', trans('Guest Name'), ['class' => 'control-label']) !!}
             {!! Form::text('guest_name', old('guest_name') , ['class' => 'form-control', 'placeholder' => 'Input the Guest Name']) !!}
-        </div>
+        </div> --}}
 
         <div class="form-group">
             {!! Form::label('iata_no', trans('Iata No'), ['class' => 'control-label']) !!}
@@ -154,6 +155,7 @@
 <script>
     $(function(){
         spinnerLoad($('#form-inventory'));
+        initSelect2Remote($('#supplier_no'), "{{ route('supplier.search-data') }}", "Choose Supplier No", 0);
     });
 </script>
 

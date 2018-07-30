@@ -89,7 +89,7 @@ class PassengerClassDataTable extends DataTable
             'passenger_class_name',
             'passenger_class_code',
             'passenger_class_type',
-            'is_draft',
+        //    'is_draft',
             'created_at'
         ];
 
