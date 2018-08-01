@@ -66,13 +66,14 @@ class LGController extends Controller
     {
         \DB::beginTransaction();
         try {
+            $newCode = MasterLG::getAutoNumber();
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'lg_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
             } else {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'lg_no' => $newCode]);
                 $msgSuccess = trans('message.published');
             }
 
@@ -162,13 +163,13 @@ class LGController extends Controller
     {
         \DB::beginTransaction();
         try {
-
+            $newCode = MasterLG::getAutoNumber();
             if (@$request->is_draft == 'false') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'lg_no' => $newCode]);
                 $msgSuccess = trans('message.published');
                 $redirect = redirect()->route('lg.index');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'lg_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
                 $redirect = redirect()->route('lg.create');
             } else {

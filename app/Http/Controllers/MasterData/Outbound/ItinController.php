@@ -69,7 +69,7 @@ class ItinController extends Controller
             \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
         }
 
-        $newCode = MasterItinerary::getAutoNumber();
+        $newCode = '';
         $branchs = Branch::getAvailableData()->pluck('branch_name', 'company_branchs.id')->all();
         $cities = City::getAvailableData()
             ->select("cities.city_code as slug", \DB::raw("(cities.city_name || '-' || cities.city_code) as text"))
@@ -102,13 +102,14 @@ class ItinController extends Controller
     {
         \DB::beginTransaction();
         try {
+            $newCode = MasterItinerary::getAutoNumber();
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'itinerary_code' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
             } else {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'itinerary_code' => $newCode]);
                 $msgSuccess = trans('message.published');
             }
 
@@ -333,12 +334,13 @@ class ItinController extends Controller
     {
         \DB::beginTransaction();
         try {
+            $newCode = MasterItinerary::getAutoNumber();
             if (@$request->is_draft == 'false') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'itinerary_code' => $newCode]);
                 $msgSuccess = trans('message.published');
                 $redirect = redirect()->route('itin.index');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'itinerary_code' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
                 $redirect = redirect()->route('itin.create');
             } else {

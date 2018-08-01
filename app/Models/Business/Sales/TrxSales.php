@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Request;
 use App\Models\MasterData\Customer\MasterCustomer;
+use App\Models\Setting\CoreForm;
 
 class TrxSales extends Model
 {
@@ -452,9 +453,11 @@ class TrxSales extends Model
 
     public static function getAutoNumber()
     {
-        $result = self::orderBy('id', 'desc')->first();
+        $result = self::whereCompanyId(user_info('company_id'))
+            ->where('sales_no', '<>', 'draft')
+            ->orderBy('id', 'desc')->first();
 
-        $findCode = \DB::table('setting_codes')->whereType('SO')->first();
+        $findCode = CoreForm::getCodeBySlug('sales');
         if ($result) {
             $lastNumber = (int) substr($result->sales_no, strlen($result->sales_no) - 4, 4);
             $newNumber = $lastNumber + 1;
@@ -480,9 +483,9 @@ class TrxSales extends Model
                 $newNumber = $newNumber;
             }
 
-            $newCode = $findCode->type.$newNumber;
+            $newCode = $findCode.$newNumber;
         } else {
-            $newCode = $findCode->type.'0001';
+            $newCode = $findCode.'0001';
         }
 
         return $newCode;

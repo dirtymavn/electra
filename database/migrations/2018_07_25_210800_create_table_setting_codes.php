@@ -13,9 +13,13 @@ class CreateTableSettingCodes extends Migration
      */
     public function up()
     {
-        Schema::create('setting_codes', function (Blueprint $table) {
+        Schema::create('core_forms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('label')->nullable();
+            $table->string('model')->nullable();
+            $table->string('code')->nullable();
             $table->string('type')->nullable();
             $table->timestamps();
         });
@@ -28,6 +32,7 @@ class CreateTableSettingCodes extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('core_forms');
         Schema::dropIfExists('setting_codes');
     }
 }

@@ -47,7 +47,7 @@ class SalesFolderController extends Controller
      */
     public function create()
     {
-        $newCode = Sales::getAutoNumber();
+        $newCode = '';
         $company_id = user_info()->company_id;
         $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
         $cities = City::getDataAvailable()->pluck('city_name', 'id')->all();
@@ -67,14 +67,14 @@ class SalesFolderController extends Controller
     {
         DB::beginTransaction();
         try {
-
+            $newCode = Sales::getAutoNumber();
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'sales_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
             } else {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'sales_no' => $newCode]);
                 $msgSuccess = trans('message.published');
             }
             $request->merge( [ 'company_id' => user_info()->company_id ] );
@@ -144,12 +144,13 @@ class SalesFolderController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $newCode = Sales::getAutoNumber();
             if (@$request->is_draft == 'false') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'sales_no' => $newCode]);
                 $msgSuccess = trans('message.published');
                 $redirect = redirect()->route('sales.index');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'sales_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
                 $redirect = redirect()->route('sales.create');
             } else {

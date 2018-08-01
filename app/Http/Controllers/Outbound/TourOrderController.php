@@ -71,7 +71,7 @@ class TourOrderController extends Controller
                 \DB::raw("(countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as text"))
             ->pluck('text', 'slug')->all();
 
-        $newCode = TourOrder::getAutoNumber();
+        $newCode = '';
         // if (count($customers) == 0) {
         //     $customers = ['' => '- Not Available -'];
         // }
@@ -97,14 +97,15 @@ class TourOrderController extends Controller
     {
         \DB::beginTransaction();
         try {
+            $newCode = TourOrder::getAutoNumber();
             $request->merge([ 'company_id' =>  @user_info()->company->id ]);
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'order_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
             } else {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'order_no' => $newCode]);
                 $msgSuccess = trans('message.published');
             }
 
@@ -274,12 +275,13 @@ class TourOrderController extends Controller
 
         \DB::beginTransaction();
         try {
+            $newCode = TourOrder::getAutoNumber();
             if (@$request->is_draft == 'false') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'order_no' => $newCode]);
                 $msgSuccess = trans('message.published');
                 $redirect = redirect()->route('tourorder.index');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'order_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
                 $redirect = redirect()->route('tourorder.create');
             } else {

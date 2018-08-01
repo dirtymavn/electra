@@ -718,6 +718,28 @@
                     </div>
                 </div>
             </li>
+            <li class=" has-sub-menu {!! (Request::is('setting*') OR Request::is('setting')) ? ' active' : '' !!}">
+                <a href="#">
+                    <div class="icon-w">
+                        <div class="os-icon os-icon-ui-46"></div>
+                    </div>
+                    <span>Setting</span>
+                </a>
+                <div class="sub-menu-w">
+                    <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
+                    <div class="sub-menu-i">
+                        <ul class="sub-menu">
+                            @if(user_info()->inRole('super-admin') || user_info()->inRole('admin'))
+                                <li class="{!! (url(route('core-form.index')) == Request::url() OR Request::is('setting/core-form*')) ? ' active' : '' !!}">
+                                    <a href=" {{ route('core-form.index') }} ">
+                                        <i class="fa fa-circle-o"></i><span>Core Form</span>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                </div>
+            </li>
         @endif
     </ul>
 </div>

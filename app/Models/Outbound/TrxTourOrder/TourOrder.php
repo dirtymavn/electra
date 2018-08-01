@@ -5,6 +5,7 @@ namespace App\Models\Outbound\TrxTourOrder;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\MasterData\Tour;
+use App\Models\Setting\CoreForm;
 use Request;
 
 class TourOrder extends Model implements Auditable
@@ -191,9 +192,11 @@ class TourOrder extends Model implements Auditable
 
     public static function getAutoNumber()
     {
-        $result = self::orderBy('id', 'desc')->first();
+        $result = self::whereCompanyId(user_info('company_id'))
+            ->where('order_no', '<>', 'draft')
+            ->orderBy('id', 'desc')->first();
 
-        $findCode = \DB::table('setting_codes')->whereType('TO')->first();
+        $findCode = CoreForm::getCodeBySlug('tour-order');
         if ($result) {
             $lastNumber = (int) substr($result->order_no, strlen($result->order_no) - 4, 4);
             $newNumber = $lastNumber + 1;
@@ -219,9 +222,17 @@ class TourOrder extends Model implements Auditable
                 $newNumber = $newNumber;
             }
 
-            $newCode = $findCode->type.date('my').$newNumber;
+            if ($findCode) {
+                $newCode = $findCode.date('my').$newNumber;    
+            } else {
+                $newCode = 'TO'.date('my').$newNumber;
+            }
         } else {
-            $newCode = $findCode->type.date('my').'0001';
+            if ($findCode) {
+                $newCode = $findCode.date('my').'0001';
+            } else {
+                $newCode = 'TO'.date('my').'0001';
+            }
         }
 
         return $newCode;

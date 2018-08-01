@@ -353,8 +353,11 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
     });
 
-
-
+    // Setting
+    Route::group(['prefix' => 'setting', 'namespace' => 'Setting'], function () {
+        // Core Form
+        Route::get('core-form', array('as' => 'core-form.index', 'uses' => 'CoreFormController@index', 'middleware' => 'sentinel_access:admin,admin.company'));
+    });
     // Finance
     Route::group(['prefix' => 'finance', 'namespace' => 'Finance'], function () {
         

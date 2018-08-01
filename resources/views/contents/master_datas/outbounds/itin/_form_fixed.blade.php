@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('itinerary_code', trans('Itinerary Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('itinerary_code', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the Code', 'readonly' => true]) !!}
+            {!! Form::text('itinerary_code', $newCode , ['class' => 'form-control', 'placeholder' => '<Auto Number>', 'readonly' => true]) !!}
         </div>
         <div class="form-group" style="display: none;">
             {!! Form::label('itinerary_direction', trans('Itinerary Direction'), ['class' => 'control-label']) !!}

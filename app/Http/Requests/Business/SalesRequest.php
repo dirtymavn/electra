@@ -24,7 +24,7 @@ class SalesRequest extends FormRequest
     public function rules()
     {
         return [
-            'sales_no' => 'required',
+            // 'sales_no' => 'required',
             'customer_id' => 'required',
             'trip_date' => 'required',
             // 'deadline' => 'required'

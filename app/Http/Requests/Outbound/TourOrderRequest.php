@@ -24,7 +24,6 @@ class TourOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_no' => 'required',
             'customer_id' => 'required',
             'order_type' => 'required',
             'trip_date' => 'required',

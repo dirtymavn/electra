@@ -24,7 +24,7 @@ class ItinRequest extends FormRequest
     public function rules()
     {
         return [
-            'itinerary_code' => 'required',
+            // 'itinerary_code' => 'required',
             // 'itinerary_direction' => 'required',
             'itinerary_name' => 'required',
         ];
