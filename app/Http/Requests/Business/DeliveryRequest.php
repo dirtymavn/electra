@@ -24,7 +24,7 @@ class DeliveryRequest extends FormRequest
     public function rules()
     {
         return [
-            'do_no' => 'required',
+            // 'do_no' => 'required',
             'do_type_id' => 'required',
             'do_date' => 'required',
             'team_code' => 'required'

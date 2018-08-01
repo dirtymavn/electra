@@ -325,7 +325,8 @@
                                 })
                                 
                             };
-                        }
+                        },
+                        cache: true
                     },
                     placeholder: placeholder,
                     minimumInputLength: minLength,

@@ -43,7 +43,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        $newCode = Supplier::getAutoNumber();
+        $newCode = '';
         $types = Supplier::types();
         $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
         $countries = Country::getDataByCompany()->pluck('countries.country_name', 'countries.id')->all();
@@ -61,14 +61,14 @@ class SupplierController extends Controller
     {
         DB::beginTransaction();
         try {
-
+            $newCode = Supplier::getAutoNumber();
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'supplier_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
             } else {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'supplier_no' => $newCode]);
                 $msgSuccess = trans('message.published');
             }
 
@@ -116,6 +116,7 @@ class SupplierController extends Controller
     public function edit(Supplier $supplier)
     {
         $parent = $supplier->toArray();
+        // wew($parent);
         $detailParent = $supplier->detail;
         $detail = $supplier->detail->toArray();
         $contact = $supplier->detail->contact->toArray();
@@ -145,6 +146,8 @@ class SupplierController extends Controller
         // dd($arrayMerge);
         
         $supplier = (object) $arrayMerge;
+        $supplier->name = $parent['name'];
+        $supplier->address = $parent['address'];
         $newCode = $supplier->supplier_no;
         $types = Supplier::types();
         $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
@@ -167,12 +170,13 @@ class SupplierController extends Controller
     {
         DB::beginTransaction();
         try {
+            $newCode = Supplier::getAutoNumber();
             if (@$request->is_draft == 'false') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'supplier_no' => $newCode]);
                 $msgSuccess = trans('message.published');
                 $redirect = redirect()->route('supplier.index');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'supplier_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
                 $redirect = redirect()->route('supplier.create');
             } else {
@@ -239,7 +243,7 @@ class SupplierController extends Controller
     {
         $results = Supplier::getAvailableData()
             ->select('master_supplier.id', \DB::raw("(master_supplier.supplier_no||'-'||master_supplier.name) as text"), 'master_supplier.supplier_no as slug')
-            ->where(function($q) {
+            ->where(function($q) use ($request) {
                 return $q->where('master_supplier.name', 'ilike', '%'.$request->search.'%')
                     ->orWhere('master_supplier.supplier_no', 'ilike', '%'.$request->search.'%');
             })

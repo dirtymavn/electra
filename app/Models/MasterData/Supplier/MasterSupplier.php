@@ -5,6 +5,7 @@ namespace App\Models\MasterData\Supplier;
 use Illuminate\Database\Eloquent\Model;
 use Request;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\Setting\CoreForm;
 
 class MasterSupplier extends Model implements Auditable
 {
@@ -208,9 +209,11 @@ class MasterSupplier extends Model implements Auditable
 
     public static function getAutoNumber()
     {
-        $result = self::orderBy('id', 'desc')->first();
+        $result = self::whereCompanyId(user_info('company_id'))
+            ->where('supplier_no', '<>', 'draft')
+            ->orderBy('id', 'desc')->first();
 
-        $findCode = \DB::table('setting_codes')->whereType('SUP')->first();
+        $findCode = CoreForm::getCodeBySlug('supplier');
         if ($result) {
             $lastNumber = (int) substr($result->supplier_no, strlen($result->supplier_no) - 4, 4);
             $newNumber = $lastNumber + 1;
@@ -236,9 +239,9 @@ class MasterSupplier extends Model implements Auditable
                 $newNumber = $newNumber;
             }
 
-            $newCode = $findCode->type.$newNumber;
+            $newCode = $findCode.$newNumber;
         } else {
-            $newCode = $findCode->type.'0001';
+            $newCode = $findCode.'0001';
         }
 
         return $newCode;

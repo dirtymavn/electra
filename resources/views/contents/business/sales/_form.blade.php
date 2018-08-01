@@ -2,7 +2,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('sales_no', trans('Sales No'), ['class' => 'control-label']) !!}
-            {!! Form::text('sales_no', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the Code', 'readonly' => true]) !!}
+            {!! Form::text('sales_no', $newCode , ['class' => 'form-control', 'placeholder' => '<Auto Number>', 'readonly' => true]) !!}
         </div>
     </div>
     <div class="col-sm-6">

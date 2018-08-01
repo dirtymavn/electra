@@ -24,7 +24,7 @@ class GuideRequest extends FormRequest
     public function rules()
     {
         return [
-            'guide_code' => 'required',
+            // 'guide_code' => 'required',
             'guide_name_first' => 'required',
             'guide_name_last' => 'required',
         ];

@@ -5,6 +5,7 @@ namespace App\Models\MasterData\Outbound\Itinerary;
 use Illuminate\Database\Eloquent\Model;
 use Request;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\Setting\CoreForm;
 
 class MasterItinerary extends Model implements Auditable
 {
@@ -261,9 +262,11 @@ class MasterItinerary extends Model implements Auditable
 
     public static function getAutoNumber()
     {
-        $result = self::orderBy('id', 'desc')->first();
+        $result = self::whereCompanyId(user_info('company_id'))
+            ->where('itinerary_code', '<>', 'draft')
+            ->orderBy('id', 'desc')->first();
 
-        $findCode = \DB::table('setting_codes')->whereType('ITIN')->first();
+        $findCode = CoreForm::getCodeBySlug('itinerary');
         if ($result) {
             $lastNumber = (int) substr($result->itinerary_code, strlen($result->itinerary_code) - 4, 4);
             $newNumber = $lastNumber + 1;
@@ -289,9 +292,9 @@ class MasterItinerary extends Model implements Auditable
                 $newNumber = $newNumber;
             }
 
-            $newCode = $findCode->type.$newNumber;
+            $newCode = $findCode.$newNumber;
         } else {
-            $newCode = $findCode->type.'0001';
+            $newCode = $findCode.'0001';
         }
 
         return $newCode;

@@ -3,7 +3,7 @@
 namespace App\Models\Business\Delivery;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Setting\CoreForm;
 use Request;
 
 class TrxDeliveryOrder extends Model
@@ -110,9 +110,11 @@ class TrxDeliveryOrder extends Model
 
     public static function getAutoNumber()
     {
-        $result = self::orderBy('id', 'desc')->first();
+        $result = self::whereCompanyId(user_info('company_id'))
+            ->where('do_no', '<>', 'draft')
+            ->orderBy('id', 'desc')->first();
 
-        $findCode = \DB::table('setting_codes')->whereType('DO')->first();
+        $findCode = CoreForm::getCodeBySlug('delivery-order');
         if ($result) {
             $lastNumber = (int) substr($result->do_no, strlen($result->do_no) - 4, 4);
             $newNumber = $lastNumber + 1;
@@ -138,9 +140,9 @@ class TrxDeliveryOrder extends Model
                 $newNumber = $newNumber;
             }
 
-            $newCode = $findCode->type.$newNumber;
+            $newCode = $findCode.$newNumber;
         } else {
-            $newCode = $findCode->type.'0001';
+            $newCode = $findCode.'0001';
         }
 
         return $newCode;

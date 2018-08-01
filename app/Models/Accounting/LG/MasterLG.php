@@ -4,6 +4,7 @@ namespace App\Models\Accounting\LG;
 
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\Setting\CoreForm;
 
 class MasterLG extends Model implements Auditable
 {
@@ -79,9 +80,11 @@ class MasterLG extends Model implements Auditable
 
     public static function getAutoNumber()
     {
-        $result = self::orderBy('id', 'desc')->first();
+        $result = self::whereCompanyId(user_info('company_id'))
+            ->where('lg_no', '<>', 'draft')
+            ->orderBy('id', 'desc')->first();
 
-        $findCode = \DB::table('setting_codes')->whereType('LG')->first();
+        $findCode = CoreForm::getCodeBySlug('lg');
         if ($result) {
             $lastNumber = (int) substr($result->lg_no, strlen($result->lg_no) - 4, 4);
             $newNumber = $lastNumber + 1;
@@ -107,9 +110,9 @@ class MasterLG extends Model implements Auditable
                 $newNumber = $newNumber;
             }
 
-            $newCode = $findCode->type.$newNumber;
+            $newCode = $findCode.$newNumber;
         } else {
-            $newCode = $findCode->type.'0001';
+            $newCode = $findCode.'0001';
         }
 
         return $newCode;

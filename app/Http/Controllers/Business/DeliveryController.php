@@ -34,7 +34,7 @@ class DeliveryController extends Controller
     public function create()
     {
         $dotypes = DoType::where('is_draft', false)->pluck('do_type_name', 'id')->all();
-        $newCode = TrxDelivery::getAutoNumber();
+        $newCode = '';
         $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
         $departmens = Department::getAvailableData()->pluck('department_name', 'company_departments.id')->all();
         return view('contents.business.delivery.create', compact('dotypes', 'newCode', 'customers', 'departmens'));
@@ -50,13 +50,14 @@ class DeliveryController extends Controller
     {
         \DB::beginTransaction();
         try {
+            $newCode = TrxDelivery::getAutoNumber();
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'do_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
             } else {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'do_no' => $newCode]);
                 $msgSuccess = trans('message.published');
             }
 
@@ -126,13 +127,14 @@ class DeliveryController extends Controller
     {
         \DB::beginTransaction();
         try {
+            $newCode = TrxDelivery::getAutoNumber();
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
             } elseif (@$request->is_publish_continue == 'true') {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'do_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
             } else {
-                $request->merge(['is_draft' => false]);
+                $request->merge(['is_draft' => false, 'do_no' => $newCode]);
                 $msgSuccess = trans('message.published');
             }
 

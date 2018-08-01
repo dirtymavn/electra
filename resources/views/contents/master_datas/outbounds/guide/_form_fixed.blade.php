@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('guide_code', trans('Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('guide_code', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the Code', 'readonly' => true]) !!}
+            {!! Form::text('guide_code', $newCode , ['class' => 'form-control', 'placeholder' => '<Auto Number>', 'readonly' => true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('guide_status', trans('Status'), ['class' => 'control-label']) !!}
@@ -270,10 +270,6 @@
 <script>
     $(function(){
         spinnerLoad($('#form-guide'));
-        // @if(@$guide->id)
-        //     console.log("{{ $guide->supplier_no }}");
-        //     $('#supplier_no').select2().val("{{ $guide->supplier_no }}").trigger('change');
-        // @endif
         initSelect2Remote($('#supplier_no'), "{{ route('supplier.search-data') }}", "Choose Supplier", 0, true);
         initSelect2Remote($('#country_of_birth'), "{{ route('country.search-data') }}", "Choose Country", 0);
         initSelect2Remote($('.nationality'), "{{ route('country.search-data-nationality') }}", "Choose Nationality", 0);

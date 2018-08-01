@@ -24,7 +24,7 @@ class LgRequest extends FormRequest
     public function rules()
     {
         return [
-            'lg_no' => 'required',
+            // 'lg_no' => 'required',
             'supplier_id' => 'required'
         ];
     }

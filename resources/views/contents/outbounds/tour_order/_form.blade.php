@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('order_no', trans('Order No'), ['class' => 'control-label']) !!}
-            {!! Form::text('order_no', $newCode , ['class' => 'form-control', 'placeholder' => 'Input the Order No', 'readonly' => true]) !!}
+            {!! Form::text('order_no', $newCode , ['class' => 'form-control', 'placeholder' => '<Auto Number>', 'readonly' => true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('customer_id', trans('Customer'), ['class' => 'control-label']) !!}

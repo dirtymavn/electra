@@ -2,7 +2,7 @@
 	<div class="col-sm-6">
 		<div class="form-group">
 			{!! Form::label('supplier_no', trans('Supplier No.'), ['class' => 'control-label']) !!}
-			{!! Form::text('supplier_no', $newCode, [ 'class' => 'form-control', 'id' => 'supplier_no', 'placeholder' => 'Supplier No', 'readonly' => true]) !!}
+			{!! Form::text('supplier_no', $newCode, [ 'class' => 'form-control', 'id' => 'supplier_no', 'placeholder' => '<Auti Number>', 'readonly' => true]) !!}
 			
 		</div>
 		<div class="form-group">

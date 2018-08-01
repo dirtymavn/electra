@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Outbound;
+namespace App\Http\Requests\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TourOrderRequest extends FormRequest
+class AccountingConfigRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,7 @@ class TourOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => 'required',
-            'order_type' => 'required',
-            'trip_date' => 'required',
-            'deadline' => 'required',
-            'your_ref' => 'required',
-            'our_ref' => 'required',
-            'master_tour_id' => 'required',
-            'days' => 'required'
+            'core_form_id' => 'required'
         ];
     }
 }

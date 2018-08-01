@@ -31,4 +31,19 @@ class MasterCoa extends Model implements Auditable
     	'internal_payment_flag',
     	'is_draft'
     ];
+
+    /**
+     * Get available coa
+     *
+     * @return array
+     */
+    public static function getAvailableData()
+    {
+        $return = self::join('companies', 'companies.id', '=', 'master_coa.company_id')
+            ->where('master_coa.is_draft', false)
+            ->where('master_coa.company_id', user_info('company_id'));
+
+        return $return;
+
+    }
 }

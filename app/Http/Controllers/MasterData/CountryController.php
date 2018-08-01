@@ -203,7 +203,7 @@ class CountryController extends Controller
     {
         $results = Country::getDataByCompany()
             ->select('countries.id', \DB::raw("(countries.country_name || '-' || countries.nationality) as text"))
-            ->where(function($q) {
+            ->where(function($q) use($request) {
                 return $q->where('countries.nationality', 'ilike', '%'.$request->search.'%')
                     ->orWhere('countries.country_name', 'ilike', '%'.$request->search.'%');
             })

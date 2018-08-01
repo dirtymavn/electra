@@ -58,7 +58,7 @@ class GuideController extends Controller
      */
     public function create()
     {
-        $newCode = MasterTourGuide::getAutoNumber();
+        $newCode = '';
         $suppliers = MasterSupplier::getAvailableData()
             ->select('master_supplier.id', \DB::raw("(master_supplier.supplier_no||'-'||master_supplier.name) as text"), 'master_supplier.supplier_no as slug')
             ->pluck('text', 'slug')
@@ -81,6 +81,7 @@ class GuideController extends Controller
     {
         \DB::beginTransaction();
         try {
+            $newCode = MasterTourGuide::getAutoNumber();
             $insertGuideVisa = $this->guideVisa->create($request->all());
             if ($insertGuideVisa) {
                 $request->merge(['tour_guide_visa_id' => $insertGuideVisa->id]);
@@ -88,10 +89,10 @@ class GuideController extends Controller
                 if (@$request->is_draft == 'true') {
                     $msgSuccess = trans('message.save_as_draft');
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $request->merge(['is_draft' => false]);
+                    $request->merge(['is_draft' => false, 'guide_code' => $newCode]);
                     $msgSuccess = trans('message.published_continue');
                 } else {
-                    $request->merge(['is_draft' => false]);
+                    $request->merge(['is_draft' => false, 'guide_code' => $newCode]);
                     $msgSuccess = trans('message.published');
                 }
 
@@ -174,12 +175,13 @@ class GuideController extends Controller
      */
     public function update(Request $request, MasterTourGuide $guide)
     {
+        $newCode = MasterTourGuide::getAutoNumber();
         if (@$request->is_draft == 'false') {
-            $request->merge(['is_draft' => false]);
+            $request->merge(['is_draft' => false, 'guide_code' => $newCode]);
             $msgSuccess = trans('message.published');
             $redirect = redirect()->route('guide.index');
         } elseif (@$request->is_publish_continue == 'true') {
-            $request->merge(['is_draft' => false]);
+            $request->merge(['is_draft' => false, 'guide_code' => $newCode]);
             $msgSuccess = trans('message.published_continue');
             $redirect = redirect()->route('guide.create');
         } else {
