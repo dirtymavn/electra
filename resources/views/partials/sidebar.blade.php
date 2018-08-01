@@ -729,13 +729,18 @@
                     <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                     <div class="sub-menu-i">
                         <ul class="sub-menu">
-                            @if(user_info()->inRole('super-admin') || user_info()->inRole('admin'))
-                                <li class="{!! (url(route('core-form.index')) == Request::url() OR Request::is('setting/core-form*')) ? ' active' : '' !!}">
-                                    <a href=" {{ route('core-form.index') }} ">
-                                        <i class="fa fa-circle-o"></i><span>Core Form</span>
-                                    </a>
-                                </li>
-                            @endif
+                            
+                            <li class="{!! (url(route('core-form.index')) == Request::url() OR Request::is('setting/core-form*')) ? ' active' : '' !!}">
+                                <a href=" {{ route('core-form.index') }} ">
+                                    <i class="fa fa-circle-o"></i><span>Core Form</span>
+                                </a>
+                            </li>
+                            <li class="{!! (url(route('accounting-config.index')) == Request::url() OR Request::is('setting/accounting-config*')) ? ' active' : '' !!}">
+                                <a href=" {{ route('accounting-config.index') }} ">
+                                    <i class="fa fa-circle-o"></i><span>Accounting Config</span>
+                                </a>
+                            </li>
+                            
                         </ul>
                     </div>
                 </div>

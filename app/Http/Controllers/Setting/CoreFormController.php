@@ -84,4 +84,20 @@ class CoreFormController extends Controller
     {
         //
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = CoreForm::select('core_forms.id', 'core_forms.name as text')
+            ->where('core_forms.type', '<>', 'Core')
+            ->where('core_forms.name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

@@ -207,4 +207,20 @@ class MasterCoaController extends Controller
         $pdf = \PDF::loadView('contents.master_datas.accountings.account.pdf', compact('trxs'));
         return $pdf->download('accounting-trx.pdf');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = MasterCoa::getAvailableData()
+            ->select('master_coa.id', 'master_coa.acc_no_key as text')
+            ->where('master_coa.acc_no_key', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

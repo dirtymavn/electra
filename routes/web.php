@@ -185,6 +185,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('account/bulk-delete', array('as' => 'account.bulk-delete', 'uses' => 'MasterCoaController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,account.destroy'));
             Route::get('account/export/excel', ['as' => 'export.account.excel', 'uses' => 'MasterCoaController@export_excel']);
             Route::get('account/export/pdf', ['as' => 'export.account.pdf', 'uses' => 'MasterCoaController@export_pdf']);
+            Route::get('account/search/data', ['as' => 'account.search-data', 'uses' => 'MasterCoaController@searchData']);
 
             // Fx Trans
             Route::resource('fx-trans', 'FxTransactionController');
@@ -357,6 +358,11 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     Route::group(['prefix' => 'setting', 'namespace' => 'Setting'], function () {
         // Core Form
         Route::get('core-form', array('as' => 'core-form.index', 'uses' => 'CoreFormController@index', 'middleware' => 'sentinel_access:admin,admin.company'));
+        Route::get('core-form/search/data', ['as' => 'core-form.search-data', 'uses' => 'CoreFormController@searchData']);
+
+        // Accounting Config
+        Route::resource('accounting-config', 'AccountingConfigController');
+        Route::post('accounting-config/bulk-delete', array('as' => 'accounting-config.bulk-delete', 'uses' => 'AccountingConfigController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,accounting-config.destroy'));
     });
     // Finance
     Route::group(['prefix' => 'finance', 'namespace' => 'Finance'], function () {
