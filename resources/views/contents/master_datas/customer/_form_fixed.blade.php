@@ -1,5 +1,9 @@
 <div class="row">
     <div class="col-md-6">
+        <div class="form-group">
+            {!! Form::label('salutation', trans('Salutation'), ['class' => 'control-label']) !!}
+            {!! Form::select('salutation', ['mr' => 'MR.', 'mrs' => 'Mrs.'], old('salutation'), ['class' => 'form-control']) !!}
+        </div>
         {{-- <div class="form-group">
             {!! Form::label('customer_no', trans('Customer No.'), ['class' => 'control-label']) !!}
             {!! Form::text('customer_no', old('customer_no') , ['class' => 'form-control', 'placeholder' => 'Input the Customer No.']) !!}
@@ -8,28 +12,24 @@
             {!! Form::label('customer_name', trans('Customer Name'), ['class' => 'control-label']) !!}
             {!! Form::text('customer_name', old('customer_name') , ['class' => 'form-control', 'placeholder' => 'Input the Customer Name']) !!}
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             {!! Form::label('company_id', trans('Company Name'), ['class' => 'control-label']) !!}
-            {{-- {!! Form::select('company_id', $companies, old('status'), ['class' => 'form-control', 'placeholder' => 'Select Company Name']) !!} --}}
-             {!! Form::text('company_name', old('company_name') , ['class' => 'form-control', 'placeholder' => 'Input the Company Name']) !!}
-        </div>
+            {!! Form::text('company_name', old('company_name') , ['class' => 'form-control', 'placeholder' => 'Input the Company Name']) !!}
+        </div> --}}
         <div class="form-group">
             {!! Form::label('status', trans('Status'), ['class' => 'control-label']) !!}
             {!! Form::select('status', ['active' => 'Active', 'inactive' => 'In Active', 'suspend' => 'Suspend'], old('status'), ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-md-6">
-        <div class="form-group">
-            {!! Form::label('salutation', trans('Salutation'), ['class' => 'control-label']) !!}
-            {!! Form::select('salutation', ['mr' => 'MR.', 'mrs' => 'Mrs.'], old('salutation'), ['class' => 'form-control']) !!}
-        </div>
+        
         <div class="form-group">
             {!! Form::label('sales_id', trans('Sales ID'), ['class' => 'control-label']) !!}
-            {!! Form::select('sales_id', ['' => 'Choose Sales'], old('sales_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('sales_id', ['' => 'Choose Sales'], old('sales_id'), ['class' => 'form-control', 'id' => 'sales_id']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('customer_group_id', trans('Customer Group'), ['class' => 'control-label']) !!}
-            {!! Form::select('customer_group_id', ['' => 'Choose Customer Group'], old('customer_group_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('customer_group_id', $customerGroup, old('customer_group_id'), ['class' => 'form-control', 'placeholder' => 'Choose Customer Group']) !!}
         </div>
     </div>
 </div>
@@ -55,11 +55,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('servicing_branch_id', trans('Servicing Branch'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('servicing_branch_id', ['' => 'Choose Servicing Branch'], old('servicing_branch_id'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('servicing_branch_id', ['' => 'Choose Servicing Branch'], old('servicing_branch_id'), ['class' => 'form-control', 'id' => 'servicing_branch_id']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('rpt_grp_id', trans('Rpt Grp'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('rpt_grp_id', ['' => 'Choose Rpt Grp'], old('rpt_grp_id'), ['class' => 'form-control']) !!}
+                                        {!! Form::select('rpt_grp_id', $rptGrp, old('rpt_grp_id'), ['class' => 'form-control', 'placeholder' => 'Choose Rpt Grp']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('cust_type_id', trans('Cust. Type'), ['class' => 'control-label']) !!}
@@ -499,6 +499,8 @@
 <script>
     $(function(){
         spinnerLoad($('#form-customer'));
+        initSelect2Remote($('#servicing_branch_id'), "{{ route('branch.search-data') }}", "Choose Branch", 0);
+        initSelect2Remote($('#sales_id'), "{{ route('sales.search-data') }}", "Choose Sales", 0);
     });
 
     $(document).ready(function() {

@@ -194,6 +194,36 @@ class MasterCustomer extends Model implements Auditable
     }
 
     /**
+     * Select RPT GRP
+     * @return array
+     */
+    public static function rptGrp()
+    {
+        $rpt = [
+            '1' => 'Option 1',
+            '2' => 'Option 2',
+            '3' => 'Option 3',
+        ];
+
+        return collect($rpt);
+    }
+
+    /**
+     * Select RPT GRP
+     * @return array
+     */
+    public static function customerGroup()
+    {
+        $rpt = [
+            '1' => 'Customer Group 1',
+            '2' => 'Customer Group 2',
+            '3' => 'Customer Group 3'
+        ];
+
+        return collect($rpt);
+    }
+
+    /**
      * Get available customer
      *
      * @return array

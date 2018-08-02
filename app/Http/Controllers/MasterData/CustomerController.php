@@ -71,8 +71,10 @@ class CustomerController extends Controller
             $companies = user_info()->company()->pluck('name', 'id')->all();
         }
         $meals = $this->masterCustomer->meals();
+        $rptGrp = $this->masterCustomer->rptGrp();
+        $customerGroup = $this->masterCustomer->customerGroup();
         $countries = $this->countries->pluck('name', 'name');
-        return view('contents.master_datas.customer.create', compact('companies', 'meals', 'countries'));
+        return view('contents.master_datas.customer.create', compact('companies', 'meals', 'countries', 'rptGrp'));
     }
 
     /**
@@ -194,8 +196,10 @@ class CustomerController extends Controller
         }
 
         $meals = $this->masterCustomer->meals();
+        $rptGrp = $this->masterCustomer->rptGrp();
+        $customerGroup = $this->masterCustomer->customerGroup();
         $countries = $this->countries->pluck('name', 'id');
-        return view('contents.master_datas.customer.edit', compact('customer', 'companies', 'meals', 'countries'));
+        return view('contents.master_datas.customer.edit', compact('customer', 'companies', 'meals', 'countries', 'rptGrp', 'customerGroup'));
     }
 
     /**

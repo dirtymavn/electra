@@ -8,7 +8,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('customer_id', trans('Customer'), ['class' => 'control-label']) !!}
-            {!! Form::select('customer_id', @$customers, old('customer_id'), ['class' => 'form-control', 'id' => 'cust_no']) !!}
+            {!! Form::select('customer_id', ['' => 'Choose Customer'], old('customer_id'), ['class' => 'form-control', 'id' => 'cust_no']) !!}
         </div>
     </div>
     <div class="col-sm-6">
