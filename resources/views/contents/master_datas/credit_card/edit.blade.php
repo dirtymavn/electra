@@ -9,7 +9,7 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('inventory-type.index')}}">Inventory Type</a></li>
+        <li class="breadcrumb-item"><a href="{{route('credit-card.index')}}">Inventory Type</a></li>
         <li class="breadcrumb-item">Edit</li>
     </ul>
 @endsection
@@ -18,21 +18,21 @@
 
 @section('content')
     @include('flash::message')
-    {!! Form::model($inventorytype, [
-            'route'     =>['inventory-type.update', $inventorytype->id],
+    {!! Form::model($creditcard, [
+            'route'     =>['credit-card.update', $creditcard->id],
             'method'    => 'PATCH',
             'class' =>  'form-horizontal',
-            'id'    =>  'form-inventorytype',
+            'id'    =>  'form-creditcard',
             'enctype' => 'multipart/form-data',
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.master_datas.inventory_type._form')  
+                @include('contents.master_datas.credit_card._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{ route('inventory-type.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
+                        <a href="{{ route('credit-card.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="button" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
-                        {{-- @if($inventorytype->is_draft)
+                        {{-- @if($creditcard->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                         @endif --}}
@@ -45,6 +45,6 @@
 
 @section('script')
 <script>
-    submitForm("{{route('inventory-type.update', $inventorytype->id)}}", $('#form-inventorytype'), 'update');
+    submitForm("{{route('credit-card.update', $creditcard->id)}}", $('#form-creditcard'), 'update');
 </script>
 @endsection

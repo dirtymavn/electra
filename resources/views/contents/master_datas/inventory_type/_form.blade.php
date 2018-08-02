@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('inventory_type_code', trans('Inventory Type Code'), ['class' => 'control-label']) !!}
-            {!! Form::text('inventory_type_code', old('product_type_code') , ['class' => 'form-control', 'placeholder' => 'Input the Inventory Type Code']) !!}
+            {!! Form::text('inventory_type_code', old('inventory_type_code') , ['class' => 'form-control', 'placeholder' => 'Input the Inventory Type Code']) !!}
         </div>
         
     </div>
