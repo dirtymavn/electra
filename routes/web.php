@@ -38,6 +38,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('sales/sales-passenger-detail', array('as' => 'sales.passenger-detail.post', 'uses' => 'SalesFolderController@salesPassenger', 'middleware' => 'sentinel_access:admin.company,sales.create'));
         Route::get('sales/export/excel', ['as' => 'export.sales.excel', 'uses' => 'SalesFolderController@export_excel']);
         Route::get('sales/export/pdf', ['as' => 'export.sales.pdf', 'uses' => 'SalesFolderController@export_pdf']);
+        Route::get('sales/search/data', ['as' => 'sales.search-data', 'uses' => 'SalesFolderController@searchData', 'middleware' => 'sentinel_access:admin.company,sales.create']);
         
         Route::resource('delivery', 'DeliveryController');
         Route::post('delivery/bulk-delete', array('as' => 'delivery.bulk-delete', 'uses' => 'DeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,delivery.destroy'));
@@ -82,6 +83,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('outboundqueue/data/detail', array('as' => 'outboundqueue.data.detail', 'uses' => 'OutboundQueueController@dataDetail', 'middleware' => 'sentinel_access:admin.company,outboundqueue.create'));
         Route::get('outboundqueue/export/excel', ['as' => 'export.outboundqueue.excel', 'uses' => 'OutboundQueueController@export_excel']);
         Route::get('outboundqueue/export/pdf', ['as' => 'export.outboundqueue.pdf', 'uses' => 'OutboundQueueController@export_pdf']);
+
+        Route::get('tourorder/export/excel', ['as' => 'export.tourorder.excel', 'uses' => 'TourOrderController@export_excel']);
+        Route::get('tourorder/export/pdf', ['as' => 'export.tourorder.pdf', 'uses' => 'TourOrderController@export_pdf']);
+
     });
 
     // Hotel
@@ -346,6 +351,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('department/search/data', ['as' => 'department.search-data', 'uses' => 'CompanyDepartmentController@searchData']);
         Route::get('department/export/excel', ['as' => 'export.department.excel', 'uses' => 'CompanyDepartmentController@export_excel']);
         Route::get('department/export/pdf', ['as' => 'export.department.pdf', 'uses' => 'CompanyDepartmentController@export_pdf']);
+
+        // Master Credit Card
+        Route::resource('credit-card', 'CreditCardController');
+        Route::post('credit-card/bulk-delete', array('as' => 'credit-card.bulk-delete', 'uses' => 'CreditCardController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,credit-card.destroy'));
+        Route::get('credit-card/export/excel', ['as' => 'export.credit-card.excel', 'uses' => 'CreditCardController@export_excel']);
+        Route::get('credit-card/export/pdf', ['as' => 'export.credit-card.pdf', 'uses' => 'CreditCardController@export_pdf']);
     });
 
     // System

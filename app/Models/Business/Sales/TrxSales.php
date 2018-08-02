@@ -57,11 +57,11 @@ class TrxSales extends Model
             $credit->expiry_date = $input['expiry_date'];
             $credit->security_id = $input['security_id'];
             $credit->merchant_no = $input['merchant_no'];
-            $credit->roc_no = $input['roc_no'];
+            // $credit->roc_no = $input['roc_no'];
             $credit->amount = $input['amount'];
-            $credit->sof_flag = $input['sof_flag'];
-            $credit->authorisation_code = $input['authorisation_code'];
-            $credit->authorisation_date = $input['authorisation_date'];
+            // $credit->sof_flag = $input['sof_flag'];
+           // $credit->authorisation_code = $input['authorisation_code'];
+            // $credit->authorisation_date = $input['authorisation_date'];
 
             $credit->save();
 
@@ -261,11 +261,11 @@ class TrxSales extends Model
             $credit->expiry_date = $input['expiry_date'];
             $credit->security_id = $input['security_id'];
             $credit->merchant_no = $input['merchant_no'];
-            $credit->roc_no = $input['roc_no'];
+           // $credit->roc_no = $input['roc_no'];
             $credit->amount = $input['amount'];
-            $credit->sof_flag = $input['sof_flag'];
-            $credit->authorisation_code = $input['authorisation_code'];
-            $credit->authorisation_date = $input['authorisation_date'];
+          //  $credit->sof_flag = $input['sof_flag'];
+          //  $credit->authorisation_code = $input['authorisation_code'];
+          //  $credit->authorisation_date = $input['authorisation_date'];
 
             $credit->save();
 
@@ -489,5 +489,10 @@ class TrxSales extends Model
         }
 
         return $newCode;
+    }
+
+    public static function getAvailableData()
+    {
+        return self::where('company_id', user_info()->company_id);
     }
 }

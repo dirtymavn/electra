@@ -605,8 +605,8 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <a href="#">
+                        <li class="{!! (url(route('credit-card.index')) == Request::url() OR Request::is('master-data/credit-card*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','creaditcard.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('credit-card.index')}}">
                                 <i class="fa fa-circle-o"></i><span>Credit Card <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>

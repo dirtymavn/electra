@@ -655,7 +655,8 @@ class TourOrderController extends Controller
 
         if ($tourOrder) {
             // If Exist
-
+            $code = 200;
+            $message = 'Success';
             // Get Data relation of tour
             $tourOrder->tour;
 
@@ -677,4 +678,30 @@ class TourOrderController extends Controller
 
         return response()->json(['code' => $code, 'message' => $message, 'data' => $result], 200);
     }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $delivery = TourOrder::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($delivery) {
+            $excel->sheet('Sheet 1', function($sheet) use ($delivery) {
+                $sheet->fromArray($delivery);
+            });
+        })->export('xls');
+    }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $tourorders = TourOrder::all();
+        $pdf = \PDF::loadView('contents.outbounds.tour_order.pdf', compact('tourorders'));
+        return $pdf->download('tour-orders.pdf');
+    }
+
 }

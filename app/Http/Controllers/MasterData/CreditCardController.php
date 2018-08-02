@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\MasterData;
 
-use App\Models\MasterData\InventoryType;
+use App\Models\MasterData\CreditCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\MasterData\InventoryTypeDataTable;
-use App\Http\Requests\MasterData\InventoryTypeRequest;
+use App\DataTables\MasterData\CreditCardDataTable;
+use App\Http\Requests\MasterData\CreditCardRequest;
 
-class InventoryTypeController extends Controller
+class CreditCardController extends Controller
 {
     public function __construct()
     {
         // middleware
-        $this->middleware('sentinel_access:admin.company,inventory-type.read', ['only' => ['index']]);
-        $this->middleware('sentinel_access:admin.company,inventory-type.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel_access:admin.company,inventory-type.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel_access:admin.company,inventory-type.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel_access:admin.company,credit-card.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,credit-card.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,credit-card.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,credit-card.destroy', ['only' => ['destroy']]);
 
     }
 
@@ -25,9 +25,9 @@ class InventoryTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(InventoryTypeDataTable $dataTable)
+    public function index(CreditCardDataTable $dataTable)
     {
-        return $dataTable->render('contents.master_datas.inventory_type.index');
+        return $dataTable->render('contents.master_datas.credit_card.index');
     }
 
     /**
@@ -37,16 +37,16 @@ class InventoryTypeController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.inventory_type.create');
+        return view('contents.master_datas.credit_card.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\InventoryTypeRequest  $request
+     * @param  \App\Http\Requests\MasterData\CreditCardRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InventoryTypeRequest $request)
+    public function store(CreditCardRequest $request)
     {
         \DB::beginTransaction();
         try {
@@ -61,14 +61,14 @@ class InventoryTypeController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
-            $insert = InventoryType::create($request->all());
+            $insert = CreditCard::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('inventory-type.index');
+                $redirect = redirect()->route('credit-card.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('inventory-type.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('credit-card.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('inventory-type.create');
+                    $redirect = redirect()->route('credit-card.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -85,10 +85,10 @@ class InventoryTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MasterData\InventoryType  $InventoryType
+     * @param  \App\Models\MasterData\CreditCard  $CreditCard
      * @return \Illuminate\Http\Response
      */
-    public function show(InventoryType $InventoryType)
+    public function show(CreditCard $CreditCard)
     {
         //
     }
@@ -96,22 +96,22 @@ class InventoryTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MasterData\InventoryType  $InventoryType
+     * @param  \App\Models\MasterData\CreditCard  $CreditCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(InventoryType $InventoryType)
+    public function edit(CreditCard $CreditCard)
     {
-        return view('contents.master_datas.inventory_type.edit')->with(['inventorytype' => $InventoryType]);
+        return view('contents.master_datas.credit_card.edit')->with(['creditcard' => $CreditCard]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\InventoryTypeRequest  $request
-     * @param  \App\Models\MasterData\InventoryType  $InventoryType
+     * @param  \App\Http\Requests\MasterData\CreditCardRequest  $request
+     * @param  \App\Models\MasterData\CreditCard  $CreditCard
      * @return \Illuminate\Http\Response
      */
-    public function update(InventoryTypeRequest $request, InventoryType $InventoryType)
+    public function update(CreditCardRequest $request, CreditCard $CreditCard)
     {
         \DB::beginTransaction();
         try {
@@ -119,17 +119,17 @@ class InventoryTypeController extends Controller
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('inventory-type.index');
+                $redirect = redirect()->route('credit-card.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('inventory-type.create');
+                $redirect = redirect()->route('credit-card.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('inventory-type.edit', $InventoryType->id);
+                $redirect = redirect()->route('credit-card.edit', $CreditCard->id);
             }
 
-            $update = $InventoryType->update($request->all());
+            $update = $CreditCard->update($request->all());
 
             if ($update) {
 
@@ -148,15 +148,15 @@ class InventoryTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MasterData\InventoryType  $InventoryType
+     * @param  \App\Models\MasterData\CreditCard  $CreditCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InventoryType $InventoryType)
+    public function destroy(CreditCard $CreditCard)
     {
-        $InventoryType->delete();
+        $CreditCard->delete();
         flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('inventory-type.index');
+        return redirect()->route('credit-card.index');
     }
 
     /**
@@ -169,14 +169,14 @@ class InventoryTypeController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            InventoryType::whereIn('id', $ids)->delete();
+            CreditCard::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('inventory-type.index');
+        return redirect()->route('credit-card.index');
     }
 
     /**
@@ -185,7 +185,7 @@ class InventoryTypeController extends Controller
      */
     public function export_excel()
     {
-        $type = InventoryType::select('*')->get();
+        $type = CreditCard::select('*')->get();
         \Excel::create('testing-'.date('Ymd'), function($excel) use ($type) {
             $excel->sheet('Sheet 1', function($sheet) use ($type) {
                 $sheet->fromArray($type);
@@ -200,8 +200,8 @@ class InventoryTypeController extends Controller
      */
     public function export_pdf()
     {
-        $types = InventoryType::all();
-        $pdf = \PDF::loadView('contents.master_datas.inventory_type.pdf', compact('types'));
-        return $pdf->download('inventory-type.pdf');
+        $types = CreditCard::all();
+        $pdf = \PDF::loadView('contents.master_datas.credit_card.pdf', compact('types'));
+        return $pdf->download('credit-card.pdf');
     }
 }

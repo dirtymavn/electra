@@ -577,4 +577,20 @@ class SalesFolderController extends Controller
         $pdf = PDF::loadView('contents.business.sales.pdf', compact('saless'));
         return $pdf->download('sales.pdf');
     }
+
+    /**
+     * Search data
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+    public function searchData(Request $request)
+    {
+        $results = Sales::getAvailableData()
+            ->select('trx_sales.id', 'trx_sales.sales_no as text')
+            ->where('trx_sales.sales_no', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }
