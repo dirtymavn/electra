@@ -38,6 +38,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('sales/sales-passenger-detail', array('as' => 'sales.passenger-detail.post', 'uses' => 'SalesFolderController@salesPassenger', 'middleware' => 'sentinel_access:admin.company,sales.create'));
         Route::get('sales/export/excel', ['as' => 'export.sales.excel', 'uses' => 'SalesFolderController@export_excel']);
         Route::get('sales/export/pdf', ['as' => 'export.sales.pdf', 'uses' => 'SalesFolderController@export_pdf']);
+        Route::get('sales/search/data', ['as' => 'sales.search-data', 'uses' => 'SalesFolderController@searchData', 'middleware' => 'sentinel_access:admin.company,sales.create']);
         
         Route::resource('delivery', 'DeliveryController');
         Route::post('delivery/bulk-delete', array('as' => 'delivery.bulk-delete', 'uses' => 'DeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,delivery.destroy'));
