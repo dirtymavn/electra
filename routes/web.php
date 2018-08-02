@@ -60,6 +60,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
         //Tour Order Paxlist Flight
         Route::post('tourorder/paxlist-flight', array('as' => 'tourorder.paxlist-flight.post', 'uses' => 'TourOrderController@tourOrderPaxlistFlightStore', 'middleware' => 'sentinel_access:admin.company,tourorder.create'));
+        Route::get('tourorder/export/excel', ['as' => 'export.tourorder.excel', 'uses' => 'TourOrderController@export_excel']);
+        Route::get('tourorder/export/pdf', ['as' => 'export.tourorder.pdf', 'uses' => 'TourOrderController@export_pdf']);
     });
 
     // Hotel

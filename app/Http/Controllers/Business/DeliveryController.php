@@ -201,10 +201,10 @@ class DeliveryController extends Controller
      */
     public function export_excel()
     {
-        $sales = Sales::select('*')->get();
-        Excel::create('testing-'.date('Ymd'), function($excel) use ($sales) {
-            $excel->sheet('Sheet 1', function($sheet) use ($sales) {
-                $sheet->fromArray($sales);
+        $delivery = TrxDelivery::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($delivery) {
+            $excel->sheet('Sheet 1', function($sheet) use ($delivery) {
+                $sheet->fromArray($delivery);
             });
         })->export('xls');
     }
@@ -216,8 +216,8 @@ class DeliveryController extends Controller
      */
     public function export_pdf()
     {
-        $vouchers = Sales::all();
-        $pdf = PDF::loadView('contents.master_datas.sales.pdf', compact('saless'));
-        return $pdf->download('sales.pdf');
+        $deliveries = TrxDelivery::all();
+        $pdf = PDF::loadView('contents.business.delivery.pdf', compact('deliveries'));
+        return $pdf->download('delivery.pdf');
     }
 }
