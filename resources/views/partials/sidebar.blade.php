@@ -194,10 +194,8 @@
                                 <i class="fa fa-circle-o"></i><span>Visa <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Queue <i class="os-icon os-icon-ui-02"></i></span>
-                            </a>
+                        <li class="{!! (url(route('businessqueue.index')) == Request::url() OR Request::is('business/businessqueue*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','businessqueue.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('businessqueue.index')}}"><i class="fa fa-circle-o"></i><span>Queue</span></a>
                         </li>
                         <li>
                             <a href="#">
@@ -208,7 +206,7 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu">
+        <li class=" has-sub-menu {!! (Request::is('outbound*') OR Request::is('outbound')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-file-text"></div>
@@ -237,10 +235,8 @@
                                 <i class="fa fa-circle-o"></i><span>Availability <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Queue <i class="os-icon os-icon-ui-02"></i></span>
-                            </a>
+                        <li class="{!! (url(route('outboundqueue.index')) == Request::url() OR Request::is('outbound/outboundqueue*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','outboundqueue.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('outboundqueue.index')}}"><i class="fa fa-circle-o"></i><span>Queue</span></a>
                         </li>
                         <li>
                             <a href="#">
@@ -653,9 +649,9 @@
                         <li class="{!! (url(route('dotype.index')) == Request::url() OR Request::is('master-data/dotype*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','dotype.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('dotype.index')}}"><i class="fa fa-circle-o"></i><span>Do Type</span></a>
                         </li>
-                        <li class="{!! (url(route('document.index')) == Request::url() OR Request::is('master-data/document*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','document.read'])) ? '' : 'display:none;' }}">
+                        {{--<li class="{!! (url(route('document.index')) == Request::url() OR Request::is('master-data/document*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','document.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('document.index')}}"><i class="fa fa-circle-o"></i><span>Master Document</span></a>
-                        </li>
+                        </li>--}}
                         <li class="{!! (url(route('branch.index')) == Request::url() OR Request::is('master-data/branch*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','branch.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('branch.index')}}"><i class="fa fa-circle-o"></i><span>Branch</span></a>
                         </li>

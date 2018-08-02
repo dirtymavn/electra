@@ -637,4 +637,44 @@ class TourOrderController extends Controller
             return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
         }
     }
+
+    /**
+     * Get detail of Tour Order resource in storage <Auto Generate>.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function detailTourOrder(Request $request)
+    {
+        $result = (object) array();
+        $code = 404;
+        $message = 'Data Not Found';
+
+        // Find Tour Order
+        $tourOrder = TourOrder::find($request->id);
+
+        if ($tourOrder) {
+            // If Exist
+
+            // Get Data relation of tour
+            $tourOrder->tour;
+
+            // Get Data relation of paxlist
+            foreach ($tourOrder->paxLists as $key => $value) {
+                // Get Data relation of paxlist tour
+                $value->paxListTour;
+
+                // Get Data relation of paxlist tour accomodation
+                $value->paxListTour->paxListTourAccomodation;
+                // Get Data relation of paxlist tour selling
+                $value->paxListTour->paxListTourSelling;
+                // Get Data relation of paxlist tour flights
+                $value->paxListTour->paxListTourFlights;
+            }
+
+            $result = $tourOrder->toArray();
+        }
+
+        return response()->json(['code' => $code, 'message' => $message, 'data' => $result], 200);
+    }
 }
