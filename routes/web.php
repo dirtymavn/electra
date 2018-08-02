@@ -323,6 +323,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('department/search/data', ['as' => 'department.search-data', 'uses' => 'CompanyDepartmentController@searchData']);
         Route::get('department/export/excel', ['as' => 'export.department.excel', 'uses' => 'CompanyDepartmentController@export_excel']);
         Route::get('department/export/pdf', ['as' => 'export.department.pdf', 'uses' => 'CompanyDepartmentController@export_pdf']);
+
+        // Master Credit Card
+        Route::resource('credit-card', 'CreditCardController');
+        Route::post('credit-card/bulk-delete', array('as' => 'credit-card.bulk-delete', 'uses' => 'CreditCardController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,credit-card.destroy'));
+        Route::get('credit-card/export/excel', ['as' => 'export.credit-card.excel', 'uses' => 'CreditCardController@export_excel']);
+        Route::get('credit-card/export/pdf', ['as' => 'export.credit-card.pdf', 'uses' => 'CreditCardController@export_pdf']);
     });
 
     // System
