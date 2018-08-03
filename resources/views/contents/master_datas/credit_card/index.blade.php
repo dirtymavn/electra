@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Business - Delivery')
+@section('title', 'Credit Card')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,24 +9,25 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{route('delivery.index')}}">Delivery</a></li>
+    <li class="breadcrumb-item">Credit Card</li>
 </ul>
 @endsection
 
-@section('page_title', 'Delivery')
+@section('page_title', 'Credit Card Lists')
 
 @section('content')
 @include('flash::message')
 <div class="row">
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'delivery.create']))
-            <a href="{{ route('delivery.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Delivery
+        @if(user_info()->hasAnyAccess(['admin.company', 'credit-card.create']))
+            <a href="{{ route('credit-card.create')}}" class="btn btn-primary" id="btn-submit">
+                <i class="fa fa-plus m-right-10"></i> Add Credit Card Lists
             </a>
         @endif
     </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'delivery.destroy']))
+        @if(user_info()->hasAnyAccess(['admin.company', 'credit-card.destroy']))
             <button class="btn btn-danger" id="bulk-delete">
                 <i class="fa fa-trash m-right-10"></i> Bulk Delete
             </button>
@@ -38,8 +39,8 @@
                 Actions
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('export.delivery.excel') }}">Export XLS</a>
-                <a class="dropdown-item" href="{{ route('export.delivery.pdf') }}">Export PDF</a>
+                <a class="dropdown-item" href="{{ route('export.credit-card.excel') }}">Export XLS</a>
+                <a class="dropdown-item" href="{{ route('export.credit-card.pdf') }}">Export PDF</a>
             </div>
         </div>
     </div>
@@ -57,7 +58,7 @@
 
 <script>
     $(document).ready(function() {
-        spinnerLoad($('#form-delivery'));
+        spinnerLoad($('#form-credit-card'));
     });
 
     $(document).on('click', '#bulk-delete', function() {
@@ -77,7 +78,7 @@
         });
         
         if (ids.length > 0) {
-            bulkDelete("{{ route('delivery.bulk-delete') }}", ids);
+            bulkDelete("{{ route('credit-card.bulk-delete') }}", ids);
         } else {
             alert('Something went wrong!');
             return false;
