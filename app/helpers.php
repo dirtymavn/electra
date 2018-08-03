@@ -404,3 +404,53 @@ if (!function_exists('wew')) {
     $randomString = str_shuffle($randomString);
     return $randomString;
 }
+if (!function_exists('propertytype')) {
+    function propertytype(){
+        $string = array(
+                        1 => 'All suite',
+                        2 => 'Resort',
+                        3 => 'Business',
+                        4 => 'Extended Stay',
+                        5 => 'Meeting',
+                        6 => 'Residential Apartment',
+                        7 => 'Others'
+                    );
+
+        return $string;
+    }
+}
+
+if (!function_exists('deposittype')) {
+    function deposittype(){
+        $string = array(
+                        'tt' => 'TT',
+                        'bank draft' => 'Bank Draft',
+                        'credit' => 'Credit',
+                        'other' => 'Others'
+                    );
+        return $string;
+    }
+}
+
+if (!function_exists('paymenttype')) {
+    function paymenttype(){
+        $string = array(
+                        'tt' => 'TT',
+                        'bank draft' => 'Bank Draft',
+                        'credit' => 'Credit',
+                        'other' => 'Others'
+                    );
+        return $string;
+    }
+}
+
+if (!function_exists('season')) {
+    function season(){
+        $string = array(
+                        'low season' => 'Low season',
+                        'shoulder season' => 'shoulder season',
+                        'high season' => 'high season'
+                    );
+        return $string;
+    }
+}

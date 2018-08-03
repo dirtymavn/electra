@@ -325,6 +325,47 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('department/export/excel', ['as' => 'export.department.excel', 'uses' => 'CompanyDepartmentController@export_excel']);
         Route::get('department/export/pdf', ['as' => 'export.department.pdf', 'uses' => 'CompanyDepartmentController@export_pdf']);
 
+        // Master Hotel Chain
+        Route::resource('hotel-chain', 'HotelChainController');
+        Route::post('hotel-chain/bulk-delete', array('as' => 'hotel-chain.bulk-delete', 'uses' => 'HotelChainController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,hotel-chain.destroy'));
+        Route::get('hotel-chain/export/excel', ['as' => 'export.hotel-chain.excel', 'uses' => 'HotelChainController@export_excel']);
+        Route::get('hotel-chain/export/pdf', ['as' => 'export.hotel-chain.pdf', 'uses' => 'HotelChainController@export_pdf']);
+
+         // Master Hotel
+        Route::resource('master-hotel', 'MasterHotelController');
+        Route::post('master-hotel/bulk-delete', array(
+                                                    'as' => 'master-hotel.bulk-delete',
+                                                    'uses' => 'MasterHotelController@bulkDelete',
+                                                    'middleware' => 'sentinel_access:admin.company,master-hotel.destroy'
+                                                ));
+        Route::get('master-hotel/export/excel', ['as' => 'export.master-hotel.excel', 'uses' => 'MasterHotelController@export_excel']);
+        Route::get('master-hotel/export/pdf', ['as' => 'export.master-hotel.pdf', 'uses' => 'MasterHotelController@export_pdf']);
+        Route::post('master-hotel/get-detail-data', array(
+                                                        'as' => 'master-hotel.get-detail-data',
+                                                        'uses' => 'MasterHotelController@detailData',
+                                                        'middleware' => 'sentinel_access:admin.company,master-hotel.create'
+                                                    ));
+        Route::post('master-hotel/master-hotel-detail/delete', array(
+                                                                'as' => 'master-hotel.detail.delete',
+                                                                'uses' => 'MasterHotelController@masterhotelDetailDelete', 
+                                                                'middleware' => 'sentinel_access:admin.company,master-hotel.create'
+                                                            ));
+        Route::post('master-hotel/master-hotel-detail/detail', array(
+                                                                'as' => 'master-hotel.detail.detail',
+                                                                'uses' => 'MasterHotelController@masterhotelDetailGetDetail',
+                                                                'middleware' => 'sentinel_access:admin.company,master-hotel.create'
+                                                            ));
+        Route::post('master-hotel/master-hotel-contact-detail', array(
+                                                            'as' => 'master-hotel.hotel-contact-detail.post',
+                                                            'uses' => 'MasterHotelController@masterhotelDetailHotelContact',
+                                                            'middleware' => 'sentinel_access:admin.company,master-hotel.create'
+                                                        ));
+        Route::post('master-hotel/master-hotel-service-detail', array(
+                                                            'as' => 'master-hotel.hotel-service-detail.post',
+                                                            'uses' => 'MasterHotelController@masterhotelDetailHotelService',
+                                                            'middleware' => 'sentinel_access:admin.company,master-hotel.create'
+                                                        ));
+
         // Master Credit Card
         Route::resource('credit-card', 'CreditCardController');
         Route::post('credit-card/bulk-delete', array('as' => 'credit-card.bulk-delete', 'uses' => 'CreditCardController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,credit-card.destroy'));
