@@ -568,10 +568,12 @@
                     $('#rebate').val(value.rebate);
                     $('#comm').val(value.comm);
                     $('#gst').val(value.gst);
-                    $('#airline_id').val(value.airline_id);
+                    $('#airline_id').select2().val(value.airline_id).trigger('change');
+                    initSelect2Remote($('#airline_id'), "{{ route('airline.search-data') }}", "Choose Airline", 0);
                     $('#ticket_no').val(value.ticket_no);
                     $('#register_date').val(value.register_date);
-                    $('#currency').val(value.currency);
+                    $('#currency').select2().val(value.currency).trigger('change');
+                    initSelect2Remote($('#currency'), "{{ route('currencyrate.search-data') }}", "Choose Currency", 0, true);
                     $('#selling_special_req').val(value.selling_special_req);
                     $('#selling_remark').val(value.selling_remark);
                     $('#tour_paxlist_id').val(data.data.id);
@@ -582,6 +584,7 @@
                 }
 
                 if (element == 'paxlist-flight') {
+                    console.log(value);
                     $('#tour_paxlist_flight_id').val(data.data.id);
                         
                     $('#flight_from').select2({placeholder: 'Choose Flight From', allowClear: true}).val(value.flight_from_ori).trigger('change');

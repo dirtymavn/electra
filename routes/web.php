@@ -44,6 +44,16 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('delivery/bulk-delete', array('as' => 'delivery.bulk-delete', 'uses' => 'DeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,delivery.destroy'));
         Route::get('delivery/export/excel', ['as' => 'export.delivery.excel', 'uses' => 'DeliveryController@export_excel']);
         Route::get('delivery/export/pdf', ['as' => 'export.delivery.pdf', 'uses' => 'DeliveryController@export_pdf']);
+
+        // Queue
+        Route::resource('businessqueue', 'BusinessQueueController');
+        Route::post('businessqueue/bulk-delete', array('as' => 'businessqueue.bulk-delete', 'uses' => 'BusinessQueueController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,businessqueue.destroy'));
+        Route::post('businessqueue/get-data', array('as' => 'businessqueue.get-data', 'uses' => 'BusinessQueueController@getData'));
+        Route::post('businessqueue/queue-message', array('as' => 'businessqueue.rate.post', 'uses' => 'BusinessQueueController@queueStore', 'middleware' => 'sentinel_access:admin.company,businessqueue.create'));
+        Route::post('businessqueue/data/delete', array('as' => 'businessqueue.data.delete', 'uses' => 'BusinessQueueController@dataDelete', 'middleware' => 'sentinel_access:admin.company,businessqueue.create'));
+        Route::post('businessqueue/data/detail', array('as' => 'businessqueue.data.detail', 'uses' => 'BusinessQueueController@dataDetail', 'middleware' => 'sentinel_access:admin.company,businessqueue.create'));
+        Route::get('businessqueue/export/excel', ['as' => 'export.businessqueue.excel', 'uses' => 'BusinessQueueController@export_excel']);
+        Route::get('businessqueue/export/pdf', ['as' => 'export.businessqueue.pdf', 'uses' => 'BusinessQueueController@export_pdf']);
         
     });
 
@@ -60,6 +70,23 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
         //Tour Order Paxlist Flight
         Route::post('tourorder/paxlist-flight', array('as' => 'tourorder.paxlist-flight.post', 'uses' => 'TourOrderController@tourOrderPaxlistFlightStore', 'middleware' => 'sentinel_access:admin.company,tourorder.create'));
+
+        // detail tour order <get all data>
+        Route::get('tourorder/data/get-detail', array('as' => 'tourorder.data.get-detail', 'uses' => 'TourOrderController@detailTourOrder', 'middleware' => 'sentinel_access:admin.company,tourorder.create'));
+
+        // Queue
+        Route::resource('outboundqueue', 'OutboundQueueController');
+        Route::post('outboundqueue/bulk-delete', array('as' => 'outboundqueue.bulk-delete', 'uses' => 'OutboundQueueController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,outboundqueue.destroy'));
+        Route::post('outboundqueue/get-data', array('as' => 'outboundqueue.get-data', 'uses' => 'OutboundQueueController@getData'));
+        Route::post('outboundqueue/queue-message', array('as' => 'outboundqueue.rate.post', 'uses' => 'OutboundQueueController@queueStore', 'middleware' => 'sentinel_access:admin.company,outboundqueue.create'));
+        Route::post('outboundqueue/data/delete', array('as' => 'outboundqueue.data.delete', 'uses' => 'OutboundQueueController@dataDelete', 'middleware' => 'sentinel_access:admin.company,outboundqueue.create'));
+        Route::post('outboundqueue/data/detail', array('as' => 'outboundqueue.data.detail', 'uses' => 'OutboundQueueController@dataDetail', 'middleware' => 'sentinel_access:admin.company,outboundqueue.create'));
+        Route::get('outboundqueue/export/excel', ['as' => 'export.outboundqueue.excel', 'uses' => 'OutboundQueueController@export_excel']);
+        Route::get('outboundqueue/export/pdf', ['as' => 'export.outboundqueue.pdf', 'uses' => 'OutboundQueueController@export_pdf']);
+
+        Route::get('tourorder/export/excel', ['as' => 'export.tourorder.excel', 'uses' => 'TourOrderController@export_excel']);
+        Route::get('tourorder/export/pdf', ['as' => 'export.tourorder.pdf', 'uses' => 'TourOrderController@export_pdf']);
+
     });
 
     // Hotel

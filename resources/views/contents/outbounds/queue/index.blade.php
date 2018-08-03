@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Business - Delivery')
+@section('title', 'Document')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,41 +9,24 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{route('delivery.index')}}">Delivery</a></li>
+    <li class="breadcrumb-item">Document</li>
 </ul>
 @endsection
 
-@section('page_title', 'Delivery')
+@section('page_title', 'Document Lists')
 
 @section('content')
 @include('flash::message')
-<div class="row">
-    <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'delivery.create']))
-            <a href="{{ route('delivery.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Delivery
-            </a>
-        @endif
-    </div>
-    <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'delivery.destroy']))
-            <button class="btn btn-danger" id="bulk-delete">
-                <i class="fa fa-trash m-right-10"></i> Bulk Delete
-            </button>
-        @endif
-    </div>
-    <div class="col-sm-3">
-        <div class="dropdown">
-            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                Actions
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('export.delivery.excel') }}">Export XLS</a>
-                <a class="dropdown-item" href="{{ route('export.delivery.pdf') }}">Export PDF</a>
-            </div>
-        </div>
-    </div>
-</div>
+@if(user_info()->hasAnyAccess(['admin.company', 'outboundqueue.create']))
+    <a href="{{ route('outboundqueue.create')}}" class="btn btn-primary" id="btn-submit">
+        <i class="fa fa-plus m-right-10"></i> Add Document
+    </a>
+@endif
+@if(user_info()->hasAnyAccess(['admin.company', 'outboundqueue.destroy']))
+    <button class="btn btn-danger" id="bulk-delete">
+        <i class="fa fa-trash m-right-10"></i> Bulk Delete
+    </button>
+@endif
 <br>
 
 <div class="table-responsive">
@@ -57,7 +40,7 @@
 
 <script>
     $(document).ready(function() {
-        spinnerLoad($('#form-delivery'));
+        spinnerLoad($('#form-outboundqueue'));
     });
 
     $(document).on('click', '#bulk-delete', function() {
@@ -77,7 +60,7 @@
         });
         
         if (ids.length > 0) {
-            bulkDelete("{{ route('delivery.bulk-delete') }}", ids);
+            bulkDelete("{{ route('outboundqueue.bulk-delete') }}", ids);
         } else {
             alert('Something went wrong!');
             return false;
