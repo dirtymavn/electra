@@ -31,6 +31,6 @@ class CreateTableMasterHotelChain extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('master_hotel_chain');
     }
 }

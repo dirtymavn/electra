@@ -25,8 +25,7 @@ class MasterHotelRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'address' => 'required',
-            'email' => 'email'
+            'address' => 'required'
         ];
     }
 }
