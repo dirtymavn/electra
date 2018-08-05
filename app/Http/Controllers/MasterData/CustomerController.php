@@ -74,7 +74,7 @@ class CustomerController extends Controller
         $rptGrp = $this->masterCustomer->rptGrp();
         $customerGroup = $this->masterCustomer->customerGroup();
         $countries = $this->countries->pluck('name', 'name');
-        return view('contents.master_datas.customer.create', compact('companies', 'meals', 'countries', 'rptGrp'));
+        return view('contents.master_datas.customer.create', compact('companies', 'meals', 'countries', 'rptGrp', 'customerGroup'));
     }
 
     /**

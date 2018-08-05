@@ -187,10 +187,10 @@ class RegionController extends Controller
      */
     public function export_excel()
     {
-        $airline = Region::select('*')->get();
-        Excel::create('testing-'.date('Ymd'), function($excel) use ($airline) {
-            $excel->sheet('Sheet 1', function($sheet) use ($airline) {
-                $sheet->fromArray($airline);
+        $region = Region::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($region) {
+            $excel->sheet('Sheet 1', function($sheet) use ($region) {
+                $sheet->fromArray($region);
             });
         })->export('xls');
     }
@@ -202,8 +202,8 @@ class RegionController extends Controller
      */
     public function export_pdf()
     {
-        $airlines = Region::all();
-        $pdf = PDF::loadView('contents.master_datas.airline.pdf', compact('airlines'));
-        return $pdf->download('airline.pdf');
+        $regions = Region::all();
+        $pdf = PDF::loadView('contents.master_datas.region.pdf', compact('regions'));
+        return $pdf->download('region.pdf');
     }
 }
