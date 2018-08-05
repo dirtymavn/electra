@@ -551,8 +551,8 @@
                         <li class="{!! (url(route('customer.index')) == Request::url() OR Request::is('master-data/customer*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','customer.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('customer.index')}}"><i class="fa fa-circle-o"></i><span>Customer</span></a>
                         </li>
-                        <li class="{!! (url(route('master-hotel.index')) == Request::url() OR Request::is('master-data/master-hotel*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','creaditcard.read'])) ? '' : 'display:none;' }}">
-                            <a href="{ route('master-hotel.index') }}"><i class="fa fa-circle-o"></i><span>Hotel </span></a>
+                        <li class="{!! (url(route('master-hotel.index')) == Request::url() OR Request::is('master-data/master-hotel*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','master-hotel.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{ route('master-hotel.index') }}"><i class="fa fa-circle-o"></i><span>Hotel </span></a>
                         </li>
                         <li class="{!! (url(route('hotel-chain.index')) == Request::url() OR Request::is('master-data/hotel-chain*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-chain.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('hotel-chain.index') }} "><i class="fa fa-circle-o"></i><span>Hotel Chain</span></a>
