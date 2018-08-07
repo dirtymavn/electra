@@ -557,6 +557,14 @@
                         <li class="{!! (url(route('hotel-chain.index')) == Request::url() OR Request::is('master-data/hotel-chain*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-chain.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('hotel-chain.index') }} "><i class="fa fa-circle-o"></i><span>Hotel Chain</span></a>
                         </li>
+                        <li class="{!! (url(route('hotel-allotment.index')) == Request::url() OR Request::is('master-data/hotel-allotment*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-allotment.read'])) ? '' : 'display:none;' }}">
+                            <a href=" {{ route('hotel-allotment.index') }} "><i class="fa fa-circle-o"></i><span>Hotel Allotment</span></a>
+                        </li>
+                        <li class="{!! (url(route('air-allotment.index')) == Request::url() OR Request::is('master-data/air-allotment*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','creaditcard.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('air-allotment.index')}}">
+                                <i class="fa fa-circle-o"></i><span>Air Allotment</span>
+                            </a>
+                        </li>
                         <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('master-data/supplier*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','supplier.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('supplier.index') }} "><i class="fa fa-circle-o"></i><span>Supplier</span></a>
                         </li>
