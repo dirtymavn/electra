@@ -86,6 +86,14 @@ class MasterCustomer extends Model implements Auditable
     }
 
     /**
+     * Get the term_fee for the customer.
+     */
+    public function sales()
+    {
+        return $this->belongTo(Business\Sales\TrxSales::class, 'sales_id');
+    }
+
+    /**
      * The "booting" method of the model.
      *
      * @return void

@@ -46,4 +46,14 @@ class Country extends Model implements Auditable
     {
         return $query->whereCompanyId(user_info('company_id'))->whereIsDraft(false);
     }
+
+    public static function getAvailableData()
+    {
+        $return = self::join('companies', 'companies.id', '=', 'countries.company_id')
+            ->where('countries.is_draft', false)
+            ->where('countries.company_id', user_info('company_id'));
+
+        return $return;
+
+    }
 }

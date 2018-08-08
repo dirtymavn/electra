@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'GST')
+@section('title', 'Air Allotment')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,24 +9,25 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item">GST</li>
+    <li class="breadcrumb-item">Air Allotment</li>
 </ul>
 @endsection
 
-@section('page_title', 'GST Lists')
+@section('page_title', 'Air Allotment Lists')
 
 @section('content')
 @include('flash::message')
 <div class="row">
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'gst.create']))
-            <a href="{{ route('gst.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add GST
+        @if(user_info()->hasAnyAccess(['admin.company', 'air-allotment.create']))
+            <a href="{{ route('air-allotment.create')}}" class="btn btn-primary" id="btn-submit">
+                <i class="fa fa-plus m-right-10"></i> Add Air Allotment Lists
             </a>
         @endif
     </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'gst.destroy']))
+        @if(user_info()->hasAnyAccess(['admin.company', 'air-allotment.destroy']))
             <button class="btn btn-danger" id="bulk-delete">
                 <i class="fa fa-trash m-right-10"></i> Bulk Delete
             </button>
@@ -38,8 +39,8 @@
                 Actions
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('export.gst.excel') }}">Export XLS</a>
-                <a class="dropdown-item" href="{{ route('export.gst.pdf') }}">Export PDF</a>
+                <a class="dropdown-item" href="{{ route('export.air-allotment.excel') }}">Export XLS</a>
+                <a class="dropdown-item" href="{{ route('export.air-allotment.pdf') }}">Export PDF</a>
             </div>
         </div>
     </div>
@@ -57,7 +58,7 @@
 
 <script>
     $(document).ready(function() {
-        spinnerLoad($('#form-gst'));
+        spinnerLoad($('#form-air-allotment'));
     });
 
     $(document).on('click', '#bulk-delete', function() {
@@ -77,7 +78,7 @@
         });
         
         if (ids.length > 0) {
-            bulkDelete("{{ route('gst.bulk-delete') }}", ids);
+            bulkDelete("{{ route('air-allotment.bulk-delete') }}", ids);
         } else {
             alert('Something went wrong!');
             return false;

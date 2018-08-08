@@ -212,4 +212,30 @@ class CountryController extends Controller
 
         return response()->json(['message' => 'Success', 'items' => $results]);
     }
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_excel()
+    {
+        $country = Country::select('*')->get();
+        Excel::create('testing-'.date('Ymd'), function($excel) use ($country) {
+            $excel->sheet('Sheet 1', function($sheet) use ($country) {
+                $sheet->fromArray($country);
+            });
+        })->export('xls');
+    }
+
+
+    /**
+     * Export PDF
+     * @return void
+     */
+    public function export_pdf()
+    {
+        $country = Country::all();
+        $pdf = PDF::loadView('contents.master_datas.country.pdf', compact('countrys'));
+        return $pdf->download('country.pdf');
+    }
 }

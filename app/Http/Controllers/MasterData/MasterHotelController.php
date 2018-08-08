@@ -20,7 +20,11 @@ class MasterHotelController extends Controller
     public function __construct()
     {
         // middleware
+<<<<<<< HEAD
         $this->middleware('sentinel_access:admin.company,master-hotel.read', ['only' => ['index']]);
+=======
+        $this->middleware('sentinel_access:admin.company,master-xxx.read', ['only' => ['index']]);
+>>>>>>> 607355bf2b0a34e27714b9742c63b30af018ce0b
         $this->middleware('sentinel_access:admin.company,master-hotel.create', ['only' => ['create', 'store']]);
         $this->middleware('sentinel_access:admin.company,master-hotel.update', ['only' => ['edit', 'update']]);
         $this->middleware('sentinel_access:admin.company,master-hotel.destroy', ['only' => ['destroy']]);

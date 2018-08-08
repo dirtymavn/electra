@@ -185,7 +185,7 @@ class GstController extends Controller
     public function export_excel()
     {
         $gst = Gst::select('*')->get();
-        Excel::create('testing-'.date('Ymd'), function($excel) use ($gst) {
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($gst) {
             $excel->sheet('Sheet 1', function($sheet) use ($gst) {
                 $sheet->fromArray($gst);
             });
@@ -199,8 +199,8 @@ class GstController extends Controller
      */
     public function export_pdf()
     {
-        $vouchers = Gst::all();
-        $pdf = PDF::loadView('contents.master_datas.gst.pdf', compact('gsts'));
+        $gsts = Gst::all();
+        $pdf = \PDF::loadView('contents.master_datas.gst.pdf', compact('gsts'));
         return $pdf->download('gst.pdf');
     }
 }

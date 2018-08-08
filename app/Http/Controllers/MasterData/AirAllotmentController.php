@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers\MasterData;
 
-use App\Models\MasterData\Region;
+use App\Models\MasterData\AirAllotment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\MasterData\RegionDataTable;
-use App\Http\Requests\MasterData\RegionRequest;
+use App\DataTables\MasterData\AirAllotmentDataTable;
+use App\Http\Requests\MasterData\AirAllotmentRequest;
+use App\Models\MasterData\Airport;
+use App\Models\MasterData\Airline;
 
-use Excel;
-use PDF;
 
-class RegionController extends Controller
+class AirAllotmentController extends Controller
 {
     public function __construct()
     {
         // middleware
-        $this->middleware('sentinel_access:admin.company,region.read', ['only' => ['index']]);
-        $this->middleware('sentinel_access:admin.company,region.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel_access:admin.company,region.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel_access:admin.company,region.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel_access:admin.company,air-allotment.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,air-allotment.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,air-allotment.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,air-allotment.destroy', ['only' => ['destroy']]);
 
     }
 
@@ -28,9 +28,9 @@ class RegionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(RegionDataTable $dataTable)
+    public function index(AirAllotmentDataTable $dataTable)
     {
-        return $dataTable->render('contents.master_datas.region.index');
+        return $dataTable->render('contents.master_datas.air_allotment.index');
     }
 
     /**
@@ -40,16 +40,18 @@ class RegionController extends Controller
      */
     public function create()
     {
-        return view('contents.master_datas.region.create');
+        $dataairport = Airport::getDataAvailable()->pluck('airports.airport_name', 'airports.id')->all();
+        $dataairline = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')->all();
+        return view('contents.master_datas.air_allotment.create', compact('dataairport', 'dataairline'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\RegionRequest  $request
+     * @param  \App\Http\Requests\MasterData\AirAllotmentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RegionRequest $request)
+    public function store(AirAllotmentRequest $request)
     {
         \DB::beginTransaction();
         try {
@@ -64,14 +66,14 @@ class RegionController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
-            $insert = Region::create($request->all());
+            $insert = AirAllotment::create($request->all());
 
             if ($insert) {
-                $redirect = redirect()->route('region.index');
+                $redirect = redirect()->route('air-allotment.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('region.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('air-allotment.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('region.create');
+                    $redirect = redirect()->route('air-allotment.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -88,10 +90,10 @@ class RegionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MasterData\Region  $region
+     * @param  \App\Models\MasterData\AirAllotment  $AirAllotment
      * @return \Illuminate\Http\Response
      */
-    public function show(Region $region)
+    public function show(AirAllotment $AirAllotment)
     {
         //
     }
@@ -99,39 +101,46 @@ class RegionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MasterData\Region  $region
+     * @param  \App\Models\MasterData\AirAllotment  $AirAllotment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Region $region)
+    public function edit(AirAllotment $AirAllotment)
     {
-        return view('contents.master_datas.region.edit', compact('region'));
+        $dataairport = Airport::getDataAvailable()->pluck('airports.airport_name', 'airports.id');
+        $dataairline = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id');
+        return view('contents.master_datas.air_allotment.edit')->with([
+                                                                        'airallotment' => $AirAllotment,
+                                                                        'dataairport' => $dataairport,
+                                                                        'dataairline' => $dataairline
+                                                                    ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\MasterData\RegionRequest  $request
-     * @param  \App\Models\MasterData\Region  $region
+     * @param  \App\Http\Requests\MasterData\AirAllotmentRequest  $request
+     * @param  \App\Models\MasterData\AirAllotment  $AirAllotment
      * @return \Illuminate\Http\Response
      */
-    public function update(RegionRequest $request, Region $region)
+    public function update(AirAllotmentRequest $request, AirAllotment $AirAllotment)
     {
         \DB::beginTransaction();
         try {
+            // $airline = Airline::find($id);
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('region.index');
+                $redirect = redirect()->route('air-allotment.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('region.create');
+                $redirect = redirect()->route('air-allotment.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('region.edit', $region->id);
+                $redirect = redirect()->route('air-allotment.edit', $AirAllotment->id);
             }
 
-            $update = $region->update($request->all());
+            $update = $AirAllotment->update($request->all());
 
             if ($update) {
 
@@ -150,15 +159,15 @@ class RegionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MasterData\Region  $region
+     * @param  \App\Models\MasterData\AirAllotment  $AirAllotment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Region $region)
+    public function destroy(AirAllotment $AirAllotment)
     {
-        $region->delete();
+        $AirAllotment->delete();
         flash()->success(trans('message.delete.success'));
 
-        return redirect()->route('region.index');
+        return redirect()->route('air-allotment.index');
     }
 
     /**
@@ -171,14 +180,14 @@ class RegionController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            Region::whereIn('id', $ids)->delete();
+            AirAllotment::whereIn('id', $ids)->delete();
 
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('region.index');
+        return redirect()->route('air-allotment.index');
     }
 
     /**
@@ -187,10 +196,10 @@ class RegionController extends Controller
      */
     public function export_excel()
     {
-        $region = Region::select('*')->get();
-        Excel::create('testing-'.date('Ymd'), function($excel) use ($region) {
-            $excel->sheet('Sheet 1', function($sheet) use ($region) {
-                $sheet->fromArray($region);
+        $type = AirAllotment::select('*')->get();
+        \Excel::create('testing-'.date('Ymd'), function($excel) use ($type) {
+            $excel->sheet('Sheet 1', function($sheet) use ($type) {
+                $sheet->fromArray($type);
             });
         })->export('xls');
     }
@@ -202,8 +211,8 @@ class RegionController extends Controller
      */
     public function export_pdf()
     {
-        $regions = Region::all();
-        $pdf = PDF::loadView('contents.master_datas.region.pdf', compact('regions'));
-        return $pdf->download('region.pdf');
+        $types = AirAllotment::all();
+        $pdf = \PDF::loadView('contents.master_datas.air_allotment.pdf', compact('types'));
+        return $pdf->download('air-allotment.pdf');
     }
 }

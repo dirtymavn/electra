@@ -206,4 +206,15 @@ class AirportController extends Controller
         $pdf = PDF::loadView('contents.master_datas.airline.pdf', compact('airlines'));
         return $pdf->download('airline.pdf');
     }
+
+    public function searchData(Request $request)
+    {
+        $results = Airport::getDataAvailable()
+            ->select('airports.id', 'airports.airport_name as text')
+            ->where('airports.airport_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

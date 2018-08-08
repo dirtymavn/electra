@@ -4,7 +4,7 @@ namespace App\Http\Requests\MasterData;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustomerRequest extends FormRequest
+class HotelAllotmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class CustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_name' => 'required',
-            // 'customer_no' => 'required',
-            // 'company_id' => 'required',
-            // 'company_name' => 'required',
+            'id_hotel' => 'required',
+            'address_info' => 'required',
+            'name_info' => 'required',
+            'all_contact_person_info' => 'required'
         ];
     }
 }

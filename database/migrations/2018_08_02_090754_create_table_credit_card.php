@@ -37,6 +37,6 @@ class CreateTableCreditCard extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('master_credit_card');
     }
 }

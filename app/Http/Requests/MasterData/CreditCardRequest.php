@@ -26,6 +26,7 @@ class CreditCardRequest extends FormRequest
         return [
             'number' => 'required',
             'expire_date' => 'required',
+            'name' => 'required',
             'cvv' => 'max:3'
         ];
     }

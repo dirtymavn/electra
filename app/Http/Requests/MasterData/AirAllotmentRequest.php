@@ -4,7 +4,7 @@ namespace App\Http\Requests\MasterData;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CustomerRequest extends FormRequest
+class AirAllotmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,7 @@ class CustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_name' => 'required',
-            // 'customer_no' => 'required',
-            // 'company_id' => 'required',
-            // 'company_name' => 'required',
+            'pnr' => 'required'
         ];
     }
 }
