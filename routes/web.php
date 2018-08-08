@@ -304,6 +304,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('airport/bulk-delete', array('as' => 'airport.bulk-delete', 'uses' => 'AirportController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,airport.destroy'));
         Route::get('airport/export/excel', ['as' => 'export.airport.excel', 'uses' => 'AirportController@export_excel']);
         Route::get('airport/export/pdf', ['as' => 'export.airport.pdf', 'uses' => 'AirportController@export_pdf']);
+        Route::get('airport/search/data', ['as' => 'airport.search-data', 'uses' => 'AirportController@searchData', 'middleware' => 'sentinel_access:admin.company,airport.create']);
 
         // Tour
         Route::resource('tour', 'TourController');
@@ -392,6 +393,43 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                             'uses' => 'MasterHotelController@masterhotelDetailHotelService',
                                                             'middleware' => 'sentinel_access:admin.company,master-hotel.create'
                                                         ));
+
+
+         // Master Hotel allotment
+        Route::resource('hotel-allotment', 'HotelAllotmentController');
+        Route::post('hotel-allotment/bulk-delete', array(
+                                                    'as' => 'hotel-allotment.bulk-delete',
+                                                    'uses' => 'HotelAllotmentController@bulkDelete',
+                                                    'middleware' => 'sentinel_access:admin.company,hotel-allotment.destroy'
+                                                ));
+        Route::get('hotel-allotment/export/excel', ['as' => 'export.hotel-allotment.excel', 'uses' => 'HotelAllotmentController@export_excel']);
+        Route::get('hotel-allotment/export/pdf', ['as' => 'export.hotel-allotment.pdf', 'uses' => 'HotelAllotmentController@export_pdf']);
+        Route::post('hotel-allotment/get-detail-data', array(
+                                                        'as' => 'hotel-allotment.get-detail-data',
+                                                        'uses' => 'HotelAllotmentController@detailData',
+                                                        'middleware' => 'sentinel_access:admin.company,hotel-allotment.create'
+                                                    ));
+        Route::post('hotel-allotment/hotel-allotment-detail/delete', array(
+                                                                'as' => 'hotel-allotment.detail.delete',
+                                                                'uses' => 'HotelAllotmentController@hotelallotmentDetailDelete', 
+                                                                'middleware' => 'sentinel_access:admin.company,hotel-allotment.create'
+                                                            ));
+        Route::post('hotel-allotment/hotel-allotment-detail/detail', array(
+                                                                'as' => 'hotel-allotment.detail.detail',
+                                                                'uses' => 'HotelAllotmentController@hotelallotmentDetailGetDetail',
+                                                                'middleware' => 'sentinel_access:admin.company,hotel-allotment.create'
+                                                            ));
+        Route::post('hotel-allotment/hotel-allotment-allotmentdetail-detail', array(
+                                                            'as' => 'hotel-allotment.hotel-allotmentdetail-detail.post',
+                                                            'uses' => 'HotelAllotmentController@hotelallotmantDetailHotelAllotmentdetail',
+                                                            'middleware' => 'sentinel_access:admin.company,hotel-allotment.create'
+                                                        ));
+        // Master air-allotment
+        Route::resource('air-allotment', 'AirAllotmentController');
+        Route::post('air-allotment/bulk-delete', array('as' => 'air-allotment.bulk-delete', 'uses' => 'AirAllotmentController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,air-allotment.destroy'));
+        Route::get('air-allotment/export/excel', ['as' => 'export.air-allotment.excel', 'uses' => 'AirAllotmentController@export_excel']);
+        Route::get('air-allotment/export/pdf', ['as' => 'export.air-allotment.pdf', 'uses' => 'AirAllotmentController@export_pdf']);
+
 
         // Master Credit Card
         Route::resource('credit-card', 'CreditCardController');
