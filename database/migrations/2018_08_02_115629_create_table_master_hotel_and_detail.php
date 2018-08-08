@@ -128,10 +128,7 @@ class CreateTableMasterHotelAndDetail extends Migration
     {
         Schema::disableForeignKeyConstraints();
             
-<<<<<<< HEAD
-=======
             Schema::dropIfExists('master_hotel');
->>>>>>> 607355bf2b0a34e27714b9742c63b30af018ce0b
             Schema::dropIfExists('master_hotel_contact');
             Schema::dropIfExists('master_hotel_property');
             Schema::dropIfExists('master_hotel_finance');
