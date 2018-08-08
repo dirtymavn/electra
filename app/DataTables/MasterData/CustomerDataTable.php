@@ -103,7 +103,7 @@ class CustomerDataTable extends DataTable
         return [
             'customer_no',
             'customer_name',
-            'company_name',
+            // 'company_name',
             // 'company_name' => ['name' => 'companies.name', 'data' => 'company_name'],
             'status',
             'salutation',

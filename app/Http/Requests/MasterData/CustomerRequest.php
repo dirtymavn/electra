@@ -27,7 +27,7 @@ class CustomerRequest extends FormRequest
             'customer_name' => 'required',
             // 'customer_no' => 'required',
             // 'company_id' => 'required',
-            'company_name' => 'required',
+            // 'company_name' => 'required',
         ];
     }
 }
