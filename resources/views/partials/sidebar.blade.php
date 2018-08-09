@@ -181,11 +181,14 @@
                         <li class="{!! (url(route('sales.index')) == Request::url() OR Request::is('business/sales*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','sales.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('sales.index') }} "><i class="fa fa-circle-o"></i><span>Sales</span></a>
                         </li>
-                        <li>
+                        <li class="{!! (url(route('invoice.index')) == Request::url() OR Request::is('business/invoice*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','invoice.read'])) ? '' : 'display:none;' }}">
+                            <a href=" {{ route('invoice.index') }} "><i class="fa fa-circle-o"></i><span>Invoice</span></a>
+                        </li>
+                        <!-- <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Invoice <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="{!! (url(route('delivery.index')) == Request::url() OR Request::is('business/delivery*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','delivery.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('delivery.index') }} "><i class="fa fa-circle-o"></i><span>Delivery</span></a>
                         </li>

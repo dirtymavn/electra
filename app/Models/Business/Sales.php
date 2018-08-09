@@ -24,6 +24,11 @@ class Sales extends Model
         'company_id'
     ];
 
+    public static function getAvailableData()
+    {
+        return self::where('company_id', user_info()->company_id);
+    }
+
     /**
      * The "booting" method of the model.
      *

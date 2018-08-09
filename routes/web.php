@@ -54,6 +54,42 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('businessqueue/data/detail', array('as' => 'businessqueue.data.detail', 'uses' => 'BusinessQueueController@dataDetail', 'middleware' => 'sentinel_access:admin.company,businessqueue.create'));
         Route::get('businessqueue/export/excel', ['as' => 'export.businessqueue.excel', 'uses' => 'BusinessQueueController@export_excel']);
         Route::get('businessqueue/export/pdf', ['as' => 'export.businessqueue.pdf', 'uses' => 'BusinessQueueController@export_pdf']);
+
+
+         // invoice
+        Route::resource('invoice', 'InvoiceController');
+        Route::post('invoice/bulk-delete', array(
+                                                    'as' => 'invoice.bulk-delete',
+                                                    'uses' => 'InvoiceController@bulkDelete',
+                                                    'middleware' => 'sentinel_access:admin.company,invoice.destroy'
+                                                ));
+        Route::get('invoice/export/excel', ['as' => 'export.invoice.excel', 'uses' => 'InvoiceController@export_excel']);
+        Route::get('invoice/export/pdf', ['as' => 'export.invoice.pdf', 'uses' => 'InvoiceController@export_pdf']);
+        Route::post('invoice/get-detail-data', array(
+                                                        'as' => 'invoice.get-detail-data',
+                                                        'uses' => 'InvoiceController@detailData',
+                                                        'middleware' => 'sentinel_access:admin.company,invoice.create'
+                                                    ));
+        Route::post('invoice/invoice-detail/delete', array(
+                                                                'as' => 'invoice.detail.delete',
+                                                                'uses' => 'InvoiceController@invoiceDetailDelete', 
+                                                                'middleware' => 'sentinel_access:admin.company,invoice.create'
+                                                            ));
+        Route::post('invoice/invoice-detail/detail', array(
+                                                                'as' => 'invoice.detail.detail',
+                                                                'uses' => 'InvoiceController@invoiceDetailGetDetail',
+                                                                'middleware' => 'sentinel_access:admin.company,invoice.create'
+                                                            ));
+        Route::post('invoice/invoice-detail-detail', array(
+                                                            'as' => 'invoice.invoicedetail-detail.post',
+                                                            'uses' => 'InvoiceController@invoicePopupInvoicedetail',
+                                                            'middleware' => 'sentinel_access:admin.company,invoice.create'
+                                                        ));
+        Route::post('invoice/invoice-refund-detail', array(
+                                                            'as' => 'invoice.invoicerefund-detail.post',
+                                                            'uses' => 'InvoiceController@invoicePopupInvoicrefund',
+                                                            'middleware' => 'sentinel_access:admin.company,invoice.create'
+                                                        ));
         
     });
 
