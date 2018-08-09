@@ -51,6 +51,7 @@ class CreateTableTrxInvoiceAndDetail extends Migration
             $table->integer('company_id')->unsigned()->nullable();
             $table->integer('branch_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('trx_invoice_id')->references('id')->on('trx_invoice')->onDelete('cascade');
         });
 
         Schema::create('trx_invoice_refund', function (Blueprint $table) {
@@ -60,6 +61,7 @@ class CreateTableTrxInvoiceAndDetail extends Migration
             $table->integer('company_id')->unsigned()->nullable();
             $table->integer('branch_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('trx_invoice_id')->references('id')->on('trx_invoice')->onDelete('cascade');
         });
 
         Schema::create('trx_invoice_detail', function (Blueprint $table) {
@@ -89,6 +91,7 @@ class CreateTableTrxInvoiceAndDetail extends Migration
             $table->integer('company_id')->unsigned()->nullable();
             $table->integer('branch_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('trx_invoice_id')->references('id')->on('trx_invoice')->onDelete('cascade');
         });
 
         Schema::enableForeignKeyConstraints();
