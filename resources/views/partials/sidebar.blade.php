@@ -220,10 +220,13 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li>
+                        <!-- <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Tour Folder <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
+                        </li> -->
+                        <li class="{!! (url(route('tourfolder.index')) == Request::url() OR Request::is('outbound/tourfolder*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','tourfolder.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('tourfolder.index')}}"><i class="fa fa-circle-o"></i><span>Tour Folder</span></a>
                         </li>
                         <li class="{!! (url(route('tourorder.index')) == Request::url() OR Request::is('outbound/tourorder*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','tourorder.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('tourorder.index')}}"><i class="fa fa-circle-o"></i><span>Tour Order</span></a>

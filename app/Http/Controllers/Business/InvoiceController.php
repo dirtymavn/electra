@@ -169,7 +169,6 @@ class InvoiceController extends Controller
         $listCustCredit = array();
         $customers = MasterCustomer::getAvailableData()->pluck('master_customers.customer_name', 'master_customers.id')
             ->all();
-        // return view('contents.business.invoice.edit', with(['Invoice' => $Invoice, 'listSales' => $listSales, 'customers' => $customers, 'listCustCredit' => $listCustCredit]));
 
         return view('contents.business.invoice.edit', compact('Invoice', 'listSales', 'customers', 'listCustCredit'));
     }

@@ -123,6 +123,53 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('tourorder/export/excel', ['as' => 'export.tourorder.excel', 'uses' => 'TourOrderController@export_excel']);
         Route::get('tourorder/export/pdf', ['as' => 'export.tourorder.pdf', 'uses' => 'TourOrderController@export_pdf']);
 
+
+
+         // tourfolder
+        Route::resource('tourfolder', 'TourFolderController');
+        Route::post('tourfolder/bulk-delete', array(
+                                                    'as' => 'tourfolder.bulk-delete',
+                                                    'uses' => 'TourFolderController@bulkDelete',
+                                                    'middleware' => 'sentinel_access:admin.company,tourfolder.destroy'
+                                                ));
+        Route::get('tourfolder/export/excel', ['as' => 'export.tourfolder.excel', 'uses' => 'TourFolderController@export_excel']);
+        Route::get('tourfolder/export/pdf', ['as' => 'export.tourfolder.pdf', 'uses' => 'TourFolderController@export_pdf']);
+        Route::post('tourfolder/get-detail-data', array(
+                                                        'as' => 'tourfolder.get-detail-data',
+                                                        'uses' => 'TourFolderController@detailData',
+                                                        'middleware' => 'sentinel_access:admin.company,tourfolder.create'
+                                                    ));
+        Route::post('tourfolder/tourfolder-detail/delete', array(
+                                                                'as' => 'tourfolder.detail.delete',
+                                                                'uses' => 'TourFolderController@tourfolderDetailDelete', 
+                                                                'middleware' => 'sentinel_access:admin.company,tourfolder.create'
+                                                            ));
+        Route::post('tourfolder/tourfolder-detail/detail', array(
+                                                                'as' => 'tourfolder.detail.detail',
+                                                                'uses' => 'TourFolderController@tourfolderDetailGetDetail',
+                                                                'middleware' => 'sentinel_access:admin.company,tourfolder.create'
+                                                            ));
+        Route::post('tourfolder/tourfolder-service-detail', array(
+                                                            'as' => 'tourfolder.tourfolderservice-detail.post',
+                                                            'uses' => 'TourFolderController@tourfolderPopupTourfolderservice',
+                                                            'middleware' => 'sentinel_access:admin.company,tourfolder.create'
+                                                        ));
+        Route::post('tourfolder/tourfolder-itinerary-detail', array(
+                                                            'as' => 'tourfolder.tourfolderitinerary-detail.post',
+                                                            'uses' => 'TourFolderController@tourfolderPopupTourfolderitinerary',
+                                                            'middleware' => 'sentinel_access:admin.company,tourfolder.create'
+                                                        ));
+        Route::post('tourfolder/tourfolder-rate-detail', array(
+                                                            'as' => 'tourfolder.tourfolderrate-detail.post',
+                                                            'uses' => 'TourFolderController@tourfolderPopupTourfolderrate',
+                                                            'middleware' => 'sentinel_access:admin.company,tourfolder.create'
+                                                        ));
+        Route::post('tourfolder/tourfolder-guide-detail', array(
+                                                            'as' => 'tourfolder.tourfolderguide-detail.post',
+                                                            'uses' => 'TourFolderController@tourfolderPopupTourfolderguide',
+                                                            'middleware' => 'sentinel_access:admin.company,tourfolder.create'
+                                                        ));
+
     });
 
     // Hotel

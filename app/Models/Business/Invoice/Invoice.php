@@ -36,7 +36,6 @@ class Invoice extends Model implements Auditable
 
     public function InvoiceCustomer()
     {
-        // return $this->belongsTo( InvoiceCustomer::class, 'id', 'trx_invoice_id' );
         return $this->hasOne(InvoiceCustomer::class, 'trx_invoice_id', 'id');
     }
 
