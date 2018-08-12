@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Master Hotel')
+@section('title', 'Edit Hotel')
 
 @section('style')
 <link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" />
@@ -9,12 +9,12 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('master-hotel.index')}}">Master Hotel</a></li>
+        <li class="breadcrumb-item"><a href="{{route('master-hotel.index')}}">Hotel</a></li>
         <li class="breadcrumb-item">Edit</li>
     </ul>
 @endsection
 
-@section('page_title', 'Edit Master Hotel')
+@section('page_title', 'Edit Hotel')
 
 @section('content')
     @include('flash::message')

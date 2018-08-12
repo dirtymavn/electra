@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Master Hotel')
+@section('title', 'Create Hotel')
 
 @section('style')
 @endsection
@@ -8,12 +8,12 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('master-hotel.index')}}">Master Hotel</a></li>
+        <li class="breadcrumb-item"><a href="{{route('master-hotel.index')}}">Hotel</a></li>
         <li class="breadcrumb-item">Create</li>
     </ul>
 @endsection
 
-@section('page_title', 'Create Master Hotel')
+@section('page_title', 'Create Hotel')
 
 @section('content')
     @include('flash::message')

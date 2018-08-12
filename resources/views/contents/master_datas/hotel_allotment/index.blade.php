@@ -13,7 +13,7 @@
 </ul>
 @endsection
 
-@section('page_title', 'Master Hotel Allotment Lists')
+@section('page_title', 'Hotel Allotment Lists')
 
 @section('content')
 @include('flash::message')
@@ -21,7 +21,7 @@
     <div class="col-sm-2">
         @if(user_info()->hasAnyAccess(['admin.company', 'hotel-allotment.create']))
             <a href="{{ route('hotel-allotment.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Master Hotel Allotment Lists
+                <i class="fa fa-plus m-right-10"></i> Add Hotel Allotment
             </a>
         @endif
     </div>

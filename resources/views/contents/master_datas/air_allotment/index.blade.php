@@ -21,7 +21,7 @@
     <div class="col-sm-2">
         @if(user_info()->hasAnyAccess(['admin.company', 'air-allotment.create']))
             <a href="{{ route('air-allotment.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Air Allotment Lists
+                <i class="fa fa-plus m-right-10"></i> Add Air Allotment
             </a>
         @endif
     </div>
