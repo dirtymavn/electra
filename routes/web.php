@@ -174,7 +174,42 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
     // Hotel
     Route::group(['prefix' => 'hotel', 'namespace' => 'Hotel'], function () {
-
+        // Master Hotel booking
+        Route::resource('hotel-booking', 'HotelBookingController');
+        Route::post('hotel-booking/bulk-delete', array('as' => 'hotel-booking.bulk-delete', 'uses' => 'HotelBookingController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,hotel-booking.destroy'));
+        Route::get('hotel-booking/export/excel', ['as' => 'export.hotel-booking.excel', 'uses' => 'HotelBookingController@export_excel']);
+        Route::get('hotel-booking/export/pdf', ['as' => 'export.hotel-booking.pdf', 'uses' => 'HotelBookingController@export_pdf']);
+        Route::post('hotel-booking/get-detail-data', array(
+                                                        'as' => 'hotel-booking.get-detail-data',
+                                                        'uses' => 'HotelBookingController@detailData',
+                                                        'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
+                                                    ));
+        Route::post('hotel-booking/hotel-booking-detail/delete', array(
+                                                                'as' => 'hotel-booking.detail.delete',
+                                                                'uses' => 'HotelBookingController@hotelbookingDetailDelete', 
+                                                                'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
+                                                            ));
+        Route::post('hotel-booking/hotel-booking-detail/detail', array(
+                                                                'as' => 'hotel-booking.detail.detail',
+                                                                'uses' => 'HotelBookingController@hotelbookingDetailGetDetail',
+                                                                'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
+                                                            ));
+        Route::post('hotel-booking/hotel-booking-detail-detail', array(
+                                                            'as' => 'hotel-booking.hotelbookingdetail-detail.post',
+                                                            'uses' => 'HotelBookingController@hotelbookingPopupHotelbookingdetail',
+                                                            'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
+                                                        ));
+        Route::post('hotel-booking/hotel-booking-pax-detail', array(
+                                                            'as' => 'hotel-booking.hotelbookingpax-detail.post',
+                                                            'uses' => 'HotelBookingController@hotelbookingPopupHotelbookingpax',
+                                                            'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
+                                                        ));
+        Route::post('hotel-booking/hotel-booking-service-detail', array(
+                                                            'as' => 'hotel-booking.hotelbookingservice-detail.post',
+                                                            'uses' => 'HotelBookingController@hotelbookingPopupHotelbookingservice',
+                                                            'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
+                                                        ));
+        
     });
 
     // FIT

@@ -21,4 +21,13 @@ class MasterHotelService extends Model
         'branch_id',
     	'company_id'
     ];
+
+    public static function getAvailableData()
+    {
+        $return = self::join('companies', 'companies.id', '=', 'master_hotel_service.company_id')
+            ->where('master_hotel_service.company_id', user_info('company_id'));
+
+        return $return;
+
+    }
 }

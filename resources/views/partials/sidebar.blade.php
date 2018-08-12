@@ -285,11 +285,18 @@
                                 <i class="fa fa-circle-o"></i><span>Enquiry <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Booking <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
+                        </li> -->
+
+
+                        <li class="{!! (url(route('hotel-booking.index')) == Request::url() OR Request::is('accounting/hotel-booking*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-booking.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{ route('hotel-booking.index') }}"><i class="fa fa-circle-o"></i><span>Booking</span></a>
                         </li>
+
+
                         <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Report <i class="os-icon os-icon-ui-02"></i></span>
@@ -566,11 +573,6 @@
                         <li class="{!! (url(route('hotel-allotment.index')) == Request::url() OR Request::is('master-data/hotel-allotment*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-allotment.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('hotel-allotment.index') }} "><i class="fa fa-circle-o"></i><span>Hotel Allotment</span></a>
                         </li>
-                        <li class="{!! (url(route('air-allotment.index')) == Request::url() OR Request::is('master-data/air-allotment*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','creaditcard.read'])) ? '' : 'display:none;' }}">
-                            <a href="{{route('air-allotment.index')}}">
-                                <i class="fa fa-circle-o"></i><span>Air Allotment</span>
-                            </a>
-                        </li>
                         <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('master-data/supplier*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','supplier.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('supplier.index') }} "><i class="fa fa-circle-o"></i><span>Supplier</span></a>
                         </li>
@@ -580,7 +582,7 @@
                         <li class="{!! (url(route('voucher.index')) == Request::url() OR Request::is('master-data/voucher*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','voucher.read'])) ? '' : 'display:none;' }}">
                             <a href="{{ route('voucher.index') }}"><i class="fa fa-circle-o"></i><span>Voucher</span></a>
                         </li>
-                        <li class="sub-submenu">
+                        <li class="sub-submenu {!! (Request::is('master-data/air-allotment') OR Request::is('master-datamaster-data/air-allotment')) ? ' active' : '' !!}">
                             <a>
                                 <i class="fa fa-circle-o"></i><span>Outbound</span><i class="arrow-third-menu os-icon os-icon-chevron-down"></i>
                             </a>
@@ -593,11 +595,12 @@
                                         <li class="{!! (url(route('itin.index')) == Request::url() OR Request::is('outbound/itin*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','itin.read'])) ? '' : 'display:none;' }}">
                                             <a href="{{ route('itin.index') }}"><i class="fa fa-circle-o"></i><span>Itinerary</span></a>
                                         </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-circle-o"></i><span>Air Allotment <i class="os-icon os-icon-ui-02"></i></span>
+                                        <li class="{!! (url(route('air-allotment.index')) == Request::url() OR Request::is('master-data/air-allotment*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','air-allotment.read'])) ? '' : 'display:none;' }}">
+                                            <a href="{{route('air-allotment.index')}}">
+                                                <i class="fa fa-circle-o"></i><span>Air Allotment</span>
                                             </a>
                                         </li>
+
                                     <ul>
                                 </div>
                             </div>

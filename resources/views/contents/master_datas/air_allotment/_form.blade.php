@@ -6,15 +6,15 @@
         </div>
         <div class="form-group">
             {!! Form::label('id_airport_from', trans('Airport From'), ['class' => 'control-label']) !!}
-            {!! Form::select('id_airport_from', ['' => 'Choose airport'] + @$dataairport, old('id_airport_from'), ['class' => 'form-control id_airport_from']) !!}
+            {!! Form::select('id_airport_from', @$dataairport, old('id_airport_from'), ['placeholder' => 'Chosse airport', 'class' => 'form-control id_airport_from']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('id_ariport_to', trans('Airport To'), ['class' => 'control-label']) !!}
-            {!! Form::select('id_ariport_to', ['' => 'Choose airport'] + @$dataairport, old('id_ariport_to'), ['class' => 'form-control id_ariport_to']) !!}
+            {!! Form::select('id_ariport_to', @$dataairport, old('id_ariport_to'), ['placeholder' => 'Chosse airport', 'class' => 'form-control id_ariport_to']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('id_airlines', trans('Airlines'), ['class' => 'control-label']) !!}
-            {!! Form::select('id_airlines', ['' => 'Choose airline'] + @$dataairline, old('id_airlines'), ['class' => 'form-control id_airlines']) !!}
+            {!! Form::select('id_airlines', @$dataairline, old('id_airlines'), ['placeholder' => 'Chosse Airlines','class' => 'form-control id_airlines']) !!}
         </div>
         <div class="form-group">
             {!! Form::label('flight_number', trans('Flight number'), ['class' => 'control-label']) !!}
