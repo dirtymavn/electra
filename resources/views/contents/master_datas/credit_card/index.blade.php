@@ -21,7 +21,7 @@
     <div class="col-sm-2">
         @if(user_info()->hasAnyAccess(['admin.company', 'credit-card.create']))
             <a href="{{ route('credit-card.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Credit Card Lists
+                <i class="fa fa-plus m-right-10"></i> Add Credit Card
             </a>
         @endif
     </div>

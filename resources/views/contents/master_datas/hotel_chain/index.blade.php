@@ -21,7 +21,7 @@
     <div class="col-sm-2">
         @if(user_info()->hasAnyAccess(['admin.company', 'hotel-chain.create']))
             <a href="{{ route('hotel-chain.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Hotel Chain Lists
+                <i class="fa fa-plus m-right-10"></i> Add Hotel Chain
             </a>
         @endif
     </div>

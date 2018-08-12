@@ -269,7 +269,7 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu">
+        <li class=" has-sub-menu {!! (url(route('hotel-booking.index')) == Request::url() OR Request::is('hotel/hotel-booking*')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-box"></div>
@@ -292,7 +292,7 @@
                         </li> -->
 
 
-                        <li class="{!! (url(route('hotel-booking.index')) == Request::url() OR Request::is('accounting/hotel-booking*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-booking.read'])) ? '' : 'display:none;' }}">
+                        <li class="{!! (url(route('hotel-booking.index')) == Request::url() OR Request::is('hotel/hotel-booking*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-booking.read'])) ? '' : 'display:none;' }}">
                             <a href="{{ route('hotel-booking.index') }}"><i class="fa fa-circle-o"></i><span>Booking</span></a>
                         </li>
 
