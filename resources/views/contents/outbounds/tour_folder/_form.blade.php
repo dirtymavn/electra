@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('tour_code', trans('Tour code'), ['class' => 'control-label']) !!}
-            {!! Form::text('tour_code', $newCode, [ 'class' => 'form-control', 'id' => 'tour_code', 'placeholder' => '<Auti Number>', 'readonly' => true]) !!}
+            {!! Form::text('tour_code', old('tour_code'), [ 'class' => 'form-control', 'id' => 'tour_code', 'placeholder' => '<Auto Number>', 'readonly' => true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('tour_name', trans('Tour name'), ['class' => 'control-label']) !!}

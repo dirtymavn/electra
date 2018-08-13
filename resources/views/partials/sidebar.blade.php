@@ -220,25 +220,22 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <!-- <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Tour Folder <i class="os-icon os-icon-ui-02"></i></span>
-                            </a>
-                        </li> -->
                         <li class="{!! (url(route('tourfolder.index')) == Request::url() OR Request::is('outbound/tourfolder*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','tourfolder.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('tourfolder.index')}}"><i class="fa fa-circle-o"></i><span>Tour Folder</span></a>
                         </li>
                         <li class="{!! (url(route('tourorder.index')) == Request::url() OR Request::is('outbound/tourorder*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','tourorder.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('tourorder.index')}}"><i class="fa fa-circle-o"></i><span>Tour Order</span></a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Visa <i class="os-icon os-icon-ui-02"></i></span>
-                            </a>
+
+
+                        <li class="{!! (url(route('visa.index')) == Request::url() OR Request::is('master-data/visa')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','visa.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('visa.index')}}"><i class="fa fa-circle-o"></i><span>Visa</span></a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Availability <i class="os-icon os-icon-ui-02"></i></span>
+
+
+                        <li class="{!! (url(route('availability.index')) == Request::url() OR Request::is('outbound/availability*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','availability.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('availability.index')}}">
+                                <i class="fa fa-circle-o"></i><span>Availability </span>
                             </a>
                         </li>
                         <li class="{!! (url(route('outboundqueue.index')) == Request::url() OR Request::is('outbound/outboundqueue*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','outboundqueue.read'])) ? '' : 'display:none;' }}">

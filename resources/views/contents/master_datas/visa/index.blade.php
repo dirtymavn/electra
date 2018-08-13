@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tourfolder')
+@section('title', 'Visa')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,25 +9,25 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item">Tourfolder</li>
+    <li class="breadcrumb-item">Visa</li>
 </ul>
 @endsection
 
-@section('page_title', 'Tour folder Lists')
+@section('page_title', 'Visa Lists')
 
 @section('content')
 @include('flash::message')
 <div class="row">
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'tourfolder.create']))
-            <a href="{{ route('tourfolder.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Tour folder
+        @if(user_info()->hasAnyAccess(['admin.company', 'visa.create']))
+            <a href="{{ route('visa.create')}}" class="btn btn-primary" id="btn-submit">
+                <i class="fa fa-plus m-right-10"></i> Add Visa
             </a>
         @endif
     </div>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'tourfolder.destroy']))
+        @if(user_info()->hasAnyAccess(['admin.company', 'visa.destroy']))
             <button class="btn btn-danger" id="bulk-delete">
                 <i class="fa fa-trash m-right-10"></i> Bulk Delete
             </button>
@@ -39,8 +39,8 @@
                 Actions
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('export.tourfolder.excel') }}">Export XLS</a>
-                <a class="dropdown-item" href="{{ route('export.tourfolder.pdf') }}">Export PDF</a>
+                <a class="dropdown-item" href="{{ route('export.visa.excel') }}">Export XLS</a>
+                <a class="dropdown-item" href="{{ route('export.visa.pdf') }}">Export PDF</a>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
 
 <script>
     $(document).ready(function() {
-        spinnerLoad($('#form-master-tourfolder'));
+        spinnerLoad($('#form-visa'));
     });
 
     $(document).on('click', '#bulk-delete', function() {
@@ -78,7 +78,7 @@
         });
         
         if (ids.length > 0) {
-            bulkDelete("{{ route('tourfolder.bulk-delete') }}", ids);
+            bulkDelete("{{ route('visa.bulk-delete') }}", ids);
         } else {
             alert('Something went wrong!');
             return false;

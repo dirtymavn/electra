@@ -171,10 +171,9 @@ class TourFolder extends Model implements Auditable
         $result = self::whereCompanyId(user_info('company_id'))
             ->where('tour_code', '<>', 'draft')
             ->orderBy('id', 'desc')->first();
-
-        $findCode = CoreForm::getCodeBySlug('tourcode');
+        $findCode = CoreForm::getCodeBySlug('tour-folder');
         if ($result) {
-            $lastNumber = (int) substr($result->supplier_no, strlen($result->supplier_no) - 4, 4);
+            $lastNumber = (int) substr($result->tour_code, strlen($result->tour_code) - 4, 4);
             $newNumber = $lastNumber + 1;
             
             if (strlen($newNumber) == 1) {
@@ -187,8 +186,8 @@ class TourFolder extends Model implements Auditable
                 $newNumber = $newNumber;
             }
 
-            $currMonth = (int)date('m', strtotime($result->supplier_no));
-            $currYear = (int)date('y', strtotime($result->supplier_no));
+            $currMonth = (int)date('m', strtotime($result->tour_code));
+            $currYear = (int)date('y', strtotime($result->tour_code));
             $nowMonth = (int)date('m');
             $nowYear = (int)date('y');
 
@@ -204,5 +203,10 @@ class TourFolder extends Model implements Auditable
         }
 
         return $newCode;
+    }
+
+    public static function getAvailableData()
+    {
+        return self::where('company_id', user_info()->company_id);
     }
 }
