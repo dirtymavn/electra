@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataTables\MasterData;
+namespace App\DataTables\Outbound;
 
-use App\Models\MasterData\Visa;
+use App\Models\Outbound\Visa\Visa;
 use Yajra\DataTables\Services\DataTable;
 
 class VisaDataTable extends DataTable
@@ -95,6 +95,6 @@ class VisaDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'MasterData/Visa_' . date('YmdHis');
+        return 'Outbound/Visa_' . date('YmdHis');
     }
 }

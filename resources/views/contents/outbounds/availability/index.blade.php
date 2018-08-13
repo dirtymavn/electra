@@ -89,31 +89,31 @@
         </div>
     </div>
     <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-8">
         <div class="form-group row">
-            <label class="col-form-label col-sm-4" for=""> Price range</label>
-            <div class="col-sm-8">
-                <input name="pricefrom" class="form-control" type="range" name="price-min" id="price-min" value="{{ Request::input('pricefrom') }}" min="0">
+            <label class="col-form-label col-sm-2" for=""> Price range</label>
+            <div class="col-sm-10">
+                <!-- <input type="text" id="slider-input" class="slider" value="1000" /> -->
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> To</label>
             <div class="col-sm-8">
                 <input name="priceto" class="form-control" type="range" name="price-min" id="price-min" value="{{ Request::input('priceto') }}" min="0" >
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Country</label>
             <div class="col-sm-8">
-                <select class="form-control" name="country" >
-                    <option>Select Country</option>
+                <select class="form-control" name="country" id="id_country">
+                    <option value="">Select Country</option>
                     @foreach ($datacountries as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
+                    <option value="{{ $key }}" <?php if(Request::input('country') == $key){ echo 'selected';} ?>>{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
@@ -123,7 +123,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> City</label>
             <div class="col-sm-8">
-                <select class="form-control" name="city">
+                <select class="form-control" name="city" id="id_city">
                     <option value="">Select City</option>
                     @foreach ($datacities as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
@@ -137,7 +137,7 @@
             <label class="col-form-label col-sm-4" for=""> Tour code</label>
             <div class="col-sm-8">
                 <select class="form-control" name="tourcode">
-                    <option>Select Tour code</option>
+                    <option value="">Select Tour code</option>
                     @foreach ($datatourcode as $key => $value)
                     <option value="{{ $key }}" <?php if($key == Request::input('tourcode')){ echo 'selected';}?>>{{ $value }} </option>
                     @endforeach
@@ -240,7 +240,7 @@
                     <td><?php echo $key+1;?></td>
                     <td>{{ $value->tour_code }}</td>
                     <td>{{ $value->tour_name }}</td>
-                    <td></td>
+                    <td>{{ $value->airline_name }}</td>
                     <td></td>
                     <td>{{ $value->number_of_days }}</td>
                     <td>{{ $value->status }}</td>
@@ -270,12 +270,46 @@
 @include('partials.delete-modal')
 @endsection
 @section('script')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/css/bootstrap-slider.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/bootstrap-slider.js"></script>
+<style type="text/css">
 
-
+</style>
 <script>
-    $(document).ready(function() {
+    jQuery(document).ready(function() {
+       var mySlider = $("#slider-input").slider({
+            min:0,
+            max: 4200,
+            value:1000,
+            step:1000
+        });
+
+
         spinnerLoad($('#form-master-tourfolder'));
+        <?php if(Request::input('country') !=''){ ?>
+            country(<?php echo Request::input('country');?>);
+        <?php } ?>
     });
+
+    function country(id){
+        // var _this = $(this);
+        console.log(id)
+        if (id == '') {
+            $('#id_city').html('<option value="">Choose City</option>');
+            return false;
+        }
+        $.ajax({
+            url: "{{ route('city.search-data-by-country') }}",
+            method: "get",
+            dataType: "json",
+            data: {country_id: id},
+            success: function(data) {
+                $.each(data, function(key, value) {
+                    $('#id_city').append('<option value="'+value.id+'">'+value.city_name+'</option>');
+                });
+            }
+        });
+    }
 
     $(document).on('click', '#bulk-delete', function() {
         var lengthChecked = $('td .checklist:checked').length;
@@ -318,6 +352,26 @@
         } else {
             $('th .checklist').prop('checked', false);
         }
+    });
+
+    $(document).on('change', '#id_country', function() {
+        var _this = $(this);
+        console.log(_this)
+        if (_this.val() == '') {
+            $('#id_city').html('<option value="">Choose City</option>');
+            return false;
+        }
+        $.ajax({
+            url: "{{ route('city.search-data-by-country') }}",
+            method: "get",
+            dataType: "json",
+            data: {country_id: _this.val()},
+            success: function(data) {
+                $.each(data, function(key, value) {
+                    $('#id_city').append('<option value="'+value.id+'">'+value.city_name+'</option>');
+                });
+            }
+        });
     });
 </script>
 @endsection

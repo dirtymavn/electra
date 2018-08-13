@@ -25,7 +25,7 @@
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.master_datas.visa._form')  
+                @include('contents.outbounds.visa._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{route('visa.index')}}" class="btn btn-grey">Cancel</a>

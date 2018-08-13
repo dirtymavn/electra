@@ -179,6 +179,33 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('availability/export/excel', ['as' => 'export.availability.excel', 'uses' => 'AvailabilityController@export_excel']);
         Route::get('availability/export/pdf', ['as' => 'export.availability.pdf', 'uses' => 'AvailabilityController@export_pdf']);
 
+
+        // Master Visa
+        Route::resource('visa', 'VisaController');
+        Route::post('visa/bulk-delete', array('as' => 'visa.bulk-delete', 'uses' => 'VisaController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,visa.destroy'));
+        Route::get('visa/export/excel', ['as' => 'export.visa.excel', 'uses' => 'VisaController@export_excel']);
+        Route::get('visa/export/pdf', ['as' => 'export.visa.pdf', 'uses' => 'VisaController@export_pdf']);
+        Route::post('visa/get-detail-data', array(
+                                                        'as' => 'visa.get-detail-data',
+                                                        'uses' => 'VisaController@detailData',
+                                                        'middleware' => 'sentinel_access:admin.company,visa.create'
+                                                    ));
+        Route::post('visa/visa-detail/delete', array(
+                                                                'as' => 'visa.detail.delete',
+                                                                'uses' => 'VisaController@visaDetailDelete', 
+                                                                'middleware' => 'sentinel_access:admin.company,visa.create'
+                                                            ));
+        Route::post('visa/visa-detail/detail', array(
+                                                                'as' => 'visa.detail.detail',
+                                                                'uses' => 'VisaController@visaDetailGetDetail',
+                                                                'middleware' => 'sentinel_access:admin.company,visa.create'
+                                                            ));
+        Route::post('visa/visa-document-detail', array(
+                                                            'as' => 'visa.visadocument-detail.post',
+                                                            'uses' => 'VisaController@visaPopupVisadocument',
+                                                            'middleware' => 'sentinel_access:admin.company,visa.create'
+                                                        ));
+
     });
 
     // Hotel
@@ -564,31 +591,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('credit-card/export/excel', ['as' => 'export.credit-card.excel', 'uses' => 'CreditCardController@export_excel']);
         Route::get('credit-card/export/pdf', ['as' => 'export.credit-card.pdf', 'uses' => 'CreditCardController@export_pdf']);
 
-        // Master Visa
-        Route::resource('visa', 'VisaController');
-        Route::post('visa/bulk-delete', array('as' => 'visa.bulk-delete', 'uses' => 'VisaController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,visa.destroy'));
-        Route::get('visa/export/excel', ['as' => 'export.visa.excel', 'uses' => 'VisaController@export_excel']);
-        Route::get('visa/export/pdf', ['as' => 'export.visa.pdf', 'uses' => 'VisaController@export_pdf']);
-        Route::post('visa/get-detail-data', array(
-                                                        'as' => 'visa.get-detail-data',
-                                                        'uses' => 'VisaController@detailData',
-                                                        'middleware' => 'sentinel_access:admin.company,visa.create'
-                                                    ));
-        Route::post('visa/visa-detail/delete', array(
-                                                                'as' => 'visa.detail.delete',
-                                                                'uses' => 'VisaController@visaDetailDelete', 
-                                                                'middleware' => 'sentinel_access:admin.company,visa.create'
-                                                            ));
-        Route::post('visa/visa-detail/detail', array(
-                                                                'as' => 'visa.detail.detail',
-                                                                'uses' => 'VisaController@visaDetailGetDetail',
-                                                                'middleware' => 'sentinel_access:admin.company,visa.create'
-                                                            ));
-        Route::post('visa/visa-document-detail', array(
-                                                            'as' => 'visa.visadocument-detail.post',
-                                                            'uses' => 'VisaController@visaPopupVisadocument',
-                                                            'middleware' => 'sentinel_access:admin.company,visa.create'
-                                                        ));
+        
     });
 
     // System

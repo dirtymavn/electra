@@ -228,7 +228,7 @@
                         </li>
 
 
-                        <li class="{!! (url(route('visa.index')) == Request::url() OR Request::is('master-data/visa')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','visa.read'])) ? '' : 'display:none;' }}">
+                        <li class="{!! (url(route('visa.index')) == Request::url() OR Request::is('outbound/visa*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','visa.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('visa.index')}}"><i class="fa fa-circle-o"></i><span>Visa</span></a>
                         </li>
 

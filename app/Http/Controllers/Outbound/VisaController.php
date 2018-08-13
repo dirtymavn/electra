@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\MasterData;
+namespace App\Http\Controllers\Outbound;
 
-use App\Models\MasterData\Visa;
-use App\Models\MasterData\VisaDocument;
+use App\Models\Outbound\Visa\Visa;
+use App\Models\Outbound\Visa\VisaDocument;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\MasterData\VisaDataTable;
-use App\Http\Requests\MasterData\VisaRequest;
+use App\DataTables\Outbound\VisaDataTable;
+use App\Http\Requests\Outbound\VisaRequest;
 use App\Models\MasterData\Airport;
 use App\Models\MasterData\Airline;
 use App\Models\Temporary;
@@ -32,7 +32,7 @@ class VisaController extends Controller
      */
     public function index(VisaDataTable $dataTable)
     {
-        return $dataTable->render('contents.master_datas.visa.index');
+        return $dataTable->render('contents.outbounds.visa.index');
     }
 
     /**
@@ -45,7 +45,7 @@ class VisaController extends Controller
          \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
         $dataairport = Airport::getDataAvailable()->pluck('airports.airport_name', 'airports.id')->all();
         $dataairline = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')->all();
-        return view('contents.master_datas.visa.create', compact('dataairport', 'dataairline'));
+        return view('contents.outbounds.visa.create', compact('dataairport', 'dataairline'));
     }
 
     /**
@@ -131,7 +131,7 @@ class VisaController extends Controller
 
         $dataairport = Airport::getDataAvailable()->pluck('airports.airport_name', 'airports.id');
         $dataairline = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id');
-        return view('contents.master_datas.visa.edit')->with([
+        return view('contents.outbounds.visa.edit')->with([
                                                                         'Visa' => $Visa,
                                                                         'dataairport' => $dataairport,
                                                                         'dataairline' => $dataairline
@@ -258,7 +258,7 @@ class VisaController extends Controller
     public function export_pdf()
     {
         $types = Visa::all();
-        $pdf = \PDF::loadView('contents.master_datas.visa.pdf', compact('types'));
+        $pdf = \PDF::loadView('contents.outbounds.visa.pdf', compact('types'));
         return $pdf->download('visa.pdf');
     }
 

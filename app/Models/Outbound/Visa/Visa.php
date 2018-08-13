@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\MasterData;
+namespace App\Models\Outbound\Visa;
 
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;

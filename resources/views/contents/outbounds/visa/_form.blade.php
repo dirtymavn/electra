@@ -86,7 +86,7 @@
             </div>
             <div class="tab-content">
                 <div class="tab-pane active show" id="visadocument">
-                    @include('contents.master_datas.visa.parts.visadocument')
+                    @include('contents.outbounds.visa.parts.visadocument')
                 </div>
             </div>
         </div>
@@ -95,12 +95,12 @@
 
 @section('part_script')
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\MasterData\VisaRequest', '#form-visa') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Outbound\VisaRequest', '#form-visa') !!}
 <script>
     $(function(){
         spinnerLoad($('#form-visa'));
     });
 </script>
 
-@include('contents.master_datas.visa.js.visadocument')
+@include('contents.outbounds.visa.js.visadocument')
 @endsection

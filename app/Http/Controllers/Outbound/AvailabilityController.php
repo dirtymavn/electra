@@ -66,9 +66,9 @@ class AvailabilityController extends Controller
         //     $conditional .= "AND a.tour_name LIKE '%".$request->get('country')."%'";
         // }
 
-        // if($request->get('city') !=''){
-        //     $conditional .= "AND a.tour_name LIKE '%".$request->get('city')."%'";
-        // }
+        if($request->get('city') !=''){
+            $conditional .= "AND d.city = '".$request->get('city')."'";
+        }
 
         if($request->get('tourcode') !=''){
             $conditional .= "AND a.id = '".$request->get('tourcode')."'";
@@ -100,16 +100,17 @@ class AvailabilityController extends Controller
 
 
         $listdata = DB::select("
-                                SELECT a.*,b.*,c.*,d.*,e.*,f.*,a.id as idtour FROM trx_tour_folder a
+                                SELECT a.*,b.*,c.*,d.*,e.*,f.*,a.id as idtour,g.* FROM trx_tour_folder a
                                 LEFT JOIN trx_tour_folder_detail b ON(b.id_tour_folder = a.id)
                                 LEFT JOIN trx_tour_folder_guide c ON(c.id_tour_folder = a.id)
                                 LEFT JOIN trx_tour_folder_itinerary d ON(d.id_tour_folder = a.id)
                                 LEFT JOIN trx_tour_folder_rate e ON(e.id_tour_folder = a.id)
                                 LEFT JOIN trx_tour_folder_service f ON(f.id_tour_folder = a.id)
+                                LEFT JOIN airlines g ON(g.id = b.id_airlines)
                                 WHERE (1=1)
                                 ".$conditional."
                             ");
-        
+        // dd($listdata);
         $datatourcode = TourFolder::getAvailableData()->pluck('tour_code', 'id')->all();
         $datacities = City::getDataAvailable()->pluck('city_name', 'id')->all();
         $datacountries = Country::getDataByCompany()->pluck('country_name', 'id')->all();
