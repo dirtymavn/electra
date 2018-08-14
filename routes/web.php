@@ -233,6 +233,11 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                             'middleware' => 'sentinel_access:admin.company,visa.create'
                                                         ));
 
+        Route::resource('outbound-delivery', 'DeliveryController');
+        Route::post('outbound-delivery/bulk-delete', array('as' => 'outbound-delivery.bulk-delete', 'uses' => 'DeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,outbound-delivery.destroy'));
+        Route::get('outbound-delivery/export/excel', ['as' => 'export.outbound-delivery.excel', 'uses' => 'DeliveryController@export_excel']);
+        Route::get('outbound-delivery/export/pdf', ['as' => 'export.outbound-delivery.pdf', 'uses' => 'DeliveryController@export_pdf']);
+
     });
 
     // Hotel

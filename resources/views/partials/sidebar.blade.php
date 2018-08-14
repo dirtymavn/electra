@@ -242,10 +242,13 @@
                         <li class="{!! (url(route('outboundqueue.index')) == Request::url() OR Request::is('outbound/outboundqueue*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','outboundqueue.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('outboundqueue.index')}}"><i class="fa fa-circle-o"></i><span>Queue</span></a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Delivery <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
+                        </li> -->
+                        <li class="{!! (url(route('outbound-delivery.index')) == Request::url() OR Request::is('outbound/outbound-delivery*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','outbound-delivery.read'])) ? '' : 'display:none;' }}">
+                            <a href=" {{ route('outbound-delivery.index') }} "><i class="fa fa-circle-o"></i><span>Delivery</span></a>
                         </li>
                         <li class="sub-submenu">
                             <a>
