@@ -266,7 +266,7 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu {!! (url(route('hotel-booking.index')) == Request::url() OR Request::is('hotel/hotel-booking*')) ? ' active' : '' !!}">
+        <li class=" has-sub-menu {!! (Request::is('hotel*') OR Request::is('hotel')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-box"></div>
@@ -277,16 +277,11 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li>
-                            <a href="#">
+                        <li class="{!! (url(route('enquiry.index')) == Request::url() OR Request::is('hotel/enquiry*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','enquiry.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{ route('enquiry.index') }}">
                                 <i class="fa fa-circle-o"></i><span>Enquiry <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
-                        <!-- <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Booking <i class="os-icon os-icon-ui-02"></i></span>
-                            </a>
-                        </li> -->
 
 
                         <li class="{!! (url(route('hotel-booking.index')) == Request::url() OR Request::is('hotel/hotel-booking*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-booking.read'])) ? '' : 'display:none;' }}">

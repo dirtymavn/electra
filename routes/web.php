@@ -210,6 +210,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
 
     // Hotel
     Route::group(['prefix' => 'hotel', 'namespace' => 'Hotel'], function () {
+        // Master Hotel enquiry
+        Route::resource('enquiry', 'EnquiryController');
+        Route::post('enquiry/bulk-delete', array('as' => 'enquiry.bulk-delete', 'uses' => 'EnquiryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,enquiry.destroy'));
+        Route::get('enquiry/export/excel', ['as' => 'export.enquiry.excel', 'uses' => 'EnquiryController@export_excel']);
+        Route::get('enquiry/export/pdf', ['as' => 'export.enquiry.pdf', 'uses' => 'EnquiryController@export_pdf']);
+
         // Master Hotel booking
         Route::resource('hotel-booking', 'HotelBookingController');
         Route::post('hotel-booking/bulk-delete', array('as' => 'hotel-booking.bulk-delete', 'uses' => 'HotelBookingController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,hotel-booking.destroy'));

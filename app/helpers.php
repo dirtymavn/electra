@@ -454,3 +454,22 @@ if (!function_exists('season')) {
         return $string;
     }
 }
+
+function getpropertytype($id) {
+  $string = array(
+                  1 => 'All suite',
+                  2 => 'Resort',
+                  3 => 'Business',
+                  4 => 'Extended Stay',
+                  5 => 'Meeting',
+                  6 => 'Residential Apartment',
+                  7 => 'Others'
+              );
+  $results = '';
+  foreach ($string as $key => $value) {
+    if($id == $key){
+      $results = $value;
+    }
+  }
+  return $results;
+}
