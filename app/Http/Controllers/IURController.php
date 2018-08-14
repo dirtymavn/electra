@@ -9,7 +9,6 @@ class IURController extends Controller
 {
     public function upload(Request $request){
         set_time_limit(0);
-
         $validator = Validator::make($request->all(), [
             'iur' => 'required|mimes:txt',
         ]);
@@ -19,11 +18,10 @@ class IURController extends Controller
         }
         try{
             $upload = upload_file($request->iur, 'upload/iur/', 'file');
-            $file = get_file($upload['original']);
-            $data=$this->convertIUR($file);
+            $data=$this->convertIUR($upload['original']);
             return view('contents.master_datas.iur.create', $data);
         }catch(\Exception $ex){
-            wew($ex);
+            die($ex->getMessage());
         }
     }
 
@@ -227,8 +225,6 @@ class IURController extends Controller
             'itinerary'=>[],
             'misc'=>[]
         ];
-        // $_data=['inv'=>$inv,'data'=>$data];
-        // wew($_data);
         return view('contents.master_datas.iur.create',$data);
 
     }

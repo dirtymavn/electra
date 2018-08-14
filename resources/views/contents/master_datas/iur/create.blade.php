@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Document')
+@section('title', 'Upload File')
 
 @section('style')
 @endsection
@@ -8,12 +8,12 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('document.index')}}">Document</a></li>
-        <li class="breadcrumb-item">Create</li>
+        <li class="breadcrumb-item"><a href="{{route('document.index')}}">Master Data</a></li>
+        <li class="breadcrumb-item">Upload IUR</li>
     </ul>
 @endsection
 
-@section('page_title', 'Create Document')
+@section('page_title', 'Upload IUR')
 
 @section('content')
     @include('flash::message')
