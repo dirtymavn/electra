@@ -454,3 +454,21 @@ if (!function_exists('season')) {
         return $string;
     }
 }
+
+if (!function_exists('text_to_array')) {
+    function text_to_array($path)
+    {
+        $obj = [];
+        $file_handle = fopen($path, "rb");
+        while (!feof($file_handle)) {
+            $line_of_text = fgets($file_handle);
+            if(!ctype_space($line_of_text)){
+                array_push($obj, $line_of_text);
+            }
+
+        }
+
+        fclose($file_handle);
+        return $obj;
+    }
+}

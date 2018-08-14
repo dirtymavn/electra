@@ -637,4 +637,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     Route::group(['prefix' => 'finance', 'namespace' => 'Finance'], function () {
         
     });
+
+    //IUR
+    Route::group(['prefix' => 'iur'], function () {
+        Route::get('/', ['as' => 'iur.index', 'uses' => 'IURController@index']);
+        Route::post('/upload', ['as' => 'iur.upload', 'uses' => 'IURController@upload']);
+    });
 });
