@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="menu-actions" style="display:none;">
-      
+
         <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right"><i class="os-icon os-icon-mail-14"></i>
             <div class="new-messages-count">12</div>
             <div class="os-dropdown light message-list">
@@ -76,7 +76,7 @@
                 </ul>
             </div>
         </div>
-      
+
         <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right"><i class="os-icon os-icon-ui-46"></i>
             <div class="os-dropdown">
                 <div class="icon-w"><i class="os-icon os-icon-ui-46"></i></div>
@@ -88,7 +88,7 @@
                 </ul>
             </div>
         </div>
-      
+
         <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right"><i class="os-icon os-icon-zap"></i>
             <div class="new-messages-count">4</div>
             <div class="os-dropdown light message-list">
@@ -184,19 +184,20 @@
                         <li class="{!! (url(route('invoice.index')) == Request::url() OR Request::is('business/invoice*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','invoice.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('invoice.index') }} "><i class="fa fa-circle-o"></i><span>Invoice</span></a>
                         </li>
-                        <!-- <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Invoice <i class="os-icon os-icon-ui-02"></i></span>
-                            </a>
-                        </li> -->
+
                         <li class="{!! (url(route('delivery.index')) == Request::url() OR Request::is('business/delivery*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','delivery.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('delivery.index') }} "><i class="fa fa-circle-o"></i><span>Delivery</span></a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Visa <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
+                        </li> -->
+
+                        <li class="{!! (url(route('businessvisa.index')) == Request::url() OR Request::is('business/businessvisa*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','visa.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('businessvisa.index')}}"><i class="fa fa-circle-o"></i><span>Visa</span></a>
                         </li>
+
                         <li class="{!! (url(route('businessqueue.index')) == Request::url() OR Request::is('business/businessqueue*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','businessqueue.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('businessqueue.index')}}"><i class="fa fa-circle-o"></i><span>Queue</span></a>
                         </li>
@@ -241,10 +242,13 @@
                         <li class="{!! (url(route('outboundqueue.index')) == Request::url() OR Request::is('outbound/outboundqueue*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','outboundqueue.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('outboundqueue.index')}}"><i class="fa fa-circle-o"></i><span>Queue</span></a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Delivery <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
+                        </li> -->
+                        <li class="{!! (url(route('outbound-delivery.index')) == Request::url() OR Request::is('outbound/outbound-delivery*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','outbound-delivery.read'])) ? '' : 'display:none;' }}">
+                            <a href=" {{ route('outbound-delivery.index') }} "><i class="fa fa-circle-o"></i><span>Delivery</span></a>
                         </li>
                         <li class="sub-submenu">
                             <a>
@@ -266,7 +270,7 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu {!! (url(route('hotel-booking.index')) == Request::url() OR Request::is('hotel/hotel-booking*')) ? ' active' : '' !!}">
+        <li class=" has-sub-menu {!! (Request::is('hotel*') OR Request::is('hotel')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-box"></div>
@@ -277,16 +281,11 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Enquiry <i class="os-icon os-icon-ui-02"></i></span>
+                        <li class="{!! (url(route('enquiry.index')) == Request::url() OR Request::is('hotel/enquiry*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','enquiry.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{ route('enquiry.index') }}">
+                                <i class="fa fa-circle-o"></i><span>Enquiry </span>
                             </a>
                         </li>
-                        <!-- <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Booking <i class="os-icon os-icon-ui-02"></i></span>
-                            </a>
-                        </li> -->
 
 
                         <li class="{!! (url(route('hotel-booking.index')) == Request::url() OR Request::is('hotel/hotel-booking*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','hotel-booking.read'])) ? '' : 'display:none;' }}">
@@ -298,7 +297,7 @@
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Report <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
-                        </li>                                   
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -554,7 +553,7 @@
                     <div class="os-icon os-icon-folder"></div>
                 </div><span>Master Data</span></a>
             <div class="sub-menu-w">
-                
+
                 <div class="sub-menu-icon"><i class="os-icon os-icon-folder"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
@@ -745,7 +744,7 @@
                     <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                     <div class="sub-menu-i">
                         <ul class="sub-menu">
-                            
+
                             <li class="{!! (url(route('core-form.index')) == Request::url() OR Request::is('setting/core-form*')) ? ' active' : '' !!}">
                                 <a href=" {{ route('core-form.index') }} ">
                                     <i class="fa fa-circle-o"></i><span>Core Form</span>
@@ -756,7 +755,7 @@
                                     <i class="fa fa-circle-o"></i><span>Accounting Config</span>
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </div>
                 </div>

@@ -79,3 +79,11 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCiyeJcoDr+tcJGSknwxOWAHzJrF2YhtDnVeW4Z/fcT
 ## Example Auth
 - username : superadmin
 - password : 12345678
+
+
+## Migration
+hapus semua table dan isi dengan yang baru dan running seednya
+
+``` composer dump-autoload ```
+
+```  php artisan migrate:refresh --seed  ```
