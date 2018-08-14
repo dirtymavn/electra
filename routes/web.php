@@ -39,7 +39,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('sales/export/excel', ['as' => 'export.sales.excel', 'uses' => 'SalesFolderController@export_excel']);
         Route::get('sales/export/pdf', ['as' => 'export.sales.pdf', 'uses' => 'SalesFolderController@export_pdf']);
         Route::get('sales/search/data', ['as' => 'sales.search-data', 'uses' => 'SalesFolderController@searchData', 'middleware' => 'sentinel_access:admin.company,sales.create']);
-        
+
         Route::resource('delivery', 'DeliveryController');
         Route::post('delivery/bulk-delete', array('as' => 'delivery.bulk-delete', 'uses' => 'DeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,delivery.destroy'));
         Route::get('delivery/export/excel', ['as' => 'export.delivery.excel', 'uses' => 'DeliveryController@export_excel']);
@@ -72,7 +72,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                     ));
         Route::post('invoice/invoice-detail/delete', array(
                                                                 'as' => 'invoice.detail.delete',
-                                                                'uses' => 'InvoiceController@invoiceDetailDelete', 
+                                                                'uses' => 'InvoiceController@invoiceDetailDelete',
                                                                 'middleware' => 'sentinel_access:admin.company,invoice.create'
                                                             ));
         Route::post('invoice/invoice-detail/detail', array(
@@ -90,7 +90,34 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                             'uses' => 'InvoiceController@invoicePopupInvoicrefund',
                                                             'middleware' => 'sentinel_access:admin.company,invoice.create'
                                                         ));
-        
+
+
+        // Master Visa
+        Route::resource('businessvisa', 'VisaController');
+        Route::post('businessvisa/bulk-delete', array('as' => 'visa.bulk-delete', 'uses' => 'VisaController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,visa.destroy'));
+        Route::get('businessvisa/export/excel', ['as' => 'export.visa.excel', 'uses' => 'VisaController@export_excel']);
+        Route::get('businessvisa/export/pdf', ['as' => 'export.visa.pdf', 'uses' => 'VisaController@export_pdf']);
+        Route::post('businessvisa/get-detail-data', array(
+                                                  'as' => 'visa.get-detail-data',
+                                                  'uses' => 'VisaController@detailData',
+                                                  'middleware' => 'sentinel_access:admin.company,visa.create'
+                                              ));
+        Route::post('businessvisa/visa-detail/delete', array(
+                                                      'as' => 'visa.detail.delete',
+                                                      'uses' => 'VisaController@visaDetailDelete',
+                                                      'middleware' => 'sentinel_access:admin.company,visa.create'
+                                                  ));
+        Route::post('businessvisa/visa-detail/detail', array(
+                                                    'as' => 'visa.detail.detail',
+                                                    'uses' => 'VisaController@visaDetailGetDetail',
+                                                    'middleware' => 'sentinel_access:admin.company,visa.create'
+                                                ));
+        Route::post('businessvisa/visa-document-detail', array(
+                                                      'as' => 'visa.visadocument-detail.post',
+                                                      'uses' => 'VisaController@visaPopupVisadocument',
+                                                      'middleware' => 'sentinel_access:admin.company,visa.create'
+                                                  ));
+
     });
 
      // Outbound
@@ -141,7 +168,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                     ));
         Route::post('tourfolder/tourfolder-detail/delete', array(
                                                                 'as' => 'tourfolder.detail.delete',
-                                                                'uses' => 'TourFolderController@tourfolderDetailDelete', 
+                                                                'uses' => 'TourFolderController@tourfolderDetailDelete',
                                                                 'middleware' => 'sentinel_access:admin.company,tourfolder.create'
                                                             ));
         Route::post('tourfolder/tourfolder-detail/detail', array(
@@ -192,7 +219,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                     ));
         Route::post('visa/visa-detail/delete', array(
                                                                 'as' => 'visa.detail.delete',
-                                                                'uses' => 'VisaController@visaDetailDelete', 
+                                                                'uses' => 'VisaController@visaDetailDelete',
                                                                 'middleware' => 'sentinel_access:admin.company,visa.create'
                                                             ));
         Route::post('visa/visa-detail/detail', array(
@@ -228,7 +255,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                     ));
         Route::post('hotel-booking/hotel-booking-detail/delete', array(
                                                                 'as' => 'hotel-booking.detail.delete',
-                                                                'uses' => 'HotelBookingController@hotelbookingDetailDelete', 
+                                                                'uses' => 'HotelBookingController@hotelbookingDetailDelete',
                                                                 'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
                                                             ));
         Route::post('hotel-booking/hotel-booking-detail/detail', array(
@@ -251,7 +278,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                             'uses' => 'HotelBookingController@hotelbookingPopupHotelbookingservice',
                                                             'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
                                                         ));
-        
+
     });
 
     // FIT
@@ -346,7 +373,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('itin/itinerary-detail/delete', array('as' => 'itin.itinerary-detail.delete', 'uses' => 'ItinController@itineraryDetailDelete', 'middleware' => 'sentinel_access:admin.company,itin.create'));
             Route::post('itin/itinerary-detail/detail', array('as' => 'itin.itinerary-detail.detail', 'uses' => 'ItinController@itineraryDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,itin.create'));
             Route::post('itin/itinerary-service', array('as' => 'itin.itinerary-service.post', 'uses' => 'ItinController@itineraryServiceStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
-            
+
             // related service
             Route::post('itin/itinerary-service-route', array('as' => 'itin.itinerary-service-route.post', 'uses' => 'ItinController@itineraryServiceRouteStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
             Route::post('itin/itinerary-service-interval', array('as' => 'itin.itinerary-service-interval.post', 'uses' => 'ItinController@itineraryServiceIntervalStore', 'middleware' => 'sentinel_access:admin.company,itin.create'));
@@ -358,7 +385,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::get('itin/export/excel', ['as' => 'export.itin.excel', 'uses' => 'ItinController@export_excel']);
             Route::get('itin/export/pdf', ['as' => 'export.itin.pdf', 'uses' => 'ItinController@export_pdf']);
 
-        }); 
+        });
 
         // Accounting
         Route::group(['prefix' => 'accounting-setup', 'namespace' => 'Accounting'], function () {
@@ -410,7 +437,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('inventory-type/bulk-delete', array('as' => 'inventory-type.bulk-delete', 'uses' => 'InventoryTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,inventory-type.destroy'));
         Route::get('inventory-type/export/excel', ['as' => 'export.inventory-type.excel', 'uses' => 'InventoryTypeController@export_excel']);
         Route::get('inventory-type/export/pdf', ['as' => 'export.inventory-type.pdf', 'uses' => 'InventoryTypeController@export_pdf']);
-        
+
 
         // Product Category
         Route::resource('product-category', 'ProductCategoryController');
@@ -535,7 +562,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                     ));
         Route::post('master-hotel/master-hotel-detail/delete', array(
                                                                 'as' => 'master-hotel.detail.delete',
-                                                                'uses' => 'MasterHotelController@masterhotelDetailDelete', 
+                                                                'uses' => 'MasterHotelController@masterhotelDetailDelete',
                                                                 'middleware' => 'sentinel_access:admin.company,master-hotel.create'
                                                             ));
         Route::post('master-hotel/master-hotel-detail/detail', array(
@@ -571,7 +598,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                     ));
         Route::post('hotel-allotment/hotel-allotment-detail/delete', array(
                                                                 'as' => 'hotel-allotment.detail.delete',
-                                                                'uses' => 'HotelAllotmentController@hotelallotmentDetailDelete', 
+                                                                'uses' => 'HotelAllotmentController@hotelallotmentDetailDelete',
                                                                 'middleware' => 'sentinel_access:admin.company,hotel-allotment.create'
                                                             ));
         Route::post('hotel-allotment/hotel-allotment-detail/detail', array(
@@ -597,7 +624,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('credit-card/export/excel', ['as' => 'export.credit-card.excel', 'uses' => 'CreditCardController@export_excel']);
         Route::get('credit-card/export/pdf', ['as' => 'export.credit-card.pdf', 'uses' => 'CreditCardController@export_pdf']);
 
-        
+
     });
 
     // System
@@ -641,6 +668,6 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     });
     // Finance
     Route::group(['prefix' => 'finance', 'namespace' => 'Finance'], function () {
-        
+
     });
 });

@@ -184,19 +184,20 @@
                         <li class="{!! (url(route('invoice.index')) == Request::url() OR Request::is('business/invoice*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','invoice.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('invoice.index') }} "><i class="fa fa-circle-o"></i><span>Invoice</span></a>
                         </li>
-                        <!-- <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Invoice <i class="os-icon os-icon-ui-02"></i></span>
-                            </a>
-                        </li> -->
+
                         <li class="{!! (url(route('delivery.index')) == Request::url() OR Request::is('business/delivery*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','delivery.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('delivery.index') }} "><i class="fa fa-circle-o"></i><span>Delivery</span></a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Visa <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
+                        </li> -->
+
+                        <li class="{!! (url(route('businessvisa.index')) == Request::url() OR Request::is('business/businessvisa*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','visa.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('businessvisa.index')}}"><i class="fa fa-circle-o"></i><span>Visa</span></a>
                         </li>
+
                         <li class="{!! (url(route('businessqueue.index')) == Request::url() OR Request::is('business/businessqueue*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','businessqueue.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('businessqueue.index')}}"><i class="fa fa-circle-o"></i><span>Queue</span></a>
                         </li>
