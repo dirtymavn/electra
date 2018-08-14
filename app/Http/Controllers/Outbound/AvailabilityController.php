@@ -55,16 +55,16 @@ class AvailabilityController extends Controller
         }
 
         if($request->get('datefrom') !='' AND $request->get('dateto') !=''){
-            $conditional .= " AND a.departure_date >= '".$expdatefrom[2]."-".$expdatefrom[0]."-".$expdatefrom[1]."' AND a.return_date < '".$expdateto[2]."-".$expdateto[0]."-".$expdateto[1]."'";
+            $conditional .= " AND (a.departure_date >= '".$expdatefrom[2]."-".$expdatefrom[0]."-".$expdatefrom[1]."' AND a.return_date < '".$expdateto[2]."-".$expdateto[0]."-".$expdateto[1]."') ";
         }
 
         if($request->get('dayfrom') !='' AND $request->get('dayto') !=''){
-            $conditional .= "AND b.number_of_days > '".$request->get('dayfrom')."' AND b.number_of_days < '".$request->get('dayto')."'";
+            $conditional .= "AND (b.number_of_days >= '".$request->get('dayfrom')."' AND b.number_of_days <= '".$request->get('dayto')."') ";
         }
 
-        // if($request->get('country') !=''){
-        //     $conditional .= "AND a.tour_name LIKE '%".$request->get('country')."%'";
-        // }
+        if($request->get('pricefrom') !=''  AND $request->get('priceto') !=''){
+            $conditional .= "AND (e.price >= '".$request->get('pricefrom')."' AND e.price <= '".$request->get('priceto')."') ";
+        }
 
         if($request->get('city') !=''){
             $conditional .= "AND d.city = '".$request->get('city')."'";
@@ -100,13 +100,15 @@ class AvailabilityController extends Controller
 
 
         $listdata = DB::select("
-                                SELECT a.*,b.*,c.*,d.*,e.*,f.*,a.id as idtour,g.* FROM trx_tour_folder a
+                                SELECT a.*,b.*,c.*,d.*,e.*,f.*,a.id as idtour,g.*,h.*,i.* FROM trx_tour_folder a
                                 LEFT JOIN trx_tour_folder_detail b ON(b.id_tour_folder = a.id)
                                 LEFT JOIN trx_tour_folder_guide c ON(c.id_tour_folder = a.id)
                                 LEFT JOIN trx_tour_folder_itinerary d ON(d.id_tour_folder = a.id)
                                 LEFT JOIN trx_tour_folder_rate e ON(e.id_tour_folder = a.id)
                                 LEFT JOIN trx_tour_folder_service f ON(f.id_tour_folder = a.id)
                                 LEFT JOIN airlines g ON(g.id = b.id_airlines)
+                                LEFT JOIN cities h ON(h.id = d.city)
+                                LEFT JOIN countries i ON(i.id = h.country_id)
                                 WHERE (1=1)
                                 ".$conditional."
                             ");

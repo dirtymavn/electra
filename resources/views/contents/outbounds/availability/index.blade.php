@@ -89,22 +89,22 @@
         </div>
     </div>
     <div class="col-md-4"></div>
-    <div class="col-md-8">
+    <div class="col-md-4">
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for=""> Price range</label>
-            <div class="col-sm-10">
-                <!-- <input type="text" id="slider-input" class="slider" value="1000" /> -->
+            <label class="col-form-label col-sm-4" for=""> Price range</label>
+            <div class="col-sm-8">
+                <input class="form-control" placeholder="Enter Price" type="text" name="pricefrom" value="{{ Request::input('pricefrom') }}">
             </div>
         </div>
     </div>
-    <!-- <div class="col-md-4">
+    <div class="col-md-4">
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> To</label>
             <div class="col-sm-8">
-                <input name="priceto" class="form-control" type="range" name="price-min" id="price-min" value="{{ Request::input('priceto') }}" min="0" >
+                <input class="form-control" placeholder="Enter Price" type="text" name="priceto" value="{{ Request::input('priceto') }}">
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <div class="form-group row">
@@ -201,7 +201,7 @@
 
     <div class="col-md-12">
         <div class="form-buttons-w text-right">
-            <button class="btn btn-primary" type="submit"><i class="os-icon os-icon-ui-46"></i> Cari</button>
+            <button class="btn btn-primary" type="submit"><i class="os-icon os-icon-ui-46"></i> Search</button>
         </div>
     </div>
 </div>
@@ -210,7 +210,7 @@
 
 <div class="table-responsive">
     
-<table class="table table-lightborder">
+<table class="table table-lightborder" width="750px" style="width: 750px;overflow-x: auto;overflow: auto;">
     <thead>
         <tr>
             <th>No</th>
@@ -248,8 +248,8 @@
                     <td></td>
                     <td>{{ $value->price }}</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $value->country_name }}</td>
+                    <td>{{ $value->city_name }}</td>
                     <td>{{ $value->tour_category }}</td>
                     <td>{{ $value->tour_type }}</td>
                     <td>{{ date('d-m-Y',strtotime($value->departure_date)) }}</td>
@@ -270,21 +270,48 @@
 @include('partials.delete-modal')
 @endsection
 @section('script')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/css/bootstrap-slider.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.2.0/bootstrap-slider.js"></script>
 <style type="text/css">
+table {
+ margin: auto;
+  border-collapse: collapse;
+  overflow-x: auto;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  /*box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);*/
+}
 
+td, th {
+  /*border: solid rgb(200, 200, 200) 1px;*/
+  padding: .5rem;
+}
+
+th {
+  text-align: left;
+  /*background-color: rgb(190, 220, 250);*/
+  text-transform: uppercase;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: rgb(50, 50, 100) solid 2px;
+  border-top: none;
+}
+
+td {
+  white-space: nowrap;
+  border-bottom: none;
+  color: rgb(20, 20, 20);
+}
+
+td:first-of-type, th:first-of-type {
+  border-left: none;
+}
+
+td:last-of-type, th:last-of-type {
+  border-right: none;
+}
 </style>
 <script>
     jQuery(document).ready(function() {
-       var mySlider = $("#slider-input").slider({
-            min:0,
-            max: 4200,
-            value:1000,
-            step:1000
-        });
-
-
         spinnerLoad($('#form-master-tourfolder'));
         <?php if(Request::input('country') !=''){ ?>
             country(<?php echo Request::input('country');?>);
