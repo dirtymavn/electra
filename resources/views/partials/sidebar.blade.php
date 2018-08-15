@@ -677,6 +677,9 @@
                         <li class="{!! (url(route('inventory-type.index')) == Request::url() OR Request::is('master-data/inventory-type*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','inventory-type.read'])) ? '' : 'display:none;' }}">
                             <a href="{{route('inventory-type.index')}}"><i class="fa fa-circle-o"></i><span>Inventory Type</span></a>
                         </li>
+                        <li class="{!! (url(route('iur.index')) == Request::url() OR Request::is('master-data/supplier*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','supplier.read'])) ? '' : 'display:none;' }}">
+                            <a href=" {{ route('iur.index') }} "><i class="fa fa-circle-o"></i><span>IUR</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
