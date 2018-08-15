@@ -127,11 +127,11 @@ class SalesFolderController extends Controller
         $credit = TrxSalesCreditCard::where('trx_sales_id', $id)->first()->toArray();
         $billing = TrxSalesBilling::where('trx_sales_id', $id)->first()->toArray();
         unset($credit['id'], $credit['created_at'], $credit['updated_at'], $billing['id'], $billing['created_at'], $billing['updated_at']);
-
+        $newCode = $sales->sales_no;
         $merge = array_merge($trxsales, $credit, $billing);
         $cities = City::getDataAvailable()->pluck('city_name', 'id')->all();
         $sales = (object) $merge;
-        return view('contents.business.sales.edit', compact('sales', 'customers', 'cities', 'departments'));
+        return view('contents.business.sales.edit', compact('sales', 'customers', 'cities', 'departments','newCode'));
     }
 
     /**
