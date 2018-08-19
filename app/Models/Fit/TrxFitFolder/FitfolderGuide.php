@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\Outbound\TrxTourfolder;
+namespace App\Models\Fit\TrxFitfolder;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TourfolderGuide extends Model
+class FitfolderGuide extends Model
 {
-    protected $table = 'trx_tour_folder_guide';
+    protected $table = 'trx_fit_folder_guide';
 
     protected $fillable = [
-    	'id_tour_folder',
+    	'id_fit_folder',
 	    'from_date',
 	    'to_date',
 	    'guide_number',

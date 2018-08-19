@@ -302,7 +302,7 @@
                 </div>
             </div>
         </li>
-        <li class=" has-sub-menu">
+        <li class=" has-sub-menu {!! (Request::is('fit*') OR Request::is('fit')) ? ' active' : '' !!}">
             <a href="#">
                 <div class="icon-w">
                     <div class="os-icon os-icon-corner-left-up"></div>
@@ -313,14 +313,14 @@
                 <div class="sub-menu-icon"><i class="os-icon os-icon-life-buoy"></i></div>
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>FIT Folder <i class="os-icon os-icon-ui-02"></i></span>
+                        <li class="{!! (url(route('fitfolder.index')) == Request::url() OR Request::is('fit/fitfolder*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','fitfolder.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('fitfolder.index')}}">
+                                <i class="fa fa-circle-o"></i><span>FIT Folder</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>Availability <i class="os-icon os-icon-ui-02"></i></span>
+                        <li class="{!! (url(route('fit-availability.index')) == Request::url() OR Request::is('fit/availability*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','fit-availability.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('fit-availability.index')}}">
+                                <i class="fa fa-circle-o"></i><span>Availability </span>
                             </a>
                         </li>
                         <li>
@@ -328,11 +328,17 @@
                                 <i class="fa fa-circle-o"></i><span>FIT Order <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
-                        <li>
+
+                        <li class="{!! (url(route('fit-delivery.index')) == Request::url() OR Request::is('fit/availability*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','fit-delivery.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('fit-delivery.index')}}">
+                                <i class="fa fa-circle-o"></i><span>Delivery </span>
+                            </a>
+                        </li>
+                        <!-- <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Delivery <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="#">
                                 <i class="fa fa-circle-o"></i><span>Report <i class="os-icon os-icon-ui-02"></i></span>

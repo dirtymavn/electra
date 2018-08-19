@@ -238,8 +238,8 @@
             <?php foreach ($listdata as $key => $value) {?>
                 <tr>
                     <td><?php echo $key+1;?></td>
-                    <td>{{ $value->tour_code }}</td>
-                    <td>{{ $value->tour_name }}</td>
+                    <td>{{ $value->fit_code }}</td>
+                    <td>{{ $value->fit_name }}</td>
                     <td>{{ $value->airline_name }}</td>
                     <td></td>
                     <td>{{ $value->number_of_days }}</td>

@@ -287,8 +287,66 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
     });
 
     // FIT
-    Route::group(['prefix' => 'fit', 'namespace' => 'FIT'], function () {
+    Route::group(['prefix' => 'fit', 'namespace' => 'Fit'], function () {
+         // fitfolder
+        Route::resource('fitfolder', 'FitFolderController');
+        Route::post('fitfolder/bulk-delete', array(
+                                                    'as' => 'fitfolder.bulk-delete',
+                                                    'uses' => 'FitFolderController@bulkDelete',
+                                                    'middleware' => 'sentinel_access:admin.company,fitfolder.destroy'
+                                                ));
+        Route::get('fitfolder/export/excel', ['as' => 'export.fitfolder.excel', 'uses' => 'FitFolderController@export_excel']);
+        Route::get('fitfolder/export/pdf', ['as' => 'export.fitfolder.pdf', 'uses' => 'FitFolderController@export_pdf']);
+        Route::post('fitfolder/get-detail-data', array(
+                                                        'as' => 'fitfolder.get-detail-data',
+                                                        'uses' => 'FitFolderController@detailData',
+                                                        'middleware' => 'sentinel_access:admin.company,fitfolder.create'
+                                                    ));
+        Route::post('fitfolder/fitfolder-detail/delete', array(
+                                                                'as' => 'fitfolder.detail.delete',
+                                                                'uses' => 'FitFolderController@fitfolderDetailDelete',
+                                                                'middleware' => 'sentinel_access:admin.company,fitfolder.create'
+                                                            ));
+        Route::post('fitfolder/fitfolder-detail/detail', array(
+                                                                'as' => 'fitfolder.detail.detail',
+                                                                'uses' => 'FitFolderController@fitfolderDetailGetDetail',
+                                                                'middleware' => 'sentinel_access:admin.company,fitfolder.create'
+                                                            ));
+        Route::post('fitfolder/fitfolder-service-detail', array(
+                                                            'as' => 'fitfolder.fitfolderservice-detail.post',
+                                                            'uses' => 'FitFolderController@fitfolderPopupFitfolderservice',
+                                                            'middleware' => 'sentinel_access:admin.company,fitfolder.create'
+                                                        ));
+        Route::post('fitfolder/fitfolder-itinerary-detail', array(
+                                                            'as' => 'fitfolder.fitfolderitinerary-detail.post',
+                                                            'uses' => 'FitFolderController@fitfolderPopupFitfolderitinerary',
+                                                            'middleware' => 'sentinel_access:admin.company,fitfolder.create'
+                                                        ));
+        Route::post('fitfolder/fitfolder-rate-detail', array(
+                                                            'as' => 'fitfolder.fitfolderrate-detail.post',
+                                                            'uses' => 'FitFolderController@fitfolderPopupFitfolderrate',
+                                                            'middleware' => 'sentinel_access:admin.company,fitfolder.create'
+                                                        ));
+        Route::post('fitfolder/fitfolder-guide-detail', array(
+                                                            'as' => 'fitfolder.fitfolderguide-detail.post',
+                                                            'uses' => 'FitFolderController@fitfolderPopupFitfolderguide',
+                                                            'middleware' => 'sentinel_access:admin.company,fitfolder.create'
+                                                        ));
 
+        Route::resource('fit-availability', 'FitAvailabilityController');
+        Route::post('fit-availability/bulk-delete', array(
+                                                    'as' => 'fit-availability.bulk-delete',
+                                                    'uses' => 'FitAvailabilityController@bulkDelete',
+                                                    'middleware' => 'sentinel_access:admin.company,fit-availability.destroy'
+                                                ));
+        Route::get('fit-availability/export/excel', ['as' => 'export.fit-availability.excel', 'uses' => 'FitAvailabilityController@export_excel']);
+        Route::get('fit-availability/export/pdf', ['as' => 'export.fit-availability.pdf', 'uses' => 'FitAvailabilityController@export_pdf']);
+
+        // Fit Delivery
+        Route::resource('fit-delivery', 'FitDeliveryController');
+        Route::post('fit-delivery/bulk-delete', array('as' => 'fit-delivery.bulk-delete', 'uses' => 'FitDeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,fit-delivery.destroy'));
+        Route::get('fit-delivery/export/excel', ['as' => 'export.fit-delivery.excel', 'uses' => 'FitDeliveryController@export_excel']);
+        Route::get('fit-delivery/export/pdf', ['as' => 'export.fit-delivery.pdf', 'uses' => 'FitDeliveryController@export_pdf']);
     });
 
     // accounting
