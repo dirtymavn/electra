@@ -347,6 +347,29 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('fit-delivery/bulk-delete', array('as' => 'fit-delivery.bulk-delete', 'uses' => 'FitDeliveryController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,fit-delivery.destroy'));
         Route::get('fit-delivery/export/excel', ['as' => 'export.fit-delivery.excel', 'uses' => 'FitDeliveryController@export_excel']);
         Route::get('fit-delivery/export/pdf', ['as' => 'export.fit-delivery.pdf', 'uses' => 'FitDeliveryController@export_pdf']);
+
+
+
+
+
+        // Tour Order
+        Route::resource('fitorder', 'FitOrderController');
+        Route::post('fitorder/bulk-delete', array('as' => 'fitorder.bulk-delete', 'uses' => 'FitOrderController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,fitorder.destroy'));
+        Route::post('fitorder/get-data', array('as' => 'fitorder.get-data', 'uses' => 'FitOrderController@getData'));
+        Route::post('fitorder/data/delete', array('as' => 'fitorder.data.delete', 'uses' => 'FitOrderController@dataDelete', 'middleware' => 'sentinel_access:admin.company,fitorder.create'));
+        Route::post('fitorder/data/detail', array('as' => 'fitorder.data.detail', 'uses' => 'FitOrderController@dataDetail', 'middleware' => 'sentinel_access:admin.company,fitorder.create'));
+        // Tour Order Paxlist
+        Route::post('fitorder/paxlist', array('as' => 'fitorder.paxlist.post', 'uses' => 'FitOrderController@tourOrderPaxlistStore', 'middleware' => 'sentinel_access:admin.company,fitorder.create'));
+
+        //Tour Order Paxlist Flight
+        Route::post('fitorder/paxlist-flight', array('as' => 'fitorder.paxlist-flight.post', 'uses' => 'FitOrderController@tourOrderPaxlistFlightStore', 'middleware' => 'sentinel_access:admin.company,fitorder.create'));
+
+        // detail tour order <get all data>
+        Route::get('fitorder/data/get-detail', array('as' => 'fitorder.data.get-detail', 'uses' => 'FitOrderController@detailTourOrder', 'middleware' => 'sentinel_access:admin.company,fitorder.create'));
+        Route::get('fitorder/export/excel', ['as' => 'export.fitorder.excel', 'uses' => 'FitOrderController@export_excel']);
+        Route::get('fitorder/export/pdf', ['as' => 'export.fitorder.pdf', 'uses' => 'FitOrderController@export_pdf']);
+
+
     });
 
     // accounting

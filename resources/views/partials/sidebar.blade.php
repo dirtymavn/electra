@@ -323,9 +323,10 @@
                                 <i class="fa fa-circle-o"></i><span>Availability </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i><span>FIT Order <i class="os-icon os-icon-ui-02"></i></span>
+
+                        <li class="{!! (url(route('fitorder.index')) == Request::url() OR Request::is('fit/fitorder*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','fitorder.read'])) ? '' : 'display:none;' }}">
+                            <a href="{{route('fitorder.index')}}">
+                                <i class="fa fa-circle-o"></i><span>FIT Order</span>
                             </a>
                         </li>
 

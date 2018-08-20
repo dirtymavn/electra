@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Fit;
 
-use App\Models\Fit\TrxTourOrder\TourOrder;
-use App\Models\Fit\TrxTourOrder\TourOrderPaxList;
-use App\Models\Fit\TrxTourOrder\TourOrderPaxListTour;
-use App\Models\Fit\TrxTourOrder\TourOrderPaxListTourAccomodation;
-use App\Models\Fit\TrxTourOrder\TourOrderPaxListTourSelling;
-use App\Models\Fit\TrxTourOrder\TourOrderPaxListTourFlight;
-use App\Models\Fit\TrxTourOrder\TourOrderTour;
+use App\Models\Fit\TrxFitOrder\FitOrder;
+use App\Models\Fit\TrxFitOrder\FitOrderPaxList;
+use App\Models\Fit\TrxFitOrder\FitOrderPaxListTour;
+use App\Models\Fit\TrxFitOrder\FitOrderPaxListTourAccomodation;
+use App\Models\Fit\TrxFitOrder\FitOrderPaxListTourSelling;
+use App\Models\Fit\TrxFitOrder\FitOrderPaxListTourFlight;
+use App\Models\Fit\TrxFitOrder\FitOrderTour;
 
 use App\Models\MasterData\Customer\MasterCustomer;
 use App\Models\MasterData\Airline;
@@ -18,7 +18,7 @@ use App\Models\MasterData\Currency\Currency;
 use App\Models\MasterData\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Outbound\TourOrderDataTable;
+use App\DataTables\Fit\FitOrderDataTable;
 use App\Http\Requests\Outbound\PaxListTourRequest;
 
 class FitOrderController extends Controller
@@ -26,10 +26,10 @@ class FitOrderController extends Controller
     public function __construct()
     {
         // middleware
-        $this->middleware('sentinel_access:admin.company,tourorder.read', ['only' => ['index']]);
-        $this->middleware('sentinel_access:admin.company,tourorder.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel_access:admin.company,tourorder.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel_access:admin.company,tourorder.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel_access:admin.company,fitorder.read', ['only' => ['index']]);
+        $this->middleware('sentinel_access:admin.company,fitorder.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel_access:admin.company,fitorder.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel_access:admin.company,fitorder.destroy', ['only' => ['destroy']]);
 
     }
 
@@ -38,9 +38,9 @@ class FitOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(TourOrderDataTable $dataTable)
+    public function index(FitOrderDataTable $dataTable)
     {
-        return $dataTable->render('contents.outbounds.tour_order.index');
+        return $dataTable->render('contents.fits.tour_order.index');
     }
 
     /**
@@ -64,8 +64,8 @@ class FitOrderController extends Controller
         $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
             ->all();
         $meals = MasterCustomer::meals();
-        $roomTypes = TourOrder::roomTypes();
-        $roomCategories = TourOrder::roomCategories();
+        $roomTypes = FitOrder::roomTypes();
+        $roomCategories = FitOrder::roomCategories();
         $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
         $cities = City::getAvailableData()
             ->select(\DB::raw("(cities.id ||'/'|| countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as slug"), 
@@ -85,7 +85,7 @@ class FitOrderController extends Controller
         //     $airlines = ['' => '- Not Available -'];
         // }
 
-        return view('contents.outbounds.tour_order.create', compact('customers', 'tours', 'airlines', 'meals', 'roomTypes', 'roomCategories', 'currencys', 'cities', 'newCode'));
+        return view('contents.fits.tour_order.create', compact('customers', 'tours', 'airlines', 'meals', 'roomTypes', 'roomCategories', 'currencys', 'cities', 'newCode'));
     }
 
     /**
@@ -98,7 +98,7 @@ class FitOrderController extends Controller
     {
         \DB::beginTransaction();
         try {
-            $newCode = TourOrder::getAutoNumber();
+            $newCode = FitOrder::getAutoNumber();
             $request->merge([ 'company_id' =>  @user_info()->company->id ]);
             if (@$request->is_draft == 'true') {
                 $msgSuccess = trans('message.save_as_draft');
@@ -110,14 +110,14 @@ class FitOrderController extends Controller
                 $msgSuccess = trans('message.published');
             }
 
-            $insert = TourOrder::create($request->all());
+            $insert = FitOrder::create($request->all());
             
             if ($insert) {
-                $redirect = redirect()->route('tourorder.index');
+                $redirect = redirect()->route('fitorder.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('tourorder.edit', $insert->id);
+                    $redirect = redirect()->route('fitorder.edit', $insert->id);
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('tourorder.create');
+                    $redirect = redirect()->route('fitorder.create');
                 }
                 flash()->success($msgSuccess);
                 \DB::commit();
@@ -126,7 +126,7 @@ class FitOrderController extends Controller
         } catch (\Exception $e) {
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
             \DB::rollback();
-            $url = route('tourorder.create').'?error=y';
+            $url = route('fitorder.create').'?error=y';
             return redirect()->to($url)->withInput();
         }
     }
@@ -134,10 +134,10 @@ class FitOrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Outbound\TrxTourOrder\TourOrder  $tourOrder
+     * @param  \App\Models\Outbound\TrxTourOrder\FitOrder  $tourOrder
      * @return \Illuminate\Http\Response
      */
-    public function show(TourOrder $tourOrder)
+    public function show(FitOrder $fitOrder)
     {
         //
     }
@@ -145,10 +145,10 @@ class FitOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Outbound\TrxTourOrder\TourOrder  $tourOrder
+     * @param  \App\Models\Outbound\TrxfitOrder\FitOrder  $fitOrder
      * @return \Illuminate\Http\Response
      */
-    public function edit(TourOrder $tourOrder, Request $request, $id)
+    public function edit(FitOrder $fitOrder, Request $request, $id)
     {
         if (!$request->error) {
             \DB::table('temporaries')
@@ -163,8 +163,8 @@ class FitOrderController extends Controller
         $airlines = Airline::getAvailableData()->pluck('airlines.airline_name', 'airlines.id')
             ->all();
         $meals = MasterCustomer::meals();
-        $roomTypes = TourOrder::roomTypes();
-        $roomCategories = TourOrder::roomCategories();
+        $roomTypes = FitOrder::roomTypes();
+        $roomCategories = FitOrder::roomCategories();
         $currencys = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_code')->all();
         $cities = City::getAvailableData()
             ->select(\DB::raw("(cities.id ||'/'|| countries.country_name || '-' || cities.city_name || '-' || cities.city_code) as slug"), 
@@ -183,12 +183,12 @@ class FitOrderController extends Controller
         // }
 
         
-        $tourOrder = TourOrder::find($id);
-        $tourOrder->master_tour_id = $tourOrder->tour->master_tour_id;
-        $tourOrder->days = $tourOrder->tour->days;
-        $newCode = $tourOrder->order_no;
+        $fitOrder = FitOrder::find($id);
+        $fitOrder->master_tour_id = $fitOrder->tour->master_tour_id;
+        $fitOrder->days = $fitOrder->tour->days;
+        $newCode = $fitOrder->order_no;
 
-        foreach ($tourOrder->paxLists as $key => $value) {
+        foreach ($fitOrder->paxLists as $key => $value) {
             $data = [
                 'customer_id' => $value->customer_id,
                 'vip_status_flag' => ($value->vip_status_flag) ? 1 : 0,
@@ -260,65 +260,65 @@ class FitOrderController extends Controller
             }
         }
 
-        return view('contents.outbounds.tour_order.edit', compact('customers', 'tours', 'airlines', 'meals', 'roomTypes', 'roomCategories', 'currencys', 'cities', 'tourOrder', 'newCode'));
+        return view('contents.fits.tour_order.edit', compact('customers', 'tours', 'airlines', 'meals', 'roomTypes', 'roomCategories', 'currencys', 'cities', 'fitOrder', 'newCode'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Outbound\TrxTourOrder\TourOrder  $tourOrder
+     * @param  \App\Models\Outbound\TrxfitOrder\fitOrder  $fitOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TourOrder $tourOrder, $id)
+    public function update(Request $request, FitOrder $fitOrder, $id)
     {
-        $tourOrder = TourOrder::find($id);
+        $fitOrder = FitOrder::find($id);
 
         \DB::beginTransaction();
         try {
-            $newCode = TourOrder::getAutoNumber();
+            $newCode = FitOrder::getAutoNumber();
             if (@$request->is_draft == 'false') {
                 $request->merge(['is_draft' => false, 'order_no' => $newCode]);
                 $msgSuccess = trans('message.published');
-                $redirect = redirect()->route('tourorder.index');
+                $redirect = redirect()->route('fitorder.index');
             } elseif (@$request->is_publish_continue == 'true') {
                 $request->merge(['is_draft' => false, 'order_no' => $newCode]);
                 $msgSuccess = trans('message.published_continue');
-                $redirect = redirect()->route('tourorder.create');
+                $redirect = redirect()->route('fitorder.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('tourorder.edit', $tourOrder->id);
+                $redirect = redirect()->route('fitorder.edit', $fitOrder->id);
             }
 
-            $update = $tourOrder->update($request->all());
+            $update = $fitOrder->update($request->all());
 
             if ($update) {
 
                 $tour = Tour::find($request->master_tour_id);
 
                 if ($tour) {
-                    $tourOrder->tour->delete();
-                    $tourOrderTour = new TourOrderTour;
-                    $tourOrderTour->master_tour_id = $tour->id;
-                    $tourOrderTour->trx_tour_order_id = $tourOrder->id;
-                    $tourOrderTour->tour_name = $tour->tour_name;
-                    $tourOrderTour->tour_code = $tour->tour_code;
-                    $tourOrderTour->depart_date = $tour->depart_date;
-                    $tourOrderTour->return_date = $tour->return_date;
-                    $tourOrderTour->days = $request->days;
-                    $tourOrderTour->source_type = $tour->source_type;
-                    $tourOrderTour->tour_category = $tour->tour_category;
-                    $tourOrderTour->pax_no = $tour->pax_no;
-                    $tourOrderTour->adult = $tour->adult;
-                    $tourOrderTour->child = $tour->child;
-                    $tourOrderTour->infant = $tour->infant;
-                    $tourOrderTour->senior = $tour->senior;
-                    $tourOrderTour->ticket_only = $tour->ticket_only;
-                    $tourOrderTour->tour_type = $tour->tour_type;
-                    $tourOrderTour->save();
+                    $fitOrder->tour->delete();
+                    $fitOrderTour = new FitOrderTour;
+                    $fitOrderTour->master_tour_id = $tour->id;
+                    $fitOrderTour->trx_fit_order_id = $fitOrder->id;
+                    $fitOrderTour->tour_name = $tour->tour_name;
+                    $fitOrderTour->tour_code = $tour->tour_code;
+                    $fitOrderTour->depart_date = $tour->depart_date;
+                    $fitOrderTour->return_date = $tour->return_date;
+                    $fitOrderTour->days = $request->days;
+                    $fitOrderTour->source_type = $tour->source_type;
+                    $fitOrderTour->tour_category = $tour->tour_category;
+                    $fitOrderTour->pax_no = $tour->pax_no;
+                    $fitOrderTour->adult = $tour->adult;
+                    $fitOrderTour->child = $tour->child;
+                    $fitOrderTour->infant = $tour->infant;
+                    $fitOrderTour->senior = $tour->senior;
+                    $fitOrderTour->ticket_only = $tour->ticket_only;
+                    $fitOrderTour->tour_type = $tour->tour_type;
+                    $fitOrderTour->save();
                 }
                 
-                $paxLists =  $tourOrder->paxLists;
+                $paxLists =  $fitOrder->paxLists;
                 foreach ($paxLists as $value) {
                     $value->delete();
                 }
@@ -330,8 +330,8 @@ class FitOrderController extends Controller
                     foreach ($tourPaxlists as $tourPaxlist) {
                         $tourPaxlistData = json_decode($tourPaxlist->data);
 
-                        $paxlist = new TourOrderPaxList;
-                        $paxlist->trx_tour_order_id = $tourOrder->id;
+                        $paxlist = new FitOrderPaxList;
+                        $paxlist->trx_fit_order_id = $fitOrder->id;
                         $paxlist->customer_id = $tourPaxlistData->customer_id;
                         $paxlist->vip_status_flag = $tourPaxlistData->vip_status_flag;
                         $paxlist->surname = $tourPaxlistData->surname;
@@ -343,8 +343,8 @@ class FitOrderController extends Controller
                         $paxlist->dob = $tourPaxlistData->dob;
                         $paxlist->save();
 
-                        $paxlistTour = new TourOrderPaxListTour;
-                        $paxlistTour->trx_tour_order_pax_list_id = $paxlist->id;
+                        $paxlistTour = new FitOrderPaxListTour;
+                        $paxlistTour->trx_fit_order_pax_list_id = $paxlist->id;
                         $paxlistTour->return_date = $tourPaxlistData->return_date;
                         $paxlistTour->deviation = $tourPaxlistData->deviation;
                         $paxlistTour->meal = $tourPaxlistData->meal;
@@ -352,8 +352,8 @@ class FitOrderController extends Controller
                         $paxlistTour->special_req = $tourPaxlistData->special_req;
                         $paxlistTour->save();
 
-                        $accomodation = new TourOrderPaxListTourAccomodation;
-                        $accomodation->trx_tour_order_pax_list_tour_id = $paxlistTour->id;
+                        $accomodation = new FitOrderPaxListTourAccomodation;
+                        $accomodation->trx_fit_order_pax_list_tour_id = $paxlistTour->id;
                         $accomodation->room_type = $tourPaxlistData->room_type;
                         $accomodation->room_category = $tourPaxlistData->room_category;
                         $accomodation->room_share = $tourPaxlistData->room_share;
@@ -361,8 +361,8 @@ class FitOrderController extends Controller
                         $accomodation->adjoin_room_id = $tourPaxlistData->adjoin_room_id;
                         $accomodation->save();
 
-                        $selling = new TourOrderPaxListTourSelling;
-                        $selling->trx_tour_order_pax_list_tour_id = $paxlistTour->id;
+                        $selling = new FitOrderPaxListTourSelling;
+                        $selling->trx_fit_order_pax_list_tour_id = $paxlistTour->id;
                         $selling->price_type = $tourPaxlistData->price_type;
                         $selling->less_total_disc = $tourPaxlistData->less_total_disc;
                         $selling->room_surcharge = $tourPaxlistData->room_surcharge;
@@ -386,8 +386,8 @@ class FitOrderController extends Controller
                         if (count($tourPaxlistTourFlights) > 0) {
                             foreach ($tourPaxlistTourFlights as $tourPaxlistTourFlight) {
                                 $tourPaxlistTourFlight = json_decode($tourPaxlistTourFlight->data);
-                                $flight = new TourOrderPaxListTourFlight;
-                                $flight->trx_tour_order_pax_list_tour_id = $paxlistTour->id;
+                                $flight = new FitOrderPaxListTourFlight;
+                                $flight->trx_fit_order_pax_list_tour_id = $paxlistTour->id;
                                 $flight->flight_from = $tourPaxlistTourFlight->flight_from;
                                 $flight->flight_to = $tourPaxlistTourFlight->flight_to;
                                 $flight->airline_id = $tourPaxlistTourFlight->flight_airline_id;
@@ -411,7 +411,7 @@ class FitOrderController extends Controller
         } catch (\Exception $e) {
             \DB::rollback();
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
-            $url = route('tourorder.edit', $tourOrder->id).'?error=y';
+            $url = route('fitorder.edit', $fitOrder->id).'?error=y';
             return redirect()->to($url)->withInput();
         }
     }
@@ -422,12 +422,12 @@ class FitOrderController extends Controller
      * @param  \App\Models\Outbound\TrxTourOrder\TourOrder  $tourOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TourOrder $tourOrder, $id)
+    public function destroy(FitOrder $fitOrder, $id)
     {
-        $tourOrder = TourOrder::find($id);
+        $fitOrder = FitOrder::find($id);
 
-        if ($tourOrder) {
-            $tourOrder->delete();
+        if ($fitOrder) {
+            $fitOrder->delete();
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.not_found'));
@@ -452,7 +452,7 @@ class FitOrderController extends Controller
             flash()->success(trans('message.delete.error'));
         }
 
-        return redirect()->route('tourorder.index');
+        return redirect()->route('fitorder.index');
     }
 
     /**
@@ -701,7 +701,7 @@ class FitOrderController extends Controller
     public function export_pdf()
     {
         $tourorders = TourOrder::all();
-        $pdf = \PDF::loadView('contents.outbounds.tour_order.pdf', compact('tourorders'));
+        $pdf = \PDF::loadView('contents.fits.tour_order.pdf', compact('tourorders'));
         return $pdf->download('tour-orders.pdf');
     }
 

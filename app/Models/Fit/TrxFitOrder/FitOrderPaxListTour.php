@@ -29,16 +29,16 @@ class FitOrderPaxListTour extends Model
 
     public function paxListTourAccomodation()
     {
-    	return $this->hasOne(TourOrderPaxListTourAccomodation::class, 'trx_tour_order_pax_list_tour_id');
+    	return $this->hasOne(FitOrderPaxListTourAccomodation::class, 'trx_fit_order_pax_list_tour_id');
     }
 
     public function paxListTourSelling()
     {
-    	return $this->hasOne(TourOrderPaxListTourSelling::class, 'trx_tour_order_pax_list_tour_id');
+    	return $this->hasOne(FitOrderPaxListTourSelling::class, 'trx_fit_order_pax_list_tour_id');
     }
 
     public function paxListTourFlights()
     {
-        return $this->hasMany(TourOrderPaxListTourFlight::class, 'trx_tour_order_pax_list_tour_id');
+        return $this->hasMany(FitOrderPaxListTourFlight::class, 'trx_fit_order_pax_list_tour_id');
     }
 }

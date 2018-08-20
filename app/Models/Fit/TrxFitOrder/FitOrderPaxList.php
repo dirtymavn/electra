@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Outbound\TrxTourOrder;
+namespace App\Models\Fit\TrxFitOrder;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FixOrderPaxList extends Model
+class FitOrderPaxList extends Model
 {
     /**
      * The table associated with the model.
@@ -33,6 +33,6 @@ class FixOrderPaxList extends Model
 
     public function paxListTour()
     {
-    	return $this->hasOne(TourOrderPaxListTour::class, 'trx_fit_order_pax_list_id');
+    	return $this->hasOne(FitOrderPaxListTour::class, 'trx_fit_order_pax_list_id');
     }
 }

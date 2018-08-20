@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Tour Order')
+@section('title', 'Edit Fit Order')
 
 @section('style')
 <link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" />
@@ -9,30 +9,30 @@
 @section('breadcrumb')
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('tourorder.index')}}">Tour Order</a></li>
+        <li class="breadcrumb-item"><a href="{{route('fitorder.index')}}">Fit Order</a></li>
         <li class="breadcrumb-item">Edit</li>
     </ul>
 @endsection
 
-@section('page_title', 'Edit Tour Order')
+@section('page_title', 'Edit Fit Order')
 
 @section('content')
     @include('flash::message')
-    {!! Form::model($tourOrder, [
-            'route'     =>['tourorder.update', $tourOrder->id],
+    {!! Form::model($fitOrder, [
+            'route'     =>['fitorder.update', $fitOrder->id],
             'method'    => 'PATCH',
             'class' =>  'form-horizontal',
-            'id'    =>  'form-tourorder',
+            'id'    =>  'form-fitorder',
             'enctype' => 'multipart/form-data',
         ]) !!}
         <div class="box">
             <div class="box-body">
-                @include('contents.outbounds.tour_order._form')  
+                @include('contents.fits.tour_order._form')  
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="{{ route('tourorder.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
+                        <a href="{{ route('fitorder.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="button" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
-                        @if($tourOrder->is_draft)
+                        @if($fitOrder->is_draft)
                             <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
                             <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
                         @endif
@@ -46,6 +46,6 @@
 
 @section('script')
 <script>
-    submitForm("{{route('tourorder.update', $tourOrder->id)}}", $('#form-tourorder'), 'update');
+    submitForm("{{route('fitorder.update', $fitOrder->id)}}", $('#form-fitorder'), 'update');
 </script>
 @endsection

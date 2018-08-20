@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tour Order')
+@section('title', 'Fit Order')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/switch-custom.css')}}">
@@ -9,24 +9,24 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-    <li class="breadcrumb-item">Tour Order</li>
+    <li class="breadcrumb-item">Fit Order</li>
 </ul>
 @endsection
 
-@section('page_title', 'Tour Order Lists')
+@section('page_title', 'Fit Order Lists')
 
 @section('content')
 @include('flash::message')
 <div class="row">
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'tourorder.create']))
-            <a href="{{ route('tourorder.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Tour Code
+        @if(user_info()->hasAnyAccess(['admin.company', 'fitorder.create']))
+            <a href="{{ route('fitorder.create')}}" class="btn btn-primary" id="btn-submit">
+                <i class="fa fa-plus m-right-10"></i> Add Fit Order
             </a>
         @endif
     </div>
     <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'tourorder.destroy']))
+        @if(user_info()->hasAnyAccess(['admin.company', 'fitorder.destroy']))
             <button class="btn btn-danger" id="bulk-delete">
                 <i class="fa fa-trash m-right-10"></i> Bulk Delete
             </button>
@@ -38,8 +38,8 @@
                 Actions
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('export.tourorder.excel') }}">Export XLS</a>
-                <a class="dropdown-item" href="{{ route('export.tourorder.pdf') }}">Export PDF</a>
+                <a class="dropdown-item" href="{{ route('export.fitorder.excel') }}">Export XLS</a>
+                <a class="dropdown-item" href="{{ route('export.fitorder.pdf') }}">Export PDF</a>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
         });
         
         if (ids.length > 0) {
-            bulkDelete("{{ route('tourorder.bulk-delete') }}", ids);
+            bulkDelete("{{ route('fitorder.bulk-delete') }}", ids);
         } else {
             alert('Something went wrong!');
             return false;

@@ -16,9 +16,9 @@ class FitOrderDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('action', function($tourorder){
-                $edit_url = route('fitorder.edit', $tourorder->id);
-                $delete_url = route('fitorder.destroy', $tourorder->id);
+            ->addColumn('action', function($fitorder){
+                $edit_url = route('fitorder.edit', $fitorder->id);
+                $delete_url = route('fitorder.destroy', $fitorder->id);
                 if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('fitorder.update') && user_info()->hasAccess('fitorder.destroy')) ) {
                     return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
                 } elseif (user_info()->hasAnyAccess(['admin.company', 'fitorder.update'])) {
@@ -29,28 +29,28 @@ class FitOrderDataTable extends DataTable
                     return '-';
                 }
             })
-            ->editColumn('depart_date', function($tourorder){
-                return date('d F Y', strtotime($tourorder->depart_date));
+            ->editColumn('depart_date', function($fitorder){
+                return date('d F Y', strtotime($fitorder->depart_date));
             })
-            ->editColumn('return_date', function($tourorder){
-                return date('d F Y', strtotime($tourorder->return_date));
+            ->editColumn('return_date', function($fitorder){
+                return date('d F Y', strtotime($fitorder->return_date));
             });
-            // ->editColumn('is_draft', function($tourorder){
-            //     return ($tourorder->is_draft) ? 'Yes' : 'No';
+            // ->editColumn('is_draft', function($fitorder){
+            //     return ($fitorder->is_draft) ? 'Yes' : 'No';
             // });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Outbound\TrxTourOrder\TourOrder $model
+     * @param \App\Models\Outbound\TrxFitOrder\FitOrder $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(TourOrder $model)
+    public function query(FitOrder $model)
     {
         $return = $model->newQuery()
             ->leftJoin('companies', 'companies.id', '=', 'trx_fit_orders.company_id')
-            ->join('trx_fit_order_tours', 'trx_fit_order_tours.trx_tour_order_id', '=', 'trx_fit_orders.id')
+            ->join('trx_fit_order_tours', 'trx_fit_order_tours.trx_fit_order_id', '=', 'trx_fit_orders.id')
             ->join('master_customers', 'master_customers.id', '=', 'trx_fit_orders.customer_id')
             ->select(
                 'trx_fit_orders.id',

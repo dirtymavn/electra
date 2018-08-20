@@ -435,13 +435,13 @@
             'type': 'tour-paxlist'
         };
 
-        initDatatable($('#paxlist'), "{{route('tourorder.get-data')}}", columns, datas);
+        initDatatable($('#paxlist'), "{{route('fitorder.get-data')}}", columns, datas);
 
         $('#form-tour-paxlist').submit(function(e) {
             var formData = new FormData(this);
             e.preventDefault();
             $.ajax({
-                url: "{{route('tourorder.paxlist.post')}}",
+                url: "{{route('fitorder.paxlist.post')}}",
                 method: "POST",
                 processData: false,
                 contentType: false,
@@ -460,7 +460,7 @@
             var formData = new FormData(this);
             e.preventDefault();
             $.ajax({
-                url: "{{route('tourorder.paxlist-flight.post')}}",
+                url: "{{route('fitorder.paxlist-flight.post')}}",
                 method: "POST",
                 processData: false,
                 contentType: false,
@@ -490,7 +490,7 @@
         $('#tour_paxlist_flight_id').val(makeId);
         $('#tour_paxlist_id').val(makeId);
 
-        initDatatable($('#paxlist-flight'), "{{route('tourorder.get-data')}}", flightColumns, FlightDatas());
+        initDatatable($('#paxlist-flight'), "{{route('fitorder.get-data')}}", flightColumns, FlightDatas());
 
         e.preventDefault();
     });
@@ -500,7 +500,7 @@
         var element = $(this).data('element');
         deleteTempData($('#'+element), id);
         // $.ajax({
-        //     url: "{{route('tourorder.data.delete')}}",
+        //     url: "{{route('fitorder.data.delete')}}",
         //     method: "POST",
         //     dataType: "JSON",
         //     data: {'id':id},
@@ -512,7 +512,7 @@
 
     function deleteTempData(element, id) {
         $.ajax({
-            url: "{{route('tourorder.data.delete')}}",
+            url: "{{route('fitorder.data.delete')}}",
             method: "POST",
             dataType: "JSON",
             data: {'id':id},
@@ -532,7 +532,7 @@
 
     function editTempData(element, id) {
         $.ajax({
-            url: "{{route('tourorder.data.detail')}}",
+            url: "{{route('fitorder.data.detail')}}",
             method: "POST",
             dataType: "JSON",
             data: {'id':id},
@@ -578,7 +578,7 @@
                     $('#selling_remark').val(value.selling_remark);
                     $('#tour_paxlist_id').val(data.data.id);
 
-                    initDatatable($('#paxlist-flight'), "{{route('tourorder.get-data')}}", flightColumns, FlightDatas(false));
+                    initDatatable($('#paxlist-flight'), "{{route('fitorder.get-data')}}", flightColumns, FlightDatas(false));
 
                     $('#form-paxlist').modal({backdrop: 'static', keyboard: false});
                 }
