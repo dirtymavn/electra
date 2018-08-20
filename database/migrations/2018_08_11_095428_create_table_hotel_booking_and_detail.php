@@ -110,11 +110,11 @@ class CreateTableHotelBookingAndDetail extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('trx_hotel_booking');
         Schema::dropIfExists('trx_hotel_booking_detail');
         Schema::dropIfExists('trx_hotel_booking_remark');
         Schema::dropIfExists('trx_hotel_booking_pax');
         Schema::dropIfExists('trx_hotel_booking_service');
+        Schema::dropIfExists('trx_hotel_booking');
 
         Schema::enableForeignKeyConstraints();
     }

@@ -4,14 +4,14 @@ namespace App\Models\Outbound\TrxTourOrder;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TourOrderPaxList extends Model
+class FixOrderPaxList extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'trx_tour_order_pax_lists';
+    protected $table = 'trx_fit_order_pax_lists';
 
     /**
      * The attributes that aren't mass assignable.
@@ -19,7 +19,7 @@ class TourOrderPaxList extends Model
      * @var array
      */
     protected $fillable = [
-        'trx_tour_order_id',
+        'trx_fit_order_id',
         'customer_id',
         'vip_status_flag',
         'surname',
@@ -33,6 +33,6 @@ class TourOrderPaxList extends Model
 
     public function paxListTour()
     {
-    	return $this->hasOne(TourOrderPaxListTour::class, 'trx_tour_order_pax_list_id');
+    	return $this->hasOne(TourOrderPaxListTour::class, 'trx_fit_order_pax_list_id');
     }
 }

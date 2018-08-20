@@ -13,6 +13,8 @@ class CreateTableMasterAirAllotment extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('master_air_allotment', function (Blueprint $table) {
             $table->increments('id');
             $table->string('pnr', 255)->nullable();
@@ -34,6 +36,8 @@ class CreateTableMasterAirAllotment extends Migration
             $table->integer('branch_id')->unsigned()->nullable();
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

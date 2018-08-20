@@ -106,10 +106,10 @@ class CreateTableTrxInvoiceAndDetail extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('trx_invoice');
         Schema::dropIfExists('trx_invoice_customer');
         Schema::dropIfExists('trx_invoice_refund');
         Schema::dropIfExists('trx_invoice_detail');
+        Schema::dropIfExists('trx_invoice');
 
         Schema::enableForeignKeyConstraints();
     }

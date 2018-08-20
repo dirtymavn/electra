@@ -76,9 +76,9 @@ class CreateTableMasterVisa extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('master_visa');
         Schema::dropIfExists('master_visa_document');
         Schema::dropIfExists('master_passport');
+        Schema::dropIfExists('master_visa');
 
         Schema::enableForeignKeyConstraints();
     }

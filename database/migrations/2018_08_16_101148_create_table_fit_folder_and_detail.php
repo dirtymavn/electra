@@ -128,12 +128,12 @@ class CreateTableFitFolderAndDetail extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('trx_fit_folder');
         Schema::dropIfExists('trx_fit_folder_detail');
         Schema::dropIfExists('trx_fit_folder_itinerary');
         Schema::dropIfExists('trx_fit_folder_service');
         Schema::dropIfExists('trx_fit_folder_rate');
         Schema::dropIfExists('trx_fit_folder_guide');
+        Schema::dropIfExists('trx_fit_folder');
 
         Schema::enableForeignKeyConstraints();
     }

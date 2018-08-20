@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/uploads
+/public/upload
 /public/storage
 /storage/*.key
 /vendor
@@ -13,3 +14,4 @@ npm-debug.log
 yarn-error.log
 .env
 .DS_Store
+/.project

@@ -56,8 +56,8 @@ class CreateTableMasterHotelAllotment extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('master_hotel_allotment');
         Schema::dropIfExists('master_hotel_allotment_detail');
+        Schema::dropIfExists('master_hotel_allotment');
 
         Schema::enableForeignKeyConstraints();
     }

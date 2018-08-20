@@ -73,9 +73,9 @@ class CreateTableFitDeliveryOrder extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('trx_delivery_order_despatchs');
-        Schema::dropIfExists('trx_delivery_order_customers');
-        Schema::dropIfExists('trx_delivery_orders');
+        Schema::dropIfExists('trx_fit_delivery_order_despatchs');
+        Schema::dropIfExists('trx_fit_delivery_order_customers');
+        Schema::dropIfExists('trx_fit_delivery_orders');
 
         Schema::enableForeignKeyConstraints();
     }

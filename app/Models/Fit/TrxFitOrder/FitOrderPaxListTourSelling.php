@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Models\Outbound\TrxTourOrder;
+namespace App\Models\Fit\TrxFitOrder;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TourOrderPaxListTourSelling extends Model
+class FitOrderPaxListTourSelling extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'trx_tour_order_pax_list_tour_sellings';
+    protected $table = 'trx_fit_order_pax_list_tour_sellings';
 
     /**
      * The attributes that aren't mass assignable.
@@ -19,7 +19,7 @@ class TourOrderPaxListTourSelling extends Model
      * @var array
      */
     protected $fillable = [
-        'trx_tour_order_pax_list_tour_id',
+        'trx_fit_order_pax_list_tour_id',
         'price_type',
         'less_total_disc',
         'room_surcharge',

@@ -128,12 +128,12 @@ class CreateTableTourFolderAndDetail extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('trx_tour_folder');
         Schema::dropIfExists('trx_tour_folder_detail');
         Schema::dropIfExists('trx_tour_folder_itinerary');
         Schema::dropIfExists('trx_tour_folder_service');
         Schema::dropIfExists('trx_tour_folder_rate');
         Schema::dropIfExists('trx_tour_folder_guide');
+        Schema::dropIfExists('trx_tour_folder');
 
         Schema::enableForeignKeyConstraints();
     }
