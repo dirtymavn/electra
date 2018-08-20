@@ -13,7 +13,7 @@
 			        </div>
 					<div class="form-group">
 						{!! Form::label('id_airlines', trans('Airlines'), ['class' => 'control-label']) !!}
-						{!! Form::select('id_airlines', ['' => 'Choose airline'] + @$dataairline, old('id_airlines'), ['class' => 'form-control id_airlines']) !!}
+						{!! Form::select('id_airlines', ['' => 'Choose airline'] + @$dataairline, old('id_airlines'), ['class' => 'form-control id_airlines', 'id' => 'id_airlines']) !!}
 					</div>
 					<div class="form-group">
 						{!! Form::label('description', trans('Description'), ['class' => 'control-label']) !!}
@@ -47,7 +47,7 @@
 					</div>
 					<div class="form-group">
 						{!! Form::label('id_currency', trans('Currency'), ['class' => 'control-label']) !!}
-						{!! Form::select('id_currency', @$datacurrency, old('id_currency'), ['class' => 'form-control', 'placeholder' => 'Choose Currency']) !!}
+						{!! Form::select('id_currency', @$datacurrency, old('id_currency'), ['class' => 'form-control id_currency', 'placeholder' => 'Choose Currency', 'id' => 'id_currency']) !!}
 					</div>
 					<div class="form-group">
 						{!! Form::label('origin', trans('Origin'), ['class' => 'control-label']) !!}

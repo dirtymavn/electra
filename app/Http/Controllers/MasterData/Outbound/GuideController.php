@@ -177,11 +177,11 @@ class GuideController extends Controller
     {
         $newCode = MasterTourGuide::getAutoNumber();
         if (@$request->is_draft == 'false') {
-            $request->merge(['is_draft' => false, 'guide_code' => $newCode]);
+            $request->merge(['is_draft' => false, 'guide' => $newCode]);
             $msgSuccess = trans('message.published');
             $redirect = redirect()->route('guide.index');
         } elseif (@$request->is_publish_continue == 'true') {
-            $request->merge(['is_draft' => false, 'guide_code' => $newCode]);
+            $request->merge(['is_draft' => false, 'guide' => $newCode]);
             $msgSuccess = trans('message.published_continue');
             $redirect = redirect()->route('guide.create');
         } else {
@@ -269,5 +269,16 @@ class GuideController extends Controller
         $guides = MasterTourGuide::all();
         $pdf = PDF::loadView('contents.master_datas.outbounds.guide.pdf', compact('guides'));
         return $pdf->download('outbound-guide.pdf');
+    }
+
+    public function searchData(Request $request)
+    {
+        $results = MasterTourGuide::getAvailableData()
+            ->select('master_tour_guides.id', 'master_tour_guides.guide_name_first as text')
+            ->where('master_tour_guides.guide_name_first', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
     }
 }

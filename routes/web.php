@@ -283,7 +283,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                             'uses' => 'HotelBookingController@hotelbookingPopupHotelbookingservice',
                                                             'middleware' => 'sentinel_access:admin.company,hotel-booking.create'
                                                         ));
-
+        Route::get('hotel-booking/search/data', ['as' => 'hotel-booking.search-data', 'uses' => 'HotelBookingController@searchData', 'middleware' => 'sentinel_access:admin.company,hotel-booking.create']);
+        
     });
 
     // FIT
@@ -451,6 +452,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('guide/bulk-delete', array('as' => 'guide.bulk-delete', 'uses' => 'GuideController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,guide.destroy'));
             Route::get('guide/export/excel', ['as' => 'export.guide.excel', 'uses' => 'GuideController@export_excel']);
             Route::get('guide/export/pdf', ['as' => 'export.guide.pdf', 'uses' => 'GuideController@export_pdf']);
+            Route::get('guide/search/data', ['as' => 'guide.search-data', 'uses' => 'GuideController@searchData', 'middleware' => 'sentinel_access:admin.company,guide.create']);
+
 
             Route::resource('itin', 'ItinController');
             Route::post('itin/bulk-delete', array('as' => 'itin.bulk-delete', 'uses' => 'ItinController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,itin.destroy'));
@@ -591,6 +594,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('dotype/bulk-delete', array('as' => 'dotype.bulk-delete', 'uses' => 'DoTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,dotype.destroy'));
         Route::get('dotype/export/excel', ['as' => 'export.dotype.excel', 'uses' => 'DoTypeController@export_excel']);
         Route::get('dotype/export/pdf', ['as' => 'export.dotype.pdf', 'uses' => 'DoTypeController@export_pdf']);
+        Route::get('dotype/search/data', ['as' => 'dotype.search-data', 'uses' => 'DoTypeController@searchData', 'middleware' => 'sentinel_access:admin.company,dotype.create']);
 
         // Product Code
         Route::resource('productcode', 'ProductCodeController');
@@ -666,7 +670,8 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                                                             'uses' => 'MasterHotelController@masterhotelDetailHotelService',
                                                             'middleware' => 'sentinel_access:admin.company,master-hotel.create'
                                                         ));
-
+        Route::get('master-hotel/search/data', ['as' => 'master-hotel.search-data', 'uses' => 'MasterHotelController@searchData']);
+        
 
          // Master Hotel allotment
         Route::resource('hotel-allotment', 'HotelAllotmentController');

@@ -384,6 +384,16 @@ class HotelBookingController extends Controller
         return $pdf->download('hotel-booking.pdf');
     }
 
+    public function searchData(Request $request)
+    {
+        $results = HotelBooking::getAvailableData()
+            ->select('trx_hotel_booking.id', 'trx_hotel_booking.tour_code as text')
+            ->where('trx_hotel_booking.tour_code', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 
     public function detailData(Request $request)
     {

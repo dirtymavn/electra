@@ -41,7 +41,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('id_tour_guide', trans('Tour guide'), ['class' => 'control-label']) !!}
-                            {!! Form::select('id_tour_guide', @$dataguide, old('id_tour_guide'), ['class' => 'form-control', 'placeholder' => 'Choose Guide']) !!}
+                            {!! Form::select('id_tour_guide', @$dataguide, old('id_tour_guide'), ['class' => 'form-control id_tour_guide', 'placeholder' => 'Choose Guide']) !!}
                         </div>
                     </div>
                     <div class="col-md-4">

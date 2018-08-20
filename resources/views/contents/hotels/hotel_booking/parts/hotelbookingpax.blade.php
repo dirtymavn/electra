@@ -58,7 +58,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('id_nationality', trans('Nationality'), ['class' => 'control-label']) !!}
-                            {!! Form::select('id_nationality', ['' => 'Choose Nationality'] + @$countries, old('id_nationality'), ['class' => 'form-control']) !!}
+                            {!! Form::select('id_nationality', ['' => 'Choose Nationality'] + @$countries, old('id_nationality'), ['class' => 'form-control id_nationality']) !!}
                         </div>
                     </div>
                 </div>

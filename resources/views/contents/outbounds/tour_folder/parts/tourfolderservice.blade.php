@@ -57,7 +57,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('id_currency', trans('Currency'), ['class' => 'control-label']) !!}
-                            {!! Form::select('id_currency', @$datacurrency, old('id_currency'), ['class' => 'form-control', 'placeholder' => 'Choose Currency']) !!}
+                            {!! Form::select('id_currency', @$datacurrency, old('id_currency'), ['class' => 'form-control id_currency', 'placeholder' => 'Choose Currency', 'id' => 'id_currency']) !!}
                         </div>
                     </div>
                     <div class="col-md-4">

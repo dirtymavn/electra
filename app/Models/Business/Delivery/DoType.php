@@ -15,4 +15,14 @@ class DoType extends Model
     	'company_id',
     	'is_draft'
     ];
+
+    public static function getAvailableData()
+    {
+        $return = self::join('companies', 'companies.id', '=', 'do_types.company_id')
+            ->where('do_types.is_draft', false)
+            ->where('do_types.company_id', user_info('company_id'));
+
+        return $return;
+
+    }
 }

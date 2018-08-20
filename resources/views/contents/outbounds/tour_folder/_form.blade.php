@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('branch_id', trans('Branch'), ['class' => 'control-label']) !!}
-            {!! Form::select('branch_id', ['' => 'Choose Branch'] + @$databranch, old('branch_id'), ['class' => 'form-control branch_id']) !!}
+            {!! Form::select('branch_id', ['' => 'Choose Branch'] + @$databranch, old('branch_id'), ['class' => 'form-control branch_id', 'id' => 'branch_id']) !!}
         </div>
     </div>
 </div>
@@ -72,6 +72,10 @@
 <script>
     $(function(){
         spinnerLoad($('#form-tourfolder'));
+        initSelect2Remote($('#branch_id'), "{{ route('branch.search-data') }}", "Choose Branch", 0);
+        initSelect2Remote($('#id_airlines'), "{{ route('airline.search-data') }}", "Choose Air line", 0);
+        initSelect2Remote($('.id_currency'), "{{ route('currencyrate.search-data') }}", "Choose Currency", 0);
+        initSelect2Remote($('.id_tour_guide'), "{{ route('guide.search-data') }}", "Choose guide", 0);
     });
 </script>
 @include('contents.outbounds.tour_folder.js.tourfolderservice')

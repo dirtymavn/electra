@@ -8,7 +8,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             {!! Form::label('do_type_id', trans('DO Type'), ['class' => 'control-label']) !!}
-            {!! Form::select('do_type_id', ['' => 'Choose Do Type'] + @$dotypes, old('do_type_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('do_type_id', ['' => 'Choose Do Type'] + @$dotypes, old('do_type_id'), ['class' => 'form-control', 'id' => 'do_type_id']) !!}
         </div>
     </div>
     <div class="col-sm-6">
@@ -39,7 +39,7 @@
         <div class="form-group">
             {!! Form::label('department_code', trans('Department Code'), ['class' => 'control-label']) !!}
             {{-- {!! Form::text('department_code', old('department_code') , ['class' => 'form-control', 'placeholder' => 'Input the Department Code']) !!} --}}
-            {!! Form::select('department_code', @$departmens, old('department_code'), ['class' => 'form-control', 'placeholder' => 'Choose Department']) !!}
+            {!! Form::select('department_code', @$departmens, old('department_code'), ['class' => 'form-control', 'placeholder' => 'Choose Department', 'id' => 'department_code']) !!}
         </div>
     </div>
 </div>
@@ -74,6 +74,8 @@
 <script>
     $(function(){
         spinnerLoad($('#form-delivery'));
+        initSelect2Remote($('#do_type_id'), "{{ route('dotype.search-data') }}", "Choose Do type", 0);
+        initSelect2Remote($('#department_code'), "{{ route('department.search-data') }}", "Choose department", 0);
         initSelect2Remote($('#cust_no'), "{{ route('customer.search-data') }}", "Choose Customer", 0);
         initSelect2Remote($('#despatch_staff'), "{{ route('customer.search-data') }}", "Choose Despatch Staff", 0);
         initSelect2Remote($('#to_delivery'), "{{ route('customer.search-data') }}", "Choose To Delivery", 0);

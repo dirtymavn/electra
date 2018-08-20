@@ -114,7 +114,7 @@ class TrxDeliveryOrder extends Model
             ->where('do_no', '<>', 'draft')
             ->orderBy('id', 'desc')->first();
 
-        $findCode = CoreForm::getCodeBySlug('delivery-order');
+        $findCode = CoreForm::getCodeBySlug('delivery');
         if ($result) {
             $lastNumber = (int) substr($result->do_no, strlen($result->do_no) - 4, 4);
             $newNumber = $lastNumber + 1;

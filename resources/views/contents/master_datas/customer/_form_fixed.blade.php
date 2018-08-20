@@ -188,7 +188,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('ic_no_1_country', trans('IC No 1 Country'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('ic_no_1_country', $countries, old('ic_no_1_country'), ['class' => 'form-control', 'placeholder' => 'Select the IC No 1 Country']) !!}
+                                        {!! Form::select('ic_no_1_country', $countries, old('ic_no_1_country'), ['class' => 'form-control select2', 'placeholder' => 'Select the IC No 1 Country']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('ic_no_2', trans('IC No 2'), ['class' => 'control-label']) !!}
@@ -196,7 +196,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('ic_no_2_country', trans('IC No 2 Country'), ['class' => 'control-label']) !!}
-                                        {!! Form::select('ic_no_2_country', $countries, old('ic_no_2_country'), ['class' => 'form-control', 'placeholder' => 'Select the IC No 2 Country']) !!}
+                                        {!! Form::select('ic_no_2_country', $countries, old('ic_no_2_country'), ['class' => 'form-control select2', 'placeholder' => 'Select the IC No 2 Country']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('nationality_1', trans('Nationality 1'), ['class' => 'control-label']) !!}

@@ -206,4 +206,15 @@ class DoTypeController extends Controller
         $pdf = PDF::loadView('contents.master_datas.dotype.pdf', compact('dotypes'));
         return $pdf->download('dotype.pdf');
     }
+
+    public function searchData(Request $request)
+    {
+        $results = DoType::getAvailableData()
+            ->select('do_types.id', 'do_types.do_type_name as text')
+            ->where('do_types.do_type_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

@@ -328,6 +328,16 @@ class MasterHotelController extends Controller
         return $pdf->download('master-hotel.pdf');
     }
 
+    public function searchData(Request $request)
+    {
+        $results = MasterHotel::getAvailableData()
+            ->select('master_hotel.id', 'master_hotel.name as text')
+            ->where('master_hotel.name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 
     public function detailData(Request $request)
     {

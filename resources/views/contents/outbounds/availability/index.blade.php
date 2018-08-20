@@ -17,42 +17,19 @@
 
 @section('content')
 @include('flash::message')
-<?php /*<div class="row">
-    <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'tourfolder.create']))
-            <a href="{{ route('tourfolder.create')}}" class="btn btn-primary" id="btn-submit">
-                <i class="fa fa-plus m-right-10"></i> Add Availability
-            </a>
-        @endif
-    </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="col-sm-2">
-        @if(user_info()->hasAnyAccess(['admin.company', 'tourfolder.destroy']))
-            <button class="btn btn-danger" id="bulk-delete">
-                <i class="fa fa-trash m-right-10"></i> Bulk Delete
-            </button>
-        @endif
-    </div>
-    <div class="col-sm-3">
-        <div class="dropdown">
-            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                Actions
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('export.tourfolder.excel') }}">Export XLS</a>
-                <a class="dropdown-item" href="{{ route('export.tourfolder.pdf') }}">Export PDF</a>
-            </div>
-        </div>
-    </div>
-</div>*/?>
 <style type="text/css">
 
 </style>
+@section('part_script')
 <script type="text/javascript">
     $(document).ready(function(){
-        
+        initSelect2Remote($('.id_tour_guide'), "{{ route('guide.search-data') }}", "Choose guide", 0);
+        initSelect2Remote($('.airline'), "{{ route('airline.search-data') }}", "Choose airline", 0);
+        initSelect2Remote($('.country'), "{{ route('country.search-data') }}", "Choose country", 0);
+        initSelect2Remote($('.city'), "{{ route('city.search-data') }}", "Choose city", 0);
     });
 </script>
+@endsection
 <form method="get">
 <div class="row">
     <div class="col-md-4">
@@ -110,7 +87,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Country</label>
             <div class="col-sm-8">
-                <select class="form-control" name="country" id="id_country">
+                <select class="form-control country" name="country" id="id_country">
                     <option value="">Select Country</option>
                     @foreach ($datacountries as $key => $value)
                     <option value="{{ $key }}" <?php if(Request::input('country') == $key){ echo 'selected';} ?>>{{ $value }}</option>
@@ -123,7 +100,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> City</label>
             <div class="col-sm-8">
-                <select class="form-control" name="city" id="id_city">
+                <select class="form-control city" name="city" id="id_city">
                     <option value="">Select City</option>
                     @foreach ($datacities as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
@@ -136,7 +113,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Tour code</label>
             <div class="col-sm-8">
-                <select class="form-control" name="tourcode">
+                <select class="form-control id_tour_guide" name="tourcode">
                     <option value="">Select Tour code</option>
                     @foreach ($datatourcode as $key => $value)
                     <option value="{{ $key }}" <?php if($key == Request::input('tourcode')){ echo 'selected';}?>>{{ $value }} </option>
@@ -188,7 +165,7 @@
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for=""> Airline</label>
             <div class="col-sm-8">
-                <select class="form-control" name="airline">
+                <select class="form-control airline" name="airline">
                     <option value="">Select Airline</option>
                     @foreach ($dataairline as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>

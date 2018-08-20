@@ -97,6 +97,9 @@
 <script>
     $(function(){
         spinnerLoad($('#form-hotelbooking'));
+        initSelect2Remote($('.id_hotel'), "{{ route('master-hotel.search-data') }}", "Choose hotel", 0);
+        initSelect2Remote($('.id_customer'), "{{ route('customer.search-data') }}", "Choose customer", 0);
+        initSelect2Remote($('.id_nationality'), "{{ route('country.search-data') }}", "Choose country", 0);
     });
 </script>
 
