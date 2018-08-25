@@ -52,4 +52,14 @@ class Branch extends Model implements Auditable
         return $return;
 
     }
+
+    public static function findMyBranch($company_id=null){
+        $return = self::where('is_draft', false);
+        
+        if(is_null($company_id)){
+            $company_id= user_info('company_id');
+        }
+        $return= $return->where('company_id', $company_id)->first();
+        return $return;
+    }
 }

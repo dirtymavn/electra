@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Request;
 use App\Models\MasterData\Customer\MasterCustomer;
 use App\Models\Setting\CoreForm;
+use App\Models\MasterData\Branch;
 
 class TrxSales extends Model
 {
@@ -458,6 +459,13 @@ class TrxSales extends Model
             ->orderBy('id', 'desc')->first();
 
         $findCode = CoreForm::getCodeBySlug('sales');
+        $findBranch = Branch::findMyBranch();
+        $branchCode='';
+
+        if($findBranch){
+            $branchCode= $findBranch->branch_code;
+        }
+
         if ($result) {
             $lastNumber = (int) substr($result->sales_no, strlen($result->sales_no) - 4, 4);
             $newNumber = $lastNumber + 1;
@@ -483,12 +491,12 @@ class TrxSales extends Model
                 $newNumber = $newNumber;
             }
 
-            $newCode = $findCode.$newNumber;
+            $newCode = $newNumber;
         } else {
-            $newCode = $findCode.'0001';
+            $newCode = '0001';
         }
-
-        return $newCode;
+        $formatedNumber=$findCode . $branchCode . date('m').date('y') . $newCode;
+        return $formatedNumber;
     }
 
     public static function getAvailableData()

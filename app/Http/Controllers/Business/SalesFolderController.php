@@ -47,7 +47,7 @@ class SalesFolderController extends Controller
      */
     public function create()
     {
-        $newCode = '';
+        $newCode = Sales::getAutoNumber();
         $company_id = user_info()->company_id;
         $customers = MasterCustomer::getAvaliable()->pluck('customer_name', 'id')->all();
         $cities = City::getDataAvailable()->pluck('city_name', 'id')->all();
