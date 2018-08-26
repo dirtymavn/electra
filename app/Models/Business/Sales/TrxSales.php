@@ -454,48 +454,29 @@ class TrxSales extends Model
 
     public static function getAutoNumber()
     {
-        $result = self::whereCompanyId(user_info('company_id'))
-            ->where('sales_no', '<>', 'draft')
-            ->orderBy('id', 'desc')->first();
+        $formCode = CoreForm::getCodeBySlug('sales');
 
-        $findCode = CoreForm::getCodeBySlug('sales');
         $findBranch = Branch::findMyBranch();
         $branchCode='';
 
-        if($findBranch){
-            $branchCode= $findBranch->branch_code;
+        if ($findBranch) {
+            $branchCode = $findBranch->branch_code;
+        }
+        
+        
+        $result = self::selectRaw('right(sales_no,4) as sales_no')
+                    ->whereRaw('substring(sales_no,-8,4)=to_char(now(),\'mmyy\')')
+                    ->orderByRaw('right(sales_no, 4) desc')
+                    ->where('sales_no', '<>', 'draft')
+                    ->whereCompanyId(user_info('company_id'))
+                    ->first();
+        
+        $nextNumber = '0001';
+        if($result){
+            $nextNumber= str_pad((intval($result->sales_no) + 1), 4, '0', STR_PAD_LEFT);
         }
 
-        if ($result) {
-            $lastNumber = (int) substr($result->sales_no, strlen($result->sales_no) - 4, 4);
-            $newNumber = $lastNumber + 1;
-            
-            if (strlen($newNumber) == 1) {
-                $newNumber = '000'.$newNumber;
-            } elseif (strlen($newNumber) == 2) {
-                $newNumber = '00'.$newNumber;
-            } elseif (strlen($newNumber) == 3) {
-                $newNumber = '0'.$newNumber;
-            } else {
-                $newNumber = $newNumber;
-            }
-
-            $currMonth = (int)date('m', strtotime($result->sales_no));
-            $currYear = (int)date('y', strtotime($result->sales_no));
-            $nowMonth = (int)date('m');
-            $nowYear = (int)date('y');
-
-            if ( ($currMonth < $nowMonth && $currYear == $nowYear) || ($currMonth == $nowMonth && $currYear < $nowYear) ) {
-                $newNumber = '0001';
-            } else {
-                $newNumber = $newNumber;
-            }
-
-            $newCode = $newNumber;
-        } else {
-            $newCode = '0001';
-        }
-        $formatedNumber=$findCode . $branchCode . date('m').date('y') . $newCode;
+        $formatedNumber=$formCode . $branchCode . date('my') . $nextNumber;
         return $formatedNumber;
     }
 
