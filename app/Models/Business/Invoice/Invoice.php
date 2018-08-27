@@ -3,12 +3,22 @@
 namespace App\Models\Business\Invoice;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use Request;
 
 class Invoice extends Model implements Auditable
 {
-	use \OwenIt\Auditing\Auditable;
+    use \OwenIt\Auditing\Auditable;
+
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     protected $table = 'trx_invoice';
 

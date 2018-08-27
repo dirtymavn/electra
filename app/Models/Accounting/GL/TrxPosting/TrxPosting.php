@@ -4,10 +4,20 @@ namespace App\Models\Accounting\GL\TrxPosting;
 
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TrxPosting extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
+
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     protected $table = 'trx_posting';
 

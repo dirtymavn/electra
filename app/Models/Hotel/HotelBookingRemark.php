@@ -3,9 +3,19 @@
 namespace App\Models\Hotel;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HotelBookingRemark extends Model
 {
+	use SoftDeletes;
+
+	/**
+	 * The attributes that should be mutated to dates.
+	 *
+	 * @var array
+	 */
+	protected $dates = ['deleted_at'];
+
     protected $table = 'trx_hotel_booking_remark';
 
     protected $fillable = [

@@ -3,13 +3,23 @@
 namespace App\Models\Outbound\TrxTourFolder;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\Setting\CoreForm;
 use Request;
 
 class TourFolder extends Model implements Auditable
 {
-	use \OwenIt\Auditing\Auditable;
+    use \OwenIt\Auditing\Auditable;
+    
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     protected $table = 'trx_tour_folder';
 

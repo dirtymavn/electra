@@ -3,6 +3,7 @@
 namespace App\Models\Business\Sales;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Request;
 use App\Models\MasterData\Customer\MasterCustomer;
@@ -11,6 +12,15 @@ use App\Models\MasterData\Branch;
 
 class TrxSales extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
     protected $table = 'trx_sales';
 
     protected $fillable = [

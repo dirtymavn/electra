@@ -3,6 +3,7 @@
 namespace App\Models\Fit\TrxFitOrder;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Models\MasterData\Tour;
 use App\Models\Setting\CoreForm;
@@ -11,6 +12,15 @@ use Request;
 class FitOrder extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
+
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * The table associated with the model.
