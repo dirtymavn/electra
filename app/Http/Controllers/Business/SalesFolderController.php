@@ -174,10 +174,11 @@ class SalesFolderController extends Controller
      * @param  \App\Models\Business\Sales\sales  $sales
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sales $sales)
+    public function destroy($id)
     {
-        $destroy = $sales->delete();
+        $destroy = Sales::destroy($id);
         flash()->success('Data is successfully deleted');
+
         return redirect()->route('sales.index');
     }
 
@@ -191,7 +192,7 @@ class SalesFolderController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            Sales::whereIn('id', $ids)->delete();
+            Sales::destroy($ids);
             flash()->success(trans('message.delete.success'));
         } else {
             flash()->success(trans('message.delete.error'));

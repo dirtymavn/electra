@@ -168,8 +168,7 @@ class DeliveryController extends Controller
      */
     public function destroy($id)
     {   
-        $delivery = TrxDelivery::find($id);
-        $delivery->delete();
+        $delivery = TrxDelivery::destroy($id);
         flash()->success(trans('message.delete.success'));
 
         return redirect()->route('delivery.index');
@@ -185,7 +184,7 @@ class DeliveryController extends Controller
     {
         $ids = explode(',', $request->ids);
         if ( count($ids) > 0 ) {
-            TrxDelivery::whereIn('id', $ids)->delete();
+            TrxDelivery::destroy($ids);
 
             flash()->success(trans('message.delete.success'));
         } else {

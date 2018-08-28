@@ -330,9 +330,9 @@ class HotelBookingController extends Controller
      * @param  \App\Models\Hotel\HotelBooking  $HotelBooking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HotelBooking $HotelBooking)
+    public function destroy($id)
     {
-        $HotelBooking->delete();
+        HotelBooking::destroy($id);
         flash()->success(trans('message.delete.success'));
 
         return redirect()->route('hotel-booking.index');

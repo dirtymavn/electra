@@ -208,9 +208,9 @@ class VisaController extends Controller
      * @param  \App\Models\MasterData\Visa  $Visa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Visa $Visa)
+    public function destroy($id)
     {
-        $Visa->delete();
+        Visa::destroy($id);
         flash()->success(trans('message.delete.success'));
 
         return redirect()->route('visa.index');

@@ -289,9 +289,9 @@ class InvoiceController extends Controller
      * @param  \App\Models\MasterData\Invoice  $Invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice $Invoice)
+    public function destroy($id)
     {
-        $Invoice->delete();
+        Invoice::destroy($id);
         flash()->success(trans('message.delete.success'));
 
         return redirect()->route('invoice.index');

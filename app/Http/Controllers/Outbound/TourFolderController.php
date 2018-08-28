@@ -397,9 +397,9 @@ class TourFolderController extends Controller
      * @param  \App\Models\Outbound\TourFolder  $TourFolder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TourFolder $tourfolder)
+    public function destroy($id)
     {
-        $tourfolder->delete();
+        TourFolder::destroy($id);
         flash()->success(trans('message.delete.success'));
 
         return redirect()->route('tourfolder.index');

@@ -398,9 +398,9 @@ class FitFolderController extends Controller
      * @param  \App\Models\Outbound\FitFolder  $FitFolder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FitFolder $fitfolder)
+    public function destroy($id)
     {
-        $fitfolder->delete();
+        FitFolder::destroy($id);
         flash()->success(trans('message.delete.success'));
 
         return redirect()->route('fitfolder.index');
