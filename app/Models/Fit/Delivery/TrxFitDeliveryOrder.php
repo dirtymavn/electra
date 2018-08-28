@@ -120,41 +120,28 @@ class TrxFitDeliveryOrder extends Model
 
     public static function getAutoNumber()
     {
-        $result = self::whereCompanyId(user_info('company_id'))
-            ->where('do_no', '<>', 'draft')
-            ->orderBy('id', 'desc')->first();
+        $formCode = CoreForm::getCodeBySlug('delivery');
 
-        $findCode = CoreForm::getCodeBySlug('delivery');
-        if ($result) {
-            $lastNumber = (int) substr($result->do_no, strlen($result->do_no) - 4, 4);
-            $newNumber = $lastNumber + 1;
-            
-            if (strlen($newNumber) == 1) {
-                $newNumber = '000'.$newNumber;
-            } elseif (strlen($newNumber) == 2) {
-                $newNumber = '00'.$newNumber;
-            } elseif (strlen($newNumber) == 3) {
-                $newNumber = '0'.$newNumber;
-            } else {
-                $newNumber = $newNumber;
-            }
+        $findBranch = Branch::findMyBranch();
+        $branchCode = '';
 
-            $currMonth = (int)date('m', strtotime($result->do_no));
-            $currYear = (int)date('y', strtotime($result->do_no));
-            $nowMonth = (int)date('m');
-            $nowYear = (int)date('y');
-
-            if ( ($currMonth < $nowMonth && $currYear == $nowYear) || ($currMonth == $nowMonth && $currYear < $nowYear) ) {
-                $newNumber = '0001';
-            } else {
-                $newNumber = $newNumber;
-            }
-
-            $newCode = $findCode.$newNumber;
-        } else {
-            $newCode = $findCode.'0001';
+        if ($findBranch) {
+            $branchCode = $findBranch->branch_code;
         }
 
-        return $newCode;
+        $result = self::withTrashed()
+            ->selectRaw('right(do_no,4) as do_no')
+            ->whereRaw('left(right(do_no,8),4)=to_char(now(),\'mmyy\')')
+            ->orderByRaw('right(do_no, 4) desc')
+            ->where('do_no', '<>', 'draft')
+            ->whereCompanyId(user_info('company_id'))
+            ->first();
+
+        $nextNumber = '0001';
+        if ($result) {
+            $nextNumber = str_pad((intval($result->do_no) + 1), 4, '0', STR_PAD_LEFT);
+        }
+
+        return $formCode . $branchCode . date('my') . $nextNumber;
     }
 }

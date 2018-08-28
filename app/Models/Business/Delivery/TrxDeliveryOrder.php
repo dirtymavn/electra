@@ -129,7 +129,8 @@ class TrxDeliveryOrder extends Model
         }
 
 
-        $result = self::selectRaw('right(do_no,4) as do_no')
+        $result = self::withTrashed()
+            ->selectRaw('right(do_no,4) as do_no')
             ->whereRaw('left(right(do_no,8),4)=to_char(now(),\'mmyy\')')
             ->orderByRaw('right(do_no, 4) desc')
             ->where('do_no', '<>', 'draft')

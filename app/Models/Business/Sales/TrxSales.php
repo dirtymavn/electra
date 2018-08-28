@@ -474,7 +474,8 @@ class TrxSales extends Model
         }
         
         
-        $result = self::selectRaw('right(sales_no,4) as sales_no')
+        $result = self::withTrashed()
+                    ->selectRaw('right(sales_no,4) as sales_no')
                     ->whereRaw('left(right(sales_no,8),4)=to_char(now(),\'mmyy\')')
                     ->orderByRaw('right(sales_no, 4) desc')
                     ->where('sales_no', '<>', 'draft')

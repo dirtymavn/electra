@@ -178,41 +178,29 @@ class FitFolder extends Model implements Auditable
 
     public static function getAutoNumber()
     {
-        $result = self::whereCompanyId(user_info('company_id'))
-            ->where('fit_code', '<>', 'draft')
-            ->orderBy('id', 'desc')->first();
-        $findCode = CoreForm::getCodeBySlug('fit-folder');
-        if ($result) {
-            $lastNumber = (int) substr($result->fit_code, strlen($result->fit_code) - 4, 4);
-            $newNumber = $lastNumber + 1;
-            
-            if (strlen($newNumber) == 1) {
-                $newNumber = '000'.$newNumber;
-            } elseif (strlen($newNumber) == 2) {
-                $newNumber = '00'.$newNumber;
-            } elseif (strlen($newNumber) == 3) {
-                $newNumber = '0'.$newNumber;
-            } else {
-                $newNumber = $newNumber;
-            }
+        $formCode = CoreForm::getCodeBySlug('fit-folder');
 
-            $currMonth = (int)date('m', strtotime($result->fit_code));
-            $currYear = (int)date('y', strtotime($result->fit_code));
-            $nowMonth = (int)date('m');
-            $nowYear = (int)date('y');
+        $findBranch = Branch::findMyBranch();
+        $branchCode = '';
 
-            if ( ($currMonth < $nowMonth && $currYear == $nowYear) || ($currMonth == $nowMonth && $currYear < $nowYear) ) {
-                $newNumber = '0001';
-            } else {
-                $newNumber = $newNumber;
-            }
-
-            $newCode = $findCode.$newNumber;
-        } else {
-            $newCode = $findCode.'0001';
+        if ($findBranch) {
+            $branchCode = $findBranch->branch_code;
         }
 
-        return $newCode;
+        $result = self::withTrashed()
+            ->selectRaw('right(fit_code,4) as fit_code')
+            ->whereRaw('left(right(fit_code,8),4)=to_char(now(),\'mmyy\')')
+            ->orderByRaw('right(fit_code, 4) desc')
+            ->where('fit_code', '<>', 'draft')
+            ->whereCompanyId(user_info('company_id'))
+            ->first();
+
+        $nextNumber = '0001';
+        if ($result) {
+            $nextNumber = str_pad((intval($result->fit_code) + 1), 4, '0', STR_PAD_LEFT);
+        }
+
+        return $formCode . $branchCode . date('my') . $nextNumber;
     }
 
     public static function getAvailableData()

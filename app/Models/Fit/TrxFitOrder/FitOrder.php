@@ -201,49 +201,27 @@ class FitOrder extends Model implements Auditable
 
     public static function getAutoNumber()
     {
-        $result = self::whereCompanyId(user_info('company_id'))
-            ->where('order_no', '<>', 'draft')
-            ->orderBy('id', 'desc')->first();
+        $formCode = CoreForm::getCodeBySlug('fit-order');
+        $findBranch = Branch::findMyBranch();
+        $branchCode = '';
 
-        $findCode = CoreForm::getCodeBySlug('fit-order');
-        if ($result) {
-            $lastNumber = (int) substr($result->order_no, strlen($result->order_no) - 4, 4);
-            $newNumber = $lastNumber + 1;
-            
-            if (strlen($newNumber) == 1) {
-                $newNumber = '000'.$newNumber;
-            } elseif (strlen($newNumber) == 2) {
-                $newNumber = '00'.$newNumber;
-            } elseif (strlen($newNumber) == 3) {
-                $newNumber = '0'.$newNumber;
-            } else {
-                $newNumber = $newNumber;
-            }
-
-            $currMonth = (int)substr($result->order_no, 2, 2);
-            $currYear = (int)substr($result->order_no, 4, 2);
-            $nowMonth = (int)date('m');
-            $nowYear = (int)date('y');
-
-            if ( ($currMonth < $nowMonth && $currYear == $nowYear) || ($currMonth == $nowMonth && $currYear < $nowYear) ) {
-                $newNumber = '0001';
-            } else {
-                $newNumber = $newNumber;
-            }
-
-            if ($findCode) {
-                $newCode = $findCode.date('my').$newNumber;    
-            } else {
-                $newCode = 'TO'.date('my').$newNumber;
-            }
-        } else {
-            if ($findCode) {
-                $newCode = $findCode.date('my').'0001';
-            } else {
-                $newCode = 'TO'.date('my').'0001';
-            }
+        if ($findBranch) {
+            $branchCode = $findBranch->branch_code;
         }
 
-        return $newCode;
+        $result = self::withTrashed()
+            ->selectRaw('right(order_no,4) as order_no')
+            ->whereRaw('left(right(order_no,8),4)=to_char(now(),\'mmyy\')')
+            ->orderByRaw('right(order_no, 4) desc')
+            ->where('order_no', '<>', 'draft')
+            ->whereCompanyId(user_info('company_id'))
+            ->first();
+
+        $nextNumber = '0001';
+        if ($result) {
+            $nextNumber = str_pad((intval($result->order_no) + 1), 4, '0', STR_PAD_LEFT);
+        }
+
+        return $formCode . $branchCode . date('my') . $nextNumber;
     }
 }
