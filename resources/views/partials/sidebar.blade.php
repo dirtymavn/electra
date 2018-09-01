@@ -361,12 +361,12 @@
                 <div class="sub-menu-i">
                     <ul class="sub-menu">
                         <li>
-                            <a href="#">
+                            <a href="{{route('accounting.invoice.index')}}">
                                 <i class="fa fa-circle-o"></i><span>Invoice <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{route('accounting.misc-invoice.index')}}">
                                 <i class="fa fa-circle-o"></i><span>Misc Invoice <i class="os-icon os-icon-ui-02"></i></span>
                             </a>
                         </li>

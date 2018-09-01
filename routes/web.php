@@ -397,6 +397,28 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
             Route::post('periodend/trx-detail/delete', array('as' => 'periodend.posting-detail.delete', 'uses' => 'TrxPostingController@trxTransDetailDelete', 'middleware' => 'sentinel_access:admin.company,periodend.create'));
             Route::post('periodend/trx-detail/detail', array('as' => 'periodend.posting-detail.detail', 'uses' => 'TrxPostingController@trxTransDetailGetDetail', 'middleware' => 'sentinel_access:admin.company,periodend.create'));
         });
+        Route::group(['as' => 'accounting.'], function () {
+            // Invoice
+            Route::resource('invoice', 'InvoiceController');
+            Route::group(['prefix'=>'invoice','as' => 'invoice.'], function () {
+                Route::post('bulk-delete', array('as' => 'bulk-delete', 'uses' => 'InvoiceController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,account.destroy'));
+                Route::get('export/excel', ['as' => 'export.excel', 'uses' => 'InvoiceController@export_excel']);
+                Route::get('export/pdf', ['as' => 'export.pdf', 'uses' => 'InvoiceController@export_pdf']);
+                Route::get('search/data', ['as' => 'search-data', 'uses' => 'InvoiceController@searchData']);
+                Route::post('sales-detail', ['as' => 'sales_detail', 'uses' => 'InvoiceController@salesDetail']);
+                Route::post('sales-table', ['as' => 'sales_table', 'uses' => 'InvoiceController@salesDetail']);
+            });
+            //Misc Invoice
+            Route::resource('misc-invoice', 'MiscInvoiceController');
+            Route::group(['prefix' => 'misc-invoice', 'as' => 'misc-invoice.'], function () {
+                Route::post('bulk-delete', array('as' => 'bulk-delete', 'uses' => 'MiscInvoiceController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,account.destroy'));
+                Route::get('export/excel', ['as' => 'export.excel', 'uses' => 'MiscInvoiceController@export_excel']);
+                Route::get('export/pdf', ['as' => 'export.pdf', 'uses' => 'MiscInvoiceController@export_pdf']);
+                Route::get('search/data', ['as' => 'search-data', 'uses' => 'MiscInvoiceController@searchData']);
+                Route::post('sales-detail', ['as' => 'sales_detail', 'uses' => 'MiscInvoiceController@salesDetail']);
+                Route::post('sales-table', ['as' => 'sales_table', 'uses' => 'MiscInvoiceController@salesDetail']);
+            });
+        });
     });
 
     // finance
