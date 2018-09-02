@@ -79,13 +79,12 @@ class InvoiceController extends Controller
 
             $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
             $insert = Invoice::create($request->all());
-
             if ($insert) {
-                $redirect = redirect()->route('invoice.index');
+                $redirect = redirect()->route('accounting.invoice.index');
                 if (@$request->is_draft == 'true') {
-                    $redirect = redirect()->route('invoice.edit', $insert->id)->withInput();
+                    $redirect = redirect()->route('accounting.invoice.edit', $insert->id)->withInput();
                 } elseif (@$request->is_publish_continue == 'true') {
-                    $redirect = redirect()->route('invoice.create');
+                    $redirect = redirect()->route('accounting.invoice.create');
                 }
 
                 flash()->success($msgSuccess);
@@ -111,11 +110,11 @@ class InvoiceController extends Controller
     }
 
 
-    public function edit(Invoice $Invoice)
+    public function edit(Invoice $invoice)
     {
         \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
         $data=$invoice;
-        $invoiceNo = '';
+        $invoiceNo = $invoice->invoice_no;
         $invoiceType = $this->invoiceType();
         $fop = $this->ddFop();
         $currentDate = date('d/m/Y');
@@ -220,7 +219,7 @@ class InvoiceController extends Controller
     public function export_pdf()
     {
         $types = Invoice::all();
-        $pdf = \PDF::loadView('contents.business.invoice.pdf', compact('types'));
+        $pdf = \PDF::loadView('contents.accountings.invoice.pdf', compact('types'));
         return $pdf->download('invoice.pdf');
     }
 

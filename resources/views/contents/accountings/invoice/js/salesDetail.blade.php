@@ -8,10 +8,9 @@
             dataType: "JSON",
             data: {'sales_id':id},
             success: function(data) {
-                var value = data.data.data;
-                console.log('Lol');
-                $('#tc_id').value=value.tc_id;
-                $('#customer_name').value=value.tc_id;
+                var value = data.data;
+                $('#tc_id').val(value.tc_id);
+                $('#customer_name').val(value.customer.customer_name);
                 {{-- $('#sales-detail').DataTable().ajax.reload(); --}}
             }
         })
@@ -28,5 +27,5 @@
                 {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
             ]
         });
-    });
+}
 </script>
