@@ -19,8 +19,8 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('type', trans('Type'), ['class' => 'control-label']) !!}
-            {!! Form::select('type',  @$invoiceType, old('type'), [ 'class' => 'form-control']) !!}
+            {!! Form::label('invoice_type', trans('Type'), ['class' => 'control-label']) !!}
+            {!! Form::select('invoice_type',  @$invoiceType, old('invoice_type'), [ 'class' => 'form-control','required'=>true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('sales_folder', trans('Sales Folder'), ['class' => 'control-label']) !!}
@@ -32,7 +32,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('tc_id', trans('TC/ID'), ['class' => 'control-label']) !!}
-            {!! Form::text('tc_id', old('tc_id') , ['class' => 'form-control', 'placeholder' => 'Auto','readonly'=>true,'required'=>true]) !!}
+            {!! Form::text('tc_id', old('tc_id') , ['class' => 'form-control', 'placeholder' => 'Auto','readonly'=>true]) !!}
         </div>
         
     </div>
@@ -41,18 +41,18 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('base', trans('Base'), ['class' => 'control-label']) !!}
-            {!! Form::select('base', ['' => 'Choose Currency'] + @$listSales, old('base'), [ 'class' => 'form-control']) !!}
+            {!! Form::label('base_currency', trans('Base'), ['class' => 'control-label']) !!}
+            {!! Form::select('base_currency', ['' => 'Choose Currency'] + @$currency, old('base_currency'), [ 'class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('billing', trans('Billing'), ['class' => 'control-label']) !!}
-            {!! Form::select('billing', ['' => 'Choose Currency'] + @$listSales, old('billing'), [ 'class' => 'form-control']) !!}
+            {!! Form::label('billing_currency', trans('Billing'), ['class' => 'control-label']) !!}
+            {!! Form::select('billing_currency', ['' => 'Choose Currency'] + @$currency, old('billing_currency'), [ 'class' => 'form-control']) !!}
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('fop', trans('FOP'), ['class' => 'control-label']) !!}
-            {!! Form::select('fop', @$fop, old('fop'), [ 'class' => 'form-control']) !!}
+            {!! Form::label('fop_id', trans('FOP'), ['class' => 'control-label']) !!}
+            {!! Form::select('fop_id', @$fop, old('fop_id'), [ 'class' => 'form-control','required'=>true]) !!}
         </div>
     </div>
     <div class="col-md-12">

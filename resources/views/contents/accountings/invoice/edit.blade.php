@@ -18,8 +18,8 @@
 
 @section('content')
     @include('flash::message')
-    {!! Form::model($Invoice, [
-            'route'     =>['accounting.invoice.update', $Invoice->id],
+    {!! Form::model($invoice, [
+            'route'     =>['accounting.invoice.update', $invoice->id],
             'method'    => 'PATCH',
             'class' =>  'form-horizontal',
             'id'    =>  'form-invoice',

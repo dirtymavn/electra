@@ -17,7 +17,19 @@ class InvoiceDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('action', 'accounting/invoicedatatable.action');
+            ->addColumn('action', function ($invoice) {
+                $edit_url = route('accounting.invoice.edit', $invoice->id);
+                $delete_url = route('accounting.invoice.destroy', $invoice->id);
+                if (user_info()->hasAccess('admin.company') || (user_info()->hasAccess('delivery.update') && user_info()->hasAccess('accounting.invoice.destroy'))) {
+                    return view('partials.action-button')->with(compact('edit_url', 'delete_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'accounting.invoice.update'])) {
+                    return view('partials.action-button')->with(compact('edit_url'));
+                } elseif (user_info()->hasAnyAccess(['admin.company', 'accounting.invoice.destroy'])) {
+                    return view('partials.action-button')->with(compact('delete_url'));
+                } else {
+                    return '-';
+                }
+            });
     }
 
     /**
@@ -28,13 +40,11 @@ class InvoiceDataTable extends DataTable
      */
     public function query(TrxInvoice $model)
     {
-        $return = $model->newQuery()
-            ->select('*');
+        $return = $model::with('sales.customer');
+        if (!user_info()->inRole('super-admin')) {
 
-        // if (!user_info()->inRole('super-admin')) {
-
-        //     $return = $return->where('master_lg.company_id', @user_info()->company->id);
-        // }
+            $return = $return->where('trx_accounting_invoices.company_id', @user_info()->company->id);
+        }
 
         return $return;
     }
@@ -62,11 +72,11 @@ class InvoiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'invoice_no',
-            'sales_no',
-            'customer',
-            'trip_date',
-            'invoice_status'
+            'invoice_no'=>['name' => 'invoice_no', 'data' => 'invoice_no', 'title' => 'Invoice No.'],
+            'sales_no' => ['name' => 'sales.sales_no', 'data' => 'sales.sales_no', 'title' => 'Sales No.'],
+            'customer' => ['name' => 'sales.customer.customer_name', 'data' => 'sales.customer.customer_name', 'title' => 'Customer'],
+            'trip_date' => ['name' => 'trip_date', 'data' => 'invoice_date', 'title' => 'Date'],
+            // 'invoice_status' => ['name' => 'invoice_status', 'data' => 'invoice_status', 'title' => 'Status']
         ];
     }
 

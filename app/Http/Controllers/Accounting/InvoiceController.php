@@ -12,6 +12,7 @@ use App\Models\Temporary;
 use App\Models\Business\Sales\TrxSales as Sales;
 use App\Models\Business\Sales\TrxSalesDetail as SalesDetail;
 use App\Models\MasterData\Customer\MasterCustomer;
+use App\Models\MasterData\Currency\Currency;
 use App\Models\Business\Invoice\InvoiceDetail;
 use App\Models\Business\Invoice\InvoiceRefund;
 
@@ -38,6 +39,7 @@ class InvoiceController extends Controller
      */
     public function index(InvoiceDataTable $dataTable)
     {
+        // return Invoice::with('sales.customer')->get();
         return $dataTable->render('contents.accountings.invoice.index');
     }
 
@@ -53,8 +55,9 @@ class InvoiceController extends Controller
         $invoiceType= $this->invoiceType();
         $fop= $this->ddFop();
         $currentDate= date('d/m/Y');
+        $currency= Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_name')->all();
         $listSales = Sales::getAvailableData()->pluck('trx_sales.sales_no', 'trx_sales.id')->all();
-        return view('contents.accountings.invoice.create', compact('listSales','invoiceNo','currentDate','invoiceType','fop'));
+        return view('contents.accountings.invoice.create', compact('listSales','invoiceNo','currentDate','invoiceType','fop','currency'));
     }
 
     /**
@@ -63,7 +66,7 @@ class InvoiceController extends Controller
      * @param  \App\Http\Requests\MasterData\InvoiceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InvoiceRequest $request)
+    public function store(Request $request)
     {
         \DB::beginTransaction();
         try {
@@ -78,7 +81,10 @@ class InvoiceController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
-            $insert = Invoice::create($request->all());
+            $invoice=$request->all();
+            $invoice['invoice_date']= date('Y-m-d',strtotime($invoice['invoice_date']));
+            $invoice['trip_date']= date('Y-m-d', strtotime($invoice['trip_date']));
+            $insert = Invoice::create($invoice);
             if ($insert) {
                 $redirect = redirect()->route('accounting.invoice.index');
                 if (@$request->is_draft == 'true') {
@@ -93,6 +99,7 @@ class InvoiceController extends Controller
             }
         } catch (\Exception $e) {
             \DB::rollback();
+            dd($e->getMessage());
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
@@ -113,13 +120,13 @@ class InvoiceController extends Controller
     public function edit(Invoice $invoice)
     {
         \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
-        $data=$invoice;
         $invoiceNo = $invoice->invoice_no;
         $invoiceType = $this->invoiceType();
         $fop = $this->ddFop();
-        $currentDate = date('d/m/Y');
+        $currentDate = $invoice->invoice_Date;
         $listSales = Sales::getAvailableData()->pluck('trx_sales.sales_no', 'trx_sales.id')->all();
-        return view('contents.accountings.invoice.edit', compact('invoice', 'listSales', 'customers', 'listCustCredit'));
+        $currency = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_name')->all();
+        return view('contents.accountings.invoice.edit', compact('invoice', 'listSales', 'customers', 'listCustCredit','currency','invoiceNo','currentDate'));
     }
 
     /**
@@ -229,11 +236,6 @@ class InvoiceController extends Controller
         $datas = SalesDetail::where('trx_sales_id',$request->trx_sales_id);
 
         return datatables()->of($datas)
-            ->addColumn('action', function ($inventory) use ($classEdit, $classDelete) {
-                return '<a href="javascript:void(0)" class="' . $classEdit . '" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                            <a href="javascript:void(0)" class="danger ' . $classDelete . '" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
-            })
-            ->rawColumns(['action'])
             ->make(true);
     }
 

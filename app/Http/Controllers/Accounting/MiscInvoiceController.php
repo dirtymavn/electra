@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Accounting;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\DataTables\Accounting\InvoiceDataTable;
+use App\DataTables\Accounting\MiscInvoiceDataTable;
 use App\Http\Requests\Business\InvoiceRequest;
 use App\Models\Business\Country;
 use App\Models\Accounting\Invoice\TrxMiscInvoice as Invoice;

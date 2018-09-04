@@ -4,6 +4,8 @@ namespace App\DataTables\Accounting;
 
 use App\User;
 use Yajra\DataTables\Services\DataTable;
+use App\Models\Accounting\Invoice\TrxMiscInvoice;
+
 
 class MiscInvoiceDataTable extends DataTable
 {
@@ -27,7 +29,16 @@ class MiscInvoiceDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
+        $return = $model->newQuery()
+            ->select('*');
+
+        if (!user_info()->inRole('super-admin')) {
+
+            $return = $return->where('trx_accounting_misc_invoices.company_id', @user_info()->company->id);
+        }
+
+        return $return;
+
     }
 
     /**
@@ -40,7 +51,8 @@ class MiscInvoiceDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px', 'class' => 'row-actions'])
+                    ->addCheckbox(['class' => 'checklist'], 0)
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -52,11 +64,13 @@ class MiscInvoiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'add your columns',
-            'created_at',
-            'updated_at'
+            'invoice_no'=>['name'=>'invoice_no','data'=>'invoice_no', 'title' => 'Misc Invoice No.'],
+            'misc_invoice_type' => ['name' => 'misc_invoice_type', 'data' => 'misc_invoice_type', 'title' => 'Type'],
+            'customer' => ['name' => 'customer.customer_name', 'data' => 'customer.customer_name', 'title' => 'Customer'],
+            'invoice_date' => ['name' => 'invoice_date', 'data' => 'invoice_date', 'title' => 'Date'],
+            'invoice_status' => ['name' => 'invoice_status', 'data' => 'invoice_status', 'title' => 'Status'],
         ];
+
     }
 
     /**

@@ -73,8 +73,8 @@ class Currency extends Model implements Auditable
     public static function getAvailableData()
     {
         $return = self::join('companies', 'companies.id', '=', 'currency.company_id')
-            ->where('currency.is_draft', false)
-            ->where('currency.company_id', user_info('company_id'));
+            ->where('currency.is_draft', false);
+            // ->where('currency.company_id', user_info('company_id'));
 
         return $return;
 
