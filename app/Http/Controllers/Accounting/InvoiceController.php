@@ -126,7 +126,7 @@ class InvoiceController extends Controller
         $currentDate = $invoice->invoice_Date;
         $listSales = Sales::getAvailableData()->pluck('trx_sales.sales_no', 'trx_sales.id')->all();
         $currency = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_name')->all();
-        return view('contents.accountings.invoice.edit', compact('invoice', 'listSales', 'customers', 'listCustCredit','currency','invoiceNo','currentDate'));
+        return view('contents.accountings.invoice.edit', compact('invoice', 'listSales', 'invoiceNo', 'currentDate', 'invoiceType', 'fop', 'currency'));
     }
 
     /**
