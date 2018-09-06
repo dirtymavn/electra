@@ -151,7 +151,7 @@ class InvoiceController extends Controller
                 $redirect = redirect()->route('accounting.invoice.create');
             } else {
                 $msgSuccess = trans('message.update.success');
-                $redirect = redirect()->route('accounting.invoice.edit', $Invoice->id);
+                $redirect = redirect()->route('accounting.invoice.edit', $invoice->id);
             }
 
             $update = $invoice->update($request->all());

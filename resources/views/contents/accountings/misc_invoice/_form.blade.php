@@ -15,16 +15,16 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('type', trans('Type'), ['class' => 'control-label']) !!}
-            {!! Form::select('type',  @$invoiceType, old('type'), [ 'class' => 'form-control']) !!}
+            {!! Form::label('misc_invoice_type', trans('Type'), ['class' => 'control-label']) !!}
+            {!! Form::select('misc_invoice_type',  @$invoiceType, old('misc_invoice_type'), [ 'class' => 'form-control']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('sales_folder', trans('Sales Folder'), ['class' => 'control-label']) !!}
-            {!! Form::select('customer_id', @$listCustomer, old('customer_id'), [ 'class' => 'form-control','required'=>true, 'onchange'=>'detailSales(value)']) !!}
+            {!! Form::label('customer_id', trans('Customer Name'), ['class' => 'control-label']) !!}
+            {!! Form::select('customer_id',[''=>'Choose Customer']+ @$listCustomer, old('customer_id'), [ 'class' => 'form-control','required'=>true, 'onchange'=>'detailCustomer(value)']) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('attention', trans('Customer Name'), ['class' => 'control-label']) !!}
-            {!! Form::text('customer_name', old('customer_name') , ['class' => 'form-control', 'placeholder' => 'Auto','readonly'=>true,'required'=>true]) !!}
+            {!! Form::label('attention', trans('Attention'), ['class' => 'control-label']) !!}
+            {!! Form::text('attention', old('attention') , ['class' => 'form-control', 'placeholder' => 'Auto','readonly'=>true,'required'=>true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('tc_id', trans('TC/ID'), ['class' => 'control-label']) !!}
@@ -40,48 +40,50 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-            {!! Form::label('base', trans('Base'), ['class' => 'control-label']) !!}
-            {!! Form::select('base', ['' => 'Choose Currency'] + @$listSales, old('base'), [ 'class' => 'form-control']) !!}
+            {!! Form::label('base_currency', trans('Base'), ['class' => 'control-label']) !!}
+            {!! Form::select('base_currency', @$currency,old('base_currency'), [ 'class' => 'form-control','required'=>true]) !!}
         </div>
         <div class="form-group">
-            {!! Form::label('billing', trans('Billing'), ['class' => 'control-label']) !!}
-            {!! Form::select('billing', ['' => 'Choose Currency'] + @$listSales, old('billing'), [ 'class' => 'form-control']) !!}
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-            {!! Form::label('fop', trans('FOP'), ['class' => 'control-label']) !!}
-            {!! Form::select('fop', @$fop, old('fop'), [ 'class' => 'form-control']) !!}
+            {!! Form::label('billing_currency', trans('Billing'), ['class' => 'control-label']) !!}
+            {!! Form::select('billing_currency', @$currency, old('billing_currency'),[ 'class' => 'form-control','required'=>true]) !!}
         </div>
     </div>
     <div class="col-md-12">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="sales-detail" style="width:100%;">
+            <table class="table table-bordered table-striped" id="invoicedetail-detail" style="width:100%;">
                 <thead>
                     <tr class="text-center">
                         <th>Product No</th>
                         <th>Description</th>
                         <th>QTY</th>
+                        <th>Unit Price</th>
                         <th>Total Sales</th>
-                        <th>Unit Sales</th>
-                        <th>GP%</th>
+                        <th>GST%</th>
                         <th>Action</th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="form-group">
+        <button type="button" class="btn btn-danger pull-left" id="delete-selected" >Delete Selected</button>
+        <button type="button" class="btn btn-primary pull-right" id="add-new" data-toggle="modal" data-target="#form-invoicedetail">Add Item</button>
+        </div>
+    </div>
 </div>
 <hr>
 
 @section('part_script')
-<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\Business\InvoiceRequest', '#form-invoice') !!}
+{{-- <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script> --}}
+{{-- {!! JsValidator::formRequest('App\Http\Requests\Business\InvoiceRequest', '#form-invoice') !!} --}}
 <script>
     $(function(){
         spinnerLoad($('#form-invoice'));
     });
 </script>
 
-@include('contents.accountings.invoice.js.salesDetail')
+@include('contents.accountings.misc_invoice.js.customerDetail')
+@include('contents.accountings.misc_invoice.js.invoicedetail')
+@include('contents.accountings.misc_invoice.parts.invoicedetail')
 @endsection

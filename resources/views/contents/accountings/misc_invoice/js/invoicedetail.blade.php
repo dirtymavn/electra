@@ -2,22 +2,26 @@
     $(document).ready(function() {
         var detailColumns = [
             { data: 'product_code', name: 'product_code'},
-            { data: 'product_code_desc', name: 'product_code_desc'},
+            { data: 'description', name: 'description'},
             { data: 'qty', name: 'qty'},
+            { data: 'unit_price', name: 'unit_price'},
+            { data: 'total_sales', name: 'total_sales'},
+            { data: 'gst', name: 'gst'},
             { data: 'action', name: 'action'},
         ];
 
         var detailDatas = {
-            'type': 'invoicedetail-detail'
+            'type': 'misc-invoice-detail'
         };
 
-        initDatatable($('#invoicedetail-detail'), "{{route('invoice.get-detail-data')}}", detailColumns, detailDatas);
+        initDatatable($('#invoicedetail-detail'), "{{route('accounting.misc-invoice.detail-invoice')}}", detailColumns, detailDatas);
 
         $('#form-invoicedetail-detail').submit(function(e) {
+            console.log('Submit');
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                url: "{{route('invoice.invoicedetail-detail.post')}}",
+                url: "{{route('accounting.misc-invoice.detail-invoice-store')}}",
                 method: "POST",
                 processData: false,
                 contentType: false,
@@ -44,7 +48,7 @@
     $(document).on('click', '.deleteDataInvoiceDetail', function() {
         var id = $(this).data('id');
         $.ajax({
-            url: "{{route('invoice.detail.delete')}}",
+            url: "{{route('accounting.misc-invoice.detail-invoice-delete')}}",
             method: "POST",
             dataType: "JSON",
             data: {'id':id},
@@ -57,16 +61,18 @@
     $(document).on('click', '.editDataInvoiceDetail', function() {
         var id = $(this).data('id');
         $.ajax({
-            url: "{{route('invoice.detail.detail')}}",
+            url: "{{route('accounting.misc-invoice.detail-invoice-show')}}",
             method: "POST",
             dataType: "JSON",
             data: {'id':id},
             success: function(data) {
                 var value = data.data.data;
                 $('#product_code').val(value.product_code);
-                $('#product_code_desc').val(value.product_code_desc);
+                $('#description').val(value.description);
                 $('#qty').val(value.qty);
                 $("#invoicedetail_id").val(data.data.id)
+                $("#unit_price").val(data.data.unit_price)
+                $("#total_sales").val(data.data.total_sales)
 
                 $('#form-invoicedetail').modal({backdrop: 'static', keyboard: false});
             }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Invoice')
+@section('title', 'Edit Misc Invoice')
 
 @section('style')
 <link rel="stylesheet" href="{{ asset('themes/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css') }}" />
@@ -14,12 +14,12 @@
     </ul>
 @endsection
 
-@section('page_title', 'Edit Invoice')
+@section('page_title', 'Edit Misc Invoice')
 
 @section('content')
     @include('flash::message')
-    {!! Form::model($Invoice, [
-            'route'     =>['accounting.misc-invoice.update', $Invoice->id],
+    {!! Form::model($invoice, [
+            'route'     =>['accounting.misc-invoice.update', $invoice->id],
             'method'    => 'PATCH',
             'class' =>  'form-horizontal',
             'id'    =>  'form-invoice',
@@ -32,10 +32,6 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <a href="{{ route('accounting.misc-invoice.index') }}" class="btn btn-grey">{{trans('Cancel')}}</a>
                         <button type="submit" class="btn btn-success" id="btn-update">{{ trans('Update') }}</button>
-                        {{-- @if($Invoice->is_draft)
-                            <button type="button" class="btn btn-primary" id="btn-publish">Publish</button>
-                            <button type="button" class="btn btn-primary" id="btn-publish-continue">Publish & Continue</button>
-                        @endif --}}
                     </div>
                 </div>              
             </div>
@@ -46,6 +42,6 @@
 
 @section('script')
 <script>
-    submitForm("{{route('accounting.misc-invoice.update', $invoice->id)}}", $('#form-invoice'), 'update');
+    submitForm("{{route('accounting.misc-invoice.update', $invoice)}}", $('#form-invoice'), 'update');
 </script>
 @endsection

@@ -415,8 +415,12 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                 Route::get('export/excel', ['as' => 'export.excel', 'uses' => 'MiscInvoiceController@export_excel']);
                 Route::get('export/pdf', ['as' => 'export.pdf', 'uses' => 'MiscInvoiceController@export_pdf']);
                 Route::get('search/data', ['as' => 'search-data', 'uses' => 'MiscInvoiceController@searchData']);
-                Route::post('sales-detail', ['as' => 'sales_detail', 'uses' => 'MiscInvoiceController@salesDetail']);
+                Route::post('customer-detail', ['as' => 'customer_detail', 'uses' => 'MiscInvoiceController@customerDetail']);
                 Route::post('sales-table', ['as' => 'sales_table', 'uses' => 'MiscInvoiceController@salesDetail']);
+                Route::post('/detail', ['as' => 'detail-invoice', 'uses' => 'MiscInvoiceController@detailDataTable']);
+                Route::post('/detail/show', ['as' => 'detail-invoice-show', 'uses' => 'MiscInvoiceController@detailShow']);
+                Route::post('/detail/store', ['as' => 'detail-invoice-store', 'uses' => 'MiscInvoiceController@detailStore']);
+                Route::post('/detail/delete', ['as' => 'detail-invoice-delete', 'uses' => 'MiscInvoiceController@detailDelete']);
             });
         });
     });

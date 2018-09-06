@@ -5,6 +5,10 @@ namespace App\Models\Accounting\Invoice;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
+use App\Models\MasterData\Customer\MasterCustomer;
+use App\Models\Setting\CoreForm;
+use App\Models\MasterData\Branch;
+use App\Models\Accounting\Invoice\TrxMiscInvoiceDetail;
 use Request;
 
 class TrxMiscInvoice extends Model implements Auditable
@@ -35,6 +39,7 @@ class TrxMiscInvoice extends Model implements Auditable
         'company_id',
         'branch_id',
         'is_draft',
+        'tc_id'
     ];
 
     public function InvoiceDetail()
@@ -51,14 +56,24 @@ class TrxMiscInvoice extends Model implements Auditable
     {
         parent::boot();
 
-        self::created(function ($Invoice) {
-            $input = Request::all();            
+        self::created(function ($invoice) {
+            $input = Request::all();
+            $tempData = \DB::table('temporaries')->whereType('misc-invoice-detail')
+                ->whereUserId(user_info('id'))
+                ->get();
+            if (count($tempData) > 0) {
+                foreach ($tempData as $tempDataValue) {
+                    $invoiceDetail = json_decode($tempDataValue->data,true);
+                    $invoiceDetail['trx_accounting_misc_invoice_id'] = $invoice->id;
+                    TrxMiscInvoiceDetail::create($invoiceDetail);
+                }
+            }           
         });
 
     }
     public function customer()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(MasterCustomer::class);
     }
 
     public static function getAutoNumber()

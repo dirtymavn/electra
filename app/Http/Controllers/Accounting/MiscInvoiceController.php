@@ -8,12 +8,17 @@ use App\DataTables\Accounting\MiscInvoiceDataTable;
 use App\Http\Requests\Business\InvoiceRequest;
 use App\Models\Business\Country;
 use App\Models\Accounting\Invoice\TrxMiscInvoice as Invoice;
+use App\Models\Accounting\Invoice\TrxMiscInvoiceDetail as DetailInvoice;
 use App\Models\Temporary;
 use App\Models\Business\Sales\TrxSales as Sales;
 use App\Models\Business\Sales\TrxSalesDetail as SalesDetail;
 use App\Models\MasterData\Customer\MasterCustomer as Customer;
+use App\Models\MasterData\Accounting\MasterCoa;
 use App\Models\Business\Invoice\InvoiceDetail;
 use App\Models\Business\Invoice\InvoiceRefund;
+use App\Models\MasterData\Currency\Currency;
+use Illuminate\Support\Facades\Route;
+
 
 use DB;
 use Excel;
@@ -36,7 +41,7 @@ class MiscInvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(InvoiceDataTable $dataTable)
+    public function index(MiscInvoiceDataTable $dataTable)
     {
         return $dataTable->render('contents.accountings.misc_invoice.index');
     }
@@ -52,8 +57,11 @@ class MiscInvoiceController extends Controller
         $invoiceNo = Invoice::getAutoNumber();
         $invoiceType = $this->invoiceType();
         $currentDate = date('d/m/Y');
+        $currency = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_name')->all();
         $listCustomer = Customer::getAvailableData()->pluck('master_customers.customer_name', 'master_customers.id')->all();
-        return view('contents.accountings.misc_invoice.create', compact('listCustomer', 'invoiceNo', 'currentDate', 'invoiceType'));
+        $listSales = Customer::getAvailableData()->pluck('master_customers.customer_name', 'master_customers.id')->all();
+        $listCoa = MasterCoa::getAvailableData()->pluck('master_coa.acc_description', 'master_coa.id')->all();
+        return view('contents.accountings.misc_invoice.create', compact('listCustomer', 'invoiceNo', 'currentDate', 'invoiceType','currency', 'listSales','listCoa'));
     }
 
     /**
@@ -62,7 +70,7 @@ class MiscInvoiceController extends Controller
      * @param  \App\Http\Requests\MasterData\InvoiceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InvoiceRequest $request)
+    public function store(Request $request)
     {
         \DB::beginTransaction();
         try {
@@ -77,7 +85,9 @@ class MiscInvoiceController extends Controller
             }
 
             $request->merge(['company_id' => @user_info()->company->id, 'is_draft' => false]);
-            $insert = Invoice::create($request->all());
+            $invoice = $request->all();
+            $invoice['invoice_date'] = date('Y-m-d', strtotime($invoice['invoice_date']));
+            $insert = Invoice::create($invoice);
 
             if ($insert) {
                 $redirect = redirect()->route('accounting.misc-invoice.index');
@@ -93,6 +103,7 @@ class MiscInvoiceController extends Controller
             }
         } catch (\Exception $e) {
             \DB::rollback();
+            dd($e->getMessage());
             flash()->success(trans('message.error') . ' : ' . $e->getMessage());
             return redirect()->back()->withInput();
         }
@@ -110,16 +121,18 @@ class MiscInvoiceController extends Controller
     }
 
 
-    public function edit(Invoice $Invoice)
+    public function edit(Invoice $invoice)
     {
         \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
-        $data = $invoice;
         $invoiceNo = '';
         $invoiceType = $this->invoiceType();
         $fop = $this->ddFop();
         $currentDate = date('d/m/Y');
-        $listSales = Sales::getAvailableData()->pluck('trx_sales.sales_no', 'trx_sales.id')->all();
-        return view('contents.accountings.misc_invoice.edit', compact('invoice', 'listSales', 'customers', 'listCustCredit'));
+        $currency = Currency::getAvailableData()->pluck('currency.currency_name', 'currency.currency_name')->all();
+        $listCustomer = Customer::getAvailableData()->pluck('master_customers.customer_name', 'master_customers.id')->all();
+        $listSales = Customer::getAvailableData()->pluck('master_customers.customer_name', 'master_customers.id')->all();
+        $listCoa = MasterCoa::getAvailableData()->pluck('master_coa.acc_description', 'master_coa.id')->all();
+        return view('contents.accountings.misc_invoice.edit', compact('invoice', 'listCustomer', 'invoiceNo', 'currentDate', 'invoiceType', 'currency', 'listSales', 'listCoa'));
     }
 
     /**
@@ -237,9 +250,9 @@ class MiscInvoiceController extends Controller
             ->make(true);
     }
 
-    public function salesDetail(Request $request)
+    public function customerDetail(Request $request)
     {
-        $sales = Sales::with('customer')->find($request->sales_id);
+        $sales = Customer::find($request->customer_id);
         return response()->json(['result' => true, 'data' => $sales], 200);
     }
 
@@ -267,5 +280,79 @@ class MiscInvoiceController extends Controller
             10 => 'Credit Card'
         ];
         return $data;
+    }
+
+    public function detailStore(Request $request)
+    {
+        \DB::beginTransaction();
+        try {
+            if (@$request->invoicedetail_id) {
+                // Delete temporaries
+                \DB::table('temporaries')->whereId($request->invoicedetail_id)->delete();
+            }
+            \DB::table('temporaries')->insert([
+                'type' => 'misc-invoice-detail',
+                'user_id' => user_info('id'),
+                'data' => json_encode($request->except(['_token', 'invoicedetail_id']))
+            ]);
+
+            \DB::commit();
+
+            return response()->json(['result' => true], 200);
+        } catch (\Exception $e) {
+            \DB::rollback();
+            return response()->json(['result' => false, 'message' => $e->getMessage()], 200);
+        }
+    }
+
+    public function detailDataTable(Request $request)
+    {
+        $datas = [];
+        $results = \DB::table('temporaries')->whereType('misc-invoice-detail')
+            ->whereUserId(user_info('id'))
+            ->select('id', 'data')
+            ->get();
+
+        if (count($results) > 0) {
+            foreach ($results as $result) {
+                $value = collect(json_decode($result->data))->toArray();
+
+                $value['id'] = $result->id;
+
+                array_push($datas, $value);
+            }
+        }
+
+        $datas = collect($datas);
+        if($request->id){
+           $datas= DetailInvoice::where('trx_accounting_misc_invoice_id', $request->id)->get(); 
+        }
+
+        $classEdit = 'editDataInvoiceDetail';
+        $classDelete = 'deleteDataInvoiceDetail';
+
+        return datatables()->of($datas)
+            ->addColumn('action', function ($inventory) use ($classEdit, $classDelete) {
+                return '<a href="javascript:void(0)" class="' . $classEdit . '" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                            <a href="javascript:void(0)" class="danger ' . $classDelete . '" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function detailShow(Request $request)
+    {
+        $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
+        $findTemp->data = json_decode($findTemp->data);
+        return response()->json(['result' => true, 'data' => $findTemp], 200);
+    }
+
+    public function detailDelete(Request $request)
+    {
+        $findTemp = \DB::table('temporaries')->whereId($request->id)->delete();
+        if ($findTemp) {
+            return response()->json(['result' => true], 200);
+        }
+        return response()->json(['result' => false], 200);
     }
 }

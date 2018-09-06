@@ -1,17 +1,17 @@
 <script>
-    function detailSales(evt){
+    function detailCustomer(evt){
         var id = evt;
         console.log(id);
         $.ajax({
-            url: "{{route('accounting.invoice.sales_detail')}}",
+            url: "{{route('accounting.misc-invoice.customer_detail')}}",
             method: "POST",
             dataType: "JSON",
-            data: {'sales_id':id},
+            data: {'customer_id':id},
             success: function(data) {
-                var value = data.data.data;
-                console.log('Lol');
-                $('#tc_id').value=value.tc_id;
-                $('#customer_name').value=value.tc_id;
+                var value = data.data;
+                $('#tc_id').val(value.tc_id);
+                $('#sales_id').val(value.sales_id);
+                $('#attention').val(value.attention);
                 {{-- $('#sales-detail').DataTable().ajax.reload(); --}}
             }
         })
@@ -28,5 +28,5 @@
                 {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
             ]
         });
-    });
+    }
 </script>
