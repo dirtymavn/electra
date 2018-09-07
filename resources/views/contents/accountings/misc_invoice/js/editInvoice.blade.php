@@ -13,12 +13,12 @@
 
         var detailDatas = {
             'type': 'misc-invoice-detail',
+            'invoice_id':"{{$invoice->id}}"
         };
 
         initDatatable($('#invoicedetail-detail'), "{{route('accounting.misc-invoice.detail-invoice')}}", detailColumns, detailDatas);
 
         $('#form-invoicedetail-detail').submit(function(e) {
-            console.log('Submit');
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
@@ -49,7 +49,7 @@
     $(document).on('click', '.deleteDataInvoiceDetail', function() {
         var id = $(this).data('id');
         $.ajax({
-            url: "{{route('accounting.misc-invoice.detail-invoice-delete')}}",
+            url: "{{route('accounting.misc-invoice.detail-invoices-delete')}}",
             method: "POST",
             dataType: "JSON",
             data: {'id':id},
@@ -62,7 +62,7 @@
     $(document).on('click', '.editDataInvoiceDetail', function() {
         var id = $(this).data('id');
         $.ajax({
-            url: "{{route('accounting.misc-invoice.detail-invoice-show')}}",
+            url: "{{route('accounting.misc-invoice.detail-invoices-bulk-delete')}}",
             method: "POST",
             dataType: "JSON",
             data: {'id':id},
@@ -74,6 +74,7 @@
                 $("#invoicedetail_id").val(data.data.id)
                 $("#unit_price").val(data.data.unit_price)
                 $("#total_sales").val(data.data.total_sales)
+
                 $('#form-invoicedetail').modal({backdrop: 'static', keyboard: false});
             }
         })
@@ -96,10 +97,10 @@
 
         if (ids.length > 0) {
             $.ajax({
-                url: "{{route('accounting.misc-invoice.detail-invoice-bulk-delete')}}",
+                url: "{{route('accounting.misc-invoice.detail-invoices-bulk-delete')}}",
                 method: "POST",
                 dataType: "JSON",
-                data: {'ids':ids,'is_temp':true},
+                data: {'ids':ids,'is_temp':false},
                 success: function(data) {
                     console.log(data);
                     $('#invoicedetail-detail').DataTable().ajax.reload();

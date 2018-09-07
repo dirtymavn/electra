@@ -272,4 +272,43 @@ class InvoiceController extends Controller
         ];
         return $data;
     }
+    
+    public function salesDetailTable(Request $request)
+    {
+        $datas = SalesDetail::where('trx_sales_id', $request->trx_sales_id);
+        $classEdit = 'editDataInvoiceDetail';
+        $classDelete = 'deleteDataInvoiceDetail';
+
+        return datatables()->of($datas)
+            ->addColumn('action', function ($inventory) use ($classEdit, $classDelete) {
+                return '<a href="javascript:void(0)" class="' . $classEdit . '" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                            <a href="javascript:void(0)" class="danger ' . $classDelete . '" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function salesDetailShow(Request $request)
+    {
+        $findTemp = SalesDetail::find($request->id);
+        return response()->json(['result' => true, 'data' => $findTemp], 200);
+    }
+
+    public function salesDetailDelete(Request $request)
+    {
+        if (SalesDetail::destroy($request->id)) {
+            return response()->json(['result' => true], 200);
+        } 
+        return response()->json(['result' => false], 200);
+    }
+    public function salesDetailBulkDelete(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        if (count($ids) > 0) {
+            if (SalesDetail::destroy($ids)) {
+                return response()->json(['result' => true], 200);
+            } 
+        } 
+        return response()->json(['result' => false], 200);
+    }
 }

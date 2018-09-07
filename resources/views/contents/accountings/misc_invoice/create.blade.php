@@ -44,4 +44,7 @@
 <script>
     submitForm("{{route('accounting.misc-invoice.store')}}", $('#form-invoice'), 'create');
 </script>
+@include('contents.accountings.misc_invoice.js.customerDetail')
+@include('contents.accountings.misc_invoice.js.invoicedetail')
+@include('contents.accountings.misc_invoice.parts.invoicedetail')
 @endsection

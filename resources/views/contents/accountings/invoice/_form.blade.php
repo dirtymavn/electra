@@ -57,7 +57,7 @@
     </div>
     <div class="col-md-12">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="sales-detail" style="width:100%;">
+            <table class="table table-bordered table-striped" id="invoicedetail-detail" style="width:100%;">
                 <thead>
                     <tr class="text-center">
                         <th>Product No</th>

@@ -53,6 +53,7 @@
             <table class="table table-bordered table-striped" id="invoicedetail-detail" style="width:100%;">
                 <thead>
                     <tr class="text-center">
+                        <th width="10px" class="checklist sorting_desc" rowspan="1" colspan="1" style="width: 13px;" aria-label=""><input type="checkbox" class="checklist" id="dataTablesCheckbox"></th>
                         <th>Product No</th>
                         <th>Description</th>
                         <th>QTY</th>
@@ -67,7 +68,7 @@
     </div>
     <div class="col-md-12">
         <div class="form-group">
-        <button type="button" class="btn btn-danger pull-left" id="delete-selected" >Delete Selected</button>
+        <button type="button" class="btn btn-danger" id="bulk-delete"><i class="fa fa-trash m-right-10"></i> Delete Selected</button>
         <button type="button" class="btn btn-primary pull-right" id="add-new" data-toggle="modal" data-target="#form-invoicedetail">Add Item</button>
         </div>
     </div>
@@ -82,8 +83,4 @@
         spinnerLoad($('#form-invoice'));
     });
 </script>
-
-@include('contents.accountings.misc_invoice.js.customerDetail')
-@include('contents.accountings.misc_invoice.js.invoicedetail')
-@include('contents.accountings.misc_invoice.parts.invoicedetail')
 @endsection

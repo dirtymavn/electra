@@ -42,6 +42,9 @@
 
 @section('script')
 <script>
-    submitForm("{{route('accounting.misc-invoice.update', $invoice)}}", $('#form-invoice'), 'update');
+    submitForm("{{route('accounting.misc-invoice.update', $invoice->id)}}", $('#form-invoice'), 'update');
 </script>
+@include('contents.accountings.misc_invoice.js.customerDetail')
+@include('contents.accountings.misc_invoice.js.editInvoice')
+@include('contents.accountings.misc_invoice.parts.invoicedetail')
 @endsection

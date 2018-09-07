@@ -406,7 +406,10 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                 Route::get('export/pdf', ['as' => 'export.pdf', 'uses' => 'InvoiceController@export_pdf']);
                 Route::get('search/data', ['as' => 'search-data', 'uses' => 'InvoiceController@searchData']);
                 Route::post('sales-detail', ['as' => 'sales_detail', 'uses' => 'InvoiceController@salesDetail']);
-                Route::post('sales-table', ['as' => 'sales_table', 'uses' => 'InvoiceController@salesDetail']);
+                Route::post('sales-folder-detail', ['as' => 'sales-folder-detail', 'uses' => 'InvoiceController@salesDetailTable']);
+                Route::post('sales-folder-show', ['as' => 'sales-folder-show', 'uses' => 'InvoiceController@salesDetailShow']);
+                Route::post('sales-folder-delete', ['as' => 'sales-folder-delete', 'uses' => 'InvoiceController@salesDetailDelete']);
+                Route::post('sales-folder-bulk-delete', ['as' => 'sales-folder-bulk-delete', 'uses' => 'InvoiceController@salesDetailBulkDelete']);
             });
             //Misc Invoice
             Route::resource('misc-invoice', 'MiscInvoiceController');
@@ -418,9 +421,13 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
                 Route::post('customer-detail', ['as' => 'customer_detail', 'uses' => 'MiscInvoiceController@customerDetail']);
                 Route::post('sales-table', ['as' => 'sales_table', 'uses' => 'MiscInvoiceController@salesDetail']);
                 Route::post('/detail', ['as' => 'detail-invoice', 'uses' => 'MiscInvoiceController@detailDataTable']);
-                Route::post('/detail/show', ['as' => 'detail-invoice-show', 'uses' => 'MiscInvoiceController@detailShow']);
                 Route::post('/detail/store', ['as' => 'detail-invoice-store', 'uses' => 'MiscInvoiceController@detailStore']);
+                Route::post('/detail/show', ['as' => 'detail-invoice-show', 'uses' => 'MiscInvoiceController@detailShow']);
+                Route::post('/detail/detail-show', ['as' => 'detail-invoices-show', 'uses' => 'MiscInvoiceController@detailShow']);
                 Route::post('/detail/delete', ['as' => 'detail-invoice-delete', 'uses' => 'MiscInvoiceController@detailDelete']);
+                Route::post('/detail/detail-delete', ['as' => 'detail-invoices-delete', 'uses' => 'MiscInvoiceController@detailDelete']);
+                Route::post('/detail/bulk-delete', ['as' => 'detail-invoice-bulk-delete', 'uses' => 'MiscInvoiceController@detailBulkDelete']);
+                Route::post('/detail/bulk-detail-delete', ['as' => 'detail-invoices-bulk-delete', 'uses' => 'MiscInvoiceController@detailBulkDelete']);
             });
         });
     });

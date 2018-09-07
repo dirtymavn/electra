@@ -11,21 +11,54 @@
                 var value = data.data;
                 $('#tc_id').val(value.tc_id);
                 $('#customer_name').val(value.customer.customer_name);
-                {{-- $('#sales-detail').DataTable().ajax.reload(); --}}
+                dtSales(id);
             }
         })
     }
 
-    function dtSales() {
-        $('#sales-detail').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{!! route("accounting.invoice.sales_table") !!}',
-            columns: [
-                {data: 'product_code', name: 'product_code'},
-                {data: 'sales_detail_remark', name: 'sales_detail_remark'},
-                {data: 'action', name: 'action', class: 'center-align', searchable: false, orderable: false}
-            ]
-        });
-}
+    function dtSales(id) {
+        var detailColumns = [
+            { data: 'product_code', name: 'product_code'},
+            { data: 'product_code_desc', name: 'product_code_desc'},
+            { data: 'qty', name: 'qty'},
+            { data: 'action', name: 'action'},
+        ];
+
+        var detailDatas = {
+            'trx_sales_id': id
+        };
+
+        initDatatable($('#invoicedetail-detail'), "{{route('accounting.invoice.sales-folder-detail')}}", detailColumns, detailDatas);
+    }
+
+    $(document).on('click', '.deleteDataInvoiceDetail', function() {
+        var id = $(this).data('id');
+        $.ajax({
+            url: "{{route('accounting.invoice.sales-folder-delete')}}",
+            method: "POST",
+            dataType: "JSON",
+            data: {'id':id},
+            success: function(data) {
+                $('#invoicedetail-detail').DataTable().ajax.reload();
+            }
+        })
+    });
+
+    $(document).on('click', '.editDataInvoiceDetail', function() {
+        var id = $(this).data('id');
+        $.ajax({
+            url: "{{route('accounting.invoice.sales-folder-show')}}",
+            method: "POST",
+            dataType: "JSON",
+            data: {'id':id},
+            success: function(data) {
+                var value = data.data.data;
+                $('#product_code').val(value.product_code);
+                $('#product_code_desc').val(value.product_code_desc);
+                $('#qty').val(value.qty);
+                $("#invoicedetail_id").val(data.data.id)
+                $('#form-invoicedetail').modal({backdrop: 'static', keyboard: false});
+            }
+        })
+    });
 </script>

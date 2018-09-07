@@ -121,10 +121,11 @@ class MiscInvoiceController extends Controller
     }
 
 
-    public function edit(Invoice $invoice)
+    public function edit($id)
     {
         \DB::table('temporaries')->whereUserId(user_info('id'))->delete();
-        $invoiceNo = '';
+        $invoice= Invoice::find($id);
+        $invoiceNo = $invoice->invoice_no;
         $invoiceType = $this->invoiceType();
         $fop = $this->ddFop();
         $currentDate = date('d/m/Y');
@@ -200,7 +201,7 @@ class MiscInvoiceController extends Controller
     {
         $ids = explode(',', $request->ids);
         if (count($ids) > 0) {
-            Invoice::whereIn('id', $ids)->delete();
+            Invoice::destroy($ids);
 
             flash()->success(trans('message.delete.success'));
         } else {
@@ -242,9 +243,9 @@ class MiscInvoiceController extends Controller
         $datas = SalesDetail::where('trx_sales_id', $request->trx_sales_id);
 
         return datatables()->of($datas)
-            ->addColumn('action', function ($inventory) use ($classEdit, $classDelete) {
-                return '<a href="javascript:void(0)" class="' . $classEdit . '" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                            <a href="javascript:void(0)" class="danger ' . $classDelete . '" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            ->addColumn('action', function ($invoice) use ($classEdit, $classDelete) {
+                return '<a href="javascript:void(0)" class="' . $classEdit . '" title="Edit" data-id="' . $invoice['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                            <a href="javascript:void(0)" class="danger ' . $classDelete . '" title="Delete" data-id="' . $invoice['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -287,7 +288,6 @@ class MiscInvoiceController extends Controller
         \DB::beginTransaction();
         try {
             if (@$request->invoicedetail_id) {
-                // Delete temporaries
                 \DB::table('temporaries')->whereId($request->invoicedetail_id)->delete();
             }
             \DB::table('temporaries')->insert([
@@ -310,7 +310,7 @@ class MiscInvoiceController extends Controller
         $datas = [];
         $results = \DB::table('temporaries')->whereType('misc-invoice-detail')
             ->whereUserId(user_info('id'))
-            ->select('id', 'data')
+            ->select('id', 'data')  
             ->get();
 
         if (count($results) > 0) {
@@ -324,35 +324,79 @@ class MiscInvoiceController extends Controller
         }
 
         $datas = collect($datas);
-        if($request->id){
-           $datas= DetailInvoice::where('trx_accounting_misc_invoice_id', $request->id)->get(); 
+        if($request->invoice_id){
+           $datas= DetailInvoice::where('trx_accounting_misc_invoice_id', $request->invoice_id)->get(); 
         }
 
         $classEdit = 'editDataInvoiceDetail';
         $classDelete = 'deleteDataInvoiceDetail';
 
         return datatables()->of($datas)
-            ->addColumn('action', function ($inventory) use ($classEdit, $classDelete) {
-                return '<a href="javascript:void(0)" class="' . $classEdit . '" title="Edit" data-id="' . $inventory['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
-                            <a href="javascript:void(0)" class="danger ' . $classDelete . '" title="Delete" data-id="' . $inventory['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            ->addColumn('checklist', function ($invoice) use ($classEdit, $classDelete) {
+                return '<input type="checkbox" class="checklist">';
             })
-            ->rawColumns(['action'])
+            ->addColumn('action', function ($invoice) use ($classEdit, $classDelete) {
+                return '<a href="javascript:void(0)" class="' . $classEdit . '" title="Show" data-id="' . $invoice['id'] . '" data-button="edit"><i class="os-icon os-icon-ui-49"></i></a>
+                            <a href="javascript:void(0)" class="danger ' . $classDelete . '" title="Delete" data-id="' . $invoice['id'] . '" data-button="delete"><i class="os-icon os-icon-ui-15"></i></a>';
+            })
+            ->rawColumns(['action','checklist'])
             ->make(true);
     }
 
     public function detailShow(Request $request)
     {
-        $findTemp = \DB::table('temporaries')->whereId($request->id)->first();
-        $findTemp->data = json_decode($findTemp->data);
-        return response()->json(['result' => true, 'data' => $findTemp], 200);
+        if ($request->is_temp == 'true') {
+            $datas = \DB::table('temporaries')->whereId($request->id)->first();
+            $datas->data = json_decode($findTemp->data);
+        } else {
+            $datas['data'] = DetailInvoice::find($request->id);
+        }
+
+        if ($datas) {
+            return response()->json(['result' => true, 'data' => $datas], 200);
+
+        }
+
+        return response()->json(['result' => false], 200);
     }
 
     public function detailDelete(Request $request)
     {
-        $findTemp = \DB::table('temporaries')->whereId($request->id)->delete();
-        if ($findTemp) {
+
+        if ($request->is_temp == 'true') {
+            $delete = \DB::table('temporaries')->whereId($request->id)->delete();
+        } else {
+            $delete = DetailInvoice::destroy($request->id);
+        }
+
+        if ($delete) {
             return response()->json(['result' => true], 200);
         }
+
         return response()->json(['result' => false], 200);
+    }
+
+    public function detailBulkDelete(Request $request)
+    {
+        $ids = $request->ids;
+
+        if (count($ids) > 0) {
+            if($request->is_temp == 'true'){
+                $delete= \DB::table('temporaries')->whereIn('id',$ids)->delete();
+            }else{
+                $delete = DetailInvoice::destroy($ids);
+            }
+
+            if ($delete) {
+                return response()->json(['result' => true], 200);
+            }
+
+        } else {
+            return response()->json(['result' => false], 200);
+
+        }
+
+        return response()->json(['result' => false], 200);
+
     }
 }
