@@ -2,15 +2,15 @@
     <div class="col-md-6">
         <div class="form-group">
             {!! Form::label('invoice_no', trans('Invoice no'), ['class' => 'control-label']) !!}
-            {!! Form::text('invoice_no', $invoiceNo , ['class' => 'form-control', 'placeholder' => 'Input the Invoice no','readonly'=>true]) !!}
+            {!! Form::text('invoice_no', $invoiceNo , ['class' => 'form-control', 'placeholder' => 'Input the Invoice no','required'=>true,'readonly'=>true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('invoice_date', trans('Date'), ['class' => 'control-label']) !!}
-            {!! Form::text('invoice_date', $currentDate , ['class' => 'form-control', 'placeholder' => 'Input the Invoice date','readonly'=>true]) !!}
+            {!! Form::text('invoice_date', $currentDate , ['class' => 'form-control', 'placeholder' => 'Input the Invoice date','required'=>true,'readonly'=>true]) !!}
         </div>
         <div class="form-group">
             {!! Form::label('address', trans('Customer Address'), ['class' => 'control-label']) !!}
-            {!! Form::textarea('address', old('address'), ['class' => 'form-control', 'placeholder' => 'Input Address','rows'=>5]) !!}
+            {!! Form::textarea('address', old('address'), ['class' => 'form-control', 'placeholder' => 'Input Address','required'=>true,'rows'=>5]) !!}
         </div>
     </div>
     <div class="col-md-6">
@@ -83,4 +83,6 @@
         spinnerLoad($('#form-invoice'));
     });
 </script>
+
+@include('contents.accountings.misc_invoice.parts.invoicedetail')
 @endsection

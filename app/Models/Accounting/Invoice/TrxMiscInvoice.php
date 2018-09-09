@@ -70,6 +70,20 @@ class TrxMiscInvoice extends Model implements Auditable
             }           
         });
 
+        self::updated(function ($invoice) {
+            $input = Request::all();
+            $tempData = \DB::table('temporaries')->whereType('misc-invoice-detail')
+                ->whereUserId(user_info('id'))
+                ->get();
+            if (count($tempData) > 0) {
+                foreach ($tempData as $tempDataValue) {
+                    $invoiceDetail = json_decode($tempDataValue->data,true);
+                    $invoiceDetail['trx_accounting_misc_invoice_id'] = $invoice->id;
+                    TrxMiscInvoiceDetail::create($invoiceDetail);
+                }
+            }           
+        });
+
     }
     public function customer()
     {

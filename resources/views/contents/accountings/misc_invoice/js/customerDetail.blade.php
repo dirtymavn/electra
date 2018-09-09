@@ -15,4 +15,17 @@
             }
         })
     }
+
+    function totalSales(){
+        var unitPrice=Number($('#unit_price').val());
+        var qty=Number($('#qty').val());
+        var gst=Number($('#gst').val());
+        console.log('UNIT Price',unitPrice);
+        console.log('QTY',qty);
+        console.log('gst',gst);
+        if (unitPrice>=0 && qty>=0 && gst>=0){
+            var totalSales=(unitPrice*qty)+((unitPrice*qty)*gst);
+            $('#total_sales').val(totalSales);
+        }
+    }
 </script>
