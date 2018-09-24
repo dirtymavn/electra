@@ -12240,7 +12240,8 @@ table.dataTable th {
 
 table.dataTable td.dataTables_empty,
 table.dataTable th.dataTables_empty {
-	text-align: center
+	text-align: center;
+	color:#E50000;
 }
 
 table.dataTable.nowrap th,
@@ -26407,8 +26408,8 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
 	border-radius: 6px;
 	font-weight: 500;
 	position: absolute;
-	top: -5px;
-	right: -12px;
+	top: 4px;
+	right: -6px;
 	padding: 4px 4px;
 	vertical-align: middle;
 	font-size: .72rem;

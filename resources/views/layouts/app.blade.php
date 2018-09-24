@@ -19,8 +19,10 @@
     {!! Html::style('themes/bower_components/slick-carousel/slick/slick.css') !!}
     {!! Html::style('themes/css/maince5a.css?version=4.4.1') !!}
     {!! Html::style('themes/icon_fonts_assets/font-awesome/css/font-awesome.min.css') !!}
+    {!! Html::style('themes/icon_fonts_assets/themefy/themify-icons.css') !!}
     {!! Html::style('themes/css/main_custom.css') !!}
     {!! Html::style('css/custom.css') !!}
+    <link href="icon_fonts_assets/themefy/themify-icons.css" rel="stylesheet">
     <style>
         body {
             height: 100% !important;
