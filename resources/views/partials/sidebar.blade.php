@@ -579,13 +579,13 @@
                         <li class="{!! (url(route('supplier.index')) == Request::url() OR Request::is('master-data/supplier*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','supplier.read'])) ? '' : 'display:none;' }}">
                             <a href=" {{ route('supplier.index') }} "><i class="fa fa-circle-o"></i><span>Supplier</span></a>
                         </li>
-                        <li>
+                        <li class="{!! (url(route('inventory.index')) == Request::url() OR Request::is('master-data/inventory*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','inventory.read'])) ? '' : 'display:none;' }}">
                             <a href="{{ route('inventory.index') }}"><i class="fa fa-circle-o"></i><span>Inventory</span></a>
                         </li>
                         <li class="{!! (url(route('voucher.index')) == Request::url() OR Request::is('master-data/voucher*')) ? ' active' : '' !!}" style="{{ (user_info()->hasAnyAccess(['admin','admin.company','voucher.read'])) ? '' : 'display:none;' }}">
                             <a href="{{ route('voucher.index') }}"><i class="fa fa-circle-o"></i><span>Voucher</span></a>
                         </li>
-                        <li class="sub-submenu {!! (Request::is('master-data/air-allotment') OR Request::is('master-datamaster-data/air-allotment')) ? ' active' : '' !!}">
+                        <li class="sub-submenu {!! (Request::is('master-data/outbound*') OR Request::is('master-data/outbound')) ? ' active' : '' !!}">
                             <a>
                                 <i class="fa fa-circle-o"></i><span>Outbound</span><i class="arrow-third-menu os-icon os-icon-chevron-down"></i>
                             </a>

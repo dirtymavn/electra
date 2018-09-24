@@ -217,4 +217,14 @@ class AirportController extends Controller
 
         return response()->json(['message' => 'Success', 'items' => $results]);
     }
+
+    public function searchDataNormal(Request $request)
+    {
+        $results = Airport::getDataAvailable()
+            ->select("airports.id", \DB::raw("(airports.airport_name || '-' || airports.airport_code_icao) as text"))
+            ->where('airports.airport_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

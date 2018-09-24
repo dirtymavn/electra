@@ -29,6 +29,7 @@
 <script>
     $(function(){
         spinnerLoad($('#form-airport'));
+        initSelect2Remote($('#city_id'), "{{ route('city.search-data-city') }}", "Choose City", 0);
     });
 </script>
 @endsection

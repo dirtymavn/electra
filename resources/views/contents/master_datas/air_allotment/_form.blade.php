@@ -67,8 +67,8 @@
 <script>
     $(function(){
         spinnerLoad($('#form-airallotment'));
-        initSelect2Remote($('.id_airport_from'), "{{ route('airport.search-data') }}", "Choose Airport", 0);
-        initSelect2Remote($('.id_ariport_to'), "{{ route('airport.search-data') }}", "Choose Airport", 0);
+        initSelect2Remote($('.id_airport_from'), "{{ route('airport.search-data-normal') }}", "Choose Airport", 0);
+        initSelect2Remote($('.id_ariport_to'), "{{ route('airport.search-data-normal') }}", "Choose Airport", 0);
         initSelect2Remote($('.id_airlines'), "{{ route('airline.search-data') }}", "Choose Airline", 0);
     });
 </script>

@@ -559,6 +559,7 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::post('inventory-type/bulk-delete', array('as' => 'inventory-type.bulk-delete', 'uses' => 'InventoryTypeController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,inventory-type.destroy'));
         Route::get('inventory-type/export/excel', ['as' => 'export.inventory-type.excel', 'uses' => 'InventoryTypeController@export_excel']);
         Route::get('inventory-type/export/pdf', ['as' => 'export.inventory-type.pdf', 'uses' => 'InventoryTypeController@export_pdf']);
+        Route::get('inventory-type/search/data', ['as' => 'inventory-type.search-data', 'uses' => 'InventoryTypeController@searchData', 'middleware' => 'sentinel_access:admin.company,inventory.create']);
 
 
         // Product Category
@@ -608,12 +609,15 @@ Route::group([ 'middleware' => 'sentinel_auth' ], function () {
         Route::get('city/export/excel', ['as' => 'export.city.excel', 'uses' => 'CityController@export_excel']);
         Route::get('city/export/pdf', ['as' => 'export.city.pdf', 'uses' => 'CityController@export_pdf']);
 
+        Route::get('city/search/datacity', ['as' => 'city.search-data-city', 'uses' => 'CityController@searchDataCity', 'middleware' => 'sentinel_access:admin.company,city.create']);
+
         // Airport
         Route::resource('airport', 'AirportController');
         Route::post('airport/bulk-delete', array('as' => 'airport.bulk-delete', 'uses' => 'AirportController@bulkDelete', 'middleware' => 'sentinel_access:admin.company,airport.destroy'));
         Route::get('airport/export/excel', ['as' => 'export.airport.excel', 'uses' => 'AirportController@export_excel']);
         Route::get('airport/export/pdf', ['as' => 'export.airport.pdf', 'uses' => 'AirportController@export_pdf']);
         Route::get('airport/search/data', ['as' => 'airport.search-data', 'uses' => 'AirportController@searchData', 'middleware' => 'sentinel_access:admin.company,airport.create']);
+        Route::get('airport/search/data-normal', ['as' => 'airport.search-data-normal', 'uses' => 'AirportController@searchDataNormal', 'middleware' => 'sentinel_access:admin.company,airport.create']);
 
         // Tour
         Route::resource('tour', 'TourController');

@@ -25,6 +25,7 @@
 <script>
     $(function(){
         spinnerLoad($('#form-city'));
+        initSelect2Remote($('#country_id'), "{{ route('country.search-data') }}", "Choose Country", 0);
     });
 </script>
 @endsection

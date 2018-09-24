@@ -204,4 +204,15 @@ class InventoryTypeController extends Controller
         $pdf = \PDF::loadView('contents.master_datas.inventory_type.pdf', compact('types'));
         return $pdf->download('inventory-type.pdf');
     }
+
+    public function searchData(Request $request)
+    {
+        $results = InventoryType::getAvailableData()
+            ->select('master_inventory_type.id', 'master_inventory_type.inventory_type_name as text')
+            ->where('master_inventory_type.inventory_type_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+        
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

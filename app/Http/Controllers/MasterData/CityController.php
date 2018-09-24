@@ -225,4 +225,14 @@ class CityController extends Controller
 
         return json_encode($results);
     }
+
+    public function searchDataCity(Request $request)
+    {
+        $results = City::getAvailableData()
+            ->select('cities.id', 'cities.city_name as text')
+            ->where('cities.city_name', 'ilike', '%'.$request->search.'%')
+            ->get();
+
+        return response()->json(['message' => 'Success', 'items' => $results]);
+    }
 }

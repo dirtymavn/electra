@@ -32,8 +32,7 @@
 
         <div class="form-group">
             {!! Form::label('inventory_type', trans('Inventory Type'), ['class' => 'control-label']) !!}
-            {{-- {!! Form::text('inventory_type', old('inventory_type') , ['class' => 'form-control', 'placeholder' => 'Input the Code']) !!} --}}
-             {!! Form::select('inventory_type_id', @$inventoryTypes, old('inventory_type_id'), ['class' => 'form-control']) !!}
+            {!! Form::select('inventory_type_id', @$inventoryTypes, old('inventory_type_id'), ['class' => 'form-control', 'id' => 'inventory_type_id']) !!}
         </div>
 
         <div class="form-group">
@@ -156,6 +155,8 @@
     $(function(){
         spinnerLoad($('#form-inventory'));
         initSelect2Remote($('#supplier_no'), "{{ route('supplier.search-data') }}", "Choose Supplier No", 0);
+        initSelect2Remote($('#inventory_type_id'), "{{ route('inventory-type.search-data') }}", "Choose inventory type", 0);
+        initSelect2Remote($('#airline_no'), "{{ route('airline.search-data') }}", "Choose Airline", 0);
     });
 </script>
 

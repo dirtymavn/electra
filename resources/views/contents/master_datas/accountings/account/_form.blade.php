@@ -80,6 +80,8 @@
 <script>
     $(function(){
         spinnerLoad($('#form-account'));
+        initSelect2Remote($('#branch_id'), "{{ route('branch.search-data') }}", "Choose Branch", 0);
+        initSelect2Remote($('#sub_acc_id'), "{{ route('account.search-data') }}", "Choose Branch", 0);
     });
 </script>
 @endsection

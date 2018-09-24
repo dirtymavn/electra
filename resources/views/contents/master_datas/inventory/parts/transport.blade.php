@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     {!! Form::label('airline_no', trans('Airline'), ['class' => 'control-label']) !!}
-                    {!! Form::select('airline_no', @$airlines, old('airline_no'), ['class' => 'form-control']) !!}
+                    {!! Form::select('airline_no', @$airlines, old('airline_no'), ['class' => 'form-control', 'id' => 'airline_no']) !!}
                 </div>
             </div>
         </div>

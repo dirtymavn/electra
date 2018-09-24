@@ -27,6 +27,8 @@
 <script>
     $(function(){
         spinnerLoad($('#form-budgetrate'));
+        initSelect2Remote($('#from_currency'), "{{ route('currencyrate.search-data') }}", "Choose currency", 0);
+        initSelect2Remote($('#to_currency'), "{{ route('currencyrate.search-data') }}", "Choose currency", 0);
     });
 </script>
 @endsection
