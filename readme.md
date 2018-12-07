@@ -35,7 +35,6 @@ Untuk setiap commit yang dilakukan harus mempertimbangkan perubahan data yang te
 - Development server : 128.199.233.178
 
 
-
 ## Flow
 
 1. All development should be done in *development* branch and tested by developer him/herself.
